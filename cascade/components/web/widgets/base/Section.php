@@ -3,7 +3,7 @@ namespace cascade\components\web\widgets\base;
 
 use Yii;
 
-use \infinite\helpers\Html;
+use infinite\helpers\Html;
 
 class Section extends PanelWidget {
 	public $gridClass = 'infinite\web\grid\Grid';

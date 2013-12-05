@@ -10,8 +10,8 @@ namespace cascade\components\dataInterface;
 
 use \cascade\models\DataInterface;
 
-use \infinite\helpers\ArrayHelper;
-use \infinite\base\exceptions\Exception;
+use infinite\helpers\ArrayHelper;
+use infinite\base\exceptions\Exception;
 
 use yii\base\Event;
 use yii\base\Application;

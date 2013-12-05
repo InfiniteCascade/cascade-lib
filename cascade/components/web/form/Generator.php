@@ -10,7 +10,7 @@ namespace cascade\components\web\form;
 
 use Yii;
 
-use \infinite\helpers\Html;
+use infinite\helpers\Html;
 
 class Generator extends \infinite\base\Object implements \infinite\web\RenderInterface
 {

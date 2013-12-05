@@ -6,7 +6,7 @@ use Yii;
 
 use \cascade\web\widgets\grid\columns\Data as DataColumn;
 
-use \infinite\base\exceptions\Exception;
+use infinite\base\exceptions\Exception;
 
 class View extends \yii\base\Widget {
 	public $widget;

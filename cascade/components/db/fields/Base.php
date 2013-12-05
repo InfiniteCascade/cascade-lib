@@ -2,7 +2,7 @@
 namespace cascade\components\db\fields;
 
 use Yii;
-use \infinite\base\exceptions\Exception;
+use infinite\base\exceptions\Exception;
 
 abstract class Base extends \infinite\base\Object {
 	public $formFieldClass;

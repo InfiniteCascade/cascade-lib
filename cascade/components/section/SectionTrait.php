@@ -5,10 +5,12 @@ use Yii;
 
 use cascade\components\helpers\StringHelper;
 use infinite\base\language\Noun;
+use infinite\base\collector\CollectorTrait;
+use infinite\web\RenderTrait;
 
 trait SectionTrait {
-	use \infinite\base\collector\CollectorTrait;
-	use \infinite\web\RenderTrait;
+	use CollectorTrait;
+	use RenderTrait;
 
 	public $sectionWidgetClass = 'cascade\components\web\widgets\base\Section';
 	public $gridCellClass = 'infinite\web\grid\Cell';

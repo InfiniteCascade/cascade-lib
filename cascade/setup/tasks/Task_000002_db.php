@@ -1,7 +1,7 @@
 <?php
 namespace cascade\setup\tasks;
 
-use \infinite\setup\Exception;
+use infinite\setup\Exception;
 
 class Task_000002_db extends \infinite\setup\Task {
 	protected $_migrator;

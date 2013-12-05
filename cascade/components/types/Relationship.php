@@ -9,7 +9,7 @@ namespace cascade\components\types;
 
 use Yii;
 
-use \infinite\base\exceptions\Exception;
+use infinite\base\exceptions\Exception;
 
 class Relationship extends \infinite\base\Object {
 	protected $_parent;

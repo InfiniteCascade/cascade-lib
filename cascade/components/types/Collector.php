@@ -3,8 +3,8 @@ namespace cascade\components\types;
 
 use Yii;
 
-use \infinite\base\exceptions\Exception;
-use \infinite\helpers\ArrayHelper;
+use infinite\base\exceptions\Exception;
+use infinite\helpers\ArrayHelper;
 
 class Collector extends \infinite\base\collector\Module
 {

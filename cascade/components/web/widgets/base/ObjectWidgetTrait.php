@@ -3,8 +3,8 @@ namespace cascade\components\web\widgets\base;
 
 use Yii;
 
-use \infinite\base\exceptions\Exception;
-use \infinite\helpers\ArrayHelper;
+use infinite\base\exceptions\Exception;
+use infinite\helpers\ArrayHelper;
 
 use \cascade\components\types\Relationship;
 

@@ -12,8 +12,8 @@ use Yii;
 
 use \cascade\components\db\fields\Model as ModelField;
 
-use \infinite\web\grid\Grid;
-use \infinite\helpers\Html;
+use infinite\web\grid\Grid;
+use infinite\helpers\Html;
 
 class Segment extends FormObject {
 	public $cellClass = 'cascade\components\web\form\fields\Cell';

@@ -1,7 +1,7 @@
 <?php
 namespace cascade\components\dataInterface\connectors;
 
-use \infinite\base\exceptions\Exception;
+use infinite\base\exceptions\Exception;
 
 class DbModel extends \infinite\base\Object {
 	protected $_interface;

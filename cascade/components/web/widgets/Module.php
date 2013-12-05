@@ -3,7 +3,7 @@ namespace cascade\components\web\widgets;
 
 use Yii;
 
-use \infinite\base\exceptions\Exception;
+use infinite\base\exceptions\Exception;
 
 use yii\base\Controller;
 

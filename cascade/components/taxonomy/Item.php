@@ -2,8 +2,8 @@
 
 namespace cascade\components\taxonomy;
 
-use \infinite\base\exceptions\Exception;
-use \infinite\helpers\ArrayHelper;
+use infinite\base\exceptions\Exception;
+use infinite\helpers\ArrayHelper;
 
 class Item extends \infinite\base\collector\Item {
 	public $name;

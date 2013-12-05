@@ -12,7 +12,7 @@ use Yii;
 
 use \cascade\components\helpers\StringHelper;
 
-use \infinite\helpers\Html;
+use infinite\helpers\Html;
 
 use yii\bootstrap\Nav;
 

@@ -8,14 +8,16 @@
 
 namespace cascade\components\web\form\fields;
 
-use \infinite\helpers\Html;
-use \infinite\base\exceptions\Exception;
+use infinite\helpers\Html;
+use infinite\base\exceptions\Exception;
 
 use yii\helpers\Json;
+use cascade\components\web\form\FormObjectTrait;
+use infinite\web\grid\CellContentTrait;
 
 abstract class Base extends \infinite\base\Object implements \infinite\web\grid\CellContentInterface {
-	use \cascade\components\web\form\FormObjectTrait;
-	use \infinite\web\grid\CellContentTrait;
+	use FormObjectTrait;
+	use CellContentTrait;
 
 	public $modelField;
 	public $options;

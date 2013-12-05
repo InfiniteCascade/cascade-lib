@@ -1,7 +1,7 @@
 <?php
 namespace cascade\components\web\form;
 
-use \infinite\helpers\Html;
+use infinite\helpers\Html;
 
 class ActiveForm extends \yii\widgets\ActiveForm {
 	public static function begin($config = [], $echo = true)

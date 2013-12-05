@@ -1,7 +1,7 @@
 <?php
 namespace cascade\setup\tasks;
 
-use \infinite\setup\Exception;
+use infinite\setup\Exception;
 
 class Task_000004_acl extends \infinite\setup\Task {
 	public function getTitle() {

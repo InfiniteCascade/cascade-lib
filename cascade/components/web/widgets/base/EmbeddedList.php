@@ -1,6 +1,6 @@
 <?php
 namespace cascade\components\web\widgets\base;
-use \infinite\helpers\Html;
+use infinite\helpers\Html;
 
 class EmbeddedList extends EmbeddedWidget implements ListWidgetInterface {
 	use ListWidgetTrait;

@@ -1,8 +1,8 @@
 <?php
 namespace cascade\components\dataInterface;
 
-use \infinite\base\exceptions\Exception;
-use \infinite\base\language\Noun;
+use infinite\base\exceptions\Exception;
+use infinite\base\language\Noun;
 
 use yii\base\Event;
 

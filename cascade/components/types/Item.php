@@ -2,8 +2,8 @@
 namespace cascade\components\types;
 
 use Yii;
-use \infinite\helpers\ArrayHelper;
-use \infinite\base\collector\CollectedObjectInterface;
+use infinite\helpers\ArrayHelper;
+use infinite\base\collector\CollectedObjectInterface;
 
 class Item extends \infinite\base\collector\Item {
 	protected $_children = [];

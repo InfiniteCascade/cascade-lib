@@ -5,9 +5,10 @@
  * @var yii\gii\generators\module\Generator $generator
  */
 
-\infinite\web\IconAsset::register($this);
+use infinite\helpers\Html;
 
-use \infinite\helpers\Html;
+infinite\web\IconAsset::register($this);
+
 $js = <<< END
 $("#generator-icon").bind('change keyup', function(event) {
 	$('.ic-icon-preview').replaceWith($('<div />').css({'float': 'right', 'margin': '5px'}).addClass('ic-icon-32 ic-icon-black ic-icon ic-icon-preview '+ $(this).val()));

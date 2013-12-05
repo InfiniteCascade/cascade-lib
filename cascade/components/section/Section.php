@@ -10,9 +10,12 @@ namespace cascade\components\section;
 
 use Yii;
 
+use infinite\base\collector\CollectedObjectTrait;
+
 class Section extends \infinite\base\Object implements SectionInterface, \infinite\base\collector\CollectedObjectInterface {
-	use \infinite\base\collector\CollectedObjectTrait;
+	use CollectedObjectTrait;
 	use SectionTrait;
+	
 	protected $_systemId;
 	
 	/**

@@ -3,10 +3,11 @@ namespace cascade\components\base;
 
 use Yii;
 use infinite\base\exceptions\Exception;
+use infinite\base\collector\CollectedObjectTrait;
 
 abstract class CollectorModule extends \infinite\base\Module implements \infinite\base\collector\CollectedObjectInterface {
-	use \infinite\base\collector\CollectedObjectTrait;
-
+	use CollectedObjectTrait;
+	
 	abstract public function getCollectorName();
 
 	/**

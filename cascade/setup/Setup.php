@@ -3,7 +3,7 @@ namespace cascade\setup;
 
 use Yii;
 
-use \infinite\setup\Exception;
+use infinite\setup\Exception;
 
 class Setup extends \infinite\setup\Setup {
 	

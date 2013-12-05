@@ -1,8 +1,8 @@
 <?php
 namespace cascade\components\web\form\fields;
 
-use \infinite\helpers\Html;
-use \infinite\base\exceptions\Exception;
+use infinite\helpers\Html;
+use infinite\base\exceptions\Exception;
 
 use yii\helpers\Json;
 

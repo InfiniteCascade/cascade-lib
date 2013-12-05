@@ -3,7 +3,7 @@ namespace cascade\components\taxonomy;
 
 use Yii;
 
-use \infinite\base\exceptions\Exception;
+use infinite\base\exceptions\Exception;
 
 class Collector extends \infinite\base\collector\Module
 {

@@ -4,8 +4,8 @@ namespace cascade\models;
 
 use Yii;
 
-use \infinite\data\ActiveDataProvider;
-use \infinite\db\ActiveQuery;
+use infinite\data\ActiveDataProvider;
+use infinite\db\ActiveQuery;
 
 /**
  * This is the model class for table "object_familiarity".

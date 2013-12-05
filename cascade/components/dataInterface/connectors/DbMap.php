@@ -6,7 +6,7 @@ use \cascade\models\Relation;
 use \cascade\models\KeyTranslation;
 use \cascade\components\dataInterface\Action;
 
-use \infinite\helpers\ArrayHelper;
+use infinite\helpers\ArrayHelper;
 
 class DbMap extends \infinite\base\Object {
 	protected $_dataInterface;

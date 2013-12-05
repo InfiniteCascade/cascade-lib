@@ -5,10 +5,11 @@
  * @var yii\gii\generators\module\Generator $generator
  */
 
-\infinite\web\assetBundles\FontAwesomeAsset::register($this);
-\infinite\web\assetBundles\UnderscoreAsset::register($this);
+use infinite\helpers\Html;
 
-use \infinite\helpers\Html;
+infinite\web\assetBundles\FontAwesomeAsset::register($this);
+infinite\web\assetBundles\UnderscoreAsset::register($this);
+
 $js = <<< END
 
 $("#generator-icon option").each(function() {

@@ -1,7 +1,7 @@
 <?php
 namespace cascade\components\web\form\fields;
 
-use \infinite\db\ActiveRecord;
+use infinite\db\ActiveRecord;
 
 class Relation extends Base {
 	public $linkExisting = true;

@@ -12,17 +12,22 @@ use Yii;
 
 use \cascade\components\helpers\StringHelper;
 
-use \infinite\helpers\Html;
+use infinite\helpers\Html;
 
 use yii\bootstrap\Nav;
 
+use infinite\base\collector\CollectedObjectTrait;
+use infinite\base\ObjectTrait;
+use infinite\base\ComponentTrait;
+use infinite\web\grid\CellContentTrait;
+use infinite\web\RenderTrait;
 
 abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\WidgetInterface, \infinite\base\collector\CollectedObjectInterface {
-	use \infinite\base\collector\CollectedObjectTrait;
-	use \infinite\base\ObjectTrait;
-	use \infinite\base\ComponentTrait;
-	use \infinite\web\grid\CellContentTrait;
-	use \infinite\web\RenderTrait;
+	use CollectedObjectTrait;
+	use ObjectTrait;
+	use ComponentTrait;
+	use CellContentTrait;
+	use RenderTrait;
 
 	public $owner;
 	public $instanceSettings;

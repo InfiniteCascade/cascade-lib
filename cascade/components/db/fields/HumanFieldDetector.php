@@ -8,7 +8,7 @@
 
 namespace cascade\components\db\fields;
 
-use \infinite\helpers\Match;
+use infinite\helpers\Match;
 
 class HumanFieldDetector extends \infinite\base\Object {
 	static $_machineTests = array(

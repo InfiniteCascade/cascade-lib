@@ -1,9 +1,9 @@
 <?php
 use Yii;
 
-use \infinite\helpers\Html;
-use \infinite\helpers\ArrayHelper;
-use \infinite\web\grid\Grid;
+use infinite\helpers\Html;
+use infinite\helpers\ArrayHelper;
+use infinite\web\grid\Grid;
 
 $this->title = 'Dashboard';
 echo Html::beginTag('div', ['class' => 'row']);

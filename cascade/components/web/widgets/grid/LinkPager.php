@@ -8,7 +8,7 @@
 
 namespace cascade\components\web\widgets\grid;
 
-use \infinite\helpers\Html;
+use infinite\helpers\Html;
 
 
 class LinkPager extends \yii\widgets\LinkPager {
