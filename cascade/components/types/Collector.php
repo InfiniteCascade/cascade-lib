@@ -56,7 +56,7 @@ class Collector extends \infinite\base\collector\Module
 			if ($this->tableRegistry[$systemId]->system_version < $module->version) {
 				$oldVersion = $this->_tableRegistry[$systemId]->system_version;
 				$this->_tableRegistry[$systemId]->system_version = $module->version;
-				if (!$module->upgrade($oldVersion) OR !$this->_tableRegistry[$systemId]->save()) {
+				if (!$module->upgrade($oldVersion) || !$this->_tableRegistry[$systemId]->save()) {
 					throw new Exception("Unable to upgrade module $systemId to {$module->version} from {$oldVersion}");
 				}
 			}
@@ -85,10 +85,19 @@ class Collector extends \infinite\base\collector\Module
 			$objectTypeClass = $this->objectTypeRegistryClass;
 			$this->_tableRegistry = [];
 			
+			Yii::beginProfile(__CLASS__.'::'.__FUNCTION__ .'::tableExists');
 			if ($objectTypeClass::tableExists()) {
-				$om = $objectTypeClass::find()->all();
+				Yii::endProfile(__CLASS__.'::'.__FUNCTION__ .'::tableExists');
 
+				Yii::beginProfile(__CLASS__.'::'.__FUNCTION__ .'::query');
+				$om = $objectTypeClass::find()->all();
+				Yii::endProfile(__CLASS__.'::'.__FUNCTION__ .'::query');
+
+				Yii::beginProfile(__CLASS__.'::'.__FUNCTION__ .'::index');
 				$this->_tableRegistry = ArrayHelper::index($om, 'name');
+				Yii::endProfile(__CLASS__.'::'.__FUNCTION__ .'::index');
+			} else {
+				Yii::endProfile(__CLASS__.'::'.__FUNCTION__ .'::tableExists');
 			}
 			Yii::endProfile(__CLASS__.'::'.__FUNCTION__);
 		}

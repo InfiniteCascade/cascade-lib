@@ -17,9 +17,9 @@ return array_merge(include($parent), [
 		'class' => 'yii\gii\Module',
 		'allowedIPs' => ['*'],
 		'generators' => [
-			'cascadeSection' => [
-				'class' => '\cascade\gii\cascadeSectionModule\Generator'
-			],
+			// 'cascadeSection' => [
+			// 	'class' => '\cascade\gii\cascadeSectionModule\Generator'
+			// ],
 			'cascadeType' => [
 				'class' => '\cascade\gii\cascadeTypeModule\Generator'
 			]
