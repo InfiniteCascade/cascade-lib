@@ -1,0 +1,47 @@
+/* site.css */
+body {
+    padding-top: 70px;
+}
+
+footer {
+    height: 500px;
+    display: block;
+}
+
+.dashboard {
+    padding-top: 35px;
+}
+
+.dashboard .scroll-mark {
+	padding-top: 100px;
+	margin-top: -100px;
+}
+
+/* Affixed Sidebar */
+.ic-sidebar.affix {
+    position: static;
+}
+@media (min-width: 992px) {
+.ic-sidebar .nav > .active > ul {
+    display: block;
+}
+.ic-sidebar.affix, .ic-sidebar.affix-bottom {
+    width: 293px;
+}
+.ic-sidebar.affix {
+    position: fixed;
+    top: 100px;
+}
+.ic-sidebar.affix-bottom {
+    position: absolute;
+}
+.ic-sidebar.affix-bottom .ic-sidenav, .ic-sidebar.affix .ic-sidenav {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+}
+@media (min-width: 1200px) {
+.ic-sidebar.affix-bottom, .ic-sidebar.affix {
+    width: 360px;
+}
+}
