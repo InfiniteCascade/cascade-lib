@@ -1,10 +1,10 @@
 <?php
 namespace cascade\components\dataInterface\connectors;
 
-use \cascade\models\Registry;
-use \cascade\models\Relation;
-use \cascade\models\KeyTranslation;
-use \cascade\components\dataInterface\Action;
+use cascade\models\Registry;
+use cascade\models\Relation;
+use cascade\models\KeyTranslation;
+use cascade\components\dataInterface\Action;
 
 use infinite\helpers\ArrayHelper;
 

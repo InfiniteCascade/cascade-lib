@@ -10,7 +10,7 @@ namespace cascade\components\web\widgets\base;
 
 use Yii;
 
-use \cascade\components\helpers\StringHelper;
+use cascade\components\helpers\StringHelper;
 
 use infinite\helpers\Html;
 

@@ -4,7 +4,7 @@ namespace cascade\components\web\widgets\grid;
 
 use Yii;
 
-use \cascade\web\widgets\grid\columns\Data as DataColumn;
+use cascade\web\widgets\grid\columns\Data as DataColumn;
 
 use infinite\base\exceptions\Exception;
 

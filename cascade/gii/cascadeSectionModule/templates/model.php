@@ -30,9 +30,11 @@ namespace <?= $generator->getModelNamespace() ?>;
 <?php endforeach; ?>
 <?php endif; ?>
  */
+use cascade\components\db\ActiveRecordTrait;
+
 class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . "\n" ?>
 {
-	use \cascade\components\types\ActiveRecordTrait;
+	use ActiveRecordTrait;
 
 	/**
 	 * @inheritdoc

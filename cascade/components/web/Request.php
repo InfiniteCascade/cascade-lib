@@ -10,7 +10,7 @@ namespace cascade\components\web;
 
 use Yii;
 
-use \cascade\models\Registry;
+use cascade\models\Registry;
 use yii\web\Application;
 
 class Request extends \infinite\web\Request {

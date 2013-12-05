@@ -1,8 +1,9 @@
 <?php
 namespace cascade\components\db;
 
+use cascade\components\db\ActiveRecordTrait;
+
 class ActiveRecord extends \infinite\db\ActiveRecord {
-	use \cascade\components\db\ActiveRecordTrait;
-	
+	use ActiveRecordTrait;	
 }
 ?>

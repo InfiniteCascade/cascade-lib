@@ -2,8 +2,10 @@
 
 namespace cascade\models;
 
+use cascade\components\db\ActiveRecordTrait;
+
 class Registry extends \infinite\db\models\Registry
 {
-	use \cascade\components\db\ActiveRecordTrait;
+	use ActiveRecordTrait;
 	
 }

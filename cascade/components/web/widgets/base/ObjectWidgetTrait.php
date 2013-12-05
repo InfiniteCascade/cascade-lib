@@ -6,7 +6,7 @@ use Yii;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\ArrayHelper;
 
-use \cascade\components\types\Relationship;
+use cascade\components\types\Relationship;
 
 trait ObjectWidgetTrait
 {

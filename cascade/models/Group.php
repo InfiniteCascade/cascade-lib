@@ -2,9 +2,11 @@
 
 namespace cascade\models;
 
+use cascade\components\types\ActiveRecordTrait;
+
 class Group extends \infinite\db\models\Group
 {
-	use \cascade\components\types\ActiveRecordTrait {
+	use ActiveRecordTrait {
 		behaviors as baseBehaviors;
 	}
 	

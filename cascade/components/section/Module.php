@@ -15,7 +15,7 @@ use infinite\base\exceptions\Exception;
 use infinite\base\exceptions\HttpException;
 use infinite\helpers\ArrayHelper;
 use infinite\helpers\Inflector;
-use \cascade\components\helpers\StringHelper;
+use cascade\components\helpers\StringHelper;
 
 class Module extends \cascade\components\base\CollectorModule implements SectionInterface {
 	use SectionTrait;

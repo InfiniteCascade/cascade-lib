@@ -10,7 +10,7 @@ namespace cascade\components\web\form;
 
 use Yii;
 
-use \cascade\components\db\fields\Model as ModelField;
+use cascade\components\db\fields\Model as ModelField;
 
 use infinite\web\grid\Grid;
 use infinite\helpers\Html;

@@ -1,7 +1,7 @@
 <?php
 namespace cascade\components\dataInterface;
 
-use \cascade\models\DataInterfaceLog;
+use cascade\models\DataInterfaceLog;
 
 class Action extends \infinite\base\Object {
 	protected $_interface;

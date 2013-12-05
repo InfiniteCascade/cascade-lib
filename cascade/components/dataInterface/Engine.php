@@ -8,7 +8,7 @@
 
 namespace cascade\components\dataInterface;
 
-use \cascade\models\DataInterface;
+use cascade\models\DataInterface;
 
 use infinite\helpers\ArrayHelper;
 use infinite\base\exceptions\Exception;

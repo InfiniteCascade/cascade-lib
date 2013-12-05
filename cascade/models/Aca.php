@@ -2,9 +2,11 @@
 
 namespace cascade\models;
 
+use cascade\components\types\ActiveRecordTrait;
+
 class Aca extends \infinite\db\models\Aca
 {
-	use \cascade\components\types\ActiveRecordTrait {
+	use ActiveRecordTrait {
 		behaviors as baseBehaviors;
 	}
 	

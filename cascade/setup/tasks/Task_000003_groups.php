@@ -1,8 +1,8 @@
 <?php
 namespace cascade\setup\tasks;
 
-use \cascade\models\Group;
-use \cascade\models\Relation;
+use cascade\models\Group;
+use cascade\models\Relation;
 
 class Task_000003_groups extends \infinite\setup\Task {
 	public function getTitle() {

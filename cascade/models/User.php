@@ -2,9 +2,11 @@
 
 namespace cascade\models;
 
+use cascade\components\types\ActiveRecordTrait;
+
 class User extends \infinite\db\models\User
 {
-	use \cascade\components\types\ActiveRecordTrait {
+	use ActiveRecordTrait {
 		behaviors as baseBehaviors;
 	}
 	
