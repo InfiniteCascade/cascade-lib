@@ -14,7 +14,7 @@ use \cascade\components\helpers\StringHelper;
 
 use \infinite\helpers\Html;
 
-use \yii\bootstrap\Nav;
+use yii\bootstrap\Nav;
 
 
 abstract class EmbeddedWidget extends PanelWidget implements ObjectWidgetInterface {

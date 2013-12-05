@@ -11,7 +11,7 @@ namespace cascade\components\web\form\fields;
 use \infinite\helpers\Html;
 use \infinite\base\exceptions\Exception;
 
-use \yii\helpers\Json;
+use yii\helpers\Json;
 
 abstract class Base extends \infinite\base\Object implements \infinite\web\grid\CellContentInterface {
 	use \cascade\components\web\form\FormObjectTrait;

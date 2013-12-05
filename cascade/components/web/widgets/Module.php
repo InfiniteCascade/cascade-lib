@@ -5,7 +5,7 @@ use Yii;
 
 use \infinite\base\exceptions\Exception;
 
-use \yii\base\Controller;
+use yii\base\Controller;
 
 abstract class Module extends \infinite\base\Module {
 	public $title;

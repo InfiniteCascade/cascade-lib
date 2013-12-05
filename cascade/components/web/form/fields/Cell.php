@@ -4,7 +4,7 @@ namespace cascade\components\web\form\fields;
 use \infinite\helpers\Html;
 use \infinite\base\exceptions\Exception;
 
-use \yii\helpers\Json;
+use yii\helpers\Json;
 
 class Cell extends \infinite\web\grid\Cell
 {

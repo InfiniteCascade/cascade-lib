@@ -5,7 +5,7 @@ use Yii;
 
 use \infinite\helpers\Html;
 
-use \yii\bootstrap\Button;
+use yii\bootstrap\Button;
 
 class SimpleLinkList extends BaseList {
 

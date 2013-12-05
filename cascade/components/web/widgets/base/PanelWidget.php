@@ -14,13 +14,13 @@ use \cascade\components\helpers\StringHelper;
 
 use \infinite\helpers\Html;
 
-use \yii\bootstrap\Nav;
+use yii\bootstrap\Nav;
 
 
 abstract class PanelWidget extends Widget {
 	public $panelCssClass = 'panel';
 	public $panelStateCssClass = 'panel-default';
-	public $gridCellClass = '\infinite\web\grid\Cell';
+	public $gridCellClass = 'infinite\web\grid\Cell';
 
 	public function generatePanelTitle() {
 		$parts = [];

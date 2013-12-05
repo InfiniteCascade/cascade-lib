@@ -37,8 +37,8 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $widgetNamespace;
 	public $modelNamespace;
 
-	public $formGeneratorClass = '\cascade\components\web\form\Generator';
-	public $sectionClass = '\cascade\components\section\Section';
+	public $formGeneratorClass = 'cascade\components\web\form\Generator';
+	public $sectionClass = 'cascade\components\section\Section';
 
 	public function init() {
 		if (isset($this->modelNamespace)) {

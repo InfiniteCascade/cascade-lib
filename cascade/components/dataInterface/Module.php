@@ -4,7 +4,7 @@ namespace cascade\components\dataInterface;
 use \infinite\base\exceptions\Exception;
 use \infinite\base\language\Noun;
 
-use \yii\base\Event;
+use yii\base\Event;
 
 abstract class Module extends \infinite\base\Module {
 	public $interfaceTitle;

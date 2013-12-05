@@ -16,7 +16,7 @@ use \infinite\web\grid\Grid;
 use \infinite\helpers\Html;
 
 class Segment extends FormObject {
-	public $cellClass = '\cascade\components\web\form\fields\Cell';
+	public $cellClass = 'cascade\components\web\form\fields\Cell';
 	public $subform;
 	public $linkExisting = true;
 

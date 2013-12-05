@@ -14,7 +14,7 @@ use \cascade\components\helpers\StringHelper;
 
 use \infinite\helpers\Html;
 
-use \yii\bootstrap\Nav;
+use yii\bootstrap\Nav;
 
 
 abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\WidgetInterface, \infinite\base\collector\CollectedObjectInterface {
@@ -34,7 +34,7 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 	public $recreateParams = array();
 	public $htmlOptions = ['class' => 'ic-widget '];
 
-	public $gridCellClass = '\infinite\web\grid\Cell';
+	public $gridCellClass = 'infinite\web\grid\Cell';
 
 	protected $_widgetId;
 	protected $_systemId;

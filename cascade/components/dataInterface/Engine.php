@@ -13,8 +13,8 @@ use \cascade\models\DataInterface;
 use \infinite\helpers\ArrayHelper;
 use \infinite\base\exceptions\Exception;
 
-use \yii\base\Event;
-use \yii\base\Application;
+use yii\base\Event;
+use yii\base\Application;
 
 class Engine extends \infinite\base\Engine {
 	const EVENT_AFTER_INTERFACE_REGISTRY = 'afterInterfaceRegistry';

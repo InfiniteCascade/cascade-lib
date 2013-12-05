@@ -3,7 +3,7 @@ namespace cascade\components\taxonomy;
 
 use Yii;
 
-use \yii\base\Event;
+use yii\base\Event;
 
 abstract class Module extends \cascade\components\base\CollectorModule {
 	public $name;

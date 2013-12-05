@@ -9,7 +9,7 @@
 namespace cascade\components\db\fields;
 
 class Model extends Base {
-	public $formFieldClass = '\cascade\components\web\form\fields\Model';
+	public $formFieldClass = 'cascade\components\web\form\fields\Model';
 }
 
 

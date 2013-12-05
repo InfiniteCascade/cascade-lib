@@ -9,11 +9,11 @@ class Collector extends \infinite\base\collector\Module
 {
 	const EVENT_AFTER_TAXONOMY_REGISTRY = 'afterTaxonomyRegistry';
 
-	public $taxonomyClass = '\cascade\models\Taxonomy';
-	public $taxonomyTypeClass = '\cascade\models\TaxonomyType';
+	public $taxonomyClass = 'cascade\models\Taxonomy';
+	public $taxonomyTypeClass = 'cascade\models\TaxonomyType';
 
 	public function getCollectorItemClass() {
-		return '\cascade\components\taxonomy\Item';
+		return 'cascade\components\taxonomy\Item';
 	}
 
 	public function getModulePrefix() {

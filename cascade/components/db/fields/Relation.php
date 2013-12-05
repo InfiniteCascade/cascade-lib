@@ -10,7 +10,7 @@ namespace cascade\components\db\fields;
 
 
 class Relation extends Base {
-	public $formFieldClass = '\cascade\components\web\form\fields\Relation';
+	public $formFieldClass = 'cascade\components\web\form\fields\Relation';
 	protected $_human = true;
 	protected $_moduleHandler;
 	public $relationship;

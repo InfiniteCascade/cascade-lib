@@ -3,15 +3,15 @@ namespace cascade\components\section;
 
 use Yii;
 
-use \cascade\components\helpers\StringHelper;
-use \infinite\base\language\Noun;
+use cascade\components\helpers\StringHelper;
+use infinite\base\language\Noun;
 
 trait SectionTrait {
 	use \infinite\base\collector\CollectorTrait;
 	use \infinite\web\RenderTrait;
 
 	public $sectionWidgetClass = 'cascade\components\web\widgets\base\Section';
-	public $gridCellClass = '\infinite\web\grid\Cell';
+	public $gridCellClass = 'infinite\web\grid\Cell';
 
 	protected $_title;
 	protected $_widget;

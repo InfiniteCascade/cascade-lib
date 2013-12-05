@@ -8,12 +8,12 @@ use \infinite\helpers\ArrayHelper;
 
 class Collector extends \infinite\base\collector\Module
 {
-	public $objectTypeRegistryClass = '\cascade\models\ObjectType';
+	public $objectTypeRegistryClass = 'cascade\models\ObjectType';
 
 	protected $_tableRegistry;
 
 	public function getCollectorItemClass() {
-		return '\cascade\components\types\Item';
+		return 'cascade\components\types\Item';
 	}
 
 
