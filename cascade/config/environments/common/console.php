@@ -14,7 +14,7 @@ return [
 	'vendorPath' => INFINITE_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'vendor',
 	'preload' => array('log', 'collectors'),
 	'language' => 'en',
-	'controllerPath' => '@app/commands',
+	'controllerPath' => '@cascade/commands',
 	'controllerNamespace' => 'cascade\commands',
 	'controllerMap' => array(
 		'migrate' => '\infinite\console\controllers\MigrateController'
@@ -28,7 +28,15 @@ return [
 		'redis' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'redis.php'),
 		'cache' => ['class' => '\yii\redis\Cache'],
 		'collectors' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'collectors.php'),
-		'gk' => array('class' => '\infinite\security\Gatekeeper'),
+		'gk' => [
+			'class' => 'infinite\\security\\Gatekeeper',
+			'acaClass' => 'cascade\\models\\Aca',
+			'aclClass' => 'cascade\\models\\Acl',
+			'aclRoleClass' => 'cascade\\models\\AclRole',
+			'groupClass' => 'cascade\\models\\Group',
+			'registryClass' => 'cascade\\models\\Registry',
+			'userClass' => 'cascade\\models\\User'
+		],
 		'log' => [
 			'class' => 'yii\log\Logger',
 			'traceLevel' => YII_DEBUG ? 3 : 0,

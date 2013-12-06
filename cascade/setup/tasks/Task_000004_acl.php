@@ -73,7 +73,6 @@ class Task_000004_acl extends \infinite\setup\Task {
 					return false;
 				}
 			}
-
 			$result = $this->setup->app()->gk->can($rule['action'], $controlled, $accessing);
 			if ($result !== $expected) {
 				return false;

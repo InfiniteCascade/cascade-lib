@@ -21,7 +21,7 @@ class Module extends \cascade\components\types\Module
 	{
 		parent::init();
 		
-		Yii::$app->registerMigrationAlias('@app/modules/TypeAccount/migrations');
+		Yii::$app->registerMigrationAlias('@cascade/modules/TypeAccount/migrations');
 	}
 
 	/**

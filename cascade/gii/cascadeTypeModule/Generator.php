@@ -1057,7 +1057,7 @@ EOD;
 	}
 
 	public function getSearchModels() {
-		return ['@app/models' => 'cascade\models'];
+		return ['@cascade/models' => 'cascade\models'];
 	}
 
 	public function getModelMap() {
