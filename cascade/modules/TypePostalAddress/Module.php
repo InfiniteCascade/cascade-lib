@@ -41,8 +41,8 @@ class Module extends \cascade\components\types\Module
 	public function parents()
 	{
 		return [
-			'Account' => [],
-			'Individual' => [],
+			'Account' => ['taxonomy' => 'ic_address_type'],
+			'Individual' => ['taxonomy' => 'ic_address_type'],
 		];
 	}
 
@@ -61,6 +61,21 @@ class Module extends \cascade\components\types\Module
 	 */
 	public function taxonomies()
 	{
-		return [];
+		return [
+			[
+				'name' => 'Address Type',
+				'models' => [\cascade\models\Relation::className()],
+				'modules' => [self::className()],
+				'systemId' => 'ic_address_type',
+				'systemVersion' => 1.0,
+				'multiple' => true,
+				'parentUnique' => true,
+				'required' => true,
+				'initialTaxonomies' => [
+					'billing' => 'Billing Address',
+					'shipping' => 'Shipping Address',
+				]
+			]
+		];
 	}
 }

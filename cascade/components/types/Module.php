@@ -25,7 +25,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	protected $_title;
 	public $version = 1;
 
-	public $objectSubInfo = array();
+	public $objectSubInfo = [];
 	public $icon = 'ic-icon-info';
 	public $priority = 1000; //lower is better
 
@@ -66,7 +66,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	}
 
 	public function onAfterInit($event) {
-		if (!isset(Yii::$app->collectors['taxonomies']) || !Yii::$app->collectors['taxonomies']->registerMultiple($this, $this->taxonomies())) { throw new Exception('Could not register widgets for '. $this->systemId .'!'); }
+		if (!isset(Yii::$app->collectors['taxonomies']) || !Yii::$app->collectors['taxonomies']->registerMultiple($this, $this->taxonomies())) { throw new Exception('Could not register taxonmies for '. $this->systemId .'!'); }
 		if (!isset(Yii::$app->collectors['widgets']) || !Yii::$app->collectors['widgets']->registerMultiple($this, $this->widgets())) { throw new Exception('Could not register widgets for '. $this->systemId .'!'); }
 		if (!isset(Yii::$app->collectors['roles']) || !Yii::$app->collectors['roles']->registerMultiple($this, $this->roles())) { throw new Exception('Could not register roles for '. $this->systemId .'!'); }	
 		return parent::onAfterInit($event);
@@ -111,7 +111,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	}
 
 	public function getCreatorRole() {
-		return array();
+		return [];
 	}
 
 	public function getIsOwnable() {
@@ -140,10 +140,10 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @param unknown $limit (optional)
 	 * @return unknown
 	 */
-	public function search($term, $params = array()) {
+	public function search($term, $params = []) {
 		throw new Exception("Who is calling this?");
 		if (!$this->primaryModel) { return false; }
-		$results = array();
+		$results = [];
 		$model = $this->primaryModel;
 		$model = new $model('search');
 		$raw = $model->searchTerm($term, $params);
@@ -175,7 +175,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @param unknown $settings (optional)
 	 * @return unknown
 	 */
-	public function getSection($parent = null, $settings = array()) {
+	public function getSection($parent = null, $settings = []) {
 		$name = $this->systemId;
 		if (!empty($parent) and $parent->systemId === $this->systemId) {
 			$sectionId = $settings['whoAmI'].'-'.$this->systemId;
@@ -224,7 +224,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 
 
 	public function widgets() {
-		$widgets = array();
+		$widgets = [];
 		$detailListClassName = self::classNamespace() .'\widgets\\'. 'DetailList';
 		$simpleListClassName = self::classNamespace() .'\widgets\\'. 'SimpleLinkList';
 		$embeddedListClassName = self::classNamespace() .'\widgets\\'. 'EmbeddedList';
@@ -313,7 +313,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function taxonomies() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -322,7 +322,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function roles() {
-		return array();
+		return [];
 	}
 
 	/**
@@ -331,7 +331,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function dependencies() {
-		return array();
+		return [];
 	}
 
 
@@ -341,7 +341,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function parents() {
-		return array();
+		return [];
 	}
 
 
@@ -376,7 +376,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function children() {
-		return array();
+		return [];
 	}
 
 

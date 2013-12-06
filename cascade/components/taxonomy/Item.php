@@ -5,13 +5,14 @@ namespace cascade\components\taxonomy;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\ArrayHelper;
 
+
 class Item extends \infinite\base\collector\Item {
 	public $name;
 	public $systemId;
 	public $systemVersion = 1;
 	public $initialTaxonomies = [];
-	public $model;
-	public $forModel;
+	public $models = [];
+	public $modules = [];
 	public $multiple = false;
 	public $required = false;
 	public $default = [];
@@ -26,7 +27,7 @@ class Item extends \infinite\base\collector\Item {
 	 */
 	public function getTaxonomies() {
 		if (is_null($this->_taxonomies)) {
-			$this->_taxonomies = $this->model->taxonomies;
+			$this->_taxonomies = $this->object->taxonomies;
 		}
 		return $this->_taxonomies;
 	}

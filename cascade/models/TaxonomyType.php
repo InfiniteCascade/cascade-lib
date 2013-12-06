@@ -2,6 +2,9 @@
 
 namespace cascade\models;
 
+use cascade\components\types\ActiveRecordTrait;
+use infinite\base\collector\CollectedObjectTrait;
+
 /**
  * This is the model class for table "taxonomy_type".
  *
@@ -15,8 +18,21 @@ namespace cascade\models;
  * @property Taxonomy[] $taxonomies
  * @property Registry $id
  */
-class TaxonomyType extends \cascade\components\db\ActiveRecord
+class TaxonomyType extends \cascade\components\db\ActiveRecord implements \infinite\base\collector\CollectedObjectInterface
 {
+	use CollectedObjectTrait;
+	use ActiveRecordTrait {
+		behaviors as baseBehaviors;
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return array_merge(parent::behaviors(), self::baseBehaviors(), []);
+	}
+
 	/**
 	 * @inheritdoc
 	 */
@@ -31,7 +47,7 @@ class TaxonomyType extends \cascade\components\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'name'], 'required'],
+			[['name'], 'required'],
 			[['system_version'], 'number'],
 			[['created', 'modified'], 'safe'],
 			[['id'], 'string', 'max' => 36],
@@ -59,7 +75,7 @@ class TaxonomyType extends \cascade\components\db\ActiveRecord
 	 */
 	public function getTaxonomies()
 	{
-		return $this->hasMany(TaxonomyType::className(), ['taxonomy_type_id' => 'id']);
+		return $this->hasMany(Taxonomy::className(), ['taxonomy_type_id' => 'id']);
 	}
 
 	/**

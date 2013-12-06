@@ -20,8 +20,9 @@ class AppAsset extends AssetBundle
 	// public $basePath = '@webroot';
 	// public $baseUrl = '@web';
 	public $css = ['css/site.css'];
-	public $js = ['js/cascade.refreshable.js'];
+	public $js = ['js/cascade.core.js', 'js/cascade.refreshable.js'];
 	public $depends = [
-		'\infinite\web\assetBundles\InfiniteAsset',
+		'infinite\web\assetBundles\InfiniteAsset',
+		'infinite\web\assetBundles\BootstrapSelectAsset',
 	];
 }

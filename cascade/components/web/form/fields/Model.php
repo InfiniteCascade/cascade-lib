@@ -6,6 +6,14 @@ use infinite\helpers\Html;
 use yii\widgets\ActiveField;
 
 class Model extends Base {
+	public function getFieldConfig()
+	{
+		return [
+				'template' => "<div class=\"\">{input}</div>\n<div class=\"\">{error}</div>",
+				'labelOptions' => ['class' => "control-label"],
+		];
+	}
+
 	/**
 	 *
 	 *
@@ -25,10 +33,7 @@ class Model extends Base {
 		$pre = $post = null;
 		$field = $this->getModelField();
 
-		$fieldConfig = [
-				'template' => "<div class=\"\">{input}</div>\n<div class=\"\">{error}</div>",
-				'labelOptions' => ['class' => "control-label"],
-		];
+		$fieldConfig = $this->fieldConfig;
 		if ($this->showLabel) {
 			$fieldConfig['template'] = "{label}\n".$fieldConfig['template'];
 		}

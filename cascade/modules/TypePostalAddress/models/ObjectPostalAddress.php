@@ -53,6 +53,7 @@ class ObjectPostalAddress extends \cascade\components\types\ActiveRecord
 			[['type'], 'string'],
 			[['no_mailings'], 'boolean'],
 			[['id'], 'string', 'max' => 36],
+			[['city'], 'required'],
 			[['name', 'address1', 'address2', 'city', 'country'], 'string', 'max' => 255],
 			[['subnational_division'], 'string', 'max' => 100],
 			[['postal_code'], 'string', 'max' => 20]
@@ -94,7 +95,7 @@ class ObjectPostalAddress extends \cascade\components\types\ActiveRecord
 			$settings['title'] = false;
 		}
 		$settings['fields'] = array();
-		$settings['fields'][] = ['name'];
+		$settings['fields'][] = ['parentTaxonomy:ic_address_type', 'name' => ['columns' => 8]];
 		$settings['fields'][] = ['address1', 'address2'];
 		$settings['fields'][] = ['city', 'subnational_division', 'postal_code'];
 		$settings['fields'][] = ['country', false, false];

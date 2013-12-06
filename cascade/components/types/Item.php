@@ -216,6 +216,12 @@ class Item extends \infinite\base\collector\Item {
 		}
 		return $this->_checked;
 	}
+
+	public function getTaxonomies()
+	{
+		$moduleClass = get_class($this->object);
+		return Yii::$app->collectors['taxonomies']->getBucket('modules:'. $moduleClass::className())->toArray();
+	}
 }
 
 

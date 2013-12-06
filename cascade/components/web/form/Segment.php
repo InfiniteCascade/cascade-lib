@@ -144,6 +144,7 @@ class Segment extends FormObject {
 			$this->_settings['fields'] = null;
 		}
 		$fields = $this->_model->getFields($this);
+		$requiredFields = $this->_model->getRequiredFields($this);
 		$fieldsTemplate = false;
 		if (!empty($this->subform)) {
 			$fieldsTemplate = [[$this->subform => ['linkExisting' => $this->linkExisting]]];
@@ -164,6 +165,26 @@ class Segment extends FormObject {
 			}
 			$this->grid->prepend($fields['_moduleHandler']->formField);
 			$cellClass = $this->cellClass;
+			
+			if (empty($this->subform)) {
+				// make sure all required fields are part of the form
+				if (!empty($requiredFields)) {
+					foreach ($fieldsTemplate as $rowFields) {
+						foreach ($rowFields as $fieldKey => $fieldSettings) {
+							if (is_numeric($fieldKey)) {
+								$fieldKey = $fieldSettings;
+								$fieldSettings = [];
+							}
+							unset($requiredFields[$fieldKey]);
+						}
+					}
+				}
+
+				foreach ($requiredFields as $fieldName => $field) {
+					$fieldsTemplate[] = [$fieldName];
+				}
+			}
+
 			foreach ($fieldsTemplate as $rowFields) {
 				$rowItems = [];
 				foreach ($rowFields as $fieldKey => $fieldSettings) {

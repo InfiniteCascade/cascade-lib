@@ -2,6 +2,8 @@
 
 namespace cascade\models;
 
+use cascade\components\types\ActiveRecordTrait;
+
 /**
  * This is the model class for table "taxonomy".
  *
@@ -18,6 +20,19 @@ namespace cascade\models;
  */
 class Taxonomy extends \cascade\components\db\ActiveRecord
 {
+	use ActiveRecordTrait {
+		behaviors as baseBehaviors;
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
+	public function behaviors()
+	{
+		return array_merge(parent::behaviors(), self::baseBehaviors(), []);
+	}
+	
+
 	/**
 	 * @inheritdoc
 	 */
@@ -32,7 +47,7 @@ class Taxonomy extends \cascade\components\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['id', 'taxonomy_type_id', 'name'], 'required'],
+			[['taxonomy_type_id', 'name'], 'required'],
 			[['created', 'modified'], 'safe'],
 			[['id', 'taxonomy_type_id'], 'string', 'max' => 36],
 			[['name', 'system_id'], 'string', 'max' => 255]

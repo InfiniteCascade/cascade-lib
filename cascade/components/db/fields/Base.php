@@ -8,6 +8,8 @@ abstract class Base extends \infinite\base\Object {
 	public $formFieldClass;
 	public $field;
 	public $default;
+	public $required = false;
+	
 	protected $_human;
 	protected $_format;
 	protected $_label;

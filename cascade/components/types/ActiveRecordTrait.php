@@ -20,6 +20,9 @@ trait ActiveRecordTrait {
 				'class' => 'infinite\\db\\behaviors\\Relatable',
 				'relationClass' => 'cascade\\models\\Relation',
 				'registryClass' => 'cascade\\models\\Registry',
+			],
+			'Taxonomy' => [
+				'class' => 'cascade\\components\\db\\behaviors\\Taxonomy',
 			]
 		];
 	}
