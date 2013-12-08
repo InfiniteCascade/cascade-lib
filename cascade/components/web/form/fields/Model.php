@@ -51,6 +51,7 @@ class Model extends Base {
 					$this->smartOptions['watchField'] = '#' . $watchFieldId;
 				}
 			}
+			$this->htmlOptions['data-value'] = Html::getAttributeValue($model, $field);
 			$this->htmlOptions['data-smart'] = json_encode($this->smartOptions);
 		}
 

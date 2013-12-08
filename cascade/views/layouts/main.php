@@ -34,7 +34,7 @@ if (YII_ENV_DEV) {
 			],
 		]);
 		echo Nav::widget([
-			'options' => ['class' => 'navbar-nav pull-right'],
+			'options' => ['class' => 'navbar-nav navbar-right'],
 			'encodeLabels' => false,
 			'items' => [
 				['label' => 'Home', 'url' => ['/app/index']],

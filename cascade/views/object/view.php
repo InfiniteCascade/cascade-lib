@@ -30,7 +30,7 @@ foreach ($sections as $section) {
 }
 echo Html::beginTag('div', ['id' => 'object-dashboard-navbar']);
 echo Nav::widget([
-	'options' => ['class' => 'navbar-nav pull-right'],
+	'options' => ['class' => 'navbar-nav navbar-right'],
 	'items' => $sectionsMenu,
 ]);
 echo Html::endTag('div');
