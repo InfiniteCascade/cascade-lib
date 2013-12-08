@@ -466,6 +466,11 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 				} else {
 					// loop through parents
 					foreach ($input['parents'] as $parentKey => $parent) {
+						if (isset($parent['relation'])) {
+							$relation = $parent['relation'];
+						} else {
+							$relation = $parent['model']->getRelationModel($parentKey);
+						}
 						$relation = $parent['model']->getRelationModel($parentKey);
 						$relation->child_object_id = $parent['model']->primaryKey;
 						if (isset($parent['handler'])) {
@@ -485,7 +490,11 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 
 					// loop through children
 					foreach ($input['children'] as $childKey => $child) {
-						$relation = $child['model']->getRelationModel($childKey);
+						if (isset($child['relation'])) {
+							$relation = $child['relation'];
+						} else {
+							$relation = $child['model']->getRelationModel($childKey);
+						}
 						$relation->parent_object_id = $primary['model']->primaryKey;
 
 						if (isset($child['handler'])) {
@@ -538,7 +547,6 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	}
 
 	protected function _handlePost($settings = []) {
-		var_dump('post');
 		$results = ['primary' => null, 'children' => [], 'parents' => []];
 		if (empty($_POST)) { return false; }
 
@@ -596,13 +604,12 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 							if (isset($_POST[$relationFormClass][$relationTabularId])) {
 								$relation->attributes = $_POST[$relationFormClass][$relationTabularId];
 							}
-							$results[$resultsKey][$tabId] = ['handler' => $handler, 'model' => $model];
+							$results[$resultsKey][$tabId] = ['handler' => $handler, 'model' => $model, 'relation' => $relation];
 						}
 					}
 				}
 			}
 		}
-		var_dump("nopost");
 		if (is_null($results['primary'])) { return false; }
 		return $results; 
 	}

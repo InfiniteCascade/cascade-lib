@@ -15,6 +15,7 @@ class Relation extends Base {
 	protected $_moduleHandler;
 	public $relationship;
 	public $modelRole; // either parent or child
+	public $baseModel;
 	static $_moduleHandlers = [];
 
 	public function getCompanion() {
@@ -36,8 +37,18 @@ class Relation extends Base {
 		return $this->_moduleHandler;
 	}
 
-	public function getCompanionModel() {
-		
+	public function getCompanionField() {
+		$fieldParts = explode(':', $this->field);
+		if ($this->modelRole === 'parent') {
+			return 'child:'.$fieldParts[1];
+		} else {
+			return 'parent:'.$fieldParts[1];
+		}
+	}
+
+	public function getCompanionModel()
+	{
+		return $this->baseModel->getRelationModel($this->companionField);
 	}
 }
 

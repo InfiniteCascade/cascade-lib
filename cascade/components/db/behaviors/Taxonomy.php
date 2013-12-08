@@ -33,7 +33,7 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
     				unset($current[$deleteKey]);
     				continue;
     			}
-    			$base = [$this->taxonomyKey => $taxonomyId, $this->relationKey => $this->object->primaryKey];
+    			$base = [$this->taxonomyKey => $taxonomyId, $this->relationKey => $this->owner->primaryKey];
     			$taxonomy = new $pivotTableClass;
     			$taxonomy->attributes = $base;
     			if (!$taxonomy->save()) {
@@ -53,7 +53,6 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
 
     public function setTaxonomy_id($value)
     {
-    	var_dump($value);exit;
     	$this->_taxonomy_id = $value;
     }
 

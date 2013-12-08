@@ -121,7 +121,7 @@ trait ActiveRecordTrait {
 	 * @param unknown $univeralFieldSettings (optional)
 	 * @return unknown
 	 */
-	public function getFields($owner = null) {
+	public function getFields($owner = null, $relationField = null) {
 		if (!isset(self::$_fields[self::className()])) {
 			$modelName = self::className();
 			self::$_fields[self::className()] = [];
@@ -143,6 +143,7 @@ trait ActiveRecordTrait {
 			}
 			$objectTypeItem = $this->objectTypeItem;
 			if ($objectTypeItem) {
+				$relationRelationship = null;
 				$relationClass = $this->relationClass;
 				$taxonomies = $objectTypeItem->taxonomies;
 				foreach ($objectTypeItem->parents as $relationship) {
@@ -153,24 +154,15 @@ trait ActiveRecordTrait {
 					}
 					$settings['class'] = $this->relationFieldClass;
 					$settings['model'] = $this->getRelationModel($fieldName);
+					$settings['baseModel'] = $this;
 					$settings['field'] = $fieldName;
 					if (!isset($settings['formField'])) { $settings['formField'] = []; }
 					$settings['formField']['owner'] = $owner;
 					$settings['relationship'] = $relationship;
 					$settings['modelRole'] = 'child';
 					self::$_fields[self::className()][$fieldName] = Yii::createObject($settings);
-
-					if (isset($relationship->taxonomy) 
-						&& isset($taxonomies[$relationship->taxonomy])
-						&& in_array($relationClass::className(), $taxonomies[$relationship->taxonomy]->models)
-					) {
-						$taxonomy = $taxonomies[$relationship->taxonomy];
-						unset($taxonomies[$relationship->taxonomy]);
-						$fieldName = 'parentTaxonomy:'. $taxonomy->systemId;
-						$settings = ['model' => $settings['model']];
-						self::$_fields[self::className()][$fieldName] = $this->_createTaxonomyField($fieldName, $taxonomy, $owner, $settings);
-					}
 				}
+
 				foreach ($objectTypeItem->children as $relationship) {
 					$fieldName = 'child:'. $relationship->child->systemId;
 					$settings = [];
@@ -179,39 +171,37 @@ trait ActiveRecordTrait {
 					}
 					$settings['class'] = $this->relationFieldClass;
 					$settings['model'] = $this->getRelationModel($fieldName);
+					$settings['baseModel'] = $this;
 					$settings['field'] = $fieldName;
 					if (!isset($settings['formField'])) { $settings['formField'] = []; }
 					$settings['formField']['owner'] = $owner;
 					$settings['relationship'] = $relationship;
 					$settings['modelRole'] = 'parent';
 					self::$_fields[self::className()][$fieldName] = Yii::createObject($settings);
-
-					if (isset($relationship->taxonomy) 
-						&& isset($taxonomies[$relationship->taxonomy])
-						&& in_array($relationClass::className(), $taxonomies[$relationship->taxonomy]->models)
-					) {
-						$taxonomy = $taxonomies[$relationship->taxonomy];
-						unset($taxonomies[$relationship->taxonomy]);
-						$fieldName = 'childTaxonomy:'. $taxonomy->systemId;
-						$settings = ['model' => $settings['model']];
-						self::$_fields[self::className()][$fieldName] = $this->_createTaxonomyField($fieldName, $taxonomy, $owner, $settings);
-					}
 				}
+
 				foreach ($taxonomies as $taxonomy) {
+					if(!in_array(self::className(), $taxonomy->models)) {
+						continue;
+					}
 					$fieldName = 'taxonomy:'. $taxonomy->systemId;
 					$settings = [];
 					if (isset($fieldSettings[$fieldName])) {
 						$settings = array_merge_recursive($settings, $fieldSettings[$fieldName]);
 					}
 					$settings['model'] = $this;
-					self::$_fields[self::className()][$fieldName] = $this->_createTaxonomyField($fieldName, $taxonomy, $owner);
+					self::$_fields[self::className()][$fieldName] = $this->createTaxonomyField($taxonomy, $owner);
 				}
+				if (!is_null($relationField)) {
+					$relationField->companionModel->addFields($this, self::$_fields[self::className()], $relationField->relationship, $owner);
+				}
+
 			}
 		}
 		return self::$_fields[self::className()];
 	}
 
-	protected function _createTaxonomyField($fieldName, $taxonomy, $owner, $settings = []) {
+	public function createTaxonomyField($taxonomy, $owner, $settings = []) {
 		$settings['class'] = $this->taxonomyFieldClass;
 		$settings['field'] = 'taxonomy_id';
 		if (!isset($settings['formField'])) { $settings['formField'] = []; }

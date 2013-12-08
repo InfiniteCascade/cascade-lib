@@ -19,6 +19,7 @@ class Segment extends FormObject {
 	public $cellClass = 'cascade\components\web\form\fields\Cell';
 	public $subform;
 	public $linkExisting = true;
+	public $relationField;
 
 	protected $_name;
 	protected $_model;
@@ -143,7 +144,7 @@ class Segment extends FormObject {
 		if (is_array($this->_settings['fields']) && empty($this->_settings['fields'])) {
 			$this->_settings['fields'] = null;
 		}
-		$fields = $this->_model->getFields($this);
+		$fields = $this->_model->getFields($this, $this->relationField);
 		$requiredFields = $this->_model->getRequiredFields($this);
 		$fieldsTemplate = false;
 		if (!empty($this->subform)) {

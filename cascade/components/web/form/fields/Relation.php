@@ -29,7 +29,7 @@ class Relation extends Base {
 				$model->_moduleHandler = $moduleHandler;
 			}
 
-			$formSegment = $companion->getFormSegment($model);
+			$formSegment = $companion->getFormSegment($model, ['relationField' => $this->modelField]);
 			$formSegment->owner = $this;
 			return $formSegment->generate();
 		}

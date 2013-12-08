@@ -142,7 +142,7 @@ class ObjectController extends Controller
 	 */
 	public function actionCreate() {
 		if (!isset($_GET['type'])) { $_GET['type'] = ''; }
-		$typeParsed = $_GET['type'];
+		$typeParsed = $originalTypeParsed= $_GET['type'];
 		$subform = $object = null;
 		$action = 'create';
 		$saveSettings = [];
@@ -166,6 +166,7 @@ class ObjectController extends Controller
 				throw new HttpException(403, "Invalid request ");
 			}
 			$subform = implode(':', $typeParsedParts);
+			$subformRelation = $originalTypeParsed; // $object->getRelationModel($typeParsed);
 			$saveSettings['allowEmpty'] = true;
 		}
 
