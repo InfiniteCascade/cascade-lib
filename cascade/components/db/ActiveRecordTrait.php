@@ -26,16 +26,15 @@ trait ActiveRecordTrait {
 
 
     public function getTabularId() {
-    	if (is_null($this->_moduleHandler)) {
-    		$this->_moduleHandler = self::FORM_PRIMARY_MODEL;
-    	}
-        return self::generateTabularId($this->_moduleHandler);
+        if (is_null($this->_tabularId)) {
+            if (is_null($this->_moduleHandler)) {
+                $this->_moduleHandler = self::FORM_PRIMARY_MODEL;
+            }
+            $this->_tabularId = self::generateTabularId($this->_moduleHandler);
+        }
+        return $this->_tabularId;
     }
-
-    public function getTabularPrefix() {
-        return '['. $this->tabularId .']';
-    }
-
+    
 	public function behaviors() {
 		$behaviors = parent::behaviors();
 		return array_merge($behaviors, [

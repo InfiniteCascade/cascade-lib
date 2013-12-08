@@ -538,6 +538,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	}
 
 	protected function _handlePost($settings = []) {
+		var_dump('post');
 		$results = ['primary' => null, 'children' => [], 'parents' => []];
 		if (empty($_POST)) { return false; }
 
@@ -581,6 +582,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 						$dirty = $model->getDirtyAttributes();
 						if ($model->isNewRecord) {
 							$formName = $model->formName();
+
 							foreach ($m[$formName] as $k => $v) {
 								if (empty($v)) {
 									unset($dirty[$k]);
@@ -588,12 +590,19 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 							}
 						}
 						if (!empty($settings['allowEmpty']) || count($dirty) > 0) {
+							$relation = $model->getRelationModel(implode(':', array_slice($handlerParts, 0, 2)));
+							$relationFormClass = $relation->formName();
+							$relationTabularId = $relation->tabularId;
+							if (isset($_POST[$relationFormClass][$relationTabularId])) {
+								$relation->attributes = $_POST[$relationFormClass][$relationTabularId];
+							}
 							$results[$resultsKey][$tabId] = ['handler' => $handler, 'model' => $model];
 						}
 					}
 				}
 			}
 		}
+		var_dump("nopost");
 		if (is_null($results['primary'])) { return false; }
 		return $results; 
 	}

@@ -45,12 +45,9 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
 		if (empty($this->_items)) {
 			return '';
 		}
-		if ($this->ajax) {
-			$this->class .= " ajaxSubmit";
-		}
 		$result = array();
 		list($this->form, $formStartRow) = ActiveForm::begin([
-			'options' => ['class' => 'ajax'], //form-horizontal
+			'options' => ['class' => ''], //form-horizontal
 			'enableClientValidation' => false
 		], false);
 		$result[] = $formStartRow;
