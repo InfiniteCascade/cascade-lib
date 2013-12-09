@@ -7,5 +7,6 @@ interface ObjectWidgetInterface
 {
 	public function getSortBy();
 	public function getHeaderMenu();
+	public function renderItemMenu($model, $key, $index);
 }
 ?>

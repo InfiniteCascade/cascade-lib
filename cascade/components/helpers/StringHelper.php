@@ -15,7 +15,7 @@ class StringHelper extends \infinite\helpers\StringHelper {
 				if (isset($placementItem)) {
 					$placementItem = $placementItem->object;
 				}
-				while (!empty($placementItem) AND is_object($placementItem) AND !empty($instructions)) {
+				while (!empty($placementItem) && is_object($placementItem) && !empty($instructions)) {
 					$nextInstruction = array_shift($instructions);
 					if (isset($placementItem->{$nextInstruction})) {
 						$placementItem = $placementItem->{$nextInstruction};

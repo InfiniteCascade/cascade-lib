@@ -14,6 +14,9 @@ return array(
 	'migrationAliases' => ['@cascade/migrations'],
 	// site look
 	'logoLogin' => "/themes/ic/img/cascade-logo-450.png",
-	'logoSmall' => "/themes/ic/img/cascade-logo-75.png"
+	'logoSmall' => "/themes/ic/img/cascade-logo-75.png",
+	'helperUrls' => [
+		'map' => 'http://maps.google.com/?q=%%object.flatAddressUrl%%'
+	]
 );
 ?>

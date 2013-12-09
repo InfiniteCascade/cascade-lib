@@ -145,8 +145,7 @@ trait ObjectWidgetTrait
 			];
 		}
 
-		//sorting 
-
+		//sorting
 		$sortBy = $this->sortBy;
 		$currentSortBy = $this->currentSortBy;
 		$currentSortByDirection = $this->currentSortByDirection;
@@ -193,6 +192,67 @@ trait ObjectWidgetTrait
 
 		return $menu;
 	}
+
+	public function getMenuItems($model, $key, $index)
+	{
+		$objectType = $model->objectType;
+
+		$menu = [];
+		$baseUrl = ['id' => $model->primaryKey];
+		$queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
+		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
+		if ($queryRole && $relationship) {
+			if ($queryRole === 'children') {
+				$relationModel = $relationship->getModel(Yii::$app->request->object->primaryKey, $model->primaryKey);
+				$baseUrl['object_relation'] = 'child';
+			} else {
+				$relationModel = $relationship->getModel($model->primaryKey, Yii::$app->request->object->primaryKey);
+				$baseUrl['object_relation'] = 'parent';
+			}
+			if ($relationModel) {
+				$baseUrl['relation_id'] = $relationModel->primaryKey;
+			}
+			if ($relationship->allowPrimary && isset($relationModel) && empty($relationModel->primary)) {
+				$menu['primary'] = [
+					'icon' => 'fa fa-star',
+					'label' => 'Set as primary',
+					'url' => ['object/update', 'subaction' => 'setPrimary'] + $baseUrl,
+					'linkOptions' => ['data-handler' => 'background']
+				];
+			}
+		}
+
+		// update button
+		if (!$objectType->hasDashboard && $model->can('update')) {
+			$menu['update'] = [
+				'icon' => 'fa fa-wrench',
+				'label' => 'Update',
+				'url' => ['object/update'] + $baseUrl,
+				'linkOptions' => ['data-handler' => 'background']
+			];
+		}
+
+		
+		// delete button
+		if ($model->can('delete')) {
+			$deleteUrl = ['object/delete', ];
+			$menu['delete'] = [
+				'icon' => 'fa fa-trash-o',
+				'label' => 'Delete',
+				'url' => ['object/delete'] + $baseUrl,
+				'linkOptions' => ['data-handler' => 'background']
+			];
+		}
+
+		return $menu;
+	}
+
+	protected function getPossibleMenuItems($model)
+	{
+		$possible = [];
+		return $possible;
+	}
+	
 
 	public function getPaginationSettings() {
 		return ['class' => 'yii\data\Pagination', 'pageSize' => 20];

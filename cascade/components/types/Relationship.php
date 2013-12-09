@@ -12,8 +12,11 @@ use Yii;
 use infinite\base\exceptions\Exception;
 
 class Relationship extends \infinite\base\Object {
+	public static $relationClass = 'cascade\\models\\Relation';
+
 	protected $_parent;
 	protected $_child;
+	static $_cache = [];
 
 	protected $_defaultOptions = array(
 		'allowPrimary' => true, 
@@ -74,6 +77,25 @@ class Relationship extends \infinite\base\Object {
 		return self::$_relationships[$key];
 	}
 
+	public function getModel($parentObjectId, $childObjectId)
+	{
+		if (!isset(self::$_cache[$parentObjectId])) {
+			$relationClass = self::$relationClass;
+			$all = $relationClass::find();
+			$all->where(
+				['or', 'parent_object_id' => ':parentObjectId', 'child_object_id' => ':childObjectId'], 
+				[':parentObjectId' => $parentObjectId, ':childObjectId' => $childObjectId]
+			);
+			$all = $all->all();
+			foreach ($all as $relation) {
+				self::$_cache[$relation->parent_object_id][$relation->child_object_id] = $relation;
+			}
+		}
+		if (isset(self::$_cache[$parentObjectId]) && isset(self::$_cache[$parentObjectId][$childObjectId])) {
+			return self::$_cache[$parentObjectId][$childObjectId];
+		}
+		return false;
+	}
 
 
 	/**

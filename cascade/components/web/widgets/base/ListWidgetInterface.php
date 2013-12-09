@@ -9,6 +9,7 @@ interface ListWidgetInterface
 	public function getListItemOptions($model, $key, $index);
 	public function renderItemContent($model, $key, $index);
 	public function renderItemMenu($model, $key, $index);
+	public function getMenuItems($model, $key, $index);
 	public function getDataProvider();
 	public function getDataProviderSettings();
 	public function generateContent();

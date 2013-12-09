@@ -151,4 +151,21 @@ class ObjectPostalAddress extends \cascade\components\types\ActiveRecord
 		}
 		return $str;
 	}
+
+	public function getFlatAddressUrl()
+	{
+		return urlencode($this->flatAddress);
+	}
+	
+	public function getFlatAddress()
+	{
+		$parts = ['address1', 'address2', 'csz', 'country'];
+		$address = [];
+		foreach ($parts as $part) {
+			if (isset($this->{$part})) {
+				$address[] = $this->{$part};
+			}
+		}
+		return implode(', ', $address);
+	}
 }

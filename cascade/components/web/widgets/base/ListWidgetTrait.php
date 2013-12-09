@@ -5,6 +5,7 @@ use Yii;
 
 use infinite\helpers\Html;
 use infinite\helpers\ArrayHelper;
+use yii\bootstrap\ButtonDropdown;
 
 trait ListWidgetTrait
 {
@@ -63,6 +64,32 @@ trait ListWidgetTrait
 
 	public function renderItemMenu($model, $key, $index)
 	{
+		$menuItems = $this->getMenuItems($model, $key, $index);
+		if (!empty($menuItems)) {
+			foreach ($menuItems as &$menuItem) {
+				if (isset($menuItem['icon'])) {
+					if (!isset($menuItem['label'])) { $menuItem['label'] = ''; }
+					$menuItem['label'] = '<span class="'.$menuItem['icon'].'"></span>'. $menuItem['label'];
+					unset($menuItem['icon']);
+				}
+			}
+			/*
+			<button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  */
+
+			return ButtonDropdown::widget([
+					'label' => '',
+					'options' => ['class' => 'pull-right'],
+					'dropdown' => [
+						'options' => ['class' => 'pull-right'],
+						'encodeLabels' => false,
+						'items' => $menuItems
+					]
+				]);
+		}
 		return null;
 	}
 

@@ -65,6 +65,7 @@ return array(
 				'' => 'object/index',
 				
 				'<action:(view)>/<id:\S+>' => 'object/<action>',
+				'<action:(update|delete)>/<id:\S+>' => 'object/<action>',
 				'<action:(create)>/<type:\S+>/<object_id:\S+>' => 'object/<action>',
 				'<action:(create)>/<type:\S+>' => 'object/<action>',
 
