@@ -32,7 +32,6 @@ class Model extends Base {
 		$form = $this->generator->form;
 		$pre = $post = null;
 		$field = $this->getModelField();
-
 		$fieldConfig = $this->fieldConfig;
 		if ($this->showLabel) {
 			$fieldConfig['template'] = "{label}\n".$fieldConfig['template'];

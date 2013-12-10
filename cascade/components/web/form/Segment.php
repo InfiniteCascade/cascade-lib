@@ -25,6 +25,7 @@ class Segment extends FormObject {
 	protected $_model;
 	protected $_settings;
 	protected $_grid;
+
 	public function init()
 	{
 		parent::init();
@@ -34,8 +35,6 @@ class Segment extends FormObject {
 			$this->isValid = true;
 			$this->model->clearErrors();
 		}
-
-		$this->autogenerate($this->settings);
 	}
 
 	public function setModel($model)
@@ -110,6 +109,8 @@ class Segment extends FormObject {
 	 */
 	public function generate()
 	{
+
+		$this->autogenerate($this->settings);
 		$result = [];
 		if (!empty($this->_settings['title'])) {
 			$result[] = Html::beginTag('fieldset');
@@ -144,7 +145,12 @@ class Segment extends FormObject {
 		if (is_array($this->_settings['fields']) && empty($this->_settings['fields'])) {
 			$this->_settings['fields'] = null;
 		}
-		$fields = $this->_model->getFields($this, $this->relationField);
+		$fields = $this->_model->getFields($this);
+
+		if (!is_null($this->relationField)) {
+			$this->relationField->model->addFields($this->_model, $fields, $this->relationField->relationship, $this);
+		}
+
 		$requiredFields = $this->_model->getRequiredFields($this);
 		$fieldsTemplate = false;
 		if (!empty($this->subform)) {
@@ -153,16 +159,24 @@ class Segment extends FormObject {
 			$fieldsTemplate = [];
 			foreach ($fields as $fieldName => $field) {
 				if (!$field->human) { continue; }
+				if (!$field->required) { continue; }
 				if (!($field instanceof ModelField)) { continue; }
 				$fieldsTemplate[] = [$fieldName];
 			}
 		} else {
 			$fieldsTemplate = $this->_settings['fields'];
 		}
+
 		if ($fieldsTemplate !== false) {
 			$this->_settings['fields'] = array();
-			if (!$this->_model->isNewRecord) {
-				$this->grid->prepend($fields['id']->formField);
+			foreach ($fields as $fieldKey => $field) {
+				if (!is_object($field->model)) {
+					\d($field);exit;
+				}
+				if ($field->model->isNewRecord) { continue; }
+				if ($field->human) { continue; }
+				if (!$field->required) { continue; }
+				$this->grid->prepend($field->formField);
 			}
 			$this->grid->prepend($fields['_moduleHandler']->formField);
 			$cellClass = $this->cellClass;
@@ -193,7 +207,6 @@ class Segment extends FormObject {
 						$fieldKey = $fieldSettings;
 						$fieldSettings = [];
 					}
-					
 					if ($fieldKey === false || $fieldKey === ':empty') {
 						$rowItems[] = Yii::createObject(['class' => $cellClass, 'content' => '&nbsp;']);
 						continue;
@@ -209,6 +222,7 @@ class Segment extends FormObject {
 					if ($fieldKey === false) {
 						$rowItems[] = false;
 					} else {
+						//\d([$fieldKey, $fieldSettings]);
 						$cellOptions = ['class' => $cellClass, 'content' => $fields[$fieldKey]->formField->configure($fieldSettings)];
 						if (isset($cellOptions['content']->columns)) {
 							$cellOptions['columns'] = $cellOptions['content']->columns;

@@ -18,5 +18,8 @@ class SimpleLinkList extends BaseList {
 	{
 		return array_merge(parent::getListItemOptions($model, $key, $index), ['tag' => 'a', 'href' => Html::url($model->getUrl('view'))]);
 	}
-
+	public function getMenuItems($model, $key, $index)
+	{
+		return [];
+	}
 }

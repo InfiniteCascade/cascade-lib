@@ -22,11 +22,15 @@ class Relation extends \infinite\db\models\Relation
 	}
 
 	public function addFields($caller, &$fields, $relationship, $owner) {
+		$baseField = ['model' => $this];
+		if (isset($this->id)) {
+			$fields['relation:id'] = $caller->createField('id', $owner, $baseField);
+		}
 		if (!empty($relationship->taxonomy) 
 				&& ($taxonomyItem = Yii::$app->collectors['taxonomies']->getOne($relationship->taxonomy)) 
 				&& ($taxonomy = $taxonomyItem->object) 
 				&& $taxonomy) {
-			$fields['relation:taxonomy_id'] = $caller->createTaxonomyField($taxonomyItem, $owner, ['model' => $this]);
+			$fields['relation:taxonomy_id'] = $caller->createTaxonomyField($taxonomyItem, $owner, $baseField);
 			//var_dump($fields['relation:taxonomy_id']);exit;
 		}
 	}

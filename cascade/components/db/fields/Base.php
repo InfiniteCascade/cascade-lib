@@ -9,12 +9,15 @@ abstract class Base extends \infinite\base\Object {
 	public $field;
 	public $default;
 	public $required = false;
+
+	public $possiblePrimaryKeys = ['id'];
 	
 	protected $_human;
 	protected $_format;
 	protected $_label;
 	protected $_model;
 	protected $_formField;
+	
 
 	public function setFormField($value) {
 		if (is_array($value)) {
@@ -37,6 +40,9 @@ abstract class Base extends \infinite\base\Object {
 
 		if (!is_null($this->default) && !$this->model->isAttributeChanged($this->field)) {
 			$this->model->{$this->field} = $this->default;
+		}
+		if (in_array($this->field, $this->possiblePrimaryKeys)) {
+			$this->required = true;
 		}
 	}
 

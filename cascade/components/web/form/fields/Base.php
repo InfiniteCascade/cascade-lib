@@ -41,7 +41,6 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
 	 * @return unknown
 	 */
 	public function getModelField($formSettings = array()) {
-
 		return "{$this->model->tabularPrefix}{$this->field}";
 	}
 

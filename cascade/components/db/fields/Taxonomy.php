@@ -23,7 +23,7 @@ class Taxonomy extends Base {
 			$stem = $this->field;
 			if (!isset(self::$_moduleHandlers[$stem])) { self::$_moduleHandlers[$stem] = []; }
 			$n = count(self::$_moduleHandlers[$stem]);
-			$this->_moduleHandler = $this->field .':'. $n;
+			$this->_moduleHandler = $this->field .':_'. $n;
 			self::$_moduleHandlers[$stem][] = $this->_moduleHandler;
 		}
 		return $this->_moduleHandler;

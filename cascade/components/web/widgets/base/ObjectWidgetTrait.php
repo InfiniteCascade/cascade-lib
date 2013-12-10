@@ -5,6 +5,7 @@ use Yii;
 
 use infinite\base\exceptions\Exception;
 use infinite\helpers\ArrayHelper;
+use infinite\helpers\Html;
 
 use cascade\components\types\Relationship;
 
@@ -84,6 +85,16 @@ trait ObjectWidgetTrait
 			'label' => $descriptorLabel
 		];
 		return $sortBy;
+	}
+
+	public function getListItemOptions($model, $key, $index)
+	{
+		$options = self::getListItemOptionsBase($model, $key, $index);
+		$relationModel = $this->getRelationModel($model);
+		if ($relationModel && !empty($relationModel->primary)) {
+			Html::addCssClass($options, 'active');
+		}
+		return $options;
 	}
 
 	public function getCurrentSortBy()
@@ -193,6 +204,19 @@ trait ObjectWidgetTrait
 		return $menu;
 	}
 
+	public function getRelationModel($model) {
+		$queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
+		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
+		if ($queryRole && $relationship) {
+			if ($queryRole === 'children') {
+				return $relationship->getModel(Yii::$app->request->object->primaryKey, $model->primaryKey);
+			} else {
+				return $relationship->getModel($model->primaryKey, Yii::$app->request->object->primaryKey);
+			}
+		}
+		return false;
+	}
+
 	public function getMenuItems($model, $key, $index)
 	{
 		$objectType = $model->objectType;
@@ -201,17 +225,15 @@ trait ObjectWidgetTrait
 		$baseUrl = ['id' => $model->primaryKey];
 		$queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
 		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
-		if ($queryRole && $relationship) {
+		$relationModel = $this->getRelationModel($model);
+
+		if ($relationModel) {
 			if ($queryRole === 'children') {
-				$relationModel = $relationship->getModel(Yii::$app->request->object->primaryKey, $model->primaryKey);
 				$baseUrl['object_relation'] = 'child';
 			} else {
-				$relationModel = $relationship->getModel($model->primaryKey, Yii::$app->request->object->primaryKey);
 				$baseUrl['object_relation'] = 'parent';
 			}
-			if ($relationModel) {
-				$baseUrl['relation_id'] = $relationModel->primaryKey;
-			}
+			$baseUrl['relation_id'] = $relationModel->primaryKey;
 			if ($relationship->allowPrimary && isset($relationModel) && empty($relationModel->primary)) {
 				$menu['primary'] = [
 					'icon' => 'fa fa-star',

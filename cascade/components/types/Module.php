@@ -414,9 +414,10 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		return $primaryModel;
 	}
 
-	public function getModels($primaryModel = null) {
+	public function getModels($primaryModel = null, $models = []) {
 		$model = $this->getModel($primaryModel);
-		return [$model->tabularId => $model];
+		$models[$model->tabularId] = $model;
+		return $models;
 	}
 
 
@@ -471,7 +472,6 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 						} else {
 							$relation = $parent['model']->getRelationModel($parentKey);
 						}
-						$relation = $parent['model']->getRelationModel($parentKey);
 						$relation->child_object_id = $parent['model']->primaryKey;
 						if (isset($parent['handler'])) {
 							$descriptor = $parent['handler']->title->singular;
@@ -549,7 +549,6 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	protected function _handlePost($settings = []) {
 		$results = ['primary' => null, 'children' => [], 'parents' => []];
 		if (empty($_POST)) { return false; }
-
 		foreach ($_POST as $modelTop => $tabs) {
 			if (!is_array($tabs)) { continue; }
 			foreach ($tabs as $tabId => $tab) {
@@ -573,7 +572,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					continue;
 				}
 				$handlerParts = explode(':', $tab['_moduleHandler']);
-				if (count($handlerParts) >= 3) {
+				if (count($handlerParts) >= 2) {
 					$resultsKey = null;
 					if ($handlerParts[0] === 'child') {
 						$rel = $this->collectorItem->getChild($handlerParts[1]);
@@ -598,7 +597,12 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 							}
 						}
 						if (!empty($settings['allowEmpty']) || count($dirty) > 0) {
-							$relation = $model->getRelationModel(implode(':', array_slice($handlerParts, 0, 2)));
+							$relationKey = implode(':', array_slice($handlerParts, 0, 2));
+							if (!empty($model->primaryKey)) {
+								$relationKey = $model->primaryKey;
+							}
+							$relationKey = Relation::generateTabularId($relationKey);
+							$relation = $model->getRelationModel($relationKey);
 							$relationFormClass = $relation->formName();
 							$relationTabularId = $relation->tabularId;
 							if (isset($_POST[$relationFormClass][$relationTabularId])) {
@@ -622,7 +626,8 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function getForm($models = null, $settings = []) {
-		$primaryModel = ActiveRecord::getPrimaryModel($models);
+		$primaryModelClass = $this->primaryModel;
+		$primaryModel = $primaryModelClass::getPrimaryModel($models);
 		if (!$primaryModel) { return false; }
 		$formSegments = [$this->getFormSegment($primaryModel, $settings)];
 		$config = ['class' => $this->formGeneratorClass, 'items' => $formSegments, 'models' => $models];

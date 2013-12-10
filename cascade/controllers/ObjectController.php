@@ -10,6 +10,7 @@ use cascade\models\ObjectFamiliarity;
 use cascade\models\DeleteForm;
 
 use infinite\web\Controller;
+use infinite\db\ActiveRecord;
 use infinite\base\exceptions\HttpException;
 
 use yii\web\AccessControl;
@@ -217,74 +218,133 @@ class ObjectController extends Controller
 		$this->params['form']->ajax = true;
 	}
 
-	/**
-	 *
-	 */
-	public function actionSetPrimary() {
-		$response = new Response(false);
-		if (empty($_GET['id']) or !($relation = Relation::model()->findByPk($_GET['id']))) {
-			throw new HttpException(404, "Unknown relation ". (empty($_GET['id']) ? '' : $_GET['id']));
-		}
-		
-		$object = Registry::getObject($relation->child_object_id);
-		if (empty($object) OR !($type = $object->getTypeModule())) {
-			throw new HttpException(404, "Unknown object");
+
+	protected function _parseParams($required = [], $can = null)
+	{
+		if (!empty($_GET['id']) && (!($this->params['object'] = Registry::getObject($_GET['id'], true)) || !($this->params['typeItem'] = $this->params['object']->objectTypeItem))) {
+			throw new HttpException(404, "Unknown object.");
 		}
 
-		if ($relation->setPrimary()) {
-			$response->success = $object->descriptor. ' is now the primary '. $type->title->getSingular(false).'!';
-		} else {
-			$response->error =  'Could not set '. $object->descriptor .' as the primary '. $type->title->getSingular(false);
+		if (!empty($_GET['relation_id']) && !($this->params['relation'] = Relation::get($_GET['relation_id']))) {
+			throw new HttpException(404, "Unknown relationship.");
 		}
-		$response->justStatus = true;
-		$response->refresh = '.ic-type-'. $type->shortName;
 
-		$response->handle();
+		if (isset($this->params['relation']) && isset($this->params['object'])) {
+			if (!isset($_GET['object_relation']) || !in_array($_GET['object_relation'], ['child', 'parent'])) {
+				throw new HttpException(400, "Invalid request object relation");
+			}
+			$this->params['relatedObject'] = $this->params['object'];
+			if (!is_null($can) && !$this->params['relatedObject']->can($can)) {
+				throw new HttpException(403, "You are not authorized to perform this action.");
+			}
+			$can = 'update';
+			$this->params['object'] = null;
+			if ($_GET['object_relation'] === 'child') {
+				$this->params['modelBucket'] = 'children';
+				$this->params['object'] = Registry::getObject($this->params['relation']->parent_object_id);
+			} else {
+				$this->params['modelBucket'] = 'parents';
+				$this->params['object'] = Registry::getObject($this->params['relation']->child_object_id);
+			}
+			if (!$this->params['object']) {
+				throw new HttpException(404, "Unknown object.");
+			}
+			$this->params['object']->tabularId = ActiveRecord::getPrimaryTabularId();
+			$this->params['object']->_moduleHandler = ActiveRecord::FORM_PRIMARY_MODEL;
+
+			$this->params['subform'] = $_GET['object_relation'] . ':'. $this->params['relatedObject']->objectType->systemId;
+			$this->params['relatedObject']->tabularId = $this->params['relatedObject']->id;
+			$this->params['relation']->tabularId = $this->params['relatedObject']->id;
+			$this->params['relatedObject']->_moduleHandler = $this->params['subform'];
+			$this->params['relatedObject']->registerRelationModel($this->params['relation']);
+		}
+
+		if (isset($this->params['object']) && (!($this->params['typeItem'] = $this->params['object']->objectTypeItem) || !($this->params['type'] = $this->params['typeItem']->object))) {
+			throw new HttpException(404, "Unknown object type.");
+		}
+
+		if (!is_null($can) && isset($this->params['object']) && !$this->params['object']->can($can)) {
+			throw new HttpException(403, "You are not authorized to perform this action.");
+		}
+
+		if (isset($_GET['subaction'])) {
+			$this->params['subaction'] = $_GET['subaction'];
+		}
+
+		foreach ($required as $r) {
+			if (!isset($this->params[$r])) {
+				throw new HttpException(400, "Invalid request");
+			}
+		}
 	}
 
 	/**
 	 *
 	 */
 	public function actionUpdate() {
-		if (empty($_GET['id']) or !($object = Registry::getObject($_GET['id'], true)) or !($type = $object->getTypeModule())) {
-			throw new HttpException(404, "Unknown object ". (empty($_GET['id']) ? '' : $_GET['id']));
-		}
-		if (!$object->can('update')) {
-			throw new HttpException(403, "Unable to access object.");
-		}
-		$response = new Response('create', array('dialog' => true, 'dialogSettings' => array('title' => 'Update '.$object->typeModule->title->getSingular(true) , 'width' => '800px')));
-		$module = $object->typeModule;
-		$models = $module->getModels($object);
-		$this->params['form'] = $module->getForm($models);
-		$this->params['form']->ajax = true;
-		if (!empty($_POST)) {
-			// RDebug::d($models);
-			// RDebug::d($_POST);exit;
-			if ($this->params['form']->isValid) {
-				if ($module->saveModels($models)) {
-					$response->justStatus = true;
-					$response->success =  $module->title->getSingular(true). ' has been saved!';
-					if ($module->objectLevel > 1) {
-						$response->refresh = '.ic-type-'. $module->shortName;
-					} else {
-						$response->redirect = array('view', 'id' => $models['primary']['model']->id);
-					}
-					ObjectFamiliarity::modified($models['primary']['model']);
-				} else {
-					$response->error = 'Error saving '. $module->title->getSingular(false);
-				}
+		$subform = null;
+		$this->_parseParams(['object', 'type'], 'update');
+		extract($this->params);
+		if (isset($subaction) && $subaction === 'setPrimary') {
+			if (!isset($relation)) {
+				throw new HttpException(404, "Invalid relationship!");
+			}
+			$relation->primary = 1;
+			$primaryModel = $type->primaryModel;
+			$this->response->task = 'status';
+			$status = [true];
+			foreach ($relation->siblings as $relationModel) {
+				if (empty($relationModel->primary)) { continue; }
+				$relationModel->primary = 0;
+				$status[] = $relationModel->save();
+			}
+			if (min($status) && $relation->save()) {
+				$this->response->trigger = [
+					['refresh', '.model-'. $primaryModel::baseClassName()]
+				];
 			} else {
-				$response->error = 'Please address the errors and try again.';
+				$this->response->error = 'Unable to set primary object!';
+			}
+			return;
+		} else {
+			$this->response->view = 'create';
+			$this->response->task = 'dialog';
+			$this->response->taskOptions = array('title' => 'Update '. $type->title->getSingular(true) , 'width' => '800px');
+			$models = $type->getModels($object, [$relatedObject->tabularId => $relatedObject, 'relations' => [$relatedObject->tabularId => $relation]]);
+			//\d($models);exit;
+			if (!($this->params['form'] = $type->getForm($models, ['subform' => $subform, 'linkExisting' => false]))) {
+				throw new HttpException(403, "There is nothing to update for {$type->title->getPlural(true)}");
+			}
+
+			if (!empty($_POST)) {
+				list($error, $notice, $models, $niceModels) = $type->handleSaveAll(null, ['allowEmpty' => true]);
+				if ($error) {
+					$this->response->error = $error;
+				} else {
+					$noticeExtra = '';
+					if (!empty($notice)) {
+						$noticeExtra = ' However, there were notices: '. $notice;
+					}
+					$this->response->success = '<em>'. $niceModels['primary']['model']->descriptor .'</em> was saved successfully.'.$noticeExtra;
+					if (isset($relation)) {
+						$primaryModel = $type->primaryModel;
+						$this->response->trigger = [
+							['refresh', '.model-'. $primaryModel::baseClassName()]
+						];
+						$this->response->task = 'status';
+					} else {
+						$this->response->redirect = $niceModels['primary']['model']->getUrl('view');
+					}
+				}
 			}
 		}
-		$response->handle();
 	}
 
 
 	/**
 	 *
 	 */
-	public function actionDelete() {
+	public function actionDeleteOld() {
 		$this->params['model'] = new DeleteForm;
 
 		if (!empty($_GET['relation_id']) AND !empty($_GET['object'])) {
