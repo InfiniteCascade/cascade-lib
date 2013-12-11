@@ -29,6 +29,9 @@ return array(
 			'enableCsrfValidation' => true,
 			'enableCookieValidation' => true,
 		),
+		'errorHandler' => [
+			'discardExistingOutput' => false
+		],
 		'view' => [
 			'class' => 'infinite\web\View',
 		],

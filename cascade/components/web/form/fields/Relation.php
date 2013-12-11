@@ -1,6 +1,7 @@
 <?php
 namespace cascade\components\web\form\fields;
 
+use infinite\helpers\ArrayHelper;
 use cascade\models\Relation as RelationModel;
 
 class Relation extends Base {
@@ -46,13 +47,11 @@ class Relation extends Base {
 	 */
 	public function generate() {
 		$companion = $this->modelField->companion;
-		//\var_dump($companion);exit;
 		if ($this->linkExisting) {
 			// we are matching with an existing document
 			return 'existing';
 		} else {
-
-			$formSegment = $companion->getFormSegment($this->relatedObject, ['relationField' => $this->modelField]);
+			$formSegment = $this->relatedObject->objectType->getFormSegment($this->relatedObject, ['relationField' => $this->modelField]);
 			$formSegment->owner = $this;
 			return $formSegment->generate();
 		}

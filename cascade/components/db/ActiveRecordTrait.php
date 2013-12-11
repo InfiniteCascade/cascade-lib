@@ -148,12 +148,12 @@ trait ActiveRecordTrait {
 						$settings = array_merge_recursive($settings, $fieldSettings[$fieldName]);
 					}
 					$settings['class'] = $this->relationFieldClass;
-					$settings['baseModel'] = $this;
 					$settings['field'] = $fieldName;
+					$settings['modelRole'] = 'child';
 					$settings['relationship'] = $relationship;
+					$settings['baseModel'] = $this;
 					if (!isset($settings['formField'])) { $settings['formField'] = []; }
 					$settings['formField']['owner'] = $owner;
-					$settings['modelRole'] = 'child';
 					self::$_fields[self::className()][$fieldName] = Yii::createObject($settings);
 				}
 
@@ -164,12 +164,12 @@ trait ActiveRecordTrait {
 						$settings = array_merge_recursive($settings, $fieldSettings[$fieldName]);
 					}
 					$settings['class'] = $this->relationFieldClass;
-					$settings['baseModel'] = $this;
 					$settings['field'] = $fieldName;
+					$settings['modelRole'] = 'parent';
+					$settings['baseModel'] = $this;
 					$settings['relationship'] = $relationship;
 					if (!isset($settings['formField'])) { $settings['formField'] = []; }
 					$settings['formField']['owner'] = $owner;
-					$settings['modelRole'] = 'parent';
 					self::$_fields[self::className()][$fieldName] = Yii::createObject($settings);
 				}
 

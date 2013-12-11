@@ -25,6 +25,13 @@ class Relation extends Base {
 			return $this->relationship->parent;
 		}
 	}
+	public function getModule() {
+		if ($this->modelRole === 'child') {
+			return $this->relationship->child;
+		} else {
+			return $this->relationship->parent;
+		}
+	}
 
 	public function getModuleHandler() {
 		if (is_null($this->_moduleHandler)) {

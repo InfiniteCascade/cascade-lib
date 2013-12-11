@@ -230,6 +230,7 @@ class Segment extends FormObject {
 						$rowItems[] = Yii::createObject($cellOptions);
 					}
 				}
+
 				$this->grid->addRow($rowItems);
 			}
 		}

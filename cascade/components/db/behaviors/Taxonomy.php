@@ -41,7 +41,9 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
     			}
     		}
     		foreach ($current as $taxonomyId) {
-    			$taxonomy = $pivotTableClass::find($taxonomyId);
+                $baseFind = [$this->taxonomyKey => $taxonomyId, $this->relationKey => $this->owner->primaryKey];
+                $taxonomy = $pivotTableClass::find()->where($baseFind)->one();
+
     			if ($taxonomy) {
     				if(!$taxonomy->delete()) {
     					$event->isValid = false;
@@ -53,6 +55,11 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
 
     public function setTaxonomy_id($value)
     {
+        foreach ($value as $k => $v) {
+            if (is_object($v)) {
+                $value[$k] = $v->primaryKey;
+            }
+        }
     	$this->_taxonomy_id = $value;
     }
 
@@ -61,7 +68,7 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
     	if (is_null($this->_current_taxonomy_id)) {
     		$taxonomyClass = $this->viaModelClass;
     		$taxonomies = $taxonomyClass::find()->where([$this->relationKey => $this->owner->primaryKey])->all();
-    		$this->_current_taxonomy_id = ArrayHelper::index($taxonomies, 'id');
+    		$this->_current_taxonomy_id = ArrayHelper::map($taxonomies, 'taxonomy_id', 'taxonomy_id');
     	}
     	return $this->_current_taxonomy_id;
     }
