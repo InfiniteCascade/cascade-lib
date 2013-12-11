@@ -15,7 +15,7 @@ class DeleteForm extends Model
 {
 	public $confirm = false;
 	protected $_target;
-	public $relationship;
+	public $relationModel;
 	public $relationshipWith;
 	public $object;
 	public $forceRelationshipDelete = false;
@@ -27,13 +27,13 @@ class DeleteForm extends Model
 	public function rules()
 	{
 		return [
-			['confirm, target', 'safe'],
+			[['confirm', 'target'], 'safe'],
 		];
 	}
 
 	public function getTarget() {
 		if (is_null($this->_target)) {
-			if (!empty($this->relationship)) {
+			if (!empty($this->relationModel)) {
 				$this->target = 'relationship';
 			} else {
 				$this->target = 'object';
@@ -46,7 +46,7 @@ class DeleteForm extends Model
 		if ($this->forceRelationshipDelete AND $this->forceObjectDelete) {
 			$this->forceObjectDelete = false;
 		}
-		if (!empty($this->relationship) AND $this->forceRelationshipDelete) {
+		if (!empty($this->relationModel) AND $this->forceRelationshipDelete) {
 			$this->_target = 'relationship';
 		} elseif (!empty($this->object) AND $this->forceObjectDelete) {
 			$this->_target = 'object';
@@ -68,12 +68,12 @@ class DeleteForm extends Model
 	public function delete() {
 		if ($this->target === 'object') {
 			$result = true;
-			if (!is_null($this->relationship)) {
-				$result = $this->relationship->delete();
+			if (!is_null($this->relationModel)) {
+				$result = $this->relationModel->delete();
 			}
-			return $result AND $this->object->delete();
+			return $result && $this->object->delete();
 		} else {
-			return $this->relationship->delete();
+			return $this->relationModel->delete();
 		}
 	}
 }

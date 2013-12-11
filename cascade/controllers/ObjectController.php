@@ -138,6 +138,78 @@ class ObjectController extends Controller
 		ObjectFamiliarity::accessed($object);
 	}
 
+
+
+	protected function _parseParams($required = [], $can = null)
+	{
+		if (!empty($_GET['id']) && (!($this->params['object'] = Registry::getObject($_GET['id'], true)) || !($this->params['typeItem'] = $this->params['object']->objectTypeItem))) {
+			throw new HttpException(404, "Unknown object.");
+		}
+
+		if (!empty($_GET['link']) && !($this->params['relation'] = Relation::get($_GET['relation_id']))) {
+			throw new HttpException(404, "Unknown relationship.");
+		}
+
+		if (!empty($_GET['relation_id']) && !($this->params['relation'] = Relation::get($_GET['relation_id']))) {
+			throw new HttpException(404, "Unknown relationship.");
+		}
+
+		if (isset($this->params['relation']) && isset($this->params['object'])) {
+			if (!isset($_GET['object_relation']) || !in_array($_GET['object_relation'], ['child', 'parent'])) {
+				throw new HttpException(400, "Invalid request object relation");
+			}
+			$this->params['relatedObject'] = $this->params['object'];
+			if (!is_null($can) && !$this->params['relatedObject']->can($can)) {
+				throw new HttpException(403, "You are not authorized to perform this action.");
+			}
+			$can = 'update';
+			$this->params['object'] = null;
+			if ($_GET['object_relation'] === 'child') {
+				$this->params['modelBucket'] = 'children';
+				$this->params['object'] = Registry::getObject($this->params['relation']->parent_object_id);
+			} else {
+				$this->params['modelBucket'] = 'parents';
+				$this->params['object'] = Registry::getObject($this->params['relation']->child_object_id);
+			}
+			if (!$this->params['object']) {
+				throw new HttpException(404, "Unknown object.");
+			}
+			$this->params['object']->tabularId = ActiveRecord::getPrimaryTabularId();
+			$this->params['object']->_moduleHandler = ActiveRecord::FORM_PRIMARY_MODEL;
+
+			$this->params['subform'] = $_GET['object_relation'] . ':'. $this->params['relatedObject']->objectType->systemId;
+			$this->params['relatedObject']->tabularId = $this->params['relatedObject']->id;
+			$this->params['relation']->tabularId = $this->params['relatedObject']->id;
+			$this->params['relatedObject']->_moduleHandler = $this->params['subform'];
+			$this->params['relatedObject']->registerRelationModel($this->params['relation']);
+
+			if (isset($this->params['relatedObject']) && (!($this->params['relatedTypeItem'] = $this->params['relatedObject']->objectTypeItem) || !($this->params['relatedType'] = $this->params['relatedTypeItem']->object))) {
+				throw new HttpException(404, "Unknown object type.");
+			}
+		}
+
+		if (isset($this->params['object']) && (!($this->params['typeItem'] = $this->params['object']->objectTypeItem) || !($this->params['type'] = $this->params['typeItem']->object))) {
+			throw new HttpException(404, "Unknown object type.");
+		}
+
+		if (!isset($this->params['handler']) && isset($this->params['object'])) {
+			$this->params['handler'] = $this->params['type'];
+		}
+
+		if (!is_null($can) && isset($this->params['object']) && !$this->params['object']->can($can)) {
+			throw new HttpException(403, "You are not authorized to perform this action.");
+		}
+
+		if (isset($_GET['subaction'])) {
+			$this->params['subaction'] = $_GET['subaction'];
+		}
+
+		foreach ($required as $r) {
+			if (!isset($this->params[$r])) {
+				throw new HttpException(400, "Invalid request");
+			}
+		}
+	}
 	/**
 	 *
 	 */
@@ -189,6 +261,7 @@ class ObjectController extends Controller
 
 		$models = false;
 		if (!empty($_POST)) {
+			$this->response->task = 'status';
 			list($error, $notice, $models, $niceModels) = $module->handleSaveAll(null, $saveSettings);
 			if ($error) {
 				$this->response->error = $error;
@@ -203,7 +276,6 @@ class ObjectController extends Controller
 					$this->response->trigger = [
 						['refresh', '.model-'. $primaryModel::baseClassName()]
 					];
-					$this->response->task = 'status';
 				} else {
 					$this->response->redirect = $niceModels['primary']['model']->getUrl('view');
 				}
@@ -218,66 +290,6 @@ class ObjectController extends Controller
 		$this->params['form']->ajax = true;
 	}
 
-
-	protected function _parseParams($required = [], $can = null)
-	{
-		if (!empty($_GET['id']) && (!($this->params['object'] = Registry::getObject($_GET['id'], true)) || !($this->params['typeItem'] = $this->params['object']->objectTypeItem))) {
-			throw new HttpException(404, "Unknown object.");
-		}
-
-		if (!empty($_GET['relation_id']) && !($this->params['relation'] = Relation::get($_GET['relation_id']))) {
-			throw new HttpException(404, "Unknown relationship.");
-		}
-
-		if (isset($this->params['relation']) && isset($this->params['object'])) {
-			if (!isset($_GET['object_relation']) || !in_array($_GET['object_relation'], ['child', 'parent'])) {
-				throw new HttpException(400, "Invalid request object relation");
-			}
-			$this->params['relatedObject'] = $this->params['object'];
-			if (!is_null($can) && !$this->params['relatedObject']->can($can)) {
-				throw new HttpException(403, "You are not authorized to perform this action.");
-			}
-			$can = 'update';
-			$this->params['object'] = null;
-			if ($_GET['object_relation'] === 'child') {
-				$this->params['modelBucket'] = 'children';
-				$this->params['object'] = Registry::getObject($this->params['relation']->parent_object_id);
-			} else {
-				$this->params['modelBucket'] = 'parents';
-				$this->params['object'] = Registry::getObject($this->params['relation']->child_object_id);
-			}
-			if (!$this->params['object']) {
-				throw new HttpException(404, "Unknown object.");
-			}
-			$this->params['object']->tabularId = ActiveRecord::getPrimaryTabularId();
-			$this->params['object']->_moduleHandler = ActiveRecord::FORM_PRIMARY_MODEL;
-
-			$this->params['subform'] = $_GET['object_relation'] . ':'. $this->params['relatedObject']->objectType->systemId;
-			$this->params['relatedObject']->tabularId = $this->params['relatedObject']->id;
-			$this->params['relation']->tabularId = $this->params['relatedObject']->id;
-			$this->params['relatedObject']->_moduleHandler = $this->params['subform'];
-			$this->params['relatedObject']->registerRelationModel($this->params['relation']);
-		}
-
-		if (isset($this->params['object']) && (!($this->params['typeItem'] = $this->params['object']->objectTypeItem) || !($this->params['type'] = $this->params['typeItem']->object))) {
-			throw new HttpException(404, "Unknown object type.");
-		}
-
-		if (!is_null($can) && isset($this->params['object']) && !$this->params['object']->can($can)) {
-			throw new HttpException(403, "You are not authorized to perform this action.");
-		}
-
-		if (isset($_GET['subaction'])) {
-			$this->params['subaction'] = $_GET['subaction'];
-		}
-
-		foreach ($required as $r) {
-			if (!isset($this->params[$r])) {
-				throw new HttpException(400, "Invalid request");
-			}
-		}
-	}
-
 	/**
 	 *
 	 */
@@ -285,12 +297,16 @@ class ObjectController extends Controller
 		$subform = null;
 		$this->_parseParams(['object', 'type'], 'update');
 		extract($this->params);
+		if (isset($relatedType)) {
+			$primaryModel = $relatedType->primaryModel;
+		} else {
+			$primaryModel = $type->primaryModel;
+		}
 		if (isset($subaction) && $subaction === 'setPrimary') {
 			if (!isset($relation)) {
 				throw new HttpException(404, "Invalid relationship!");
 			}
 			$relation->primary = 1;
-			$primaryModel = $type->primaryModel;
 			$this->response->task = 'status';
 			$status = [true];
 			foreach ($relation->siblings as $relationModel) {
@@ -309,15 +325,14 @@ class ObjectController extends Controller
 		} else {
 			$this->response->view = 'create';
 			$this->response->task = 'dialog';
-			$this->response->taskOptions = array('title' => 'Update '. $type->title->getSingular(true) , 'width' => '800px');
+			$this->response->taskOptions = array('title' => 'Update '. $type->title->getSingular(true));
 			$models = $type->getModels($object, [$relatedObject->tabularId => $relatedObject, 'relations' => [$relatedObject->tabularId => $relation]]);
-			//\d($models);exit;
-			if (!($this->params['form'] = $type->getForm($models, ['subform' => $subform, 'linkExisting' => false]))) {
+			if (!($this->params['form'] = $handler->getForm($models, ['subform' => $subform, 'linkExisting' => false]))) {
 				throw new HttpException(403, "There is nothing to update for {$type->title->getPlural(true)}");
 			}
 
 			if (!empty($_POST)) {
-				list($error, $notice, $models, $niceModels) = $type->handleSaveAll(null, ['allowEmpty' => true]);
+				list($error, $notice, $models, $niceModels) = $handler->handleSaveAll(null, ['allowEmpty' => true]);
 				if ($error) {
 					$this->response->error = $error;
 				} else {
@@ -327,7 +342,6 @@ class ObjectController extends Controller
 					}
 					$this->response->success = '<em>'. $niceModels['primary']['model']->descriptor .'</em> was saved successfully.'.$noticeExtra;
 					if (isset($relation)) {
-						$primaryModel = $type->primaryModel;
 						$this->response->trigger = [
 							['refresh', '.model-'. $primaryModel::baseClassName()]
 						];
@@ -340,6 +354,50 @@ class ObjectController extends Controller
 		}
 	}
 
+	/**
+	 *
+	 */
+	public function actionDelete() {
+		$subform = null;
+		$this->_parseParams(['object', 'type'], 'delete');
+		extract($this->params);
+		if (isset($relatedType)) {
+			$primaryModel = $relatedType->primaryModel;
+		} else {
+			$primaryModel = $type->primaryModel;
+		}
+
+		$this->response->view = 'delete';
+		$this->response->task = 'dialog';
+		$this->response->taskOptions = array('title' => 'Delete '. $type->title->getSingular(true) , 'isConfirmDeletion' => true);
+
+		$this->params['model'] = new DeleteForm;
+		$this->params['model']->object = $relatedObject;
+		if (isset($relation)) {
+			$this->params['model']->relationModel = $relation;
+			$this->params['model']->relationshipWith = $object;
+			$this->params['model']->forceObjectDelete = $object->allowRogue($relation);
+		} else {
+			$this->params['model']->forceObjectDelete = $object->allowRogue();
+		}
+		if (!empty($_POST['DeleteForm'])) {
+			$this->response->task = 'status';
+			$targetDescriptor = $this->params['model']->targetDescriptor;
+			$this->params['model']->attributes = $_POST['DeleteForm'];
+			if (!$this->params['model']->delete()) {
+				$this->response->error =  'Could not delete '. $this->params['model']->targetDescriptor;
+			} else {
+				$this->response->success = ucfirst($targetDescriptor). ' has been deleted!';
+				if (!empty($_GET['redirect'])) {
+					$this->response->redirect = $_GET['redirect'];
+				} else {
+					$this->response->trigger = [
+						['refresh', '.model-'. $primaryModel::baseClassName()]
+					];
+				}
+			}
+		}
+	}
 
 	/**
 	 *
@@ -398,7 +456,7 @@ class ObjectController extends Controller
 			if ($this->params['model']->delete()) {
 				$response->success = ucfirst($this->params['model']->targetDescriptor). ' has been deleted!';;
 			} else {
-				$response->error =  'Could not delete '. $this->params['model']->targetDescriptor;
+				
 			}
 		}
 

@@ -46,10 +46,14 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
 			return '';
 		}
 		$result = array();
-		list($this->form, $formStartRow) = ActiveForm::begin([
-			'options' => ['class' => 'ajax'], //form-horizontal
+		$formOptions = [
+			'options' => ['class' => ''], //form-horizontal
 			'enableClientValidation' => false
-		], false);
+		];
+		if (Yii::$app->request->isAjax) {
+			Html::addCssClass($formOptions['options'], 'ajax');
+		}
+		list($this->form, $formStartRow) = ActiveForm::begin($formOptions, false);
 		$result[] = $formStartRow;
 		// $result[] = Html::beginForm('', 'post', array('class' => $this->class));
 		$result[] = Html::beginTag('div', array('class' => ''));

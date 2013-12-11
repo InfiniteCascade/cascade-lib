@@ -24,6 +24,19 @@ trait ActiveRecordTrait {
 	static protected $_fields = [];
 	protected $_defaultOrder = '{alias}.name ASC';
 
+	public function allowRogue($relation = false)
+	{
+		if ($this->objectType->uniparental) {
+			return false;
+		}
+		if ($this->objectType->hasDashboard) {
+			return true;
+		}
+		if (count($this->parentIds) > 1) {
+			return true;
+		}
+		return false;
+	}
 
     public function getTabularId() {
         if (is_null($this->_tabularId)) {
