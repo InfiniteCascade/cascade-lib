@@ -17,6 +17,9 @@ class Relation extends \infinite\db\models\Relation
 				'class' => 'cascade\\components\\db\\behaviors\\Taxonomy',
 				'viaModelClass' => 'cascade\\models\\RelationTaxonomy',
 				'relationKey' => 'relation_id'
+			],
+			'PrimaryRelation' => [
+				'class' => 'cascade\\components\\db\\behaviors\\PrimaryRelation'
 			]
 		]);
 	}

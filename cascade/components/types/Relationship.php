@@ -19,7 +19,7 @@ class Relationship extends \infinite\base\Object {
 	static $_cache = [];
 
 	protected $_defaultOptions = array(
-		'allowPrimary' => true, 
+		'handlePrimary' => true, 
 		'taxonomy' => null,
 		'fields' => array(),
 		'uniqueParent' => false, // only 1 parent of this type for this child (rare)

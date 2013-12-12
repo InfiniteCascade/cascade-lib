@@ -239,7 +239,7 @@ class ObjectController extends Controller
 				throw new HttpException(403, "Invalid request ");
 			}
 			$subform = implode(':', $typeParsedParts);
-			$subformRelation = $originalTypeParsed; // $object->getRelationModel($typeParsed);
+			$subformRelation = $originalTypeParsed;
 			$saveSettings['allowEmpty'] = true;
 		}
 
@@ -261,11 +261,11 @@ class ObjectController extends Controller
 
 		$models = false;
 		if (!empty($_POST)) {
-			$this->response->task = 'status';
 			list($error, $notice, $models, $niceModels) = $module->handleSaveAll(null, $saveSettings);
 			if ($error) {
 				$this->response->error = $error;
 			} else {
+				$this->response->task = 'status';
 				$noticeExtra = '';
 				if (!empty($notice)) {
 					$noticeExtra = ' However, there were notices: '. $notice;

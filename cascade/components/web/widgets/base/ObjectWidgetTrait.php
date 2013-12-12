@@ -234,7 +234,7 @@ trait ObjectWidgetTrait
 				$baseUrl['object_relation'] = 'parent';
 			}
 			$baseUrl['relation_id'] = $relationModel->primaryKey;
-			if ($relationship->allowPrimary && isset($relationModel) && empty($relationModel->primary)) {
+			if ($relationModel->getBehavior('PrimaryRelation') !== null && $relationModel->presentSetPrimaryOption) {
 				$menu['primary'] = [
 					'icon' => 'fa fa-star',
 					'label' => 'Set as primary',

@@ -52,11 +52,6 @@ class Relation extends Base {
 			return 'parent:'.$fieldParts[1];
 		}
 	}
-
-	// public function getCompanionModel()
-	// {
-	// 	return $this->baseModel->getRelationModel($this->companionField);
-	// }
 }
 
 ?>
