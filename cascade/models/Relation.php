@@ -10,6 +10,8 @@ class Relation extends \infinite\db\models\Relation
 {
 	use ActiveRecordTrait;
 
+	public $registryClass = 'cascade\\models\\Registry';
+
 	public function behaviors()
 	{
 		return array_merge(parent::behaviors(), [
