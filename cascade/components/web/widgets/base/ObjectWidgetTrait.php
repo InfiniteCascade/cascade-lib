@@ -47,10 +47,10 @@ trait ObjectWidgetTrait
 			$queryModelClass = $this->owner->primaryModel;
 			switch ($method) {
 				case 'parents':
-					$dataProvider['query'] = Yii::$app->request->object->relativesQuery('parents', $queryModelClass);
+					$dataProvider['query'] = Yii::$app->request->object->queryParentObjects($queryModelClass);
 				break;
 				case 'children':
-					$dataProvider['query'] = Yii::$app->request->object->relativesQuery('children', $queryModelClass);
+					$dataProvider['query'] = Yii::$app->request->object->queryChildObjects($queryModelClass);
 				break;
 				default:
 					$dataProvider['query'] = $queryModelClass::find();
