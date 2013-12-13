@@ -306,15 +306,8 @@ class ObjectController extends Controller
 			if (!isset($relation)) {
 				throw new HttpException(404, "Invalid relationship!");
 			}
-			$relation->primary = 1;
 			$this->response->task = 'status';
-			$status = [true];
-			foreach ($relation->siblings as $relationModel) {
-				if (empty($relationModel->primary)) { continue; }
-				$relationModel->primary = 0;
-				$status[] = $relationModel->save();
-			}
-			if (min($status) && $relation->save()) {
+			if ($relation->setPrimary()) {
 				$this->response->trigger = [
 					['refresh', '.model-'. $primaryModel::baseClassName()]
 				];
