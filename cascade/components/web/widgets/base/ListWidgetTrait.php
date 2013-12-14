@@ -19,9 +19,15 @@ trait ListWidgetTrait
 
 	public function renderItemContent($model, $key, $index){
 		if (!isset($this->renderContentTemplate)) {
-			$this->renderContentTemplate = [
-				'descriptor' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
-			];
+			if ($model->objectType->hasDashboard) {
+				$this->renderContentTemplate = [
+					'viewLink' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
+				];
+			} else {
+				$this->renderContentTemplate = [
+					'descriptor' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
+				];
+			}
 		}
 		$parts = [];
 		foreach ($this->renderContentTemplate as $fieldName => $settings) {

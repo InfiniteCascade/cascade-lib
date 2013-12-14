@@ -86,6 +86,11 @@ abstract class PanelWidget extends Widget {
 		$parts[] = Html::endTag('div'); // panel-body
 		return implode("", $parts);
 	}
+
+	public function getPanelTitle()
+	{
+		return $this->parseText($this->title);
+	}
 }
 
 

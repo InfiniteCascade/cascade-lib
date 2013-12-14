@@ -2,12 +2,17 @@
 
 namespace cascade\models;
 
-use cascade\components\types\ActiveRecordTrait;
+use cascade\components\db\ActiveRecordTrait as BaseActiveRecordTrait;
+use cascade\components\types\ActiveRecordTrait as TypesActiveRecordTrait;
 
 class Group extends \infinite\db\models\Group
 {
-	use ActiveRecordTrait {
-		behaviors as baseBehaviors;
+	use TypesActiveRecordTrait {
+		TypesActiveRecordTrait::behaviors as typesBehaviors;
+	}
+
+	use BaseActiveRecordTrait {
+		BaseActiveRecordTrait::behaviors as baseBehaviors;
 	}
 	
 	/**
@@ -15,6 +20,6 @@ class Group extends \infinite\db\models\Group
 	 */
 	public function behaviors()
 	{
-		return array_merge(parent::behaviors(), self::baseBehaviors(), []);
+		return array_merge(parent::behaviors(), self::baseBehaviors(), self::typesBehaviors(), []);
 	}
 }

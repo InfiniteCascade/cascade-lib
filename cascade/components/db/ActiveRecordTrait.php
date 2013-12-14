@@ -50,7 +50,8 @@ trait ActiveRecordTrait {
         return $this->_tabularId;
     }
     
-	public function behaviors() {
+	public function behaviors()
+	{
 		$behaviors = parent::behaviors();
 		return array_merge($behaviors, [
 			'Access' => [
@@ -63,7 +64,8 @@ trait ActiveRecordTrait {
 	}
 
 
-	public function getDefaultOrder($alias = 't') {
+	public function getDefaultOrder($alias = 't')
+	{
 		if (is_string($this->_defaultOrder)) {
 			return strtr($this->_defaultOrder, array('{alias}' => $alias));
 		} else {

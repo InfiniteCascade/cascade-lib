@@ -76,7 +76,7 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
 	/**
 	 *
 	 */
-	public function render() {
+	public function output() {
 		echo $this->generate();
 	}
 }

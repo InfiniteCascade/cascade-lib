@@ -9,6 +9,8 @@
 
 namespace cascade\components\types;
 
+use infinite\helpers\Html;
+
 trait ActiveRecordTrait {
 	public function behaviors() {
 		return [
@@ -28,7 +30,12 @@ trait ActiveRecordTrait {
 	}
 
 	public function getUrl($action = 'view') {
-		return ['object/view', 'id' => $this->primaryKey];
+		return ['object/'. $action, 'id' => $this->primaryKey];
+	}
+
+	public function getViewLink()
+	{
+		return Html::a($this->descriptor, $this->getUrl('view'));
 	}
 }
 

@@ -7,5 +7,5 @@
  */
 
 
-$form->render();
+$form->output();
 ?>

@@ -175,14 +175,16 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @param unknown $settings (optional)
 	 * @return unknown
 	 */
-	public function getSection($parent = null, $settings = []) {
+	public function getSection($parentWidget = null, $settings = []) {
 		$name = $this->systemId;
-		if (!empty($parent) and $parent->systemId === $this->systemId) {
-			$sectionId = $settings['whoAmI'].'-'.$this->systemId;
+		$parent = (isset($settings['relationship']) ? $settings['relationship']->parent : false);
+		$child = (isset($settings['relationship']) ? $settings['relationship']->child : false);
+		if (($parent && $parent->systemId === $this->systemId) || ($child && $child->systemId === $this->systemId)) {
+			$sectionId = $settings['relationship']->systemId.'-'.$this->systemId;
 			$section = Yii::$app->collectors['sections']->getOne($sectionId);
 			if (empty($section->object)) {
 				$sectionConfig = ['class' => $this->sectionClass, 'title' => 'Related %%type.'. $this->systemId .'.title.upperPlural%%', 'icon' => $this->icon, 'systemId' => $sectionId];
-				$section->displayPriority = -999;
+				$section->displayPriority = 99999;
 				$section->object = Yii::createObject($sectionConfig);
 			}
 			return $section;

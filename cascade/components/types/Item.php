@@ -89,7 +89,7 @@ class Item extends \infinite\base\collector\Item {
 			}
 		}
 		
-		ArrayHelper::multisort($this->_sections, 'displayPriority');
+		ArrayHelper::multisort($widgets, ['displayPriority', 'sectionTitle'], [SORT_ASC, SORT_ASC]);
 		return $this->_sections;
 	}
 

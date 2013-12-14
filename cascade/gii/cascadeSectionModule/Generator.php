@@ -120,7 +120,7 @@ class Generator extends \yii\gii\Generator
 			//['ns', 'validateNamespace'],
 			['tableName', 'validateTableName'],
 			['migrationTimestamp', 'integer'],
-			['parents, children, uniparental, hasDashboard', 'safe'],
+			['parents, children, uniparental, hasDashboard, baseNamespace', 'safe'],
 			//['baseClass', 'validateClass', 'params' => ['extends' => ActiveRecord::className()]],
 			//['generateRelations, generateLabelsFromComments', 'boolean'],
 

@@ -128,7 +128,7 @@ class ObjectController extends Controller
 		$this->params['active'] = $this->params['default'] = null;
 		foreach ($sections as $section) {
 			if ($section->displayPriority > 0) {
-				$this->params['active'] = $this->params['default'] = $section->shortName;
+				$this->params['active'] = $this->params['default'] = $section->systemId;
 				break;
 			}
 		}
@@ -320,9 +320,6 @@ class ObjectController extends Controller
 			$this->response->task = 'dialog';
 			$this->response->taskOptions = array('title' => 'Update '. $type->title->getSingular(true));
 			$models = $type->getModels($object, [$relatedObject->tabularId => $relatedObject, 'relations' => [$relatedObject->tabularId => $relation]]);
-			if (!($this->params['form'] = $handler->getForm($models, ['subform' => $subform, 'linkExisting' => false]))) {
-				throw new HttpException(403, "There is nothing to update for {$type->title->getPlural(true)}");
-			}
 
 			if (!empty($_POST)) {
 				list($error, $notice, $models, $niceModels) = $handler->handleSaveAll(null, ['allowEmpty' => true]);
@@ -343,6 +340,10 @@ class ObjectController extends Controller
 						$this->response->redirect = $niceModels['primary']['model']->getUrl('view');
 					}
 				}
+			}
+			
+			if (!($this->params['form'] = $handler->getForm($models, ['subform' => $subform, 'linkExisting' => false]))) {
+				throw new HttpException(403, "There is nothing to update for {$type->title->getPlural(true)}");
 			}
 		}
 	}

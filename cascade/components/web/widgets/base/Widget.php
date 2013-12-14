@@ -76,13 +76,10 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 		return [];
 	}
 
-	public function render() {
+	public function output() {
 		echo $this->generate();
 	}
 
-	public function renderView($view, $params = []) {
-		return parent::render($view, $params);
-	}
 
 	public function run() {
 		echo $this->generate();

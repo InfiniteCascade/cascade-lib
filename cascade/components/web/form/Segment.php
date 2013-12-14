@@ -97,7 +97,7 @@ class Segment extends FormObject {
 	/**
 	 *
 	 */
-	public function render() {
+	public function output() {
 		echo $this->generate();
 	}
 
@@ -162,7 +162,7 @@ class Segment extends FormObject {
 			$fieldsTemplate = [];
 			foreach ($fields as $fieldName => $field) {
 				if (!$field->human) { continue; }
-				if (!$field->required) { continue; }
+				//if (!$field->required) { continue; }
 				if (!($field instanceof ModelField)) { continue; }
 				$fieldsTemplate[] = [$fieldName];
 			}

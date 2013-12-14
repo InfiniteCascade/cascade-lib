@@ -67,13 +67,14 @@ class AppController extends Controller
 
 	public function actionLogin()
 	{
-		$model = new LoginForm();
+		$this->params['model'] = $model = new LoginForm();
 		if ($model->load($_POST) && $model->login()) {
+			//$this->response->redirect = Yii::$app->getUser()->getReturnUrl();
 			return $this->goBack();
 		} else {
-			return $this->render('login', [
-				'model' => $model,
-			]);
+			$this->response->task = 'dialog';
+			$this->response->taskOptions = array('title' => 'Log In');
+			$this->response->view = 'login';
 		}
 	}
 

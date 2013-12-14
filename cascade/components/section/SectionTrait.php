@@ -16,6 +16,7 @@ trait SectionTrait {
 	public $gridCellClass = 'infinite\web\grid\Cell';
 
 	protected $_title;
+	protected $_parsedTitle;
 	protected $_widget;
 	protected $_gridCell;
 
@@ -47,8 +48,13 @@ trait SectionTrait {
 	}
 
 	public function getSectionTitle() {
-		return StringHelper::parseText($this->_title);
+		if (!isset($this->_parsedTitle)) {
+			$this->_parsedTitle = StringHelper::parseText($this->_title);
+		}
+		
+		return $this->_parsedTitle;
 	}
+
 
 	/**
 	 *

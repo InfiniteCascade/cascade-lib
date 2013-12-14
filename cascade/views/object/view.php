@@ -26,7 +26,15 @@ $navBar = SubNavBar::begin([
 $sectionsMenu = [];
 foreach ($sections as $section) {
 	if (substr($section->systemId, 0, 1) === '_') { continue; }
-	$sectionsMenu[] = ['label' => $section->object->sectionTitle, 'url' => '#section-'.$section->systemId];
+
+	$widgets = $section->object->widget->widgets;
+	if (count($widgets) === 1)
+	{
+		$firstWidget = array_shift($widgets);
+		$sectionsMenu[] = ['label' => $firstWidget->object->object->panelTitle, 'url' => '#section-'.$section->systemId];
+	} else {
+		$sectionsMenu[] = ['label' => $section->object->sectionTitle, 'url' => '#section-'.$section->systemId];
+	}
 }
 echo Html::beginTag('div', ['id' => 'object-dashboard-navbar']);
 echo Nav::widget([
@@ -69,13 +77,13 @@ if (isset($sections['_side'])) {
 $mainCell = [];
 foreach ($sections as $section) {
 	if (substr($section->systemId, 0, 1) === '_') { continue; }
-	$mainCell[] = $section->object->generate();
+	$mainCell[] = $section->object->generate() .'<!--end '.$section->systemId.'-->';
 }
 $cells[] = $mainCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => implode('', $mainCell)]);
 Yii::configure($mainCell,['mediumDesktopColumns' => 8, 'largeDesktopSize' => false, 'tabletSize' => false]);
 
 $grid->cells = $cells;
-$grid->render();
+$grid->output();
 echo Html::endTag('div'); // .dashboard
 $this->registerJs(implode("\n", $js));
 ?>

@@ -5,7 +5,7 @@ trait FormObjectTrait {
 	public $owner;
 	public $isValid = true;
 
-	public function render() {
+	public function output() {
 		echo $this->generate();
 	}
 	

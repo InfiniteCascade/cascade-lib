@@ -2,6 +2,7 @@
 namespace cascade\modules\TypeWebAddress\models;
 
 use cascade\models\Registry;
+use infinite\helpers\Html;
 
 /**
  * This is the model class for table "object_web_address".
@@ -18,6 +19,22 @@ class ObjectWebAddress extends \cascade\components\types\ActiveRecord
 {
 	public $descriptorField = 'title';
 
+	/**
+	 * @inheritdoc
+	 */
+	public function getDescriptor()
+    {
+    	if (!empty($this->title)) {
+    		return $this->title;
+    	} else {
+    		return $this->url;
+    	}
+    }
+
+    public function getLink()
+    {
+    	return Html::a($this->descriptor, $this->url, ['target' => '_blank']);
+    }
 	/**
 	 * @inheritdoc
 	 */
@@ -43,7 +60,8 @@ class ObjectWebAddress extends \cascade\components\types\ActiveRecord
 			[['url'], 'required'],
 			[['id'], 'string', 'max' => 36],
 			[['title'], 'string', 'max' => 255],
-			[['url'], 'string', 'max' => 500]
+			[['url'], 'string', 'max' => 500],
+			[['url'], 'url']
 		];
 	}
 
@@ -55,7 +73,11 @@ class ObjectWebAddress extends \cascade\components\types\ActiveRecord
 	{
 		return [
 			'title' => [],
-			'url' => []
+			'url' => [
+				'formField' => [
+					'htmlOptions' => ['placeholder' => 'e.g. http://www.google.com']
+				]
+			]
 		];
 	}
 
@@ -65,7 +87,7 @@ class ObjectWebAddress extends \cascade\components\types\ActiveRecord
 	 */
 	public function formSettings($name, $settings = [])
 	{
-		return parent::formSettings($name, $settings);
+		return ['fields' => [['url'], ['title']]];
 	}
 
 	/**

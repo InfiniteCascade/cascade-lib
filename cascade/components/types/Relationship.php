@@ -157,6 +157,11 @@ class Relationship extends \infinite\base\Object {
 	public function getOptions() {
 		return array_merge($this->_defaultOptions, $this->_options);
 	}
+
+	public function getSystemId()
+	{
+		return $this->_parent->systemId .'-'. $this->_child->systemId;
+	}
 }
 
 

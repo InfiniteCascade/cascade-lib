@@ -22,4 +22,12 @@ class SimpleLinkList extends BaseList {
 	{
 		return [];
 	}
+	public function renderItemContent($model, $key, $index){
+		if (!isset($this->renderContentTemplate)) {
+			$this->renderContentTemplate = [
+				'descriptor' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
+			];
+		}
+		return parent::renderItemContent($model, $key, $index);
+	}
 }

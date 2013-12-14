@@ -39,15 +39,23 @@ class Section extends PanelWidget {
 		}
 		return null;
 	}
+	public function generateFooter()
+	{
+		if (!$this->isSingle) {
+			return parent::generateFooter();
+		}
+		return null;
+	}
 
 	public function generateEnd()
 	{
+		$parts = [];
 		if ($this->isSingle) {
-			$parts = [];
-			$parts[] = Html::endTag('div');
-			return implode("", $parts);
+			$parts[] = Html::endTag('div') .'<!--single-section-->';
+		} else {
+			$parts[] = parent::generateEnd();
 		}
-		return parent::generateEnd();
+		return implode("", $parts);
 	}
 
 	public function generateContent()

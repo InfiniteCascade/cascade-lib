@@ -274,7 +274,23 @@ trait ObjectWidgetTrait
 		$possible = [];
 		return $possible;
 	}
-	
+
+	public function getVariables()
+	{
+		$vars = [];
+		if (
+			isset($this->settings['relationship']) 
+			&& $this->settings['queryRole']
+			&& $this->settings['relationship']->child === $this->settings['relationship']->parent
+			) {
+			if ($this->settings['queryRole'] === 'parents') {
+				$vars['relationship'] = 'Parent';
+			} elseif ($this->settings['queryRole'] === 'children') {
+				$vars['relationship'] = 'Child';
+			}
+		}
+		return array_merge(parent::getVariables(), $vars);
+	}
 
 	public function getPaginationSettings() {
 		return ['class' => 'yii\data\Pagination', 'pageSize' => 20];
