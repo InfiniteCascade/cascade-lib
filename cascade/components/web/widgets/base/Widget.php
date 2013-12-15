@@ -56,8 +56,8 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 	// }
 	public function getGridCellSettings() {
 		return [
-			'columns' => 3,
-			'maxColumns' => 6
+			'columns' => 12,
+			'maxColumns' => 12
 		];
 	}
 
@@ -180,10 +180,17 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 	 * @return unknown
 	 */
 	public function getSystemId() {
-		if (isset($this->collectorItem)) {
-			return $this->collectorItem->systemId;
+		if (!isset($this->_systemId)) {
+			if (isset($this->collectorItem) && isset($this->collectorItem->systemId)) {
+				$this->_systemId = $this->collectorItem->systemId;
+			}
 		}
-		return self::baseClassName();
+		return $this->_systemId;
+	}
+
+	public function setSystemId($value)
+	{
+		$this->_systemId = $value;
 	}
 }
 

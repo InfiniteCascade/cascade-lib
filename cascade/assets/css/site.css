@@ -1,4 +1,9 @@
 /* site.css */
+html,body,.container
+{
+  height: 100%;
+}
+
 body {
     padding-top: 70px;
 }
@@ -17,31 +22,60 @@ footer {
 	margin-top: -100px;
 }
 
-/* Affixed Sidebar */
-.ic-sidebar.affix {
-    position: static;
+.container-fluid .container,
+nav .container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  width: auto;
+  max-width: 1300px;
 }
-@media (min-width: 992px) {
-.ic-sidebar .nav > .active > ul {
+
+.container-fluid {
+  max-width: 1300px;
+}
+
+.ic-sidenav {
+    width: 100%;
+    min-width: 150px;
+    max-width: 200px;
+}
+
+.ic-sidenav.affix {
+    width: 11%;
+    position: fixed;
+}
+
+
+.ic-sidenav .nav {
     display: block;
 }
-.ic-sidebar.affix, .ic-sidebar.affix-bottom {
-    width: 293px;
+
+/* Affixed Sidebar */
+.ic-sidebar {
+    width: 100%;
+    min-width: 150px;
+    max-width: 400px;
 }
+
 .ic-sidebar.affix {
     position: fixed;
-    top: 100px;
+    width: 31%;
 }
 .ic-sidebar.affix-bottom {
-    position: absolute;
+    width: 100%;
+    position: fixed;
 }
-.ic-sidebar.affix-bottom .ic-sidenav, .ic-sidebar.affix .ic-sidenav {
-    margin-bottom: 0;
-    margin-top: 0;
-}
+
+@media (min-width: 992px) {
+    .ic-sidebar .nav > .active > ul {
+        display: block;
+    }
+    .ic-sidebar.affix,
+    .ic-navbar.affix {
+        position: fixed;
+    }
 }
 @media (min-width: 1200px) {
-.ic-sidebar.affix-bottom, .ic-sidebar.affix {
-    width: 360px;
-}
 }

@@ -6,7 +6,7 @@ use infinite\helpers\ArrayHelper;
 use infinite\web\grid\Grid;
 
 $this->title = 'Dashboard';
-echo Html::beginTag('div', ['class' => 'row']);
+echo Html::beginTag('div', ['class' => 'ic-dashboard row']);
 Yii::beginProfile("Build Grid");
 $widgets = Yii::$app->collectors['widgets']->getLocation('front');
 ArrayHelper::multisort($widgets, ['displayPriority', 'name'], [SORT_ASC, SORT_ASC]);

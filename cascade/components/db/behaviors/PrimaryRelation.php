@@ -5,8 +5,6 @@ use cascade\components\types\Relationship;
 
 class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 {
-	public $registryClass = 'cascade\\models\\Registry';
-
 	protected $_relationship;
 
 	public function handlePrimary()

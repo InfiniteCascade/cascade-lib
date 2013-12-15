@@ -13,6 +13,7 @@ trait SectionTrait {
 	use RenderTrait;
 
 	public $sectionWidgetClass = 'cascade\components\web\widgets\base\Section';
+	public $singleSectionWidgetClass = 'cascade\components\web\widgets\base\SingleSection';
 	public $gridCellClass = 'infinite\web\grid\Cell';
 
 	protected $_title;
@@ -33,7 +34,15 @@ trait SectionTrait {
 
 	public function getWidget() {
 		if (is_null($this->_widget)) {
-			$this->_widget = Yii::createObject(['class' => $this->sectionWidgetClass, 'section' => $this]);
+			$widgets = $this->getAll();
+			if (count($widgets) > 1) {
+				$this->_widget = Yii::createObject(['class' => $this->sectionWidgetClass, 'section' => $this]);
+			} elseif (count($widgets) === 1) {
+				$widgetItem = array_shift($widgets);
+				$this->_widget = Yii::createObject(['class' => $this->singleSectionWidgetClass, 'section' => $this, 'singleWidget' => $widgetItem]);
+			} else {
+				return false;
+			}
 		}
 		return $this->_widget;
 	}

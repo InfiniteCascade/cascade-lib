@@ -38,7 +38,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $modelNamespace;
 
 	public $formGeneratorClass = 'cascade\components\web\form\Generator';
-	public $sectionClass = 'cascade\components\section\Section';
+	public $sectionClass = 'cascade\\components\\web\\widgets\\base\\SingleSection';
 
 	public function init() {
 		if (isset($this->modelNamespace)) {
@@ -182,8 +182,11 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		if (($parent && $parent->systemId === $this->systemId) || ($child && $child->systemId === $this->systemId)) {
 			$sectionId = $settings['relationship']->systemId.'-'.$this->systemId;
 			$section = Yii::$app->collectors['sections']->getOne($sectionId);
+			$section->title = '%%type.'. $this->systemId .'.title.upperPlural%%';
+			$section->icon = $this->icon;
+			$section->systemId = $sectionId;
 			if (empty($section->object)) {
-				$sectionConfig = ['class' => $this->sectionClass, 'title' => 'Related %%type.'. $this->systemId .'.title.upperPlural%%', 'icon' => $this->icon, 'systemId' => $sectionId];
+				$sectionConfig = ['class' => $this->sectionClass, 'section' => $section];
 				$section->displayPriority = 99999;
 				$section->object = Yii::createObject($sectionConfig);
 			}

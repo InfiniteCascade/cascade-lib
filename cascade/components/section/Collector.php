@@ -17,7 +17,7 @@ class Collector extends \infinite\base\collector\Module {
 	public function getInitialItems()
 	{
 		return [
-			'_side' => Yii::createObject(['class' => 'cascade\components\section\base\Side'])
+			'_side' => Yii::createObject(['class' => 'cascade\components\web\widgets\base\SideSection'])
 		];
 	}
 }

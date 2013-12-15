@@ -69,7 +69,7 @@ class Item extends \infinite\base\collector\Item {
 				if (!isset($this->_sections[$item->section->systemId])) {
 					$this->_sections[$section->systemId] = $section;
 				}
-				$this->_sections[$section->systemId]->object->register($this, $item);
+				$this->_sections[$section->systemId]->register($this, $item);
 			}
 		}
 
@@ -85,7 +85,7 @@ class Item extends \infinite\base\collector\Item {
 				if (!isset($this->_sections[$item->section->systemId])) {
 					$this->_sections[$section->systemId] = $section;
 				}
-				$this->_sections[$section->systemId]->object->register($this, $item);
+				$this->_sections[$section->systemId]->register($this, $item);
 			}
 		}
 		
