@@ -17,6 +17,8 @@ return array(
 	'logoSmall' => "/themes/ic/img/cascade-logo-75.png",
 	'helperUrls' => [
 		'map' => 'http://maps.google.com/?q=%%object.flatAddressUrl%%'
+	],
+	'moduleConfig' => [
 	]
 );
 ?>
