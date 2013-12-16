@@ -1,0 +1,35 @@
+{
+	"name": "InfiniteCascade/cascade-lib",
+	"description": "Cascade CRM libraries",
+	"keywords": ["yii", "crm"],
+	"homepage": "http://www.infinitecascade.com",
+	"type": "library",
+	"license": "GPL -2.0",
+	"minimum-stability": "dev",
+	"require": {
+		"php": ">=5.4.0",
+		"yiisoft/yii2": "dev-master",
+		"yiisoft/yii2-composer": "dev-master",
+		"InfiniteCascade/yii2-infinite-core": "*"
+	},
+	"repositories": [
+	   {
+	     "type": "vcs",
+	     "url": "https://github.com/InfiniteCascade/yii2-infinite-core.git"
+	   },
+	   {
+	   		"type": "vcs",
+	   		"url": "https://github.com/MisatoTremor/bootstrap-select.git"
+	   }
+	],
+	"require-dev": {
+		"phpunit/phpunit": "3.7.*",
+		"yiisoft/yii2-debug": "*",
+		"yiisoft/yii2-gii": "*",
+		"yiisoft/yii2-jui": "*",
+		"mustangostang/spyc": "*"
+	},
+    "autoload": {
+		"psr-0": { "cascade\\": "lib" }
+    }
+}
