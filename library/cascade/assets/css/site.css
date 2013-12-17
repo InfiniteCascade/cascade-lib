@@ -58,7 +58,6 @@ nav .container {
 .ic-sidebar {
     width: 100%;
     min-width: 150px;
-    max-width: 400px;
 }
 
 .ic-sidebar.affix {

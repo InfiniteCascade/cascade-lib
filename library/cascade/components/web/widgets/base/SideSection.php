@@ -17,7 +17,7 @@ class SideSection extends Section {
 	{
 		return [
 			'mediumDesktopColumns' => 12,
-			'tabletColumns' => 6,
+			'tabletColumns' => 12,
 			'baseSize' => 'tablet'
 		];
 	}
