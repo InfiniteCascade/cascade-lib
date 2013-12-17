@@ -1,4 +1,6 @@
 <?php
+namespace cascade;
+
 class Cascade extends \yii\base\Extension
 {
     /**

@@ -23,5 +23,8 @@
     "autoload": {
 		"classmap": ["library/cascade/Cascade.php"],
 		"psr-0": { "cascade\\": "library" }
-    }
+    },
+    "extra": {
+    	"bootstrap": "cascade\\Cascade"
+    },
 }
