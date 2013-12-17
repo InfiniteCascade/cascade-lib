@@ -34,7 +34,8 @@ END;
 //	echo $form->field($generator, 'moduleClass');
 //	echo $form->field($generator, 'moduleID');
 
-	echo $form->field($generator, 'baseNamespace');
+	echo $form->field($generator, 'moduleSet')->dropDownList($generator->possibleModuleSets());
+
 	echo $form->field($generator, 'tableName');
 	echo $form->field($generator, 'descriptorField');
 	echo $form->field($generator, 'title');

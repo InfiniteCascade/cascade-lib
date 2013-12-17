@@ -24,7 +24,9 @@ if (YII_ENV_DEV) {
 	<?php $this->head(); ?>
 </head>
 <?= Html::beginTag('body', $this->bodyHtmlOptions); ?>
-<?php $this->beginBody(); ?>
+<?php 
+echo Html::beginTag('div', ['class' => 'overall-container']);
+$this->beginBody(); ?>
 	<?php
 		NavBar::begin([
 			'brandLabel' => Yii::$app->name,
@@ -63,7 +65,9 @@ if (YII_ENV_DEV) {
 		</div>
 	</footer>
 
-<?php $this->endBody(); ?>
+<?php 
+echo Html::endTag('div');
+$this->endBody(); ?>
 </body>
 </html>
 <?php $this->endPage(); ?>

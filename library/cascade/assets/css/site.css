@@ -1,11 +1,21 @@
 /* site.css */
-html,body,.container
+
+html,body,.container,.overall-container
 {
-  height: 100%;
+  position: relative;
+  height: auto;
 }
 
-body {
+.overall-container {
     padding-top: 70px;
+}
+
+.dashboard, .row, .ic-column, body, .container,.overall-container,.container-fluid {
+    position: relative;
+}
+
+body.double-top-nav .overall-container {
+    padding-top: 80px;
 }
 
 footer {
@@ -13,13 +23,10 @@ footer {
     display: block;
 }
 
-.dashboard {
-    padding-top: 35px;
-}
 
 .scroll-mark {
-	padding-top: 100px;
-	margin-top: -100px;
+	padding-top: 90px;
+	margin-top: -90px;
   height: 0px;
   visibility: hidden;
 }
@@ -58,24 +65,30 @@ nav .container {
 .ic-sidebar {
     width: 100%;
     min-width: 150px;
+    margin: 0;
+    padding: 0;
 }
 
 .ic-sidebar.affix {
     position: fixed;
     width: 31%;
+    bottom: auto;
 }
-.ic-sidebar.affix-bottom {
+.ic-sidebar .ic-column,
+.ic-sidenav .ic-column {
+  float: none;
+}
+.ic-sidebar.affix-bottom,
+.ic-sidenav.affix-bottom {
     width: 100%;
     position: fixed;
+    top: auto;
+    bottom: 500px;
 }
 
 @media (min-width: 992px) {
     .ic-sidebar .nav > .active > ul {
         display: block;
-    }
-    .ic-sidebar.affix,
-    .ic-navbar.affix {
-        position: fixed;
     }
 }
 @media (min-width: 1200px) {

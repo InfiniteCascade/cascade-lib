@@ -14,11 +14,12 @@ use yii\helpers\StringHelper;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 
-
 use yii\db\ActiveRecord;
 use yii\db\Connection;
 use yii\db\Schema;
 use yii\helpers\Inflector;
+
+use cascade\components\base\ModuleSetExtension;
 
 /**
  * This generator will generate the skeleton code needed for a 
@@ -31,8 +32,9 @@ use yii\helpers\Inflector;
 class Generator extends \yii\gii\Generator
 {
 	public $db = 'db';
+	public $moduleSet = '';
+
 	//public $moduleName;
-	public $baseNamespace = 'cascade\modules';
 	public $baseClass = 'cascade\components\types\ActiveRecord';
 	
 	public $title;
@@ -61,6 +63,16 @@ class Generator extends \yii\gii\Generator
 		}
 		return parent::__construct();
 	}
+
+	public function getBaseNamespace() {
+		if (!empty($this->moduleSet) && isset(Yii::$app->extensions[$this->moduleSet])) {
+			$bsClass = Yii::$app->extensions[$this->moduleSet]['bootstrap'];
+			$bsReflector = new \ReflectionClass(new $bsClass);
+			return $bsReflector->getNamespaceName();
+		}
+		return 'cascade\\modules';
+	}
+
 
 	public function getModelClass() {
 		return $this->generateClassName($this->tableName);
@@ -130,7 +142,7 @@ class Generator extends \yii\gii\Generator
 			//['ns', 'validateNamespace'],
 			[['tableName'], 'validateTableName'],
 			[['migrationTimestamp'], 'integer'],
-			[['section', 'descriptorField', 'parents', 'children', 'uniparental', 'hasDashboard', 'baseNamespace'], 'safe'],
+			[['section', 'descriptorField', 'parents', 'children', 'uniparental', 'hasDashboard', 'moduleSet'], 'safe'],
 			//['baseClass', 'validateClass', 'params' => ['extends' => ActiveRecord::className()]],
 			//['generateRelations, generateLabelsFromComments', 'boolean'],
 
@@ -143,7 +155,7 @@ class Generator extends \yii\gii\Generator
 	public function attributeLabels()
 	{
 		return [
-			'baseNamespace' => 'Base Namespace',
+			'moduleSet' => 'Module Set',
 
 			/* Module */
 			'moduleID' => 'Module ID',
@@ -235,7 +247,7 @@ EOD;
 	 */
 	public function requiredTemplates()
 	{
-		return ['module.php', 'detail_list_widget.php', 'simple_link_list_widget.php',  'model.php', 'migration.php'];
+		return ['module.php', 'detail_list_widget.php', 'simple_link_list_widget.php',  'model.php', 'migration.php', 'module_set.php'];
 	}
 
 	/**
@@ -255,7 +267,7 @@ EOD;
 	 */
 	public function stickyAttributes()
 	{
-		return ['baseNamespace'];
+		return ['moduleSet'];
 	}
 
 
@@ -307,6 +319,14 @@ EOD;
 			$modulePath . '/Module.php',
 			$this->render("module.php")
 		);
+
+		if (!empty($this->moduleSet) && isset(Yii::$app->extensions[$this->moduleSet])) {
+			$files[] = new CodeFile(
+				$this->moduleSetPath . '/Extension.php',
+				$this->render("module_set.php")
+			);
+		}
+
 		$relations = $this->generateRelations();
 		$db = $this->getDbConnection();
 		foreach ($this->getTableNames() as $tableName) {
@@ -376,10 +396,24 @@ EOD;
 	public function possibleSections() {
 		$s = ['' => '(self)'];
 		foreach (Yii::$app->collectors['sections']->getAll() as $section) {
-			$s[$section->systemId] = $section->object->sectionTitle;
+			$s[$section->systemId] = $section->sectionTitle;
 		}
 		return $s;
 	}
+
+	public function possibleModuleSets() {
+		$s = ['' => '(core)'];
+		foreach (Yii::$app->extensions as $id => $ext) {
+			if (!isset($ext['bootstrap'])) { continue; }
+			$bsClass = $ext['bootstrap'];
+			$bs = new $bsClass;
+			if ($bs instanceof ModuleSetExtension) {
+				$s[$id] = $id;
+			}
+		}
+		return $s;
+	}
+
 	public function possibleIcons() {
 		$path = Yii::getAlias("@vendor/fortawesome/font-awesome/src/icons.yml");
 		$data = \Spyc::YAMLLoad($path);
@@ -400,6 +434,11 @@ EOD;
 	public function getModulePath()
 	{
 		return Yii::getAlias('@' . str_replace('\\', '/', $this->moduleNamespace));
+	}
+
+	public function getModuleSetPath()
+	{
+		return Yii::getAlias('@' . str_replace('\\', '/', $this->baseNamespace));
 	}
 
 	/**
@@ -551,6 +590,37 @@ EOD;
 			$i[] = "\$this->addForeignKey('{$fk['name']}', '{$tableName}', '".implode(',', array_keys($fk['keys']))."', '{$fk['table']}', '".implode(',', array_values($fk['keys'])) ."', '{$fk['onDelete']}', '{$fk['onUpdate']}');";
 		}
 		return implode("\n\t\t", $i);
+	}
+
+
+	public function getModuleSetModules() {
+		if (empty($this->moduleSet) || !isset(Yii::$app->extensions[$this->moduleSet])) { return ''; }
+		$bsClass = Yii::$app->extensions[$this->moduleSet]['bootstrap'];
+		$p = [];
+		$bs = new $bsClass;
+		$modules = $bs->getModules();
+		foreach ($modules as $id => $module) {
+			$e = '$m[\''. $id .'\'] = [';
+			if (!is_array($module)) {
+				$module = ['class' => $module];
+			}
+			$n = 0;
+			foreach ($module as $k => $v) {
+				$e .= "\n\t\t\t'{$k}' => ";
+				if (is_string($v)) {
+					$e .= "'". addslashes($v) ."'";
+				} elseif (is_numeric($v)) {
+					$e .= $v;
+				}
+				$n++;
+				if ($n !== count($module)) {
+					$e .= ',';
+				}
+			}
+			$e .= "\n\t\t];";
+			$p[] = $e;
+		}
+		return implode("\n\t\t", $p);
 	}
 
 	public function fixIndexName($name, $table, $keys) {

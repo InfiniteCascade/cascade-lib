@@ -6,6 +6,8 @@ use yii\bootstrap\Nav;
 use infinite\web\bootstrap\SubNavBar;
 use cascade\components\web\widgets\base\Section as SectionWidget;
 
+Html::addCssClass($this->bodyHtmlOptions, 'double-top-nav');
+
 $baseInstructions = [];
 $baseInstructions['objectId'] = $object->primaryKey;
 $refreshable = [
@@ -41,7 +43,7 @@ $calculateBottom = 'function() {
 ';
 
 if (count($sectionsMenu) > 2) {
-	$js[] = "\$('body').scrollspy({ target: '.ic-sidenav', 'offset': 100 });";
+	$js[] = "\$('body').scrollspy({ target: '.ic-sidenav', 'offset': 90 });";
 
 	$menuContent = Html::beginTag('div', ['class' => 'hidden-xs hidden-sm ic-sidenav']);
 	$menuContent .= Nav::widget([
@@ -57,7 +59,7 @@ if (count($sectionsMenu) > 2) {
 
 	$js[] = '
 	var $menuBar = $(".ic-sidenav");
-	$menuBar.affix({offset: {bottom: '.$calculateBottom.'}});';
+	$menuBar.affix({offset: {top: 90, bottom: 100}});';
 }
 
 
@@ -86,10 +88,16 @@ $calculateTop = 'function () {
 		}
 ';
 
-	$js[] = '
-	var $sideBar = $("#'. $cellInner->id .'");
-	$sideBar.affix({offset: {top: '.$calculateTop.', bottom: '.$calculateBottom.'}});';
+	// $js[] = '
+	// var $sideBar = $("#'. $cellInner->id .'");
+	// $sideBar.affix({offset: {top: 80, bottom: 500}});';
 	Html::addCssClass($cellInner->htmlOptions, 'ic-sidebar');
+
+	$cellInner->htmlOptions['data-spy'] = 'affix';
+	$cellInner->htmlOptions['data-offset-top'] = 120;
+	$cellInner->htmlOptions['data-offset-bottom'] = 400;
+	$cellInner->htmlOptions['data-spy'] = 'affix';
+
 	$cells[] = $sideCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $cellInner->generate()]);
 	Yii::configure($sideCell, ['mediumDesktopColumns' => 4,'maxMediumDesktopColumns' => 4, 'largeDesktopSize' => false, 'tabletSize' => false]);
 }
