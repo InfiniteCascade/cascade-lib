@@ -1,6 +1,8 @@
 <?php
 namespace cascade\components\db\behaviors;
 
+use Yii;
+
 use cascade\components\types\Relationship;
 
 class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
@@ -10,6 +12,9 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 	public function handlePrimary()
 	{
 		if (!parent::handlePrimary()) {
+			return false;
+		}
+		if (!isset(Yii::$app->collectors['types'])) {
 			return false;
 		}
 		if (empty($this->relationship)) {
