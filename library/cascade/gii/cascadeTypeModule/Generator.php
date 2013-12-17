@@ -548,7 +548,6 @@ EOD;
 				$r['foreignKeys'][] = $constraint;
 			}
 		}
-
 		return $r;
 	}
 
@@ -644,6 +643,7 @@ EOD;
 	{
 		$fields = [];
 		$queryBuilder = $this->getDbConnection()->getQueryBuilder();
+	//	\d($table->columns );
 		foreach ($table->columns as $column) {
 			$nullExtra = $signedExtra = $defaultExtra = $primaryKeyExtra  = $autoIncrementExtra = '';
 			$size = $column->size;
@@ -705,6 +705,8 @@ EOD;
 				$fieldType = $column->dbType .' CHARACTER SET ascii COLLATE ascii_bin';
 			} elseif ($fieldType === 'tinyint(1)') {
 				$fieldType = 'boolean';
+			}elseif (substr($column->dbType, 0, 4) === 'enum') {
+				$fieldType = $column->dbType;
 			} elseif(isset($this->getDbConnection()->getSchema()->typeMap[$fieldTypeBare])) {
 				$fieldType = $this->getDbConnection()->getSchema()->typeMap[$fieldTypeBare];
 				$qb = $this->getDbConnection()->getQueryBuilder();
@@ -719,7 +721,7 @@ EOD;
 				}
 			}
 
-			$fieldComplete = trim($fieldType . $signedExtra . $nullExtra . $defaultExtra . $autoIncrementExtra . $primaryKeyExtra);
+			$fieldComplete = trim(addslashes($fieldType) . $signedExtra . $nullExtra . $defaultExtra . $autoIncrementExtra . $primaryKeyExtra);
 			$field .= $fieldComplete .'\'';
 
 			$fields[] = $field;
