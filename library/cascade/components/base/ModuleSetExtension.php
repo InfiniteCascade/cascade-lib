@@ -1,13 +1,25 @@
 <?php
 namespace cascade\components\base;
 
+use Yii;
+
 abstract class ModuleSetExtension extends \yii\base\Extension
 {
+	static $_instance;
 	abstract public function getModules();
 	
-	public function init()
+	public static function getInstance()
 	{
-		Yii::$app->modules = $this->modules;
+		if (!isset(self::$_instance)) {
+			$className = get_called_class();
+			self::$_instance = new $className;
+		}
+		return self::$_instance;
+	}
+
+	public static function init()
+	{
+		Yii::$app->modules = self::getInstance()->getModules();
 	}
 }
 
