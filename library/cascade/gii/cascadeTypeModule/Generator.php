@@ -599,6 +599,7 @@ EOD;
 		$p = [];
 		$bs = new $bsClass;
 		$modules = $bs->getModules();
+		$modules[$this->moduleID] = ['class' => $this->moduleClass];
 		foreach ($modules as $id => $module) {
 			$e = '$m[\''. $id .'\'] = [';
 			if (!is_array($module)) {
