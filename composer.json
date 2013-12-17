@@ -3,7 +3,7 @@
 	"description": "Cascade CRM libraries",
 	"keywords": ["yii", "crm"],
 	"homepage": "http://www.infinitecascade.com",
-	"type": "library",
+	"type": "yii2-extension",
 	"license": "GPL -2.0",
 	"minimum-stability": "dev",
 	"require": {
@@ -29,7 +29,9 @@
 		"yiisoft/yii2-jui": "*",
 		"mustangostang/spyc": "*"
 	},
+
     "autoload": {
-		"psr-0": { "cascade\\": "lib" }
+		"classmap": ["library/cascade/Cascade.php"],
+		"psr-0": { "cascade\\": "library" }
     }
 }
