@@ -219,7 +219,9 @@ class Generator extends \yii\gii\Generator
 	 */
 	public function successMessage()
 	{
-		if (Yii::$app->hasModule($this->moduleID)) {
+		if (!empty($this->moduleSet)) {
+			return "<iframe src=\"/setup.php?\" style=\"width: 100%; height: 400px;\" ></iframe>";
+		} elseif (Yii::$app->hasModule($this->moduleID)) {
 			$link = Html::a('try it now', Yii::$app->getUrlManager()->createUrl($this->moduleID), ['target' => '_blank']);
 			return "The module has been generated successfully. You may $link.";
 		}

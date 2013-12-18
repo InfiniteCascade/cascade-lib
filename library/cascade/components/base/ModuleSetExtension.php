@@ -5,21 +5,17 @@ use Yii;
 
 abstract class ModuleSetExtension extends \yii\base\Extension
 {
-	static $_instance;
-	abstract public function getModules();
-	
-	public static function getInstance()
-	{
-		if (!isset(self::$_instance)) {
-			$className = get_called_class();
-			self::$_instance = new $className;
-		}
-		return self::$_instance;
-	}
-
 	public static function init()
 	{
-		Yii::$app->modules = self::getInstance()->getModules();
+		Yii::beginProfile(get_called_class());
+		Yii::$app->modules = static::getModules();
+		Yii::endProfile(get_called_class());
+		Yii::trace("Registered ".count(static::getModules())." modules in ". get_called_class());
+	}
+
+	public static function getModules()
+	{
+		return [];
 	}
 }
 
