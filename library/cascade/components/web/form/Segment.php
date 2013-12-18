@@ -134,13 +134,16 @@ class Segment extends FormObject {
 		if (is_array($settings)) {
 			$this->_settings = $settings;
 		} else {
-			$this->_settings = array();
+			$this->_settings = [];
 		}
 		if (!isset($this->_settings['fieldSettings'])) {
-			$this->_settings['fieldSettings'] = array();
+			$this->_settings['fieldSettings'] = [];
 		}
 		if (!isset($this->_settings['formField'])) {
-			$this->_settings['formField'] = array();
+			$this->_settings['formField'] = [];
+		}
+		if (!isset($this->_settings['ignoreFields'])) {
+			$this->_settings['ignoreFields'] = [];
 		}
 		if (is_array($this->_settings['fields']) && empty($this->_settings['fields'])) {
 			$this->_settings['fields'] = null;
@@ -171,7 +174,7 @@ class Segment extends FormObject {
 		}
 
 		if ($fieldsTemplate !== false) {
-			$this->_settings['fields'] = array();
+			$this->_settings['fields'] = [];
 			foreach ($fields as $fieldKey => $field) {
 				if (!is_object($field->model)) {
 					\d($field);exit;
@@ -199,6 +202,7 @@ class Segment extends FormObject {
 				}
 
 				foreach ($requiredFields as $fieldName => $field) {
+					if (in_array($fieldName, $this->_settings['ignoreFields'])) { continue; }
 					$fieldsTemplate[] = [$fieldName];
 				}
 			}
