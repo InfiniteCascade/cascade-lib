@@ -3,7 +3,6 @@ namespace cascade\components\web\form\fields;
 
 use infinite\base\exceptions\Exception;
 use infinite\helpers\Html;
-use yii\widgets\ActiveField;
 
 class Model extends Base {
 	public function getFieldConfig()
@@ -33,8 +32,10 @@ class Model extends Base {
 		$pre = $post = null;
 		$field = $this->getModelField();
 		$fieldConfig = $this->fieldConfig;
+		$templatePrefix = '';
 		if ($this->showLabel) {
-			$fieldConfig['template'] = "{label}\n".$fieldConfig['template'];
+			$templatePrefix = "{label}\n";
+			$fieldConfig['template'] = $templatePrefix.$fieldConfig['template'];
 		}
 		$item = $form->field($model, $field, $fieldConfig);
 		$item->inputOptions =& $this->htmlOptions;
@@ -85,7 +86,9 @@ class Model extends Base {
 			$item->password();
 			break;
 		case 'date':
-			Html::addCssClass($this->htmlOptions, 'date');
+			//$item->template = $templatePrefix . "<div class=\"input-group date\">{input}<span class=\"input-group-addon\"></span></div>\n<div class=\"\">{error}</div>";
+			$item->inputGroupPostfix = "<i class=\"fa fa-calendar\"></i>";
+			Html::addCssClass($item->inputGroupHtmlOptions, 'date');
 			break;
 		case 'textarea':
 			$item->textarea();
