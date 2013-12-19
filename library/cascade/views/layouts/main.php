@@ -51,7 +51,7 @@ $this->beginBody(); ?>
 		NavBar::end();
 	?>
 
-	<div class="container-fluid">
+	<div class="container">
 		<?=Breadcrumbs::widget([
 			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 		]); ?>
