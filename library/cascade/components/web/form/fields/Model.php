@@ -5,14 +5,19 @@ use infinite\base\exceptions\Exception;
 use infinite\helpers\Html;
 
 class Model extends Base {
+	protected $_fieldConfig = [];
 	public function getFieldConfig()
 	{
-		return [
+		return array_merge([
 				'template' => "<div class=\"\">{input}</div>\n<div class=\"\">{error}</div>",
 				'labelOptions' => ['class' => "control-label"],
-		];
+		], $this->_fieldConfig);
 	}
 
+	public function setFieldConfig($value)
+	{
+		$this->_fieldConfig = $value;
+	}
 	/**
 	 *
 	 *
@@ -87,7 +92,9 @@ class Model extends Base {
 			break;
 		case 'date':
 			//$item->template = $templatePrefix . "<div class=\"input-group date\">{input}<span class=\"input-group-addon\"></span></div>\n<div class=\"\">{error}</div>";
-			$item->inputGroupPostfix = "<i class=\"fa fa-calendar\"></i>";
+			if (!$item->inputGroupPostfix) {
+				$item->inputGroupPostfix = "<i class=\"fa fa-calendar\"></i>";
+			}
 			Html::addCssClass($item->inputGroupHtmlOptions, 'date');
 			break;
 		case 'textarea':
