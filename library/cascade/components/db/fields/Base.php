@@ -6,9 +6,9 @@ use infinite\base\exceptions\Exception;
 
 abstract class Base extends \infinite\base\Object {
 	public $formFieldClass;
-	public $field;
 	public $default;
 	public $required = false;
+	public $fieldSchema;
 
 	public $possiblePrimaryKeys = ['id'];
 	
@@ -17,9 +17,31 @@ abstract class Base extends \infinite\base\Object {
 	protected $_label;
 	protected $_model;
 	protected $_formField;
+	protected $_multiline;
 	
 
-	public function setFormField($value) {
+	public function init() {
+		parent::init();
+
+		if (!is_null($this->default) && !$this->model->isAttributeChanged($this->field)) {
+			$this->model->{$this->field} = $this->default;
+		}
+		if (in_array($this->field, $this->possiblePrimaryKeys)) {
+			$this->required = true;
+		}
+	}
+
+
+	public function getField()
+	{
+		if (isset($this->fieldSchema)) {
+			return $this->fieldSchema->name;
+		}
+		return null;
+	}
+
+	public function setFormField($value)
+	{
 		if (is_array($value)) {
 			if (is_null($this->formFieldClass)) {
 				throw new Exception("DB Field incorrectly set up. What is the form class?");
@@ -34,17 +56,6 @@ abstract class Base extends \infinite\base\Object {
 		return true;
 	}
 
-
-	public function init() {
-		parent::init();
-
-		if (!is_null($this->default) && !$this->model->isAttributeChanged($this->field)) {
-			$this->model->{$this->field} = $this->default;
-		}
-		if (in_array($this->field, $this->possiblePrimaryKeys)) {
-			$this->required = true;
-		}
-	}
 
 	/**
 	 *
@@ -65,11 +76,23 @@ abstract class Base extends \infinite\base\Object {
 	 */
 	public function getHuman() {
 		if (is_null($this->_human)) {
-			$this->_human = HumanFieldDetector::test($this->field);
+			$this->_human = HumanFieldDetector::test($this->fieldSchema);
 		}
 		return $this->_human;
 	}
 
+	public function getMultiline()
+	{
+		if (is_null($this->_multiline)) {
+			$this->_multiline = MultilineDetector::test($this->fieldSchema);
+		}
+		return $this->_multiline;
+	}
+
+	public function setMultiline($value)
+	{
+		$this->_multiline = $value;
+	}
 
 	/**
 	 *
@@ -82,26 +105,6 @@ abstract class Base extends \infinite\base\Object {
 		}
 		return $this->_formField;
 	}
-
-	/**
-	 *
-	 *
-	 * @return unknown
-	 */
-	public function getMetaData() {
-		if (!$this->model) {
-			return false;
-		}
-
-		$modelName = get_class($this->model);
-		
-		if (!isset($modelName::getTableSchema()->columns[$this->field])) {
-			return false;
-		}
-
-		return $modelName::getTableSchema()->columns[$this->field];
-	}
-
 
 	/**
 	 *

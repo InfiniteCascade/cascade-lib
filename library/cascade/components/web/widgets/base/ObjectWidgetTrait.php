@@ -34,7 +34,8 @@ trait ObjectWidgetTrait
 		return $classes;
 	}
 
-	public function getDataProvider() {
+	public function getDataProvider()
+	{
 		if (is_null($this->_dataProvider)) {
 			$dataProvider = $this->dataProviderSettings;
 			if (!isset($dataProvider['class'])) {
@@ -68,7 +69,8 @@ trait ObjectWidgetTrait
 		return $this->_dataProvider;
 	}
 
-	public function getSortBy() {
+	public function getSortBy()
+	{
 		$sortBy = [];
 		$dummyModel = $this->owner->dummyModel;
 		$descriptorField = $dummyModel->descriptorField;

@@ -25,7 +25,7 @@ abstract class PanelWidget extends Widget {
 	public function generatePanelTitle() {
 		$parts = [];
 		if ($this->title) {
-			$menu = null;
+			$menu = $icon = null;
 			$titleMenu = $this->generateTitleMenu();
 			if ($titleMenu) {
 				$menu = $titleMenu;

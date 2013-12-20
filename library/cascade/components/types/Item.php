@@ -59,7 +59,7 @@ class Item extends \infinite\base\collector\Item {
 		$this->_sections = array();
 		foreach ($this->_children as $rel) {
 			if (!$rel->active) { continue; }
-			if ($rel->uniqueChild) { continue; }
+			// if ($rel->isHasOne()) { continue; }
 			$child = $rel->child;
 			$instanceSettings = array('relationship' => $rel, 'queryRole' => 'children');
 			$items = Yii::$app->collectors['widgets']->getLocation('parent_objects', $child);
@@ -77,7 +77,7 @@ class Item extends \infinite\base\collector\Item {
 
 		foreach ($this->_parents as $rel) {
 			if (!$rel->active) { continue; }
-			if ($rel->uniqueParent) { continue; }
+			if ($rel->isHasOne()) { continue; }
 			$parent = $rel->parent;
 			$instanceSettings = array('relationship' => $rel, 'queryRole' => 'parents');
 			$items = Yii::$app->collectors['widgets']->getLocation('child_objects', $parent);

@@ -64,20 +64,8 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
 	 */
 	public function getType() {
 		if (is_null($this->_type)) {
-			if (!$this->modelField->human) {
-				$this->_type = 'hidden';
-			} else {
-				$fieldType = $type = 'text';
-				if (isset($this->modelField->metaData->dbType)) {
-					$fieldType = $this->modelField->metaData->dbType;
-				}
-				switch ($fieldType) {
-					case 'date':
-						$type = $fieldType;
-					break;
-				}
-				$this->_type = $type;
-			}
+			$this->_type = FieldTypeDetector::detect($this->modelField);
+			
 		}
 		return $this->_type;
 	}

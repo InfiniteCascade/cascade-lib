@@ -11,7 +11,11 @@ use Yii;
 
 use infinite\base\exceptions\Exception;
 
-class Relationship extends \infinite\base\Object {
+class Relationship extends \infinite\base\Object
+{
+	const HAS_MANY = 0x01;
+	const HAS_ONE = 0x02;
+
 	public static $relationClass = 'cascade\\models\\Relation';
 
 	protected $_parent;
@@ -23,8 +27,7 @@ class Relationship extends \infinite\base\Object {
 		'handlePrimary' => true,
 		'taxonomy' => null,
 		'fields' => array(),
-		'uniqueParent' => false, // only 1 parent of this type for this child
-		'uniqueChild' => false, // only 1 child of this type for this parent
+		'type' => self::HAS_MANY
 	);
 	protected $_options = array();
 	static $_relationships = array();
@@ -60,6 +63,7 @@ class Relationship extends \infinite\base\Object {
 		}
 		return parent::__get($name);
 	}
+
 	/**
 	 *
 	 *
@@ -77,6 +81,16 @@ class Relationship extends \infinite\base\Object {
 			self::$_relationships[$key] = new Relationship($parent, $child, $options);
 		}
 		return self::$_relationships[$key];
+	}
+
+	public function isHasOne()
+	{
+		return $this->type === self::HAS_ONE;
+	}
+
+	public function isHasMany()
+	{
+		return $this->type === self::HAS_MANY;
 	}
 
 	public function companionRole($queryRole)

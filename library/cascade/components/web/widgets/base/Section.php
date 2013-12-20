@@ -28,12 +28,22 @@ class Section extends PanelWidget {
 		return implode('', $parts);
 	}
 
+	public function widgetCellSettings()
+	{
+		return [
+			'mediumDesktopColumns' => 12,
+			'tabletColumns' => 12,
+			'baseSize' => 'tablet'
+		];
+	}
 
+	
 	public function generateContent()
 	{
 		$items = [];
 		foreach ($this->widgets as $widget) {
 			$items[] = $cell = Yii::$app->collectors['widgets']->build($widget->object);
+			Yii::configure($cell, $this->widgetCellSettings());
 		}
 		$grid = Yii::createObject(['class' => $this->gridClass, 'cells' => $items]);
 		return $grid->generate();

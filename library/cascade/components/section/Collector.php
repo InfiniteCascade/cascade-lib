@@ -17,7 +17,8 @@ class Collector extends \infinite\base\collector\Module {
 	public function getInitialItems()
 	{
 		return [
-			'_side' => Yii::createObject(['class' => 'cascade\components\web\widgets\base\SideSection'])
+			'_side' => ['object' => Yii::createObject(['class' => 'cascade\components\web\widgets\base\SideSection']), 'displayPriority' => false],
+			'_parents' => ['object' => Yii::createObject(['class' => 'cascade\components\web\widgets\base\ParentSection']), 'displayPriority' => 1000000, 'title' => 'Related']
 		];
 	}
 }

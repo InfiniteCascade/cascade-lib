@@ -23,6 +23,15 @@ trait ActiveRecordTrait {
 	public $relationClass = 'cascade\models\Relation';
 	public $taxonomyFieldClass = 'cascade\components\db\fields\Taxonomy';
 	public $formSegmentClass = 'cascade\components\web\form\Segment';
+	public $columnSchemaClass = 'yii\\db\\ColumnSchema';
+
+	public $defaultCustomColumnSchema = [
+		'allowNull' => false,
+		'type' => 'string',
+		'phpType' => 'string',
+		'dbType' => 'string',
+		'isPrimaryKey' => false
+	];
 
 	public function behaviors() {
 		return [
@@ -55,7 +64,7 @@ trait ActiveRecordTrait {
 		if (is_null($relationship)) {
 			$relationship = false;
 		}
-		if ($relationship && $relationship->uniqueParent) {
+		if ($relationship && $relationship->isHasOne()) {
 			return false;
 		}
 		if ($this->objectType->hasDashboard) {
@@ -142,20 +151,29 @@ trait ActiveRecordTrait {
 		return [];
 	}
 
-	public function getDetailFields($owner = null, $fields = [])
+	public function getDetailFields($owner = null, $fields = null)
 	{
-
+		if (is_null($fields)) {
+			$fields = $this->getFields($owner);
+		}
 		foreach ($fields as $key => $field) {
 			if ($field instanceof $this->relationFieldClass) {
 				if (	(in_array($key, $this->headerDetails))
-					|| 	($field->modelRole === 'child' && !$field->relationship->uniqueChild)
-					||	($field->modelRole === 'parent' && !$field->relationship->uniqueParent)) {}
+					|| 	($field->modelRole === 'child')
+					||	($field->modelRole === 'parent' && !$field->relationship->isHasOne())) {}
 				unset($fields[$key]);
 			}
 		}
 		return $fields;
 	}
 
+	public function createColumnSchema($name, $settings = [])
+	{
+		$settings = array_merge($this->defaultCustomColumnSchema, $settings);
+		$settings['name'] = $name;
+		$settings['class'] = $this->columnSchemaClass;
+		return Yii::createObject($settings);
+	}
 
 	/**
 	 *
@@ -174,7 +192,10 @@ trait ActiveRecordTrait {
 				if (isset($fieldSettings[$name])) {
 					$settings = array_merge_recursive($settings, $fieldSettings[$name]);
 				}
-				self::$_fields[self::className()][$name] = $this->createField($name, $owner, $settings);
+				if (is_array($column)) {
+					$column = $this->createColumnSchema($name, $column);
+				}
+				self::$_fields[self::className()][$name] = $this->createField($column, $owner, $settings);
 			}
 			$objectTypeItem = $this->objectTypeItem;
 			if ($objectTypeItem) {
@@ -183,34 +204,26 @@ trait ActiveRecordTrait {
 				$taxonomies = $objectTypeItem->taxonomies;
 				foreach ($objectTypeItem->parents as $relationship) {
 					$fieldName = 'parent:'. $relationship->parent->systemId;
+					$fieldSchema = $this->createColumnSchema($fieldName, ['type' => 'relation', 'phpType' => 'object', 'dbType' => 'relation', 'allowNull' => true]);
 					$settings = [];
 					if (isset($fieldSettings[$fieldName])) {
 						$settings = array_merge_recursive($settings, $fieldSettings[$fieldName]);
 					}
-					$settings['class'] = $this->relationFieldClass;
-					$settings['field'] = $fieldName;
 					$settings['modelRole'] = 'child';
 					$settings['relationship'] = $relationship;
-					$settings['baseModel'] = $this;
-					if (!isset($settings['formField'])) { $settings['formField'] = []; }
-					$settings['formField']['owner'] = $owner;
-					self::$_fields[self::className()][$fieldName] = Yii::createObject($settings);
+					self::$_fields[self::className()][$fieldName] = $this->createRelationField($fieldSchema, $owner, $settings);
 				}
 
 				foreach ($objectTypeItem->children as $relationship) {
 					$fieldName = 'child:'. $relationship->child->systemId;
+					$fieldSchema = $this->createColumnSchema($fieldName, ['type' => 'relation', 'phpType' => 'object', 'dbType' => 'relation', 'allowNull' => true]);
 					$settings = [];
 					if (isset($fieldSettings[$fieldName])) {
 						$settings = array_merge_recursive($settings, $fieldSettings[$fieldName]);
 					}
-					$settings['class'] = $this->relationFieldClass;
-					$settings['field'] = $fieldName;
 					$settings['modelRole'] = 'parent';
-					$settings['baseModel'] = $this;
 					$settings['relationship'] = $relationship;
-					if (!isset($settings['formField'])) { $settings['formField'] = []; }
-					$settings['formField']['owner'] = $owner;
-					self::$_fields[self::className()][$fieldName] = Yii::createObject($settings);
+					self::$_fields[self::className()][$fieldName] = $this->createRelationField($fieldSchema, $owner, $settings);
 				}
 
 				foreach ($taxonomies as $taxonomy) {
@@ -231,14 +244,14 @@ trait ActiveRecordTrait {
 		return self::$_fields[self::className()];
 	}
 
-	public function createField($field, $owner, $settings = [])
+	public function createField($fieldSchema, $owner, $settings = [])
 	{
 		$settings['class'] = $this->modelFieldClass;
 		if (!isset($settings['model'])) {
 			$settings['model'] = $this;
 		}
-		$settings['field'] = $field;
-		$settings['required'] = $this->isAttributeRequired($field);
+		$settings['fieldSchema'] = $fieldSchema;
+		$settings['required'] = $this->isAttributeRequired($fieldSchema->name);
 
 		if (!isset($settings['formField'])) { $settings['formField'] = []; }
 		$settings['formField']['owner'] = $owner;
@@ -247,14 +260,15 @@ trait ActiveRecordTrait {
 	}
 
 
-	public function createRelationField($field, $owner, $settings = [])
+	public function createRelationField($fieldSchema, $owner, $settings = [])
 	{
 		$settings['class'] = $this->relationFieldClass;
-		if (!isset($settings['model'])) {
-			$settings['model'] = $this;
+		if (!isset($settings['baseModel'])) {
+			$settings['baseModel'] = $this;
 		}
-		$settings['field'] = $field;
-		$settings['required'] = $this->isAttributeRequired($field);
+		$settings['fieldSchema'] = $fieldSchema;
+		$settings['required'] = $this->isAttributeRequired($fieldSchema->name);
+		$settings['baseModel'] = $this;
 
 		if (!isset($settings['formField'])) { $settings['formField'] = []; }
 		$settings['formField']['owner'] = $owner;

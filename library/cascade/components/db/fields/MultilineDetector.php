@@ -11,14 +11,10 @@ namespace cascade\components\db\fields;
 use infinite\helpers\Match;
 use yii\db\ColumnSchema;
 
-class HumanFieldDetector extends \infinite\base\Object {
+class MultilineDetector extends \infinite\base\Object {
 	static $_machineTests = array(
-		'id',
-		'/\_id$/',
-		'_moduleHandler',
-		'created',
-		'modified',
-		'deleted',
+		'/text/',
+		'/blob/',
 	);
 
 	/**
@@ -30,11 +26,11 @@ class HumanFieldDetector extends \infinite\base\Object {
 	static function test(ColumnSchema $column) {
 		foreach (static::$_machineTests as $test) {
 			$t = new Match($test);
-			if ($t->test($column->name)) {
-				return false;
+			if ($t->test($column->dbType)) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 

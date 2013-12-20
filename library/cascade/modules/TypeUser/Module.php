@@ -21,13 +21,6 @@ class Module extends \cascade\components\types\Module
 		return 'cascade\\models\\User';
 	}
 
-	/**
-	 * @inheritdoc
-	 */
-	public function defaultRelationshipSettings()
-	{
-		return array_merge(parent::defaultRelationshipSettings(), []);
-	}
 
 	/**
 	 * @inheritdoc

@@ -47,11 +47,6 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		parent::init();
 	}
 
-	public function defaultRelationshipSettings()
-	{
-		return [];
-	}
-
 	public function getCollectorName() {
 		return 'types';
 	}
@@ -245,19 +240,15 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		if ($detailsSection === true) {
 			$detailsSection = '_self';
 		}
+
 		$detailsWidgetClass = self::classNamespace() .'\widgets\\'. 'Details';
 		$widgetClass = $this->fallbackDetailsWidgetClass;
 
-		$details = $objectModel->getDetailFields($this, $objectModel->getFields($this));
-		if (empty($details)) {
-			return false;
-		}
 		@class_exists($detailsWidgetClass);
 		if (class_exists($detailsWidgetClass, false)) {
 			$widgetClass = $detailsWidgetClass;
 		}
 		$widget = ['class' => $widgetClass];
-		$widget['details'] = array_keys($details);
 		$widget['owner'] = $this;
 		$widgetItem = ['widget' => $widget, 'locations' => ['self'], 'displayPriority' => 1];
 		$widgetItem['section'] = Yii::$app->collectors['sections']->getOne($detailsSection);
@@ -266,10 +257,6 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 
 	public function getDetailsSection()
 	{
-		// possible values are:
-		//		true 		: main section
-		//		false 		: no details
-		//		(string)	: name of section
 		return '_side';
 	}
 
@@ -309,6 +296,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 				];
 				$childrenWidget['locations'] = array('child_objects');
 				$childrenWidget['displayPriority'] = $this->priority;
+				$childrenWidget['section'] = Yii::$app->collectors['sections']->getOne('_parents');
 				$widgets[$id] = $childrenWidget;
 			} else {
 				Yii::trace("Warning: There is no browse class for the child objects of {$this->systemId}");

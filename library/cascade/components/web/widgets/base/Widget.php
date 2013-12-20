@@ -122,7 +122,9 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 
 	public function generate() {
 		Yii::beginProfile(get_called_class() .':'. __FUNCTION__);
-		$result = $this->generateStart() . $this->generateHeader() . $this->generateContent() . $this->generateFooter() . $this->generateEnd();
+		$content = $this->generateContent();
+		if ($content === false) { return; }
+		$result = $this->generateStart() . $this->generateHeader() . $content . $this->generateFooter() . $this->generateEnd();
 		Yii::endProfile(get_called_class() .':'. __FUNCTION__);
 		return $result;
 	}

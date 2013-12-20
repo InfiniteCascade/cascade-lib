@@ -19,15 +19,6 @@ class Module extends \cascade\components\types\Module
 	public function getPrimaryModel() {
 		return 'cascade\\models\\Group';
 	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function defaultRelationshipSettings()
-	{
-		return array_merge(parent::defaultRelationshipSettings(), []);
-	}
-
 	
 	/**
 	 * @inheritdoc

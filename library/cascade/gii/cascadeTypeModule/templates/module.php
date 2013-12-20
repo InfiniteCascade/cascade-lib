@@ -41,27 +41,6 @@ class Module extends \cascade\components\types\Module
 	/**
 	 * @inheritdoc
 	 */
-	public function defaultRelationshipSettings()
-	{
-		return array_merge(parent::defaultRelationshipSettings(), [<?php 
-		$parts = [];
-		if ($generator->uniqueParent) {
-			$parts[] = "'uniqueParent' => true";
-		}
-		if ($generator->uniqueChild) {
-			$parts[] = "'uniqueChild' => true";
-		}
-		if (!empty($parts)) {
-			echo "\n\t\t\t";
-			echo implode(",\n\t\t\t", $parts);
-			echo "\n\t\t";
-		}
-		?>]);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
 	public function widgets()
 	{
 	<?php
