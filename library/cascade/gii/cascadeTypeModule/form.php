@@ -50,8 +50,10 @@ END;
 	echo $form->field($generator, 'parents');
 	echo $form->field($generator, 'children');
 
-
+	echo $form->field($generator, 'priority');
 	echo $form->field($generator, 'uniparental')->checkbox();
+	echo $form->field($generator, 'uniqueChild')->checkbox();
+	echo $form->field($generator, 'uniqueChild')->checkbox();
 	echo $form->field($generator, 'hasDashboard')->checkbox();
 
 //	echo $form->field($generator, 'modelClass');

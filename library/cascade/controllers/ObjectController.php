@@ -370,9 +370,12 @@ class ObjectController extends Controller
 		if (isset($relation)) {
 			$this->params['model']->relationModel = $relation;
 			$this->params['model']->relationshipWith = $object;
-			$this->params['model']->forceObjectDelete = $object->allowRogue($relation);
+			$this->params['model']->forceObjectDelete = !$object->allowRogue($relation);
+			if (!$this->params['model']->forceObjectDelete) {
+				$this->params['model']->target = 'relationship';
+			}
 		} else {
-			$this->params['model']->forceObjectDelete = $object->allowRogue();
+			$this->params['model']->forceObjectDelete = !$object->allowRogue();
 		}
 		if (!empty($_POST['DeleteForm'])) {
 			$this->response->task = 'status';

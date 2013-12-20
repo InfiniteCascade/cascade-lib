@@ -8,7 +8,7 @@ class Module extends \cascade\components\types\Module
 {
 	protected $_title = 'User';
 	public $icon = 'fa fa-user';
-	public $uniparental = false;
+
 	public $hasDashboard = true;
 
 	public $widgetNamespace = 'cascade\\modules\\TypeUser\\widgets';
@@ -19,6 +19,14 @@ class Module extends \cascade\components\types\Module
 	 */
 	public function getPrimaryModel() {
 		return 'cascade\\models\\User';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function defaultRelationshipSettings()
+	{
+		return array_merge(parent::defaultRelationshipSettings(), []);
 	}
 
 	/**

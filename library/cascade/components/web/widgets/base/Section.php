@@ -3,6 +3,7 @@ namespace cascade\components\web\widgets\base;
 
 use Yii;
 
+use infinite\helpers\ArrayHelper;
 use infinite\helpers\Html;
 
 class Section extends PanelWidget {
@@ -40,7 +41,9 @@ class Section extends PanelWidget {
 
 
 	public function getWidgets() {
-		return $this->collectorItem->getAll();;
+		$widgets = $this->collectorItem->getAll();
+		ArrayHelper::multisort($widgets, ['object.displayPriority', 'object.name'], [SORT_ASC, SORT_ASC]);
+		return $widgets;
 	}
 }
 ?>

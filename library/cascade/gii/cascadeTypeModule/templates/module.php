@@ -21,8 +21,9 @@ class Module extends \cascade\components\types\Module
 {
 	protected $_title = '<?= $generator->title; ?>';
 	public $icon = '<?= $generator->icon; ?>';
-	public $uniparental = <?php echo empty($generator->uniparental) ? 'false' : 'true'; ?>;
 	public $hasDashboard = <?php echo empty($generator->hasDashboard) ? 'false' : 'true'; ?>;
+	public $uniparental = <?php echo empty($generator->uniparental) ? 'false' : 'true'; ?>;
+	public $priority = <?= $generator->priority; ?>;
 
 	public $widgetNamespace = '<?=$generator->getWidgetNamespace(); ?>';
 	public $modelNamespace = '<?=$generator->getModelNamespace(); ?>';
@@ -35,6 +36,27 @@ class Module extends \cascade\components\types\Module
 		parent::init();
 		
 		Yii::$app->registerMigrationAlias('<?= $generator->migrationsAlias; ?>');
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function defaultRelationshipSettings()
+	{
+		return array_merge(parent::defaultRelationshipSettings(), [<?php 
+		$parts = [];
+		if ($generator->uniqueParent) {
+			$parts[] = "'uniqueParent' => true";
+		}
+		if ($generator->uniqueChild) {
+			$parts[] = "'uniqueChild' => true";
+		}
+		if (!empty($parts)) {
+			echo "\n\t\t\t";
+			echo implode(",\n\t\t\t", $parts);
+			echo "\n\t\t";
+		}
+		?>]);
 	}
 
 	/**
@@ -85,7 +107,7 @@ class Module extends \cascade\components\types\Module
 				echo "\n";
 				foreach(explode(',', $generator->children) as $child) {
 					$child = trim($child);
-					echo "\t\t\t'{$child}' => ['uniqueChild' => true],\n";
+					echo "\t\t\t'{$child}' => [],\n";
 				}
 			}
 		?>];

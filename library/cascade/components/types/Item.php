@@ -46,6 +46,7 @@ class Item extends \infinite\base\collector\Item {
 			$this->collector->addRelationship($parent, $this->systemId, $options);
 		}
 	}
+	
 	/**
 	 *
 	 *
@@ -58,6 +59,7 @@ class Item extends \infinite\base\collector\Item {
 		$this->_sections = array();
 		foreach ($this->_children as $rel) {
 			if (!$rel->active) { continue; }
+			if ($rel->uniqueChild) { continue; }
 			$child = $rel->child;
 			$instanceSettings = array('relationship' => $rel, 'queryRole' => 'children');
 			$items = Yii::$app->collectors['widgets']->getLocation('parent_objects', $child);
@@ -75,6 +77,7 @@ class Item extends \infinite\base\collector\Item {
 
 		foreach ($this->_parents as $rel) {
 			if (!$rel->active) { continue; }
+			if ($rel->uniqueParent) { continue; }
 			$parent = $rel->parent;
 			$instanceSettings = array('relationship' => $rel, 'queryRole' => 'parents');
 			$items = Yii::$app->collectors['widgets']->getLocation('child_objects', $parent);
@@ -88,8 +91,7 @@ class Item extends \infinite\base\collector\Item {
 				$this->_sections[$section->systemId]->register($this, $item);
 			}
 		}
-		
-		ArrayHelper::multisort($widgets, ['displayPriority', 'sectionTitle'], [SORT_ASC, SORT_ASC]);
+		ArrayHelper::multisort($this->_sections, ['displayPriority', 'sectionTitle'], [SORT_ASC, SORT_ASC]);
 		return $this->_sections;
 	}
 
@@ -98,7 +100,7 @@ class Item extends \infinite\base\collector\Item {
 		$sections = $this->sections;
 		$widgets = [];
 		foreach ($this->sections as $section) {
-			foreach ($section->object->getAll() as $key => $widget) {
+			foreach ($section->getAll() as $key => $widget) {
 				$widgets[$key] = $widget;
 			}
 		}

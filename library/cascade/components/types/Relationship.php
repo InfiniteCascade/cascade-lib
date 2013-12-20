@@ -19,10 +19,11 @@ class Relationship extends \infinite\base\Object {
 	static $_cache = [];
 
 	protected $_defaultOptions = array(
-		'handlePrimary' => true, 
+		'required' => false,
+		'handlePrimary' => true,
 		'taxonomy' => null,
 		'fields' => array(),
-		'uniqueParent' => false, // only 1 parent of this type for this child (rare)
+		'uniqueParent' => false, // only 1 parent of this type for this child
 		'uniqueChild' => false, // only 1 child of this type for this parent
 	);
 	protected $_options = array();
@@ -67,7 +68,8 @@ class Relationship extends \infinite\base\Object {
 	 * @param unknown $options (optional)
 	 * @return unknown
 	 */
-	static public function getOne(Item $parent, Item $child, $options = array()) {
+	static public function getOne(Item $parent, Item $child, $options = array())
+	{
 		$key = md5($parent->systemId ."-". $child->systemId);
 		if (isset(self::$_relationships[$key])) {
 			self::$_relationships[$key]->mergeOptions($options);
@@ -75,6 +77,30 @@ class Relationship extends \infinite\base\Object {
 			self::$_relationships[$key] = new Relationship($parent, $child, $options);
 		}
 		return self::$_relationships[$key];
+	}
+
+	public function companionRole($queryRole)
+	{
+		if ($queryRole === 'children' || $queryRole === 'child') {
+			return 'parent';
+		}
+		return 'child';
+	}
+
+	public function canLink($relationshipRole, $objectModule)
+	{
+		if (!$objectModule || ($relationshipRole === 'parent' && $this->child->uniparental)) {
+			return false;
+		}
+		return true;
+	}
+
+	public function canCreate($relationshipRole, $objectModule)
+	{
+		if ($this->child->hasDashboard && $relationshipRole === 'child') { // && ($this->parent->uniparental || $this->uniqueParent)
+			return false;
+		}
+		return true;
 	}
 
 	public function getModel($parentObjectId, $childObjectId)

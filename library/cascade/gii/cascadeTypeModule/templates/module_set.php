@@ -25,7 +25,7 @@ class Extension extends \cascade\components\base\ModuleSetExtension {
 		Yii::setAlias('@<?= str_replace('\\', '/', $generator->getBaseNamespace()) ?>', __DIR__);
 	}
 
-	public function getModules()
+	public static function getModules()
 	{
 		$m = [];
 		<?= $generator->getModuleSetModules() ?>

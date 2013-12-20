@@ -16,12 +16,12 @@ if (is_null($model->relationModel) || $model->forceObjectDelete) {
 	 	echo Html::radio('target', $model->target === 'relationship', array_merge($itemOptions, [
 					'value' => 'relationship',
 					'label' => 'Relationship',
-					'labelOptions' => ['class' => 'btn btn-warning']
+					'labelOptions' => ['class' => 'btn btn-default' . ($model->target === 'relationship' ? ' active' : '')]
 				]));
 	 	echo Html::radio('target', $model->target === 'object', array_merge($itemOptions, [
 					'value' => 'object',
 					'label' => $model->object->objectType->title->getSingular(true),
-					'labelOptions' => ['class' => 'btn btn-danger']
+					'labelOptions' => ['class' => 'btn btn-danger'. ($model->target === 'object' ? ' active' : '')]
 				]));
 	 	echo '</div>';
 	 }

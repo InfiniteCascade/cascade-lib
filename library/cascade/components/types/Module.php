@@ -29,9 +29,8 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $icon = 'ic-icon-info';
 	public $priority = 1000; //lower is better
 
-	public $uniparental = false;
 	public $hasDashboard = true;
-
+	public $uniparental = false;
 	public $sectionName;
 
 	public $widgetNamespace;
@@ -39,12 +38,18 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 
 	public $formGeneratorClass = 'cascade\components\web\form\Generator';
 	public $sectionClass = 'cascade\\components\\web\\widgets\\base\\SingleSection';
+	public $fallbackDetailsWidgetClass = 'cascade\\components\\web\\widgets\\base\\Details';
 
 	public function init() {
 		if (isset($this->modelNamespace)) {
 			Yii::$app->registerModelAlias(':'. $this->systemId, $this->modelNamespace);
 		}
 		parent::init();
+	}
+
+	public function defaultRelationshipSettings()
+	{
+		return [];
 	}
 
 	public function getCollectorName() {
@@ -187,7 +192,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 			$section->systemId = $sectionId;
 			if (empty($section->object)) {
 				$sectionConfig = ['class' => $this->sectionClass, 'section' => $section];
-				$section->displayPriority = 99999;
+				$section->displayPriority = $this->priority;
 				$section->object = Yii::createObject($sectionConfig);
 			}
 			return $section;
@@ -227,6 +232,53 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		$this->_title = $title;
 	}
 
+	public function getDetailsWidget($objectModel)
+	{
+		$detailsSection = $this->getDetailsSection();
+		if ($detailsSection === false) { return false; }
+		$detailsWidgetClass = self::classNamespace() .'\widgets\\'. 'Details';
+		$widgetClass = $this->fallbackDetailsWidgetClass;
+
+		$details = $objectModel->getDetailFields([], $this);
+		if (!is_array($details)) {
+			$details = (array) $details;
+		}
+		foreach ($this->collectorItem->children as $relationship) {
+			if (!$relationship->active) { continue; }
+			if (!$relationship->uniqueChild) { continue; }
+			$fieldName = 'child:'. $relationship->child->systemId;
+			$details[] = $objectModel->createRelationField($fieldName, $this, ['relationship' => $relationship, 'baseModel' => $this, 'modelRole' => 'parent']);
+		}
+		foreach ($this->collectorItem->parents as $relationship) {
+			if (!$relationship->active) { continue; }
+			if (!$relationship->uniqueParent) { continue; }
+			$fieldName = 'parent:'. $relationship->parent->systemId;
+			$details[] = $objectModel->createRelationField($fieldName, $this, ['relationship' => $relationship, 'baseModel' => $this, 'modelRole' => 'child']);
+		}
+
+		if (empty($details)) {
+			return false;
+		}
+		$widgetClass = $fallbackDetailsWidgetClass
+		@class_exists($detailsWidgetClass);
+		if (class_exists($detailListClassName, false)) {
+			$widgetClass = $detailsWidgetClass;
+		}
+		$widget = ['class' => $widgetClass];
+		$widget['details'] = $details;
+		$widget['owner'] = $this;
+		$widget['section'] = $detailsSection;
+		return Yii::createObject($widget);
+	}
+
+	public function getDetailsSection()
+	{
+		// possible values are:
+		//		true 		: main section
+		//		false 		: no details
+		//		(string)	: name of section
+		return '_side';
+	}
 
 	public function widgets() {
 		$widgets = [];
@@ -286,7 +338,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 			$childrenWidget['widget'] = [
 				'class' => $embeddedListClassName,
 				'icon' => $this->icon, 
-				'title' => '%%type.'. $this->systemId .'.title.upperPlural%%'
+				'title' => '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%'
 			];
 			$childrenWidget['locations'] = array('parent_objects', 'child_objects');
 			$childrenWidget['displayPriority'] = $this->priority;

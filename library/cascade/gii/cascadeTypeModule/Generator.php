@@ -38,9 +38,11 @@ class Generator extends \yii\gii\Generator
 	public $baseClass = 'cascade\components\types\ActiveRecord';
 	
 	public $title;
+	public $uniqueParent = 0;
+	public $uniqueChild = 0;
 	public $uniparental = 0;
 	public $hasDashboard = 1;
-	public $priority = 1;
+	public $priority = 1000;
 	public $icon;
 
 	public $widgets = [];
@@ -141,8 +143,8 @@ class Generator extends \yii\gii\Generator
 			//['db', 'validateDb'],
 			//['ns', 'validateNamespace'],
 			[['tableName'], 'validateTableName'],
-			[['migrationTimestamp'], 'integer'],
-			[['section', 'descriptorField', 'parents', 'children', 'uniparental', 'hasDashboard', 'moduleSet'], 'safe'],
+			[['migrationTimestamp', 'priority'], 'integer'],
+			[['section', 'descriptorField', 'parents', 'children', 'uniparental', 'uniqueParent', 'uniqueChild', 'hasDashboard', 'moduleSet'], 'safe'],
 			//['baseClass', 'validateClass', 'params' => ['extends' => ActiveRecord::className()]],
 			//['generateRelations, generateLabelsFromComments', 'boolean'],
 
@@ -160,9 +162,11 @@ class Generator extends \yii\gii\Generator
 			/* Module */
 			'moduleID' => 'Module ID',
 			'moduleClass' => 'Module Class',
-
-			'uniparental' => 'Allow only one parent',
+			'uniparental' => 'Uniparental',
+			'uniqueParent' => 'Unique Parent',
+			'uniqueChild' => 'Unique Child',
 			'hasDashboard' => 'Managed by its own dashboard',
+			'priority' => 'Priority',
 
 			/* Model */
 
@@ -188,7 +192,10 @@ class Generator extends \yii\gii\Generator
 
 			'title' => 'Single noun for this object type',
 			'section' => 'Which section does this widget fall into?',
-			'uniparental' => 'Objects of this type can only have one parent.',
+			'uniparental' => 'Objects of this type can have only one parent',
+			'uniqueParent' => 'For children of this type, only one parent of this type',
+			'uniqueChild' => 'For parents of this type, only one child of this type',
+			'priority' => 'Priority object appears in sections (lower numbers appear first)',
 			'hasDashboard' => 'Objects of this type are managed from their own dashboard.',
 
 			/* Model */

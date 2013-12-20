@@ -8,7 +8,6 @@ class Module extends \cascade\components\types\Module
 {
 	protected $_title = 'Group';
 	public $icon = 'fa fa-users';
-	public $uniparental = false;
 	public $hasDashboard = true;
 
 	public $widgetNamespace = 'cascade\modules\Group\widgets';
@@ -24,9 +23,18 @@ class Module extends \cascade\components\types\Module
 	/**
 	 * @inheritdoc
 	 */
+	public function defaultRelationshipSettings()
+	{
+		return array_merge(parent::defaultRelationshipSettings(), []);
+	}
+
+	
+	/**
+	 * @inheritdoc
+	 */
 	public function widgets()
 	{
-			return parent::widgets();
+		return parent::widgets();
 	}
 
 	
@@ -47,7 +55,7 @@ class Module extends \cascade\components\types\Module
 	public function children()
 	{
 		return [
-			'User' => ['uniqueChild' => true, 'handlePrimary' => false],
+			'User' => ['handlePrimary' => false],
 ];
 	}
 
