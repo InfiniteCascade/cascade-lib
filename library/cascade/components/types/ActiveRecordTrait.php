@@ -137,14 +137,20 @@ trait ActiveRecordTrait {
 		return $required;
 	}
 
-
-	public function getDetailFields($fields = [], $owner = null)
+	public function getHeaderDetails()
 	{
-		foreach ($fields as $key => $settings) {
-			if (is_object($settings) && !($settings instanceof $this->baseFieldClass)) {
+		return [];
+	}
+
+	public function getDetailFields($owner = null, $fields = [])
+	{
+
+		foreach ($fields as $key => $field) {
+			if ($field instanceof $this->relationFieldClass) {
+				if (	(in_array($key, $this->headerDetails))
+					|| 	($field->modelRole === 'child' && !$field->relationship->uniqueChild)
+					||	($field->modelRole === 'parent' && !$field->relationship->uniqueParent)) {}
 				unset($fields[$key]);
-			} elseif (!is_object($settings) {
-				$fields[$key] = $this->createField($key, $owner, $settings);
 			}
 		}
 		return $fields;

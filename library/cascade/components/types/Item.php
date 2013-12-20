@@ -91,6 +91,17 @@ class Item extends \infinite\base\collector\Item {
 				$this->_sections[$section->systemId]->register($this, $item);
 			}
 		}
+		$items = Yii::$app->collectors['widgets']->getLocation('self',  $this->object);
+		foreach ($items as $item) {
+			$item->settings = $instanceSettings;
+			$section = $item->getSection($this->object);
+			if (empty($section)) { continue; }
+			if (!isset($this->_sections[$item->section->systemId])) {
+				$this->_sections[$section->systemId] = $section;
+			}
+			$this->_sections[$section->systemId]->register($this, $item);
+		}
+
 		ArrayHelper::multisort($this->_sections, ['displayPriority', 'sectionTitle'], [SORT_ASC, SORT_ASC]);
 		return $this->_sections;
 	}

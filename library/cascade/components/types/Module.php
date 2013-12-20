@@ -232,43 +232,36 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		$this->_title = $title;
 	}
 
-	public function getDetailsWidget($objectModel)
+	public function getDetailsWidget($objectModel = null)
 	{
+		if (is_null($objectModel) && isset(Yii::$app->request->object)) {
+			$objectModel = Yii::$app->request->object;
+		} elseif(is_null($objectModel)) {
+			$objectModel = $this->dummyModel;
+		}
+
 		$detailsSection = $this->getDetailsSection();
 		if ($detailsSection === false) { return false; }
+		if ($detailsSection === true) {
+			$detailsSection = '_self';
+		}
 		$detailsWidgetClass = self::classNamespace() .'\widgets\\'. 'Details';
 		$widgetClass = $this->fallbackDetailsWidgetClass;
 
-		$details = $objectModel->getDetailFields([], $this);
-		if (!is_array($details)) {
-			$details = (array) $details;
-		}
-		foreach ($this->collectorItem->children as $relationship) {
-			if (!$relationship->active) { continue; }
-			if (!$relationship->uniqueChild) { continue; }
-			$fieldName = 'child:'. $relationship->child->systemId;
-			$details[] = $objectModel->createRelationField($fieldName, $this, ['relationship' => $relationship, 'baseModel' => $this, 'modelRole' => 'parent']);
-		}
-		foreach ($this->collectorItem->parents as $relationship) {
-			if (!$relationship->active) { continue; }
-			if (!$relationship->uniqueParent) { continue; }
-			$fieldName = 'parent:'. $relationship->parent->systemId;
-			$details[] = $objectModel->createRelationField($fieldName, $this, ['relationship' => $relationship, 'baseModel' => $this, 'modelRole' => 'child']);
-		}
-
+		$details = $objectModel->getDetailFields($this, $objectModel->getFields($this));
 		if (empty($details)) {
 			return false;
 		}
-		$widgetClass = $fallbackDetailsWidgetClass
 		@class_exists($detailsWidgetClass);
-		if (class_exists($detailListClassName, false)) {
+		if (class_exists($detailsWidgetClass, false)) {
 			$widgetClass = $detailsWidgetClass;
 		}
 		$widget = ['class' => $widgetClass];
-		$widget['details'] = $details;
+		$widget['details'] = array_keys($details);
 		$widget['owner'] = $this;
-		$widget['section'] = $detailsSection;
-		return Yii::createObject($widget);
+		$widgetItem = ['widget' => $widget, 'locations' => ['self'], 'displayPriority' => 1];
+		$widgetItem['section'] = Yii::$app->collectors['sections']->getOne($detailsSection);
+		return $widgetItem;
 	}
 
 	public function getDetailsSection()
@@ -282,6 +275,13 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 
 	public function widgets() {
 		$widgets = [];
+
+		$detailsWidget = $this->getDetailsWidget();
+		if ($detailsWidget) {
+			$id = '_'. $this->systemId .'Details';
+			$widgets[$id] = $detailsWidget;
+		}
+
 		$detailListClassName = self::classNamespace() .'\widgets\\'. 'DetailList';
 		$simpleListClassName = self::classNamespace() .'\widgets\\'. 'SimpleLinkList';
 		$embeddedListClassName = self::classNamespace() .'\widgets\\'. 'EmbeddedList';

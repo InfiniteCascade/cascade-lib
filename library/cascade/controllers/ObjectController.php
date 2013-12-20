@@ -124,7 +124,7 @@ class ObjectController extends Controller
 		$this->response->view = 'view';
 
 		$type = $this->params['type'] = $object->objectType;
-		$sections = $this->params['sections'] = $typeItem->getSections();
+		$sections = $this->params['sections'] = $typeItem->getSections($object);
 		$this->params['active'] = $this->params['default'] = null;
 		foreach ($sections as $section) {
 			if ($section->displayPriority > 0) {

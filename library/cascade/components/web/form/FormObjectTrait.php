@@ -1,9 +1,12 @@
 <?php
 namespace cascade\components\web\form;
 
+use Yii;
+
 trait FormObjectTrait {
 	public $owner;
 	public $isValid = true;
+	public $generatorClass = 'cascade\\components\\web\\form\\Generator';
 
 	public function output() {
 		echo $this->generate();
@@ -14,7 +17,10 @@ trait FormObjectTrait {
 		if ($this->owner instanceof Generator) {
 			return $this->owner;
 		}
-		return $this->owner->generator;
+		if (isset($this->owner->generator)) {
+			return $this->owner->generator;
+		}
+		return Yii::createObject(['class' => $this->generatorClass]);
 	}
 
 	public function getSegment() {
