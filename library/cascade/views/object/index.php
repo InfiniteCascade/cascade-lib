@@ -9,7 +9,7 @@ $this->title = 'Dashboard';
 echo Html::beginTag('div', ['class' => 'ic-dashboard row']);
 Yii::beginProfile("Build Grid");
 $widgets = Yii::$app->collectors['widgets']->getLocation('front');
-ArrayHelper::multisort($widgets, ['displayPriority', 'name'], [SORT_ASC, SORT_ASC]);
+ArrayHelper::multisort($widgets, ['priority', 'name'], [SORT_ASC, SORT_ASC]);
 $grid = new Grid;
 $cells = [];
 Yii::beginProfile("Collect Widgets");

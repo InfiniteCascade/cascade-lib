@@ -127,7 +127,7 @@ class ObjectController extends Controller
 		$sections = $this->params['sections'] = $typeItem->getSections($object);
 		$this->params['active'] = $this->params['default'] = null;
 		foreach ($sections as $section) {
-			if ($section->displayPriority > 0) {
+			if ($section->priority > 0) {
 				$this->params['active'] = $this->params['default'] = $section->systemId;
 				break;
 			}

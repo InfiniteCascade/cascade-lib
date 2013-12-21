@@ -46,6 +46,12 @@ trait ActiveRecordTrait {
 			],
 			'Taxonomy' => [
 				'class' => 'cascade\\components\\db\\behaviors\\Taxonomy',
+			],
+			'Access' => [
+				'class' => '\infinite\db\behaviors\Access',
+			],
+			'SearchTerm' => [
+				'class' => '\infinite\db\behaviors\SearchTerm',
 			]
 		];
 	}
@@ -157,10 +163,18 @@ trait ActiveRecordTrait {
 			$fields = $this->getFields($owner);
 		}
 		foreach ($fields as $key => $field) {
+			$keep = true;
 			if ($field instanceof $this->relationFieldClass) {
 				if (	(in_array($key, $this->headerDetails))
-					|| 	($field->modelRole === 'child')
-					||	($field->modelRole === 'parent' && !$field->relationship->isHasOne())) {}
+					|| 	($field->modelRole === 'child' && !$field->relationship->isHasOne())
+					||	($field->modelRole === 'parent')) {
+					$keep = false;
+				}
+			} elseif (!$field->human) {
+				$keep = false;
+			}
+
+			if (!$keep) {
 				unset($fields[$key]);
 			}
 		}

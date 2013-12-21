@@ -50,7 +50,7 @@ abstract class Module extends \infinite\base\Module {
 				// 'title' => '%%type.'. $this->systemId .'.title.upperPlural%%'
 			];
 			$summaryWidget['locations'] = array('front');
-			$summaryWidget['displayPriority'] = $this->priority;
+			$summaryWidget['priority'] = $this->priority;
 			$widgets[$id] = $summaryWidget;
 		}
 		//var_dump($widgets);exit;

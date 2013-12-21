@@ -52,7 +52,7 @@ class Section extends PanelWidget {
 
 	public function getWidgets() {
 		$widgets = $this->collectorItem->getAll();
-		ArrayHelper::multisort($widgets, ['object.displayPriority', 'object.name'], [SORT_ASC, SORT_ASC]);
+		ArrayHelper::multisort($widgets, ['object.priority', 'object.name'], [SORT_ASC, SORT_ASC]);
 		return $widgets;
 	}
 }

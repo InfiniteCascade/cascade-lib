@@ -187,7 +187,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 			$section->systemId = $sectionId;
 			if (empty($section->object)) {
 				$sectionConfig = ['class' => $this->sectionClass, 'section' => $section];
-				$section->displayPriority = $this->priority;
+				$section->priority = $this->priority;
 				$section->object = Yii::createObject($sectionConfig);
 			}
 			return $section;
@@ -250,7 +250,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		}
 		$widget = ['class' => $widgetClass];
 		$widget['owner'] = $this;
-		$widgetItem = ['widget' => $widget, 'locations' => ['self'], 'displayPriority' => 1];
+		$widgetItem = ['widget' => $widget, 'locations' => ['self'], 'priority' => 1];
 		$widgetItem['section'] = Yii::$app->collectors['sections']->getOne($detailsSection);
 		return $widgetItem;
 	}
@@ -295,7 +295,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					'title' => '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%'
 				];
 				$childrenWidget['locations'] = array('child_objects');
-				$childrenWidget['displayPriority'] = $this->priority;
+				$childrenWidget['priority'] = $this->priority;
 				$childrenWidget['section'] = Yii::$app->collectors['sections']->getOne('_parents');
 				$widgets[$id] = $childrenWidget;
 			} else {
@@ -310,7 +310,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					'title' => '%%type.'. $this->systemId .'.title.upperPlural%%'
 				];
 				$summaryWidget['locations'] = array('front');
-				$summaryWidget['displayPriority'] = $this->priority;
+				$summaryWidget['priority'] = $this->priority;
 				$widgets[$id] = $summaryWidget;
 			} else {
 				Yii::trace("Warning: There is no summary class for {$this->systemId}");
@@ -329,7 +329,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 				'title' => '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%'
 			];
 			$childrenWidget['locations'] = array('parent_objects', 'child_objects');
-			$childrenWidget['displayPriority'] = $this->priority;
+			$childrenWidget['priority'] = $this->priority;
 			$widgets[$id] = $childrenWidget;
 		} else {
 			Yii::trace("Warning: There is no browse class for the child objects of {$this->systemId}");
@@ -343,7 +343,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					'title' => '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%'
 				];
 			$parentsWidget['locations'] = array('parent_objects');
-			$parentsWidget['displayPriority'] = $this->priority + 1;
+			$parentsWidget['priority'] = $this->priority + 1;
 			$widgets[$id] = $parentsWidget;
 		} else {
 			Yii::trace("Warning: There is no browse class for the parent objects of {$this->systemId}");

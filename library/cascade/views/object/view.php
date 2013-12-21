@@ -32,7 +32,7 @@ $cells = [];
 
 $sectionsMenu = [];
 foreach ($sections as $section) {
-	if ($section->displayPriority === false) { continue; }
+	if ($section->priority === false) { continue; }
 	$sectionsMenu[] = ['label' => $section->sectionTitle, 'url' => '#section-'.$section->systemId];
 }
 
@@ -76,7 +76,7 @@ if (count($sectionsMenu) > 2) {
 
 $mainCell = [];
 foreach ($sections as $section) {
-	if ($section->displayPriority === false) { continue; }
+	if ($section->priority === false) { continue; }
 	$mainCell[] = $section->object->cell;
 }
 $mainCellGrid = Yii::createObject(['class' => 'infinite\web\grid\Grid']);

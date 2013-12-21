@@ -169,6 +169,9 @@ abstract class Base extends \infinite\base\Object {
 	}
 
 	public function getValue() {
+		if (!isset($this->model->{$this->field})) {
+			return null;
+		}
 		return $this->model->{$this->field};
 	}
 

@@ -12,7 +12,13 @@ class Details extends EmbeddedWidget implements ListWidgetInterface {
 	}
 
 	public $title = 'Details';
-	public $contentHtmlOptions = [];
+	public $contentHtmlOptions = ['class' => ''];
+	public $fieldHtmlOptions = ['class' => 'form-group'];
+	public $labelHtmlOptions = ['class' => 'control-label', ];
+	public $valueHtmlOptions = ['class' => 'form-control-static'];
+
+	public $gridClass = 'infinite\web\grid\Grid';
+	public $gridCellClass = 'infinite\web\grid\Cell';
 
 	public function getHeaderMenu()
 	{
@@ -25,13 +31,35 @@ class Details extends EmbeddedWidget implements ListWidgetInterface {
 		if (empty(Yii::$app->request->object)) { return false; }
 		if (!($detailFields = Yii::$app->request->object->getDetailFields()) || empty($detailFields)) { return false; }
 		$parts = [];
-		Html::addCssClass($this->contentHtmlOptions, 'form-group');
 		$parts[] = Html::beginTag('div', $this->contentHtmlOptions);
-		foreach ($detailFields as $key => $field) {
 
+		$grid = Yii::createObject(['class' => $this->gridClass]);
+		// $parts[] = '<pre>'. print_r(array_keys($detailFields), true) .'</pre>';
+		foreach ($detailFields as $key => $field) {
+			$fieldHtmlOptions = $this->fieldHtmlOptions;
+			$labelCell = $this->generateCell(Html::tag('label', $field->label, $this->labelHtmlOptions));
+			$valueCell = $this->generateCell(Html::tag('p', $field->formattedValue, $this->valueHtmlOptions));
+			$row = $grid->addRow([$labelCell, $valueCell]);
+
+			if ($field->multiline) {
+				$labelCell->columns = 12;
+				$valueCell->columns = 12;
+				Html::addCssClass($row->htmlOptions, 'form-vertical');
+			} else {
+				$labelCell->columns = 5;
+				$valueCell->columns = 7;
+				Html::addCssClass($row->htmlOptions, 'form-horizontal');
+			}
 		}
+
+		$parts[] = $grid->generate();
 		$parts[] = Html::endTag('div');
 		return implode($parts);
+	}
+
+	protected function generateCell($content)
+	{
+		return Yii::createObject(['class' => $this->gridCellClass, 'content' => $content, 'tabletSize' => false]);
 	}
 
 	public function getPaginationSettings() {

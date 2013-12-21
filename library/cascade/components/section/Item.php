@@ -8,7 +8,7 @@ use infinite\base\collector\CollectedObjectTrait;
 class Item extends \infinite\base\collector\Item implements SectionInterface, CollectedObjectInterface {
 	use SectionTrait;
 	use CollectedObjectTrait;
-	public $displayPriority = 0;
+	public $priority = 0;
 }
 
 

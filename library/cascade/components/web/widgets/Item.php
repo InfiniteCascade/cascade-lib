@@ -19,7 +19,7 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
 	public $name;
 	public $widget;
 	public $tab;
-	public $displayPriority = 0;
+	public $priority = 0;
 	public $locations = array();
 	protected $_section;
 	public $settings = [];

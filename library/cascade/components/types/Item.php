@@ -102,7 +102,7 @@ class Item extends \infinite\base\collector\Item {
 			$this->_sections[$section->systemId]->register($this, $item);
 		}
 
-		ArrayHelper::multisort($this->_sections, ['displayPriority', 'sectionTitle'], [SORT_ASC, SORT_ASC]);
+		ArrayHelper::multisort($this->_sections, ['priority', 'sectionTitle'], [SORT_ASC, SORT_ASC]);
 		return $this->_sections;
 	}
 
