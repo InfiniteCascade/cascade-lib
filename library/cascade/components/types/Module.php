@@ -40,6 +40,8 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $sectionClass = 'cascade\\components\\web\\widgets\\base\\SingleSection';
 	public $fallbackDetailsWidgetClass = 'cascade\\components\\web\\widgets\\base\\Details';
 
+	protected $_disabledFields;
+
 	public function init() {
 		if (isset($this->modelNamespace)) {
 			Yii::$app->registerModelAlias(':'. $this->systemId, $this->modelNamespace);
@@ -88,6 +90,19 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 			}
 		}
 		return min($results);
+	}
+
+	public function getDisabledFields()
+	{
+		if (is_null($this->_disabledFields)) {
+			return [];
+		}
+		return $this->_disabledFields;
+	}
+
+	public function setDisabledFields($fields)
+	{
+		$this->_disabledFields = $fields;
 	}
 
 	public function getPrimaryModel() {

@@ -14,6 +14,13 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
 	 * @inheritdoc
 	 */
 	public function __construct($id, $parent, $config=null) {
+		if (isset(Yii::$app->params['modules'][$id])) {
+			if (is_array($config)) {
+				$config = array_merge_recursive($config, Yii::$app->params['modules'][$id]);
+			} else {
+				$config = Yii::$app->params['modules'][$id];
+			}
+		}
 		if (!isset(Yii::$app->collectors[$this->collectorName])) { throw new Exception('Cannot find the collector '. $this->collectorName .'!'); }
 		if (!(Yii::$app->collectors[$this->collectorName]->register(null, $this))) { throw new Exception('Could not register '. $this->shortName .' in '. $this->collectorName .'!'); }
 		$this->loadSubmodules();

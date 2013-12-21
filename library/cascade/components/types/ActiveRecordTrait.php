@@ -12,6 +12,7 @@ namespace cascade\components\types;
 use Yii;
 
 use infinite\helpers\Html;
+use infinite\helpers\ArrayHelper;
 
 use cascade\components\web\form\Segment as FormSegment;
 use cascade\components\types\Relationship;
@@ -189,6 +190,19 @@ trait ActiveRecordTrait {
 		return Yii::createObject($settings);
 	}
 
+	public function getValidators()
+	{
+		$validators = parent::getValidators();
+		
+		if (isset($this->objectType) && ($disabledFields = $this->objectType->disabledFields) && !empty($disabledFields)) {
+			foreach ($validators as $validator) {
+				$validator->attributes = array_diff($validator->attributes, $disabledFields);
+			}
+		}
+
+		return $validators;
+	}
+
 	/**
 	 *
 	 *
@@ -198,10 +212,12 @@ trait ActiveRecordTrait {
 	 */
 	public function getFields($owner = null) {
 		if (!isset(self::$_fields[self::className()])) {
+			$disabledFields = $this->objectType->disabledFields;
 			$modelName = self::className();
 			self::$_fields[self::className()] = [];
 			$fieldSettings = $this->fieldSettings();
 			foreach (array_merge($this->additionalFields(), self::getTableSchema()->columns) as  $name => $column) {
+				if (in_array($name, $disabledFields)) { continue; }
 				$settings = [];
 				if (isset($fieldSettings[$name])) {
 					$settings = array_merge_recursive($settings, $fieldSettings[$name]);
@@ -218,6 +234,7 @@ trait ActiveRecordTrait {
 				$taxonomies = $objectTypeItem->taxonomies;
 				foreach ($objectTypeItem->parents as $relationship) {
 					$fieldName = 'parent:'. $relationship->parent->systemId;
+					if (in_array($fieldName, $disabledFields)) { continue; }
 					$fieldSchema = $this->createColumnSchema($fieldName, ['type' => 'relation', 'phpType' => 'object', 'dbType' => 'relation', 'allowNull' => true]);
 					$settings = [];
 					if (isset($fieldSettings[$fieldName])) {
@@ -230,6 +247,7 @@ trait ActiveRecordTrait {
 
 				foreach ($objectTypeItem->children as $relationship) {
 					$fieldName = 'child:'. $relationship->child->systemId;
+					if (in_array($fieldName, $disabledFields)) { continue; }
 					$fieldSchema = $this->createColumnSchema($fieldName, ['type' => 'relation', 'phpType' => 'object', 'dbType' => 'relation', 'allowNull' => true]);
 					$settings = [];
 					if (isset($fieldSettings[$fieldName])) {
@@ -252,8 +270,16 @@ trait ActiveRecordTrait {
 					$settings['model'] = $this;
 					self::$_fields[self::className()][$fieldName] = $this->createTaxonomyField($taxonomy, $owner);
 				}
-
 			}
+			$currentKeys = array_keys(self::$_fields[self::className()]);
+			foreach (self::$_fields[self::className()] as $name => $field) {
+				if (!isset($field->priority)) {
+					$field->priority = (int) array_search($name, $currentKeys);
+					$field->priority = ($field->priority * 100);
+				}
+			}
+			// \d(ArrayHelper::getColumn(self::$_fields[self::className()], 'priority'));
+			ArrayHelper::multisort(self::$_fields[self::className()], 'priority', SORT_ASC);
 		}
 		return self::$_fields[self::className()];
 	}

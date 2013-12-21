@@ -9,6 +9,7 @@ abstract class Base extends \infinite\base\Object {
 	public $default;
 	public $required = false;
 	public $fieldSchema;
+	public $priority;
 
 	public $possiblePrimaryKeys = ['id'];
 	

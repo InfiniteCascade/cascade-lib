@@ -12,7 +12,7 @@ class Details extends EmbeddedWidget implements ListWidgetInterface {
 	}
 
 	public $title = 'Details';
-	public $contentHtmlOptions = ['class' => ''];
+	public $contentHtmlOptions = ['class' => 'form-panel'];
 	public $fieldHtmlOptions = ['class' => 'form-group'];
 	public $labelHtmlOptions = ['class' => 'control-label', ];
 	public $valueHtmlOptions = ['class' => 'form-control-static'];
