@@ -73,7 +73,7 @@ class AppController extends Controller
 			return $this->goBack();
 		} else {
 			$this->response->task = 'dialog';
-			$this->response->taskOptions = array('title' => 'Log In');
+			$this->response->taskOptions = ['title' => 'Log In'];
 			$this->response->view = 'login';
 		}
 	}

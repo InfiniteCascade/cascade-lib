@@ -80,26 +80,26 @@ class ObjectController extends Controller
 	 *
 	 */
 	public function actionSuggest() {
-		$package = array('results' => array());
+		$package = ['results' => []];
 		if (empty($_GET['modules']) or empty($_GET['term'])) {
 			$this->json($package, true);
 		}
-		$ignore = array();
+		$ignore = [];
 		if (!empty($_GET['ignore'])) {
 			$ignore = $_GET['ignore'];
 		}
 		$modules = $_GET['modules'];
 		$term = $_GET['term'];
-		$scores = array();
+		$scores = [];
 
 		foreach ($modules as $module) {
 			$moduleObject = Yii::$app->types->get($module);
-			$results = array('name' => $moduleObject->title->getPlural(true), 'results' => array());
-			$raw = $moduleObject->search($term, array('ignore' => $ignore));
-			$results['results'] = array();
+			$results = ['name' => $moduleObject->title->getPlural(true), 'results' => []];
+			$raw = $moduleObject->search($term, ['ignore' => $ignore]);
+			$results['results'] = [];
 			if (!empty($raw['results'])) {
 				foreach ($raw['results'] as $r) {
-					$results['results'][] = array('objectId' => $r->primaryKey, 'label' => $r->descriptor, 'sub' => $r->getSubInfo($moduleObject->objectSubInfo), 'score' => $r->searchScore, 'module' => $moduleObject->shortName);
+					$results['results'][] = ['objectId' => $r->primaryKey, 'label' => $r->descriptor, 'sub' => $r->getSubInfo($moduleObject->objectSubInfo), 'score' => $r->searchScore, 'module' => $moduleObject->shortName];
 				}
 			}
 			if (!empty($results['results'])) {
@@ -253,7 +253,7 @@ class ObjectController extends Controller
 
 		$this->response->view = 'create';
 		$this->response->task = 'dialog';
-		$this->response->taskOptions = array('title' => ucfirst($action) . ' '.$module->title->getSingular(true) , 'width' => '800px');
+		$this->response->taskOptions = ['title' => ucfirst($action) . ' '.$module->title->getSingular(true) , 'width' => '800px'];
 
 		if (isset($object)) {
 			$module = $object->objectType;
@@ -318,7 +318,7 @@ class ObjectController extends Controller
 		} else {
 			$this->response->view = 'create';
 			$this->response->task = 'dialog';
-			$this->response->taskOptions = array('title' => 'Update '. $type->title->getSingular(true));
+			$this->response->taskOptions = ['title' => 'Update '. $type->title->getSingular(true)];
 			$models = $type->getModels($object, [$relatedObject->tabularId => $relatedObject, 'relations' => [$relatedObject->tabularId => $relation]]);
 
 			if (!empty($_POST)) {
@@ -363,7 +363,7 @@ class ObjectController extends Controller
 
 		$this->response->view = 'delete';
 		$this->response->task = 'dialog';
-		$this->response->taskOptions = array('title' => 'Delete '. $type->title->getSingular(true) , 'isConfirmDeletion' => true);
+		$this->response->taskOptions = ['title' => 'Delete '. $type->title->getSingular(true) , 'isConfirmDeletion' => true];
 
 		$this->params['model'] = new DeleteForm;
 		$this->params['model']->object = $relatedObject;
@@ -423,8 +423,8 @@ class ObjectController extends Controller
 			$this->params['model']->relationship = $relationship;
 			$this->params['model']->relationshipWith = $relationshipWith;
 			$this->params['model']->forceRelationshipDelete = false; // @todo if they can't delete object
-			$this->params['model']->forceObjectDelete = $object->getGreenMile(array($relationshipWith->id));
-			$response = new Response('delete', array('dialog' => true, 'dialogSettings' => array('title' => 'Delete '.$object->typeModule->title->getSingular(true) .' or Relationship', 'saveButton' => array('text' => 'Delete', 'class' => 'ui-state-error'), 'width' => '600px')));
+			$this->params['model']->forceObjectDelete = $object->getGreenMile([$relationshipWith->id]);
+			$response = new Response('delete', ['dialog' => true, 'dialogSettings' => ['title' => 'Delete '.$object->typeModule->title->getSingular(true) .' or Relationship', 'saveButton' => ['text' => 'Delete', 'class' => 'ui-state-error'], 'width' => '600px']]);
 		} else {
 			if (empty($_GET['id']) or !($object = Registry::getObject($_GET['id'], true)) or !($type = $object->getTypeModule())) {
 				throw new HttpException(404, "Unknown object ". (empty($_GET['id']) ? '' : $_GET['id']));
@@ -433,7 +433,7 @@ class ObjectController extends Controller
 				throw new RAccessException("You do not have access to delete this object.");
 			}
 			$relationship = null;
-			$response = new Response('delete', array('dialog' => true, 'dialogSettings' => array('title' => 'Delete '.$object->typeModule->title->getSingular(true),  'saveButton' => array('text' => 'Delete', 'class' => 'ui-state-error'),  'width' => '600px')));
+			$response = new Response('delete', ['dialog' => true, 'dialogSettings' => ['title' => 'Delete '.$object->typeModule->title->getSingular(true),  'saveButton' => ['text' => 'Delete', 'class' => 'ui-state-error'],  'width' => '600px']]);
 		}
 
 		$this->params['model']->object = $object;
@@ -468,7 +468,7 @@ class ObjectController extends Controller
 		if (empty($_GET['id']) or !($object = Registry::getObject($_GET['id'])) or !($type = $object->getTypeModule())) {
 			throw new HttpException(404, "Unknown object ". (empty($_GET['id']) ? '' : $_GET['id']));
 		}
-		$response->ajaxPackage['replace'] = CHtml::link('', array('unwatch', 'id' => $object->id), array('class' => 'ic-icon-darker-blue ic-icon-hover-gray ic-icon-24 ic-icon-eye ajax', 'title' => 'Stop Watching'));
+		$response->ajaxPackage['replace'] = CHtml::link('', ['unwatch', 'id' => $object->id], ['class' => 'ic-icon-darker-blue ic-icon-hover-gray ic-icon-24 ic-icon-eye ajax', 'title' => 'Stop Watching']);
 		if ($object->watch(true)) {
 			$response->success = $object->descriptor. ' is being watched!';;
 		} else {
@@ -487,7 +487,7 @@ class ObjectController extends Controller
 		if (empty($_GET['id']) or !($object = Registry::getObject($_GET['id'])) or !($type = $object->getTypeModule())) {
 			throw new HttpException(404, "Unknown object ". (empty($_GET['id']) ? '' : $_GET['id']));
 		}
-		$response->ajaxPackage['replace'] = CHtml::link('', array('watch', 'id' => $object->id), array('class' => 'ic-icon-gray ic-icon-hover-blue ic-icon-24 ic-icon-eye ajax', 'title' => 'Start Watching'));
+		$response->ajaxPackage['replace'] = CHtml::link('', ['watch', 'id' => $object->id], ['class' => 'ic-icon-gray ic-icon-hover-blue ic-icon-24 ic-icon-eye ajax', 'title' => 'Start Watching']);
 		if ($object->watch(false)) {
 			$response->success = $object->descriptor. ' is no longer being watched!';;
 		} else {
@@ -502,14 +502,14 @@ class ObjectController extends Controller
 	 *
 	 */
 	public function actionWidget() {
-		$package = array();
-		$renderWidgets = array();
+		$package = [];
+		$renderWidgets = [];
 		if (!empty($_POST['widgets'])) {
 			$renderWidgets = $_POST['widgets'];
-			$baseState = array('fetch' => 0);
+			$baseState = ['fetch' => 0];
 		} elseif (!empty($_GET['widgets'])) {
 			$renderWidgets = $_GET['widgets'];
-			$baseState = array('fetch' => 1);
+			$baseState = ['fetch' => 1];
 			ob_start();
 			ob_implicit_flush(false);
 		}
@@ -522,13 +522,13 @@ class ObjectController extends Controller
 		}
 		if (!empty($renderWidgets)) {
 			foreach ($renderWidgets as $i => $widget) {
-				$w = array();
-				if (empty($widget['state'])) { $widget['state'] = array(); }
-				if (empty($widget['data'])) { $widget['data'] = array(); }
+				$w = [];
+				if (empty($widget['state'])) { $widget['state'] = []; }
+				if (empty($widget['data'])) { $widget['data'] = []; }
 				if (!isset($widget['data']['sectionCount'])) {
 					$widget['data']['sectionCount'] = $sectionCount;
 				}
-				$w['rendered'] = Yii::$app->widgetEngine->build($widget['name'], $widget['data'], array(), array_merge($baseState, $widget['state']));
+				$w['rendered'] = Yii::$app->widgetEngine->build($widget['name'], $widget['data'], [], array_merge($baseState, $widget['state']));
 				$w['id'] =  Yii::$app->widgetEngine->lastBuildId;
 				$package[$i] = $w;
 			}

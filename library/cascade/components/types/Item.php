@@ -30,7 +30,7 @@ class Item extends \infinite\base\collector\Item {
 		}
 
 		foreach ($this->object->children() as $key => $child) {
-			$options = array();
+			$options = [];
 			if (is_string($key)) {
 				$options = $child;
 				$child = $key;
@@ -38,7 +38,7 @@ class Item extends \infinite\base\collector\Item {
 			$this->collector->addRelationship($this->systemId, $child, $options);
 		}
 		foreach ($this->object->parents() as $key => $parent) {
-			$options = array();
+			$options = [];
 			if (is_string($key)) {
 				$options = $parent;
 				$parent = $key;
@@ -56,12 +56,12 @@ class Item extends \infinite\base\collector\Item {
 		if (!is_null($this->_sections)) {
 			return $this->_sections;
 		}
-		$this->_sections = array();
+		$this->_sections = [];
 		foreach ($this->_children as $rel) {
 			if (!$rel->active) { continue; }
 			// if ($rel->isHasOne()) { continue; }
 			$child = $rel->child;
-			$instanceSettings = array('relationship' => $rel, 'queryRole' => 'children');
+			$instanceSettings = ['relationship' => $rel, 'queryRole' => 'children'];
 			$items = Yii::$app->collectors['widgets']->getLocation('parent_objects', $child);
 			foreach ($items as $item) {
 				$widgetObject = $item->object;
@@ -79,7 +79,7 @@ class Item extends \infinite\base\collector\Item {
 			if (!$rel->active) { continue; }
 			if ($rel->isHasOne()) { continue; }
 			$parent = $rel->parent;
-			$instanceSettings = array('relationship' => $rel, 'queryRole' => 'parents');
+			$instanceSettings = ['relationship' => $rel, 'queryRole' => 'parents'];
 			$items = Yii::$app->collectors['widgets']->getLocation('child_objects', $parent);
 			foreach ($items as $item) {
 				$item->settings = $instanceSettings;
@@ -176,7 +176,7 @@ class Item extends \infinite\base\collector\Item {
 	 * @return unknown
 	 */
 	public function getChildren() {
-		$children = array();
+		$children = [];
 		foreach ($this->_children as $key => $child) {
 			if (!$child->active) { continue; }
 			$children[$key] = $child;
@@ -191,7 +191,7 @@ class Item extends \infinite\base\collector\Item {
 	 * @return unknown
 	 */
 	public function getParents() {
-		$parents = array();
+		$parents = [];
 		foreach ($this->_parents as $key => $parent) {
 			if (!$parent->active) { continue; }
 			$parents[$key] = $parent;

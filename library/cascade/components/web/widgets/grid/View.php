@@ -13,17 +13,17 @@ class View extends \yii\base\Widget {
 	public $state;
 	public $dataProvider;
 	public $emptyText = 'No items found';
-	public $htmlOptions = array();
+	public $htmlOptions = [];
 	public $sortableAttributes;
 	public $filters;
-	public $views = array('list');
+	public $views = ['list'];
 	public $currentView = 'list';
 	public $itemsPerRequest = 20;
 	public $limit;
-	public $rendererSettings = array();
-	public $itemMenu = array();
+	public $rendererSettings = [];
+	public $itemMenu = [];
 	public $additionalClasses;
-	public $specialItemClasses = array();
+	public $specialItemClasses = [];
 
 	public $nullDisplay = '';
 
@@ -54,7 +54,7 @@ class View extends \yii\base\Widget {
 			Yii::$app->end();
 		} else {
 			$columnSettings = $this->getColumnSettings();
-			$options = array();
+			$options = [];
 			$options['currentPage'] = $this->dataProvider->pagination->currentPage + 1;
 			$options['widget'] = $this->widget;
 			$options['state'] = $this->state;
@@ -81,13 +81,13 @@ class View extends \yii\base\Widget {
 	
 	public function getColumnSettings() {
 		if (is_null($this->_columnSettings)) {
-			$this->_columnSettings = array();
+			$this->_columnSettings = [];
 			foreach ($this->columns as $key => $c) {
 				if (!$c->visible) { continue; }
-				$this->_columnSettings[$key] = array('label' => $c->getDataLabel());
+				$this->_columnSettings[$key] = ['label' => $c->getDataLabel()];
 
 				if (!isset($c->htmlOptions)) {
-					$c->htmlOptions = array();
+					$c->htmlOptions = [];
 				}
 				$this->_columnSettings[$key]['htmlOptions'] = $c->htmlOptions;
 				$sortableResolve = $this->dataProvider->sort->resolveAttribute($c->name);
@@ -100,15 +100,15 @@ class View extends \yii\base\Widget {
 	public function getData() {
 		if (is_null($this->_currentData)) {
 			$this->_currentDataRaw = $this->dataProvider->getData();
-			$this->_currentData = array();
+			$this->_currentData = [];
 			$itemNumber = $this->dataProvider->pagination->offset;
 			$row = 0;
 			foreach ($this->_currentDataRaw as $r) {
-				$p = array('itemNumber' => $itemNumber, 'id' => $r->primaryKey, 'values' => array());
+				$p = ['itemNumber' => $itemNumber, 'id' => $r->primaryKey, 'values' => []];
 				foreach ($this->columns as $key => $c) {
 					$p['values'][$key] = $c->getDataValue($row, $r, false);
 				}
-				$p['acl'] = array();
+				$p['acl'] = [];
 				if ($this->owner->instanceSettings['whoAmI'] === 'parent' AND isset($r->childObject) AND $r->childObject->hasBehavior('Access')) {
 					$p['acl'] = $r->childObject->aclSummary();
 				} elseif($this->owner->instanceSettings['whoAmI'] === 'child' AND isset($r->parentObject) AND $r->parentObject->hasBehavior('Access')) {
@@ -124,13 +124,13 @@ class View extends \yii\base\Widget {
 	}
 
 	public function setColumns($columns) {
-		$this->_columns = array();
+		$this->_columns = [];
 		foreach ($columns as $key => $columnName) {
 			if (is_array($columnName)) {
 				$settings = $columnName;
 				$settings['name'] = $key;
 			} else {
-				$settings = array('name' => $columnName);
+				$settings = ['name' => $columnName];
 			}
 			if (!isset($settings['class'])) {
 				$settings['class'] = '\cascade\web\widgets\grid\columns\Data';

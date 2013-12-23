@@ -108,7 +108,7 @@ trait ActiveRecordTrait {
 	public function getDefaultOrder($alias = 't')
 	{
 		if (is_string($this->_defaultOrder)) {
-			return strtr($this->_defaultOrder, array('{alias}' => $alias));
+			return strtr($this->_defaultOrder, ['{alias}' => $alias]);
 		} else {
 			return $this->_defaultOrder;
 		}
@@ -132,7 +132,7 @@ trait ActiveRecordTrait {
 	 * @return unknown
 	 */
 	public function getAdditionalAttributes() {
-		$add = array();
+		$add = [];
 		$af = $this->additionalFields();
 		foreach (array_keys($af) as $field) {
 			$add[$field] = $this->{$field};

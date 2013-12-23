@@ -8,8 +8,8 @@ class Action extends \infinite\base\Object {
 	protected $_status;
 	protected $_log;
 	protected $_id;
-	protected $_settings = array();
-	protected $_registry = array();
+	protected $_settings = [];
+	protected $_registry = [];
 
 	public function __construct(Item $interface = null, $resumeLog = null) {
 		$this->_interface = $interface;

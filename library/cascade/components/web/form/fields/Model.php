@@ -102,8 +102,8 @@ class Model extends Base {
 			break;
 		case 'rich':
 			Html::addCssClass($this->htmlOptions, 'rich');
-			$editorSettings = array(
-				);
+			$editorSettings = [
+				];
 			$this->htmlOptions['data-editor'] = Json::encode($editorSettings);
 			$item = Html::activeTextArea($model, $field, $this->htmlOptions);
 			break;

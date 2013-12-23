@@ -7,7 +7,7 @@ use infinite\setup\Exception;
 
 class Setup extends \infinite\setup\Setup {
 	
-	public static function createSetupApplication($config = array())
+	public static function createSetupApplication($config = [])
 	{
 		if (is_null(self::$_instance)) {
 			$className = __CLASS__;

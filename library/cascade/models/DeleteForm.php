@@ -50,7 +50,7 @@ class DeleteForm extends Model
 			$this->_target = 'relationship';
 		} elseif (!empty($this->object) AND $this->forceObjectDelete) {
 			$this->_target = 'object';
-		} elseif(in_array($value, array('relationship', 'object'))) {
+		} elseif(in_array($value, ['relationship', 'object'])) {
 			$this->_target = $value;
 		} else {
 			throw new Exception('Unknown deletion target '. $value);

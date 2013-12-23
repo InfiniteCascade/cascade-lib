@@ -1,7 +1,7 @@
 <?php
 use infinite\helpers\Html;
-echo Html::beginForm('', 'post', array('class' => 'ajax'));
-echo Html::beginTag('div', array('class' => 'form'));
+echo Html::beginForm('', 'post', ['class' => 'ajax']);
+echo Html::beginTag('div', ['class' => 'form']);
 $model->confirm = 1;
 echo Html::activeHiddenInput($model, 'confirm');
 if (is_null($model->relationModel) || $model->forceObjectDelete) {

@@ -122,7 +122,7 @@ class Engine extends \infinite\base\Engine {
 	 */
 	public function get($get = null, $activeOnly = true) {
 		if ($get === null) {
-			$interfaces = array();
+			$interfaces = [];
 			foreach ($this->_interfaces as $k => $m) {
 				if ($activeOnly AND !$m->active) { continue; }
 				$interfaces[$k] = $m->module;

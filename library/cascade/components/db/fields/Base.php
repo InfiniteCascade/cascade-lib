@@ -163,7 +163,7 @@ abstract class Base extends \infinite\base\Object {
 		if ($this->format instanceof BaseFormat) {
 			return $this->format->get();
 		} elseif (is_callable($this->format) OR (is_array($this->format) AND !empty($this->format[0]) AND is_object($this->format[0]))) {
-			return $this->evaluateExpression($this->format, array($this->value));
+			return $this->evaluateExpression($this->format, [$this->value]);
 		} else {
 			return $this->value;
 		}

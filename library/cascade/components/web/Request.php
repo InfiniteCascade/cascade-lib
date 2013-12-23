@@ -19,7 +19,7 @@ class Request extends \infinite\web\Request {
 
 	public function init() {
 		parent::init();
-		Yii::$app->on(Application::EVENT_BEFORE_REQUEST, array($this, 'startRequest'));
+		Yii::$app->on(Application::EVENT_BEFORE_REQUEST, [$this, 'startRequest']);
 	}
 
 	public function startRequest() {

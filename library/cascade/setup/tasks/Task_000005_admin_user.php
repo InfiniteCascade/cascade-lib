@@ -40,12 +40,12 @@ class Task_000005_admin_user extends \infinite\setup\Task {
 		return false;
 	}
 	public function getFields() {
-		$fields = array();
-		$fields['admin'] = array('label' => 'First Admin User', 'fields' => array());
-		$fields['admin']['fields']['first_name'] = array('type' => 'text', 'label' => 'First Name', 'required' => true, 'value' => function() { return ''; });
-		$fields['admin']['fields']['last_name'] = array('type' => 'text', 'label' => 'Last Name', 'required' => true, 'value' => function() { return ''; });
-		$fields['admin']['fields']['username'] = array('type' => 'text', 'label' => 'Username', 'required' => true, 'value' => function() { return 'admin'; });
-		$fields['admin']['fields']['password'] = array('type' => 'text', 'label' => 'Password', 'required' => true, 'value' => function() { return 'admin'; });
+		$fields = [];
+		$fields['admin'] = ['label' => 'First Admin User', 'fields' => []];
+		$fields['admin']['fields']['first_name'] = ['type' => 'text', 'label' => 'First Name', 'required' => true, 'value' => function() { return ''; }];
+		$fields['admin']['fields']['last_name'] = ['type' => 'text', 'label' => 'Last Name', 'required' => true, 'value' => function() { return ''; }];
+		$fields['admin']['fields']['username'] = ['type' => 'text', 'label' => 'Username', 'required' => true, 'value' => function() { return 'admin'; }];
+		$fields['admin']['fields']['password'] = ['type' => 'text', 'label' => 'Password', 'required' => true, 'value' => function() { return 'admin'; }];
 		return $fields;
 	}
 }

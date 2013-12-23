@@ -3,7 +3,7 @@ namespace cascade\components\dataInterface;
 
 class Status extends \infinite\base\status\Status {
 	protected $_action;
-	protected $_errors = array();
+	protected $_errors = [];
 
 	public function __construct($action) {
 		$this->_action = $action;
@@ -11,7 +11,7 @@ class Status extends \infinite\base\status\Status {
 
 	public function __sleep() {
 		$keys = array_keys((array)$this);
-		$bad = array("\0*\0_action", "\0*\0_registry");
+		$bad = ["\0*\0_action", "\0*\0_registry"];
 		foreach($keys as $k => $key) {
 			if (in_array($key, $bad)) {
 				unset($keys[$k]);

@@ -35,8 +35,8 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 	public $title = false;
 	public $icon = false;
 
-	public $params = array();
-	public $recreateParams = array();
+	public $params = [];
+	public $recreateParams = [];
 	public $htmlOptions = ['class' => 'ic-widget '];
 
 	public $gridCellClass = 'infinite\web\grid\Cell';

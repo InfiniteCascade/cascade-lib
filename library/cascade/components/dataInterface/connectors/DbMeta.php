@@ -4,15 +4,15 @@ namespace cascade\components\dataInterface\connectors;
 use infinite\base\exceptions\Exception;
 
 class DbMeta extends \infinite\base\Object {
-	protected $_hasMany = array();
-	protected $_hasOne = array();
-	protected $_belongsTo = array();
-	protected $_habtm = array();
+	protected $_hasMany = [];
+	protected $_hasOne = [];
+	protected $_belongsTo = [];
+	protected $_habtm = [];
 	protected $_foreignTable;
 	protected $_db;
 	protected $_schema;
 
-	static $_metas = array();
+	static $_metas = [];
 
 	public static function get($db, $foreignTable) {
 		if (!isset(self::$_metas[$foreignTable])) {
@@ -30,21 +30,21 @@ class DbMeta extends \infinite\base\Object {
 		$this->_schema = $db->schema->tables[$foreignTable];
 	}
 
-	public function addHasMany(DbModel $foreignModel, $foreignKey, $params = array()) {
-		$this->_hasMany[] = array('foreignModel' => $foreignModel, 'foreignKey' => $foreignKey, 'params' => $params);
+	public function addHasMany(DbModel $foreignModel, $foreignKey, $params = []) {
+		$this->_hasMany[] = ['foreignModel' => $foreignModel, 'foreignKey' => $foreignKey, 'params' => $params];
 	}
 
-	public function addHasOne(DbModel $foreignModel, $foreignKey, $params = array()) {
-		$this->_hasOne[] = array('foreignModel' => $foreignModel, 'foreignKey' => $foreignKey, 'params' => $params);
+	public function addHasOne(DbModel $foreignModel, $foreignKey, $params = []) {
+		$this->_hasOne[] = ['foreignModel' => $foreignModel, 'foreignKey' => $foreignKey, 'params' => $params];
 
 	}
 
-	public function addBelongsTo(DbModel $foreignModel, $localKey, $params = array()) {
-		$this->_belongsTo[] = array('foreignModel' => $foreignModel, 'localKey' => $localKey, 'params' => $params);
+	public function addBelongsTo(DbModel $foreignModel, $localKey, $params = []) {
+		$this->_belongsTo[] = ['foreignModel' => $foreignModel, 'localKey' => $localKey, 'params' => $params];
 	}
 
-	public function addHabtm(DbModel $foreignModel, DbModel $connectorModel, $localKey, $foreignKey, $params = array()) {
-		$this->_habtm[] = array('foreignModel' => $foreignModel, 'connectorModel' => $connectorModel, 'localKey' => $localKey, 'foreignKey' => $foreignKey, 'params' => $params);
+	public function addHabtm(DbModel $foreignModel, DbModel $connectorModel, $localKey, $foreignKey, $params = []) {
+		$this->_habtm[] = ['foreignModel' => $foreignModel, 'connectorModel' => $connectorModel, 'localKey' => $localKey, 'foreignKey' => $foreignKey, 'params' => $params];
 	}
 
 	public function getHasMany() {

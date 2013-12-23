@@ -45,7 +45,7 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
 		if (empty($this->_items)) {
 			return '';
 		}
-		$result = array();
+		$result = [];
 		$formOptions = [
 			'options' => ['class' => ''], //form-horizontal
 			'enableClientValidation' => false
@@ -56,13 +56,13 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
 		list($this->form, $formStartRow) = ActiveForm::begin($formOptions, false);
 		$result[] = $formStartRow;
 		// $result[] = Html::beginForm('', 'post', array('class' => $this->class));
-		$result[] = Html::beginTag('div', array('class' => ''));
+		$result[] = Html::beginTag('div', ['class' => '']);
 		foreach ($this->_items as $item) {
 			$result[] = $item->generate();
 		}
 		if (!Yii::$app->request->isAjax) {
-			$result[] = Html::beginTag('div', array('class' => 'form-group'));
-			$result[] = Html::beginTag('div', array('class' => 'col-sm-12'));
+			$result[] = Html::beginTag('div', ['class' => 'form-group']);
+			$result[] = Html::beginTag('div', ['class' => 'col-sm-12']);
 			$result[] = Html::submitButton('Save', ['class' => 'btn btn-primary']);;
 			$result[] = Html::endTag('div');
 			$result[] = Html::endTag('div');

@@ -72,7 +72,7 @@ trait SectionTrait {
 	 * @return unknown
 	 */
 	protected function defaultItems($parent = null) {
-		return array();
+		return [];
 	}
 
 	/**

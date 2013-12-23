@@ -4,7 +4,7 @@ namespace cascade\components\web\widgets;
 use Yii;
 
 class Collector extends \infinite\base\collector\Module {
-	public $producedWidgets = array();
+	public $producedWidgets = [];
 	public $lastBuildId;
 
 	public function getCollectorItemClass() {
@@ -31,7 +31,7 @@ class Collector extends \infinite\base\collector\Module {
 		$cell = $widgetObject->cell;
 
 		$this->lastBuildId = $widgetObject->getWidgetId();
-		$this->producedWidgets[$widgetObject->widgetId] = array('widget' => $widgetObject->systemId, 'id' => $widgetObject->widgetId, 'params' => $widgetObject->recreateParams);
+		$this->producedWidgets[$widgetObject->widgetId] = ['widget' => $widgetObject->systemId, 'id' => $widgetObject->widgetId, 'params' => $widgetObject->recreateParams];
 
 		return $cell;
 	}

@@ -19,11 +19,11 @@ abstract class Module extends \infinite\base\Module {
 	 * @inheritdoc
 	 */
 	public function __construct($id, $parent, $config=null) {
-		Yii::$app->collectors->onAfterInit(array($this, 'onAfterInit'));
+		Yii::$app->collectors->onAfterInit([$this, 'onAfterInit']);
 
 		if (isset(Yii::$app->controller)) {
 			throw new Exception("This is a happy exception!");
-			Yii::$app->controller->on(Controller::EVENT_BEFORE_ACTION, array($this, 'onBeforeControllerAction'));
+			Yii::$app->controller->on(Controller::EVENT_BEFORE_ACTION, [$this, 'onBeforeControllerAction']);
 		}
 		
 		parent::__construct($id, $parent, $config);
@@ -42,14 +42,14 @@ abstract class Module extends \infinite\base\Module {
 		$className = $this->widgetNamespace .'\\'. 'Content';
 		@class_exists($className);
 		if (class_exists($className, false)) {
-			$summaryWidget = array();
+			$summaryWidget = [];
 			$id = $this->systemId .'Content';
 			$summaryWidget['widget'] = [
 				'class' => $className,
 				'icon' => $this->icon, 
 				// 'title' => '%%type.'. $this->systemId .'.title.upperPlural%%'
 			];
-			$summaryWidget['locations'] = array('front');
+			$summaryWidget['locations'] = ['front'];
 			$summaryWidget['priority'] = $this->priority;
 			$widgets[$id] = $summaryWidget;
 		}

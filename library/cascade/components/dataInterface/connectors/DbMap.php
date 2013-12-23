@@ -18,25 +18,25 @@ class DbMap extends \infinite\base\Object {
 
 	protected $_settings;
 
-	static $defaultSettings = array(
+	static $defaultSettings = [
 		'direction' => 'to_local', // to_local, to_foreign, both
 		'update' => true,
 		'create' => true,
 		'deleteLocal' => false,
 		'deleteForeign' => false,
-		'foreignPullParams' => array(),
+		'foreignPullParams' => [],
 		'universalKey' => false
-	);
+	];
 
 	public function __construct($dataInterface, $localModel, $foreignModel) {
 		$this->_dataInterface = $dataInterface;
 		$this->_l = $localModel;
 		$this->_f = $foreignModel;
-		$this->_m = array();
+		$this->_m = [];
 
 		foreach ($this->unmappedLocalKeys as $key) {
 			if ($foreignModel->meta->hasAttribute($key)) {
-				$this->_m[$key] = array('foreignKey' => $key);
+				$this->_m[$key] = ['foreignKey' => $key];
 			}
 		}
 	}
@@ -55,12 +55,12 @@ class DbMap extends \infinite\base\Object {
 
 				$object->attributes = $localAttributes;
 				if (!$object->save()) {
-					$action->status->addError("Unable to save new $objectModelClass", array('newLocal' => $localAttributes));
+					$action->status->addError("Unable to save new $objectModelClass", ['newLocal' => $localAttributes]);
 				} else {
 					$key->registry_id = $object->primaryKey;
 					$action->addRegistry($key->key, $object->primaryKey);
 					if (!$key->save()) {
-						$action->status->addError("Unable to save new key for $objectModelClass ({$object->primaryKey})", array('newLocal' => $localAttributes, 'key' => $key->attributes));
+						$action->status->addError("Unable to save new key for $objectModelClass ({$object->primaryKey})", ['newLocal' => $localAttributes, 'key' => $key->attributes]);
 						continue;
 					}
 				}
@@ -76,13 +76,13 @@ class DbMap extends \infinite\base\Object {
 					}
 				}
 				if ($update AND !$object->save()) {
-					$action->status->addError("Unable to update ". get_class($object) .'.'. $object->primaryKey, array('newLocal' => $localAttributes));
+					$action->status->addError("Unable to update ". get_class($object) .'.'. $object->primaryKey, ['newLocal' => $localAttributes]);
 				}
 			}
 		}
 
-		if (!is_null($parent) AND !Relation::set($parent, $object, array('active' => 1))) {
-			$action->status->addError("Unable to associate ". get_class($object) .'.'. $object->primaryKey ." to its parent", array('parent' => $parent, 'object' => $object));
+		if (!is_null($parent) AND !Relation::set($parent, $object, ['active' => 1])) {
+			$action->status->addError("Unable to associate ". get_class($object) .'.'. $object->primaryKey ." to its parent", ['parent' => $parent, 'object' => $object]);
 		}
 
 		// foreign children
@@ -110,7 +110,7 @@ class DbMap extends \infinite\base\Object {
 	}
 
 	public function buildLocalAttributes(DbModel $foreignModel) {
-		$a = array();
+		$a = [];
 		foreach ($this->map as $localKey => $foreignSettings) {
 			if ($localKey === $this->localPrimaryKeyName) { continue; }
 			if ($this->isRelationKey($localKey)) {
@@ -141,7 +141,7 @@ class DbMap extends \infinite\base\Object {
 	public function generateKey(DbModel $foreignObject) {
 		if (is_null($this->keyGenerator)) {
 			$this->keyGenerator = function($foreignModel) {
-				return array($foreignModel->foreignTable, $foreignModel->primaryKey);
+				return [$foreignModel->foreignTable, $foreignModel->primaryKey];
 			};
 		}
 		$keyGen = $this->keyGenerator;
@@ -175,7 +175,7 @@ class DbMap extends \infinite\base\Object {
 	}
 
 	public function getUnmappedKeys() {
-		$u = array();
+		$u = [];
 		$f = $this->unmappedForeignKeys;
 		$l = $this->unmappedLocalKeys;
 		if (!empty($f)) { $u['foreign'] = $f; }
@@ -215,10 +215,10 @@ class DbMap extends \infinite\base\Object {
 	public function setMap($m) {
 		foreach ($m as $k => $v) {
 			if (!isset($this->_m[$k])) {
-				$this->_m[$k] = array();
+				$this->_m[$k] = [];
 			}
 			if (is_string($v)) {
-				$v = array('foreignKey' => $v);
+				$v = ['foreignKey' => $v];
 			}
 			$this->_m[$k] = array_merge($this->_m[$k], $v);
 		}

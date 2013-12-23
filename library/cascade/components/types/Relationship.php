@@ -22,15 +22,15 @@ class Relationship extends \infinite\base\Object
 	protected $_child;
 	static $_cache = [];
 
-	protected $_defaultOptions = array(
+	protected $_defaultOptions = [
 		'required' => false,
 		'handlePrimary' => true,
 		'taxonomy' => null,
-		'fields' => array(),
+		'fields' => [],
 		'type' => self::HAS_MANY
-	);
-	protected $_options = array();
-	static $_relationships = array();
+	];
+	protected $_options = [];
+	static $_relationships = [];
 
 
 	/**
@@ -40,7 +40,7 @@ class Relationship extends \infinite\base\Object
 	 * @param object  $child
 	 * @param unknown $options (optional)
 	 */
-	public function __construct(Item $parent, Item $child, $options = array()) {
+	public function __construct(Item $parent, Item $child, $options = []) {
 		$this->_parent = $parent;
 		$this->_child = $child;
 		$this->mergeOptions($options);
@@ -72,7 +72,7 @@ class Relationship extends \infinite\base\Object
 	 * @param unknown $options (optional)
 	 * @return unknown
 	 */
-	static public function getOne(Item $parent, Item $child, $options = array())
+	static public function getOne(Item $parent, Item $child, $options = [])
 	{
 		$key = md5($parent->systemId ."-". $child->systemId);
 		if (isset(self::$_relationships[$key])) {

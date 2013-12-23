@@ -111,7 +111,7 @@ class Collector extends \infinite\base\collector\Module
 	 * @param unknown $options (optional)
 	 * @return unknown
 	 */
-	public function addRelationship($parent, $child, $options = array()) {
+	public function addRelationship($parent, $child, $options = []) {
 		$parentRef = $this->getOne($parent);
 		$childRef = $this->getOne($child);
 		$relationship = Relationship::getOne($parentRef, $childRef, $options);

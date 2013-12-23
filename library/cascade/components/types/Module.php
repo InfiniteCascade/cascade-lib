@@ -76,16 +76,16 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 
 	
 	public function setup() {
-		$results = array(true);
+		$results = [true];
 		if (!empty($this->primaryModel) AND !empty($this->collectorItem->parents)) {
-			$groups = array('staff');
+			$groups = ['staff'];
 			foreach ($groups as $groupName) {
 				$group = Group::getBySystemName($groupName, true);
 				if (empty($group)) { continue; }
 				if ($this->isChildless) {
-					$results[] = Yii::$app->gk->inherit(array('read', 'delete', 'create', 'archive', 'update'), null, $group, $this->primaryModel);
+					$results[] = Yii::$app->gk->inherit(['read', 'delete', 'create', 'archive', 'update'], null, $group, $this->primaryModel);
 				} else {
-					$results[] = Yii::$app->gk->parentAccess(array('read', 'delete', 'create', 'archive', 'update'), null, $group, $this->primaryModel);
+					$results[] = Yii::$app->gk->parentAccess(['read', 'delete', 'create', 'archive', 'update'], null, $group, $this->primaryModel);
 				}
 			}
 		}
@@ -309,7 +309,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					'icon' => $this->icon, 
 					'title' => '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%'
 				];
-				$childrenWidget['locations'] = array('child_objects');
+				$childrenWidget['locations'] = ['child_objects'];
 				$childrenWidget['priority'] = $this->priority;
 				$childrenWidget['section'] = Yii::$app->collectors['sections']->getOne('_parents');
 				$widgets[$id] = $childrenWidget;
@@ -324,7 +324,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					'icon' => $this->icon, 
 					'title' => '%%type.'. $this->systemId .'.title.upperPlural%%'
 				];
-				$summaryWidget['locations'] = array('front');
+				$summaryWidget['locations'] = ['front'];
 				$summaryWidget['priority'] = $this->priority;
 				$widgets[$id] = $summaryWidget;
 			} else {
@@ -343,7 +343,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 				'icon' => $this->icon, 
 				'title' => '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%'
 			];
-			$childrenWidget['locations'] = array('parent_objects', 'child_objects');
+			$childrenWidget['locations'] = ['parent_objects', 'child_objects'];
 			$childrenWidget['priority'] = $this->priority;
 			$widgets[$id] = $childrenWidget;
 		} else {
@@ -357,7 +357,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					'icon' => $this->icon, 
 					'title' => '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%'
 				];
-			$parentsWidget['locations'] = array('parent_objects');
+			$parentsWidget['locations'] = ['parent_objects'];
 			$parentsWidget['priority'] = $this->priority + 1;
 			$widgets[$id] = $parentsWidget;
 		} else {
@@ -411,11 +411,11 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function parentSettings() {
-		return array(
+		return [
 			'title' => false,
 			'allow' => 1, // 0/false = no; 1 = only 1; 2 = 1 or more
 			'showDescriptor' => false
-		);
+		];
 	}
 
 
@@ -425,9 +425,9 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function childrenSettings() {
-		return array(
+		return [
 			'allow' => 2,  // 0/false = no; 1 = only 1; 2 = 1 or more
-		);
+		];
 	}
 
 	/**

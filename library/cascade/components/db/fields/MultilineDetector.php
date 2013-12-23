@@ -12,10 +12,10 @@ use infinite\helpers\Match;
 use yii\db\ColumnSchema;
 
 class MultilineDetector extends \infinite\base\Object {
-	static $_machineTests = array(
+	static $_machineTests = [
 		'/text/',
 		'/blob/',
-	);
+	];
 
 	/**
 	 *

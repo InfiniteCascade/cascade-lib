@@ -12,14 +12,14 @@ use infinite\helpers\Match;
 use yii\db\ColumnSchema;
 
 class HumanFieldDetector extends \infinite\base\Object {
-	static $_machineTests = array(
+	static $_machineTests = [
 		'id',
 		'/\_id$/',
 		'_moduleHandler',
 		'created',
 		'modified',
 		'deleted',
-	);
+	];
 
 	/**
 	 *

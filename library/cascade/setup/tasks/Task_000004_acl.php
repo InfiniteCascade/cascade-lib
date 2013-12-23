@@ -8,43 +8,43 @@ class Task_000004_acl extends \infinite\setup\Task {
 		return 'ACL';
 	}
 	public function getBaseRules() {
-		return array(
-			array(
+		return [
+			[
 				'action' => null,
 				'controlled' => null,
-				'accessing' => array('model' => 'cascade\models\Group', 'fields' => array('system' => 'top')),
+				'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'top']],
 				'object_model' => null,
 				'task' => 'deny',
-			),
-			array(
+			],
+			[
 				'action' => null,
 				'controlled' => null,
-				'accessing' => array('model' => 'cascade\models\Group', 'fields' => array('system' => 'staff')),
+				'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'staff']],
 				'object_model' => null,
 				'task' => 'deny',
-			),
-			array(
+			],
+			[
 				'action' => null,
 				'controlled' => null,
-				'accessing' => array('model' => 'cascade\models\Group', 'fields' => array('system' => 'clients')),
+				'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'clients']],
 				'object_model' => null,
 				'task' => 'deny',
-			),
-			array(
+			],
+			[
 				'action' => null,
 				'controlled' => null,
-				'accessing' => array('model' => 'cascade\models\Group', 'fields' => array('system' => 'guests')),
+				'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'guests']],
 				'object_model' => null,
 				'task' => 'deny',
-			),
-			array(
+			],
+			[
 				'action' => null,
 				'controlled' => null,
-				'accessing' => array('model' => 'cascade\models\Group', 'fields' => array('system' => 'administrators')),
+				'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'administrators']],
 				'object_model' => null,
 				'task' => 'allow',
-			),
-		);
+			],
+		];
 	}
 	public function test() {
 		foreach ($this->baseRules as $rule) {

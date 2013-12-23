@@ -28,7 +28,7 @@ class Item extends \infinite\base\CollectorItem {
 
 
 	public function run() {
-		register_shutdown_function(array($this, 'saveLog'));
+		register_shutdown_function([$this, 'saveLog']);
 
 		$this->_currentInterfaceAction = new Action($this);
 		if (!$this->_currentInterfaceAction->start()) {

@@ -50,14 +50,14 @@ class DbModel extends \infinite\base\Object {
 
 	public function getChildren() {
 		if (is_null($this->_children)) {
-			$children = array();
+			$children = [];
 			// for this application, there is no distinction between hasOne and hasMany on the database level
 			$hasMany = array_merge($this->meta->hasMany, $this->meta->hasOne);
 			foreach ($hasMany as $r) {
-				$query = array(
+				$query = [
 					'where' => $r['foreignKey'] .'=:foreignKeyId',
-					'params' => array(':foreignKeyId' => $this->primaryKey)
-				);
+					'params' => [':foreignKeyId' => $this->primaryKey]
+				];
 				$children[$r['foreignModel']->foreignTable] = $r['foreignModel']->findAll($query);
 			}
 			$habtm = $this->meta->habtm;
@@ -79,7 +79,7 @@ class DbModel extends \infinite\base\Object {
 	}
 
 	public function populateRecords($results) {
-		$r = array();
+		$r = [];
 		foreach ($results as $o) {
 			$r[] = $this->populateRecord($o);
 		}
@@ -87,7 +87,7 @@ class DbModel extends \infinite\base\Object {
 	}
 
 	public function getAttributes() {
-		$a = array();
+		$a = [];
 		foreach ($this->meta->attributeKeys as $k) {
 			$a[$k] = null;
 			if (is_array($this->_attributes) AND isset($this->_attributes[$k])) {
@@ -105,7 +105,7 @@ class DbModel extends \infinite\base\Object {
 		return $this->_interface;
 	}
 
-	public function findAll($params = array()) {
+	public function findAll($params = []) {
 		$c = $this->interface->db->createCommand();
 		$c->select('*');
 		$c->from($this->_foreignTable);

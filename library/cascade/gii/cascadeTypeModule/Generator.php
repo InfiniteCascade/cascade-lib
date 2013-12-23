@@ -760,7 +760,7 @@ EOD;
 	{
 		$types = [];
 		foreach ($table->columns as $column) {
-			if (in_array($column->name, array('id', 'created', 'modified', 'archived', 'deleted')) || strstr($column->name, '_id') !== false) { continue; }
+			if (in_array($column->name, ['id', 'created', 'modified', 'archived', 'deleted']) || strstr($column->name, '_id') !== false) { continue; }
 			$types[] = "'{$column->name}' => []";
 		}
 

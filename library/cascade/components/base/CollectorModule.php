@@ -25,11 +25,11 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
 		if (!(Yii::$app->collectors[$this->collectorName]->register(null, $this))) { throw new Exception('Could not register '. $this->shortName .' in '. $this->collectorName .'!'); }
 		$this->loadSubmodules();
 		
-		Yii::$app->collectors->onAfterInit(array($this, 'onAfterInit'));
+		Yii::$app->collectors->onAfterInit([$this, 'onAfterInit']);
 
 		if (isset(Yii::$app->controller)) {
 			throw new Exception("This is a happy exception!");
-			Yii::$app->controller->on(Controller::EVENT_BEFORE_ACTION, array($this, 'onBeforeControllerAction'));
+			Yii::$app->controller->on(Controller::EVENT_BEFORE_ACTION, [$this, 'onBeforeControllerAction']);
 		}
 		
 		parent::__construct($id, $parent, $config);
