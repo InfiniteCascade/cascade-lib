@@ -5,6 +5,7 @@ namespace cascade\models;
 use Yii;
 
 use cascade\components\db\ActiveRecordTrait;
+use cascade\components\types\Relationship;
 
 class Relation extends \infinite\db\models\Relation
 {
@@ -35,8 +36,18 @@ class Relation extends \infinite\db\models\Relation
 				&& ($taxonomyItem = Yii::$app->collectors['taxonomies']->getOne($relationship->taxonomy)) 
 				&& ($taxonomy = $taxonomyItem->object) 
 				&& $taxonomy) {
-			$fields['relation:taxonomy_id'] = $caller->createTaxonomyField($taxonomyItem, $owner, $baseField);
+			$fieldName = 'relation:taxonomy_id';
+			$fieldSchema = $caller->createColumnSchema('taxonomy_id', ['type' => 'taxonomy', 'phpType' => 'object', 'dbType' => 'taxonomy', 'allowNull' => true]);
+
+			$fields[$fieldName] = $caller->createTaxonomyField($fieldSchema, $taxonomyItem, $owner, $baseField);
 			//var_dump($fields['relation:taxonomy_id']);exit;
 		}
+	}
+
+	public function getRelationship()
+	{
+		if (!isset($this->parentObject) || !isset($this->parentObject->objectTypeItem)) { return false; }
+		if (!isset($this->childObject) || !isset($this->childObject->objectTypeItem)) { return false; }
+		return Relationship::getOne($this->parentObject->objectTypeItem, $this->childObject->objectTypeItem);
 	}
 }

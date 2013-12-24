@@ -18,6 +18,8 @@ class FieldTypeDetector extends \infinite\base\object
 			$fieldSchema = $field->fieldSchema;
 			if ($field->multiline) {
 				$type = 'textarea';
+			} elseif ($fieldSchema->type === 'boolean') {
+				$type = 'boolean';
 			} elseif (isset($dbMap[$fieldSchema->dbType])) {
 				$type = $dbMap[$fieldSchema->dbType];
 			}

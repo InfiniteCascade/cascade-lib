@@ -71,6 +71,28 @@ class Model extends Base {
 			$item->checkboxList($this->options);
 			break;
 		case 'radioButtonList':
+		case 'boolean':
+			if ($this->type === 'boolean') {
+				$this->showLabel = false;
+				if (!isset($this->options)) {
+					$this->showLabel = true;
+					$this->options = [1 => 'Yes', 0 => 'No'];
+				}
+				Html::addCssClass($this->htmlOptions, 'btn-group');
+				Html::removeCssClass($this->htmlOptions, 'form-control');
+				$this->htmlOptions['data-toggle'] = 'buttons';
+				$encode = !isset($this->htmlOptions['encode']) || $this->htmlOptions['encode'];
+				$this->htmlOptions['item'] = function ($index, $label, $name, $checked, $value) use ($encode) {
+					$itemOptions = ['container' => false, 'labelOptions' => ['class' => 'btn-primary btn']];
+					if ($checked) {
+						Html::addCssClass($itemOptions['labelOptions'], 'active');
+					}
+					return Html::radio($name, $checked, array_merge($itemOptions, [
+						'value' => $value,
+						'label' => $encode ? Html::encode($label) : $label,
+					]));
+				};
+			}
 			$item->radioList($this->options);
 			break;
 		case 'dropDownList':

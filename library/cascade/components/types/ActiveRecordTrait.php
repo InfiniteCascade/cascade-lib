@@ -16,6 +16,7 @@ use infinite\helpers\ArrayHelper;
 
 use cascade\components\web\form\Segment as FormSegment;
 use cascade\components\types\Relationship;
+use cascade\models\Relation;
 
 trait ActiveRecordTrait {
 	public $baseFieldClass = 'cascade\components\db\fields\Base';
@@ -57,6 +58,20 @@ trait ActiveRecordTrait {
 		];
 	}
 
+	public function getDefaultValues()
+	{
+		return [];
+	}
+
+	public function loadDefaultValues() {
+		$defaultValues = $this->getDefaultValues();
+		foreach ($defaultValues as $k => $v) {
+			if (!$this->isAttributeChanged($k)) {
+				$this->{$k} = $v;
+			}
+		}
+	}
+
 	public function getUrl($action = 'view') {
 		return ['object/'. $action, 'id' => $this->primaryKey];
 	}
@@ -66,12 +81,19 @@ trait ActiveRecordTrait {
 		return Html::a($this->descriptor, $this->getUrl('view'));
 	}
 
-	public function allowRogue(Relationship $relationship = null)
+	public function allowRogue(Relation $relation = null)
 	{
-		if (is_null($relationship)) {
-			$relationship = false;
+		$relationship = false;
+		if (is_null($relation)) {
+			$relation = false;
+		} else {
+			$relationship = $relation->relationship;
 		}
+
 		if ($relationship && $relationship->isHasOne()) {
+			return false;
+		}
+		if ($relation && isset($relation->childObject) && isset($relation->childObject->objectType) && $relation->childObject->objectType->uniparental) {
 			return false;
 		}
 		if ($this->objectType->hasDashboard) {
@@ -262,13 +284,17 @@ trait ActiveRecordTrait {
 					if(!in_array(self::className(), $taxonomy->models)) {
 						continue;
 					}
+
 					$fieldName = 'taxonomy:'. $taxonomy->systemId;
+					if (in_array($fieldName, $disabledFields)) { continue; }
+					$fieldSchema = $this->createColumnSchema($fieldName, ['type' => 'taxonomy', 'phpType' => 'object', 'dbType' => 'taxonomy', 'allowNull' => true]);
+
 					$settings = [];
 					if (isset($fieldSettings[$fieldName])) {
 						$settings = array_merge_recursive($settings, $fieldSettings[$fieldName]);
 					}
 					$settings['model'] = $this;
-					self::$_fields[self::className()][$fieldName] = $this->createTaxonomyField($taxonomy, $owner);
+					self::$_fields[self::className()][$fieldName] = $this->createTaxonomyField($fieldSchema, $taxonomy, $owner);
 				}
 			}
 			$currentKeys = array_keys(self::$_fields[self::className()]);
@@ -316,9 +342,9 @@ trait ActiveRecordTrait {
 		return Yii::createObject($settings);
 	}
 
-	public function createTaxonomyField($taxonomy, $owner, $settings = []) {
+	public function createTaxonomyField($fieldSchema, $taxonomy, $owner, $settings = []) {
 		$settings['class'] = $this->taxonomyFieldClass;
-		$settings['field'] = 'taxonomy_id';
+		$settings['fieldSchema'] = $fieldSchema;
 		if (!isset($settings['formField'])) { $settings['formField'] = []; }
 		$settings['formField']['owner'] = $owner;
 		$settings['taxonomy'] = $taxonomy;

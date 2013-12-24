@@ -17,7 +17,6 @@ class Taxonomy extends Base {
 
 	protected static $_moduleHandlers = [];
 
-
 	public function getModuleHandler() {
 		if (is_null($this->_moduleHandler)) {
 			$stem = $this->field;

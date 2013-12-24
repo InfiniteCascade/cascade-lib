@@ -153,6 +153,7 @@ class Segment extends FormObject {
 			$modelClass = get_class($this->_model);
 			$this->_model->_moduleHandler = $modelClass::FORM_PRIMARY_MODEL;
 		}
+
 		if (!is_null($this->relationField)) {
 			$this->relationField->model->addFields($this->_model, $fields, $this->relationField->relationship, $this);
 		}

@@ -470,6 +470,8 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 			$primaryModel->_moduleHandler = $moduleHandler;
 			unset($input[$formName]['_moduleHandler']);
 			$primaryModel->load($input);
+		} else {
+			$primaryModel->loadDefaultValues();
 		}
 		return $primaryModel;
 	}

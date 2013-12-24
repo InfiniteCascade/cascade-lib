@@ -21,18 +21,21 @@ class Relation extends Base {
 				$model = $modelTest;
 			}
 		}
-
-		if (is_null($model)) {
-			$model = $companion->getModel();
+		if (is_null($model) || empty($model->primaryKey)) {
 			$relationKey = $moduleHandler;
+
+			if (is_null($model)) {
+				$model = $companion->getModel();
+			}
 		} else {
+
 			$relationKey = $model->primaryKey;
 		}
-		$relationKeyKey = RelationModel::generateTabularId($relationKey);
-		if (isset($this->generator->models['relations'][$relationKeyKey])) {
-			$relationModel = $this->generator->models['relations'][$relationKeyKey];
+		$relationTabularId = RelationModel::generateTabularId($relationKey);
+		if (isset($this->generator->models['relations'][$relationTabularId])) {
+			$relationModel = $this->generator->models['relations'][$relationTabularId];
 		} else {
-			$relationModel = $model->getRelationModel($relationKeyKey);
+			$relationModel = $model->getRelationModel($relationTabularId);
 		}
 		$model->_moduleHandler = $moduleHandler;
 		$this->modelField->model = $relationModel;

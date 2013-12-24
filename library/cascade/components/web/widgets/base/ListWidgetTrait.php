@@ -79,16 +79,10 @@ trait ListWidgetTrait
 					unset($menuItem['icon']);
 				}
 			}
-			/*
-			<button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu1" data-toggle="dropdown">
-    Dropdown
-    <span class="caret"></span>
-  </button>
-  */
-
 			return ButtonDropdown::widget([
 					'label' => '',
 					'options' => ['class' => 'pull-right'],
+					'encodeLabel' => false,
 					'dropdown' => [
 						'options' => ['class' => 'pull-right'],
 						'encodeLabels' => false,

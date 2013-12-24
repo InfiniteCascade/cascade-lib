@@ -61,7 +61,7 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
 			$result[] = $item->generate();
 		}
 		if (!Yii::$app->request->isAjax) {
-			$result[] = Html::beginTag('div', ['class' => 'form-group']);
+			$result[] = Html::beginTag('div', ['class' => 'row form-group']);
 			$result[] = Html::beginTag('div', ['class' => 'col-sm-12']);
 			$result[] = Html::submitButton('Save', ['class' => 'btn btn-primary']);;
 			$result[] = Html::endTag('div');
