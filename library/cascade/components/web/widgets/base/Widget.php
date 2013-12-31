@@ -39,12 +39,9 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 	public $recreateParams = [];
 	public $htmlOptions = ['class' => 'ic-widget '];
 
-	public $gridCellClass = 'infinite\web\grid\Cell';
-
 	protected $_widgetId;
 	protected $_systemId;
 	protected $_settings;
-	protected $_gridCell;
 
 	abstract public function generateContent();
 
@@ -54,23 +51,16 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 	// 	$backtrace = $backtrace[4];
 	// 	echo self::className() ." ({$backtrace['file']}:{$backtrace['line']})<br/>\n";
 	// }
-	public function getGridCellSettings() {
+
+	public function behaviors()
+	{
 		return [
-			'columns' => 12,
-			'maxColumns' => 12
+			'CellBehavior' => [
+				'class' => 'cascade\\components\\web\\widgets\\base\\CellBehavior'
+			]
 		];
 	}
 
-	public function getCell() {
-		if (is_null($this->_gridCell)) {
-			$gridCellClass = $this->gridCellClass;
-			$objectSettings = $this->gridCellSettings;
-			$objectSettings['class'] = $gridCellClass;
-			$objectSettings['content'] = $this;
-			$this->_gridCell = Yii::createObject($objectSettings);
-		}
-		return $this->_gridCell;
-	}
 
 	public function getHeaderMenu() {
 		return [];

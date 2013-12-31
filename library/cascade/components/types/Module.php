@@ -37,7 +37,9 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $modelNamespace;
 
 	public $formGeneratorClass = 'cascade\components\web\form\Generator';
-	public $sectionClass = 'cascade\\components\\web\\widgets\\base\\SingleSection';
+	public $sectionItemClass = 'cascade\\components\\section\\Item';
+	public $sectionWidgetClass = 'cascade\\components\\web\\widgets\\base\\Section';
+	public $sectionSingleWidgetClass = 'cascade\\components\\web\\widgets\\base\\SingleSection';
 	public $fallbackDetailsWidgetClass = 'cascade\\components\\web\\widgets\\base\\Details';
 
 	protected $_disabledFields;
@@ -192,8 +194,15 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 */
 	public function getSection($parentWidget = null, $settings = []) {
 		$name = $this->systemId;
-		$parent = (isset($settings['relationship']) ? $settings['relationship']->parent : false);
-		$child = (isset($settings['relationship']) ? $settings['relationship']->child : false);
+		$parent = false;
+		$child = false;
+		if (isset($settings['relationship']) && isset($settings['queryRole'])) {
+			if ($settings['relationship']->companionRole($settings['queryRole']) === 'parent') {
+				$parent = $settings['relationship']->parent;
+			} else {
+				$child = $settings['relationship']->child;
+			}
+		}
 		if (($parent && $parent->systemId === $this->systemId) || ($child && $child->systemId === $this->systemId)) {
 			$sectionId = $settings['relationship']->systemId.'-'.$this->systemId;
 			$section = Yii::$app->collectors['sections']->getOne($sectionId);
@@ -201,25 +210,29 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 			$section->icon = $this->icon;
 			$section->systemId = $sectionId;
 			if (empty($section->object)) {
-				$sectionConfig = ['class' => $this->sectionClass, 'section' => $section];
+				$sectionConfig = ['class' => $this->sectionSingleWidgetClass, 'section' => $section];
 				$section->priority = $this->priority;
 				$section->object = Yii::createObject($sectionConfig);
 			}
 			return $section;
 		}
+		$sectionClass = $this->sectionSingleWidgetClass;
+		$sectionItemClass = $this->sectionItemClass;
 		$newSectionTitle = '%%type.'. $this->systemId .'.title.upperPlural%%';
+		$sectionId = $this->systemId;
 		if (!is_null($this->sectionName)) {
-			$sectionClass = $this->sectionClass;
-			$sectionId = $sectionClass::generateSectionId($this->sectionName);
+			$sectionId = $sectionItemClass::generateSectionId($this->sectionName);
 			if (Yii::$app->collectors['sections']->has($sectionId)) {
-				$section = Yii::$app->collectors['sections']->getOne($sectionId);
-				return $section;
+				return Yii::$app->collectors['sections']->getOne($sectionId);
 			}
 			$newSectionTitle = $this->sectionName;
+			$sectionClass = $this->sectionWidgetClass;
 		}
-		$section = Yii::$app->collectors['sections']->getOne($this->systemId);
+		$section = Yii::$app->collectors['sections']->getOne($sectionId);
 		if (empty($section->object)) {
-			$sectionConfig = ['class' => $this->sectionClass, 'title' => $newSectionTitle, 'icon' => $this->icon, 'systemId' => $this->systemId];
+			$section->title = $newSectionTitle;
+			$section->icon = $this->icon;
+			$sectionConfig = ['class' => $sectionClass, 'section' => $section];
 			$section->object = Yii::createObject($sectionConfig);
 		}
 		return $section;
@@ -292,7 +305,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		@class_exists($embeddedListClassName);
 
 		$baseWidget = [];
-		if (!($this->module instanceof \infinite\base\ApplicationInterface)) {
+		if ($this->module instanceof \cascade\components\section\Module) {
 			$baseWidget['section'] = $this->module->collectorItem;
 		}
 		

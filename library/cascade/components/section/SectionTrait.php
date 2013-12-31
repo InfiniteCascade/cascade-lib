@@ -3,6 +3,7 @@ namespace cascade\components\section;
 
 use Yii;
 
+use yii\helpers\Inflector;
 use cascade\components\helpers\StringHelper;
 use infinite\base\language\Noun;
 use infinite\base\collector\CollectorTrait;
@@ -13,7 +14,7 @@ trait SectionTrait {
 	use RenderTrait;
 
 	public $sectionWidgetClass = 'cascade\components\web\widgets\base\Section';
-	public $singleSectionWidgetClass = 'cascade\components\web\widgets\base\SingleSection';
+	public $sectionSingleWidgetClass = 'cascade\components\web\widgets\base\SingleSection';
 	public $gridCellClass = 'infinite\web\grid\Cell';
 
 	protected $_title;
@@ -35,13 +36,11 @@ trait SectionTrait {
 	public function getWidget() {
 		if (is_null($this->_widget)) {
 			$widgets = $this->getAll();
-			if (count($widgets) > 1) {
-				$this->_widget = Yii::createObject(['class' => $this->sectionWidgetClass, 'section' => $this]);
-			} elseif (count($widgets) === 1) {
+			if (count($widgets) === 1) {
 				$widgetItem = array_shift($widgets);
-				$this->_widget = Yii::createObject(['class' => $this->singleSectionWidgetClass, 'section' => $this, 'singleWidget' => $widgetItem]);
+				$this->_widget = Yii::createObject(['class' => $this->sectionSingleWidgetClass, 'section' => $this, 'singleWidget' => $widgetItem]);
 			} else {
-				return false;
+				$this->_widget = Yii::createObject(['class' => $this->sectionWidgetClass, 'section' => $this]);
 			}
 		}
 		return $this->_widget;
