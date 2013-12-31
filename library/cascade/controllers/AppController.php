@@ -45,7 +45,7 @@ class AppController extends Controller
 			'verbs' => [
 				'class' => VerbFilter::className(),
 				'actions' => [
-					'refresh' => ['post'],
+					'refresh' => ['get'],
 				],
 			],
 		];
@@ -86,48 +86,63 @@ class AppController extends Controller
 
 	public function actionRefresh()
 	{
-		$refreshed = false;
-		$this->response->baseInstructions['content'] = &$refreshed;
+		$refreshed = [];
+		$this->response->baseInstructions['requests'] = &$refreshed;
 		$this->response->forceInstructions = true;
 		$this->response->task = 'status';
-		if (empty($_POST['instructions']) || empty($_POST['instructions']['type']) || empty($_POST['instructions']['systemId'])) { return; }
-		$instructions = $_POST['instructions'];
-		
-		if (!empty($_POST['state'])) {
-			foreach ($_POST['state'] as $key => $value) {
-				Yii::$app->state->set($key, $value);
-			}
-		}
 
-		if (isset($instructions['objectId'])) {
-			$object = Yii::$app->request->object = Registry::getObject($instructions['objectId']);
-			if (!$object) {
-				throw new HttpException(404, 'Unknown object');
-			}
-			$type = $object->objectType;
-		}
 
-		$settings = (isset($instructions['settings'])) ? $instructions['settings'] : [];
-		switch ($instructions['type']) {
-			case 'widget':
-				$widget = false;
-				if (isset($object)) {
-					$widgets = $object->objectTypeItem->widgets;
-					if (isset($widgets[$instructions['systemId']])) {
-						$widget = $widgets[$instructions['systemId']]->object;
+		if (empty($_GET['requests'])) { return; }
+		$baseInstrictions = (isset($_GET['baseInstructions']) ? $_GET['baseInstructions'] : []);
+		foreach ($_GET['requests'] AS $requestId => $request) {
+			$refreshed[$requestId] = false;
+			$instructions = $baseInstrictions;
+			if (isset($request['instructions'])) {
+				$instructions = array_merge($instructions, $request['instructions']);
+			}
+			if (empty($instructions['type']) || empty($instructions['type'])) { continue; }
+			if (isset($request['state'])) {
+				foreach ($request['state'] as $key => $value) {
+					Yii::$app->state->set($key, $value);
+				}
+			}
+
+			if (isset($instructions['objectId'])) {
+				$object = Yii::$app->request->object = Registry::getObject($instructions['objectId']);
+				if (!$object) {
+					$refreshed[$requestId] = ['error' => 'Invalid object'];
+					continue;
+				}
+				$type = $object->objectType;
+			}
+
+			$settings = (isset($instructions['settings'])) ? $instructions['settings'] : [];
+			switch ($instructions['type']) {
+				case 'widget':
+					$widget = false;
+					if (isset($object)) {
+						$widgets = $object->objectTypeItem->widgets;
+						if (isset($widgets[$instructions['systemId']])) {
+							$widget = $widgets[$instructions['systemId']]->object;
+						}
+					} else {
+						$widget = Yii::$app->collectors['widgets']->getOne($instructions['systemId']);
 					}
-				} else {
-					$widget = Yii::$app->collectors['widgets']->getOne($instructions['systemId']);
-				}
-				if (!$widget) {
-					$this->response->error = 'Unknown widget!';
-					return;
-				}
-				$widgetObject = $widget->object;
-
-				$widgetObject->owner = $widget->owner;
-				$refreshed = $widgetObject->generate();
-			break;
+					if (!$widget) {
+						$refreshed[$requestId] = ['error' => 'Unknown widget'];
+						return;
+					}
+					$widgetObject = $widget->object;
+					if (isset($instructions['section']) 
+						&& ($sectionItem = Yii::$app->collectors['sections']->getOne($instructions['section']))
+						&& ($section = $sectionItem->object)) {
+						$widgetObject->attachDecorator($section->widgetDecoratorClass);
+						$widgetObject->section = $section;
+					}
+					$widgetObject->owner = $widget->owner;
+					$refreshed[$requestId] = ['content' => $widgetObject->generate()];
+				break;
+			}
 		}
 	}
 }

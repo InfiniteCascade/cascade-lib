@@ -33,6 +33,7 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 
 	public $title = false;
 	public $icon = false;
+	public $section = false;
 	public $defaultDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\PanelDecorator';
 
 	public $params = [];

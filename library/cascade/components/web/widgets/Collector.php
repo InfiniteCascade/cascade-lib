@@ -28,6 +28,7 @@ class Collector extends \infinite\base\collector\Module {
 		}
 		if (isset($section)) {
 			$widgetObject->attachDecorator($section->widgetDecoratorClass);
+			$widgetObject->section = $section;
 		}
 		$widgetObject->owner = $widget->owner;
 		Yii::configure($widgetObject, $instanceSettings);

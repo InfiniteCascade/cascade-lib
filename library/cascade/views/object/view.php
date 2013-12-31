@@ -11,9 +11,8 @@ Html::addCssClass($this->bodyHtmlOptions, 'double-top-nav');
 $baseInstructions = [];
 $baseInstructions['objectId'] = $object->primaryKey;
 $refreshable = [
-	'baseInstructions' => $baseInstructions,
 	'url' => Html::url('app/refresh'),
-	'data' => [Yii::$app->request->csrfVar => Yii::$app->request->csrfToken]
+	'data' => [Yii::$app->request->csrfVar => Yii::$app->request->csrfToken, 'baseInstructions' => $baseInstructions]
 ];
 $this->bodyHtmlOptions['data-refreshable'] = json_encode($refreshable);
 $js = [];

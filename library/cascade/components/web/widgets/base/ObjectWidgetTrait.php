@@ -23,6 +23,9 @@ trait ObjectWidgetTrait
 		$i['type'] = 'widget';
 		$i['systemId'] = $this->collectorItem->systemId;
 		$i['recreateParams'] = $this->recreateParams;
+		if ($this->section) {
+			$i['section'] = $this->section->systemId;
+		}
 		return $i;
 	}
 
@@ -39,7 +42,7 @@ trait ObjectWidgetTrait
 		if (is_null($this->_dataProvider)) {
 			$dataProvider = $this->dataProviderSettings;
 			if (!isset($dataProvider['class'])) {
-				$dataProvider['class'] = 'yii\data\ActiveDataProvider';
+				$dataProvider['class'] = 'yii\\data\\ActiveDataProvider';
 			}
 			$method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
 			if (in_array($method, ['parents', 'children']) && empty(Yii::$app->request->object)) {

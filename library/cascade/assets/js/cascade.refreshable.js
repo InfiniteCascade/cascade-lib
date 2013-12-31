@@ -1,25 +1,69 @@
+var refreshableDeferred;
+
+function handleRefresh(object, request) {
+	if (!refreshableDeferred || (refreshableDeferred.state !== undefined) && refreshableDeferred.state() !== 'pending') {
+		refreshableDeferred = jQuery.Deferred();
+		refreshableDeferred.timer = false;
+		refreshableDeferred.requests = {};
+		refreshableDeferred.requestCount = 0;
+		refreshableDeferred.handle = function() {
+			var settings = {'data': {}};
+			settings = jQuery.extend(true, settings, $('body').data('refreshable'));
+			settings.data.requests = {};
+			jQuery.each(refreshableDeferred.requests, function(index, requestObject) {
+				if (requestObject.result) { return true; }
+				settings.data.requests[index] = requestObject.request;
+			});
+			settings.dataType = 'json';
+			settings.type = 'GET';
+			settings.context = $(this);
+			settings.success = function(r, textStatus, jqXHR) {
+				if (r.requests !== undefined) {
+					jQuery.each(r.requests, function(index, requestObject) {
+						if (requestObject.content !== undefined) {
+							refreshableDeferred.requests[index].result = requestObject.content;
+						}
+					});
+					refreshableDeferred.resolve();
+				} else {
+					refreshableDeferred.reject();
+				}
+			};
+			settings.error = function () {
+				refreshableDeferred.reject();
+			};
+			var request = jQuery.ajax(settings);
+		};
+	}
+	if (refreshableDeferred.timer) {
+		clearTimeout(refreshableDeferred.timer);
+	}
+	var requestId = 'request-' + refreshableDeferred.requestCount;
+	refreshableDeferred.requestCount++;
+	refreshableDeferred.requests[requestId] = {'object': object, 'request': request, 'result': false};
+	refreshableDeferred.done(function() {
+		if (refreshableDeferred.requests[requestId].result) {
+			$(refreshableDeferred.requests[requestId].object).replaceWith(refreshableDeferred.requests[requestId].result);
+			delete refreshableDeferred.requests[requestId];
+		}
+	});
+	refreshableDeferred.timer = setTimeout(refreshableDeferred.handle, 200);
+}
+
 $(document).on('refresh.cascade-api', '.refreshable', function(e, data) {
-	var settings = {};
+	
 	var instructions = {};
-	if (settings.data === undefined) {
-		settings.data = {};
-	}
-    if (typeof data === 'object') {
-    	settings.data = jQuery.extend(true, settings.data, data);
+    if (typeof data !== 'object') {
+    	data = {};
     }
-	if (typeof $('body').data('refreshable') === 'object' ) {
-		settings = jQuery.extend(true, settings, $('body').data('refreshable'));
-	}
-	if (typeof settings.baseInstructions === 'object') {
-		instructions = jQuery.extend(true, instructions, settings.baseInstructions);
-	}
-	delete settings.baseInstructions;
 	if (typeof $(this).data('instructions') === 'object' ) {
 		instructions = jQuery.extend(true, instructions, $(this).data('instructions'));
 	}
-	
-	settings.dataType = 'json';
-	settings.type = 'POST';
+	data.instructions = instructions;
+	handleRefresh(this, data);
+
+/*	settings.dataType = 'json';
+	settings.type = 'GET';
 	settings.context = $(this);
 	settings.success = function(r, textStatus, jqXHR) {
 		if (r.content) {
@@ -29,7 +73,7 @@ $(document).on('refresh.cascade-api', '.refreshable', function(e, data) {
 		}
 	};
 	settings.data.instructions = instructions;
-	var request = jQuery.ajax(settings);
+	var request = jQuery.ajax(settings);*/
 });
 
 
