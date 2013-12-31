@@ -2,6 +2,7 @@
 namespace cascade\components\web\widgets;
 
 use Yii;
+use cascade\components\web\widgets\section\Section;
 
 class Collector extends \infinite\base\collector\Module {
 	public $producedWidgets = [];
@@ -15,7 +16,7 @@ class Collector extends \infinite\base\collector\Module {
 		return 'Widget';
 	}
 
-	public function build($widgetName, $instanceSettings = []) {
+	public function build(Section $section = null, $widgetName, $instanceSettings = []) {
 		if (is_object($widgetName)) {
 			$widget = $widgetName;
 		} else {
@@ -25,7 +26,9 @@ class Collector extends \infinite\base\collector\Module {
 		if (is_null($widgetObject)) {
 			return false;
 		}
-
+		if (isset($section)) {
+			$widgetObject->attachDecorator($section->widgetDecoratorClass);
+		}
 		$widgetObject->owner = $widget->owner;
 		Yii::configure($widgetObject, $instanceSettings);
 		$cell = $widgetObject->cell;

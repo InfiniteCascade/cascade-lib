@@ -366,8 +366,8 @@ class ObjectController extends Controller
 		$this->response->taskOptions = ['title' => 'Delete '. $type->title->getSingular(true) , 'isConfirmDeletion' => true];
 
 		$this->params['model'] = new DeleteForm;
-		$this->params['model']->object = $relatedObject;
 		if (isset($relation)) {
+			$this->params['model']->object = $relatedObject;
 			$this->params['model']->relationModel = $relation;
 			$this->params['model']->relationshipWith = $object;
 			$this->params['model']->forceObjectDelete = !$object->allowRogue($relation);
@@ -375,6 +375,7 @@ class ObjectController extends Controller
 				$this->params['model']->target = 'relationship';
 			}
 		} else {
+			$this->params['model']->object = $object;
 			$this->params['model']->forceObjectDelete = !$object->allowRogue();
 		}
 		if (!empty($_POST['DeleteForm'])) {

@@ -1,39 +1,27 @@
 <?php
-/**
- * ./app/components/web/widgets/RBaseWidget.php
- *
- * @author Jacob Morrison <jacob@infinitecascade.com>
- * @package cascade
- */
-
-namespace cascade\components\web\widgets\base;
-
-use Yii;
-
-use cascade\components\helpers\StringHelper;
+namespace cascade\components\web\widgets\decorator;
 
 use infinite\helpers\Html;
-
 use yii\bootstrap\Nav;
 
+class PanelDecorator extends Decorator {
 
-abstract class PanelWidget extends Widget {
 	public $panelCssClass = 'panel';
 	public $panelStateCssClass = 'panel-default';
 	public $gridCellClass = 'infinite\web\grid\Cell';
 
 	public function generatePanelTitle() {
 		$parts = [];
-		if ($this->title) {
+		if ($this->owner->title) {
 			$menu = $icon = null;
-			$titleMenu = $this->generateTitleMenu();
+			$titleMenu = $this->owner->generateTitleMenu();
 			if ($titleMenu) {
 				$menu = $titleMenu;
 			}
-			if (!empty($this->icon)) {
-				$icon = Html::tag('i', '', ['class' => 'panel-icon '. $this->icon]) . Html::tag('span', '', ['class' => 'break']);
+			if (!empty($this->owner->icon)) {
+				$icon = Html::tag('i', '', ['class' => 'panel-icon '. $this->owner->icon]) . Html::tag('span', '', ['class' => 'break']);
 			}
-			$parts[] = Html::tag('div', Html::tag('h2', $icon . $this->parseText($this->title)) . $menu, ['class' => 'panel-heading']);
+			$parts[] = Html::tag('div', Html::tag('h2', $icon . $this->owner->parseText($this->owner->title)) . $menu, ['class' => 'panel-heading']);
 		}
 		if (empty($parts)) {
 			return false;
@@ -42,14 +30,14 @@ abstract class PanelWidget extends Widget {
 	}
 
 	public function generateStart() {
-		Html::addCssClass($this->htmlOptions, $this->panelCssClass);
-		Html::addCssClass($this->htmlOptions, $this->panelStateCssClass);
+		Html::addCssClass($this->owner->htmlOptions, $this->owner->panelCssClass);
+		Html::addCssClass($this->owner->htmlOptions, $this->owner->panelStateCssClass);
 		return parent::generateStart();
 	}
 	
 	public function generateHeader() {
 		$parts = [];
-		$title = $this->generatePanelTitle();
+		$title = $this->owner->generatePanelTitle();
 		if ($title) {
 			$parts[] = $title;
 		}
@@ -58,7 +46,7 @@ abstract class PanelWidget extends Widget {
 	}
 
 	public function generateTitleMenu() {
-		$menu = $this->getHeaderMenu();
+		$menu = $this->owner->getHeaderMenu();
 		if (empty($menu)) { return false; }
 		$this->backgroundifyMenu($menu);
 		return Nav::widget([
@@ -89,9 +77,7 @@ abstract class PanelWidget extends Widget {
 
 	public function getPanelTitle()
 	{
-		return $this->parseText($this->title);
+		return $this->owner->parseText($this->owner->title);
 	}
 }
-
-
 ?>

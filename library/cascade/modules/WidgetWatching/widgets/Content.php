@@ -2,7 +2,7 @@
 
 namespace cascade\modules\WidgetWatching\widgets;
 
-class Content extends \cascade\components\web\widgets\base\PanelWidget
+class Content extends \cascade\components\web\widgets\Widget
 {
 	public $title = 'Watching';
 	public $icon = 'fa-eye';

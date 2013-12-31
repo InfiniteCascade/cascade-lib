@@ -36,10 +36,10 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $widgetNamespace;
 	public $modelNamespace;
 
-	public $formGeneratorClass = 'cascade\components\web\form\Generator';
+	public $formGeneratorClass = 'cascade\\components\\web\\form\\Generator';
 	public $sectionItemClass = 'cascade\\components\\section\\Item';
-	public $sectionWidgetClass = 'cascade\\components\\web\\widgets\\base\\Section';
-	public $sectionSingleWidgetClass = 'cascade\\components\\web\\widgets\\base\\SingleSection';
+	public $sectionWidgetClass = 'cascade\\components\\web\\widgets\\section\\Section';
+	public $sectionSingleWidgetClass = 'cascade\\components\\web\\widgets\\section\\SingleSection';
 	public $fallbackDetailsWidgetClass = 'cascade\\components\\web\\widgets\\base\\Details';
 
 	protected $_disabledFields;
@@ -299,10 +299,8 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 
 		$detailListClassName = self::classNamespace() .'\widgets\\'. 'DetailList';
 		$simpleListClassName = self::classNamespace() .'\widgets\\'. 'SimpleLinkList';
-		$embeddedListClassName = self::classNamespace() .'\widgets\\'. 'EmbeddedList';
 		@class_exists($detailListClassName);
 		@class_exists($simpleListClassName);
-		@class_exists($embeddedListClassName);
 
 		$baseWidget = [];
 		if ($this->module instanceof \cascade\components\section\Module) {
@@ -312,7 +310,6 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		if (!$this->isChildless) {
 			if (!class_exists($detailListClassName, false)) { $detailListClassName = false; }
 			if (!class_exists($simpleListClassName, false)) { $simpleListClassName = false; }
-			if (!class_exists($embeddedListClassName, false)) { $embeddedListClassName = false; }
 			// needs widget for children and summary page
 			if ($detailListClassName) {
 				$childrenWidget = $baseWidget;
@@ -345,22 +342,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 			}
 		} else {
 			if (!class_exists($detailListClassName, false)) { $detailListClassName = false; }
-			if (!class_exists($embeddedListClassName, false)) { $embeddedListClassName = false; }
 			// needs widget for parents
-		}
-		if ($embeddedListClassName) {
-			$childrenWidget = $baseWidget;
-			$id = 'Embedded'. $this->systemId .'Browse';
-			$childrenWidget['widget'] = [
-				'class' => $embeddedListClassName,
-				'icon' => $this->icon, 
-				'title' => '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%'
-			];
-			$childrenWidget['locations'] = ['parent_objects', 'child_objects'];
-			$childrenWidget['priority'] = $this->priority;
-			$widgets[$id] = $childrenWidget;
-		} else {
-			Yii::trace("Warning: There is no browse class for the child objects of {$this->systemId}");
 		}
 		if ($detailListClassName) {
 			$parentsWidget = $baseWidget;

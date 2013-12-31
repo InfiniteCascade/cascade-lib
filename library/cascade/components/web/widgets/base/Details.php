@@ -4,8 +4,9 @@ namespace cascade\components\web\widgets\base;
 use Yii;
 
 use infinite\helpers\Html;
+use cascade\components\web\widgets\Widget;
 
-class Details extends EmbeddedWidget implements ListWidgetInterface {
+class Details extends Widget implements ListWidgetInterface {
 	use ListWidgetTrait, ObjectWidgetTrait {
 		ObjectWidgetTrait::getListItemOptions insteadof ListWidgetTrait;
 		ListWidgetTrait::getListItemOptions as getListItemOptionsBase;

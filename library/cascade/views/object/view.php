@@ -4,7 +4,7 @@ use Yii;
 use infinite\helpers\Html;
 use yii\bootstrap\Nav;
 use infinite\web\bootstrap\SubNavBar;
-use cascade\components\web\widgets\base\Section as SectionWidget;
+use cascade\components\web\widgets\section\Section as SectionWidget;
 
 Html::addCssClass($this->bodyHtmlOptions, 'double-top-nav');
 

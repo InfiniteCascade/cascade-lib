@@ -13,9 +13,9 @@ trait SectionTrait {
 	use CollectorTrait;
 	use RenderTrait;
 
-	public $sectionWidgetClass = 'cascade\components\web\widgets\base\Section';
-	public $sectionSingleWidgetClass = 'cascade\components\web\widgets\base\SingleSection';
-	public $gridCellClass = 'infinite\web\grid\Cell';
+	public $sectionWidgetClass = 'cascade\\components\\web\\widgets\\section\\Section';
+	public $sectionSingleWidgetClass = 'cascade\\components\\web\\widgets\\section\\SingleSection';
+	public $gridCellClass = 'infinite\\web\\grid\\Cell';
 
 	protected $_title;
 	protected $_parsedTitle;

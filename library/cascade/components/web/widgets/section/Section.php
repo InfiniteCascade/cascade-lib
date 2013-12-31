@@ -1,13 +1,14 @@
 <?php
-namespace cascade\components\web\widgets\base;
+namespace cascade\components\web\widgets\section;
 
 use Yii;
 
 use infinite\helpers\ArrayHelper;
 use infinite\helpers\Html;
 
-class Section extends PanelWidget {
-	public $gridClass = 'infinite\web\grid\Grid';
+class Section extends \cascade\components\web\widgets\Widget {
+	public $gridClass = 'infinite\\web\\grid\\Grid';
+	public $defaultWidgetDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\PanelDecorator';
 	public $section;
 
 	public function init()
@@ -17,6 +18,11 @@ class Section extends PanelWidget {
 			$this->icon = $this->section->icon;
 			$this->title = $this->section->sectionTitle;
 		}
+	}
+
+	public function getWidgetDecoratorClass()
+	{
+		return $this->defaultWidgetDecoratorClass;
 	}
 
 	public function generateStart()
@@ -42,7 +48,7 @@ class Section extends PanelWidget {
 	{
 		$items = [];
 		foreach ($this->widgets as $widget) {
-			$items[] = $cell = Yii::$app->collectors['widgets']->build($widget->object);
+			$items[] = $cell = Yii::$app->collectors['widgets']->build($this, $widget->object);
 			Yii::configure($cell, $this->widgetCellSettings());
 		}
 		$grid = Yii::createObject(['class' => $this->gridClass, 'cells' => $items]);

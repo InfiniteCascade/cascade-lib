@@ -1,5 +1,5 @@
 <?php
-namespace cascade\components\web\widgets\base;
+namespace cascade\components\web\widgets\section;
 
 use Yii;
 
@@ -11,6 +11,11 @@ class SideSection extends Section {
 		parent::init();
 		$this->title = false;
 		$this->icon = false;
+	}
+
+	public function getWidgetDecoratorClass()
+	{
+		return 'cascade\\components\\web\\widgets\\decorator\\EmbeddedDecorator';
 	}
 
 	public function widgetCellSettings()

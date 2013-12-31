@@ -1,5 +1,5 @@
 <?php
-namespace cascade\components\web\widgets\base;
+namespace cascade\components\web\widgets\section;
 
 use Yii;
 

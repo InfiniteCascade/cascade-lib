@@ -6,7 +6,7 @@
  * @package cascade
  */
 
-namespace cascade\components\web\widgets\base;
+namespace cascade\components\web\widgets;
 
 use Yii;
 
@@ -14,7 +14,6 @@ use cascade\components\helpers\StringHelper;
 
 use infinite\helpers\Html;
 
-use yii\bootstrap\Nav;
 
 use infinite\base\collector\CollectedObjectTrait;
 use infinite\base\ObjectTrait;
@@ -34,23 +33,39 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 
 	public $title = false;
 	public $icon = false;
+	public $defaultDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\PanelDecorator';
 
 	public $params = [];
 	public $recreateParams = [];
-	public $htmlOptions = ['class' => 'ic-widget '];
+	public $htmlOptions = ['class' => 'ic-widget'];
 
 	protected $_widgetId;
 	protected $_systemId;
 	protected $_settings;
+	protected $_decorator;
 
 	abstract public function generateContent();
 
-	// public function init() {
-	// 	parent::init();
-	// 	$backtrace = debug_backtrace();
-	// 	$backtrace = $backtrace[4];
-	// 	echo self::className() ." ({$backtrace['file']}:{$backtrace['line']})<br/>\n";
-	// }
+	public function ensureDecorator()
+	{
+		if (!$this->hasDecorator()) {
+			$this->attachDecorator($this->defaultDecoratorClass);
+		}
+	}
+
+	public function hasDecorator()
+	{
+		return $this->_decorator !== null;
+	}
+
+	public function attachDecorator($decorator)
+	{
+		if ($this->hasDecorator()) {
+			$this->detachBehavior('__decorator');
+		}
+
+		return $this->_decorator = $this->attachBehavior('__decorator', ['class' => $decorator]);
+	}
 
 	public function behaviors()
 	{
@@ -87,31 +102,9 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 		return Yii::$app->state->set($this->stateKeyName($key), $value);
 	}
 
-	public function generateStart() {
-		$parts = [];
-		foreach ($this->widgetClasses as $class) {
-			Html::addCssClass($this->htmlOptions, $class);
-		}
-		$parts[] = Html::beginTag('div', $this->htmlOptions);
-		return implode("", $parts);
-	}
-
-	public function generateEnd() {
-		$parts = [];
-		$parts[] = Html::endTag('div'); // panel
-		return implode("", $parts);
-	}
-
-	public function generateHeader() {
-		return null;
-	}
-
-	public function generateFooter() {
-		return null;
-	}
-
 	public function generate() {
 		Yii::beginProfile(get_called_class() .':'. __FUNCTION__);
+		$this->ensureDecorator();
 		$content = $this->generateContent();
 		if ($content === false) { return; }
 		$result = $this->generateStart() . $this->generateHeader() . $content . $this->generateFooter() . $this->generateEnd();
@@ -127,9 +120,6 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 		return [];
 	}
 
-	public function getWidgetClasses() {
-		return [];
-	}
 	/**
 	 *
 	 *

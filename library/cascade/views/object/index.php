@@ -14,7 +14,7 @@ $grid = new Grid;
 $cells = [];
 Yii::beginProfile("Collect Widgets");
 foreach ($widgets as $item => $widget) {
-	$cells[] = Yii::$app->collectors['widgets']->build($widget, [], []);
+	$cells[] = Yii::$app->collectors['widgets']->build(null, $widget, [], []);
 }
 Yii::endProfile("Collect Widgets");
 $grid->cells = $cells;

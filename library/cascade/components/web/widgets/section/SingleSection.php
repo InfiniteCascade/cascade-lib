@@ -1,5 +1,5 @@
 <?php
-namespace cascade\components\web\widgets\base;
+namespace cascade\components\web\widgets\section;
 
 use Yii;
 
@@ -12,7 +12,7 @@ class SingleSection extends Section {
 	{
 		$singleWidget = $this->singleWidget;
 		if ($singleWidget) {
-			$widgetCell = Yii::$app->collectors['widgets']->build($singleWidget->object);
+			$widgetCell = Yii::$app->collectors['widgets']->build($this, $singleWidget->object);
 			$widgetCell->prepend(Html::tag('div', '', ['id' => 'section-'.$this->systemId, 'class' => 'scroll-mark']));
 			return $widgetCell;
 		}
