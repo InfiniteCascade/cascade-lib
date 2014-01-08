@@ -72,7 +72,6 @@ class ObjectController extends Controller
 		// echo Registry::parseModelAlias(\cascade\modules\SectionContact\modules\TypePhoneNumber\models\ObjectPhoneNumber::modelAlias());
 		// //echo "okay";
 		// exit;
-		//var_dump(Yii::$app->collectors['types']);
 		return $this->render('index');
 	}
 
