@@ -54,46 +54,12 @@ $mainCell.checkHeight = function(height) {
 };
 ';
 $mainColumnSize = 12;
-if (count($sectionsMenu) > 2) {
-	$calculateTop = 'function () {
-			var offsetTop = $menuBar.offset().top;
-			var sideBarMargin = parseInt($menuBar.children(0).css(\'margin-top\'), 10);
-			var navOuterHeight = 0;
-			$(\'nav.navbar-fixed-top\').each(function() {
-				navOuterHeight += $(\'.navbar-header\').outerHeight();
-			});
-			this.top = offsetTop - navOuterHeight - sideBarMargin;
-			return this.top;
-		}';
-
-	$js[] = "\$('body').scrollspy({ target: '.ic-sidenav', 'offset': 10 });";
-
-	$menuContent = Html::beginTag('div', ['class' => 'hidden-xs hidden-sm ic-sidenav']);
-	$menuContent .= Nav::widget([
-			'options' => ['class' => 'navbar-default'],
-			'encodeLabels' => false,
-			'items' => $sectionsMenu,
-		]);;
-	$menuContent .= Html::endTag('div');
-	$cells[] = $menuCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $menuContent]);
-	Yii::configure($menuCell, ['mediumDesktopColumns' => 2, 'maxMediumDesktopColumns' => 2, 'largeDesktopSize' => false, 'tabletSize' => false]);
-
-	$mainColumnSize -= 2;
-
-	$js[] = '
-	setTimeout(function() {
-		var $menuBar = $(".ic-sidenav");
-		$mainCell.checkHeight($menuBar.height());
-		$menuBar.affix({offset: {top: '.$calculateTop.', bottom: '.$calculateBottom.'}});
-	}, 100);
-	';
-}
 
 if (isset($sections['_side'])) {
 	$mainColumnSize -= 4;
 	$cellInner = $sections['_side']->object;
 	$cellInner->htmlOptions['id'] = $cellInner->id;
-$calculateTop = 'function () {
+	$calculateTop = 'function () {
 			var offsetTop = $sideBar.offset().top;
 			var sideBarMargin = parseInt($sideBar.children(0).css(\'margin-top\'), 10);
 			var navOuterHeight = 0;
@@ -120,8 +86,12 @@ $calculateTop = 'function () {
 
 	$cells[] = $sideCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $cellInner->generate()]);
 
-	Html::addCssClass($sideCell->htmlOptions, 'col-md-push-'. $mainColumnSize);
+	//Html::addCssClass($sideCell->htmlOptions, 'col-md-push-'. $mainColumnSize);
 	Yii::configure($sideCell, ['mediumDesktopColumns' => 4,'maxMediumDesktopColumns' => 4, 'largeDesktopSize' => false, 'tabletSize' => false]);
+}
+
+if (count($sectionsMenu) > 2) {
+	$mainColumnSize -= 2;
 }
 
 $mainCell = [];
@@ -133,8 +103,41 @@ $mainCellGrid = Yii::createObject(['class' => 'infinite\web\grid\Grid']);
 $mainCellGrid->cells = $mainCell;
 $cells[] = $mainCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $mainCellGrid->generate()]);
 Yii::configure($mainCell,['mediumDesktopColumns' => 4, 'maxMediumDesktopColumns' => 8, 'largeDesktopSize' => false, 'tabletSize' => false]);
-Html::addCssClass($mainCell->htmlOptions, 'ic-main-cell col-md-pull-4');
+Html::addCssClass($mainCell->htmlOptions, 'ic-main-cell');
 
+
+if (count($sectionsMenu) > 2) {
+	$calculateTop = 'function () {
+			var offsetTop = $menuBar.offset().top;
+			var sideBarMargin = parseInt($menuBar.children(0).css(\'margin-top\'), 10);
+			var navOuterHeight = 0;
+			$(\'nav.navbar-fixed-top\').each(function() {
+				navOuterHeight += $(\'.navbar-header\').outerHeight();
+			});
+			this.top = offsetTop - navOuterHeight - sideBarMargin;
+			return this.top;
+		}';
+
+	$js[] = "\$('body').scrollspy({ target: '.ic-sidenav', 'offset': 10 });";
+
+	$menuContent = Html::beginTag('div', ['class' => 'hidden-xs hidden-sm ic-sidenav']);
+	$menuContent .= Nav::widget([
+			'options' => ['class' => 'navbar-default'],
+			'encodeLabels' => false,
+			'items' => $sectionsMenu,
+		]);;
+	$menuContent .= Html::endTag('div');
+	$cells[] = $menuCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $menuContent]);
+	Yii::configure($menuCell, ['mediumDesktopColumns' => 2, 'maxMediumDesktopColumns' => 2, 'largeDesktopSize' => false, 'tabletSize' => false]);
+
+	$js[] = '
+	setTimeout(function() {
+		var $menuBar = $(".ic-sidenav");
+		$mainCell.checkHeight($menuBar.height());
+		$menuBar.affix({offset: {top: '.$calculateTop.', bottom: '.$calculateBottom.'}});
+	}, 100);
+	';
+}
 
 $grid->cells = $cells;
 $grid->output();
