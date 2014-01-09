@@ -120,7 +120,7 @@ class ObjectController extends Controller
 			throw new HttpException(403, "Unable to access object.");
 		}
 		Yii::$app->request->object = $object;
-		$this->response->view = 'view';
+		Yii::$app->response->view = 'view';
 
 		$type = $this->params['type'] = $object->objectType;
 		$sections = $this->params['sections'] = $typeItem->getSections($object);
@@ -250,9 +250,9 @@ class ObjectController extends Controller
 			throw new HttpException(403, "You do not have access to create {$module->title->getPlural(true)}");
 		}
 
-		$this->response->view = 'create';
-		$this->response->task = 'dialog';
-		$this->response->taskOptions = ['title' => ucfirst($action) . ' '.$module->title->getSingular(true) , 'width' => '800px'];
+		Yii::$app->response->view = 'create';
+		Yii::$app->response->task = 'dialog';
+		Yii::$app->response->taskOptions = ['title' => ucfirst($action) . ' '.$module->title->getSingular(true) , 'width' => '800px'];
 
 		if (isset($object)) {
 			$module = $object->objectType;
@@ -262,21 +262,21 @@ class ObjectController extends Controller
 		if (!empty($_POST)) {
 			list($error, $notice, $models, $niceModels) = $module->handleSaveAll(null, $saveSettings);
 			if ($error) {
-				$this->response->error = $error;
+				Yii::$app->response->error = $error;
 			} else {
-				$this->response->task = 'status';
+				Yii::$app->response->task = 'status';
 				$noticeExtra = '';
 				if (!empty($notice)) {
 					$noticeExtra = ' However, there were notices: '. $notice;
 				}
-				$this->response->success = '<em>'. $niceModels['primary']['model']->descriptor .'</em> was saved successfully.'.$noticeExtra;
+				Yii::$app->response->success = '<em>'. $niceModels['primary']['model']->descriptor .'</em> was saved successfully.'.$noticeExtra;
 				if (isset($subform)) {
 					$primaryModel = $type->object->primaryModel;
-					$this->response->trigger = [
+					Yii::$app->response->trigger = [
 						['refresh', '.model-'. $primaryModel::baseClassName()]
 					];
 				} else {
-					$this->response->redirect = $niceModels['primary']['model']->getUrl('view');
+					Yii::$app->response->redirect = $niceModels['primary']['model']->getUrl('view');
 				}
 			}
 		}
@@ -305,38 +305,38 @@ class ObjectController extends Controller
 			if (!isset($relation)) {
 				throw new HttpException(404, "Invalid relationship!");
 			}
-			$this->response->task = 'status';
+			Yii::$app->response->task = 'status';
 			if ($relation->setPrimary()) {
-				$this->response->trigger = [
+				Yii::$app->response->trigger = [
 					['refresh', '.model-'. $primaryModel::baseClassName()]
 				];
 			} else {
-				$this->response->error = 'Unable to set primary object!';
+				Yii::$app->response->error = 'Unable to set primary object!';
 			}
 			return;
 		} else {
-			$this->response->view = 'create';
-			$this->response->task = 'dialog';
-			$this->response->taskOptions = ['title' => 'Update '. $type->title->getSingular(true)];
+			Yii::$app->response->view = 'create';
+			Yii::$app->response->task = 'dialog';
+			Yii::$app->response->taskOptions = ['title' => 'Update '. $type->title->getSingular(true)];
 			$models = $type->getModels($object, [$relatedObject->tabularId => $relatedObject, 'relations' => [$relatedObject->tabularId => $relation]]);
 
 			if (!empty($_POST)) {
 				list($error, $notice, $models, $niceModels) = $handler->handleSaveAll(null, ['allowEmpty' => true]);
 				if ($error) {
-					$this->response->error = $error;
+					Yii::$app->response->error = $error;
 				} else {
 					$noticeExtra = '';
 					if (!empty($notice)) {
 						$noticeExtra = ' However, there were notices: '. $notice;
 					}
-					$this->response->success = '<em>'. $niceModels['primary']['model']->descriptor .'</em> was saved successfully.'.$noticeExtra;
+					Yii::$app->response->success = '<em>'. $niceModels['primary']['model']->descriptor .'</em> was saved successfully.'.$noticeExtra;
 					if (isset($relation)) {
-						$this->response->trigger = [
+						Yii::$app->response->trigger = [
 							['refresh', '.model-'. $primaryModel::baseClassName()]
 						];
-						$this->response->task = 'status';
+						Yii::$app->response->task = 'status';
 					} else {
-						$this->response->redirect = $niceModels['primary']['model']->getUrl('view');
+						Yii::$app->response->redirect = $niceModels['primary']['model']->getUrl('view');
 					}
 				}
 			}
@@ -360,9 +360,9 @@ class ObjectController extends Controller
 			$primaryModel = $type->primaryModel;
 		}
 
-		$this->response->view = 'delete';
-		$this->response->task = 'dialog';
-		$this->response->taskOptions = ['title' => 'Delete '. $type->title->getSingular(true) , 'isConfirmDeletion' => true];
+		Yii::$app->response->view = 'delete';
+		Yii::$app->response->task = 'dialog';
+		Yii::$app->response->taskOptions = ['title' => 'Delete '. $type->title->getSingular(true) , 'isConfirmDeletion' => true];
 
 		$this->params['model'] = new DeleteForm;
 		if (isset($relation)) {
@@ -378,17 +378,17 @@ class ObjectController extends Controller
 			$this->params['model']->forceObjectDelete = !$object->allowRogue();
 		}
 		if (!empty($_POST['DeleteForm'])) {
-			$this->response->task = 'status';
+			Yii::$app->response->task = 'status';
 			$targetDescriptor = $this->params['model']->targetDescriptor;
 			$this->params['model']->attributes = $_POST['DeleteForm'];
 			if (!$this->params['model']->delete()) {
-				$this->response->error =  'Could not delete '. $this->params['model']->targetDescriptor;
+				Yii::$app->response->error =  'Could not delete '. $this->params['model']->targetDescriptor;
 			} else {
-				$this->response->success = ucfirst($targetDescriptor). ' has been deleted!';
+				Yii::$app->response->success = ucfirst($targetDescriptor). ' has been deleted!';
 				if (!empty($_GET['redirect'])) {
-					$this->response->redirect = $_GET['redirect'];
+					Yii::$app->response->redirect = $_GET['redirect'];
 				} else {
-					$this->response->trigger = [
+					Yii::$app->response->trigger = [
 						['refresh', '.model-'. $primaryModel::baseClassName()]
 					];
 				}

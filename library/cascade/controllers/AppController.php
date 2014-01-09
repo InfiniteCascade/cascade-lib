@@ -69,12 +69,12 @@ class AppController extends Controller
 	{
 		$this->params['model'] = $model = new LoginForm();
 		if ($model->load($_POST) && $model->login()) {
-			//$this->response->redirect = Yii::$app->getUser()->getReturnUrl();
+			//Yii::$app->response->redirect = Yii::$app->getUser()->getReturnUrl();
 			return $this->goBack();
 		} else {
-			$this->response->task = 'dialog';
-			$this->response->taskOptions = ['title' => 'Log In'];
-			$this->response->view = 'login';
+			Yii::$app->response->task = 'dialog';
+			Yii::$app->response->taskOptions = ['title' => 'Log In'];
+			Yii::$app->response->view = 'login';
 		}
 	}
 
@@ -87,9 +87,9 @@ class AppController extends Controller
 	public function actionRefresh()
 	{
 		$refreshed = [];
-		$this->response->baseInstructions['requests'] = &$refreshed;
-		$this->response->forceInstructions = true;
-		$this->response->task = 'status';
+		Yii::$app->response->baseInstructions['requests'] = &$refreshed;
+		Yii::$app->response->forceInstructions = true;
+		Yii::$app->response->task = 'status';
 
 
 		if (empty($_GET['requests'])) { return; }
