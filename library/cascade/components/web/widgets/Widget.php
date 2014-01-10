@@ -150,7 +150,7 @@ abstract class Widget extends \yii\bootstrap\Widget implements \infinite\base\Wi
 		if (!is_null($this->_widgetId)) {
 			return $this->_widgetId;
 		}
-		return $this->_widgetId = 'ic-widget-'.md5(uniqid());
+		return $this->_widgetId = 'ic-widget-'. md5(microtime() . mt_rand());
 	}
 
 	public function setWidgetId($value) {
