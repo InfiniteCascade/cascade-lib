@@ -3,10 +3,11 @@ var relationshipDefaults = {
 	'browseLabel': 'Browse',
 	'multiple': false,
 	'browse': {
-		'url': '/browse',
 		'data': {'preview': true}
 	},
-	'search': {}
+	'search': {
+		'data': {'preview': true}
+	}
 };
 
 $preparer.add(function(context) {
