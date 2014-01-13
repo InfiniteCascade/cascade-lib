@@ -61,12 +61,23 @@ class Relation extends Base {
 		}
 	}
 
+	public function getRelationModelField()
+	{
+		$field = $this->model->tabularPrefix;
+		if ($this->modelField->relationship->companionRole($this->modelField->modelRole) === 'child') {
+			$field .= 'child_object_id';
+		} else {
+			$field .= 'parent_object_id';
+		}
+		return $field;
+	}
+
 	protected function generateRelationField()
 	{
 		$model = $this->model;
 		$companion = $this->modelField->companion;
 		$module = $this->modelField->module;
-		$field = $this->getModelField();
+		$field = $this->getRelationModelField();
 		$parts = [];
 		$r = [];
 		$r['module'] = $module->systemId;
