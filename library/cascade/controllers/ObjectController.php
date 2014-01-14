@@ -95,8 +95,7 @@ class ObjectController extends Controller
 
 		foreach ($modules as $module) {
 			$moduleItem = Yii::$app->collectors['types']->getOne($module);
-			if (!$moduleItem) { continue; }
-			$moduleObject = $moduleItem->object;
+			if (!$moduleItem || !($moduleObject = $moduleItem->object)) { continue; }
 			$results = ['name' => $moduleObject->title->getPlural(true), 'results' => []];
 			$raw = $moduleObject->search($term, ['ignore' => $ignore]);
 			$results['results'] = [];
