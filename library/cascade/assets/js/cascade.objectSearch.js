@@ -2,11 +2,15 @@
    $.fn.objectSearch = function (opts) {
    		var $this = this;
    		var defaultOptions = {
-			'url': '/search',
+			'remote': {
+				'url': '/search?query=%QUERY',
+			},
+			'maxParallelRequests': 2
    		};
    		$this.options = jQuery.extend(true, {}, defaultOptions, opts);
-      	return $this.on("change keyup", function(e) {
-			$.debug($this.val());
-		});
+   		if ($this.options.name === undefined) {
+   			$this.options.name = $this.attr('id');
+   		}
+      	return $this.typeahead($this.options);
    };
 }(jQuery));

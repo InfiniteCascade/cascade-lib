@@ -158,13 +158,11 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function search($term, $params = []) {
-		throw new Exception("Who is calling this?");
 		if (!$this->primaryModel) { return false; }
+
 		$results = [];
 		$model = $this->primaryModel;
-		$model = new $model('search');
-		$raw = $model->searchTerm($term, $params);
-		return $raw;
+		return $model::searchTerm($term, $params);
 	}
 
 	public function getObjectLevel() {

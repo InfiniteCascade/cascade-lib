@@ -50,10 +50,7 @@ trait ActiveRecordTrait {
 				'class' => 'cascade\\components\\db\\behaviors\\Taxonomy',
 			],
 			'Access' => [
-				'class' => '\infinite\db\behaviors\Access',
-			],
-			'SearchTerm' => [
-				'class' => '\infinite\db\behaviors\SearchTerm',
+				'class' => 'infinite\\db\\behaviors\\Access',
 			]
 		];
 	}

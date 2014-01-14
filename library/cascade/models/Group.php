@@ -4,6 +4,7 @@ namespace cascade\models;
 
 use cascade\components\db\ActiveRecordTrait as BaseActiveRecordTrait;
 use cascade\components\types\ActiveRecordTrait as TypesActiveRecordTrait;
+use infinite\db\behaviors\SearchTerm;
 
 class Group extends \infinite\db\models\Group
 {
@@ -14,6 +15,7 @@ class Group extends \infinite\db\models\Group
 	use BaseActiveRecordTrait {
 		BaseActiveRecordTrait::behaviors as baseBehaviors;
 	}
+	use SearchTerm;
 	
 	/**
 	 * @inheritdoc

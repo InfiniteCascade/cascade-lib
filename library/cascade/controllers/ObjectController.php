@@ -39,7 +39,6 @@ class ObjectController extends Controller
 				'class' => VerbFilter::className(),
 				'actions' => [
 					'index' => ['get'],
-					'suggest' => ['get'],
 					'view' => ['get'],
 					'create' => ['get', 'post'],
 					'setPrimary' => ['get'],
@@ -51,6 +50,8 @@ class ObjectController extends Controller
 					'unwatch' => ['get'],
 					'widget' => ['get', 'post'],
 					'unwatch' => ['get'],
+					'search' => ['get'],
+					'browse' => ['get'],
 				],
 			],
 		];
@@ -78,21 +79,24 @@ class ObjectController extends Controller
 	/**
 	 *
 	 */
-	public function actionSuggest() {
+	public function actionSearch() {
 		$package = ['results' => []];
-		if (empty($_GET['modules']) or empty($_GET['term'])) {
-			$this->json($package, true);
+		if (empty($_GET['term'])) {
+			Yii::$app->response->data = $package;
+			return;
 		}
+		$modules = isset($_GET['modules']) ? $_GET['modules'] : array_keys(Yii::$app->collectors['types']->getAll());
 		$ignore = [];
 		if (!empty($_GET['ignore'])) {
 			$ignore = $_GET['ignore'];
 		}
-		$modules = $_GET['modules'];
 		$term = $_GET['term'];
 		$scores = [];
 
 		foreach ($modules as $module) {
-			$moduleObject = Yii::$app->types->get($module);
+			$moduleItem = Yii::$app->collectors['types']->getOne($module);
+			if (!$moduleItem) { continue; }
+			$moduleObject = $moduleItem->object;
 			$results = ['name' => $moduleObject->title->getPlural(true), 'results' => []];
 			$raw = $moduleObject->search($term, ['ignore' => $ignore]);
 			$results['results'] = [];
@@ -105,7 +109,7 @@ class ObjectController extends Controller
 				$package['results'][$module] = $results;
 			}
 		}
-		$this->json($package, true);
+		Yii::$app->response->data = $package;
 	}
 
 

@@ -4,6 +4,7 @@ namespace cascade\models;
 
 use cascade\components\db\ActiveRecordTrait as BaseActiveRecordTrait;
 use cascade\components\types\ActiveRecordTrait as TypesActiveRecordTrait;
+use infinite\db\behaviors\SearchTerm;
 
 class User extends \infinite\db\models\User
 {
@@ -14,6 +15,7 @@ class User extends \infinite\db\models\User
 	use BaseActiveRecordTrait {
 		BaseActiveRecordTrait::behaviors as baseBehaviors;
 	}
+	use SearchTerm;
 	
 	public $descriptorField = ['first_name', 'middle_name', 'last_name'];
 	

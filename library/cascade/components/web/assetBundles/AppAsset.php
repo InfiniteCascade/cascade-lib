@@ -28,8 +28,9 @@ class AppAsset extends AssetBundle
 		'js/cascade.relationship.js'
 	];
 	public $depends = [
-		'infinite\web\assetBundles\InfiniteAsset',
-		'infinite\web\assetBundles\BootstrapSelectAsset',
-		'infinite\web\assetBundles\BootstrapDatepickerAsset',
+		'infinite\\web\\assetBundles\\InfiniteAsset',
+		'infinite\\web\\assetBundles\\BootstrapSelectAsset',
+		'infinite\\web\\assetBundles\\BootstrapDatepickerAsset',
+		'cascade\\components\\web\\assetBundles\\BootstrapTypeaheadAsset'
 	];
 }
