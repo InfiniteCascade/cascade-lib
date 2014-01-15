@@ -85,24 +85,28 @@ class ObjectController extends Controller
 			Yii::$app->response->data = $package;
 			return;
 		}
-		$modules = isset($_GET['modules']) ? $_GET['modules'] : array_keys(Yii::$app->collectors['types']->getAll());
-		$ignore = [];
+
+		$modules = isset($_GET['modules']) ? (array)$_GET['modules'] : array_keys(Yii::$app->collectors['types']->getAll());
+		$params = ['ignore' => [], 'ignoreChildren' => [], 'ignoreParents' => []];
 		if (!empty($_GET['ignore'])) {
-			$ignore = $_GET['ignore'];
+			$params['ignore'] = (array)$_GET['ignore'];
 		}
+		if (!empty($_GET['ignoreChildren'])) {
+			$params['ignoreChildren'] = (array)$_GET['ignoreChildren'];
+		}
+		if (!empty($_GET['ignoreParents'])) {
+			$params['ignoreParents'] = (array)$_GET['ignoreParents'];
+		}
+		$params['modules'] = $modules;
 		$term = $_GET['term'];
 		$scores = [];
-
 		foreach ($modules as $module) {
 			$moduleItem = Yii::$app->collectors['types']->getOne($module);
 			if (!$moduleItem || !($moduleObject = $moduleItem->object)) { continue; }
 			$results = ['name' => $moduleObject->title->getPlural(true), 'results' => []];
-			$raw = $moduleObject->search($term, ['ignore' => $ignore]);
-			$results['results'] = [];
-			if (!empty($raw['results'])) {
-				foreach ($raw['results'] as $r) {
-					$results['results'][] = ['objectId' => $r->primaryKey, 'label' => $r->descriptor, 'sub' => $r->getSubInfo($moduleObject->objectSubInfo), 'score' => $r->searchScore, 'module' => $moduleObject->shortName];
-				}
+			$moduleResults = $moduleObject->search($term, $params);
+			foreach ($moduleResults as $r) {
+				$results['results'][] = $r->toArray();
 			}
 			if (!empty($results['results'])) {
 				$package['results'][$module] = $results;

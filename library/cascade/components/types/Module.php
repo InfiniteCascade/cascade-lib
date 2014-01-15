@@ -31,6 +31,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 
 	public $hasDashboard = true;
 	public $uniparental = false;
+	public $searchForParent = false; // can you find a parent through objects of this type?
 	public $sectionName;
 
 	public $widgetNamespace;
@@ -158,11 +159,11 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function search($term, $params = []) {
-		if (!$this->primaryModel) { return false; }
+		if (!$this->primaryModel) { echo "boom"; return false; }
 
 		$results = [];
-		$model = $this->primaryModel;
-		return $model::searchTerm($term, $params);
+		$modelClass = $this->primaryModel;
+		return $modelClass::searchTerm($term, $params);
 	}
 
 	public function getObjectLevel() {

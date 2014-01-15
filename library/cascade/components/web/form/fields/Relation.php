@@ -75,18 +75,16 @@ class Relation extends Base {
 	protected function generateRelationField()
 	{
 		$model = $this->model;
-		$companion = $this->modelField->companion;
-		$module = $this->modelField->module;
 		$field = $this->getRelationModelField();
 		$parts = [];
-		$r = [];
-		$r['module'] = $module->systemId;
-		$r['companion'] = $companion->systemId;
-		$r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
-		$r['role'] = $this->modelField->relationship->companionRole($this->modelField->modelRole);
+		$r = ['context' => []];
+		$r['context']['relationship'] = $this->modelField->relationship->systemId;
 		if ($this->modelField->baseModel && !$this->modelField->baseModel->isNewRecord) {
-			$r['moduleObjectId'] = $this->modelField->baseModel->primaryKey;
+			$r['context']['objectId'] = $this->modelField->baseModel->primaryKey;
 		}
+		$r['context']['role'] = $this->modelField->relationship->companionRole($this->modelField->modelRole);
+
+		$r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
 		$this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
 		Html::addCssClass($this->htmlOptions, 'relationship');
 		$parts[] = Html::activeHiddenInput($model, $field, $this->htmlOptions);

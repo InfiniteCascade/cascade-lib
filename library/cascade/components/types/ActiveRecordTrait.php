@@ -17,12 +17,16 @@ use infinite\helpers\ArrayHelper;
 use cascade\components\web\form\Segment as FormSegment;
 use cascade\components\types\Relationship;
 use cascade\models\Relation;
+use infinite\db\behaviors\SearchTerm;
 
 trait ActiveRecordTrait {
+	use SearchTerm;
+
 	public $baseFieldClass = 'cascade\components\db\fields\Base';
 	public $modelFieldClass = 'cascade\components\db\fields\Model';
 	public $relationFieldClass = 'cascade\components\db\fields\Relation';
 	public $relationClass = 'cascade\models\Relation';
+	public $registryClass = 'cascade\\models\\Registry';
 	public $taxonomyFieldClass = 'cascade\components\db\fields\Taxonomy';
 	public $formSegmentClass = 'cascade\components\web\form\Segment';
 	public $columnSchemaClass = 'yii\\db\\ColumnSchema';
@@ -53,6 +57,49 @@ trait ActiveRecordTrait {
 				'class' => 'infinite\\db\\behaviors\\Access',
 			]
 		];
+	}
+
+	public function getRegistryClass()
+	{
+		return 'cascade\\models\\Registry';
+	}
+	
+	public static function searchFields()
+	{
+		$modelClass = get_called_class();
+		$model = new $modelClass;
+
+		if (is_null($model->descriptorField)) {
+			$fields = [];
+		} elseif(is_array($model->descriptorField)) {
+			$fields = $model->descriptorField;
+		} else {
+			$fields = [$model->descriptorField];
+		}
+
+		$fields = array_intersect($fields, $model->attributes());
+		if (($moduleItem = $model->getObjectTypeItem())) {
+			foreach ($moduleItem->children as $key => $relationship) {
+				if ($relationship->child->searchForParent) {
+					$fields[] = 'child:'.$key;
+				}
+			}
+		}
+		return $fields;
+	}
+
+	public static function parseSearchFields($fields)
+	{
+		$localFields = [];
+		$foreignTypes = [];
+		foreach ($fields as $field) {
+			if (strpos($field, ':') === false) {
+				$localFields[] = $field;
+			} else {
+				$foreignTypes[] = $field;
+			}
+		}
+		return [$localFields, $foreignTypes];
 	}
 
 	public function getDefaultValues()
