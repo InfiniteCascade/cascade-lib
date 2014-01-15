@@ -9,6 +9,7 @@ use cascade\models\Relation;
 use cascade\models\ObjectFamiliarity;
 use cascade\models\DeleteForm;
 
+use infinite\helpers\ArrayHelper;
 use infinite\web\Controller;
 use infinite\db\ActiveRecord;
 use infinite\base\exceptions\HttpException;
@@ -80,7 +81,7 @@ class ObjectController extends Controller
 	 *
 	 */
 	public function actionSearch() {
-		$package = ['results' => []];
+		$package = [];
 		if (empty($_GET['term'])) {
 			Yii::$app->response->data = $package;
 			return;
@@ -103,15 +104,12 @@ class ObjectController extends Controller
 		foreach ($modules as $module) {
 			$moduleItem = Yii::$app->collectors['types']->getOne($module);
 			if (!$moduleItem || !($moduleObject = $moduleItem->object)) { continue; }
-			$results = ['name' => $moduleObject->title->getPlural(true), 'results' => []];
 			$moduleResults = $moduleObject->search($term, $params);
 			foreach ($moduleResults as $r) {
-				$results['results'][] = $r->toArray();
-			}
-			if (!empty($results['results'])) {
-				$package['results'][$module] = $results;
+				$package[] = $r->toArray();
 			}
 		}
+		ArrayHelper::multisort($package, 'score', SORT_DESC);
 		Yii::$app->response->data = $package;
 	}
 

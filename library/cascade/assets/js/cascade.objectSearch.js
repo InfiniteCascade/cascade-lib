@@ -15,7 +15,10 @@
          $this.options.data['term'] = '--QUERY--';
          $this.options.remote.url += '?' + jQuery.param($this.options.data);
          $this.options.remote.url = $this.options.remote.url.replace('--QUERY--', '%QUERY');
-         $.debug($this.options);
+         if ($this.options.dataset === undefined) {
+            $this.options.dataset = {};
+         }
+         $this.options.dataset.template = '<p><strong>{{name}}</strong>&nbsp;{{sub}}</p>';
          delete $this.options.data;
       	return $this.typeahead($this.options);
    };
