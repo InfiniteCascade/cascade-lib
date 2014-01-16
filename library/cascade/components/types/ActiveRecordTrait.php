@@ -63,7 +63,23 @@ trait ActiveRecordTrait {
 	{
 		return 'cascade\\models\\Registry';
 	}
+
+
+    public function isForeignField($field)
+    {
+        return parent::isForeignField($field) && strpos($field, ':') !== false;
+    }
 	
+    public function getForeignFieldValue($field)
+    {
+    	$parts = explode(':', $field);
+    	if (!in_array(count($parts), [2, 3])) { return null; }
+    	$relationshipType = $parts[0];
+    	$relationshipName = $parts[1];
+    	$field = isset($parts[2]) ? $parts[2] : 'descriptor';
+        return null; 
+    }
+
 	public static function searchFields()
 	{
 		$modelClass = get_called_class();
