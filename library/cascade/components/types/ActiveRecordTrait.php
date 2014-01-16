@@ -11,24 +11,27 @@ namespace cascade\components\types;
 
 use Yii;
 
+use yii\helpers\Inflector;
+
 use infinite\helpers\Html;
 use infinite\helpers\ArrayHelper;
+use infinite\db\behaviors\SearchTerm;
 
 use cascade\components\web\form\Segment as FormSegment;
 use cascade\components\types\Relationship;
 use cascade\models\Relation;
-use infinite\db\behaviors\SearchTerm;
 
 trait ActiveRecordTrait {
 	use SearchTerm;
 
-	public $baseFieldClass = 'cascade\components\db\fields\Base';
-	public $modelFieldClass = 'cascade\components\db\fields\Model';
-	public $relationFieldClass = 'cascade\components\db\fields\Relation';
-	public $relationClass = 'cascade\models\Relation';
+	public $baseFieldClass = 'cascade\\components\\db\\fields\\Base';
+	public $artificialFieldClass = 'cascade\\components\\db\\fields\\Artificial';
+	public $modelFieldClass = 'cascade\\components\\db\\fields\\Model';
+	public $relationFieldClass = 'cascade\\components\\db\\fields\\Relation';
+	public $relationClass = 'cascade\\models\\Relation';
 	public $registryClass = 'cascade\\models\\Registry';
-	public $taxonomyFieldClass = 'cascade\components\db\fields\Taxonomy';
-	public $formSegmentClass = 'cascade\components\web\form\Segment';
+	public $taxonomyFieldClass = 'cascade\\components\\db\\fields\\Taxonomy';
+	public $formSegmentClass = 'cascade\\components\\web\\form\\Segment';
 	public $columnSchemaClass = 'yii\\db\\ColumnSchema';
 
 	public $defaultCustomColumnSchema = [
@@ -70,15 +73,112 @@ trait ActiveRecordTrait {
         return parent::isForeignField($field) && strpos($field, ':') !== false;
     }
 	
-    public function getForeignFieldValue($field)
+
+    public static function searchForeign($term, $field)
+	{
+		$modelClass = get_called_class();
+		$model = new $modelClass;
+
+		$package = [];
+		$parts = explode(':', $field);
+    	if (count($parts) !== 2) { return $package; }
+    	$relationshipType = $parts[0];
+    	if (!in_array($relationshipType, ['child', 'children', 'descendants', 'parent', 'parents', 'ancestors'])) {
+    		return null;
+    	}
+
+		$searchFields = array_unique(static::searchFields());
+    	$companionName = $parts[1];
+    	$fieldName = isset($parts[2]) ? $parts[2] : 'descriptor';
+    	$myTypeItem = $model->objectTypeItem;
+    	$companionTypeItem = Yii::$app->collectors['types']->getOne($companionName);
+    	if (!$companionTypeItem || !$myTypeItem || !($companionType = $companionTypeItem->object) || !($myType = $myTypeItem->object)) { return null; }
+    	if (in_array($relationshipType, ['child', 'children', 'descendants'])) {
+    		// I'm the parent
+    		$relationship = Relationship::has($myTypeItem, $companionTypeItem) ? Relationship::getOne($myTypeItem, $companionTypeItem) : false;
+    		$seek = 'parents';
+    	} else {
+    		$relationship = Relationship::has($companionTypeItem, $myTypeItem) ? Relationship::getOne($companionTypeItem, $myTypeItem) : false;
+    		$seek = 'children';
+    	}
+    	if (!$relationship) { return $package; }
+    	$results = $companionType->search($term);
+    	foreach ($results as $result) {
+    		if (empty($result->object)) { continue; }
+    		foreach ($result->object->$seek($myType->primaryModel) as $object) {
+    			$package[$object->id] = self::createSearchResult($object, $searchFields, $result->score);
+    			$package[$object->id]->mergeTerms([$result->object->descriptor]);
+    			$package[$object->id]->addSubdescriptorValue($result->object->descriptor);
+    		}
+    	}
+
+		return $package;
+	}
+
+    public function getForeignField($field, $relationOptions = [], $objectOptions = [])
     {
     	$parts = explode(':', $field);
     	if (!in_array(count($parts), [2, 3])) { return null; }
     	$relationshipType = $parts[0];
-    	$relationshipName = $parts[1];
-    	$field = isset($parts[2]) ? $parts[2] : 'descriptor';
+    	if (!in_array($relationshipType, ['child', 'children', 'descendants', 'parent', 'parents', 'ancestors'])) {
+    		return null;
+    	}
+    	$companionName = $parts[1];
+    	$fieldName = isset($parts[2]) ? $parts[2] : 'descriptor';
+    	$myTypeItem = $this->objectTypeItem;
+    	$companionTypeItem = Yii::$app->collectors['types']->getOne($companionName);
+    	if (!$companionTypeItem || !$myTypeItem || !($companionType = $companionTypeItem->object) || !($myType = $myTypeItem->object)) { return null; }
+    	if (in_array($relationshipType, ['child', 'children', 'descendants'])) {
+    		// I'm the parent
+    		$relationship = Relationship::has($myTypeItem, $companionTypeItem) ? Relationship::getOne($myTypeItem, $companionTypeItem) : false;
+    	} else {
+    		$relationship = Relationship::has($companionTypeItem, $myTypeItem) ? Relationship::getOne($companionTypeItem, $myTypeItem) : false;
+    	}
+    	if (!$relationship) { return null; }
+    	$result = $this->{$relationshipType}($companionType->primaryModel, $relationOptions, $objectOptions);
+    	if (empty($result)) {
+    		return null;
+    	}
+    	if (is_array($result)) {
+    		$fields = [];
+    		foreach ($result as $object) {
+    			$field = $object->getField($fieldName);
+    			if (empty($field)) { continue; }
+    			$companionType->loadFieldLink($field, $object);
+    			$fields[] = $field;
+    		}
+    		return $fields;
+    	} else {
+    		$field = $result->getField($fieldName);
+    		if (empty($field)) { continue; }
+    		$companionType->loadFieldLink($field, $result);
+    		return $field;
+    	}
         return null; 
     }
+
+    public function getForeignFieldValue($field)
+    {
+    	$field = $this->getForeignField($field);
+    	if (!empty($field)) {
+    		if (is_array($field)) {
+    			$rich = [];
+	    		$plain = [];
+	    		foreach ($field as $object) {
+	    			$valuePackage = $object->valuePackage;
+	    			if (!empty($valuePackage) && !empty($valuePackage['rich']) && !empty($valuePackage['plain'])) {
+	    				$rich[] = $valuePackage['rich'];
+	    				$plain[] = $valuePackage['plain'];
+	    			}
+	    		}
+	    		return ['rich' => implode(', ', $rich), 'plain' => implode(', ', $plain)];
+    		} else {
+    			return $field->valuePackage;
+    		}
+    	}
+    	return null;
+    }
+
 
 	public static function searchFields()
 	{
@@ -285,6 +385,23 @@ trait ActiveRecordTrait {
 		return $validators;
 	}
 
+	public function getField($field, $owner = null)
+	{
+		$fields = $this->fields;
+		if (isset($fields[$field])) {
+			return $fields[$field];
+		} else {
+			$functionName = 'get'. Inflector::camelize($field) .'Field';
+			if (method_exists($this, $functionName)) {
+				return $this->$functionName();
+			} elseif (isset($this->{$field})) {
+				// create artificial field
+				return $this->createArtificialField($field, $this->{$field}, $owner);
+			}
+		}
+		return null;
+	}
+
 	/**
 	 *
 	 *
@@ -382,6 +499,19 @@ trait ActiveRecordTrait {
 		if (!isset($settings['formField'])) { $settings['formField'] = []; }
 		$settings['formField']['owner'] = $owner;
 
+		return Yii::createObject($settings);
+	}
+
+	public function createArtificialField($fieldName, $fieldValue, $owner, $settings = [])
+	{
+		$settings['class'] = $this->artificialFieldClass;
+		if (!isset($settings['model'])) {
+			$settings['model'] = $this;
+		}
+		$settings['fieldName'] = $fieldName;
+		$settings['fieldValue'] = $fieldValue;
+		$settings['required'] = false;
+		$settings['formField'] = false;;
 		return Yii::createObject($settings);
 	}
 

@@ -82,6 +82,13 @@ class Relationship extends \infinite\base\Object
 		}
 		return self::$_relationships[$key];
 	}
+	
+	static public function has(Item $parent, Item $child)
+	{
+		$key = md5($parent->systemId ."-". $child->systemId);
+		return isset(self::$_relationships[$key]);
+	}
+
 
 	public function isHasOne()
 	{

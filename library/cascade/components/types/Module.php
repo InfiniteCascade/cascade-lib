@@ -360,6 +360,17 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		return $widgets;
 	}
 
+	public function loadFieldLink($field, $object, $typeMatch = true)
+	{
+		if ($this->hasDashboard) {
+			$field->url = ['/object/view', $object->id];
+			if (!$typeMatch) {
+				// what is being displayed isn't the same type as what is being linked to. put helper title.
+				//		example: linking to an Individual from one of their phone numbers
+				$field->linkOptions['title'] = $object->descriptor;
+			}
+		}
+	}
 
 	/**
 	 *

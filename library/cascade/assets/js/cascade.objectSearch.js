@@ -15,7 +15,7 @@
          $this.options.data['term'] = '--QUERY--';
          $this.options.remote.url += '?' + jQuery.param($this.options.data);
          $this.options.remote.url = $this.options.remote.url.replace('--QUERY--', '%QUERY');
-         $this.options.template = '<p><strong>{{name}}</strong>&nbsp;{{subtitle}}</p>';
+         $this.options.template = '<p><strong>{{name}}</strong>&nbsp;{{subdescriptor}}</p>';
          $this.options.engine = SingleTemplateEngine;
          delete $this.options.data;
       	return $this.typeahead($this.options);

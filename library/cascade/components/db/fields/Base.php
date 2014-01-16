@@ -11,6 +11,9 @@ abstract class Base extends \infinite\base\Object {
 	public $fieldSchema;
 	public $priority;
 
+	public $url; // wrap formatted text in link
+	public $linkOptions = [];
+
 	public $possiblePrimaryKeys = ['id'];
 	
 	protected $_human;
@@ -161,12 +164,18 @@ abstract class Base extends \infinite\base\Object {
 
 	public function getFormattedValue() {
 		if ($this->format instanceof BaseFormat) {
-			return $this->format->get();
+			$formattedValue = $this->format->get();
 		} elseif (is_callable($this->format) OR (is_array($this->format) AND !empty($this->format[0]) AND is_object($this->format[0]))) {
-			return $this->evaluateExpression($this->format, [$this->value]);
+			$formattedValue = $this->evaluateExpression($this->format, [$this->value]);
 		} else {
-			return $this->value;
+			$formattedValue = $this->value;
 		}
+		return $formattedValue;
+	}
+
+	public function getValuePackage()
+	{
+		return ['plain' => $this->value, 'rich' => $this->formattedValue];
 	}
 
 	public function getValue() {
