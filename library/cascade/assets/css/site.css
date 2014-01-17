@@ -177,3 +177,37 @@ nav .container {
 .tt-suggestion p {
   margin: 0;
 }
+
+/* objectBrowse */
+.object-browse {
+  height: 200px;
+  border: 1px solid #CCCCCC;
+  border-top-width: 0;
+  overflow: hidden;
+}
+.object-browse .section {
+  overflow-y: scroll;
+  height: 200px;
+  width: 300px;
+  float: left;
+  display: block;
+  border-right: 1px solid #CCCCCC;
+  position: relative;
+}
+.object-browse .list-group-item .glyphicon {
+  float: right;
+}
+
+.object-browse .section .canvas {
+  margin: 5px 20px;
+}
+
+.object-browse .type-chooser {
+}
+
+.object-browse .parent-chooser {
+}
+
+.object-browse .object-chooser {
+  border-right: none;
+}

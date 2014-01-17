@@ -10,7 +10,7 @@ namespace cascade\components\dataInterface;
 
 use infinite\base\exceptions\Exception;
 
-class Item extends \infinite\base\CollectorItem {
+class Item extends \infinite\base\collector\Item {
 	public $error;
 
 	private $_name;
@@ -18,13 +18,6 @@ class Item extends \infinite\base\CollectorItem {
 	private $_checked;
 	protected $_interfaceObject;
 	protected $_currentInterfaceAction;
-
-	/**
-	 *
-	 */
-	public function init() {
-		parent::init();
-	}
 
 
 	public function run() {

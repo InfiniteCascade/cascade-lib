@@ -25,7 +25,8 @@ class AppAsset extends AssetBundle
 		'js/cascade.refreshable.js',
 		'js/cascade.objectSearch.js',
 		'js/cascade.objectBrowse.js',
-		'js/cascade.relationship.js'
+		'js/cascade.relationship.js',
+		'js/cascade.infiniteFilter.js'
 	];
 	public $depends = [
 		'infinite\\web\\assetBundles\\InfiniteAsset',

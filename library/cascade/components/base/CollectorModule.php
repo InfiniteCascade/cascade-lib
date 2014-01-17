@@ -27,10 +27,6 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
 		
 		Yii::$app->collectors->onAfterInit([$this, 'onAfterInit']);
 
-		if (isset(Yii::$app->controller)) {
-			throw new Exception("This is a happy exception!");
-			Yii::$app->controller->on(Controller::EVENT_BEFORE_ACTION, [$this, 'onBeforeControllerAction']);
-		}
 		
 		parent::__construct($id, $parent, $config);
 	}
@@ -50,9 +46,6 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
 		return [];
 	}
 
-	public function onBeforeControllerAction($controller, $action) {
-		return true;
-	}
 
 	public function onAfterInit($event) {
 		return true;

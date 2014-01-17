@@ -77,13 +77,18 @@ class Relation extends Base {
 		$model = $this->model;
 		$field = $this->getRelationModelField();
 		$parts = [];
-		$r = ['context' => []];
+		$r = ['context' => [], 'browse' => []];
 		$r['context']['relationship'] = $this->modelField->relationship->systemId;
 		if ($this->modelField->baseModel && !$this->modelField->baseModel->isNewRecord) {
 			$r['context']['objectId'] = $this->modelField->baseModel->primaryKey;
 		}
-		$r['context']['role'] = $this->modelField->relationship->companionRole($this->modelField->modelRole);
-
+		$r['context']['role'] = $role = $this->modelField->relationship->companionRole($this->modelField->modelRole);
+		// \d($role);exit;
+		if (($modelTypeItem = $this->modelField->relationship->{$role}->collectorItem)) {
+			$parentTypes = $modelTypeItem->parents;
+			$r['browse']['types'] = ArrayHelper::map($parentTypes, 'parent.systemId', 'parent.title.upperPlural');
+		}
+		asort($r['browse']['types']);
 		$r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
 		$this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
 		Html::addCssClass($this->htmlOptions, 'relationship');
