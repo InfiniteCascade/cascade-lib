@@ -24,10 +24,10 @@ class DbMeta extends \infinite\base\Object {
 	public function __construct($db, $foreignTable) {
 		$this->_db = $db;
 		$this->_foreignTable = $foreignTable;
-		if (!isset($db->schema->tables[$foreignTable])) {
+		if (!($this->_schema = $db->schema->getTableSchema($foreignTable))) {
 			throw new Exception("Foreign table does not exist {$foreignTable}!");
 		}
-		$this->_schema = $db->schema->tables[$foreignTable];
+		
 	}
 
 	public function addHasMany(DbModel $foreignModel, $foreignKey, $params = []) {

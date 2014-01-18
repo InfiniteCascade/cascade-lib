@@ -61,8 +61,8 @@ class Task_000001_environment extends \infinite\setup\Task {
 		$input['_']['yiiEnv'] = ($input['general']['template'] === 'development') ? 'dev' :'prod';
 		$input['_']['version'] = $this->setup->version;
 		$input['_']['application_id'] = self::generateId($input['general']['application_name']);
-		$input['_']['envPath'] = $this->setup->environmentSetupsPath . DIRECTORY_SEPARATOR . $input['general']['template'];
-		$input['_']['envPathFriendly'] = '__DIR__ . DIRECTORY_SEPARATOR . \'environments\' . DIRECTORY_SEPARATOR . \'setups\' . DIRECTORY_SEPARATOR . \''.$input['general']['template'] .'\'';
+		$input['_']['envPath'] = $this->setup->configPath . DIRECTORY_SEPARATOR . $input['general']['template'];
+		$input['_']['envPathFriendly'] = '__DIR__ . DIRECTORY_SEPARATOR . \''.$input['general']['template'] .'\'';
 		if ($this->setup->app()) {
 			$input['_']['salt'] = $this->setup->app()->params['salt'];
 		}

@@ -1,14 +1,12 @@
 <?php
 /**
- * ./app/config/environments/templates/development/main.php
+ * ./app/config/environments/templates/development/web-test.php
  *
  * @author Jacob Morrison <jacob@infinitecascade.com>
  * @package cascade
  */
 
 
-$parent = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..'. DIRECTORY_SEPARATOR . '..'. DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR . basename(__FILE__);
-$config = include $parent;
-$config = array_merge($config, []);
-return $config;
+$parent = INFINITE_CASCADE_PATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR . basename(__FILE__);
+return array_merge(include($parent), []);
 ?>

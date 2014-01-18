@@ -26,13 +26,22 @@ class DataInterface extends \cascade\components\db\ActiveRecord
 		return 'data_interface';
 	}
 
+	public function behaviors() {
+		return array_merge(parent::behaviors(), [
+			'Registry' => [
+				'class' => 'infinite\\db\\behaviors\\Registry',
+				'registryClass' => Registry::className(),
+			],
+		]);
+	}
+
 	/**
 	 * @inheritdoc
 	 */
 	public function rules()
 	{
 		return [
-			[['id', 'system_id'], 'required'],
+			[['system_id'], 'required'],
 			[['last_sync', 'created', 'modified'], 'safe'],
 			[['id'], 'string', 'max' => 36],
 			[['name', 'system_id'], 'string', 'max' => 255]

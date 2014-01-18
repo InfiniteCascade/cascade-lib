@@ -9,6 +9,7 @@
 namespace cascade\components\dataInterface;
 
 use infinite\base\exceptions\Exception;
+use cascade\models\DataInterface;
 
 class Item extends \infinite\base\collector\Item {
 	public $error;
@@ -29,7 +30,7 @@ class Item extends \infinite\base\collector\Item {
 			return false;
 		}
 		try {
-			$this->module->run($this->_currentInterfaceAction);
+			$this->object->run($this->_currentInterfaceAction);
 		} catch (Exception $e) {
 			$this->_currentInterfaceAction->status->addError('Exception raised: '. $e->getMessage());
 			$this->_currentInterfaceAction->end(true);
@@ -49,62 +50,21 @@ class Item extends \infinite\base\collector\Item {
 	}
 
 
-	public function setInterfaceObject($value) {
-		$this->_interfaceObject = $value;
-	}
-
-	public function getInterfaceObject() {
+	public function getInterfaceObject()
+	{
+		if (is_null($this->_interfaceObject)) {
+			$this->_interfaceObject = DataInterface::find()->where(['system_id' => $this->object->systemId])->one();
+			if (empty($this->_interfaceObject)) {
+				$this->_interfaceObject = new DataInterface;
+				$this->_interfaceObject->name = $this->object->name;
+				$this->_interfaceObject->system_id = $this->object->systemId;
+				if (!$this->_interfaceObject->save()) {
+					var_dump($this->_interfaceObject->errors);
+					throw new Exception("Unable to save interface object!");
+				}
+			}
+		}
 		return $this->_interfaceObject;
 	}
 
-	/**
-	 *
-	 *
-	 * @param unknown $name
-	 */
-	public function __construct($name) {
-		$this->_name = $name;
-	}
-
-
-	/**
-	 *
-	 *
-	 * @return unknown
-	 */
-	public function getName() {
-		return $this->_name;
-	}
-
-	/**
-	 *
-	 *
-	 * @return unknown
-	 */
-	public function getActive() {
-		if (!is_null($this->_module) && $this->checked) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 *
-	 *
-	 * @return unknown
-	 */
-	public function getChecked() {
-		if (is_null($this->_checked)) {
-			$this->_checked = true;
-		}
-		return $this->_checked;
-	}
-
-	public function getModule() {
-		return $this->_module;
-	}
-
-	public function setModule($mod) {
-		$this->_module = $mod;
-	}
 }

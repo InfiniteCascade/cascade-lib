@@ -25,12 +25,14 @@ abstract class DbModule extends Module {
 		return [];
 	}
 	
-	public function getForeignModelConfig($modelName)
+	public function getForeignModelConfig($tableName, $modelName)
 	{
 		$config = ['class' => 'cascade\\components\\dataInterface\\connectors\\DbModel'];
 		if (isset($this->foreignModelsConfig[$modelName])) {
 			$config = array_merge($config, $this->foreignModelsConfig[$modelName]);
 		}
+		$config['tableName'] = $tableName;
+		$config['interface'] = $this;
 		return $config;
 	}
 
@@ -42,9 +44,9 @@ abstract class DbModule extends Module {
 	public function getForeignModels()
 	{
 		if (is_null($this->_models)) {
-			foreach ($this->db->schema->findTableNames() as $tableName) {
+			foreach ($this->db->schema->getTableNames() as $tableName) {
 				$modelName = $this->getForeignModelName($tableName);
-				$this->_models[$modelName] = Yii::createObject($this->getForeignModelConfig($modelName));
+				$this->_models[$modelName] = Yii::createObject($this->getForeignModelConfig($tableName, $modelName));
 			}
 		}
 		return $this->_models;
@@ -57,8 +59,9 @@ abstract class DbModule extends Module {
 				$this->dbConfig['class'] = 'cascade\\components\\dataInterface\\connectors\\DbConnection';
 			}
 			$this->_db = Yii::createObject($this->dbConfig);
+			$this->_db->open();
 		}
-		if (!$this->_db || !$this->_db->isActive) {
+		if (empty($this->_db) || !$this->_db->isActive) {
 			throw new Exception("Unable to connect to foreign database.");
 		}
 		return $this->_db;

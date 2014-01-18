@@ -2,21 +2,27 @@
 namespace cascade\components\dataInterface\connectors;
 
 use infinite\base\exceptions\Exception;
+use yii\db\Query;
 
 class DbModel extends \infinite\base\Object {
 	protected $_interface;
-	protected $_foreignTable;
+	protected $_tableName;
 	protected $_meta;
 	protected $_attributes;
 	protected $_keys;
 	protected $_children;
 
-	public function __construct($interface, $foreignTable, $attributes = null) {
-		$this->_foreignTable = $foreignTable;
-		$this->_interface = $interface;
-		$this->_attributes = $attributes;
-		$this->_meta = DbMeta::get($this->interface->db, $foreignTable);
+	public function init()
+	{
+		parent::init();
+		$this->_meta = DbMeta::get($this->interface->db, $this->tableName);
 	}
+
+	public function __clone()
+	{
+		$this->reset();
+	}
+
 
 	public function __get($name) {
 		if (isset($this->_attributes[$name])) {
@@ -26,26 +32,48 @@ class DbModel extends \infinite\base\Object {
 	}
 
 	public function __set($name, $value) {
-		if ($this->meta->hasAttribute($name)) {
+		if (isset($this->meta) && $this->meta->hasAttribute($name)) {
 			$this->_attributes[$name] = $value;
 			return true;
 		}
-		return parent::__get($name);
+		return parent::__set($name, $value);
 	}
 
 	public function __isset($name) {
-		if($this->meta->hasAttribute($name) && isset($this->_attributes[$name])) {
+		if(isset($this->meta) && $this->meta->hasAttribute($name) && isset($this->_attributes[$name])) {
 			return true;
 		}
 		return parent::__isset($name);
 	}
 
 	public function __unset($name) {
-		if($this->meta->hasAttribute($name)) {
+		if(isset($this->meta) && $this->meta->hasAttribute($name)) {
 			unset($this->_attributes[$name]);
 			return true;
 		}
 		return parent::__unset($name);
+	}
+
+	public function settableName($value)
+	{
+		$this->_tableName = $value;
+	}
+
+	public function setInterface($value)
+	{
+		$this->_interface = $value;
+	}
+
+	public function reset()
+	{
+		$this->_attributes = [];
+	}
+
+	public function setAttributes($value)
+	{
+		foreach ($value as $key => $val) {
+			$this->{$key} = $val;
+		}
 	}
 
 	public function getChildren() {
@@ -58,7 +86,7 @@ class DbModel extends \infinite\base\Object {
 					'where' => $r['foreignKey'] .'=:foreignKeyId',
 					'params' => [':foreignKeyId' => $this->primaryKey]
 				];
-				$children[$r['foreignModel']->foreignTable] = $r['foreignModel']->findAll($query);
+				$children[$r['foreignModel']->tableName] = $r['foreignModel']->findAll($query);
 			}
 			$habtm = $this->meta->habtm;
 
@@ -75,7 +103,9 @@ class DbModel extends \infinite\base\Object {
 	}
 
 	public function populateRecord($attributes) {
-		return new DbModel($this->_interface, $this->_foreignTable, $attributes);
+		$clone = clone $this;
+		$clone->attributes = $attributes;
+		return $clone;
 	}
 
 	public function populateRecords($results) {
@@ -106,17 +136,17 @@ class DbModel extends \infinite\base\Object {
 	}
 
 	public function findAll($params = []) {
-		$c = $this->interface->db->createCommand();
-		$c->select('*');
-		$c->from($this->_foreignTable);
+		$q = new Query;
+		$q->select('*');
+		$q->from($this->_tableName);
 		foreach ($params as $k => $v) {
-			$c->{$k} = $v;
+			$q->{$k} = $v;
 		}
-		return $this->populateRecords($c->queryAll());
+		return $this->populateRecords($q->all($this->interface->db));
 	}
 
-	public function getForeignTable() {
-		return $this->_foreignTable;
+	public function getTableName() {
+		return $this->_tableName;
 	}
 	
 }

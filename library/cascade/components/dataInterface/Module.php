@@ -18,5 +18,6 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	}
 
 	abstract public function getSettings();
+	abstract public function run(Action $action);
 }
 ?>

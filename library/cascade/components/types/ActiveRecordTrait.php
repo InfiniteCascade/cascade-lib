@@ -376,7 +376,7 @@ trait ActiveRecordTrait {
 	{
 		$validators = parent::getValidators();
 		
-		if (isset($this->objectType) && ($disabledFields = $this->objectType->disabledFields) && !empty($disabledFields)) {
+		if (is_object($this->objectType) && ($disabledFields = $this->objectType->disabledFields) && !empty($disabledFields)) {
 			foreach ($validators as $validator) {
 				$validator->attributes = array_diff($validator->attributes, $disabledFields);
 			}
