@@ -20,10 +20,11 @@ abstract class DbModule extends Module {
 	{
 		if (is_null($this->_dataSources)) {
 			$this->_dataSources = [];
-			foreach ($this->dataSources() as $localKey => $dataSource) {
+			foreach ($this->dataSources() as $foreignModel => $dataSource) {
 				if (!isset($dataSource['class'])) {
 					$dataSource['class'] = $this->dataSourceClass;
 				}
+				$dataSource['foreignModel'] = $foreignModel;
 				$dataSource['module'] = $this;
 				$this->_dataSources[$localKey] = Yii::createObject($dataSource);
 			}
