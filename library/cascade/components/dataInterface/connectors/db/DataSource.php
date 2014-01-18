@@ -1,6 +1,7 @@
 <?php
-namespace cascade\components\dataInterface\connectors;
+namespace cascade\components\dataInterface\connectors\db;
 
+use Yii;
 use cascade\models\Registry;
 use cascade\models\Relation;
 use cascade\models\KeyTranslation;
@@ -8,14 +9,15 @@ use cascade\components\dataInterface\Action;
 
 use infinite\helpers\ArrayHelper;
 
-class DbMap extends \infinite\base\Object {
-	protected $_dataInterface;
-	protected $_l;
-	protected $_f;
-	protected $_m;
-
+class DataSource extends \infinite\base\Object {
+	public $fieldMapClass = 'cascade\\components\\dataInterface\\connectors\\db\\FieldMap';
 	public $keyGenerator;
 
+	public $module;
+	protected $_dataInterface;
+	protected $_localModel;
+	protected $_foreignModel;
+	protected $_map;
 	protected $_settings;
 
 	static $defaultSettings = [
@@ -28,18 +30,6 @@ class DbMap extends \infinite\base\Object {
 		'universalKey' => false
 	];
 
-	public function __construct($dataInterface, $localModel, $foreignModel) {
-		$this->_dataInterface = $dataInterface;
-		$this->_l = $localModel;
-		$this->_f = $foreignModel;
-		$this->_m = [];
-
-		foreach ($this->unmappedLocalKeys as $key) {
-			if ($foreignModel->meta->hasAttribute($key)) {
-				$this->_m[$key] = ['foreignKey' => $key];
-			}
-		}
-	}
 
 	public function handleForeign($action, $f, $parent = null) {
 		$key = $this->getKeyTranslation($f);
@@ -205,22 +195,30 @@ class DbMap extends \infinite\base\Object {
 	}
 
 	public function getLocalModel() {
-		return $this->_l;
+		return $this->_localModel;
+	}
+
+	public function setLocalModel($value) {
+		$this->_localModel = $value;
+	}
+
+	public function setForeignModel($value) {
+		$this->_foreignModel = $value;
 	}
 
 	public function getForeignModel() {
-		return $this->_f;
+		return $this->_foreignModel;
 	}
 
 	public function setMap($m) {
 		foreach ($m as $k => $v) {
-			if (!isset($this->_m[$k])) {
-				$this->_m[$k] = [];
+			$fieldMap = $v;
+			if (!isset($fieldMap['class'])) {
+				$fieldMap['class'] = $this->fieldMapClass;
 			}
-			if (is_string($v)) {
-				$v = ['foreignKey' => $v];
-			}
-			$this->_m[$k] = array_merge($this->_m[$k], $v);
+			$fieldMap['map'] = $this;
+			$fieldMap = Yii::createObject($fieldMap);
+			$this->_map[] = $fieldMap;
 		}
 		return true;
 	}

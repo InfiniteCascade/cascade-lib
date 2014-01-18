@@ -1,9 +1,9 @@
 <?php
-namespace cascade\components\dataInterface\connectors;
+namespace cascade\components\dataInterface\connectors\db;
 
 use infinite\base\exceptions\Exception;
 
-class DbMeta extends \infinite\base\Object {
+class Meta extends \infinite\base\Object {
 	protected $_hasMany = [];
 	protected $_hasOne = [];
 	protected $_belongsTo = [];
@@ -16,7 +16,7 @@ class DbMeta extends \infinite\base\Object {
 
 	public static function get($db, $foreignTable) {
 		if (!isset(self::$_metas[$foreignTable])) {
-			self::$_metas[$foreignTable] = new DbMeta($db, $foreignTable);
+			self::$_metas[$foreignTable] = new Meta($db, $foreignTable);
 		}
 		return self::$_metas[$foreignTable];
 	}
@@ -30,20 +30,20 @@ class DbMeta extends \infinite\base\Object {
 		
 	}
 
-	public function addHasMany(DbModel $foreignModel, $foreignKey, $params = []) {
+	public function addHasMany(Model $foreignModel, $foreignKey, $params = []) {
 		$this->_hasMany[] = ['foreignModel' => $foreignModel, 'foreignKey' => $foreignKey, 'params' => $params];
 	}
 
-	public function addHasOne(DbModel $foreignModel, $foreignKey, $params = []) {
+	public function addHasOne(Model $foreignModel, $foreignKey, $params = []) {
 		$this->_hasOne[] = ['foreignModel' => $foreignModel, 'foreignKey' => $foreignKey, 'params' => $params];
 
 	}
 
-	public function addBelongsTo(DbModel $foreignModel, $localKey, $params = []) {
+	public function addBelongsTo(Model $foreignModel, $localKey, $params = []) {
 		$this->_belongsTo[] = ['foreignModel' => $foreignModel, 'localKey' => $localKey, 'params' => $params];
 	}
 
-	public function addHabtm(DbModel $foreignModel, DbModel $connectorModel, $localKey, $foreignKey, $params = []) {
+	public function addHabtm(Model $foreignModel, Model $connectorModel, $localKey, $foreignKey, $params = []) {
 		$this->_habtm[] = ['foreignModel' => $foreignModel, 'connectorModel' => $connectorModel, 'localKey' => $localKey, 'foreignKey' => $foreignKey, 'params' => $params];
 	}
 

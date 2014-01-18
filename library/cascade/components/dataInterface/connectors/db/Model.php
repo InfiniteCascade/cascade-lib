@@ -1,10 +1,10 @@
 <?php
-namespace cascade\components\dataInterface\connectors;
+namespace cascade\components\dataInterface\connectors\db;
 
 use infinite\base\exceptions\Exception;
 use yii\db\Query;
 
-class DbModel extends \infinite\base\Object {
+class Model extends \infinite\base\Object {
 	protected $_interface;
 	protected $_tableName;
 	protected $_meta;
@@ -15,7 +15,7 @@ class DbModel extends \infinite\base\Object {
 	public function init()
 	{
 		parent::init();
-		$this->_meta = DbMeta::get($this->interface->db, $this->tableName);
+		$this->_meta = Meta::get($this->interface->db, $this->tableName);
 	}
 
 	public function __clone()
@@ -120,7 +120,7 @@ class DbModel extends \infinite\base\Object {
 		$a = [];
 		foreach ($this->meta->attributeKeys as $k) {
 			$a[$k] = null;
-			if (is_array($this->_attributes) AND isset($this->_attributes[$k])) {
+			if (is_array($this->_attributes) && isset($this->_attributes[$k])) {
 				$a[$k] = $this->_attributes[$k];
 			}
 		}
