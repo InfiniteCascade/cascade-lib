@@ -4,17 +4,52 @@ namespace cascade\components\dataInterface;
 use Yii;
 use yii\helpers\Inflector;
 use infinite\base\exceptions\Exception;
+use cascade\components\dataInterface\Action;
 
 
 abstract class DbModule extends Module {
 	public $dataSourceClass = 'cascade\\components\\dataInterface\\connectors\\db\\DataSource';
 	public $dbConfig = [];
+	protected $_action;
 
 	protected $_models;
 	protected $_db;
 	protected $_dataSources;
 
 	abstract public function dataSources();
+
+	public function getKeyTranslation(DbModel $foreignObject) {
+		$key = $this->generateKey($foreignObject);
+		if ($this->settings['universalKey']) {
+			return KeyTranslation::get($key);
+		} else {
+			return KeyTranslation::get($key, $this->dataInterface->interfaceItem->interfaceObject);
+		}
+	}
+	
+	public function run(Action $action)
+	{
+		$this->_action = $action;
+		$total = 0;
+		foreach ($this->dataSources as $source)
+		{
+			$total += $source->total;
+		}
+
+		$action->progressTotal = $total;
+		foreach ($this->dataSources as $source)
+		{
+			if ($source->settings['direction'] === 'to_local') {
+				$prefix = 'Importing';
+			} elseif ($source->settings['direction'] === 'to_foreign') {
+				$prefix = 'Exporting';
+			} else {
+				$prefix = 'Syncing';
+			}
+			$action->progressPrefix = "{$prefix} {$source->name}...";
+			$source->run();
+		}
+	}
 
 	public function getDataSources()
 	{
@@ -24,9 +59,9 @@ abstract class DbModule extends Module {
 				if (!isset($dataSource['class'])) {
 					$dataSource['class'] = $this->dataSourceClass;
 				}
-				$dataSource['foreignModel'] = $foreignModel;
+				$dataSource['foreignModel'] = $this->getForeignModel($foreignModel);
 				$dataSource['module'] = $this;
-				$this->_dataSources[$localKey] = Yii::createObject($dataSource);
+				$this->_dataSources[$foreignModel] = Yii::createObject($dataSource);
 			}
 		}
 		return $this->_dataSources;
@@ -86,6 +121,14 @@ abstract class DbModule extends Module {
 			throw new Exception("Unable to connect to foreign database.");
 		}
 		return $this->_db;
+	}
+
+	public function getAction()
+	{
+		if (is_null($this->_action)) {
+			$this->_action = new Action;
+		}
+		return $this->_action;
 	}
 }
 ?>

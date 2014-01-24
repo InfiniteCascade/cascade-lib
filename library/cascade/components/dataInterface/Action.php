@@ -2,6 +2,7 @@
 namespace cascade\components\dataInterface;
 
 use cascade\models\DataInterfaceLog;
+use yii\helpers\Console;
 
 class Action extends \infinite\base\Object {
 	protected $_interface;
@@ -11,11 +12,56 @@ class Action extends \infinite\base\Object {
 	protected $_settings = [];
 	protected $_registry = [];
 
+	public $progressPrefix = 'Loading';
+	protected $_progress = false;
+	protected $_progressTotal = 1;
+	protected $_progressRemaining;
+
 	public function __construct(Item $interface = null, $resumeLog = null) {
 		$this->_interface = $interface;
 		if (!is_null($resumeLog)) {
 			$this->_log = $resumeLog;
 		}
+	}
+
+
+	public function progress()
+	{
+		if (!$this->_progress) {
+			$this->_progress = true;
+			Console::startProgress($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
+		}
+		Console::updateProgress($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
+	}
+
+	public function setProgressTotal($total)
+	{
+		$this->_progressTotal = $total;
+		$this->progress();
+	}
+
+	public function getProgressTotal()
+	{
+		return $this->_progressTotal;
+	}
+
+	public function getProgressDone()
+	{
+		return $this->progressTotal - $this->progressRemaining;
+	}
+
+	public function getProgressRemaining()
+	{
+		if (is_null($this->_progressRemaining)) {
+			$this->_progressRemaining = $this->progressTotal;
+		}
+		return $this->_progressRemaining;
+	}
+
+	public function reduceRemaining($n)
+	{
+		$this->_progressRemaining = $this->progressRemaining - $n;
+		return $this->progress();
 	}
 
 	public function setSettings($value) {
@@ -32,6 +78,8 @@ class Action extends \infinite\base\Object {
 
 	public function end($endInterrupted = false) {
 		if (!is_null($this->log->ended)) { return true; }
+		Console::endProgress(true);
+		Console::stdout("Done! ". PHP_EOL);
 		if ($endInterrupted) {
 			$lerror = error_get_last();
 			if (!empty($lerror)) {

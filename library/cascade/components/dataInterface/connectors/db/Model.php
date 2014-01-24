@@ -96,13 +96,41 @@ class Model extends \infinite\base\Object {
 
 		return $this->_children;
 	}
+	public function primaryKey() {
+		$pk = $this->meta->schema->primaryKey;
+		if (is_array($pk)) {
+			$ppk = [];
+			foreach ($pk as $key) {
+				$ppk[] = $key;
+			}
+			return implode('.', $ppk);
+		}
+		return $pk;
+	}
 
 	public function getPrimaryKey() {
 		$pk = $this->meta->schema->primaryKey;
+		if (is_array($pk)) {
+			$ppk = [];
+			foreach ($pk as $key) {
+				if (!isset($this->attributes[$key])) {
+					$ppk[] = null;
+				} else {
+					$ppk[] = $this->attributes[$key];
+				}
+			}
+			return implode('.', $ppk);
+		}
+		if (!isset($this->attributes[$pk])) {
+			return null;
+		}
 		return $this->attributes[$pk];
 	}
 
 	public function populateRecord($attributes) {
+		if ($attributes === false) {
+			return false;
+		}
 		$clone = clone $this;
 		$clone->attributes = $attributes;
 		return $clone;
@@ -135,14 +163,35 @@ class Model extends \infinite\base\Object {
 		return $this->_interface;
 	}
 
-	public function findAll($params = []) {
+	public function find($params)
+	{
+
 		$q = new Query;
 		$q->select('*');
 		$q->from($this->_tableName);
 		foreach ($params as $k => $v) {
-			$q->{$k} = $v;
+			if (in_array($k, ['where'])) {
+				$q->{$k}($v);
+			} else {
+				$q->{$k} = $v;
+			}
 		}
-		return $this->populateRecords($q->all($this->interface->db));
+		return $q;
+	}
+
+	public function findAll($params = []) {
+		$return = $this->populateRecords($this->find($params)->all($this->interface->db));
+		return $return;
+	}
+
+	public function findOne($params = []) {
+		return $this->populateRecord($this->find($params)->one($this->interface->db));
+	}
+
+	public function findPrimaryKeys($params = []) {
+		$q = $this->find($params);
+		$q->select($this->meta->schema->primaryKey);
+		return $q->column($this->interface->db);
 	}
 
 	public function getTableName() {

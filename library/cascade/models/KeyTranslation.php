@@ -53,6 +53,12 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
 		];
 	}
 
+	public function getObject()
+	{
+		$registryClass = Registry::className();
+		return $registryClass::getObject($this->registry_id, true);
+	}
+
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
