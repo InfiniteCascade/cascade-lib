@@ -1,10 +1,12 @@
 <?php
 namespace cascade\components\dataInterface\connectors\db;
 
+use Yii;
 use infinite\base\exceptions\Exception;
 use yii\db\Query;
 
 class Model extends \infinite\base\Object {
+	public $name;
 	protected $_interface;
 	protected $_tableName;
 	protected $_meta;
@@ -15,7 +17,12 @@ class Model extends \infinite\base\Object {
 	public function init()
 	{
 		parent::init();
-		$this->_meta = Meta::get($this->interface->db, $this->tableName);
+		$metaConfig = [];
+		if (isset($this->_meta)) {
+			$metaConfig = $this->_meta;
+		}
+		$this->_meta = Meta::get($this->interface, $this->tableName);
+		Yii::configure($this->_meta, $metaConfig);
 	}
 
 	public function __clone()
@@ -32,7 +39,7 @@ class Model extends \infinite\base\Object {
 	}
 
 	public function __set($name, $value) {
-		if (isset($this->meta) && $this->meta->hasAttribute($name)) {
+		if (isset($this->meta) && is_object($this->meta) && $this->meta->hasAttribute($name)) {
 			$this->_attributes[$name] = $value;
 			return true;
 		}
@@ -82,11 +89,29 @@ class Model extends \infinite\base\Object {
 			// for this application, there is no distinction between hasOne and hasMany on the database level
 			$hasMany = array_merge($this->meta->hasMany, $this->meta->hasOne);
 			foreach ($hasMany as $r) {
+				if (!isset($r['foreignModel'])) { var_dump($r);exit; continue; }
+				if (is_string($r['foreignModel']) 
+					&& (!isset($this->interface->foreignModels[$r['foreignModel']])
+					|| !($r['foreignModel'] = $this->interface->foreignModels[$r['foreignModel']]))) {
+					var_dump($this->interface->foreignModels);
+					var_dump($r['foreignModel']);exit;
+					continue;
+				}
+				$params = isset($r['params']) ? $r['params'] : [];
+				$params[':foreignKeyId'] = $this->primaryKey;
+
+				$where = isset($r['where']) ? $r['where'] : [];
+				if (!empty($where)) {
+					$where = ['and', $where, $r['foreignKey'] .'=:foreignKeyId'];
+				} else {
+					$where = $r['foreignKey'] .'=:foreignKeyId';
+				}
 				$query = [
-					'where' => $r['foreignKey'] .'=:foreignKeyId',
-					'params' => [':foreignKeyId' => $this->primaryKey]
+					'where' => $where,
+					'params' => $params
 				];
 				$children[$r['foreignModel']->tableName] = $r['foreignModel']->findAll($query);
+				var_dump(count($children[$r['foreignModel']->tableName]));
 			}
 			$habtm = $this->meta->habtm;
 
@@ -157,6 +182,11 @@ class Model extends \infinite\base\Object {
 
 	public function getMeta() {
 		return $this->_meta;
+	}
+
+	public function setMeta($value)
+	{
+		$this->_meta = $value;
 	}
 
 	public function getInterface() {

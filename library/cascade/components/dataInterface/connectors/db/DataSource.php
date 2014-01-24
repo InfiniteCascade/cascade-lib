@@ -180,5 +180,10 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 	{
 		$this->_localDataItems = [];
 	}
+
+	public function getModule()
+	{
+		return $this->dataSource->module;
+	}
 }
 ?>

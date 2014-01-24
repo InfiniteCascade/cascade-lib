@@ -42,6 +42,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		foreach ($attributes as $key => $value) {
 			$this->localObject->$key = $value;
 		}
+
 		// save local object
 		if (!$this->localObject->save()) {
 			var_dump($this->localObject->errors);exit;
@@ -54,7 +55,13 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		}
 
 		// loop through children
-
+		foreach ($this->foreignObject->children as $table => $children) {
+			$dataSource = $this->module->getDataSource($table);
+			if (empty($dataSource) || !$dataSource->isRead()) { continue; }
+			foreach ($children as $child) {
+				// let the handler figure it out
+			}
+		} 
 
 		return $this->localObject;
 	}

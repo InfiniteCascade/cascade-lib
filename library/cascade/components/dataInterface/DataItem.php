@@ -208,4 +208,9 @@ abstract class DataItem extends \infinite\base\Component {
 	{
 		return $this->dataSource->action;
 	}
+
+	public function getModule()
+	{
+		return $this->dataSource->module;
+	}
 }

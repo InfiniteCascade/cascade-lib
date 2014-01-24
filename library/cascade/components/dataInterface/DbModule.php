@@ -51,6 +51,20 @@ abstract class DbModule extends Module {
 		}
 	}
 
+	public function getDataSource($tableName)
+	{
+		$model = $this->getForeignModelName($tableName);
+		if (isset($this->dataSources[$model])) {
+			return $this->dataSources[$model];
+		}
+		foreach ($this->dataSources as $dataSource) {
+			if ($dataSource->foreignModel->tableName === $tableName) {
+				return $dataSource;
+			}
+		}
+		return false;
+	}
+
 	public function getDataSources()
 	{
 		if (is_null($this->_dataSources)) {
@@ -59,6 +73,7 @@ abstract class DbModule extends Module {
 				if (!isset($dataSource['class'])) {
 					$dataSource['class'] = $this->dataSourceClass;
 				}
+				$dataSource['name'] = $foreignModel;
 				$dataSource['foreignModel'] = $this->getForeignModel($foreignModel);
 				$dataSource['module'] = $this;
 				$this->_dataSources[$foreignModel] = Yii::createObject($dataSource);
@@ -100,6 +115,7 @@ abstract class DbModule extends Module {
 	public function getForeignModels()
 	{
 		if (is_null($this->_models)) {
+			$this->_models = [];
 			foreach ($this->db->schema->getTableNames() as $tableName) {
 				$modelName = $this->getForeignModelName($tableName);
 				$this->_models[$modelName] = Yii::createObject($this->getForeignModelConfig($tableName, $modelName));
