@@ -84,6 +84,7 @@ class Action extends \infinite\base\Object {
 			$lerror = error_get_last();
 			if (!empty($lerror)) {
 				$this->status->addError("{$lerror['file']}:{$lerror['line']} {$lerror['message']}");
+				Console::stdout(PHP_EOL . PHP_EOL . "{$lerror['file']}:{$lerror['line']} {$lerror['message']}" . PHP_EOL);
 			}
 			$this->log->status = 'interrupted';
 		} elseif ($this->status->error) {

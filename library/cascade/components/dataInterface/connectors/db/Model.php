@@ -93,8 +93,6 @@ class Model extends \infinite\base\Object {
 				if (is_string($r['foreignModel']) 
 					&& (!isset($this->interface->foreignModels[$r['foreignModel']])
 					|| !($r['foreignModel'] = $this->interface->foreignModels[$r['foreignModel']]))) {
-					var_dump($this->interface->foreignModels);
-					var_dump($r['foreignModel']);exit;
 					continue;
 				}
 				$params = isset($r['params']) ? $r['params'] : [];
@@ -110,8 +108,7 @@ class Model extends \infinite\base\Object {
 					'where' => $where,
 					'params' => $params
 				];
-				$children[$r['foreignModel']->tableName] = $r['foreignModel']->findAll($query);
-				var_dump(count($children[$r['foreignModel']->tableName]));
+				$children[$r['foreignModel']->tableName] = $r['foreignModel']->findPrimaryKeys($query);
 			}
 			$habtm = $this->meta->habtm;
 

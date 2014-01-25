@@ -24,6 +24,17 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 
 	public function getForeignDataItem($key)
 	{
+		if (!isset($this->_foreignDataItems[$key])) {
+			$this->createForeignDataItem(null, ['foreignPrimaryKey' => $key]);
+		}
+		if (isset($this->_foreignDataItems[$key])) {
+			return $this->_foreignDataItems[$key];
+		}
+		return false;
+	}
+
+	public function getForeignDataModel($key)
+	{
 		$config = $this->settings['foreignPullParams'];
 		if (!isset($config['where'])) {
 			$config['where'] = [];
@@ -33,7 +44,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 		} else {
 			$config['where'][$this->foreignModel->primaryKey()] = $key;
 		}
-		//var_dump($config);exit;
+		//var_dump($this->foreignModel->find($config)->count('*', $this->module->db));
 		return $this->foreignModel->findOne($config);
 	}
 

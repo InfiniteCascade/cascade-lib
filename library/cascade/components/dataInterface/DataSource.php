@@ -19,8 +19,8 @@ abstract class DataSource extends \infinite\base\Component {
 	public $keyGenerator;
 	public $lazyForeign = true;
 	public $lazyLocal = true;
+	public $childOnly = false;
 
-	protected $_dataInterface;
 	protected $_localModel;
 	protected $_foreignModel;
 	protected $_map;
@@ -47,9 +47,15 @@ abstract class DataSource extends \infinite\base\Component {
 
 	// abstract public function handleLocal($action, DataItem $dataItem, DataItem $parent = null);
 
+
 	public function isReady()
 	{
 		return isset($this->localModel) && isset($this->foreignModel);
+	}
+
+	public function clearCaches()
+	{
+		ActiveRecord::clearCache();
 	}
 
 	public function getTotal()
@@ -131,13 +137,15 @@ abstract class DataSource extends \infinite\base\Component {
 			// start foreign
 			foreach ($this->foreignDataItems as $dataItem) {
 				$dataItem->handler->handle();
+				$this->clearCaches();
 			}
 		}
 
 		if (in_array($this->settings['direction'], ['to_foreign', 'both'])) {
 			// start local
 			foreach ($this->localDataItems as $dataItem) {
-				$dataItem->handler->handle($action);
+				$dataItem->handler->handle();
+				$this->clearCaches();
 			}
 		}
 

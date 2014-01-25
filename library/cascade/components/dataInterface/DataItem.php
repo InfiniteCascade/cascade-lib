@@ -20,6 +20,19 @@ abstract class DataItem extends \infinite\base\Component {
 	const EVENT_LOAD_FOREIGN_OBJECT = 0x01;
 	const EVENT_LOAD_LOCAL_OBJECT = 0x02;
 
+
+	public function clean()
+	{
+		if (isset($this->foreignObject)) {
+			$this->foreignPrimaryKey = $this->foreignObject->primaryKey;
+			$this->foreignObject = null;
+		}
+		if (isset($this->localObject)) {
+			$this->localPrimaryKey = $this->localObject->primaryKey;
+			$this->localObject = null;
+		}
+	}
+
 	public function getId()
 	{
 		if ($this->isForeign) {
@@ -38,18 +51,22 @@ abstract class DataItem extends \infinite\base\Component {
 		return null;
 	}
 
-	public function handle()
+	public function handle($fromParent = false)
 	{
 		if ($this->handledDataItem) { return true; }
-		if ($this->isForeign) {
-			// handle local to foreign
-			$result = $this->handler->handleForeign();
+		if ($fromParent || !$this->dataSource->childOnly) {
+			if ($this->isForeign) {
+				// handle local to foreign
+				$result = $this->handler->handleForeign();
+			} else {
+				$result = $this->handler->handleLocal();
+			}
 		} else {
-			$result = $this->handler->handleLocal();
+			$result = true;
 		}
 		if ($result) {
 			$this->handledDataItem = true;
-			return true;
+			return $result;
 		}
 		return false;
 	}
@@ -170,6 +187,7 @@ abstract class DataItem extends \infinite\base\Component {
 		if (!$this->_handledDataItem && $value) {
 			$this->dataSource->reduceRemaining($this);
 		}
+		$this->clean();
 		return $this->_handledDataItem = $value;
 	}
 

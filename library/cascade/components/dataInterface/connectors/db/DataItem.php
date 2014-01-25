@@ -3,6 +3,7 @@ namespace cascade\components\dataInterface\connectors\db;
 
 use cascade\components\dataInterface\RecursionException;
 use cascade\components\dataInterface\MissingItemException;
+use cascade\models\Relation;
 
 class DataItem extends \cascade\components\dataInterface\DataItem {
 	protected $_isLoadingForeignObject = false;
@@ -15,7 +16,6 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		return parent::init();
 	}
 
-
 	protected function handleForeign()
 	{
 		if (!$this->foreignObject) {
@@ -26,9 +26,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 
 		// find or start up local object
 		$localModel = $this->dataSource->localModel;
-		if (is_null($localModel)) {
-			var_dump($this->dataSource);exit;
-		}
+
 		if (!isset($this->localObject)) {
 		//	throw new \Exception("no new objects on this pass!");
 			$this->localObject = new $localModel;
@@ -45,7 +43,6 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 
 		// save local object
 		if (!$this->localObject->save()) {
-			var_dump($this->localObject->errors);exit;
 			return false;
 		}
 
@@ -57,9 +54,17 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		// loop through children
 		foreach ($this->foreignObject->children as $table => $children) {
 			$dataSource = $this->module->getDataSource($table);
-			if (empty($dataSource) || !$dataSource->isRead()) { continue; }
-			foreach ($children as $child) {
+			//var_dump([$dataSource->name, $table]);exit;
+			if (empty($dataSource) || !$dataSource->isReady()) { continue; }
+			foreach ($children as $childId) {
 				// let the handler figure it out
+				if (!($dataItem = $dataSource->getForeignDataItem($childId))) {
+					continue;
+				}
+				$childLocalObject = $dataItem->handle(true);
+				if (!Relation::set($this->localObject, $childLocalObject)) {
+					echo "boooo";
+				}
 			}
 		} 
 
@@ -82,16 +87,16 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		}
 		$this->_isLoadingForeignObject = true;
 		if (isset($this->foreignPrimaryKey)) {
-			$foreignObject = $this->dataSource->getForeignDataItem($this->foreignPrimaryKey);
+			$foreignObject = $this->dataSource->getForeignDataModel($this->foreignPrimaryKey);
 			if ($foreignObject) {
 				$this->foreignObject = $foreignObject;
-				if ($foreignObject->primaryKey !== $this->foreignPrimaryKey) {
-					var_dump([$this->foreignPrimaryKey, $foreignObject]);exit;
-				}
 			}
 		}
 		if (empty($this->_foreignObject)) {
-			throw new MissingItemException('Foreign item could not be found: '. $this->foreignPrimaryKey);
+			var_dump($this->foreignPrimaryKey);
+			var_dump($this->dataSource->name);
+			exit;
+			//throw new MissingItemException('Foreign item could not be found: '. $this->foreignPrimaryKey);
 		}
 		$this->_isLoadingForeignObject = false;
 	}
