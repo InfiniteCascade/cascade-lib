@@ -7,7 +7,6 @@ class Meta extends \infinite\base\Object {
 	protected $_hasMany = [];
 	protected $_hasOne = [];
 	protected $_belongsTo = [];
-	protected $_habtm = [];
 	protected $_foreignTable;
 	protected $_db;
 	protected $_schema;
@@ -39,24 +38,24 @@ class Meta extends \infinite\base\Object {
 		}
 	}
 
-	public function addHasMany(Model $foreignModel, $foreignKey, $settings = []) {
-		$settings['foreignModel'] = $foreignModel;
-		$settings['foreignKey'] = $foreignKey;
-		$this->_hasMany[] = $settings;
-	}
+	// public function addHasMany(Model $foreignModel, $foreignKey, $settings = []) {
+	// 	$settings['foreignModel'] = $foreignModel;
+	// 	$settings['foreignKey'] = $foreignKey;
+	// 	$this->_hasMany[] = $settings;
+	// }
 
-	public function addHasOne(Model $foreignModel, $foreignKey, $params = []) {
-		$this->_hasOne[] = ['foreignModel' => $foreignModel, 'foreignKey' => $foreignKey, 'params' => $params];
+	// public function addHasOne(Model $foreignModel, $foreignKey, $params = []) {
+	// 	$this->_hasOne[] = ['foreignModel' => $foreignModel, 'foreignKey' => $foreignKey, 'params' => $params];
 
-	}
+	// }
 
-	public function addBelongsTo(Model $foreignModel, $localKey, $params = []) {
-		$this->_belongsTo[] = ['foreignModel' => $foreignModel, 'localKey' => $localKey, 'params' => $params];
-	}
+	// public function addBelongsTo(Model $foreignModel, $localKey, $params = []) {
+	// 	$this->_belongsTo[] = ['foreignModel' => $foreignModel, 'localKey' => $localKey, 'params' => $params];
+	// }
 
-	public function addHabtm(Model $foreignModel, Model $connectorModel, $localKey, $foreignKey, $params = []) {
-		$this->_habtm[] = ['foreignModel' => $foreignModel, 'connectorModel' => $connectorModel, 'localKey' => $localKey, 'foreignKey' => $foreignKey, 'params' => $params];
-	}
+	// public function addHabtm(Model $foreignModel, Model $connectorModel, $localKey, $foreignKey, $params = []) {
+	// 	$this->_habtm[] = ['foreignModel' => $foreignModel, 'connectorModel' => $connectorModel, 'localKey' => $localKey, 'foreignKey' => $foreignKey, 'params' => $params];
+	// }
 
 	public function getHasMany() {
 		return $this->_hasMany;
@@ -70,9 +69,6 @@ class Meta extends \infinite\base\Object {
 		return $this->_belongsTo;
 	}
 
-	public function getHabtm() {
-		return $this->_habtm;
-	}
 
 	public function hasAttribute($name) {
 		return isset($this->_schema->columns[$name]);

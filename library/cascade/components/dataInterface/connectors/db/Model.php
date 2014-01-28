@@ -108,9 +108,11 @@ class Model extends \infinite\base\Object {
 					'where' => $where,
 					'params' => $params
 				];
+				if (isset($r['join'])) {
+					$query['join'] = $r['join'];
+				}
 				$children[$r['foreignModel']->tableName] = $r['foreignModel']->findPrimaryKeys($query);
 			}
-			$habtm = $this->meta->habtm;
 
 
 			$this->_children = $children;
@@ -192,16 +194,30 @@ class Model extends \infinite\base\Object {
 
 	public function find($params)
 	{
-
+		$debug = false;
 		$q = new Query;
 		$q->select('*');
 		$q->from($this->_tableName);
 		foreach ($params as $k => $v) {
-			if (in_array($k, ['where'])) {
+			if ($k === 'join') {
+				foreach ($v as $join) {
+					if (!isset($join['type'])) {
+						$join['type'] = 'INNER JOIN';
+					}
+					if (!isset($join['params'])) {
+						$join['params'] = [];
+					}
+					$q->join($join['type'], $join['table'], $join['on'], $join['params']);
+				}
+				$debug = true;
+			} elseif (in_array($k, ['where'])) {
 				$q->{$k}($v);
 			} else {
 				$q->{$k} = $v;
 			}
+		}
+		if ($debug) {
+			//var_dump($q->createCommand()->rawSql);exit;
 		}
 		return $q;
 	}
@@ -217,7 +233,7 @@ class Model extends \infinite\base\Object {
 
 	public function findPrimaryKeys($params = []) {
 		$q = $this->find($params);
-		$q->select($this->meta->schema->primaryKey);
+		$q->select($this->_tableName .'.'. $this->meta->schema->primaryKey[0]);
 		return $q->column($this->interface->db);
 	}
 

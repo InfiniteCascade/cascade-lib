@@ -33,7 +33,13 @@ return [
 			'aclRoleClass' => 'cascade\\models\\AclRole',
 			'groupClass' => 'cascade\\models\\Group',
 			'registryClass' => 'cascade\\models\\Registry',
-			'userClass' => 'cascade\\models\\User'
+			'userClass' => 'cascade\\models\\User',
+			
+			'authority' => [
+				'type' => 'Individual',
+				
+			]
+
 		],
 		'log' => [
 			'class' => 'yii\log\Logger',
