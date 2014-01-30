@@ -3,50 +3,57 @@ namespace cascade\setup\tasks;
 
 use infinite\setup\Exception;
 
-class Task_000004_acl extends \infinite\setup\Task {
+class Task_000005_acl extends \infinite\setup\Task {
 	public function getTitle() {
 		return 'ACL';
 	}
+	public function getBaseAcas()
+	{
+		return ['read', 'create', 'update', 'delete', 'archive'];
+	}
 	public function getBaseRules() {
 		return [
+			// [
+			// 	'action' => null,
+			// 	'controlled' => null,
+			// 	'accessing' => ['model' => 'cascade\\models\\Group', 'fields' => ['system' => 'top']],
+			// 	'object_model' => null,
+			// 	'task' => 'deny',
+			// ],
+			// [
+			// 	'action' => null,
+			// 	'controlled' => null,
+			// 	'accessing' => ['model' => 'cascade\\models\\Group', 'fields' => ['system' => 'staff']],
+			// 	'object_model' => null,
+			// 	'task' => 'deny',
+			// ],
+			// [
+			// 	'action' => null,
+			// 	'controlled' => null,
+			// 	'accessing' => ['model' => 'cascade\\models\\Group', 'fields' => ['system' => 'clients']],
+			// 	'object_model' => null,
+			// 	'task' => 'deny',
+			// ],
+			// [
+			// 	'action' => null,
+			// 	'controlled' => null,
+			// 	'accessing' => ['model' => 'cascade\\models\\Group', 'fields' => ['system' => 'public']],
+			// 	'object_model' => null,
+			// 	'task' => 'deny',
+			// ],
 			[
 				'action' => null,
 				'controlled' => null,
-				'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'top']],
-				'object_model' => null,
-				'task' => 'deny',
-			],
-			[
-				'action' => null,
-				'controlled' => null,
-				'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'staff']],
-				'object_model' => null,
-				'task' => 'deny',
-			],
-			[
-				'action' => null,
-				'controlled' => null,
-				'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'clients']],
-				'object_model' => null,
-				'task' => 'deny',
-			],
-			[
-				'action' => null,
-				'controlled' => null,
-				'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'guests']],
-				'object_model' => null,
-				'task' => 'deny',
-			],
-			[
-				'action' => null,
-				'controlled' => null,
-				'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'administrators']],
+				'accessing' => ['model' => 'cascade\\models\\Group', 'fields' => ['system' => 'administrators']],
 				'object_model' => null,
 				'task' => 'allow',
 			],
 		];
 	}
 	public function test() {
+		foreach ($this->baseAcas as $aca) {
+			$this->setup->app()->gk->getActionObjectByName($aca);
+		}
 		foreach ($this->baseRules as $rule) {
 			if ($rule['task'] === 'allow') {
 				$expected = true;

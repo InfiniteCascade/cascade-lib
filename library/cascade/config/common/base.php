@@ -27,7 +27,8 @@ return [
 		],
 		
 		'gk' => [
-			'class' => 'infinite\\security\\Gatekeeper',
+			'class' => 'cascade\\components\\security\\Gatekeeper',
+			
 			'acaClass' => 'cascade\\models\\Aca',
 			'aclClass' => 'cascade\\models\\Acl',
 			'aclRoleClass' => 'cascade\\models\\AclRole',

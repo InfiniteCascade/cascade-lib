@@ -3,7 +3,7 @@ namespace cascade\setup\tasks;
 
 use infinite\setup\Exception;
 
-class Task_000006_collectors extends \infinite\setup\Task {
+class Task_000007_collectors extends \infinite\setup\Task {
 	public function getTitle() {
 		return 'Collector Item Setup';
 	}

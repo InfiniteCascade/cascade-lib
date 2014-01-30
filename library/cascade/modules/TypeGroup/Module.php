@@ -10,7 +10,7 @@ class Module extends \cascade\components\types\Module
 	public $icon = 'fa fa-users';
 	public $hasDashboard = true;
 
-	public $widgetNamespace = 'cascade\modules\Group\widgets';
+	public $widgetNamespace = 'cascade\\modules\\Group\\widgets';
 	public $modelNamespace = false;
 
 	/**

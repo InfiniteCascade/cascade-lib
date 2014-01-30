@@ -5,7 +5,7 @@ use cascade\models\Group;
 use cascade\models\User;
 use cascade\models\Relation;
 
-class Task_000005_admin_user extends \infinite\setup\Task {
+class Task_000006_admin_user extends \infinite\setup\Task {
 	public function getTitle() {
 		return 'Admin User';
 	}

@@ -81,14 +81,12 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public function setup() {
 		$results = [true];
 		if (!empty($this->primaryModel) AND !empty($this->collectorItem->parents)) {
-			$groups = ['staff'];
+			$groups = ['top'];
 			foreach ($groups as $groupName) {
 				$group = Group::getBySystemName($groupName, true);
 				if (empty($group)) { continue; }
-				if ($this->isChildless) {
-					$results[] = Yii::$app->gk->inherit(['read', 'delete', 'create', 'archive', 'update'], null, $group, $this->primaryModel);
-				} else {
-					$results[] = Yii::$app->gk->parentAccess(['read', 'delete', 'create', 'archive', 'update'], null, $group, $this->primaryModel);
+				if (!$this->hasDashboard) {
+					$results[] = Yii::$app->gk->parentAccess(null, null, $group, $this->primaryModel);
 				}
 			}
 		}

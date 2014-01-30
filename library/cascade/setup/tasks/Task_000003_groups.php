@@ -9,7 +9,7 @@ class Task_000003_groups extends \infinite\setup\Task {
 		return 'Groups';
 	}
 	public function getBaseGroups() {
-		return ['Top' => ['Staff' => ['Contractors', 'Administrators' => ['Super Administrators']], 'Clients', 'Guests']];
+		return ['Top' => ['Users' => ['Administrators' => ['Super Administrators']], 'Public']];
 	}
 
 	public function test() {

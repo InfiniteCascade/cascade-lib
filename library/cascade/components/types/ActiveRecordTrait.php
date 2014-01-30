@@ -56,8 +56,8 @@ trait ActiveRecordTrait {
 			'Taxonomy' => [
 				'class' => 'cascade\\components\\db\\behaviors\\Taxonomy',
 			],
-			'Access' => [
-				'class' => 'infinite\\db\\behaviors\\Access',
+			'ActiveAccess' => [
+				'class' => 'infinite\\db\\behaviors\\ActiveAccess',
 			]
 		];
 	}
@@ -492,6 +492,9 @@ trait ActiveRecordTrait {
 		$settings['class'] = $this->modelFieldClass;
 		if (!isset($settings['model'])) {
 			$settings['model'] = $this;
+		}
+		if (!is_object($fieldSchema)) {
+			$fieldSchema = $this->createColumnSchema($fieldSchema);
 		}
 		$settings['fieldSchema'] = $fieldSchema;
 		$settings['required'] = $this->isAttributeRequired($fieldSchema->name);

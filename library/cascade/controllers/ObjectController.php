@@ -62,7 +62,7 @@ class ObjectController extends Controller
 	{
 		return [
 			'error' => [
-				'class' => 'yii\web\ErrorAction',
+				'class' => 'yii\\web\\ErrorAction',
 			]
 		];
 	}
@@ -75,6 +75,12 @@ class ObjectController extends Controller
 		// //echo "okay";
 		// exit;
 		return $this->render('index');
+	}
+
+	public function actionTest()
+	{
+		$groups = \cascade\modules\core\TypeAccount\models\ObjectAccount::find()->enableAccessCheck();
+		\d($groups->all());exit;
 	}
 
 	/**
