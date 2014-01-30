@@ -109,11 +109,11 @@ class View extends \yii\base\Widget {
 					$p['values'][$key] = $c->getDataValue($row, $r, false);
 				}
 				$p['acl'] = [];
-				if ($this->owner->instanceSettings['whoAmI'] === 'parent' AND isset($r->childObject) AND $r->childObject->hasBehavior('QueryAccess')) {
+				if ($this->owner->instanceSettings['whoAmI'] === 'parent' AND isset($r->childObject) AND $r->childObject->hasBehavior('Access')) {
 					$p['acl'] = $r->childObject->aclSummary();
-				} elseif($this->owner->instanceSettings['whoAmI'] === 'child' AND isset($r->parentObject) AND $r->parentObject->hasBehavior('QueryAccess')) {
+				} elseif($this->owner->instanceSettings['whoAmI'] === 'child' AND isset($r->parentObject) AND $r->parentObject->hasBehavior('Access')) {
 					$p['acl'] = $r->parentObject->aclSummary();
-				} elseif ($r->hasBehavior('QueryAccess')) {
+				} elseif ($r->hasBehavior('Access')) {
 					$p['acl'] = $r->aclSummary();
 				}
 				$this->_currentData['item-'. $itemNumber] = $p;
