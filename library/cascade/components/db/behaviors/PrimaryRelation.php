@@ -26,8 +26,8 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 	public function getRelationship()
 	{
 		if (is_null($this->_relationship)) {
-			$parentObject = $this->owner->parentObject;
-			$childObject= $this->owner->childObject;
+			$parentObject = $this->owner->getParentObject(false);
+			$childObject= $this->owner->getChildObject(false);
 			if ($parentObject && $childObject) {
 				$this->_relationship = Relationship::getOne($parentObject->objectTypeItem, $childObject->objectTypeItem);
 			}

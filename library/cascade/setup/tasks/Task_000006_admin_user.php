@@ -4,20 +4,21 @@ namespace cascade\setup\tasks;
 use cascade\models\Group;
 use cascade\models\User;
 use cascade\models\Relation;
+use infinite\base\exceptions\Exception;
 
 class Task_000006_admin_user extends \infinite\setup\Task {
 	public function getTitle() {
 		return 'Admin User';
 	}
 	public function test() {
-		return User::find()->count() > 0;
+		return User::find()->disableAccessCheck()->andWhere(['not', ['username' => 'system']])->count() > 0;
 	}
 	public function run() {
 		$user = new User;
 		$user->scenario = 'creation';
 		$user->attributes = $this->input['admin'];
 		$user->status = User::STATUS_ACTIVE;
-		$superGroup = Group::find()->where(['system' => 'super_administrators'])->one();
+		$superGroup = Group::find()->disableAccessCheck()->where(['system' => 'super_administrators'])->one();
 		if (!$superGroup) {
 			throw new Exception("Unable to find super_administrators group!");
 		}

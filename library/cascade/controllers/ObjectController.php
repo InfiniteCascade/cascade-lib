@@ -124,7 +124,7 @@ class ObjectController extends Controller
 	 *
 	 */
 	public function actionView() {
-		if (empty($_GET['id']) or !($object = $this->params['object'] = Registry::getObject($_GET['id'], true)) or !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
+		if (empty($_GET['id']) or !($object = $this->params['object'] = Registry::getObject($_GET['id'], false)) or !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
 			throw new HttpException(404, "Unknown object.");
 		}
 		if (!$object->can('read')) {
@@ -152,7 +152,7 @@ class ObjectController extends Controller
 
 	protected function _parseParams($required = [], $can = null)
 	{
-		if (!empty($_GET['id']) && (!($this->params['object'] = Registry::getObject($_GET['id'], true)) || !($this->params['typeItem'] = $this->params['object']->objectTypeItem))) {
+		if (!empty($_GET['id']) && (!($this->params['object'] = Registry::getObject($_GET['id'], false)) || !($this->params['typeItem'] = $this->params['object']->objectTypeItem))) {
 			throw new HttpException(404, "Unknown object.");
 		}
 
@@ -235,7 +235,7 @@ class ObjectController extends Controller
 			$action = 'link';
 		}
 
-		if (!empty($_GET['object_id']) && (!($object = $this->params['object'] = Registry::getObject($_GET['object_id'], true)) || !($typeItem = $this->params['typeItem'] = $object->objectTypeItem))) {
+		if (!empty($_GET['object_id']) && (!($object = $this->params['object'] = Registry::getObject($_GET['object_id'], false)) || !($typeItem = $this->params['typeItem'] = $object->objectTypeItem))) {
 			throw new HttpException(404, "Unknown object.");
 		} elseif(isset($object)) {
 			if (!$object->can('update')) {
@@ -437,7 +437,7 @@ class ObjectController extends Controller
 			$this->params['model']->forceObjectDelete = $object->getGreenMile([$relationshipWith->id]);
 			$response = new Response('delete', ['dialog' => true, 'dialogSettings' => ['title' => 'Delete '.$object->typeModule->title->getSingular(true) .' or Relationship', 'saveButton' => ['text' => 'Delete', 'class' => 'ui-state-error'], 'width' => '600px']]);
 		} else {
-			if (empty($_GET['id']) or !($object = Registry::getObject($_GET['id'], true)) or !($type = $object->getTypeModule())) {
+			if (empty($_GET['id']) or !($object = Registry::getObject($_GET['id'], false)) or !($type = $object->getTypeModule())) {
 				throw new HttpException(404, "Unknown object ". (empty($_GET['id']) ? '' : $_GET['id']));
 			}
 			if ($object->asa('RAclBehavior') AND !$object->can('delete')) {

@@ -20,6 +20,14 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
 	/**
 	 * @inheritdoc
 	 */
+	public static function isAccessControlled()
+    {
+        return false;
+    }
+    
+	/**
+	 * @inheritdoc
+	 */
 	public static function tableName()
 	{
 		return 'key_translation';
@@ -53,10 +61,10 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
 		];
 	}
 
-	public function getObject()
+	public function getObject($checkAccess = true)
 	{
 		$registryClass = Registry::className();
-		return $registryClass::getObject($this->registry_id, true);
+		return $registryClass::getObject($this->registry_id, $checkAccess);
 	}
 
 	/**

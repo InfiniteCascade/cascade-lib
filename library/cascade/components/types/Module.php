@@ -83,7 +83,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		if (!empty($this->primaryModel) AND !empty($this->collectorItem->parents)) {
 			$groups = ['top'];
 			foreach ($groups as $groupName) {
-				$group = Group::getBySystemName($groupName, true);
+				$group = Group::getBySystemName($groupName, false);
 				if (empty($group)) { continue; }
 				if (!$this->hasDashboard) {
 					$results[] = Yii::$app->gk->parentAccess(null, null, $group, $this->primaryModel);

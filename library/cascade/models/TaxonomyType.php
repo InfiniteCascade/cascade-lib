@@ -24,7 +24,15 @@ class TaxonomyType extends \cascade\components\db\ActiveRecord implements \infin
 	use ActiveRecordTrait {
 		behaviors as baseBehaviors;
 	}
-	
+
+	/**
+	 * @inheritdoc
+	 */
+	public static function isAccessControlled()
+    {
+        return false;
+    }
+
 	/**
 	 * @inheritdoc
 	 */

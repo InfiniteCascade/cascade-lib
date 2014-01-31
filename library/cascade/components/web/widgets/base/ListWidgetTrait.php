@@ -136,7 +136,7 @@ trait ListWidgetTrait
 		}
 		/** @var LinkPager $class */
 		$pager = $this->pagerSettings;
-		$class = ArrayHelper::remove($pager, 'class', 'yii\widgets\LinkPager');
+		$class = ArrayHelper::remove($pager, 'class', 'infinite\widgets\LinkPager');
 		$pager['pagination'] = $pagination;
 		if (!isset($pager['options'])) {
 			$pager['options'] = [];

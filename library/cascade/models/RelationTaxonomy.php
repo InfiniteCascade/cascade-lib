@@ -17,6 +17,14 @@ class RelationTaxonomy extends \cascade\components\db\ActiveRecord
 	/**
 	 * @inheritdoc
 	 */
+	public static function isAccessControlled()
+    {
+        return false;
+    }
+    
+	/**
+	 * @inheritdoc
+	 */
 	public static function tableName()
 	{
 		return 'relation_taxonomy';

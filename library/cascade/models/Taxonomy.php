@@ -24,6 +24,15 @@ class Taxonomy extends \cascade\components\db\ActiveRecord
 		behaviors as baseBehaviors;
 	}
 	
+
+	/**
+	 * @inheritdoc
+	 */
+	public static function isAccessControlled()
+    {
+        return false;
+    }
+    
 	/**
 	 * @inheritdoc
 	 */

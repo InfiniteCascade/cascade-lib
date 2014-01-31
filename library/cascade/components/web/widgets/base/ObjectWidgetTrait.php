@@ -12,7 +12,7 @@ use cascade\components\types\Relationship;
 trait ObjectWidgetTrait
 {
 	protected $_dataProvider;
-
+	public $pageSize = 5;
 	public function generateStart() {
 		$this->htmlOptions['data-instructions'] = json_encode($this->refreshInstructions);
 		return parent::generateStart();
@@ -42,7 +42,7 @@ trait ObjectWidgetTrait
 		if (is_null($this->_dataProvider)) {
 			$dataProvider = $this->dataProviderSettings;
 			if (!isset($dataProvider['class'])) {
-				$dataProvider['class'] = 'yii\\data\\ActiveDataProvider';
+				$dataProvider['class'] = 'infinite\\data\\ActiveDataProvider';
 			}
 			$method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
 			if (in_array($method, ['parents', 'children']) && empty(Yii::$app->request->object)) {
@@ -292,15 +292,24 @@ trait ObjectWidgetTrait
 	}
 
 	public function getPaginationSettings() {
-		return ['class' => 'yii\data\Pagination', 'pageSize' => 20];
+		return [
+			'class' => 'infinite\data\Pagination',
+			'pageSize' => $this->pageSize,
+			'page' => $this->getState('_page', 0),
+		];
 	}
 
 	public function getPagerSettings() {
-		return ['class' => 'yii\widgets\LinkPager'];
+		return [
+			'class' => 'infinite\widgets\LinkPager',
+			'pageStateKey' => $this->stateKeyName('_page'),
+		];
 	}
 
 	public function getDataProviderSettings() {
-		return ['class' => 'yii\data\ActiveDataProvider'];
+		return [
+			'class' => 'infinite\data\ActiveDataProvider'
+		];
 	}
 }
 ?>

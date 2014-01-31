@@ -10,7 +10,9 @@ class Task_000002_db extends \infinite\setup\Task {
 		return 'Database';
 	}
 
-	public function test() {
+	public function test()
+	{
+		if ($this->isNewInstall()) { return false; }
 		$request = $this->migrator->getRequest();
 		$request->setParams(['migrate/new', '--interactive=0', 1000]);
 		list($route, $params) = $request->resolve();
@@ -23,6 +25,14 @@ class Task_000002_db extends \infinite\setup\Task {
         }
         $numberMatches = (int)$matches[1];
 		return $numberMatches === 0;
+	}
+
+	public function isNewInstall()
+	{
+		if (count($this->setup->app()->db->schema->tableNames) < 2) {
+			return true;
+		}
+		return false;
 	}
 
 	public function run() {
@@ -48,7 +58,7 @@ class Task_000002_db extends \infinite\setup\Task {
 	}
 	
 	public function getVerification() {
-		if (!$this->test()) {
+		if (!$this->isNewInstall() && !$this->test()) {
 			return 'There are database upgrades available. Would you like to upgrade the database now?';
 		}
 		return false;

@@ -1,11 +1,15 @@
 <?php
-use Yii;
-
 use infinite\helpers\Html;
 use infinite\helpers\ArrayHelper;
 use infinite\web\grid\Grid;
 
 $this->title = 'Dashboard';
+$refreshable = [
+	'url' => Html::url('app/refresh'),
+	'data' => [Yii::$app->request->csrfVar => Yii::$app->request->csrfToken, 'baseInstructions' => []]
+];
+$this->bodyHtmlOptions['data-refreshable'] = json_encode($refreshable);
+
 echo Html::beginTag('div', ['class' => 'ic-dashboard row']);
 Yii::beginProfile("Build Grid");
 $widgets = Yii::$app->collectors['widgets']->getLocation('front');

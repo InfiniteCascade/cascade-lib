@@ -94,7 +94,7 @@ class Task_000005_acl extends \infinite\setup\Task {
 
 			if (is_array($controlled)) {
 				$model = $controlled['model'];
-				$controlled = $model::find()->where($controlled['fields'])->one();
+				$controlled = $model::find()->disableAccessCheck()->where($controlled['fields'])->one();
 				if (!$controlled) {
 					throw new Exception("Could not find controlled object: ". print_r($rule['controlled'], true));
 					return false;
@@ -103,7 +103,7 @@ class Task_000005_acl extends \infinite\setup\Task {
 
 			if (is_array($accessing)) {
 				$model = $accessing['model'];
-				$accessing = $model::find()->where($accessing['fields'])->one();
+				$accessing = $model::find()->disableAccessCheck()->where($accessing['fields'])->one();
 				if (!$accessing) {
 					throw new Exception("Could not find accessing object: ". print_r($rule['accessing'], true));
 					return false;

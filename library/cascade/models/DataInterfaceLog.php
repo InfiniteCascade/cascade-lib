@@ -17,6 +17,15 @@ namespace cascade\models;
  */
 class DataInterfaceLog extends \cascade\components\db\ActiveRecord
 {
+
+	/**
+	 * @inheritdoc
+	 */
+	public static function isAccessControlled()
+    {
+        return false;
+    }
+    
 	/**
 	 * @inheritdoc
 	 */

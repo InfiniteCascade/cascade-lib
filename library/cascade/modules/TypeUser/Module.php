@@ -17,6 +17,15 @@ class Module extends \cascade\components\types\Module
 	/**
 	 * @inheritdoc
 	 */
+	public function setup() {
+		$results = [true];
+		$results[] = Yii::$app->gk->allow('read', null, null, $this->primaryModel);
+		return min($results);
+	}
+	
+	/**
+	 * @inheritdoc
+	 */
 	public function getPrimaryModel() {
 		return 'cascade\\models\\User';
 	}

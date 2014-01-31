@@ -21,6 +21,14 @@ class DataInterface extends \cascade\components\db\ActiveRecord
 	/**
 	 * @inheritdoc
 	 */
+	public static function isAccessControlled()
+    {
+        return false;
+    }
+    
+	/**
+	 * @inheritdoc
+	 */
 	public static function tableName()
 	{
 		return 'data_interface';

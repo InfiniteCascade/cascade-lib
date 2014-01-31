@@ -13,6 +13,14 @@ class Role extends \infinite\db\models\Role
 	/**
 	 * @inheritdoc
 	 */
+	public static function isAccessControlled()
+    {
+        return false;
+    }
+
+	/**
+	 * @inheritdoc
+	 */
 	public function behaviors()
 	{
 		return array_merge(parent::behaviors(), self::baseBehaviors(), []);
