@@ -44,7 +44,7 @@ return [
 		],
 		'log' => [
 			'class' => 'yii\log\Logger',
-			'traceLevel' => YII_DEBUG ? 3 : 0,
+			'traceLevel' => YII_DEBUG ? 4 : 0,
 			'targets' => [
 				[
 					'class' => 'yii\log\FileTarget',
