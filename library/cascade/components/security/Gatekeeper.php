@@ -18,7 +18,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 			|| !($authorityTypeItem = Yii::$app->collectors['types']->getOne($authority['type']))
 			|| !($authorityType = $authorityTypeItem->object))
 		{
-			throw new Exception("Access Control Authority is not set up correctly!");
+			throw new Exception("Access Control Authority is not set up correctly!" . print_r($authority, true));
 		}
 		unset($authority['type']);
 		$authority['handler'] = $authorityType;

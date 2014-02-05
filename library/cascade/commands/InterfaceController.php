@@ -12,6 +12,18 @@ use infinite\helpers\ArrayHelper;
 class InterfaceController extends \infinite\console\Controller {
 	protected $_interface;
 	public $verbose;
+	protected $_started = false;
+	public function events()
+	{
+		return [
+			self::EVENT_BEFORE_ACTION => [$this, 'start']
+		];
+	}
+
+	public function start()
+	{
+		$this->_started = true;
+	}
 
 	public function actionIndex()
 	{
@@ -27,7 +39,7 @@ class InterfaceController extends \infinite\console\Controller {
 
 	public function getInterface()
 	{
-		if (is_null($this->_interface)) {
+		if ($this->_started && is_null($this->_interface)) {
 			$interfaces = ArrayHelper::map(Yii::$app->collectors['dataInterfaces']->getAll(), 'systemId', 'object.name');
 			$this->interface = $this->select("Choose interface", $interfaces);
 		}

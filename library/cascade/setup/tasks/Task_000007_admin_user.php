@@ -6,7 +6,7 @@ use cascade\models\User;
 use cascade\models\Relation;
 use infinite\base\exceptions\Exception;
 
-class Task_000006_admin_user extends \infinite\setup\Task {
+class Task_000007_admin_user extends \infinite\setup\Task {
 	public function getTitle() {
 		return 'Admin User';
 	}

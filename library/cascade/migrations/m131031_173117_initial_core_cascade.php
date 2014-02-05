@@ -173,6 +173,36 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         // $this->addPrimaryKey('taxonomyTypePk', 'taxonomy_type', 'id');
         $this->addForeignKey('taxonomyTypeRegistry', 'taxonomy_type', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
 
+        $this->dropExistingTable('storage_engine');
+        
+        $this->createTable('storage_engine', [
+            'id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY',
+            'handler' => 'string(255) DEFAULT NULL',
+            'data' => 'blob DEFAULT NULL',
+            'created' => 'datetime DEFAULT NULL',
+            'modified' => 'datetime DEFAULT NULL'
+        ]);
+
+        $this->addForeignKey('storageEngineRegistry', 'storage_engine', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
+
+        $this->dropExistingTable('storage');
+        
+        $this->createTable('storage', [
+            'id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY',
+            'storage_engine_id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
+            'storage_key' => 'string(255) DEFAULT NULL',
+            'name' => 'string(255) DEFAULT NULL',
+            'file_name' => 'string(255) NOT NULL',
+            'type' => 'string(100) NOT NULL',
+            'size' => 'integer(11) unsigned NOT NULL',
+            'created' => 'datetime DEFAULT NULL',
+            'modified' => 'datetime DEFAULT NULL'
+        ]);
+
+        $this->createIndex('storageStorageEngine', 'storage', 'storage_engine_id', false);
+        $this->addForeignKey('storageRegistry', 'storage', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('storageStorageEngine', 'storage', 'storage_engine_id', 'storage_engine_id', 'id', 'CASCADE', 'CASCADE');
+
         $this->db->createCommand()->checkIntegrity(true)->execute();
 
         return true;
@@ -192,6 +222,8 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->dropExistingTable('relation_taxonomy');
         $this->dropExistingTable('taxonomy');
         $this->dropExistingTable('taxonomy_type');
+        $this->dropExistingTable('storage_engine');
+        $this->dropExistingTable('storage');
 
         $this->db->createCommand()->checkIntegrity(true)->execute();
         return true;

@@ -6,7 +6,7 @@ use cascade\models\User;
 use cascade\models\Relation;
 use cascade\modules\core\TypeAccount\models\ObjectAccount;
 
-class Task_000004_account extends \infinite\setup\Task {
+class Task_000005_account extends \infinite\setup\Task {
 	public function getTitle() {
 		return 'Primary Account';
 	}

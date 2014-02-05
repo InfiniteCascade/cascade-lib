@@ -12,19 +12,22 @@ class Item extends \infinite\base\collector\Item {
 	protected $_checked;
 	protected $_init = false;
 
-	public function init() {
+	public function init()
+	{
 		parent::init();
 		$this->_init = true;
 		$this->distributeRelationships();
 	}
 
-	public function setObject(CollectedObjectInterface $object) {
+	public function setObject($object)
+	{
 		parent::setObject($object);
 		$this->distributeRelationships();
 		return true;
 	}
 
-	protected function distributeRelationships() {
+	protected function distributeRelationships()
+	{
 		if (!$this->_init || is_null($this->object)) {
 			return;
 		}
@@ -52,7 +55,8 @@ class Item extends \infinite\base\collector\Item {
 	 *
 	 * @return unknown
 	 */
-	public function getSections() {
+	public function getSections()
+	{
 		if (!is_null($this->_sections)) {
 			return $this->_sections;
 		}
@@ -124,7 +128,8 @@ class Item extends \infinite\base\collector\Item {
 	 * @param unknown $relationship
 	 * @return unknown
 	 */
-	public function addChild($name, $relationship) {
+	public function addChild($name, $relationship)
+	{
 		$this->_children[$name] = $relationship;
 		return true;
 	}
@@ -137,7 +142,8 @@ class Item extends \infinite\base\collector\Item {
 	 * @param unknown $relationship
 	 * @return unknown
 	 */
-	public function addParent($name, $relationship) {
+	public function addParent($name, $relationship)
+	{
 		$this->_parents[$name] = $relationship;
 		return true;
 	}
@@ -148,7 +154,8 @@ class Item extends \infinite\base\collector\Item {
 	 * @param unknown $type
 	 * @return unknown
 	 */
-	public function getChild($type) {
+	public function getChild($type)
+	{
 		if (isset($this->_children[$type])) {
 			return $this->_children[$type];
 		}
@@ -162,7 +169,8 @@ class Item extends \infinite\base\collector\Item {
 	 * @param unknown $type
 	 * @return unknown
 	 */
-	public function getParent($type) {
+	public function getParent($type)
+	{
 		if (isset($this->_parents[$type])) {
 			return $this->_parents[$type];
 		}
@@ -175,7 +183,8 @@ class Item extends \infinite\base\collector\Item {
 	 *
 	 * @return unknown
 	 */
-	public function getChildren() {
+	public function getChildren()
+	{
 		$children = [];
 		foreach ($this->_children as $key => $child) {
 			if (!$child->active) { continue; }
@@ -190,7 +199,8 @@ class Item extends \infinite\base\collector\Item {
 	 *
 	 * @return unknown
 	 */
-	public function getParents() {
+	public function getParents()
+	{
 		$parents = [];
 		foreach ($this->_parents as $key => $parent) {
 			if (!$parent->active) { continue; }
@@ -204,7 +214,8 @@ class Item extends \infinite\base\collector\Item {
 	 *
 	 * @return unknown
 	 */
-	public function getActive() {
+	public function getActive()
+	{
 		if (!is_null($this->hasObject()) && $this->checked) {
 			return true;
 		}
@@ -217,7 +228,8 @@ class Item extends \infinite\base\collector\Item {
 	 *
 	 * @return unknown
 	 */
-	public function getChecked() {
+	public function getChecked()
+	{
 		if (is_null($this->object) || !$this->object) { return false; }
 		if (is_null($this->_checked)) {
 			$this->_checked = true;

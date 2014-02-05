@@ -11,7 +11,19 @@ return [
 		'taxonomies' => [
 			'class' => 'cascade\\components\\taxonomy\\Collector',
 		],
-		
+		'storageHandlers' => [
+			'class' => 'cascade\\components\\storageHandlers\\Collector',
+			'initialItems' => [
+				'local' => [
+					'object' => [
+						'class' => 'cascade\\components\\storageHandlers\\core\\LocalHandler',
+						'bucketFormat' => '{year}.{month}',
+						'baseDir' => INFINITE_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'storage'
+					],
+					'publicEngine' => true
+				]
+			]
+		],
 		'widgets' => [
 			'class' => 'cascade\\components\\web\\widgets\\Collector',
 			'lazyLoad' => $lazyLoad
