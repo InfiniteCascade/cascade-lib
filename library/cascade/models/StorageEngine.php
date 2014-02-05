@@ -1,6 +1,7 @@
 <?php
 namespace cascade\models;
 
+use Yii;
 use cascade\components\types\ActiveRecordTrait;
 
 /**
@@ -69,5 +70,13 @@ class StorageEngine extends \cascade\components\db\ActiveRecord
 	public function getRegistry()
 	{
 		return $this->hasOne(Registry::className(), ['id' => 'id']);
+	}
+
+	public function getStorageHandler()
+	{
+		if (Yii::$app->collectors['storageHandlers']->has($this->handler)) {
+			return Yii::$app->collectors['storageHandlers']->getOne($this->handler);
+		}
+		return false;
 	}
 }

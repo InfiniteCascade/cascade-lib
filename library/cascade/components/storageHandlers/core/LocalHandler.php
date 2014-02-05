@@ -8,6 +8,11 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler {
 	public $bucketFormat = '{year}.{month}';
 	protected $_baseDir;
 
+	public function validate($model, $attribute)
+	{
+		
+	}
+	
 	public function setBaseDir($value)
 	{
 		$value = Yii::getAlias($value);
@@ -23,6 +28,11 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler {
 	public function getBaseDir()
 	{
 		return $this->_baseDir;
+	}
+
+	public function generateInternal($item)
+	{
+		return $item->fileInput();
 	}
 }
 ?>

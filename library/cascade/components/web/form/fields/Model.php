@@ -5,6 +5,7 @@ use infinite\base\exceptions\Exception;
 use infinite\helpers\Html;
 
 class Model extends Base {
+	public $fileStorageWidgetClass = 'cascade\\components\\web\\widgets\\form\\FileStorage';
 	protected $_fieldConfig = [];
 	public function getFieldConfig()
 	{
@@ -103,7 +104,10 @@ class Model extends Base {
 			$item->listBox($this->options);
 			break;
 		case 'file':
-			$item->fileInput();
+			// $item->fileInput();
+			Html::removeCssClass($this->htmlOptions, 'form-control');
+			$fileStorageWidgetClass = $this->fileStorageWidgetClass;
+			$item = $fileStorageWidgetClass::widget(['item' => $item]);
 			break;
 		case 'hidden':
 			$this->showLabel = false;
