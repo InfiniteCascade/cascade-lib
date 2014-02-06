@@ -4,7 +4,9 @@ namespace cascade\components\storageHandlers;
 use Yii;
 
 use yii\base\Event;
-use yii\web\UploadedFile;
+use infinite\web\UploadedFile;
+use infinite\base\FileInterface;
+use infinite\base\exceptions\Exception;
 
 class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
 	public $storageEngineClass = 'cascade\\models\\StorageEngine';
@@ -31,8 +33,26 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
 
     public function safeAttributes()
 	{
-		return ['storageEngine'];
+		return ['storageEngine', 'storage'];
 	}
+
+    public function setStorage($value)
+    {
+        $value = $this->storageEngine->storageHandler->object->beforeSetStorage($value);
+        if ($value instanceof FileInterface) {
+            $this->owner->{$this->storageAttribute} = $value;
+        } else {
+            throw new Exception("Trying to set storage item that isn't part of the file interface!");
+        }
+    }
+
+    public function getStorage()
+    {
+        if (isset($this->owner->{$this->storageAttribute}) && $this->owner->{$this->storageAttribute} instanceof FileInterface) {
+            return $this->owner->{$this->storageAttribute};
+        }
+        return null;
+    }
 
     public function loadPostFile($tabId = '')
     {
@@ -49,7 +69,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
     {
         if (!$this->storageEngine->storageHandler->object->beforeSave($this->storageEngine, $this->owner, $this->storageAttribute)) {
             $event->isValid = false;
-            $this->owner->addError($this->storageAttribute, 'Unable to save file in storage engine. Try again later.');
+            $this->owner->addError($this->storageAttribute, 'Unable to save file in storage engine. Try again later. ('.$this->storageEngine->storageHandler->object->error . ')');
             return false;
         }
     }
@@ -87,6 +107,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
 
 	public function getStorageEngine()
 	{
+        if (is_null($this->_storageEngine)) {
+            $storageEngineClass = $this->storageEngineClass;
+            $this->storageEngine = $storageEngineClass::find()->andWhere(['handler' => Yii::$app->params['defaultStorageEngine']])->one();
+        }
 		return $this->_storageEngine;
 	}
 

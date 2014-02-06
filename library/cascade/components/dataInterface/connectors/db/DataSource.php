@@ -54,12 +54,15 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 		$a = [];
 		foreach ($this->map as $localKey => $fieldMap) {
 			if ($localKey === $this->localPrimaryKeyName) { continue; }
-			if ($this->isRelationKey($fieldMap->foreignField)) {
+			if (is_string($fieldMap->foreignField) && $this->isRelationKey($fieldMap->foreignField)) {
 				continue;
 			}
 			if (strpos($fieldMap->localField, ':') !== false) {
 			} else {
 				$a[$fieldMap->localField] = $fieldMap->extractValue($foreignModel);
+				if ($a[$fieldMap->localField] === false) {
+					return false;
+				}
 			}
 		}
 		return $a;
@@ -137,8 +140,11 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 			$key->registry_id = $localObject->primaryKey;
 			$key->key = $this->generateKey($foreignObject);
 			if (!$key->save()) {
+				echo "\n\n".__FILE__.__LINE__."\n\n\n";
 				var_dump($key->attributes);
 				var_dump($key->errors);
+				echo "\n\n\n\n";
+				exit;
 				return false;
 			}
 		}

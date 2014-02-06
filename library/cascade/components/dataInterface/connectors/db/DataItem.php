@@ -41,6 +41,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 			$this->localObject->$key = $value;
 		}
 
+
 		// save local object
 		if (!$this->localObject->save()) {
 			return false;
@@ -62,8 +63,12 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 					continue;
 				}
 				$childLocalObject = $dataItem->handle(true);
-				if (!Relation::set($this->localObject, $childLocalObject)) {
-					echo "boooo";
+				if (is_object($childLocalObject) && !Relation::set($this->localObject, $childLocalObject)) {
+					
+					echo "\n\n".__FILE__.__LINE__."\n\n\n";
+					var_dump($childLocalObject);
+					echo "\n\n\n\n";
+					exit;
 				}
 			}
 		} 

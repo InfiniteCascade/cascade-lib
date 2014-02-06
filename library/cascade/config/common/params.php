@@ -20,6 +20,7 @@ return [
 		'map' => 'http://maps.google.com/?q=%%object.flatAddressUrl%%'
 	],
 	'moduleConfig' => [
-	]
+	],
+	'defaultStorageEngine' => 'local'
 ];
 ?>

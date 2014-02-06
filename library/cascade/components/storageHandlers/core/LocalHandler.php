@@ -3,7 +3,8 @@ namespace cascade\components\storageHandlers\core;
 
 use Yii;
 
-use yii\web\UploadedFile;
+use infinite\base\FileInterface;
+use infinite\web\UploadedFile;
 use yii\helpers\FileHelper;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\Date;
@@ -12,8 +13,30 @@ use cascade\models\StorageEngine;
 
 class LocalHandler extends \cascade\components\storageHandlers\Handler 
 	implements \cascade\components\storageHandlers\UploadInterface {
+	public $localFileClass = 'infinite\\base\\File';
 	public $bucketFormat = '{year}.{month}';
 	protected $_baseDir;
+
+
+	public function beforeSetStorage($value)
+	{
+		if (is_array($value) && isset($value['tempName'])) {
+			if (!isset($value['class'])) {
+				$value['class'] = $this->localFileClass;
+			}
+			if (!isset($value['size'])) {
+				$value['size'] = filesize($value['tempName']);
+			}
+			if (!isset($value['type'])) {
+				$value['type'] = FileHelper::getMimeType($value['tempName']);
+			}
+			if (!isset($value['name'])) {
+				$value['name'] = basename($vale['tempName']);
+			}
+			$value = Yii::createObject($value);
+		}
+		return $value;
+	}
 
 	public function buildKey()
 	{
@@ -81,18 +104,19 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
 		$path = $dirPath . DIRECTORY_SEPARATOR . $storage->primaryKey;
 		$file = $model->{$attribute};
 		if ($file->saveAs($path) && file_exists($path)) {
-			$package['file_name'] = $file->baseName;
+			$package['file_name'] = $file->name;
 			$package['size'] = $file->size;
 			$package['type'] = FileHelper::getMimeType($path);
 			return $package;
 		}
+		var_dump($path);
 		return false;
 	}
 
 	public function validate(StorageEngine $engine, $model, $attribute)
 	{
 		$errorMessage = "No file was uploaded!";
-		if ($model->{$attribute} instanceof UploadedFile) {
+		if ($model->{$attribute} instanceof FileInterface) {
 			if (!$model->{$attribute}->hasError) {
 				return true;
 			} else {

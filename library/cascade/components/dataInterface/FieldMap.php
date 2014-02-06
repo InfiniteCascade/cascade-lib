@@ -27,10 +27,13 @@ class FieldMap extends \infinite\base\Object {
 		if (isset($this->value)) {
 			$value = $this->value($foreignModel, $this);
 		} elseif (isset($this->foreignField)) {
-			$value = (isset($foreignModel->{$this->foreignField}) ? $foreignModel->{$this->foreignField} : null);
+			if (is_string($this->foreignField)) {
+				$value = (isset($foreignModel->{$this->foreignField}) ? $foreignModel->{$this->foreignField} : null);
+			} elseif (is_callable($this->foreignField)) {
+				$value = call_user_func($this->foreignField, $foreignModel);
+			}
 		}
 		if (isset($this->filter)) {
-			var_dump($this->filter);
 			$value = call_user_func($this->filter, $value);
 		}
 		return $value;

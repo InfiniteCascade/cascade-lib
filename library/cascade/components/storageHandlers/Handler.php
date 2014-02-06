@@ -58,5 +58,10 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 		}
 		return $result;
 	}
+
+	public function beforeSetStorage($value)
+	{
+		return $value;
+	}
 }
 ?>

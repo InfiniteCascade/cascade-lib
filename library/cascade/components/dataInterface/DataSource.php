@@ -17,6 +17,7 @@ abstract class DataSource extends \infinite\base\Component {
 	public $dataItemClass = 'cascade\\components\\dataInterface\\DataItem';
 
 	public $keyGenerator;
+	public $debug = false;
 	public $lazyForeign = true;
 	public $lazyLocal = true;
 	public $childOnly = false;
