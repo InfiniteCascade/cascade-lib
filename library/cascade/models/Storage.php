@@ -2,6 +2,7 @@
 
 namespace cascade\models;
 
+use cascade\components\types\ActiveRecordTrait;
 /**
  * This is the model class for table "storage".
  *
@@ -21,6 +22,18 @@ namespace cascade\models;
  */
 class Storage extends \cascade\components\db\ActiveRecord
 {
+	use ActiveRecordTrait {
+		behaviors as baseBehaviors;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public static function isAccessControlled()
+    {
+        return false;
+    }
+
 	/**
 	 * @inheritdoc
 	 */
@@ -35,13 +48,41 @@ class Storage extends \cascade\components\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['storage_engine_id', 'file_name', 'type', 'size'], 'required'],
+			[['storage_engine_id', 'file_name', 'type', 'size'], 'safe'],
+			[['storage_engine_id', 'file_name', 'type', 'size'], 'required', 'on' => 'fill'],
 			[['size'], 'integer'],
 			[['created', 'modified'], 'safe'],
 			[['id', 'storage_engine_id'], 'string', 'max' => 36],
 			[['storage_key', 'name', 'file_name'], 'string', 'max' => 255],
 			[['type'], 'string', 'max' => 100]
 		];
+	}
+
+	public function fillKill($attributes)
+	{
+		if ($attributes === false) {
+			$this->delete();
+			return false;
+		} else {
+			$this->scenario = 'fill';
+			$this->attributes = $attributes;
+			if (!$this->save()) {
+				$this->delete();
+				return false;
+			}
+			return true;
+		}
+	}
+
+	public static function startBlank($engine)
+	{
+		$className = self::className();
+		$blank = new $className;
+		$blank->storage_engine_id = $engine->primaryKey;
+		if ($blank->save()) {
+			return $blank;
+		}
+		return false;
 	}
 
 	/**

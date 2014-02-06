@@ -43,6 +43,7 @@ class Relation extends Base {
 		$this->modelField->model = $relationModel;
 		$this->relatedObject = $model;
 	}
+
 	/**
 	 *
 	 *

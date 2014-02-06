@@ -25,6 +25,7 @@ class Segment extends FormObject {
 	protected $_model;
 	protected $_settings;
 	protected $_grid;
+	protected $_fields;
 
 	public function init()
 	{
@@ -102,6 +103,21 @@ class Segment extends FormObject {
 	}
 
 
+	public function hasFile()
+	{
+		if ($this->model->getBehavior('Storage') !== null) {
+			return true;
+		}
+
+		foreach ($this->fields as $field) {
+			if ($field->hasFile()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	/**
 	 *
 	 *
@@ -109,8 +125,7 @@ class Segment extends FormObject {
 	 */
 	public function generate()
 	{
-
-		$this->autogenerate($this->settings);
+		$this->getFields();
 		$result = [];
 		if (!empty($this->_settings['title'])) {
 			$result[] = Html::beginTag('fieldset');
@@ -130,119 +145,125 @@ class Segment extends FormObject {
 	 * @param unknown $settings
 	 * @return unknown
 	 */
-	protected function autogenerate($settings) {
-		if (is_array($settings)) {
-			$this->_settings = $settings;
-		} else {
-			$this->_settings = [];
-		}
-		if (!isset($this->_settings['fieldSettings'])) {
-			$this->_settings['fieldSettings'] = [];
-		}
-		if (!isset($this->_settings['formField'])) {
-			$this->_settings['formField'] = [];
-		}
-		if (!isset($this->_settings['ignoreFields'])) {
-			$this->_settings['ignoreFields'] = [];
-		}
-		if (is_array($this->_settings['fields']) && empty($this->_settings['fields'])) {
-			$this->_settings['fields'] = null;
-		}
-		$fields = $this->_model->getFields($this);
-		if (!isset($this->_model->_moduleHandler)) {
-			$modelClass = get_class($this->_model);
-			$this->_model->_moduleHandler = $modelClass::FORM_PRIMARY_MODEL;
-		}
-
-		if (!is_null($this->relationField)) {
-			$this->relationField->model->addFields($this->_model, $fields, $this->relationField->relationship, $this);
-		}
-
-		$requiredFields = $this->_model->getRequiredFields($this);
-		$fieldsTemplate = false;
-		if (!empty($this->subform)) {
-			$fieldsTemplate = [[$this->subform => ['linkExisting' => $this->linkExisting]]];
-		} elseif (!isset($this->_settings['fields'])) {
-			$fieldsTemplate = [];
-			foreach ($fields as $fieldName => $field) {
-				if (!$field->human) { continue; }
-				//if (!$field->required) { continue; }
-				if (!($field instanceof ModelField)) { continue; }
-				$fieldsTemplate[] = [$fieldName];
+	protected function getFields() {
+		$settings = $this->settings;
+		if (is_null($this->_fields)) {
+			$this->_fields = [];
+			if (is_array($settings)) {
+				$this->_settings = $settings;
+			} else {
+				$this->_settings = [];
 			}
-		} else {
-			$fieldsTemplate = $this->_settings['fields'];
-		}
-
-		if ($fieldsTemplate !== false) {
-			$this->_settings['fields'] = [];
-			foreach ($fields as $fieldKey => $field) {
-				if (!is_object($field->model)) {
-					\d($field);exit;
-				}
-				if ($field->model->isNewRecord) { continue; }
-				if ($field->human) { continue; }
-				if (!$field->required) { continue; }
-				$this->grid->prepend($field->formField);
+			if (!isset($this->_settings['fieldSettings'])) {
+				$this->_settings['fieldSettings'] = [];
 			}
-			$this->grid->prepend($fields['_moduleHandler']->formField);
-			$cellClass = $this->cellClass;
-			
-			if (empty($this->subform)) {
-				// make sure all required fields are part of the form
-				if (!empty($requiredFields)) {
-					foreach ($fieldsTemplate as $rowFields) {
-						foreach ($rowFields as $fieldKey => $fieldSettings) {
-							if (is_numeric($fieldKey)) {
-								$fieldKey = $fieldSettings;
-								$fieldSettings = [];
-							}
-							unset($requiredFields[$fieldKey]);
-						}
-					}
-				}
+			if (!isset($this->_settings['formField'])) {
+				$this->_settings['formField'] = [];
+			}
+			if (!isset($this->_settings['ignoreFields'])) {
+				$this->_settings['ignoreFields'] = [];
+			}
+			if (is_array($this->_settings['fields']) && empty($this->_settings['fields'])) {
+				$this->_settings['fields'] = null;
+			}
+			$fields = $this->_model->getFields($this);
+			if (!isset($this->_model->_moduleHandler)) {
+				$modelClass = get_class($this->_model);
+				$this->_model->_moduleHandler = $modelClass::FORM_PRIMARY_MODEL;
+			}
 
-				foreach ($requiredFields as $fieldName => $field) {
-					if (in_array($fieldName, $this->_settings['ignoreFields'])) { continue; }
+			if (!is_null($this->relationField)) {
+				$this->relationField->model->addFields($this->_model, $fields, $this->relationField->relationship, $this);
+			}
+
+			$requiredFields = $this->_model->getRequiredFields($this);
+			$fieldsTemplate = false;
+			if (!empty($this->subform)) {
+				$fieldsTemplate = [[$this->subform => ['linkExisting' => $this->linkExisting]]];
+			} elseif (!isset($this->_settings['fields'])) {
+				$fieldsTemplate = [];
+				foreach ($fields as $fieldName => $field) {
+					if (!$field->human) { continue; }
+					//if (!$field->required) { continue; }
+					if (!($field instanceof ModelField)) { continue; }
 					$fieldsTemplate[] = [$fieldName];
 				}
+			} else {
+				$fieldsTemplate = $this->_settings['fields'];
 			}
 
-			foreach ($fieldsTemplate as $rowFields) {
-				$rowItems = [];
-				foreach ($rowFields as $fieldKey => $fieldSettings) {
-					if (is_numeric($fieldKey)) {
-						$fieldKey = $fieldSettings;
-						$fieldSettings = [];
+			if ($fieldsTemplate !== false) {
+				$this->_settings['fields'] = [];
+				foreach ($fields as $fieldKey => $field) {
+					if (!is_object($field->model)) {
+						\d($field);exit;
 					}
-					if ($fieldKey === false || $fieldKey === ':empty') {
-						$rowItems[] = Yii::createObject(['class' => $cellClass, 'content' => '&nbsp;']);
-						continue;
-					}
-
-					if ($fieldKey === ':separator') {
-						$rowItems[] = Yii::createObject(['class' => $cellClass, 'content' => '<span class="separator"></span>']);
-						continue;
-					}
-
-					if (!isset($fields[$fieldKey])) { continue; }
-
-					if ($fieldKey === false) {
-						$rowItems[] = false;
-					} else {
-						//\d([$fieldKey, $fieldSettings]);
-						$cellOptions = ['class' => $cellClass, 'content' => $fields[$fieldKey]->formField->configure($fieldSettings)];
-						if (isset($cellOptions['content']->columns)) {
-							$cellOptions['columns'] = $cellOptions['content']->columns;
+					if ($field->model->isNewRecord) { continue; }
+					if ($field->human) { continue; }
+					if (!$field->required) { continue; }
+					$this->grid->prepend($field->formField);
+				}
+				$this->grid->prepend($fields['_moduleHandler']->formField);
+				$cellClass = $this->cellClass;
+				
+				if (empty($this->subform)) {
+					// make sure all required fields are part of the form
+					if (!empty($requiredFields)) {
+						foreach ($fieldsTemplate as $rowFields) {
+							foreach ($rowFields as $fieldKey => $fieldSettings) {
+								if (is_numeric($fieldKey)) {
+									$fieldKey = $fieldSettings;
+									$fieldSettings = [];
+								}
+								unset($requiredFields[$fieldKey]);
+							}
 						}
-						$rowItems[] = Yii::createObject($cellOptions);
+					}
+
+					foreach ($requiredFields as $fieldName => $field) {
+						if (in_array($fieldName, $this->_settings['ignoreFields'])) { continue; }
+						$fieldsTemplate[] = [$fieldName];
 					}
 				}
 
-				$this->grid->addRow($rowItems);
+				foreach ($fieldsTemplate as $rowFields) {
+					$rowItems = [];
+					foreach ($rowFields as $fieldKey => $fieldSettings) {
+						if (is_numeric($fieldKey)) {
+							$fieldKey = $fieldSettings;
+							$fieldSettings = [];
+						}
+						if ($fieldKey === false || $fieldKey === ':empty') {
+							$rowItems[] = Yii::createObject(['class' => $cellClass, 'content' => '&nbsp;']);
+							continue;
+						}
+
+						if ($fieldKey === ':separator') {
+							$rowItems[] = Yii::createObject(['class' => $cellClass, 'content' => '<span class="separator"></span>']);
+							continue;
+						}
+
+						if (!isset($fields[$fieldKey])) { continue; }
+
+						$this->_fields[$fieldKey] = $fields[$fieldKey];
+
+						if ($fieldKey === false) {
+							$rowItems[] = false;
+						} else {
+							//\d([$fieldKey, $fieldSettings]);
+							$cellOptions = ['class' => $cellClass, 'content' => $fields[$fieldKey]->formField->configure($fieldSettings)];
+							if (isset($cellOptions['content']->columns)) {
+								$cellOptions['columns'] = $cellOptions['content']->columns;
+							}
+							$rowItems[] = Yii::createObject($cellOptions);
+						}
+					}
+
+					$this->grid->addRow($rowItems);
+				}
 			}
 		}
-		return true;
+		return $this->_fields;
 	}
 
 	public function getGrid()

@@ -201,7 +201,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
 
         $this->createIndex('storageStorageEngine', 'storage', 'storage_engine_id', false);
         $this->addForeignKey('storageRegistry', 'storage', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('storageStorageEngine', 'storage', 'storage_engine_id', 'storage_engine_id', 'id', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('storageStorageEngine', 'storage', 'storage_engine_id', 'storage_engine', 'id', 'CASCADE', 'CASCADE');
 
         $this->db->createCommand()->checkIntegrity(true)->execute();
 

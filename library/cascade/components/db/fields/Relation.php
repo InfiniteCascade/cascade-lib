@@ -44,6 +44,11 @@ class Relation extends Base {
 		return $this->_moduleHandler;
 	}
 
+	public function hasFile()
+	{
+		return $this->companion->dummyModel->getBehavior('Storage') !== null;
+	}
+
 	public function getCompanionField() {
 		$fieldParts = explode(':', $this->field);
 		if ($this->modelRole === 'parent') {

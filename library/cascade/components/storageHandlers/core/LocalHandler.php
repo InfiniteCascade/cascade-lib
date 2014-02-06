@@ -2,15 +2,75 @@
 namespace cascade\components\storageHandlers\core;
 
 use Yii;
-use infinite\base\exceptions\Exception;
 
-class LocalHandler extends \cascade\components\storageHandlers\Handler {
+use yii\web\UploadedFile;
+use infinite\base\exceptions\Exception;
+use infinite\helpers\Date;
+use cascade\models\Storage;
+use cascade\models\StorageEngine;
+
+class LocalHandler extends \cascade\components\storageHandlers\Handler 
+	implements \cascade\components\storageHandlers\UploadInterface {
 	public $bucketFormat = '{year}.{month}';
 	protected $_baseDir;
 
-	public function validate($model, $attribute)
+	public function buildKey()
 	{
-		
+		$keyVariables = $this->keyVariables;
+		$keyParts = explode('.', $this->bucketFormat);
+		foreach($keyParts as &$part) {
+			$part = strtr($part, $keyVariables);
+		}
+		return $keyParts;
+	}
+
+	public function getKeyVariables()
+	{
+		$vars = [];
+		$time = Date::time();
+		$vars['{year}'] = Date::date("Y", $time);
+		$vars['{month}'] = Date::date("m", $time);
+		$vars['{day}'] = Date::date("d", $time);
+		$vars['{hour}'] = Date::date("H", $time);
+		$vars['{minute}'] = Date::date("i", $time);
+		return $vars;
+	}
+
+	public function handleSave(Storage $storage, $model, $attribute)
+	{
+		return $this->handleUpload($storage, $model, $attribute);
+	}
+
+	public function handleUpload(Storage $storage, $model, $attribute)
+	{
+		$package = [];
+		$baseKey = $this->buildKey();
+		$package['storage_key'] = implode('.', $baseKey);
+		$dirPath = $this->baseDir . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $baseKey);
+		if (!is_dir($dirPath)) {
+			@mkdir($dirPath, 0755, true);
+		}
+		if (!is_dir($dirPath)) {
+			$this->error = 'Unable to create storage directory';
+			return false;
+		}
+		$path = $dirPath . DIRECTORY_SEPARATOR . $storage->primaryKey;
+		\d($model->{$attribute});
+		return [];
+	}
+
+	public function validate(StorageEngine $engine, $model, $attribute)
+	{
+		$errorMessage = "No file was uploaded!";
+		if ($model->{$attribute} instanceof UploadedFile) {
+			if (!$model->{$attribute}->hasError) {
+				return true;
+			} else {
+				$errorMessage = 'An error occurred during file transport.';
+			}
+		}
+		$model->addError($attribute, $errorMessage);
+		return false;
 	}
 	
 	public function setBaseDir($value)

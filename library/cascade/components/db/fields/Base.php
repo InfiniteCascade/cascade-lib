@@ -44,6 +44,11 @@ abstract class Base extends \infinite\base\Object {
 		return null;
 	}
 
+	public function hasFile()
+	{
+		return false;
+	}
+
 	public function setFormField($value)
 	{
 		if (is_array($value)) {

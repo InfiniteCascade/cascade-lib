@@ -53,6 +53,11 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
 		if (Yii::$app->request->isAjax) {
 			Html::addCssClass($formOptions['options'], 'ajax');
 		}
+
+		if ($this->hasFile() && !isset($formOptions['options']['enctype'])) {
+			$formOptions['options']['enctype'] = 'multipart/form-data';
+		}
+
 		list($this->form, $formStartRow) = ActiveForm::begin($formOptions, false);
 		$result[] = $formStartRow;
 		// $result[] = Html::beginForm('', 'post', array('class' => $this->class));
@@ -72,6 +77,15 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
 		return implode("\n", $result);
 	}
 
+	public function hasFile()
+	{
+		foreach ($this->_items as $item) {
+			if ($item->hasFile()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 *

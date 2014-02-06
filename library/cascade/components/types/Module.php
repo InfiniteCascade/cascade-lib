@@ -614,6 +614,8 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	protected function _handlePost($settings = []) {
 		$results = ['primary' => null, 'children' => [], 'parents' => []];
 		if (empty($_POST)) { return false; }
+		// \d($_POST);
+		// \d($_FILES);
 		foreach ($_POST as $modelTop => $tabs) {
 			if (!is_array($tabs)) { continue; }
 			foreach ($tabs as $tabId => $tab) {
@@ -634,6 +636,10 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 						return false;
 					}
 					$results['primary'] = ['handler' => $this, 'model' => $this->getModel($object, $m)];
+
+					if ($results['primary']['model']->getBehavior('Storage') !== null) {
+						$results['primary']['model']->loadPostFile($tabId);
+					}
 					continue;
 				}
 				$handlerParts = explode(':', $tab['_moduleHandler']);
@@ -651,6 +657,9 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					}
 					if (!empty($resultsKey)) {
 						$model = $handler->getModel($object, $m);
+						if ($model->getBehavior('Storage') !== null) {
+							$model->loadPostFile($tabId);
+						}
 						$dirty = $model->getDirtyAttributes();
 						if ($model->isNewRecord) {
 							$formName = $model->formName();
