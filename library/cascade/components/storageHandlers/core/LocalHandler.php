@@ -4,6 +4,7 @@ namespace cascade\components\storageHandlers\core;
 use Yii;
 
 use yii\web\UploadedFile;
+use yii\helpers\FileHelper;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\Date;
 use cascade\models\Storage;
@@ -41,6 +42,29 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
 		return $this->handleUpload($storage, $model, $attribute);
 	}
 
+	public function afterDelete(StorageEngine $engine, Storage $model)
+	{
+		$path = $this->getPath($model);
+		if (file_exists($path)) {
+			@unlink($path);
+		}
+		return true;
+	}
+
+	public function getPath(Storage $model)
+	{
+		$baseKey = explode('.', $model->storage_key);
+		$dirPath = $this->baseDir . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $baseKey);
+		if (!is_dir($dirPath)) {
+			@mkdir($dirPath, 0755, true);
+		}
+		if (!is_dir($dirPath)) {
+			$this->error = 'Unable to create storage directory';
+			return false;
+		}
+		return $dirPath . DIRECTORY_SEPARATOR . $model->primaryKey;
+	}
+
 	public function handleUpload(Storage $storage, $model, $attribute)
 	{
 		$package = [];
@@ -55,8 +79,14 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
 			return false;
 		}
 		$path = $dirPath . DIRECTORY_SEPARATOR . $storage->primaryKey;
-		\d($model->{$attribute});
-		return [];
+		$file = $model->{$attribute};
+		if ($file->saveAs($path) && file_exists($path)) {
+			$package['file_name'] = $file->baseName;
+			$package['size'] = $file->size;
+			$package['type'] = FileHelper::getMimeType($path);
+			return $package;
+		}
+		return false;
 	}
 
 	public function validate(StorageEngine $engine, $model, $attribute)

@@ -8,7 +8,8 @@ use yii\web\UploadedFile;
 
 class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
 	public $storageEngineClass = 'cascade\\models\\StorageEngine';
-	public $storageClass = 'cascade\\models\\Storage';
+    public $storageClass = 'cascade\\models\\Storage';
+    public $registryClass = 'cascade\\models\\Registry';
 	public $storageAttribute = 'storage_id';
 
 	protected $_storageEngine;
@@ -24,6 +25,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
             \infinite\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
             \infinite\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
             \infinite\db\ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
+            \infinite\db\ActiveRecord::EVENT_AFTER_DELETE => 'afterDelete',
         ];
     }
 
@@ -53,6 +55,25 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
     }
 
 
+    public function afterDelete($event)
+    {
+        $storageObject = $this->storageObject;
+        if (is_null($this->storageEngine)) {
+            $this->storageEngine = $this->storageObject->storageEngine;
+        }
+        if (!$this->storageEngine->storageHandler->object->afterDelete($this->storageEngine, $storageObject)) {
+            $event->isValid = false;
+            return false;
+        }
+    }
+
+    public function getStorageObject()
+    {
+        $registryClass = $this->registryClass;
+        return $registryClass::getObject($this->owner->{$this->storageAttribute});
+    }
+
+
     public function beforeValidate($event)
     {
     	if (empty($this->storageEngine)) {
@@ -71,11 +92,15 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
 
 	public function setStorageEngine($value)
 	{
-		$storageEngineClass = $this->storageEngineClass;
-		$engineTest = $storageEngineClass::findPk($value);
-		if ($engineTest) {
-			return $this->_storageEngine = $engineTest;
-		}
+        if (is_object($value)) {
+            $this->_storageEngine = $value;
+        } else {
+    		$storageEngineClass = $this->storageEngineClass;
+    		$engineTest = $storageEngineClass::findPk($value);
+    		if ($engineTest) {
+    			return $this->_storageEngine = $engineTest;
+    		}
+        }
 		return false;
 	}
 }

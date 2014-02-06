@@ -40,12 +40,21 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 		return $storageClass::startBlank($engine);
 	}
 
+
+	public function afterDelete(StorageEngine $engine, Storage $model)
+	{
+		return true;
+	}
+
 	public function beforeSave(StorageEngine $engine, $model, $attribute)
 	{
 		$result = false;
 		if (($storage = $this->prepareStorage($engine))) {
 			$fill = $this->handleSave($storage, $model, $attribute);
 			$result = $storage->fillKill($fill);
+			if ($result) {
+				$model->{$attribute} = $storage->primaryKey;
+			}
 		}
 		return $result;
 	}

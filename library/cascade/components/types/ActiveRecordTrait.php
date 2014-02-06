@@ -259,7 +259,7 @@ trait ActiveRecordTrait {
 		if ($this->objectType->hasDashboard) {
 			return true;
 		}
-		if (count($this->parentIds) > 1) {
+		if ($this->getBehavior('Relatable') !== null && count($this->parentIds) > 1) {
 			return true;
 		}
 		return false;

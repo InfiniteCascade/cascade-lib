@@ -9,7 +9,6 @@ use cascade\components\types\ActiveRecordTrait;
  * @property string $id
  * @property string $storage_engine_id
  * @property string $storage_key
- * @property string $name
  * @property string $file_name
  * @property string $type
  * @property string $size
@@ -53,7 +52,7 @@ class Storage extends \cascade\components\db\ActiveRecord
 			[['size'], 'integer'],
 			[['created', 'modified'], 'safe'],
 			[['id', 'storage_engine_id'], 'string', 'max' => 36],
-			[['storage_key', 'name', 'file_name'], 'string', 'max' => 255],
+			[['storage_key', 'file_name'], 'string', 'max' => 255],
 			[['type'], 'string', 'max' => 100]
 		];
 	}
@@ -94,7 +93,6 @@ class Storage extends \cascade\components\db\ActiveRecord
 			'id' => 'ID',
 			'storage_engine_id' => 'Storage Engine ID',
 			'storage_key' => 'Storage Key',
-			'name' => 'Name',
 			'file_name' => 'File Name',
 			'type' => 'Type',
 			'size' => 'Size',
@@ -124,6 +122,6 @@ class Storage extends \cascade\components\db\ActiveRecord
 	 */
 	public function getStorageEngine()
 	{
-		return $this->hasOne(StorageEngineId::className(), ['id' => 'storage_engine_id']);
+		return $this->hasOne(StorageEngine::className(), ['id' => 'storage_engine_id']);
 	}
 }
