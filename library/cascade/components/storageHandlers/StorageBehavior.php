@@ -96,7 +96,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
             $this->_storageEngine = $value;
         } else {
     		$storageEngineClass = $this->storageEngineClass;
-    		$engineTest = $storageEngineClass::findPk($value);
+    		$engineTest = $storageEngineClass::find()->pk($value)->one();
     		if ($engineTest) {
     			return $this->_storageEngine = $engineTest;
     		}
