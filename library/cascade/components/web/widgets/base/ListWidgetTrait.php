@@ -131,6 +131,7 @@ trait ListWidgetTrait
 	public function renderPager()
 	{
 		$pagination = $this->dataProvider->getPagination();
+		//\d([get_class($this), $pagination]);
 		if ($pagination === false || $pagination->getPageCount() <= 1) {
 			return false;
 		}

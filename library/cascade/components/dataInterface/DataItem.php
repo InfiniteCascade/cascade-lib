@@ -53,7 +53,13 @@ abstract class DataItem extends \infinite\base\Component {
 
 	public function handle($fromParent = false)
 	{
-		if ($this->handledDataItem) { return true; }
+		if ($this->handledDataItem) {
+			if ($this->isForeign) {
+				return $this->localObject;
+			} else {
+				return $this->foreignObject;
+			}
+		}
 		if ($fromParent || !$this->dataSource->childOnly) {
 			if ($this->isForeign) {
 				// handle local to foreign
@@ -65,7 +71,9 @@ abstract class DataItem extends \infinite\base\Component {
 			$result = true;
 		}
 		if ($result) {
-			$this->handledDataItem = true;
+			if (is_object($result)) {
+				$this->handledDataItem = true;
+			}
 			return $result;
 		}
 		return false;
@@ -73,13 +81,13 @@ abstract class DataItem extends \infinite\base\Component {
 
 	protected function handleLocal()
 	{
-		return true;
+		return false;
 	}
 
 
 	protected function handleForeign()
 	{
-		return true;
+		return false;
 	}
 
 	public function getHandler()

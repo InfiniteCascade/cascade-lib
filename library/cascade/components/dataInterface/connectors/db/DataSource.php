@@ -54,10 +54,32 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 		$a = [];
 		foreach ($this->map as $localKey => $fieldMap) {
 			if ($localKey === $this->localPrimaryKeyName) { continue; }
-			if (is_string($fieldMap->foreignField) && $this->isRelationKey($fieldMap->foreignField)) {
-				continue;
-			}
 			if (strpos($fieldMap->localField, ':') !== false) {
+				if (($relationKey = $fieldMap->extractValue($foreignModel)) && !empty($relationKey)) {
+					$fieldParts = explode(':', $fieldMap->localField);
+					if ($fieldParts[0] === 'child') {
+						$relationship = $this->dummyLocalModel->objectTypeItem->getChild($fieldParts[1]);
+						$relatedType = !empty($relationship) ? $relationship->child : false;
+						$relationField = 'children';
+					} else {
+						$relationship = $this->dummyLocalModel->objectTypeItem->getParent($fieldParts[1]);
+						$relatedType = !empty($relationship) ? $relationship->parent : false;
+						$relationField = 'parent_object_id';
+					}
+					$relatedObject = null;
+					if ($relatedType && ($relatedObject = $this->module->getLocalObject($relatedType->primaryModel, $relationKey)) && is_object($relatedObject)) {
+						if (!isset($a['relations'])) {
+							$a['relations'] = [];
+						}
+						if (!isset($a['relations'][$fieldParts[0]])) {
+							$a['relations'][$fieldParts[0]] = [];
+						}
+						$a['relations'][$fieldParts[0]][] = $relatedObject->primaryKey;
+					} elseif (!is_object($relatedObject)) {
+						var_dump([$relatedType->primaryModel, $relationKey]);
+						var_dump($relatedObject); exit;
+					}
+				}
 			} else {
 				$a[$fieldMap->localField] = $fieldMap->extractValue($foreignModel);
 				if ($a[$fieldMap->localField] === false) {

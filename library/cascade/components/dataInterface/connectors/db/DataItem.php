@@ -31,8 +31,12 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		//	throw new \Exception("no new objects on this pass!");
 			$this->localObject = new $localModel;
 		}
-
+		$relations = [];
 		$attributes = $this->dataSource->buildLocalAttributes($this->foreignObject);
+		if (isset($attributes['relations'])) {
+			$relations = $attributes['relations'];
+			unset($attributes['relations']);
+		}
 		if (empty($attributes)) {
 			return false;
 		}
@@ -72,7 +76,24 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 				}
 			}
 		} 
-
+		if (isset($relations['parent'])) {
+			foreach ($relations['parent'] as $parentObject) {
+				if(!Relation::set($parentObject, $this->localObject)) {
+					echo "\n\n".__FILE__.__LINE__."\n\n\n";
+					var_dump($parentObject);
+					echo "\n\n\n\n";
+				}
+			}
+		}
+		if (isset($relations['child'])) {
+			foreach ($relations['child'] as $childObject) {
+				if(!Relation::set($this->localObject, $childObject)) {
+					echo "\n\n".__FILE__.__LINE__."\n\n\n";
+					var_dump($childObject);
+					echo "\n\n\n\n";
+				}
+			}
+		}
 		return $this->localObject;
 	}
 
@@ -82,7 +103,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 
 		// find 
 
-		return true;
+		return false;
 	}
 
 	protected function loadForeignObject()

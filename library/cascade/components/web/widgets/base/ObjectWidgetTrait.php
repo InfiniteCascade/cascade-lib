@@ -64,8 +64,6 @@ trait ObjectWidgetTrait
 			$currentSortBy = $this->currentSortBy;
 			$currentSortByDirection = $this->currentSortByDirection;
 
-			
-
 			$dataProvider['pagination'] = $this->paginationSettings;
 			$this->_dataProvider = Yii::createObject($dataProvider);
 		}

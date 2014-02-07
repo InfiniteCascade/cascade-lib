@@ -82,6 +82,25 @@ abstract class DbModule extends Module {
 		return $this->_dataSources;
 	}
 
+	public function getLocalObject($localModelClass, $foreignPrimaryKey)
+	{
+		$dataSource = $this->getLocalDataSource($localModelClass);
+		if ($dataSource && ($foreignDataItem = $dataSource->getForeignDataItem($foreignPrimaryKey))) {
+			return $foreignDataItem->handle(true);
+		}
+		return false;
+	}
+
+	public function getLocalDataSource($localModelClass)
+	{
+		foreach ($this->dataSources as $dataSource) {
+			if ($dataSource->localModel === $localModelClass) {
+				return $dataSource;
+			}
+		}
+		return false;
+	}
+
 	public function getForeignModel($model)
 	{
 		$models = $this->foreignModels;
