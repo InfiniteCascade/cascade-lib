@@ -9,6 +9,8 @@ use yii\console\Exception;
 
 use infinite\helpers\ArrayHelper;
 
+ini_set('memory_limit', -1);
+
 class InterfaceController extends \infinite\console\Controller {
 	protected $_interface;
 	public $verbose;

@@ -32,7 +32,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 			$this->localObject = new $localModel;
 		}
 		$relations = [];
-		$attributes = $this->dataSource->buildLocalAttributes($this->foreignObject);
+		$attributes = $this->dataSource->buildLocalAttributes($this->foreignObject, $this->localObject);
 		if (isset($attributes['relations'])) {
 			$relations = $attributes['relations'];
 			unset($attributes['relations']);

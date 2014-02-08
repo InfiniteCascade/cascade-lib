@@ -49,7 +49,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 	}
 
 
-	public function buildLocalAttributes(Model $foreignModel)
+	public function buildLocalAttributes(Model $foreignModel, $localModel = null)
 	{
 		$a = [];
 		foreach ($this->map as $localKey => $fieldMap) {
@@ -60,24 +60,61 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 					if ($fieldParts[0] === 'child') {
 						$relationship = $this->dummyLocalModel->objectTypeItem->getChild($fieldParts[1]);
 						$relatedType = !empty($relationship) ? $relationship->child : false;
-						$relationField = 'children';
+						$currentRelationsFunction = 'child';
 					} else {
 						$relationship = $this->dummyLocalModel->objectTypeItem->getParent($fieldParts[1]);
 						$relatedType = !empty($relationship) ? $relationship->parent : false;
-						$relationField = 'parent_object_id';
+						$currentRelationsFunction = 'parent';
 					}
 					$relatedObject = null;
-					if ($relatedType && ($relatedObject = $this->module->getLocalObject($relatedType->primaryModel, $relationKey)) && is_object($relatedObject)) {
-						if (!isset($a['relations'])) {
-							$a['relations'] = [];
+					if (!isset($a['relations'])) {
+						$a['relations'] = [];
+					}
+					if (!isset($a['relations'][$fieldParts[0]])) {
+						$a['relations'][$fieldParts[0]] = [];
+					}
+					if (empty($fieldParts[2])) {
+						// we're just matching to an existing objects primary key
+						if ($relatedType && ($relatedObject = $this->module->getLocalObject($relatedType->primaryModel, $relationKey)) && is_object($relatedObject)) {
+							$a['relations'][$fieldParts[0]][] = $relatedObject->primaryKey;
+						} elseif (!is_object($relatedObject)) {
+							var_dump([$relatedType->primaryModel, $relationKey]);
+							var_dump($relatedObject); exit;
 						}
-						if (!isset($a['relations'][$fieldParts[0]])) {
-							$a['relations'][$fieldParts[0]] = [];
+					} else {
+						// we're creating or updating an existing related object's field
+						$localRelatedField = $fieldParts[2];
+						if (is_array($relationKey)) {
+							// the localRelatedField is a dummy; build/search for object using this hash
+							$valueMap = $relationKey;
+						} else {
+							$valueMap = [$localRelatedField => $relationKey];
 						}
-						$a['relations'][$fieldParts[0]][] = $relatedObject->primaryKey;
-					} elseif (!is_object($relatedObject)) {
-						var_dump([$relatedType->primaryModel, $relationKey]);
-						var_dump($relatedObject); exit;
+
+						// @todo eventually we'll probably take some keys out of this
+						$searchMap = $valueMap;
+
+						// first, lets see if it exists
+						$relatedObject = null;
+						$currentRelation = false;
+						if (!empty($localModel) && !$localModel->isNewRecord) {
+							$test = $localModel->{$currentRelationsFunction}($relatedType->primaryModel, [], ['where' => $searchMap]);
+							if ($test) {
+								$relatedObject = $test;
+								$currentRelation = true;
+							}
+						}
+
+						if (empty($relatedObject)) {
+							$relatedClass = $relatedType->primaryModel;
+							$relatedObject = new $relatedClass;
+						}
+						$relatedObject->attributes = $valueMap;
+						if ($relatedObject->save()) {
+							$a['relations'][$fieldParts[0]][] = $relatedObject->primaryKey;
+						} else {
+							var_dump($relatedObject); exit;
+						}
 					}
 				}
 			} else {

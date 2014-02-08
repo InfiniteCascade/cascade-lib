@@ -222,24 +222,25 @@ trait ObjectWidgetTrait
 		$baseUrl = ['id' => $model->primaryKey];
 		$queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
 		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
-		$relationModel = $this->getRelationModel($model);
+		// $relationModel = $this->getRelationModel($model);
 
-		if ($relationModel) {
-			if ($queryRole === 'children') {
-				$baseUrl['object_relation'] = 'child';
-			} else {
-				$baseUrl['object_relation'] = 'parent';
-			}
-			$baseUrl['relation_id'] = $relationModel->primaryKey;
-			if ($relationModel->getBehavior('PrimaryRelation') !== null && $relationModel->presentSetPrimaryOption) {
-				$menu['primary'] = [
-					'icon' => 'fa fa-star',
-					'label' => 'Set as primary',
-					'url' => ['object/update', 'subaction' => 'setPrimary'] + $baseUrl,
-					'linkOptions' => ['data-handler' => 'background']
-				];
-			}
-		}
+		// if ($relationModel) {
+		// 	if ($queryRole === 'children') {
+		// 		$baseUrl['object_relation'] = 'child';
+		// 	} else {
+		// 		$baseUrl['object_relation'] = 'parent';
+		// 	}
+		// 	$baseUrl['relation_id'] = $relationModel->primaryKey;
+		// 	// @todo refactor primary relation! this slows it down
+		// 	if ($relationModel->getBehavior('PrimaryRelation') !== null && $relationModel->presentSetPrimaryOption) {
+		// 		$menu['primary'] = [
+		// 			'icon' => 'fa fa-star',
+		// 			'label' => 'Set as primary',
+		// 			'url' => ['object/update', 'subaction' => 'setPrimary'] + $baseUrl,
+		// 			'linkOptions' => ['data-handler' => 'background']
+		// 		];
+		// 	}
+		// }
 
 		// update button
 		if (!$objectType->hasDashboard && $model->can('update')) {

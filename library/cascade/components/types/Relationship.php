@@ -130,9 +130,10 @@ class Relationship extends \infinite\base\Object
 			$relationClass = self::$relationClass;
 			$all = $relationClass::find();
 			$all->where(
-				['or', 'parent_object_id' => ':parentObjectId', 'child_object_id' => ':childObjectId'], 
-				[':parentObjectId' => $parentObjectId, ':childObjectId' => $childObjectId]
+				['or', 'parent_object_id=:parentObjectId', 'child_object_id=:childObjectId']
 			);
+			$all->params[':parentObjectId'] = $parentObjectId;
+			$all->params[':childObjectId'] = $childObjectId;
 			$all = $all->all();
 			foreach ($all as $relation) {
 				self::$_cache[$relation->parent_object_id][$relation->child_object_id] = $relation;
