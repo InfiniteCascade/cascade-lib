@@ -28,7 +28,7 @@ trait ActiveRecordTrait {
 	public $artificialFieldClass = 'cascade\\components\\db\\fields\\Artificial';
 	public $modelFieldClass = 'cascade\\components\\db\\fields\\Model';
 	public $relationFieldClass = 'cascade\\components\\db\\fields\\Relation';
-	public $relationClass = 'cascade\\models\\Relation';
+	//public $relationClass = 'cascade\\models\\Relation';
 	public $registryClass = 'cascade\\models\\Registry';
 	public $taxonomyFieldClass = 'cascade\\components\\db\\fields\\Taxonomy';
 	public $formSegmentClass = 'cascade\\components\\web\\form\\Segment';
@@ -60,11 +60,6 @@ trait ActiveRecordTrait {
 				'class' => 'infinite\\db\\behaviors\\ActiveAccess',
 			]
 		];
-	}
-
-	public function getRegistryClass()
-	{
-		return 'cascade\\models\\Registry';
 	}
 
 
