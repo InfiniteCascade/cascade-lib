@@ -32,6 +32,23 @@ class Relationship extends \infinite\base\Object
 	protected $_options = [];
 	static $_relationships = [];
 
+	public function getPrimaryRelation($parentObject)
+	{
+		if (!$this->handlePrimary) { return false; }
+		$relationClass = self::$relationClass;
+		$childClass = $this->child->primaryModel;
+		$relation = $relationClass::find();
+		$alias = $relationClass::tableName();
+		$relation->andWhere(['`'. $alias.'`.`parent_object_id`' => $parentObject->primaryKey, '`'. $alias.'`.`primary`' => 1]);
+		$relation->andWhere('`'. $alias.'`.`child_object_id` LIKE :prefix');
+		$relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
+		$parentObject->addActiveConditions($relation, $alias);
+		$relation = $relation->one();
+		if ($relation) {
+			return $relation;
+		}
+		return null;
+	}
 
 	/**
 	 *

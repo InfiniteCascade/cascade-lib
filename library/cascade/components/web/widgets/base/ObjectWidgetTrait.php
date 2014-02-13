@@ -224,23 +224,23 @@ trait ObjectWidgetTrait
 		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
 		// $relationModel = $this->getRelationModel($model);
 
-		// if ($relationModel) {
-		// 	if ($queryRole === 'children') {
-		// 		$baseUrl['object_relation'] = 'child';
-		// 	} else {
-		// 		$baseUrl['object_relation'] = 'parent';
-		// 	}
-		// 	$baseUrl['relation_id'] = $relationModel->primaryKey;
-		// 	// @todo refactor primary relation! this slows it down
-		// 	if ($relationModel->getBehavior('PrimaryRelation') !== null && $relationModel->presentSetPrimaryOption) {
-		// 		$menu['primary'] = [
-		// 			'icon' => 'fa fa-star',
-		// 			'label' => 'Set as primary',
-		// 			'url' => ['object/update', 'subaction' => 'setPrimary'] + $baseUrl,
-		// 			'linkOptions' => ['data-handler' => 'background']
-		// 		];
-		// 	}
-		// }
+		if ($queryRole === 'children') {
+			$baseUrl['object_relation'] = 'child';
+			$primaryRelation = $relationship->getPrimaryRelation(Yii::$app->request->object);
+		} else {
+			$baseUrl['object_relation'] = 'parent';
+			$primaryRelation = false; // can only have a primary child
+		}
+		if ($primaryRelation && $primaryRelation->primaryKey !== $model->primaryKey) {
+			$relationUrl = ['id' => Yii::$app->request->object->primaryKey];
+			$relationUrl['child_object_id'] = $model->primaryKey;
+			$menu['primary'] = [
+				'icon' => 'fa fa-star',
+				'label' => 'Set as primary',
+				'url' => ['object/update', 'subaction' => 'setPrimary'] + $relationUrl,
+				'linkOptions' => ['data-handler' => 'background']
+			];
+		}
 
 		// update button
 		if (!$objectType->hasDashboard && $model->can('update')) {
