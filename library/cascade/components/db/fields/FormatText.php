@@ -11,7 +11,7 @@ namespace cascade\components\db\fields;
 
 class FormatText extends BaseFormat {
 	public function get() {
-		$result = $this->_field->value;
+		$result = $this->field->value;
 		if (empty($result)) {
 			$result = '<span class="empty">(none)</span>';
 		}

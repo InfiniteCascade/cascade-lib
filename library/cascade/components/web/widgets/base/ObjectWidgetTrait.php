@@ -90,16 +90,6 @@ trait ObjectWidgetTrait
 		return $sortBy;
 	}
 
-	public function getListItemOptions($model, $key, $index)
-	{
-		$options = self::getListItemOptionsBase($model, $key, $index);
-		$relationModel = $this->getRelationModel($model);
-		if ($relationModel && !empty($relationModel->primary)) {
-			Html::addCssClass($options, 'active');
-		}
-		return $options;
-	}
-
 	public function getCurrentSortBy()
 	{
 		return $this->getState('sortBy', 'familiarity');
@@ -201,17 +191,29 @@ trait ObjectWidgetTrait
 		return $menu;
 	}
 
-	public function getRelationModel($model) {
+	public function getListItemOptions($model, $key, $index)
+	{
+		$options = self::getListItemOptionsBase($model, $key, $index);
+		//return $options;
+		$objectType = $model->objectType;
+
 		$queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
 		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
-		if ($queryRole && $relationship) {
-			if ($queryRole === 'children') {
-				return $relationship->getModel(Yii::$app->request->object->primaryKey, $model->primaryKey);
-			} else {
-				return $relationship->getModel($model->primaryKey, Yii::$app->request->object->primaryKey);
-			}
+
+		if ($queryRole === 'children') {
+			$baseUrl['object_relation'] = 'child';
+			$primaryRelation = $relationship->getPrimaryChild(Yii::$app->request->object);
+			$key = 'child_object_id';
+		} else {
+			$baseUrl['object_relation'] = 'parent';
+			$primaryRelation = $relationship->getPrimaryParent($model);
+			$key = 'parent_object_id';
 		}
-		return false;
+		if ($primaryRelation && $primaryRelation->{$key} === $model->primaryKey) {
+			Html::addCssClass($options, 'active');
+		}
+
+		return $options;
 	}
 
 	public function getMenuItems($model, $key, $index)
@@ -226,10 +228,10 @@ trait ObjectWidgetTrait
 
 		if ($queryRole === 'children') {
 			$baseUrl['object_relation'] = 'child';
-			$primaryRelation = $relationship->getPrimaryRelation(Yii::$app->request->object);
+			$primaryRelation = $relationship->getPrimaryChild(Yii::$app->request->object);
 		} else {
 			$baseUrl['object_relation'] = 'parent';
-			$primaryRelation = false; // can only have a primary child
+			$primaryRelation = $relationship->getPrimaryParent($model);
 		}
 		if ($primaryRelation && $primaryRelation->primaryKey !== $model->primaryKey) {
 			$relationUrl = ['id' => Yii::$app->request->object->primaryKey];

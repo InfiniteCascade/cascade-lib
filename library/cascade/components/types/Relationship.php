@@ -24,7 +24,7 @@ class Relationship extends \infinite\base\Object
 
 	protected $_defaultOptions = [
 		'required' => false,
-		'handlePrimary' => true,
+		'handlePrimary' => true, // should we look at parent and child primary preferences
 		'taxonomy' => null,
 		'fields' => [],
 		'type' => self::HAS_MANY
@@ -32,22 +32,51 @@ class Relationship extends \infinite\base\Object
 	protected $_options = [];
 	static $_relationships = [];
 
-	public function getPrimaryRelation($parentObject)
+	public function getPrimaryChild($parentObject)
 	{
 		if (!$this->handlePrimary) { return false; }
-		$relationClass = self::$relationClass;
-		$childClass = $this->child->primaryModel;
-		$relation = $relationClass::find();
-		$alias = $relationClass::tableName();
-		$relation->andWhere(['`'. $alias.'`.`parent_object_id`' => $parentObject->primaryKey, '`'. $alias.'`.`primary`' => 1]);
-		$relation->andWhere('`'. $alias.'`.`child_object_id` LIKE :prefix');
-		$relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
-		$parentObject->addActiveConditions($relation, $alias);
-		$relation = $relation->one();
-		if ($relation) {
-			return $relation;
+		if (!$this->child->primaryAsChild) { return false; }
+		$key = json_encode([__FUNCTION__, $this->systemId, $parentObject->primaryKey]);
+		if (!isset(self::$_cache[$key])) {
+			self::$_cache[$key] = true;
+			$relationClass = self::$relationClass;
+			$childClass = $this->child->primaryModel;
+			$relation = $relationClass::find();
+			$alias = $relationClass::tableName();
+			$relation->andWhere(['`'. $alias.'`.`parent_object_id`' => $parentObject->primaryKey, '`'. $alias.'`.`primary`' => 1]);
+			$relation->andWhere(['or', '`'. $alias.'`.`child_object_id` LIKE :prefix', '`'. $alias.'`.`child_object_id` LIKE \''.$childClass.'\'']);
+			$relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
+			$parentObject->addActiveConditions($relation, $alias);
+			$relation = $relation->one();
+			if ($relation) {
+				self::$_cache[$key] = $relation;
+			}
 		}
-		return null;
+		return self::$_cache[$key];
+	}
+
+
+	public function getPrimaryParent($childObject)
+	{
+		if (!$this->handlePrimary) { return false; }
+		if (!$this->parent->primaryAsChild) { return false; }
+		$key = json_encode([__FUNCTION__, $this->systemId, $childObject->primaryKey]);
+		if (!isset(self::$_cache[$key])) {
+			self::$_cache[$key] = true;
+			$relationClass = self::$relationClass;
+			$parentClass = $this->parent->primaryModel;
+			$relation = $relationClass::find();
+			$alias = $relationClass::tableName();
+			$relation->andWhere(['`'. $alias.'`.`child_object_id`' => $childObject->primaryKey, '`'. $alias.'`.`primary`' => 1]);
+			$relation->andWhere('`'. $alias.'`.`parent_object_id` LIKE :prefix');
+			$relation->params[':prefix'] = $parentClass::modelPrefix() . '-%';
+			$parentObject->addActiveConditions($relation, $alias);
+			$relation = $relation->one();
+			if ($relation) {
+				self::$_cache[$key] = $relation;
+			}
+		}
+		return self::$_cache[$key];
 	}
 
 	/**
@@ -143,7 +172,8 @@ class Relationship extends \infinite\base\Object
 
 	public function getModel($parentObjectId, $childObjectId)
 	{
-		if (!isset(self::$_cache[$parentObjectId])) {
+		$key = json_encode([__FUNCTION__, $this->systemId, $parentObjectId]);
+		if (!isset(self::$_cache[$key])) {
 			$relationClass = self::$relationClass;
 			$all = $relationClass::find();
 			$all->where(
@@ -153,11 +183,15 @@ class Relationship extends \infinite\base\Object
 			$all->params[':childObjectId'] = $childObjectId;
 			$all = $all->all();
 			foreach ($all as $relation) {
-				self::$_cache[$relation->parent_object_id][$relation->child_object_id] = $relation;
+				$subkey = json_encode([__FUNCTION__, $this->systemId, $relation->parent_object_id]);
+				if (!isset(self::$_cache[$subkey])) {
+					self::$_cache[$subkey] = [];
+				}
+				self::$_cache[$subkey][$relation->child_object_id] = $relation;
 			}
 		}
-		if (isset(self::$_cache[$parentObjectId]) && isset(self::$_cache[$parentObjectId][$childObjectId])) {
-			return self::$_cache[$parentObjectId][$childObjectId];
+		if (isset(self::$_cache[$key]) && isset(self::$_cache[$key][$childObjectId])) {
+			return self::$_cache[$key][$childObjectId];
 		}
 		return false;
 	}

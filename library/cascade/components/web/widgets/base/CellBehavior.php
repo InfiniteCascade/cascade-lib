@@ -11,7 +11,8 @@ class CellBehavior extends \yii\base\Behavior {
 	public function getGridCellSettings() {
 		return [
 			'columns' => 12,
-			'maxColumns' => 12
+			'maxColumns' => 12,
+			'tabletSize' => false
 		];
 	}
 

@@ -5,6 +5,7 @@ use Yii;
 use infinite\base\exceptions\Exception;
 
 abstract class Base extends \infinite\base\Object {
+	public $formatClass = 'cascade\components\db\fields\FormatText';
 	public $formFieldClass;
 	public $default;
 	public $required = false;
@@ -147,7 +148,7 @@ abstract class Base extends \infinite\base\Object {
 	 */
 	public function getFormat() {
 		if (is_null($this->_format)) {
-			return $this->_format = new FormatText($this);
+			return $this->format = [];
 		}
 		return $this->_format;
 	}
@@ -161,7 +162,11 @@ abstract class Base extends \infinite\base\Object {
 	 */
 	public function setFormat($value) {
 		if (is_array($value)) {
-			$this->_format = Yii::createObject($value, $this);
+			if (!isset($value['class'])) {
+				$value['class'] = $this->formatClass;
+			}
+			$value['field'] = $this;
+			$this->_format = Yii::createObject($value);
 		}
 		$this->_format = $value;
 		return true;

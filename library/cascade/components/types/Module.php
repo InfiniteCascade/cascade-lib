@@ -32,6 +32,10 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $hasDashboard = true;
 	public $uniparental = false;
 	public $searchForParent = false; // can you find a parent through objects of this type?
+	
+	public $primaryAsChild = false;
+	public $primaryAsParent = false;
+
 	public $sectionName;
 
 	public $widgetNamespace;

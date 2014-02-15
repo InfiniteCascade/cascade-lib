@@ -10,27 +10,28 @@ use yii\bootstrap\ButtonDropdown;
 trait ListWidgetTrait
 {
 	public $emptyMessage = 'No items exist.';
-	public $renderContentTemplate;
 	public $defaultContentRow = [
 		'class' => 'list-group-item-text',
 		'tag' => 'div'
 	];
+	protected $_renderContentTemplate;
 
+	public function contentTemplate($model)
+	{
+		if ($model->objectType->hasDashboard) {
+			return [
+				'viewLink' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
+			];
+		} else {
+			return [
+				'descriptor' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
+			];
+		}
+	}
 
 	public function renderItemContent($model, $key, $index){
-		if (!isset($this->renderContentTemplate)) {
-			if ($model->objectType->hasDashboard) {
-				$this->renderContentTemplate = [
-					'viewLink' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
-				];
-			} else {
-				$this->renderContentTemplate = [
-					'descriptor' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
-				];
-			}
-		}
 		$parts = [];
-		foreach ($this->renderContentTemplate as $fieldName => $settings) {
+		foreach ($this->contentTemplate($model) as $fieldName => $settings) {
 			if (is_numeric($fieldName)) {
 				$fieldName = $settings;
 				$settings = [];
