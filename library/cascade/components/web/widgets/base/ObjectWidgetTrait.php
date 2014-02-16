@@ -200,6 +200,10 @@ trait ObjectWidgetTrait
 		$queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
 		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
 
+		if (!$relationship) {
+			return $options;
+		}
+		
 		if ($queryRole === 'children') {
 			$baseUrl['object_relation'] = 'child';
 			$primaryRelation = $relationship->getPrimaryChild(Yii::$app->request->object);
