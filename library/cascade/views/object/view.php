@@ -12,7 +12,7 @@ $baseInstructions = [];
 $baseInstructions['objectId'] = $object->primaryKey;
 $refreshable = [
 	'url' => Html::url('app/refresh'),
-	'data' => [Yii::$app->request->csrfVar => Yii::$app->request->csrfToken, 'baseInstructions' => $baseInstructions]
+	'data' => [Yii::$app->request->csrfParam => Yii::$app->request->csrfToken, 'baseInstructions' => $baseInstructions]
 ];
 $this->bodyHtmlOptions['data-refreshable'] = json_encode($refreshable);
 $js = [];
