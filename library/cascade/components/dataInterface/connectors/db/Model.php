@@ -6,7 +6,7 @@ use infinite\base\exceptions\Exception;
 use yii\db\Query;
 
 class Model extends \infinite\base\Object {
-	public $name;
+	public $modelName;
 	protected $_interface;
 	protected $_tableName;
 	protected $_meta;
@@ -61,7 +61,7 @@ class Model extends \infinite\base\Object {
 		return parent::__unset($name);
 	}
 
-	public function settableName($value)
+	public function setTableName($value)
 	{
 		$this->_tableName = $value;
 	}

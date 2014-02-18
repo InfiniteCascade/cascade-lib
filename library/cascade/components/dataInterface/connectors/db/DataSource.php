@@ -48,8 +48,75 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 		return $this->foreignModel->findOne($config);
 	}
 
-
 	public function buildLocalAttributes(Model $foreignModel, $localModel = null)
+	{
+		$a = [];
+		foreach ($this->map as $localKey => $fieldMap) {
+			if ($localKey === $this->localPrimaryKeyName) { continue; }
+			$value = $fieldMap->extractValue($foreignModel);
+			
+			if (strpos($fieldMap->localField, ':') !== false) {
+				// we're feeding the relations
+				$relationKey = $value;
+				$value = false;
+				if (!empty($relationKey)) {
+					$fieldParts = explode(':', $fieldMap->localField);
+					if ($fieldParts[0] === 'child') {
+						$relationship = $this->dummyLocalModel->objectTypeItem->getChild($fieldParts[1]);
+						$relatedType = !empty($relationship) ? $relationship->child : false;
+						$currentRelationsFunction = 'child';
+					} else {
+						$relationship = $this->dummyLocalModel->objectTypeItem->getParent($fieldParts[1]);
+						$relatedType = !empty($relationship) ? $relationship->parent : false;
+						$currentRelationsFunction = 'parent';
+					}
+					if (!$relatedType) { continue; }
+
+					$relatedObject = null;
+					if (!isset($a['relations'])) {
+						$a['relations'] = [];
+					}
+					if (!isset($a['relations'][$fieldParts[0]])) {
+						$a['relations'][$fieldParts[0]] = [];
+					}
+
+					if (empty($fieldParts[2])) {
+						// we're just matching to an existing object's primary key
+						if (($relatedObject = $this->module->getLocalObject($relatedType->primaryModel, $relationKey)) && is_object($relatedObject)) {
+							$a['relations'][$fieldParts[0]][] = $relatedObject->primaryKey;
+						}
+					} else {
+						// we're creating or updating an existing related object's field
+						$localRelatedField = $fieldParts[2];
+						if (is_array($relationKey)) {
+							// the localRelatedField is a dummy; build/search for object using this hash
+							$valueMap = $relationKey;
+						} else {
+							$valueMap = [$localRelatedField => $relationKey];
+						}
+						if (($relatedObject = $this->module->updateLocalObject($relatedType, $relationKey, $valueMap, $fieldMap)) && is_object($relatedObject)) {
+							$a['relations'][$fieldParts[0]][] = $relatedObject->primaryKey;
+						}
+					}
+				}
+			} elseif (!empty($fieldMap->foreignModel)) {
+				$relationKey = $value;
+				$value = false;
+				if (!empty($relationKey)) {
+					// we're filling a local related _id field with another foreign object
+					if (($relatedObject = $this->module->getForeignObject($fieldMap->foreignModel, $relationKey)) && is_object($relatedObject)) {
+						$value = $relatedObject->primaryKey;
+					}
+				}
+			}
+			if ($value !== false) {
+				$a[$fieldMap->localField] = $value;
+			}
+		}
+		return $a;
+	}
+
+	public function buildLocalAttributesOld(Model $foreignModel, $localModel = null)
 	{
 		$a = [];
 		foreach ($this->map as $localKey => $fieldMap) {
@@ -78,8 +145,8 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 						if ($relatedType && ($relatedObject = $this->module->getLocalObject($relatedType->primaryModel, $relationKey)) && is_object($relatedObject)) {
 							$a['relations'][$fieldParts[0]][] = $relatedObject->primaryKey;
 						} elseif (!is_object($relatedObject)) {
-							var_dump([$relatedType->primaryModel, $relationKey]);
-							var_dump($relatedObject); exit;
+							\d([$relatedType->primaryModel, $relationKey]);
+							\d($relatedObject); exit;
 						}
 					} else {
 						// we're creating or updating an existing related object's field
@@ -113,7 +180,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 						if ($relatedObject->save()) {
 							$a['relations'][$fieldParts[0]][] = $relatedObject->primaryKey;
 						} else {
-							var_dump($relatedObject); exit;
+							\d($relatedObject); exit;
 						}
 					}
 				}
@@ -199,10 +266,8 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 			$key->registry_id = $localObject->primaryKey;
 			$key->key = $this->generateKey($foreignObject);
 			if (!$key->save()) {
-				echo "\n\n".__FILE__.__LINE__."\n\n\n";
-				var_dump($key->attributes);
-				var_dump($key->errors);
-				echo "\n\n\n\n";
+				\d($key->attributes);
+				\d($key->errors);
 				exit;
 				return false;
 			}

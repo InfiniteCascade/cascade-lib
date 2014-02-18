@@ -68,10 +68,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 				}
 				$childLocalObject = $dataItem->handle(true);
 				if (is_object($childLocalObject) && !Relation::set($this->localObject, $childLocalObject)) {
-					
-					echo "\n\n".__FILE__.__LINE__."\n\n\n";
-					var_dump($childLocalObject);
-					echo "\n\n\n\n";
+					\d($childLocalObject);
 					exit;
 				}
 			}
@@ -79,18 +76,14 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		if (isset($relations['parent'])) {
 			foreach ($relations['parent'] as $parentObject) {
 				if(!Relation::set($parentObject, $this->localObject)) {
-					echo "\n\n".__FILE__.__LINE__."\n\n\n";
-					var_dump($parentObject);
-					echo "\n\n\n\n";
+					\d($parentObject);
 				}
 			}
 		}
 		if (isset($relations['child'])) {
 			foreach ($relations['child'] as $childObject) {
 				if(!Relation::set($this->localObject, $childObject)) {
-					echo "\n\n".__FILE__.__LINE__."\n\n\n";
-					var_dump($childObject);
-					echo "\n\n\n\n";
+					\d($childObject);
 				}
 			}
 		}
@@ -119,8 +112,8 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 			}
 		}
 		if (empty($this->_foreignObject)) {
-			var_dump($this->foreignPrimaryKey);
-			var_dump($this->dataSource->name);
+			\d($this->foreignPrimaryKey);
+			\d($this->dataSource->name);
 			exit;
 			//throw new MissingItemException('Foreign item could not be found: '. $this->foreignPrimaryKey);
 		}

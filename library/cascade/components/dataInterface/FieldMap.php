@@ -14,6 +14,7 @@ class FieldMap extends \infinite\base\Object {
 	public $localField = false;
 	public $foreignField = false;
 	public $foreignModel = false;
+	public $searchFields;
 	public $value;
 	public $filter;
 

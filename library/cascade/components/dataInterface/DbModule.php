@@ -82,9 +82,55 @@ abstract class DbModule extends Module {
 		return $this->_dataSources;
 	}
 
+	public function updateLocalObject($relatedType, $foreignPrimaryKey, $valueMap, $fieldMap)
+	{
+		$localModelClass = $relatedType->primaryModel;
+		// @todo eventually we'll probably take some keys out of this
+		$searchMap = $valueMap;
+		if (isset($fieldMap->searchFields) && is_array($fieldMap->searchFields)) {
+			foreach ($searchMap as $field => $value) {
+				if (!in_array($field, $fieldMap->searchFields)) {
+					unset($searchMap[$field]);
+				}
+			}
+		}
+
+		// first, lets see if it exists
+		$relatedObject = null;
+		$currentRelation = false;
+		if (!empty($localModel) && !$localModel->isNewRecord) {
+			$test = $localModel->{$currentRelationsFunction}($relatedType->primaryModel, [], ['where' => $searchMap]);
+			if ($test) {
+				$relatedObject = $test;
+				$currentRelation = true;
+			}
+		}
+
+		if (empty($relatedObject)) {
+			$relatedClass = $relatedType->primaryModel;
+			$relatedObject = new $relatedClass;
+		}
+		$relatedObject->attributes = $valueMap;
+		if ($relatedObject->save()) {
+			return $relatedObject;
+		} else {
+			\d($relatedObject); exit;
+			return false;
+		}
+	}
+
 	public function getLocalObject($localModelClass, $foreignPrimaryKey)
 	{
 		$dataSource = $this->getLocalDataSource($localModelClass);
+		if ($dataSource && ($foreignDataItem = $dataSource->getForeignDataItem($foreignPrimaryKey))) {
+			return $foreignDataItem->handle(true);
+		}
+		return false;
+	}
+
+	public function getForeignObject($foreignModelClass, $foreignPrimaryKey)
+	{
+		$dataSource = $this->getForeignDataSource($foreignModelClass);
 		if ($dataSource && ($foreignDataItem = $dataSource->getForeignDataItem($foreignPrimaryKey))) {
 			return $foreignDataItem->handle(true);
 		}
@@ -95,6 +141,16 @@ abstract class DbModule extends Module {
 	{
 		foreach ($this->dataSources as $dataSource) {
 			if ($dataSource->localModel === $localModelClass) {
+				return $dataSource;
+			}
+		}
+		return false;
+	}
+
+	public function getForeignDataSource($foreignModelClass)
+	{
+		foreach ($this->dataSources as $dataSource) {
+			if ($dataSource->foreignModel->modelName === $foreignModelClass) {
 				return $dataSource;
 			}
 		}
@@ -121,6 +177,7 @@ abstract class DbModule extends Module {
 		if (isset($this->foreignModelsConfig[$modelName])) {
 			$config = array_merge($config, $this->foreignModelsConfig[$modelName]);
 		}
+		$config['modelName'] = $modelName;
 		$config['tableName'] = $tableName;
 		$config['interface'] = $this;
 		return $config;
