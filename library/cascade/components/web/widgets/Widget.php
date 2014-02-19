@@ -70,6 +70,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 				}
 				$widgetArea->parentWidget = $this;
 				$widgetAreaCell = $widgetArea->cell;
+				if (!$widgetArea->isReady) { continue; }
 				switch ($widgetArea->location) {
 					case 'bottom':
 						array_push($bottomRow, $widgetAreaCell);

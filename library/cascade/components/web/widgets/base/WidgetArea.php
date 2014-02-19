@@ -20,8 +20,14 @@ abstract class WidgetArea extends BaseWidget {
 		Yii::endProfile(get_called_class() .':'. __FUNCTION__);
 		return $result;
 	}
+	
 	public function getCellContent()
 	{
 		return $this->generate();
+	}
+
+	public function getIsReady()
+	{
+		return true;
 	}
 }
