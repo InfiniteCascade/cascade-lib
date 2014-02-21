@@ -17,6 +17,7 @@ class FieldMap extends \infinite\base\Object {
 	public $searchFields;
 	public $value;
 	public $filter;
+	public $taxonomy;
 
 	public function extractValue($foreignModel = null)
 	{

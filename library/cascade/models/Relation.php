@@ -40,7 +40,6 @@ class Relation extends \infinite\db\models\Relation
 			$fieldSchema = $caller->createColumnSchema('taxonomy_id', ['type' => 'taxonomy', 'phpType' => 'object', 'dbType' => 'taxonomy', 'allowNull' => true]);
 
 			$fields[$fieldName] = $caller->createTaxonomyField($fieldSchema, $taxonomyItem, $owner, $baseField);
-			//var_dump($fields['relation:taxonomy_id']);exit;
 		}
 	}
 

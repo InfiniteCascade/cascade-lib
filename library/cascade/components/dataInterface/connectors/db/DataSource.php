@@ -54,6 +54,18 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 		foreach ($this->map as $localKey => $fieldMap) {
 			if ($localKey === $this->localPrimaryKeyName) { continue; }
 			$value = $fieldMap->extractValue($foreignModel);
+			$taxonomyId = null;
+			if (isset($fieldMap->taxonomy) && isset($fieldMap->taxonomy['taxonomy_type'])) {
+				$taxonomyTypeItem = Yii::$app->collectors['taxonomies']->getOne($fieldMap->taxonomy['taxonomy_type']);
+				if (($taxonomyType = $taxonomyTypeItem->object) && isset($taxonomyType)) {
+					if (isset($fieldMap->taxonomy['taxonomy_system_id']) 
+						&& ($taxonomy = $taxonomyTypeItem->getTaxonomy($fieldMap->taxonomy['taxonomy_system_id']))
+						&& (isset($taxonomy))
+					) {
+						$taxonomyId = [$taxonomy->primaryKey];
+					}
+				}
+			}
 			
 			if (strpos($fieldMap->localField, ':') !== false) {
 				// we're feeding the relations
@@ -76,14 +88,17 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 					if (!isset($a['relations'])) {
 						$a['relations'] = [];
 					}
-					if (!isset($a['relations'][$fieldParts[0]])) {
-						$a['relations'][$fieldParts[0]] = [];
-					}
+					$fieldKey = $fieldParts[0] .'_object_id';
 
 					if (empty($fieldParts[2])) {
 						// we're just matching to an existing object's primary key
 						if (($relatedObject = $this->module->getLocalObject($relatedType->primaryModel, $relationKey)) && is_object($relatedObject)) {
-							$a['relations'][$fieldParts[0]][] = $relatedObject->primaryKey;
+							$relation = [$fieldKey => $relatedObject->primaryKey];
+							if (isset($taxonomyId)) {
+								$relation['taxonomy_id'] = $taxonomyId;
+								$taxonomyId = null;
+							}
+							$a['relations'][] = $relation;
 						}
 					} else {
 						// we're creating or updating an existing related object's field
@@ -95,7 +110,12 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 							$valueMap = [$localRelatedField => $relationKey];
 						}
 						if (($relatedObject = $this->module->updateLocalObject($relatedType, $relationKey, $valueMap, $fieldMap)) && is_object($relatedObject)) {
-							$a['relations'][$fieldParts[0]][] = $relatedObject->primaryKey;
+							$relation = [$fieldKey => $relatedObject->primaryKey];
+							if (isset($taxonomyId)) {
+								$relation['taxonomy_id'] = $taxonomyId;
+								$taxonomyId = null;
+							}
+							$a['relations'][] = $relation;
 						}
 					}
 				}

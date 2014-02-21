@@ -73,21 +73,24 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 				}
 			}
 		} 
-		if (isset($relations['parent'])) {
-			foreach ($relations['parent'] as $parentObject) {
-				if(!Relation::set($parentObject, $this->localObject)) {
-					\d($parentObject);
-				}
-			}
-		}
-		if (isset($relations['child'])) {
-			foreach ($relations['child'] as $childObject) {
-				if(!Relation::set($this->localObject, $childObject)) {
-					\d($childObject);
+		if (!empty($relations)) {
+			foreach ($relations as $relationConfig) {
+				$this->fillRelationConfig($relationConfig, $this->localObject);
+				if(!Relation::set($relationConfig)) {
+					\d($relationConfig);exit;
 				}
 			}
 		}
 		return $this->localObject;
+	}
+
+	protected function fillRelationConfig(&$config, $otherObject)
+	{
+		if (isset($config['parent_object_id'])) {
+			$config['child_object_id'] = $otherObject;
+		} elseif (isset($config['child_object_id'])) {
+			$config['parent_object_id'] = $otherObject;
+		}
 	}
 
 	protected function handleLocal()
