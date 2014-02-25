@@ -13,6 +13,7 @@ trait ObjectWidgetTrait
 {
 	protected $_dataProvider;
 	public $pageSize = 5;
+	
 	public function generateStart() {
 		$this->htmlOptions['data-instructions'] = json_encode($this->refreshInstructions);
 		return parent::generateStart();

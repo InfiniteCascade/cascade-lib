@@ -54,7 +54,7 @@ trait ListWidgetTrait
 
 	public function getListItemOptions($model, $key, $index)
 	{
-		return ['class' => 'list-group-item'];
+		return ['class' => 'list-group-item expandable'];
 	}
 
 	public function renderItem($model, $key, $index)

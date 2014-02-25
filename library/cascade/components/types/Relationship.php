@@ -154,16 +154,40 @@ class Relationship extends \infinite\base\Object
 		return 'child';
 	}
 
-	public function canLink($relationshipRole, $objectModule)
+	public function companionRoleType($queryRole)
 	{
-		if (!$objectModule || ($relationshipRole === 'parent' && $this->child->uniparental)) {
+		if ($queryRole === 'children' || $queryRole === 'child') {
+			return $this->parent;
+		}
+		return $this->child;
+	}
+
+	public function roleType($queryRole)
+	{
+		if ($queryRole === 'children' || $queryRole === 'child') {
+			return $this->child;
+		}
+		return $this->parent;
+	}
+
+	public function canLink($relationshipRole, $object)
+	{
+		$objectModule = $object->objectType;
+		if (!$objectModule 
+			|| ($relationshipRole === 'parent' && ($this->child->uniparental || $this->type === self::HAS_ONE))
+		) {
+			return false;
+		}
+
+		if (!$object->can('associate:'. $this->systemId)) {
 			return false;
 		}
 		return true;
 	}
 
-	public function canCreate($relationshipRole, $objectModule)
+	public function canCreate($relationshipRole, $object)
 	{
+		$objectModule = $object->objectType;
 		if ($this->child->hasDashboard && $relationshipRole === 'child') { // && ($this->parent->uniparental || $this->uniqueParent)
 			return false;
 		}
@@ -259,7 +283,7 @@ class Relationship extends \infinite\base\Object
 
 	public function getSystemId()
 	{
-		return $this->_parent->systemId .'-'. $this->_child->systemId;
+		return $this->_parent->systemId .'.'. $this->_child->systemId;
 	}
 }
 
