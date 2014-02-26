@@ -1,13 +1,13 @@
 <?php
-namespace cascade\components\dataInterface;
+namespace cascade\components\dataInterface\connectors\db;
 
 use Yii;
 use yii\helpers\Inflector;
 use infinite\base\exceptions\Exception;
 use cascade\components\dataInterface\Action;
+use cascade\components\dataInterface\Module as BaseModule;
 
-
-abstract class DbModule extends Module {
+abstract class Module extends BaseModule {
 	public $dataSourceClass = 'cascade\\components\\dataInterface\\connectors\\db\\DataSource';
 	public $dbConfig = [];
 	protected $_action;
@@ -18,7 +18,7 @@ abstract class DbModule extends Module {
 
 	abstract public function dataSources();
 
-	public function getKeyTranslation(DbModel $foreignObject) {
+	public function getKeyTranslation(Model $foreignObject) {
 		$key = $this->generateKey($foreignObject);
 		if ($this->settings['universalKey']) {
 			return KeyTranslation::get($key);

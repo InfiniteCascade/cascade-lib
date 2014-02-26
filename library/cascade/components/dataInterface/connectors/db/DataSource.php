@@ -14,6 +14,7 @@ use infinite\helpers\ArrayHelper;
 class DataSource extends \cascade\components\dataInterface\DataSource {
 	public $fieldMapClass = 'cascade\\components\\dataInterface\\connectors\\db\\FieldMap';
 	public $dataItemClass = 'cascade\\components\\dataInterface\\connectors\\db\\DataItem';
+	public $searchClass = 'cascade\\components\\dataInterface\\connectors\\db\\Search';
 
 	public function init()
 	{

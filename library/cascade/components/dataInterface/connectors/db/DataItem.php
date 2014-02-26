@@ -13,7 +13,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 	{
 		$this->on(self::EVENT_LOAD_FOREIGN_OBJECT, [$this, 'loadForeignObject']);
 		$this->on(self::EVENT_LOAD_LOCAL_OBJECT, [$this, 'loadLocalObject']);
-		return parent::init();
+		parent::init();
 	}
 
 	protected function handleForeign()
@@ -23,7 +23,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		}
 
 		// foreign to local
-
+		
 		// find or start up local object
 		$localModel = $this->dataSource->localModel;
 
@@ -129,7 +129,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 			throw new RecursionException('Ran into recursion while loading local object');
 		}
 		$this->_isLoadingLocalObject = true;
-		if (isset($this->foreignObject)) {
+		if (isset($this->foreignObject) && !isset($this->_localObject)) {
 			$keyTranslation = $this->dataSource->getKeyTranslation($this->foreignObject);
 			if (!empty($keyTranslation) && ($localObject = $keyTranslation->object)) {
 				$this->_localObject = $localObject;

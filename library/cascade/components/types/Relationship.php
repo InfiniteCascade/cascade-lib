@@ -44,7 +44,7 @@ class Relationship extends \infinite\base\Object
 			$relation = $relationClass::find();
 			$alias = $relationClass::tableName();
 			$relation->andWhere(['`'. $alias.'`.`parent_object_id`' => $parentObject->primaryKey, '`'. $alias.'`.`primary`' => 1]);
-			$relation->andWhere(['or', '`'. $alias.'`.`child_object_id` LIKE :prefix', '`'. $alias.'`.`child_object_id` LIKE \''.$childClass.'\'']);
+			$relation->andWhere(['or', '`'. $alias.'`.`child_object_id` LIKE :prefix']); //, '`'. $alias.'`.`child_object_id` LIKE \''.$childClass.'\''
 			$relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
 			$parentObject->addActiveConditions($relation, $alias);
 			$relation = $relation->one();

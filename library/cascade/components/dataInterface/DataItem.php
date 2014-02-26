@@ -20,6 +20,21 @@ abstract class DataItem extends \infinite\base\Component {
 	const EVENT_LOAD_FOREIGN_OBJECT = 0x01;
 	const EVENT_LOAD_LOCAL_OBJECT = 0x02;
 
+	public function init()
+	{
+		$this->on(self::EVENT_LOAD_LOCAL_OBJECT, [$this, 'searchLocalObject']);
+		parent::init();
+	}
+
+	protected function searchLocalObject($event)
+	{
+		if (isset($this->foreignObject) && !isset($this->_localObject) && isset($this->dataSource->search)) {
+			if (($localObject = $this->dataSource->search->searchLocal($this)) && !empty($localObject)) {
+				$this->_localObject = $localObject;
+			}
+		}
+		return true;
+	}
 
 	public function clean()
 	{

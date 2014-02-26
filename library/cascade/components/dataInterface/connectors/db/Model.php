@@ -27,7 +27,6 @@ class Model extends \infinite\base\Object {
 
 	public function __clone()
 	{
-		parent::__clone();
 		$this->reset();
 	}
 

@@ -15,6 +15,7 @@ abstract class DataSource extends \infinite\base\Component {
 
 	public $fieldMapClass = 'cascade\\components\\dataInterface\\FieldMap';
 	public $dataItemClass = 'cascade\\components\\dataInterface\\DataItem';
+	public $searchClass = 'cascade\\components\\dataInterface\\Search';
 
 	public $keyGenerator;
 	public $debug = false;
@@ -26,6 +27,7 @@ abstract class DataSource extends \infinite\base\Component {
 	protected $_foreignModel;
 	protected $_map;
 	protected $_settings;
+	protected $_search;
 
 	protected $_foreignDataItems;
 	protected $_localDataItems;
@@ -129,6 +131,17 @@ abstract class DataSource extends \infinite\base\Component {
 		return $this->_localDataItems;
 	}
 
+	public function getHandledLocalDataItems()
+	{
+		$handled = [];
+		foreach ($this->localDataItems as $local) {
+			if ($local->handled) {
+				$handled[] = $local;
+			}
+		}
+		return $handled;
+	}
+
 	public function run() {
 		if (!$this->isReady()) { return false; }
 		$action = $this->action;
@@ -172,6 +185,23 @@ abstract class DataSource extends \infinite\base\Component {
 		}
 		return $this->_settings;
 	}
+
+
+	public function getSearch() {
+		return $this->_search;
+	}
+
+	public function setSearch($value) {
+		if (!is_object($value)) {
+			if (!isset($value['class'])) {
+				$value['class'] = $this->searchClass;
+			}
+			$value = Yii::createObject($value);
+		}
+		$value->dataSource = $this;
+		$this->_search = $value;
+	}
+
 
 	public function getLocalModel() {
 		return $this->_localModel;
