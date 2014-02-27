@@ -15,7 +15,8 @@ return [
 		'db' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . "database.php"),
 		'redis' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'redis.php'),
 		'collectors' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'collectors.php'),
-		'cache' => ['class' => 'yii\redis\Cache'],
+		//'cache' => ['class' => 'yii\redis\Cache'],
+		'cache' => ['class' => 'yii\caching\DummyCache'],
 		'errorHandler' => [
 			'discardExistingOutput' => false
 		],

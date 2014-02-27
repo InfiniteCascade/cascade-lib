@@ -22,6 +22,12 @@ abstract class DataSource extends \infinite\base\Component {
 	public $lazyForeign = true;
 	public $lazyLocal = true;
 	public $childOnly = false;
+	public $postProcess = false;
+
+	public $ignoreForeign = false;
+	public $ignoreLocal = false;
+
+	public $baseAttributes = [];
 
 	protected $_localModel;
 	protected $_foreignModel;
@@ -226,7 +232,7 @@ abstract class DataSource extends \infinite\base\Component {
 			if (!isset($fieldMap['class'])) {
 				$fieldMap['class'] = $this->fieldMapClass;
 			}
-			$fieldMap['map'] = $this;
+			$fieldMap['dataSource'] = $this;
 			$fieldMap = Yii::createObject($fieldMap);
 			$this->_map[] = $fieldMap;
 		}

@@ -16,10 +16,10 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		parent::init();
 	}
 
-	protected function handleForeign()
+	protected function handleForeign($baseAttributes = [])
 	{
-		if (!$this->foreignObject) {
-			return false;
+		if ($this->ignoreForeignObject) {
+			return null;
 		}
 
 		// foreign to local
@@ -33,18 +33,22 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		}
 		$relations = [];
 		$attributes = $this->dataSource->buildLocalAttributes($this->foreignObject, $this->localObject);
-		if (isset($attributes['relations'])) {
-			$relations = $attributes['relations'];
-			unset($attributes['relations']);
-		}
+		// if (isset($attributes['relations'])) {
+		// 	$relations = $attributes['relations'];
+		// 	unset($attributes['relations']);
+		// }
 		if (empty($attributes)) {
 			return false;
 		}
+
 		// load local object
 		foreach ($attributes as $key => $value) {
-			$this->localObject->$key = $value;
+			$this->localObject->{$key} = $value;
 		}
 
+		foreach (array_merge($this->dataSource->baseAttributes, $baseAttributes) as $key => $value) {
+			$this->localObject->{$key} = $value;
+		}
 
 		// save local object
 		if (!$this->localObject->save()) {
@@ -66,21 +70,21 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 				if (!($dataItem = $dataSource->getForeignDataItem($childId))) {
 					continue;
 				}
-				$childLocalObject = $dataItem->handle(true);
-				if (is_object($childLocalObject) && !Relation::set($this->localObject, $childLocalObject)) {
-					\d($childLocalObject);
-					exit;
-				}
+				$childLocalObject = $dataItem->handle(true, ['relationModels' => [['parent_object_id' => $this->localObject->primaryKey]]]);
+				// if (is_object($childLocalObject) && !Relation::set($this->localObject, $childLocalObject)) {
+				// 	\d($childLocalObject);
+				// 	exit;
+				// }
 			}
 		} 
-		if (!empty($relations)) {
-			foreach ($relations as $relationConfig) {
-				$this->fillRelationConfig($relationConfig, $this->localObject);
-				if(!Relation::set($relationConfig)) {
-					\d($relationConfig);exit;
-				}
-			}
-		}
+		// if (!empty($relations)) {
+		// 	foreach ($relations as $relationConfig) {
+		// 		$this->fillRelationConfig($relationConfig, $this->localObject);
+		// 		if(!Relation::set($relationConfig)) {
+		// 			\d($relationConfig);exit;
+		// 		}
+		// 	}
+		// }
 		return $this->localObject;
 	}
 
@@ -93,8 +97,11 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		}
 	}
 
-	protected function handleLocal()
+	protected function handleLocal($baseAttributes = [])
 	{
+		if ($this->ignoreLocalObject) {
+			return false;
+		}
 		// local to foreign
 
 		// find 
@@ -117,8 +124,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		if (empty($this->_foreignObject)) {
 			\d($this->foreignPrimaryKey);
 			\d($this->dataSource->name);
-			exit;
-			//throw new MissingItemException('Foreign item could not be found: '. $this->foreignPrimaryKey);
+			throw new MissingItemException('Foreign item could not be found: '. $this->foreignPrimaryKey);
 		}
 		$this->_isLoadingForeignObject = false;
 	}

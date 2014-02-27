@@ -5,7 +5,7 @@ use infinite\helpers\ArrayHelper;
 
 class Search extends \infinite\base\Component {
 	public static $interactive = true;
-	public $threshold = 6;
+	public $threshold = 9;
 	public $autoadjust = 1.5;
 	public $dataSource;
 

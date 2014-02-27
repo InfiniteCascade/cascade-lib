@@ -97,6 +97,26 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		return min($results);
 	}
 
+	public function determineOwner($object)
+	{
+        if (isset(Yii::$app->user) 
+        	&& !Yii::$app->user->isGuest 
+        	&& isset(Yii::$app->user->identity)
+        	){
+        	if (!empty(Yii::$app->user->identity->object_individual_id)) {
+        		return Yii::$app->user->identity->object_individual_id;
+        	} else {
+            	return Yii::$app->user->id;
+        	}
+        }
+        return false;
+	}
+
+	public function ownerAccess($object)
+    {
+        return ['read', 'update', 'delete'];
+    }
+
 	public function getDisabledFields()
 	{
 		if (is_null($this->_disabledFields)) {

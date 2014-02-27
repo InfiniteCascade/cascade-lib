@@ -66,41 +66,93 @@ abstract class DataItem extends \infinite\base\Component {
 		return null;
 	}
 
-	public function handle($fromParent = false)
+	public function handle($fromParent = false, $baseAttributes = [])
 	{
 		if ($this->handledDataItem) {
 			if ($this->isForeign) {
-				return $this->localObject;
+				$object = $this->localObject;
 			} else {
-				return $this->foreignObject;
+				$object = $this->foreignObject;
 			}
+			if (!empty($baseAttributes)) {
+				foreach ($baseAttributes as $key => $value) {
+					$object->{$key} = $value;
+				}
+				if (!$object->save()) {
+					return false;
+				}
+			}
+			return $object;
 		}
 		if ($fromParent || !$this->dataSource->childOnly) {
 			if ($this->isForeign) {
 				// handle local to foreign
-				$result = $this->handler->handleForeign();
+				$result = $this->handler->handleForeign($baseAttributes);
 			} else {
-				$result = $this->handler->handleLocal();
+				$result = $this->handler->handleLocal($baseAttributes);
 			}
 		} else {
 			$result = true;
 		}
-		if ($result) {
+		if (is_null($result)) {
+			$this->handledDataItem = true;
+		} elseif ($result) {
 			if (is_object($result)) {
 				$this->handledDataItem = true;
+			}
+			if ($this->dataSource->postProcess) {
+				call_user_func($this->dataSource->postProcess, $this);
 			}
 			return $result;
 		}
 		return false;
 	}
 
-	protected function handleLocal()
+	public function getIgnoreForeignObject()
+	{
+		return $this->testIgnore($this->foreignObject, $this->dataSource->ignoreForeign);
+	}
+
+	public function getIgnoreLocalObject()
+	{
+		return $this->testIgnore($this->localObject, $this->dataSource->ignoreLocal);
+	}
+
+	protected function testIgnore($object, $ignore)
+	{
+		if (!$object) {
+			return true;
+		}
+		if ($ignore === true) {
+			return true;
+		} elseif (is_array($ignore)) {
+			foreach ($ignore as $key => $value) {
+				$objectValue = $object->{$key};
+				if (is_object($value)) {
+					if ($value->test($objectValue)) {
+						return true;
+					}
+				} elseif (is_array($value)) {
+					if (in_array($objectValue, $value)) {
+						return true;
+					}
+				} else {
+					if ($objectValue === $value) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	protected function handleLocal($baseAttributes = [])
 	{
 		return false;
 	}
 
 
-	protected function handleForeign()
+	protected function handleForeign($baseAttributes = [])
 	{
 		return false;
 	}

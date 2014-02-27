@@ -9,7 +9,7 @@ use cascade\components\dataInterface\Action;
 use infinite\helpers\ArrayHelper;
 
 class FieldMap extends \infinite\base\Object {
-	public $map;
+	public $dataSource;
 
 	public $localField = false;
 	public $foreignField = false;
@@ -27,7 +27,11 @@ class FieldMap extends \infinite\base\Object {
 
 		$value = null;
 		if (isset($this->value)) {
-			$value = $this->value($foreignModel, $this);
+			if (is_callable($this->value)) {
+				$value = call_user_func($this->value, $foreignModel, $this);
+			} else {
+				$value = $this->value;
+			}
 		} elseif (isset($this->foreignField)) {
 			if (is_string($this->foreignField)) {
 				$value = (isset($foreignModel->{$this->foreignField}) ? $foreignModel->{$this->foreignField} : null);

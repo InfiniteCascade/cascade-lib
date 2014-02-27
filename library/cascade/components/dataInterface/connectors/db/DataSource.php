@@ -70,9 +70,12 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 			
 			if (strpos($fieldMap->localField, ':') !== false) {
 				// we're feeding the relations
-				$relationKey = $value;
+				$relationKeys = $value;
 				$value = false;
-				if (!empty($relationKey)) {
+				if (!empty($relationKeys)) {
+					if (!is_array($relationKeys)) {
+						$relationKeys = [$relationKeys];
+					}
 					$fieldParts = explode(':', $fieldMap->localField);
 					if ($fieldParts[0] === 'child') {
 						$relationship = $this->dummyLocalModel->objectTypeItem->getChild($fieldParts[1]);
@@ -86,37 +89,38 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 					if (!$relatedType) { continue; }
 
 					$relatedObject = null;
-					if (!isset($a['relations'])) {
-						$a['relations'] = [];
+					if (!isset($a['relationModels'])) {
+						$a['relationModels'] = [];
 					}
 					$fieldKey = $fieldParts[0] .'_object_id';
-
-					if (empty($fieldParts[2])) {
-						// we're just matching to an existing object's primary key
-						if (($relatedObject = $this->module->getLocalObject($relatedType->primaryModel, $relationKey)) && is_object($relatedObject)) {
-							$relation = [$fieldKey => $relatedObject->primaryKey];
-							if (isset($taxonomyId)) {
-								$relation['taxonomy_id'] = $taxonomyId;
-								$taxonomyId = null;
+					foreach ($relationKeys as $relationKey) {
+						if (empty($fieldParts[2])) {
+							// we're just matching to an existing object's primary key
+							if (($relatedObject = $this->module->getLocalObject($relatedType->primaryModel, $relationKey)) && is_object($relatedObject)) {
+								$relation = [$fieldKey => $relatedObject->primaryKey];
+								if (isset($taxonomyId)) {
+									$relation['taxonomy_id'] = $taxonomyId;
+									$taxonomyId = null;
+								}
+								$a['relationModels'][] = $relation;
 							}
-							$a['relations'][] = $relation;
-						}
-					} else {
-						// we're creating or updating an existing related object's field
-						$localRelatedField = $fieldParts[2];
-						if (is_array($relationKey)) {
-							// the localRelatedField is a dummy; build/search for object using this hash
-							$valueMap = $relationKey;
 						} else {
-							$valueMap = [$localRelatedField => $relationKey];
-						}
-						if (($relatedObject = $this->module->updateLocalObject($relatedType, $relationKey, $valueMap, $fieldMap)) && is_object($relatedObject)) {
-							$relation = [$fieldKey => $relatedObject->primaryKey];
-							if (isset($taxonomyId)) {
-								$relation['taxonomy_id'] = $taxonomyId;
-								$taxonomyId = null;
+							// we're creating or updating an existing related object's field
+							$localRelatedField = $fieldParts[2];
+							if (is_array($relationKey)) {
+								// the localRelatedField is a dummy; build/search for object using this hash
+								$valueMap = $relationKey;
+							} else {
+								$valueMap = [$localRelatedField => $relationKey];
 							}
-							$a['relations'][] = $relation;
+							if (($relatedObject = $this->module->updateLocalObject($relatedType, $relationKey, $valueMap, $fieldMap)) && is_object($relatedObject)) {
+								$relation = [$fieldKey => $relatedObject->primaryKey];
+								if (isset($taxonomyId)) {
+									$relation['taxonomy_id'] = $taxonomyId;
+									$taxonomyId = null;
+								}
+								$a['relationModels'][] = $relation;
+							}
 						}
 					}
 				}

@@ -58,7 +58,10 @@ trait ActiveRecordTrait {
 			],
 			'ActiveAccess' => [
 				'class' => 'infinite\\db\\behaviors\\ActiveAccess',
-			]
+			],
+			'Ownable' => [
+				'class' => 'cascade\\components\\db\\behaviors\\Ownable',
+			],
 		];
 	}
 
