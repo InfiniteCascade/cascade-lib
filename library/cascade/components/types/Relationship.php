@@ -62,7 +62,7 @@ class Relationship extends \infinite\base\Object
 		if (!$this->parent->primaryAsChild) { return false; }
 		$key = json_encode([__FUNCTION__, $this->systemId, $childObject->primaryKey]);
 		if (!isset(self::$_cache[$key])) {
-			self::$_cache[$key] = true;
+			self::$_cache[$key] = false;
 			$relationClass = self::$relationClass;
 			$parentClass = $this->parent->primaryModel;
 			$relation = $relationClass::find();
@@ -70,7 +70,7 @@ class Relationship extends \infinite\base\Object
 			$relation->andWhere(['`'. $alias.'`.`child_object_id`' => $childObject->primaryKey, '`'. $alias.'`.`primary`' => 1]);
 			$relation->andWhere('`'. $alias.'`.`parent_object_id` LIKE :prefix');
 			$relation->params[':prefix'] = $parentClass::modelPrefix() . '-%';
-			$parentObject->addActiveConditions($relation, $alias);
+			$childObject->addActiveConditions($relation, $alias);
 			$relation = $relation->one();
 			if ($relation) {
 				self::$_cache[$key] = $relation;

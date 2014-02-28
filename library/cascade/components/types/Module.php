@@ -47,6 +47,8 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $sectionSingleWidgetClass = 'cascade\\components\\web\\widgets\\section\\SingleSection';
 	public $fallbackDetailsWidgetClass = 'cascade\\components\\web\\widgets\\base\\Details';
 
+	const EVENT_RELATION_CHANGE = 'onRelationChange';
+
 	protected $_disabledFields;
 
 	public function init() {

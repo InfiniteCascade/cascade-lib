@@ -5,7 +5,10 @@ namespace cascade\models;
 use Yii;
 
 use cascade\components\db\ActiveRecordTrait;
+
+use cascade\components\types\Module as TypeModule;
 use cascade\components\types\Relationship;
+use cascade\components\types\RelationshipEvent;
 
 class Relation extends \infinite\db\models\Relation
 {
@@ -25,6 +28,21 @@ class Relation extends \infinite\db\models\Relation
 				'class' => 'cascade\\components\\db\\behaviors\\PrimaryRelation'
 			]
 		]);
+	}
+
+	public function afterSaveRelation($event)
+	{
+		if ($this->wasDirty) {
+			$parentObject = $this->getParentObject(false);
+			$childObject =  $this->getChildObject(false);
+			$relationshipEvent = new RelationshipEvent(['parentEvent' => $event, 'parentObject' => $parentObject, 'childObject' => $childObject, 'relationship' => $this->relationship]);
+			if ($parentObject) {
+				$this->parentObject->objectType->trigger(TypeModule::EVENT_RELATION_CHANGE, $relationshipEvent);
+			}
+			if ($childObject) {
+				$this->childObject->objectType->trigger(TypeModule::EVENT_RELATION_CHANGE, $relationshipEvent);
+			}
+		}
 	}
 
 	public function addFields($caller, &$fields, $relationship, $owner) {

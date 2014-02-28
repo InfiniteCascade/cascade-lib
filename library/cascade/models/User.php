@@ -42,7 +42,8 @@ class User extends \infinite\db\models\User
 			$user->username = 'system';
 			$user->status = static::STATUS_INACTIVE;
 			$user->password =  Security::generateRandomKey();
-			if (!$user->save() || !Relation::set($superGroup, $user)) {
+			$user->relationModels = [['parent_object_id' => $superGroup->primaryKey]];
+			if (!$user->save()) {
 				throw new Exception("Unable to save system user!");
 			}
 		}

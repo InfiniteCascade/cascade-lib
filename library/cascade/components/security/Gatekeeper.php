@@ -4,7 +4,6 @@ namespace cascade\components\security;
 use Yii;
 
 use infinite\base\exceptions\Exception;
-// use infinite\security\AuthorityInterface;
 use cascade\modules\core\TypeAccount\models\ObjectAccount;
 
 class Gatekeeper extends \infinite\security\Gatekeeper {

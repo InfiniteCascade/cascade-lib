@@ -10,9 +10,11 @@ class Task_000007_admin_user extends \infinite\setup\Task {
 	public function getTitle() {
 		return 'Admin User';
 	}
+	
 	public function test() {
 		return User::find()->disableAccessCheck()->andWhere(['not', ['username' => 'system']])->count() > 0;
 	}
+
 	public function run() {
 		$user = new User;
 		$user->scenario = 'creation';
@@ -22,17 +24,9 @@ class Task_000007_admin_user extends \infinite\setup\Task {
 		if (!$superGroup) {
 			throw new Exception("Unable to find super_administrators group!");
 		}
-
+		$user->relationModels = [['parent_object_id' => $superGroup->primaryKey]];
 		if ($user->save()) {
-			$rel = new Relation;
-			$rel->parent_object_id = $superGroup->primaryKey;
-			$rel->child_object_id = $user->primaryKey;
-			$rel->active = 1;
-			if ($rel->save()) {
-				return true;
-			} else {
-				$this->errors[] = "Could not assign user to the Super Administrators group.";
-			}
+			return true;
 		}
 		foreach ($user->errors as $field => $errors) {
 			$this->fieldErrors[$field] = implode('; ', $errors);
@@ -40,13 +34,14 @@ class Task_000007_admin_user extends \infinite\setup\Task {
 		var_dump($this->fieldErrors);exit;
 		return false;
 	}
+
 	public function getFields() {
 		$fields = [];
 		$fields['admin'] = ['label' => 'First Admin User', 'fields' => []];
-		$fields['admin']['fields']['first_name'] = ['type' => 'text', 'label' => 'First Name', 'required' => true, 'value' => function() { return ''; }];
-		$fields['admin']['fields']['last_name'] = ['type' => 'text', 'label' => 'Last Name', 'required' => true, 'value' => function() { return ''; }];
+		$fields['admin']['fields']['first_name'] = ['type' => 'text', 'label' => 'First Name', 'required' => true, 'value' => function() { return 'Super'; }];
+		$fields['admin']['fields']['last_name'] = ['type' => 'text', 'label' => 'Last Name', 'required' => true, 'value' => function() { return 'Admin'; }];
 		$fields['admin']['fields']['username'] = ['type' => 'text', 'label' => 'Username', 'required' => true, 'value' => function() { return 'admin'; }];
-		$fields['admin']['fields']['password'] = ['type' => 'text', 'label' => 'Password', 'required' => true, 'value' => function() { return 'admin'; }];
+		$fields['admin']['fields']['password'] = ['type' => 'text', 'label' => 'Password', 'required' => true, 'value' => function() { return 'adminadmin'; }];
 		return $fields;
 	}
 }
