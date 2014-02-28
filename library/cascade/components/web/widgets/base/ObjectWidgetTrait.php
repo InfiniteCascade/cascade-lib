@@ -301,6 +301,7 @@ trait ObjectWidgetTrait
 		return [
 			'class' => 'infinite\data\Pagination',
 			'pageSize' => $this->pageSize,
+			'validatePage' => false,
 			'page' => $this->getState('_page', 0),
 		];
 	}
