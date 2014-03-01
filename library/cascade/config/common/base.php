@@ -2,7 +2,7 @@
 return [
 	'id' => 'cascade',
 	'name' => 'Cascade',
-	'basePath' => INFINITE_CASCADE_PATH,
+	'basePath' => INFINITE_APP_PATH,
 	'vendorPath' => INFINITE_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'vendor',
 	'runtimePath' => INFINITE_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'runtime',
 	'preload' => ['log', 'collectors'],

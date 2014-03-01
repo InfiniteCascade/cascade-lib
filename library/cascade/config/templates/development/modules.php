@@ -7,7 +7,7 @@
  */
 
 
-$parent = INFINITE_CASCADE_PATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR . basename(__FILE__);
+$parent = INFINITE_APP_PATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR . basename(__FILE__);
 return array_merge(include($parent), [
 	'debug' => [
 		'class' => 'yii\debug\Module',
