@@ -87,6 +87,15 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
         }
     }
 
+    public function serve()
+    {
+        if (!$this->storageEngine || !$this->storageEngine->storageHandler) { return false; }
+        $storageObject = $this->storageObject;
+        if (!$storageObject) { return false; }
+        if (!$this->storageEngine->storageHandler->object->serve($storageObject)) { return false; }
+        return true;
+    }
+
     public function getStorageObject()
     {
         $registryClass = $this->registryClass;

@@ -13,6 +13,7 @@ use cascade\models\Group;
 use cascade\models\Relation;
 use cascade\models\Registry;
 use cascade\models\ObjectFamiliarity;
+use cascade\components\web\ObjectViewEvent;
 
 use infinite\base\exceptions\Exception;
 use infinite\base\exceptions\HttpException;
@@ -48,6 +49,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $fallbackDetailsWidgetClass = 'cascade\\components\\web\\widgets\\base\\Details';
 
 	const EVENT_RELATION_CHANGE = 'onRelationChange';
+	const EVENT_VIEW_OBJECT = 'onViewObject';
 
 	protected $_disabledFields;
 
@@ -55,6 +57,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		if (isset($this->modelNamespace)) {
 			Yii::$app->registerModelAlias(':'. $this->systemId, $this->modelNamespace);
 		}
+		$this->on(self::EVENT_VIEW_OBJECT, [$this, 'subactionHandle']);
 		parent::init();
 	}
 
@@ -80,9 +83,30 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		if (!isset(Yii::$app->collectors['taxonomies']) || !Yii::$app->collectors['taxonomies']->registerMultiple($this, $this->taxonomies())) { throw new Exception('Could not register taxonmies for '. $this->systemId .'!'); }
 		if (!isset(Yii::$app->collectors['widgets']) || !Yii::$app->collectors['widgets']->registerMultiple($this, $this->widgets())) { throw new Exception('Could not register widgets for '. $this->systemId .'!'); }
 		if (!isset(Yii::$app->collectors['roles']) || !Yii::$app->collectors['roles']->registerMultiple($this, $this->roles())) { throw new Exception('Could not register roles for '. $this->systemId .'!'); }	
+		// if (!isset(Yii::$app->collectors['tools']) || !Yii::$app->collectors['tools']->registerMultiple($this, $this->tools())) { throw new Exception('Could not register tools for '. $this->systemId .'!'); }
+		// if (!isset(Yii::$app->collectors['reports']) || !Yii::$app->collectors['reports']->registerMultiple($this, $this->reports())) { throw new Exception('Could not register reports for '. $this->systemId .'!'); }
 		return parent::onAfterInit($event);
 	}
 
+	public function subactionHandle(ObjectViewEvent $event)
+	{
+		$subactions = $this->subactions();
+		if (isset($subactions[$event->action])) {
+			if (is_callable($subactions[$event->action])) {
+				$event->handleWith($subactions[$event->action]);
+				return;
+			} elseif (isset($subactions[$event->action]['callback'])) {
+				$always = !empty($subactions[$event->action]['always']);
+				$event->handleWith($subactions[$event->action]['callback'], $always);
+			}
+		}
+		return;
+	}
+
+	public function subactions()
+	{
+		return [];
+	}
 	
 	public function setup() {
 		$results = [true];

@@ -36,10 +36,12 @@ $config['components']['urlManager'] = [
 		'<action:(login|logout)>' => 'app/<action>',
 
 		'<action:(search|browse)>' => 'object/<action>',
+		'<action:(view)>:<subaction:\S+>/<id:\S+>' => 'object/<action>',
 		'<action:(view)>/<id:\S+>' => 'object/<action>',
 		'<action:(update|delete)>/<id:\S+>' => 'object/<action>',
 		'<action:(create)>/<type:\S+>/<object_id:\S+>' => 'object/<action>',
-		'<action:(create)>/<type:\S+>' => 'object/<action>',
+		'tool/<tool:\S+>' => 'object/tool',
+		'report/<report:\S+>' => 'object/report',
 
 		// a standard rule to handle 'post/update' and so on
 		'<controller:\w+>/<action:\w+>' => '<controller>/<action>',

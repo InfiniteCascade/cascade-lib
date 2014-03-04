@@ -60,6 +60,14 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
 		return $vars;
 	}
 
+	public function serve(Storage $storage)
+	{
+		$path = $this->getPath($storage);
+		if (!file_exists($path)) { return false; }
+		Yii::$app->response->sendFile($path, $storage->file_name, $storage->type);
+		return true;
+	}
+
 	public function handleSave(Storage $storage, $model, $attribute)
 	{
 		return $this->handleUpload($storage, $model, $attribute);

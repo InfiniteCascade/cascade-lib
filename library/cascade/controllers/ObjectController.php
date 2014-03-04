@@ -8,6 +8,8 @@ use cascade\models\Registry;
 use cascade\models\Relation;
 use cascade\models\ObjectFamiliarity;
 use cascade\models\DeleteForm;
+use cascade\components\types\Module as TypeModule;
+use cascade\components\web\ObjectViewEvent;
 
 use infinite\helpers\ArrayHelper;
 use infinite\web\Controller;
@@ -130,10 +132,26 @@ class ObjectController extends Controller
 		if (!$object->can('read')) {
 			throw new HttpException(403, "Unable to access object.");
 		}
+		$action = isset($_GET['subaction']) ? $_GET['subaction'] : 'view';
 		Yii::$app->request->object = $object;
+		$type = $this->params['type'] = $object->objectType;
+		$viewEvent = new ObjectViewEvent(['object' => $object, 'action' => $action]);
+		$type->trigger(TypeModule::EVENT_VIEW_OBJECT, $viewEvent);
+
+		if ($viewEvent->handled) {
+			if ($viewEvent->accessed) {
+				ObjectFamiliarity::accessed($object);
+			}
+			return;
+		}
+		
+		if (!$type->hasDashboard) {
+			throw new HttpException(400, "Bad request");
+		}
+
+		ObjectFamiliarity::accessed($object);
 		Yii::$app->response->view = 'view';
 
-		$type = $this->params['type'] = $object->objectType;
 		$sections = $this->params['sections'] = $typeItem->getSections($object);
 		$this->params['active'] = $this->params['default'] = null;
 		foreach ($sections as $section) {
@@ -145,7 +163,6 @@ class ObjectController extends Controller
 		if (!empty($_GET['section'])) {
 			$this->params['active'] = $_GET['section'];
 		}
-		ObjectFamiliarity::accessed($object);
 	}
 
 
