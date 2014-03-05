@@ -21,7 +21,7 @@ return [
 			'discardExistingOutput' => false
 		],
 		'view' => [
-			'class' => 'infinite\web\View',
+			'class' => 'cascade\components\web\View',
 		],
 		'response' => [
 			'class' => 'infinite\web\Response'

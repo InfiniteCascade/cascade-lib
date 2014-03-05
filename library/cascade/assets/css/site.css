@@ -6,8 +6,8 @@ html,body,.container,.overall-container
   height: auto;
 }
 
-.overall-container {
-    padding-top: 70px;
+.inner-container {
+    padding-top: 60px;
 }
 
 .dashboard, .row, .ic-column, body, .container,.overall-container,.container-fluid {
@@ -31,8 +31,7 @@ footer {
   visibility: hidden;
 }
 
-.container-fluid .container,
-nav .container {
+.container-fluid .container {
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
@@ -47,6 +46,15 @@ nav .container {
 
 .navbar-fixed-top.sub-navbar {
   margin-top: 50px;
+}
+
+.navbar-header .breadcrumb {
+  background-color: transparent;
+  font-size: 18px;
+  height: 50px;
+  line-height: 20px;
+  padding: 15px;
+  margin: 0;
 }
 
 .ic-sidenav {

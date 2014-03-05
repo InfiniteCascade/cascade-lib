@@ -2,6 +2,8 @@
 
 namespace cascade\models;
 
+use Yii;
+
 use cascade\components\db\ActiveRecordTrait as BaseActiveRecordTrait;
 use cascade\components\types\ActiveRecordTrait as TypesActiveRecordTrait;
 
@@ -10,6 +12,7 @@ use infinite\base\exceptions\Exception;
 
 class User extends \infinite\db\models\User
 {
+	protected $_individual;
 
 	use TypesActiveRecordTrait {
 		TypesActiveRecordTrait::behaviors as typesBehaviors;
@@ -48,5 +51,21 @@ class User extends \infinite\db\models\User
 			}
 		}
 		return $user;
+	}
+
+	/**
+	 * @return \yii\db\ActiveRelation
+	 */
+	public function getIndividual()
+	{
+		if (!isset($this->_individual) && !empty($this->object_individual_id)) {
+			$this->_individual = false;
+			$individualType = Yii::$app->collectors['types']->getOne('Individual');
+			if (!empty($individualType->object)) {
+				$individualClass = $individualType->object->primaryModel;
+				$this->_individual = $individualClass::get($this->object_individual_id);
+			}
+		}
+		return $this->_individual;
 	}
 }

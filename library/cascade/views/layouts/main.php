@@ -1,8 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
+use cascade\components\web\bootstrap\NavBar;
 
 /**
  * @var $this \infinite\base\View
@@ -25,25 +24,26 @@ if (YII_ENV_DEV) {
 </head>
 <?= Html::beginTag('body', $this->bodyHtmlOptions); ?>
 <?php 
-echo Html::beginTag('div', ['class' => 'overall-container']);
+echo Html::beginTag('div', ['class' => 'main-container container']);
 $this->beginBody(); ?>
 	<?php
 		NavBar::begin([
-			'brandLabel' => Yii::$app->name,
+			'brandLabel' => 'Dashboard',//Yii::$app->name,
 			'brandUrl' => Yii::$app->homeUrl,
 			'options' => [
 				'class' => 'i-navbar-top navbar-inverse navbar-fixed-top',
 			],
 		]);
+		$identityLink = Yii::$app->user->identity->url;
 		echo Nav::widget([
 			'options' => ['class' => 'navbar-nav navbar-right'],
 			'encodeLabels' => false,
 			'items' => [
-				['label' => 'Home', 'url' => ['/app/index']],
+				['label' =>  Yii::$app->user->identity->first_name, 'url' => $identityLink],
 				Yii::$app->user->isGuest ?
 					['label' => 'Sign In', 'url' => ['/app/login'],
 						'linkOptions' => ['data-method' => 'post']] :
-					['label' => '<span class="glyphicon glyphicon-off"></span> (' . Yii::$app->user->identity->username .')' ,
+					['label' => '<span class="glyphicon glyphicon-off"></span>' ,
 						'url' => ['/app/logout'],
 						'linkOptions' => ['data-method' => 'post']],
 			],
@@ -51,10 +51,7 @@ $this->beginBody(); ?>
 		NavBar::end();
 	?>
 
-	<div class="container">
-		<?=Breadcrumbs::widget([
-			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-		]); ?>
+	<div class="inner-container">
 		<?=$content; ?>
 	</div>
 

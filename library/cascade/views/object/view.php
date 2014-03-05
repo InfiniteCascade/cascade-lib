@@ -1,10 +1,11 @@
 <?php
-use Yii;
-
 use infinite\helpers\Html;
 use yii\bootstrap\Nav;
 use infinite\web\bootstrap\SubNavBar;
 use cascade\components\web\widgets\section\Section as SectionWidget;
+
+$this->title = $object->descriptor;
+$this->params['breadcrumbs'][] = $this->title;
 
 Html::addCssClass($this->bodyHtmlOptions, 'double-top-nav');
 
@@ -21,21 +22,8 @@ foreach ($sections as $section) {
 	if ($section->priority === false) { continue; }
 	$sectionsMenu[] = ['label' => $section->sectionTitle, 'url' => '#section-'.$section->systemId];
 }
-
+$this->tinyMenu = $sectionsMenu;
 echo Html::beginTag('div', ['class' => 'dashboard']);
-$navBar = SubNavBar::begin([
-	'brandLabel' => $object->descriptor,
-	'brandUrl' => $object->getUrl('view'),
-	'options' => [
-		'class' => 'navbar-fixed-top navbar-default',
-	],
-]);
-echo Nav::widget([
-			'options' => ['class' => 'navbar-nav navbar-right hidden-md hidden-lg'],
-			'encodeLabels' => false,
-			'items' => $sectionsMenu,
-		]);;
-SubNavBar::end();
 
 $grid = Yii::createObject(['class' => 'infinite\web\grid\Grid']);
 $cells = [];
@@ -87,7 +75,7 @@ if (isset($sections['_side'])) {
 	$cells[] = $sideCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $cellInner->generate()]);
 
 	//Html::addCssClass($sideCell->htmlOptions, 'col-md-push-'. $mainColumnSize);
-	Yii::configure($sideCell, ['mediumDesktopColumns' => 4,'maxMediumDesktopColumns' => 4, 'largeDesktopSize' => false, 'tabletSize' => false]);
+	Yii::configure($sideCell, ['mediumDesktopColumns' => 4,'maxMediumDesktopColumns' => 4, 'largeDesktopSize' => false, 'tabletColumns' => 5]);
 }
 
 if (count($sectionsMenu) > 2) {
@@ -102,7 +90,7 @@ foreach ($sections as $section) {
 $mainCellGrid = Yii::createObject(['class' => 'infinite\web\grid\Grid']);
 $mainCellGrid->cells = $mainCell;
 $cells[] = $mainCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $mainCellGrid->generate()]);
-Yii::configure($mainCell,['mediumDesktopColumns' => 4, 'maxMediumDesktopColumns' => 8, 'largeDesktopSize' => false, 'tabletSize' => false]);
+Yii::configure($mainCell,['mediumDesktopColumns' => 4, 'maxMediumDesktopColumns' => $mainColumnSize, 'largeDesktopSize' => false, 'tabletColumns' => $mainColumnSize + 1]);
 Html::addCssClass($mainCell->htmlOptions, 'ic-main-cell');
 
 
@@ -120,7 +108,7 @@ if (count($sectionsMenu) > 2) {
 
 	$js[] = "\$('body').scrollspy({ target: '.ic-sidenav', 'offset': 10 });";
 
-	$menuContent = Html::beginTag('div', ['class' => 'hidden-xs hidden-sm ic-sidenav']);
+	$menuContent = Html::beginTag('div', ['class' => 'ic-sidenav']);
 	$menuContent .= Nav::widget([
 			'options' => ['class' => 'navbar-default'],
 			'encodeLabels' => false,
@@ -129,7 +117,7 @@ if (count($sectionsMenu) > 2) {
 	$menuContent .= Html::endTag('div');
 	$cells[] = $menuCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $menuContent]);
 	Yii::configure($menuCell, ['mediumDesktopColumns' => 2, 'maxMediumDesktopColumns' => 2, 'largeDesktopSize' => false, 'tabletSize' => false]);
-
+	Html::addCssClass($menuCell->htmlOptions, 'hidden-xs hidden-sm');
 	$js[] = '
 	setTimeout(function() {
 		var $menuBar = $(".ic-sidenav");
