@@ -143,6 +143,7 @@ trait ListWidgetTrait
 		if (!isset($pager['options'])) {
 			$pager['options'] = [];
 		}
+		$pager['maxButtonCount'] = 6;
 		Html::addCssClass($pager['options'], 'pagination pull-right');
 		return $class::widget($pager);
 	}
