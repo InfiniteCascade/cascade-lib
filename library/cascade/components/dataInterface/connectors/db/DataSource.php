@@ -113,7 +113,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 							} else {
 								$valueMap = [$localRelatedField => $relationKey];
 							}
-							if (($relatedObject = $this->module->updateLocalObject($relatedType, $relationKey, $valueMap, $fieldMap)) && is_object($relatedObject)) {
+							if (($relatedObject = $this->module->updateLocalObject($relatedType, $relationKey, $valueMap, $fieldMap, $localModel)) && is_object($relatedObject)) {
 								$relation = [$fieldKey => $relatedObject->primaryKey];
 								if (isset($taxonomyId)) {
 									$relation['taxonomy_id'] = $taxonomyId;

@@ -82,7 +82,7 @@ abstract class Module extends BaseModule {
 		return $this->_dataSources;
 	}
 
-	public function updateLocalObject($relatedType, $foreignPrimaryKey, $valueMap, $fieldMap)
+	public function updateLocalObject($relatedType, $foreignPrimaryKey, $valueMap, $fieldMap, $localModel)
 	{
 		$localModelClass = $relatedType->primaryModel;
 		// @todo eventually we'll probably take some keys out of this
@@ -93,6 +93,13 @@ abstract class Module extends BaseModule {
 					unset($searchMap[$field]);
 				}
 			}
+		}
+
+		$fieldParts = explode(':', $fieldMap->localField);
+		if ($fieldParts[0] === 'child') {
+			$currentRelationsFunction = 'child';
+		} else {
+			$currentRelationsFunction = 'parent';
 		}
 
 		// first, lets see if it exists

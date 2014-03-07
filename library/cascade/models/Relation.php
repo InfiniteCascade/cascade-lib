@@ -37,10 +37,10 @@ class Relation extends \infinite\db\models\Relation
 			$childObject =  $this->getChildObject(false);
 			$relationshipEvent = new RelationshipEvent(['parentEvent' => $event, 'parentObject' => $parentObject, 'childObject' => $childObject, 'relationship' => $this->relationship]);
 			if ($parentObject) {
-				$this->parentObject->objectType->trigger(TypeModule::EVENT_RELATION_CHANGE, $relationshipEvent);
+				$parentObject->objectType->trigger(TypeModule::EVENT_RELATION_CHANGE, $relationshipEvent);
 			}
 			if ($childObject) {
-				$this->childObject->objectType->trigger(TypeModule::EVENT_RELATION_CHANGE, $relationshipEvent);
+				$childObject->objectType->trigger(TypeModule::EVENT_RELATION_CHANGE, $relationshipEvent);
 			}
 		}
 	}

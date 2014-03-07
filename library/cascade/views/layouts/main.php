@@ -34,24 +34,26 @@ $this->beginBody(); ?>
 				'class' => 'i-navbar-top navbar-inverse navbar-fixed-top',
 			],
 		]);
-		$identityLink = Yii::$app->user->identity->url;
+		$identityLink = isset(Yii::$app->user->identity) ? Yii::$app->user->identity->url : false;
+		$topItems = [];
+		if (Yii::$app->user->isGuest) {
+			$topItems[] = ['label' => 'Sign In', 'url' => ['/app/login'],
+							'linkOptions' => ['data-method' => 'post']];
+		} else {
+			$topItems[] = ['label' =>  Yii::$app->user->identity->first_name, 'url' => $identityLink];
+			$topItems[] = ['label' => '<span class="glyphicon glyphicon-off"></span>' ,
+								'url' => ['/app/logout'],
+								'linkOptions' => ['data-method' => 'post']];
+		}
 		echo Nav::widget([
 			'options' => ['class' => 'navbar-nav navbar-right'],
 			'encodeLabels' => false,
-			'items' => [
-				['label' =>  Yii::$app->user->identity->first_name, 'url' => $identityLink],
-				Yii::$app->user->isGuest ?
-					['label' => 'Sign In', 'url' => ['/app/login'],
-						'linkOptions' => ['data-method' => 'post']] :
-					['label' => '<span class="glyphicon glyphicon-off"></span>' ,
-						'url' => ['/app/logout'],
-						'linkOptions' => ['data-method' => 'post']],
-			],
+			'items' => $topItems,
 		]);
 		NavBar::end();
 	?>
 
-	<div class="inner-container">
+	<div class="inner-container container">
 		<?=$content; ?>
 	</div>
 

@@ -28,7 +28,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		$localModel = $this->dataSource->localModel;
 
 		if (!isset($this->localObject)) {
-		//	throw new \Exception("no new objects on this pass!");
+			$attributes = $this->dataSource->buildLocalAttributes($this->foreignObject, $this->localObject);
 			$this->localObject = new $localModel;
 		}
 		$relations = [];
