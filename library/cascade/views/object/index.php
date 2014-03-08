@@ -2,7 +2,6 @@
 use infinite\helpers\Html;
 use infinite\helpers\ArrayHelper;
 use infinite\web\grid\Grid;
-
 $this->title = 'Dashboard';
 $refreshable = [
 	'url' => Html::url('app/refresh'),

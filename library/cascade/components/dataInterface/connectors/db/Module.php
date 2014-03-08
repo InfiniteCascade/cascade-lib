@@ -101,12 +101,11 @@ abstract class Module extends BaseModule {
 		} else {
 			$currentRelationsFunction = 'parent';
 		}
-
 		// first, lets see if it exists
 		$relatedObject = null;
 		$currentRelation = false;
 		if (!empty($localModel) && !$localModel->isNewRecord) {
-			$test = $localModel->{$currentRelationsFunction}($relatedType->primaryModel, [], ['where' => $searchMap]);
+			$test = $localModel->{$currentRelationsFunction}($relatedType->primaryModel, [], ['where' => $searchMap, 'disableAccessCheck' => 1]);
 			if ($test) {
 				$relatedObject = $test;
 				$currentRelation = true;

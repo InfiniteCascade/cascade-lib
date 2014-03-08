@@ -28,19 +28,15 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		$localModel = $this->dataSource->localModel;
 
 		if (!isset($this->localObject)) {
-			$attributes = $this->dataSource->buildLocalAttributes($this->foreignObject, $this->localObject);
 			$this->localObject = new $localModel;
 		}
-		$relations = [];
+
 		$attributes = $this->dataSource->buildLocalAttributes($this->foreignObject, $this->localObject);
-		// if (isset($attributes['relations'])) {
-		// 	$relations = $attributes['relations'];
-		// 	unset($attributes['relations']);
-		// }
 		if (empty($attributes)) {
 			return false;
 		}
-
+		
+		$relations = [];
 		// load local object
 		foreach ($attributes as $key => $value) {
 			$this->localObject->{$key} = $value;
@@ -63,7 +59,6 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		// loop through children
 		foreach ($this->foreignObject->children as $table => $children) {
 			$dataSource = $this->module->getDataSource($table);
-			//var_dump([$dataSource->name, $table]);exit;
 			if (empty($dataSource) || !$dataSource->isReady()) { continue; }
 			foreach ($children as $childId) {
 				// let the handler figure it out
@@ -71,20 +66,8 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 					continue;
 				}
 				$childLocalObject = $dataItem->handle(true, ['relationModels' => [['parent_object_id' => $this->localObject->primaryKey]]]);
-				// if (is_object($childLocalObject) && !Relation::set($this->localObject, $childLocalObject)) {
-				// 	\d($childLocalObject);
-				// 	exit;
-				// }
 			}
-		} 
-		// if (!empty($relations)) {
-		// 	foreach ($relations as $relationConfig) {
-		// 		$this->fillRelationConfig($relationConfig, $this->localObject);
-		// 		if(!Relation::set($relationConfig)) {
-		// 			\d($relationConfig);exit;
-		// 		}
-		// 	}
-		// }
+		}
 		return $this->localObject;
 	}
 

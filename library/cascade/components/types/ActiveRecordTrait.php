@@ -230,8 +230,12 @@ trait ActiveRecordTrait {
 		}
 	}
 
-	public function getUrl($action = 'view') {
-		return ['object/'. $action, 'id' => $this->primaryKey];
+	public function getUrl($action = 'view', $pathLink = true) {
+		$url = ['object/'. $action, 'id' => $this->primaryKey];
+		if ($action === 'view' && $pathLink === true && isset(Yii::$app->request->object)) {
+			$url['p'] = Yii::$app->request->object->primaryKey;
+		}
+		return $url;
 	}
 
 	public function getViewLink()

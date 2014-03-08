@@ -8,6 +8,7 @@ use cascade\components\web\bootstrap\NavBar;
  * @var $content string
  */
 cascade\components\web\assetBundles\AppAsset::register($this);
+Yii::$app->collectors['themes']->registerAssetBundles($this);
 
 if (YII_ENV_DEV) {
 	Html::addCssClass($this->bodyHtmlOptions, 'development');

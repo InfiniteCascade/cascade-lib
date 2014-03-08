@@ -78,6 +78,8 @@ class NavBar extends \yii\bootstrap\Widget {
 	public function init()
 	{
 		parent::init();
+		$themeEngine = Yii::$app->collectors['themes'];
+		$identity = $themeEngine->getIdentity($this->view);
 		$this->clientOptions = false;
 		Html::addCssClass($this->options, 'navbar');
 		if ($this->options['class'] === 'navbar') {
@@ -89,7 +91,9 @@ class NavBar extends \yii\bootstrap\Widget {
 			'options' => ['class' => 'breadcrumb navbar-brand'],
 			'links' => isset($this->view->params['breadcrumbs']) ? $this->view->params['breadcrumbs'] : [],
 		]);
-
+		if ($breadcrumbs === '') {
+			$breadcrumbs = '<ul class="breadcrumb navbar-brand"><li><img src="'.$identity->getLogo(['height' => 100]).'" /></li></ul>';
+		}
 		$options = $this->options;
 		$tag = ArrayHelper::remove($options, 'tag', 'nav');
 		echo Html::beginTag($tag, $options);

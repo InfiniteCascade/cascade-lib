@@ -15,7 +15,7 @@ use yii\web\Application;
 
 class Request extends \infinite\web\Request {
 	protected $_object;
-	protected $_parent;
+	protected $_previousObject;
 
 	public function init() {
 		parent::init();
@@ -23,8 +23,8 @@ class Request extends \infinite\web\Request {
 	}
 
 	public function startRequest() {
-		if (isset($_GET['parent'])) {
-			$this->parent = Registry::getObject($_GET['parent']);
+		if (isset($_GET['p'])) {
+			$this->_previousObject = Registry::getObject($_GET['p']);
 		}	
 	}
 
@@ -36,12 +36,8 @@ class Request extends \infinite\web\Request {
 		return $this->_object;
 	}
 
-	public function setParent($object) {
-		$this->_parent = $object;
-	}
-
-	public function getParent() {
-		return $this->_parent;
+	public function getPreviousObject() {
+		return $this->_previousObject;
 	}
 }
 

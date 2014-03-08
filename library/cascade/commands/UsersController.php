@@ -14,19 +14,22 @@ class UsersController extends \infinite\console\Controller {
 
 	public function actionCreate() {
 
-		$groups = Group::find()->disableAccessCheck()->all();
+		$groups = Group::find()->disableAccessCheck()->orderBy('name')->all();
 		$this->out("Groups");
 		$options = [];
 		$i = 1;
 		$defaultGroup = null;
 		foreach ($groups as $group) {
+			$extra = '';
 			if ($group->system === 'users') {
 				$defaultGroup = $group->primaryKey;
+				$extra = '*';
 			}
 			$options[$i] = $group->primaryKey;
-			$this->out("$i) {$group->descriptor}");
+			$this->out("$i) {$group->descriptor}{$extra}");
 			$i++;
 		}
+		$options[''] = $defaultGroup;
 		$group = Console::select("Choose", $options);
 		if (empty($group)) {
 			$group = $defaultGroup;
@@ -35,7 +38,6 @@ class UsersController extends \infinite\console\Controller {
 		}
 
 		$user =  new User;
-		$user->registerRelationModel(new Relation(['child_object_id' => $group]));
 		$user->scenario = 'creation';
 		$user->first_name = $this->prompt("First name");
 		$user->last_name = $this->prompt("Last name");
@@ -43,6 +45,7 @@ class UsersController extends \infinite\console\Controller {
 		$user->status = 1;
 		$user->username = $this->prompt("Username");
 		$user->password = $this->prompt("Password");
+		$user->registerRelationModel(['parent_object_id' => $group]);
 		if (!$user->validate()) {
 			\d($user->errors);
 			$this->stderr("User didn't validate!");

@@ -12,5 +12,5 @@ $config['controllerMap'] = [
 	'migrate' => 'infinite\\console\\controllers\\MigrateController'
 ];
 unset($config['modules']['debug']);
-$config['controllerPath'] = '@cascade/commands';
+$config['controllerNamespace'] = 'cascade\\commands';
 return $config;

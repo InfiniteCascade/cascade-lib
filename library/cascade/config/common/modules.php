@@ -16,6 +16,9 @@ return [
     ],
     'TypeGroup' => [
         'class' => 'cascade\modules\TypeGroup\Module',
+    ],
+    'ThemeCascade' => [
+        'class' => 'cascade\modules\ThemeCascade\Module',
     ]
 ];
 ?>

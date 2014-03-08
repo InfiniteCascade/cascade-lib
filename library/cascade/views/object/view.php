@@ -5,6 +5,9 @@ use infinite\web\bootstrap\SubNavBar;
 use cascade\components\web\widgets\section\Section as SectionWidget;
 
 $this->title = $object->descriptor;
+if (!empty(Yii::$app->request->previousObject)) {
+	$this->params['breadcrumbs'][] = ['label' => Yii::$app->request->previousObject->descriptor, 'url' => Yii::$app->request->previousObject->getUrl('view', false)];
+}
 $this->params['breadcrumbs'][] = $this->title;
 
 Html::addCssClass($this->bodyHtmlOptions, 'double-top-nav');

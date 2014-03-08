@@ -11,6 +11,9 @@ return [
 		'taxonomies' => [
 			'class' => 'cascade\\components\\taxonomy\\Collector',
 		],
+		'themes' => [
+			'class' => 'cascade\\components\\web\\themes\\Collector',
+		],
 		'storageHandlers' => [
 			'class' => 'cascade\\components\\storageHandlers\\Collector',
 			'initialItems' => [
