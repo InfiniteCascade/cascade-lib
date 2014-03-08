@@ -20,8 +20,32 @@ class AssetBundle extends \yii\web\AssetBundle
 		if (file_exists($cachePath)) {
 			return $cachePath;
 		}
-		$imagine = Imagine::getImagine();
-		return $cachePath;
+		$image = $this->followResizeInstructions($imagePath, $size);
+		if (!$image) { return false; }
+		$image->save($cachePath);
+		if (file_exists($cachePath)) {
+			return $cachePath;
+		}
+		return false;
+	}
+
+	protected function followResizeInstructions($imagePath, $resize)
+	{
+		if (is_object($imagePath)) {
+			$image = $imagePath;
+		} else {
+			$imagine = Image::getImagine();
+			$image = $imagine->open($imagePath);
+		}
+		if (!$image) { return false; }
+		$size = $image->getSize();
+		if (isset($resize['width']) && $resize['width'] < $size->getWidth()) {
+			$image->resize($size->widen($resize['width']));
+		}
+		if (isset($resize['height']) && $resize['height'] < $size->getHeight()) {
+			$image->resize($size->heighten($resize['height']));
+		}
+		return $image;
 	}
 
 	public function getCachePath()
@@ -35,5 +59,18 @@ class AssetBundle extends \yii\web\AssetBundle
 			return false;
 		}
 		return $cachePath;
+	}
+
+	public function getCacheUrl()
+	{
+		if (empty($this->baseUrl)) { return false; }
+		$cacheUrl = $this->baseUrl . '/cache';
+		return $cacheUrl;
+	}
+
+	public function getCacheAssetUrl($path)
+	{
+		$url = $this->cacheUrl .'/'. basename($path);
+		return $url;
 	}
 }

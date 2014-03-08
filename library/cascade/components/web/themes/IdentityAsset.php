@@ -1,17 +1,19 @@
 <?php
 namespace cascade\components\web\themes;
 
+use Yii;
+
 abstract class IdentityAsset extends AssetBundle
 {
 	abstract public function getLogoPath();
 
 	public function getLogo($size = null)
 	{
-		\d($this->logoPath);
 		if (!$this->logoPath || !file_exists($this->logoPath)) { return; }
 		$cacheLogo = $this->sizeImageCache($this->logoPath, $size);
-		\d($cacheLogo);
-		exit;
-		return 'boom';
+		if ($cacheLogo) {
+			return $this->getCacheAssetUrl($cacheLogo);
+		}
+		return false;
 	}
 }
