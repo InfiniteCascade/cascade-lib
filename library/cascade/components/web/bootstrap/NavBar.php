@@ -92,7 +92,7 @@ class NavBar extends \yii\bootstrap\Widget {
 			'links' => isset($this->view->params['breadcrumbs']) ? $this->view->params['breadcrumbs'] : [],
 		]);
 		if ($breadcrumbs === '') {
-			$breadcrumbs = '<ul class="breadcrumb navbar-brand"><li><img src="'.$identity->getLogo(['height' => 30]).'" /></li></ul>';
+			$breadcrumbs = '<img class="logo" src="'.$identity->getLogo(['height' => 40]).'" />';
 		}
 		$options = $this->options;
 		$tag = ArrayHelper::remove($options, 'tag', 'nav');

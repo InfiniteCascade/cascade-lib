@@ -32,7 +32,7 @@ $this->beginBody(); ?>
 			'brandLabel' => 'Dashboard',//Yii::$app->name,
 			'brandUrl' => Yii::$app->homeUrl,
 			'options' => [
-				'class' => 'i-navbar-top navbar-inverse navbar-fixed-top',
+				'class' => 'ic-navbar-top navbar-inverse navbar-fixed-top',
 			],
 		]);
 		$identityLink = isset(Yii::$app->user->identity) ? Yii::$app->user->identity->url : false;

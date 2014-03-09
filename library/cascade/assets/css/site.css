@@ -23,6 +23,9 @@ footer {
     display: block;
 }
 
+.ic-navbar-top .logo {
+  margin: 3px 0;
+}
 
 .scroll-mark {
 	padding-top: 100px;
@@ -69,6 +72,7 @@ footer {
 .ic-sidenav .nav {
     display: block;
 }
+
 
 /* Affixed Sidebar */
 .ic-sidebar {
