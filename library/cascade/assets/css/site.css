@@ -23,8 +23,31 @@ footer {
     display: block;
 }
 
-.ic-navbar-top .logo {
-  margin: 3px 0;
+.ic-navbar-top .nav li {
+  float: left;
+}
+.ic-navbar-top .container .navbar-header {
+  float: left;
+  margin: 0 15px 0 0;
+}
+.ic-navbar-top .container .navbar-brand {
+  line-height: 15px;
+  margin-left: 15px;
+}
+.ic-navbar-top .navbar-brand img {
+  margin: -15px;
+}
+
+.ic-navbar-top .navbar-form {
+  border: 0 none;
+  margin: 0;
+  padding: 10px;
+}
+
+@media(max-width:767px) {
+  #searchform-query {
+    width: 120px;
+  }
 }
 
 .scroll-mark {

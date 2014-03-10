@@ -1,10 +1,16 @@
 <?php
+/**
+ * @link http://www.yiiframework.com/
+ * @copyright Copyright (c) 2008 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ */
+
 namespace cascade\components\web\bootstrap;
 
 use Yii;
-use infinite\helpers\ArrayHelper;
-use infinite\helpers\Html;
-use yii\widgets\Breadcrumbs;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\bootstrap\Widget;
 use yii\bootstrap\BootstrapPluginAsset;
 
 /**
@@ -31,11 +37,10 @@ use yii\bootstrap\BootstrapPluginAsset;
  * @see http://getbootstrap.com/components/#navbar
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @author Alexander Kochetov <creocoder@gmail.com>
- * @author Jacob Morrison <jomorrison@gmail.com>
  * @since 2.0
  */
-
-class NavBar extends \yii\bootstrap\Widget {
+class TopNavBar extends Widget
+{
 	/**
 	 * @var array the HTML attributes for the widget container tag. The following special options are recognized:
 	 *
@@ -59,11 +64,15 @@ class NavBar extends \yii\bootstrap\Widget {
 	 */
 	public $brandUrl;
 	/**
+	 * @var array the HTML attributes of the brand link.
+	 */
+	public $brandOptions = [];
+	/**
 	 * @var string text to show for screen readers for the button to toggle the navbar.
 	 */
 	public $screenReaderToggleText = 'Toggle navigation';
 	/**
-	 * @var bool whether the navbar content should be included in an inner div container which by default
+	 * @var boolean whether the navbar content should be included in an inner div container which by default
 	 * adds left and right padding. Set this to false for a 100% width navbar.
 	 */
 	public $renderInnerContainer = true;
@@ -78,21 +87,14 @@ class NavBar extends \yii\bootstrap\Widget {
 	public function init()
 	{
 		parent::init();
-		$themeEngine = Yii::$app->collectors['themes'];
-		$identity = $themeEngine->getIdentity($this->view);
 		$this->clientOptions = false;
 		Html::addCssClass($this->options, 'navbar');
 		if ($this->options['class'] === 'navbar') {
 			Html::addCssClass($this->options, 'navbar-default');
 		}
-		
-		$breadcrumbs = Breadcrumbs::widget([
-			'homeLink' => ['label' => $this->brandLabel, 'url' => $this->brandUrl],
-			'options' => ['class' => 'breadcrumb navbar-brand'],
-			'links' => isset($this->view->params['breadcrumbs']) ? $this->view->params['breadcrumbs'] : [],
-		]);
-		if ($breadcrumbs === '') {
-			$breadcrumbs = '<img class="logo" src="'.$identity->getLogo(['height' => 40]).'" />';
+		Html::addCssClass($this->brandOptions, 'navbar-brand');
+		if (empty($this->options['role'])) {
+			$this->options['role'] = 'navigation';
 		}
 		$options = $this->options;
 		$tag = ArrayHelper::remove($options, 'tag', 'nav');
@@ -104,14 +106,11 @@ class NavBar extends \yii\bootstrap\Widget {
 			echo Html::beginTag('div', $this->innerContainerOptions);
 		}
 		echo Html::beginTag('div', ['class' => 'navbar-header']);
-		if (!isset($this->containerOptions['id'])) {
-			$this->containerOptions['id'] = "{$this->options['id']}-collapse";
+		if ($this->brandLabel !== null) {
+			Html::addCssClass($this->brandOptions, 'navbar-brand');
+			echo Html::a($this->brandLabel, $this->brandUrl === null ? Yii::$app->homeUrl : $this->brandUrl, $this->brandOptions);
 		}
-		echo $this->renderToggleButton();
-		echo $breadcrumbs;
 		echo Html::endTag('div');
-		Html::addCssClass($this->containerOptions, 'collapse');
-		Html::addCssClass($this->containerOptions, 'navbar-collapse');
 		$options = $this->containerOptions;
 		$tag = ArrayHelper::remove($options, 'tag', 'div');
 		echo Html::beginTag($tag, $options);
@@ -147,4 +146,3 @@ class NavBar extends \yii\bootstrap\Widget {
 		]);
 	}
 }
-?>
