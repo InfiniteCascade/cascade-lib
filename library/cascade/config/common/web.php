@@ -31,11 +31,12 @@ $config['components']['urlManager'] = [
 	'showScriptName' => false,
 	'rules' => [
 		// a standard rule mapping '/' to 'site/index' action
-		'' => 'object/index',
+		'' => 'app/index',
 		
 		'<action:(login|logout)>' => 'app/<action>',
 
-		'<action:(search|browse)>' => 'object/<action>',
+		'<action:(search)>' => 'object/<action>',
+		'<action:(browse)>/<type:\S+>' => 'object/<action>',
 		'<action:(view)>:<subaction:\S+>/<id:\S+>' => 'object/<action>',
 		'<action:(view)>/<id:\S+>' => 'object/<action>',
 		'<action:(update|delete)>/<id:\S+>' => 'object/<action>',

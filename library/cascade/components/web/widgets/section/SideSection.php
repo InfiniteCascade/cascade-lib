@@ -31,5 +31,17 @@ class SideSection extends Section {
 	{
 		return false;
 	}
+
+	public function defaultItems($parent = null)
+	{
+		$default = [];
+		$default['_header'] = [
+			'object' => [
+				'class' => 'cascade\\components\\web\\widgets\\Item',
+				'widget' => ['class' => 'cascade\\components\\web\\widgets\\base\\Header'],
+			]
+		];
+		return $default;
+	}
 }
 ?>

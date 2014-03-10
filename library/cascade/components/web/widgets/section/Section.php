@@ -6,7 +6,8 @@ use Yii;
 use infinite\helpers\ArrayHelper;
 use infinite\helpers\Html;
 
-class Section extends \cascade\components\web\widgets\Widget {
+class Section extends \cascade\components\web\widgets\Widget
+{
 	public $gridClass = 'infinite\\web\\grid\\Grid';
 	public $defaultWidgetDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\PanelDecorator';
 	public $section;
@@ -17,6 +18,9 @@ class Section extends \cascade\components\web\widgets\Widget {
 		if (isset($this->section)) {
 			$this->icon = $this->section->icon;
 			$this->title = $this->section->sectionTitle;
+		}
+		if (isset($this->collectorItem)) {
+			$this->collectorItem->registerMultiple($this, $this->defaultItems());
 		}
 	}
 
@@ -48,8 +52,11 @@ class Section extends \cascade\components\web\widgets\Widget {
 	{
 		$items = [];
 		foreach ($this->widgets as $widget) {
-			$items[] = $cell = Yii::$app->collectors['widgets']->build($this, $widget->object);
+			$cell = Yii::$app->collectors['widgets']->build($this, $widget->object);
+			if (!$cell) { \d($widget);exit; continue; }
+			$items[] = $cell;
 			Yii::configure($cell, $this->widgetCellSettings());
+
 		}
 		$grid = Yii::createObject(['class' => $this->gridClass, 'cells' => $items]);
 		return $grid->generate();
@@ -60,6 +67,11 @@ class Section extends \cascade\components\web\widgets\Widget {
 		$widgets = $this->collectorItem->getAll();
 		ArrayHelper::multisort($widgets, ['object.priority', 'object.name'], [SORT_ASC, SORT_ASC]);
 		return $widgets;
+	}
+
+	public function defaultItems($parent = null)
+	{
+		return [];
 	}
 }
 ?>

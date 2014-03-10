@@ -57,6 +57,15 @@ class Relation extends Base {
 			return 'parent:'.$fieldParts[1];
 		}
 	}
+
+	public function determineLocations()
+	{
+		if (!($this->modelRole === 'child' && !$this->relationship->isHasOne())
+			&&	!($this->modelRole === 'parent')) {
+			return [self::LOCATION_DETAILS];
+		}
+		return [self::LOCATION_HIDDEN];
+	}
 }
 
 ?>

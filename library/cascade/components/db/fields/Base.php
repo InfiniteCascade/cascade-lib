@@ -5,7 +5,7 @@ use Yii;
 use infinite\base\exceptions\Exception;
 
 abstract class Base extends \infinite\base\Object {
-	public $formatClass = 'cascade\components\db\fields\FormatText';
+	public $formatClass = 'cascade\\components\\db\\fields\\FormatText';
 	public $formFieldClass;
 	public $default;
 	public $required = false;
@@ -23,6 +23,13 @@ abstract class Base extends \infinite\base\Object {
 	protected $_model;
 	protected $_formField;
 	protected $_multiline;
+	protected $_locations;
+
+	const LOCATION_HIDDEN = 0x00;
+	const LOCATION_DETAILS = 0x01;
+	const LOCATION_HEADER = 0x02;
+	const LOCATION_SUBHEADER = 0x03;
+
 	
 
 	public function init() {
@@ -48,6 +55,27 @@ abstract class Base extends \infinite\base\Object {
 	public function hasFile()
 	{
 		return false;
+	}
+
+	public function setLocations($value)
+	{
+		$this->_locations = $value;
+	}
+
+	public function getLocations()
+	{
+		if (is_null($this->_locations)) {
+			$this->_locations = $this->determineLocations();
+		}
+		return $this->_locations;
+	}
+
+	public function determineLocations()
+	{
+		if (!$this->human) {
+			return [self::LOCATION_HIDDEN];
+		}
+		return [self::LOCATION_DETAILS];
 	}
 
 	public function setFormField($value)

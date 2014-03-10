@@ -69,13 +69,7 @@ class ObjectController extends Controller
 		];
 	}
 
-	public function actionIndex() {
-		// echo Registry::parseModelAlias(\cascade\models\Group::modelAlias()) .'<br />';
-		// echo '<hr />';
-		// echo \cascade\modules\SectionContact\modules\TypePhoneNumber\models\ObjectPhoneNumber::modelAlias() .'<br />';
-		// echo Registry::parseModelAlias(\cascade\modules\SectionContact\modules\TypePhoneNumber\models\ObjectPhoneNumber::modelAlias());
-		// //echo "okay";
-		// exit;
+	public function actionBrowse() {
 		return $this->render('index');
 	}
 

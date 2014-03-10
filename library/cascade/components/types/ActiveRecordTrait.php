@@ -19,6 +19,7 @@ use infinite\db\behaviors\SearchTerm;
 
 use cascade\components\web\form\Segment as FormSegment;
 use cascade\components\types\Relationship;
+use cascade\components\db\fields\Base as BaseField;
 use cascade\models\Relation;
 
 trait ActiveRecordTrait {
@@ -342,28 +343,38 @@ trait ActiveRecordTrait {
 		return [];
 	}
 
-	public function getDetailFields($owner = null, $fields = null)
+	public function getFieldLocation($location, $owner = null, $allFields = null)
 	{
-		if (is_null($fields)) {
-			$fields = $this->getFields($owner);
+		if (is_null($allFields)) {
+			$allFields = $this->getFields($owner);
 		}
-		foreach ($fields as $key => $field) {
-			$keep = true;
-			if ($field instanceof $this->relationFieldClass) {
-				if (	(in_array($key, $this->headerDetails))
-					|| 	($field->modelRole === 'child' && !$field->relationship->isHasOne())
-					||	($field->modelRole === 'parent')) {
-					$keep = false;
-				}
-			} elseif (!$field->human) {
-				$keep = false;
-			}
-
-			if (!$keep) {
-				unset($fields[$key]);
+		$fields = [];
+		foreach ($allFields as $key => $field) {
+			if (in_array($location, $field->locations)) {
+				$fields[] = $field;
 			}
 		}
 		return $fields;
+	}
+
+	public function getDetailFields($owner = null, $fields = null)
+	{
+		return $this->getFieldLocation(BaseField::LOCATION_DETAILS, $owner, $fields);
+	}
+
+	public function getHiddenFields($owner = null, $fields = null)
+	{
+		return $this->getFieldLocation(BaseField::LOCATION_HIDDEN, $owner, $fields);
+	}
+
+	public function getHeaderFields($owner = null, $fields = null)
+	{
+		return $this->getFieldLocation(BaseField::LOCATION_HEADER, $owner, $fields);
+	}
+
+	public function getSubheaderFields($owner = null, $fields = null)
+	{
+		return $this->getFieldLocation(BaseField::LOCATION_SUBHEADER, $owner, $fields);
 	}
 
 	public function createColumnSchema($name, $settings = [])

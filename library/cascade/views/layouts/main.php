@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
 use cascade\components\web\bootstrap\TopNavBar;
+use cascade\components\web\bootstrap\Nav;
 use cascade\models\SearchForm;
 use yii\widgets\ActiveForm;
 
@@ -17,6 +17,13 @@ if (YII_ENV_DEV) {
 }
 
 $itemTypes = [];
+foreach (Yii::$app->collectors['types']->getAll() as $type) {
+	if (empty($type->object)) { continue; }
+	if (empty($type->object->hasDashboard)) { continue; }
+	$itemTypes[$type->object->title .'-'.$type->systemId] = ['label' => $type->object->title->upperPlural, 'url' => ['object/browse', 'type' => $type->systemId]];
+}
+ksort($itemTypes);
+$itemTypes = array_values($itemTypes);
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
@@ -42,10 +49,34 @@ $this->beginBody(); ?>
 			],
 		]);
 		if (!Yii::$app->user->isGuest) {
+			$browseLabel = 'Browse';
+			if (isset(Yii::$app->request->object)) {
+				$browseLabel .= ' ' . Html::tag('span', Yii::$app->request->object->objectType->title->upperPlural, ['class' => 'object-type']);
+			}
 			$topMenu = [];
-			$topMenu[] = ['label' =>  '<span class="glyphicon glyphicon-home"></span> <span class="hidden-xs hidden-sm">Dashboard</span>', 'url' => ['/']];
-			$topMenu[] = ['label' =>  '<span class="glyphicon glyphicon-th"></span> <span class="hidden-xs hidden-sm">Browse</span>', 'url' => ['object/browse'], 'items' => $itemTypes];
-			$topMenu[] = ['label' =>  '<span class="glyphicon glyphicon-filter"></span> <span class="hidden-xs hidden-sm">Reports</span>', 'url' => ['reports/index']];
+			$topMenu[] = [
+				'label' =>  '<span class="glyphicon glyphicon-home"></span> <span class="hidden-xs hidden-sm">Dashboard</span>', 
+				'url' => ['app/index']
+			];
+			$topMenu[] = [
+				'label' =>  '<span class="glyphicon glyphicon-th"></span> <span class="hidden-xs hidden-sm">'.$browseLabel.'</span>', 
+				'url' => ['object/index'], 
+				'items' => $itemTypes,
+				'active' => function($nav, $item) {
+					$check = ['/^object\//']; // , '/^object\/view/', '/^object\/index/', '/^object\/browse/'
+
+					foreach ($check as $c) {
+						if (preg_match($c, $nav->route) === 1) {
+							return true;
+						}
+					}
+					return false;
+				}
+			];
+			$topMenu[] = [
+				'label' =>  '<span class="glyphicon glyphicon-filter"></span> <span class="hidden-xs hidden-sm">Reports</span>', 
+				'url' => ['reports/index']
+			];
 			//$topMenu[] = ['label' =>  '<span class="glyphicon glyphicon-home"></span> <span class="hidden-xs hidden-sm">Dashboard</span>', 'url' => ['/']];
 
 			echo Nav::widget([

@@ -28,57 +28,23 @@ foreach ($sections as $section) {
 $this->tinyMenu = $sectionsMenu;
 echo Html::beginTag('div', ['class' => 'dashboard']);
 
-$grid = Yii::createObject(['class' => 'infinite\web\grid\Grid']);
+$grid = Yii::createObject(['class' => 'infinite\\web\\grid\\Grid']);
 $cells = [];
-
-$calculateBottom = 'function() {
-	this.bottom = $(\'.footer\').outerHeight(true);
-	return this.bottom;
-}
-';
-$js[] = '
-var $mainCell = $(".ic-main-cell");
-$mainCell.checkHeight = function(height) {
-	if (this.height() < height) {
-		this.height(height);
-	}
-};
-';
 $mainColumnSize = 12;
 
 if (isset($sections['_side'])) {
-	$mainColumnSize -= 4;
 	$cellInner = $sections['_side']->object;
 	$cellInner->htmlOptions['id'] = $cellInner->id;
-	$calculateTop = 'function () {
-			var offsetTop = $sideBar.offset().top;
-			var sideBarMargin = parseInt($sideBar.children(0).css(\'margin-top\'), 10);
-			var navOuterHeight = 0;
-			$(\'nav.navbar-fixed-top\').each(function() {
-				navOuterHeight += $(\'.navbar-header\').outerHeight();
-			});
-			this.top = offsetTop - navOuterHeight - sideBarMargin;
-			return this.top;
-		}
-';
-
-	$js[] = '
-	setTimeout(function() {
-		var $sideBar = $("#'. $cellInner->id .'");
-		$mainCell.checkHeight($sideBar.height());
-		$sideBar.affix({offset: {top: '.$calculateTop.', bottom: '.$calculateBottom.'}});
-	}, 100)';
 	Html::addCssClass($cellInner->htmlOptions, 'ic-sidebar');
+	$sideContent = $cellInner->generate();
 
-	// $cellInner->htmlOptions['data-spy'] = 'affix';
-	// $cellInner->htmlOptions['data-offset-top'] = 120;
-	// $cellInner->htmlOptions['data-offset-bottom'] = 400;
-	// $cellInner->htmlOptions['data-spy'] = 'affix';
-
-	$cells[] = $sideCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $cellInner->generate()]);
-
-	//Html::addCssClass($sideCell->htmlOptions, 'col-md-push-'. $mainColumnSize);
-	Yii::configure($sideCell, ['mediumDesktopColumns' => 4,'maxMediumDesktopColumns' => 4, 'largeDesktopSize' => false, 'tabletColumns' => 5]);
+	if (!empty($sideContent)) {
+		$mainColumnSize -= 4;
+		$js[] = '$("#'. $cellInner->id .'").cascadeAffix();';
+		$js[] = "\$('body').scrollspy({ target: '.ic-sidenav', 'offset': 10 });";
+		$cells[] = $sideCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $sideContent]);
+		Yii::configure($sideCell, ['mediumDesktopColumns' => 4,'maxMediumDesktopColumns' => 4, 'largeDesktopSize' => false, 'tabletColumns' => 5]);
+	}
 }
 
 if (count($sectionsMenu) > 2) {
@@ -98,19 +64,7 @@ Html::addCssClass($mainCell->htmlOptions, 'ic-main-cell');
 
 
 if (count($sectionsMenu) > 2) {
-	$calculateTop = 'function () {
-			var offsetTop = $menuBar.offset().top;
-			var sideBarMargin = parseInt($menuBar.children(0).css(\'margin-top\'), 10);
-			var navOuterHeight = 0;
-			$(\'nav.navbar-fixed-top\').each(function() {
-				navOuterHeight += $(\'.navbar-header\').outerHeight();
-			});
-			this.top = offsetTop - navOuterHeight - sideBarMargin;
-			return this.top;
-		}';
-
-	$js[] = "\$('body').scrollspy({ target: '.ic-sidenav', 'offset': 10 });";
-
+	$js[] = '$(".ic-sidenav").cascadeAffix();';
 	$menuContent = Html::beginTag('div', ['class' => 'ic-sidenav']);
 	$menuContent .= Nav::widget([
 			'options' => ['class' => 'navbar-default'],
@@ -121,13 +75,6 @@ if (count($sectionsMenu) > 2) {
 	$cells[] = $menuCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $menuContent]);
 	Yii::configure($menuCell, ['mediumDesktopColumns' => 2, 'maxMediumDesktopColumns' => 2, 'largeDesktopSize' => false, 'tabletSize' => false]);
 	Html::addCssClass($menuCell->htmlOptions, 'hidden-xs hidden-sm');
-	$js[] = '
-	setTimeout(function() {
-		var $menuBar = $(".ic-sidenav");
-		$mainCell.checkHeight($menuBar.height());
-		$menuBar.affix({offset: {top: '.$calculateTop.', bottom: '.$calculateBottom.'}});
-	}, 100);
-	';
 }
 
 $grid->cells = $cells;

@@ -15,6 +15,7 @@ class HumanFieldDetector extends \infinite\base\Object {
 	static $_machineTests = [
 		'id',
 		'/\_id$/',
+		'/\_hash$/',
 		'_moduleHandler',
 		'created',
 		'modified',

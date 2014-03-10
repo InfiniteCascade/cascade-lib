@@ -6,6 +6,29 @@ $preparer.add(function(context) {
 	});
 });
 
+// side menu bar
+$.fn.cascadeAffix = function (option) {
+	var $self = $(this);
+	var calculateBottom = function() {
+		this.bottom = $('.footer').outerHeight(true);
+		return this.bottom;
+	};
+	var calculateTop = function () {
+		var offsetTop = $self.offset().top;
+		var margin = parseInt($self.css('margin-top'), 10);
+		var navOuterHeight = 0;
+		$('nav.navbar-fixed-top').each(function() {
+			navOuterHeight += $(this).outerHeight();
+		});
+		navOuterHeight += 10;
+		this.top = offsetTop - navOuterHeight - margin;
+		return this.top;
+	};
+	setTimeout(function() {
+		$self.affix({offset: {top: calculateTop, bottom: calculateBottom}});
+	}, 200);
+};
+
 // top menu bar
 $(function() {
 	

@@ -1,0 +1,166 @@
+Searching 3102 files for "defaultItems"
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/components/section/SectionInterface.php:
+    6  	public function setTitle($title);
+    7  	public function getSectionTitle();
+    8: 	public function defaultItems($parent = null);
+    9  	public function getTitle();
+   10  }
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/components/section/SectionTrait.php:
+   27  	public function init() {
+   28  		parent::init();
+   29: 		$this->registerMultiple($this, $this->defaultItems());
+   30  	}
+   31  
+   ..
+   71  	 * @return unknown
+   72  	 */
+   73: 	protected function defaultItems($parent = null) {
+   74  		return [];
+   75  	}
+
+3 matches across 2 files
+
+
+Searching 3102 files for "SectionTrait"
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/components/section/Item.php:
+    7  
+    8  class Item extends \infinite\base\collector\Item implements SectionInterface, CollectedObjectInterface {
+    9: 	use SectionTrait;
+   10  	use CollectedObjectTrait;
+   11  	public $priority = 0;
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/components/section/Module.php:
+   21  
+   22  class Module extends \cascade\components\base\CollectorModule implements SectionInterface {
+   23: 	use SectionTrait;
+   24  	
+   25  	public $version = 1;
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/components/section/SectionTrait.php:
+   10  use infinite\web\RenderTrait;
+   11  
+   12: trait SectionTrait {
+   13  	use CollectorTrait;
+   14  	use RenderTrait;
+
+3 matches across 3 files
+
+
+Searching 3102 files for "_side"
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-core-types/cascade/modules/core/TypeAccount/Module.php:
+   76  	{
+   77  		$widgets = parent::widgets();
+   78: 		$widgets['ParentAccountBrowse']['section'] = Yii::$app->collectors['sections']->getOne('_side');
+   79  		return $widgets;
+   80  	}
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-core-types/cascade/modules/core/TypeEmailAddress/Module.php:
+   44  	{
+   45  		$widgets = parent::widgets();
+   46: 		$widgets['ChildrenEmailAddressBrowse']['section'] = Yii::$app->collectors['sections']->getOne('_side');
+   47  		return $widgets;
+   48  	}
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-core-types/cascade/modules/core/TypePhoneNumber/Module.php:
+   44  	{
+   45  		$widgets = parent::widgets();
+   46: 		$widgets['ChildrenPhoneNumberBrowse']['section'] = Yii::$app->collectors['sections']->getOne('_side');
+   47  		return $widgets;
+   48  	}
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-core-types/cascade/modules/core/TypePostalAddress/Module.php:
+   43  	{
+   44  		$widgets = parent::widgets();
+   45: 		$widgets['ChildrenPostalAddressBrowse']['section'] = Yii::$app->collectors['sections']->getOne('_side');
+   46  		return $widgets;
+   47  	}
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-core-types/cascade/modules/core/TypeWebAddress/Module.php:
+   43  	{
+   44  		$widgets = parent::widgets();
+   45: 		$widgets['ChildrenWebAddressBrowse']['section'] = Yii::$app->collectors['sections']->getOne('_side');
+   46  		return $widgets;
+   47  	}
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/components/section/base/Side.php:
+    4  class Side extends \cascade\components\section\Item {
+    5  	public $sectionWidgetClass = 'cascade\\components\\web\\widgets\\section\\SideSection';
+    6: 	protected $_systemId = '_side';
+    7  	protected $_title = 'Side Panel';
+    8  	public function init()
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/components/section/Collector.php:
+   18  	{
+   19  		return [
+   20: 			'_side' => ['object' => Yii::createObject(['class' => 'cascade\\components\\web\\widgets\\section\\SideSection']), 'priority' => false],
+   21  			'_parents' => ['object' => Yii::createObject(['class' => 'cascade\\components\\web\\widgets\\section\\ParentSection']), 'priority' => 1000000, 'title' => 'Related']
+   22  		];
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/components/types/Module.php:
+  333  	public function getDetailsSection()
+  334  	{
+  335: 		return '_side';
+  336  	}
+  337  
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/gii/cascadeTypeModule/Generator.php:
+  285  		$systemId = ucfirst($this->getModuleSystemID());
+  286  		if (!empty($this->section) && substr($this->section, 0, 1) === '_') {
+  287: 			if ($this->section === '_side') {
+  288  				$files[] = new CodeFile(
+  289  					$modulePath . '/widgets/EmbeddedList.php',
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/views/object/view.php:
+   47  $mainColumnSize = 12;
+   48  
+   49: if (isset($sections['_side'])) {
+   50  	$mainColumnSize -= 4;
+   51: 	$cellInner = $sections['_side']->object;
+   52  	$cellInner->htmlOptions['id'] = $cellInner->id;
+   53  	$calculateTop = 'function () {
+
+/Users/jacob/Projects/cascade/vendor/phpspec/php-diff/example/example.php:
+   34  		// Generate a side by side diff
+   35  		require_once dirname(__FILE__).'/../lib/Diff/Renderer/Html/SideBySide.php';
+   36: 		$renderer = new Diff_Renderer_Html_SideBySide;
+   37  		echo $diff->Render($renderer);
+   38  
+
+/Users/jacob/Projects/cascade/vendor/phpspec/php-diff/lib/Diff/Renderer/Html/SideBySide.php:
+   43  require_once dirname(__FILE__).'/Array.php';
+   44  
+   45: class Diff_Renderer_Html_SideBySide extends Diff_Renderer_Html_Array
+   46  {
+   47  	/**
+
+13 matches across 12 files
+
+
+Searching 3101 files for "defaultItems"
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/components/section/SectionInterface.php:
+    6  	public function setTitle($title);
+    7  	public function getSectionTitle();
+    8: 	public function defaultItems($parent = null);
+    9  	public function getTitle();
+   10  }
+
+/Users/jacob/Projects/cascade/vendor/infiniteCascade/cascade-lib/library/cascade/components/section/SectionTrait.php:
+   27  	public function init() {
+   28  		parent::init();
+   29: 		$this->registerMultiple($this, $this->defaultItems());
+   30: 		$this->registerMultiple($this, $this->widget->defaultItems());
+   31  	}
+   32  
+   ..
+   72  	 * @return unknown
+   73  	 */
+   74: 	protected function defaultItems($parent = null) {
+   75  		return [];
+   76  	}
+
+4 matches across 2 files
