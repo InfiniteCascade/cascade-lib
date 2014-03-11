@@ -22,9 +22,24 @@ class Header extends Widget {
 		$content[] = Yii::$app->request->object->descriptor;
 		$content[] = Html::endTag('div');
 
-		$content[] = Html::beginTag('div', ['class' => 'ic-object-menu']);
-		$content[] = 'menu';
-		$content[] = Html::endTag('div');
+		$menu = [];
+		$menu[] = ['label' => Html::tag('span', '', ['class' => 'fa fa-eye']) .' Watch', 'url' => $object->getUrl('watch')];
+		if ($object->can('update')) {
+			$menu[] = ['label' => Html::tag('span', '', ['class' => 'fa fa-wrench']) .' Update', 'url' => $object->getUrl('update')];
+		}
+		if ($object->can('update')) {
+			$menu[] = ['label' => Html::tag('span', '', ['class' => 'fa fa-shield']) .' Access', 'url' => $object->getUrl('privacy')];
+		}
+		if (!empty($menu)) {
+			$content[] = Html::beginTag('div', ['class' => 'ic-object-menu columns-'. count($menu)]);
+			$content[] = Html::beginTag('ul', ['class' => 'clearfix']);
+			foreach ($menu as $item) {
+				if (!isset($item['options'])) { $item['options'] = []; }
+				$content[] = Html::tag('li', Html::a($item['label'], $item['url'], $item['options']));
+			}
+			$content[] = Html::endTag('ul');
+			$content[] = Html::endTag('div');
+		}
 		$content[] = Html::endTag('div');
 		return implode($content);
 	}
