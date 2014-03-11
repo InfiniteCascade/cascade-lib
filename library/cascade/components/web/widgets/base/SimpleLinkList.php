@@ -2,6 +2,7 @@
 namespace cascade\components\web\widgets\base;
 
 use Yii;
+use yii\helpers\Url;
 
 use infinite\helpers\Html;
 
@@ -17,7 +18,7 @@ class SimpleLinkList extends BaseList {
 	
 	public function getListItemOptions($model, $key, $index)
 	{
-		return array_merge(parent::getListItemOptions($model, $key, $index), ['tag' => 'a', 'href' => Html::url($model->getUrl('view'))]);
+		return array_merge(parent::getListItemOptions($model, $key, $index), ['tag' => 'a', 'href' => Url::to($model->getUrl('view'))]);
 	}
 
 	public function getMenuItems($model, $key, $index)

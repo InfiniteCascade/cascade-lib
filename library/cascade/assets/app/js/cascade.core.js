@@ -29,11 +29,6 @@ $.fn.cascadeAffix = function (option) {
 	}, 200);
 };
 
-// top menu bar
-$(function() {
-	
-});
-
 // basic template engine used in typeahead.js
 // from https://github.com/twitter/typeahead.js/issues/14
 var SingleTemplateEngine = {

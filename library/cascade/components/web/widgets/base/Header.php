@@ -15,27 +15,69 @@ class Header extends Widget {
 		$content[] = Html::beginTag('div', ['class' => 'well ic-masthead']);
 		if (Yii::$app->request->previousObject) {
 			$content[] = Html::beginTag('div', ['class' => 'ic-object-previous']);
-			$content[] = Html::tag('span', '', ['class' => 'fa fa-reply']) .'&nbsp; '. Html::a('Go back to <em>' . Yii::$app->request->previousObject->descriptor .'</em>', Yii::$app->request->previousObject->getUrl('view', false));
+			$content[] = Html::tag('span', '', ['class' => 'fa fa-reply']) .'&nbsp; '. Html::a('Go back to <em>' . Yii::$app->request->previousObject->descriptor .'</em>', Yii::$app->request->previousObject->getUrl('view', [], false));
 			$content[] = Html::endTag('div');
 		}
 		$content[] = Html::beginTag('div', ['class' => 'ic-object-header']);
-		$content[] = Yii::$app->request->object->descriptor;
+		$content[] = $object->descriptor;
 		$content[] = Html::endTag('div');
 
 		$menu = [];
-		$menu[] = ['label' => Html::tag('span', '', ['class' => 'fa fa-eye']) .' Watch', 'url' => $object->getUrl('watch')];
-		if ($object->can('update')) {
-			$menu[] = ['label' => Html::tag('span', '', ['class' => 'fa fa-wrench']) .' Update', 'url' => $object->getUrl('update')];
+		$familiarty = $object->getFamiliarity();
+		$startWatchingItem = [
+			'label' => Html::tag('span', '', ['class' => 'fa fa-eye']) .' Watch', 
+			'url' => $object->getUrl('watch'), 
+			'options' => [
+				'title' => 'Watch and get notified with changes',
+				'data-handler' => 'background',
+				'class' => 'watch-link',
+				'data-watch-task' => 'start',
+			]
+		];
+		$stopWatchingItem = [
+			'label' => Html::tag('span', '', ['class' => 'fa fa-check']) .' Watching',
+			'url' => $object->getUrl('watch', ['stop' => 1]),
+			'options' => [
+				'title' => 'Stop receiving change notifications',
+				'data-handler' => 'background',
+				'data-watch-task' => 'stop',
+				'class' => 'watch-link',
+			]
+		];
+		$startWatchingItem['companion'] = $stopWatchingItem;
+		$stopWatchingItem['companion'] = $startWatchingItem;
+		if (empty($familiarty->watching)) {
+			$menu[] = $startWatchingItem;
+		} else {
+			$menu[] = $stopWatchingItem;
 		}
 		if ($object->can('update')) {
-			$menu[] = ['label' => Html::tag('span', '', ['class' => 'fa fa-shield']) .' Access', 'url' => $object->getUrl('privacy')];
+			$menu[] = [
+				'label' => Html::tag('span', '', ['class' => 'fa fa-wrench']) .' Update', 
+				'url' => $object->getUrl('update'), 
+				'options' => ['title' => 'Update', 'data-handler' => 'background']
+			];
+		}
+		if ($object->can('update')) {
+			$menu[] = [
+				'label' => Html::tag('span', '', ['class' => 'fa fa-shield']) .' Access', 
+				'url' => $object->getUrl('privacy'), 
+				'options' => ['title' => 'Manage access privileges', 'data-handler' => 'background']
+			];
 		}
 		if (!empty($menu)) {
 			$content[] = Html::beginTag('div', ['class' => 'ic-object-menu columns-'. count($menu)]);
 			$content[] = Html::beginTag('ul', ['class' => 'clearfix']);
 			foreach ($menu as $item) {
 				if (!isset($item['options'])) { $item['options'] = []; }
-				$content[] = Html::tag('li', Html::a($item['label'], $item['url'], $item['options']));
+				$companionContent = '';
+				if (isset($item['companion'])) {
+					$companion = $item['companion'];
+					if (!isset($companion['options'])) { $companion['options'] = []; }
+					Html::addCssClass($companion['options'], 'hidden');
+					$companionContent = Html::a($companion['label'], $companion['url'], $companion['options']);
+				}
+				$content[] = Html::tag('li', $companionContent . Html::a($item['label'], $item['url'], $item['options']));
 			}
 			$content[] = Html::endTag('ul');
 			$content[] = Html::endTag('div');

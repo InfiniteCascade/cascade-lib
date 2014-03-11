@@ -14,7 +14,7 @@ class BootstrapTypeaheadAsset extends AssetBundle
     public $sourcePath = '@vendor/twitter/typeahead.js/dist';
 	public $css = [];
 	public $js = [
-		'typeahead.min.js'
+		'typeahead.bundle.min.js'
 	];
     public $depends = ['yii\web\JqueryAsset', 'yii\bootstrap\BootstrapAsset'];
 }

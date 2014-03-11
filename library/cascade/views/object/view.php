@@ -1,12 +1,15 @@
 <?php
-use infinite\helpers\Html;
 use yii\bootstrap\Nav;
+use yii\helpers\Url;
+use infinite\helpers\Html;
 use infinite\web\bootstrap\SubNavBar;
 use cascade\components\web\widgets\section\Section as SectionWidget;
 
+cascade\components\web\assetBundles\ObjectViewAsset::register($this);
+
 $this->title = $object->descriptor;
 if (!empty(Yii::$app->request->previousObject)) {
-	$this->params['breadcrumbs'][] = ['label' => Yii::$app->request->previousObject->descriptor, 'url' => Yii::$app->request->previousObject->getUrl('view', false)];
+	$this->params['breadcrumbs'][] = ['label' => Yii::$app->request->previousObject->descriptor, 'url' => Yii::$app->request->previousObject->getUrl('view', [], false)];
 }
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -15,7 +18,7 @@ Html::addCssClass($this->bodyHtmlOptions, 'double-top-nav');
 $baseInstructions = [];
 $baseInstructions['objectId'] = $object->primaryKey;
 $refreshable = [
-	'url' => Html::url('app/refresh'),
+	'url' => Url::to('app/refresh'),
 	'data' => [Yii::$app->request->csrfParam => Yii::$app->request->csrfToken, 'baseInstructions' => $baseInstructions]
 ];
 $this->bodyHtmlOptions['data-refreshable'] = json_encode($refreshable);

@@ -15,7 +15,7 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $sourcePath = '@cascade/assets';
+    public $sourcePath = '@cascade/assets/app';
 
 	// public $basePath = '@webroot';
 	// public $baseUrl = '@web';

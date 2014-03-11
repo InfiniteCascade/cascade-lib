@@ -19,7 +19,6 @@ class AppController extends Controller
 		return [
 			'access' => [
 				'class' => AccessControl::className(),
-				'only' => ['login', 'logout'],
 				'rules' => [
 					[
 						'actions' => ['login'],
@@ -32,7 +31,7 @@ class AppController extends Controller
 						'roles' => ['@'],
 					],
 					[
-						'actions' => ['refresh'],
+						'actions' => ['refresh', 'index'],
 						'allow' => true,
 						'roles' => ['@'],
 					],

@@ -544,7 +544,6 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 */
 	public function handleSave($model) {
 		if ($this->internalSave($model)) {
-			ObjectFamiliarity::created($model);
 			return true;
 		}
 		return false;

@@ -73,11 +73,6 @@ class ObjectController extends Controller
 		return $this->render('index');
 	}
 
-	public function actionTest()
-	{
-		$groups = \cascade\modules\core\TypeAccount\models\ObjectAccount::find()->enableAccessCheck();
-		\d($groups->all());exit;
-	}
 
 	/**
 	 *
@@ -421,103 +416,34 @@ class ObjectController extends Controller
 	/**
 	 *
 	 */
-	public function actionDeleteOld() {
-		$this->params['model'] = new DeleteForm;
-
-		if (!empty($_GET['relation_id']) AND !empty($_GET['object'])) {
-			$relationship = Relation::get($_GET['relation_id']);
-			if (empty($relationship)) {
-				throw new HttpException(404, "Unknown relationship ". (empty($_GET['relation_id']) ? '' : $_GET['relation_id']));
-			}
-			if ($_GET['object'] === 'parent') {
-				$object = Registry::getObject($relationship->parent_object_id, true);
-				$relationshipWith = Registry::getObject($relationship->child_object_id, true);
-			} elseif($_GET['object'] === 'child') {
-				$object = Registry::getObject($relationship->child_object_id, true);
-				$relationshipWith = Registry::getObject($relationship->parent_object_id, true);
-			}
-			if (empty($object) OR empty($relationshipWith)) {
-				throw new HttpException(404, "Unknown object");
-			}
-			if ($object->asa('RAclBehavior') AND !$object->can('delete')) {
-				throw new RAccessException("You do not have access to delete this object.");
-			}
-			$this->params['model']->relationship = $relationship;
-			$this->params['model']->relationshipWith = $relationshipWith;
-			$this->params['model']->forceRelationshipDelete = false; // @todo if they can't delete object
-			$this->params['model']->forceObjectDelete = $object->getGreenMile([$relationshipWith->id]);
-			$response = new Response('delete', ['dialog' => true, 'dialogSettings' => ['title' => 'Delete '.$object->typeModule->title->getSingular(true) .' or Relationship', 'saveButton' => ['text' => 'Delete', 'class' => 'ui-state-error'], 'width' => '600px']]);
-		} else {
-			if (empty($_GET['id']) or !($object = Registry::getObject($_GET['id'], false)) or !($type = $object->getTypeModule())) {
-				throw new HttpException(404, "Unknown object ". (empty($_GET['id']) ? '' : $_GET['id']));
-			}
-			if ($object->asa('RAclBehavior') AND !$object->can('delete')) {
-				throw new RAccessException("You do not have access to delete this object.");
-			}
-			$relationship = null;
-			$response = new Response('delete', ['dialog' => true, 'dialogSettings' => ['title' => 'Delete '.$object->typeModule->title->getSingular(true),  'saveButton' => ['text' => 'Delete', 'class' => 'ui-state-error'],  'width' => '600px']]);
-		}
-
-		$this->params['model']->object = $object;
-
-		if (!empty($_POST['DeleteForm'])) {
-			$this->params['model']->attributes = $_POST['DeleteForm'];
-			if (!empty($_GET['redirect'])) {
-				$response->redirect = $_GET['redirect'];
-			} else {
-				$response->refresh = '.ic-type-'. $object->typeModule->shortName;
-			}
-
-			if (!empty($_POST['target'])) {
-				$this->params['model']->target = $_POST['target'];
-			}
-
-			if ($this->params['model']->delete()) {
-				$response->success = ucfirst($this->params['model']->targetDescriptor). ' has been deleted!';;
-			} else {
-				
-			}
-		}
-
-		$response->handle();
-	}
-
-	/**
-	 *
-	 */
 	public function actionWatch() {
-		$response = new Response(false);
-		if (empty($_GET['id']) or !($object = Registry::getObject($_GET['id'])) or !($type = $object->getTypeModule())) {
-			throw new HttpException(404, "Unknown object ". (empty($_GET['id']) ? '' : $_GET['id']));
+		if (empty($_GET['id']) or !($object = $this->params['object'] = Registry::getObject($_GET['id'], false)) or !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
+			throw new HttpException(404, "Unknown object.");
 		}
-		$response->ajaxPackage['replace'] = CHtml::link('', ['unwatch', 'id' => $object->id], ['class' => 'ic-icon-darker-blue ic-icon-hover-gray ic-icon-24 ic-icon-eye ajax', 'title' => 'Stop Watching']);
-		if ($object->watch(true)) {
-			$response->success = $object->descriptor. ' is being watched!';;
-		} else {
-			$response->error =  'Could not watch '. $object->descriptor;
+		if (!$object->can('read')) {
+			throw new HttpException(403, "Unable to access object.");
 		}
+		Yii::$app->request->object = $object;
 
-		$response->handle();
+		$watching = empty($_GET['stop']);
+		if ($object->watch($watching)) {
+			Yii::$app->response->task = 'trigger';
+			if ($watching) {
+				Yii::$app->response->success = 'You are now watching '. $object->descriptor .'.';
+				Yii::$app->response->trigger = [
+					['startedWatching']
+				];
+			} else {
+				Yii::$app->response->success = 'You stopped watching '. $object->descriptor .'.';
+				Yii::$app->response->trigger = [
+					['stoppedWatching']
+				];
+			}
+		} else {
+			Yii::$app->response->error = 'Unable update the watching status of this object.';
+		}
 	}
 
-
-	/**
-	 *
-	 */
-	public function actionUnwatch() {
-		$response = new Response(false);
-		if (empty($_GET['id']) or !($object = Registry::getObject($_GET['id'])) or !($type = $object->getTypeModule())) {
-			throw new HttpException(404, "Unknown object ". (empty($_GET['id']) ? '' : $_GET['id']));
-		}
-		$response->ajaxPackage['replace'] = CHtml::link('', ['watch', 'id' => $object->id], ['class' => 'ic-icon-gray ic-icon-hover-blue ic-icon-24 ic-icon-eye ajax', 'title' => 'Start Watching']);
-		if ($object->watch(false)) {
-			$response->success = $object->descriptor. ' is no longer being watched!';;
-		} else {
-			$response->error =  'Could not unwatch '. $object->descriptor;
-		}
-
-		$response->handle();
-	}
 
 
 	/**
