@@ -39,7 +39,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     {
         if ($owner && !empty($this->owner->getBehavior('Ownable')) && isset($this->owner->objectOwner)) {
             return $this->owner->objectOwner;
-        } elseif (isset(Yii::$app->user->identity->primaryKey)) {
+        } elseif (isset(Yii::$app->user) && isset(Yii::$app->user->identity->primaryKey)) {
             return Yii::$app->user->identity;
         }
         return false;

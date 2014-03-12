@@ -20,6 +20,21 @@ class Header extends Widget {
 		}
 		$content[] = Html::beginTag('div', ['class' => 'ic-object-header']);
 		$content[] = $object->descriptor;
+
+		$accessManageUrl = $object->getUrl('sharing');
+		$objectVisibility = Yii::$app->gk->getObjectVisibility($object);
+		$visibilityLinkOptions = ['class' => 'label', 'title' => 'View sharing details', 'data-handler' => 'background'];
+		if ($objectVisibility === 'public') {
+			Html::addCssClass($visibilityLinkOptions, 'label-success');
+			$content[] = Html::a('Public', $accessManageUrl, $visibilityLinkOptions);
+		} elseif ($objectVisibility === 'shared') {
+			Html::addCssClass($visibilityLinkOptions, 'label-info');
+			$content[] = Html::a('Shared', $accessManageUrl, $visibilityLinkOptions);
+		} else {
+			Html::addCssClass($visibilityLinkOptions, 'label-default');
+			$content[] = Html::a('Private', $accessManageUrl, $visibilityLinkOptions);
+		}
+
 		$content[] = Html::endTag('div');
 
 		$menu = [];
@@ -54,7 +69,7 @@ class Header extends Widget {
 		if ($object->can('update')) {
 			$menu[] = [
 				'label' => Html::tag('span', '', ['class' => 'fa fa-shield']) .' Access', 
-				'url' => $object->getUrl('privacy'), 
+				'url' => $accessManageUrl, 
 				'options' => ['title' => 'Manage access privileges', 'data-handler' => 'background']
 			];
 		}

@@ -11,6 +11,10 @@ html,body,.container,.overall-container
   height: auto;
 }
 
+.container {
+  padding: 0;
+}
+
 .inner-container {
     padding-top: 70px;
 }
@@ -140,6 +144,13 @@ footer {
   font-size: 1.2em;
   font-weight: 600;
   text-align: center;
+}
+
+.ic-masthead .ic-object-header a.label {
+  font-size: .7em;
+  margin: 4px auto;
+  display: block;
+  width: 30%;
 }
 
 .scroll-mark {

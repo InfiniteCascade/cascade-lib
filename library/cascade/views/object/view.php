@@ -14,7 +14,6 @@ if (!empty(Yii::$app->request->previousObject)) {
 $this->params['breadcrumbs'][] = $this->title;
 
 Html::addCssClass($this->bodyHtmlOptions, 'double-top-nav');
-
 $baseInstructions = [];
 $baseInstructions['objectId'] = $object->primaryKey;
 $refreshable = [

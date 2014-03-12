@@ -57,9 +57,9 @@ class InterfaceController extends \infinite\console\Controller {
 		}
 	}
 
-	public function globalOptions()
+	public function options($id)
 	{
-		return array_merge(parent::globalOptions(), ['interface', 'verbose']);
+		return array_merge(parent::options($id), ['interface', 'verbose']);
 	}
 }
 ?>
