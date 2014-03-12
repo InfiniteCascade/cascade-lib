@@ -12,7 +12,6 @@ class Details extends Widget implements ListWidgetInterface {
 		ListWidgetTrait::getListItemOptions as getListItemOptionsBase;
 	}
 
-	public $title = 'Details';
 	public $contentHtmlOptions = ['class' => 'form-panel'];
 	public $fieldHtmlOptions = ['class' => 'form-group'];
 	public $labelHtmlOptions = ['class' => 'control-label', ];
@@ -20,6 +19,7 @@ class Details extends Widget implements ListWidgetInterface {
 
 	public $gridClass = 'infinite\web\grid\Grid';
 	public $gridCellClass = 'infinite\web\grid\Cell';
+	protected $_title = 'Details';
 
 	public function getHeaderMenu()
 	{

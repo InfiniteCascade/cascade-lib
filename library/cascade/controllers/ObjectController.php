@@ -9,6 +9,7 @@ use cascade\models\Relation;
 use cascade\models\ObjectFamiliarity;
 use cascade\models\DeleteForm;
 use cascade\components\types\Module as TypeModule;
+use cascade\components\types\Relationship;
 use cascade\components\web\ObjectViewEvent;
 
 use infinite\helpers\ArrayHelper;
@@ -162,6 +163,29 @@ class ObjectController extends Controller
 			throw new HttpException(404, "Unknown object.");
 		}
 
+		if (isset($this->params['object']) && (!($this->params['typeItem'] = $this->params['object']->objectTypeItem) || !($this->params['type'] = $this->params['typeItem']->object))) {
+			throw new HttpException(404, "Unknown object type.");
+		}
+
+		if (!$this->params['type']->hasDashboard || $this->params['type']->uniparental) {
+			$required[] = 'relation';
+		}
+
+		if (isset($_GET['related_object_id']) && isset($_GET['object_relation']) && isset($_GET['relationship_id'])) {
+			$this->params['relationship'] = Relationship::getById($_GET['relationship_id']);
+			if (!$this->params['relationship']) {
+				throw new HttpException(404, "Unknown relationship type.");
+			}
+			if ($_GET['object_relation'] === 'child') {
+				$this->params['relation'] = $this->params['relationship']->getModel($_GET['related_object_id'], $this->params['object']->primaryKey);
+			} else {
+				$this->params['relation'] = $this->params['relationship']->getModel($this->params['object']->primaryKey, $_GET['related_object_id']);
+			}
+			if (empty($this->params['relation'])) {
+				throw new HttpException(404, "Unknown relationship.");
+			}
+		}
+
 		if (!empty($_GET['link']) && !($this->params['relation'] = Relation::get($_GET['relation_id']))) {
 			throw new HttpException(404, "Unknown relationship.");
 		}
@@ -202,10 +226,6 @@ class ObjectController extends Controller
 			if (isset($this->params['relatedObject']) && (!($this->params['relatedTypeItem'] = $this->params['relatedObject']->objectTypeItem) || !($this->params['relatedType'] = $this->params['relatedTypeItem']->object))) {
 				throw new HttpException(404, "Unknown object type.");
 			}
-		}
-
-		if (isset($this->params['object']) && (!($this->params['typeItem'] = $this->params['object']->objectTypeItem) || !($this->params['type'] = $this->params['typeItem']->object))) {
-			throw new HttpException(404, "Unknown object type.");
 		}
 
 		if (!isset($this->params['handler']) && isset($this->params['object'])) {
@@ -335,7 +355,12 @@ class ObjectController extends Controller
 			Yii::$app->response->view = 'create';
 			Yii::$app->response->task = 'dialog';
 			Yii::$app->response->taskOptions = ['title' => 'Update '. $type->title->getSingular(true)];
-			$models = $type->getModels($object, [$relatedObject->tabularId => $relatedObject, 'relations' => [$relatedObject->tabularId => $relation]]);
+			$base = [];
+			if (isset($relatedObject)) {
+				$base[$relatedObject->tabularId] = $relatedObject;
+				$base['relations'] = [$relatedObject->tabularId => $relation];
+			}
+			$models = $type->getModels($object, $base);
 
 			if (!empty($_POST)) {
 				list($error, $notice, $models, $niceModels) = $handler->handleSaveAll(null, ['allowEmpty' => true]);

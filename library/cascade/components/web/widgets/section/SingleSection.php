@@ -7,12 +7,12 @@ use infinite\helpers\Html;
 
 class SingleSection extends Section {
 	public $section;
+	protected $_singleWidget;
 
 	public function getCell()
 	{
-		$singleWidget = $this->singleWidget;
-		if ($singleWidget) {
-			$widgetCell = Yii::$app->collectors['widgets']->build($this, $singleWidget->object);
+		$widgetCell = $this->singleWidget;
+		if ($widgetCell) {
 			$widgetCell->prepend(Html::tag('div', '', ['id' => 'section-'.$this->systemId, 'class' => 'scroll-mark']));
 			return $widgetCell;
 		}
@@ -20,11 +20,24 @@ class SingleSection extends Section {
 	}
 
 	public function getSingleWidget() {
-		$widgets = $this->collectorItem->getAll();
-		if (!empty($widgets)) {
-			return array_shift($widgets);
+		if (is_null($this->_singleWidget)) {
+			$this->_singleWidget = false;
+			$widgets = $this->collectorItem->getAll();
+			if (!empty($widgets)) {
+				$widget = array_shift($widgets);
+				$this->_singleWidget = Yii::$app->collectors['widgets']->build($this, $widget->object);
+			}
 		}
-		return false;
+		return $this->_singleWidget;
+	}
+
+	public function getTitle()
+	{
+		$singleWidget = $this->singleWidget;
+		if ($singleWidget && isset($singleWidget->content->panelTitle)) {
+			return $singleWidget->content->panelTitle;
+		}
+		return parent::getTitle();
 	}
 }
 ?>

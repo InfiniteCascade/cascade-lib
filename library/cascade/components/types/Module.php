@@ -253,12 +253,12 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		if (($parent && $parent->systemId === $this->systemId) || ($child && $child->systemId === $this->systemId)) {
 			$sectionId = $settings['relationship']->systemId.'-'.$this->systemId;
 			$section = Yii::$app->collectors['sections']->getOne($sectionId);
-			$section->title = '%%type.'. $this->systemId .'.title.upperPlural%%';
+			$section->title = '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%';
 			$section->icon = $this->icon;
 			$section->systemId = $sectionId;
 			if (empty($section->object)) {
 				$sectionConfig = ['class' => $this->sectionSingleWidgetClass, 'section' => $section];
-				$section->priority = $this->priority;
+				$section->priority = $this->priority + 10000;
 				$section->object = Yii::createObject($sectionConfig);
 			}
 			return $section;
@@ -278,6 +278,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		$section = Yii::$app->collectors['sections']->getOne($sectionId);
 		if (empty($section->object)) {
 			$section->title = $newSectionTitle;
+			$section->priority = $this->priority;
 			$section->icon = $this->icon;
 			$sectionConfig = ['class' => $sectionClass, 'section' => $section];
 			$section->object = Yii::createObject($sectionConfig);

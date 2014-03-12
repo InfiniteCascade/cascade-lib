@@ -8,7 +8,17 @@ use infinite\base\collector\CollectedObjectTrait;
 class Item extends \infinite\base\collector\Item implements SectionInterface, CollectedObjectInterface {
 	use SectionTrait;
 	use CollectedObjectTrait;
-	public $priority = 0;
+	protected $_priority = 0;
+
+	public function getPriority()
+	{
+		return $this->_priority;
+	}
+
+	public function setPriority($priority)
+	{
+		$this->_priority = $priority;
+	}
 }
 
 

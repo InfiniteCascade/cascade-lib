@@ -22,20 +22,22 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     public function afterUpdate()
     {
         if ($this->user) {
-            ObjectFamiliarity::modified($this->owner, $this->user);
+            $familiarityClass = $this->familiarityClass;
+            $familiarityClass::modified($this->owner, $this->getUser(false));
         }
     }
 
     public function afterInsert()
     {
         if ($this->user) {
-            ObjectFamiliarity::created($this->owner, $this->user);
+            $familiarityClass = $this->familiarityClass;
+            $familiarityClass::created($this->owner, $this->user);
         }
     }
 
     public function getUser($owner = true)
     {
-        if ($owner && $this->owner->hasBehavior('Ownable') && isset($this->owner->objectOwner)) {
+        if ($owner && !empty($this->owner->getBehavior('Ownable')) && isset($this->owner->objectOwner)) {
             return $this->owner->objectOwner;
         } elseif (isset(Yii::$app->user->identity->primaryKey)) {
             return Yii::$app->user->identity;

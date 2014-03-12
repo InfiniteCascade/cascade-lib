@@ -120,7 +120,7 @@ class Relationship extends \infinite\base\Object
 	 */
 	static public function getOne(Item $parent, Item $child, $options = [])
 	{
-		$key = md5($parent->systemId ."-". $child->systemId);
+		$key = md5($parent->systemId .".". $child->systemId);
 		if (isset(self::$_relationships[$key])) {
 			self::$_relationships[$key]->mergeOptions($options);
 		} else {
@@ -128,10 +128,19 @@ class Relationship extends \infinite\base\Object
 		}
 		return self::$_relationships[$key];
 	}
+
+	static public function getById($relationshipId)
+	{
+		$key = md5($relationshipId);
+		if (isset(self::$_relationships[$key])) {
+			return self::$_relationships[$key];
+		}
+		return false;
+	}
 	
 	static public function has(Item $parent, Item $child)
 	{
-		$key = md5($parent->systemId ."-". $child->systemId);
+		$key = md5($parent->systemId .".". $child->systemId);
 		return isset(self::$_relationships[$key]);
 	}
 

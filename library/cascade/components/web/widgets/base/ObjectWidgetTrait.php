@@ -230,6 +230,8 @@ trait ObjectWidgetTrait
 		$queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
 		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
 		// $relationModel = $this->getRelationModel($model);
+		$baseUrl['related_object_id'] = Yii::$app->request->object->primaryKey;
+		$baseUrl['relationship_id'] = $relationship->systemId;
 
 		if ($queryRole === 'children') {
 			$baseUrl['object_relation'] = 'child';
@@ -285,9 +287,10 @@ trait ObjectWidgetTrait
 		$vars = [];
 		if (
 			isset($this->settings['relationship']) 
-			&& $this->settings['queryRole']
+			&& isset($this->settings['queryRole'])
 			&& $this->settings['relationship']->child === $this->settings['relationship']->parent
 			) {
+
 			if ($this->settings['queryRole'] === 'parents') {
 				$vars['relationship'] = 'Parent';
 			} elseif ($this->settings['queryRole'] === 'children') {

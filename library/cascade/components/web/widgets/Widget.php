@@ -23,7 +23,6 @@ use infinite\web\RenderTrait;
 abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterface, \infinite\base\collector\CollectedObjectInterface {
 	use CollectedObjectTrait;
 
-	public $title = false;
 	public $icon = false;
 	public $section = false;
 	public $defaultDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\PanelDecorator';
@@ -35,6 +34,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 	public $htmlOptions = ['class' => 'ic-widget'];
 
 	protected $_widgetId;
+	protected $_title  = false;
 
 
 	public function stateKeyName($key) {
@@ -52,6 +52,16 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 	public function getHeaderMenu()
 	{
 		return [];
+	}
+
+	public function getTitle()
+	{
+		return $this->_title;
+	}
+
+	public function setTitle($title)
+	{
+		$this->_title = $title;
 	}
 
 	public function generate() {

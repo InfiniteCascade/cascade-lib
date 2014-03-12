@@ -109,25 +109,33 @@ footer {
   background-color: rgba(255, 255, 255, .9);
 }
 
-.ic-object-menu li:last-child {
-  border-right: none;
-}
 
 .ic-object-menu.columns-1 li {
   width: 100%;
 }
 
-.ic-object-menu.columns-2 li {
+.ic-object-menu.columns-2 li,
+.ic-object-menu.columns-4 li {
   width: 50%;
 }
 
-.ic-object-menu.columns-3 li {
+.ic-object-menu.columns-3 li,
+.ic-object-menu.columns-5 li {
   width: 33%;
 }
-
-.ic-object-menu.columns-4 li {
-  width: 25%;
+.ic-object-menu.columns-4 li.item-1,
+.ic-object-menu.columns-4 li.item-2 {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
+
+.ic-object-menu.columns-1 li.item-1,
+.ic-object-menu.columns-2 li.item-2,
+.ic-object-menu.columns-3 li.item-3,
+.ic-object-menu.columns-4 li.item-2,
+.ic-object-menu.columns-4 li.item-4 {
+  border-right: none;
+}
+
 .ic-masthead .ic-object-header {
   font-size: 1.2em;
   font-weight: 600;

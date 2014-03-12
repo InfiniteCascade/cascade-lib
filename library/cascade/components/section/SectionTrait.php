@@ -11,7 +11,7 @@ use infinite\web\RenderTrait;
 
 trait SectionTrait {
 	use CollectorTrait;
-	use RenderTrait;
+	//use RenderTrait;
 
 	public $sectionWidgetClass = 'cascade\\components\\web\\widgets\\section\\Section';
 	public $sectionSingleWidgetClass = 'cascade\\components\\web\\widgets\\section\\SingleSection';
@@ -33,31 +33,22 @@ trait SectionTrait {
 		return Inflector::slug($name);
 	}
 
-	public function getWidget() {
-		if (is_null($this->_widget)) {
-			$widgets = $this->getAll();
-			if (count($widgets) === 1) {
-				$widgetItem = array_shift($widgets);
-				$this->_widget = Yii::createObject(['class' => $this->sectionSingleWidgetClass, 'section' => $this, 'singleWidget' => $widgetItem]);
-			} else {
-				$this->_widget = Yii::createObject(['class' => $this->sectionWidgetClass, 'section' => $this]);
-			}
-		}
-		return $this->_widget;
-	}
-
-
-	public function generate() {
-		return $this->widget->generate();
-	}
-
 	public function setTitle($title) {
 		$this->_title = $title;
 	}
 
+	/**
+	 *
+	 *
+	 * @return unknown
+	 */
+	public function getTitle() {
+		return $this->_title;
+	}
+
 	public function getSectionTitle() {
 		if (!isset($this->_parsedTitle)) {
-			$this->_parsedTitle = StringHelper::parseText($this->_title);
+			$this->_parsedTitle = StringHelper::parseText($this->title);
 		}
 		
 		return $this->_parsedTitle;
@@ -74,14 +65,5 @@ trait SectionTrait {
 		return [];
 	}
 
-	/**
-	 *
-	 *
-	 * @return unknown
-	 */
-	public function getTitle() {
-		if (is_object($this->sectionTitle)) { return $this->sectionTitle; }
-		return new Noun($this->sectionTitle);
-	}
 }
 ?>

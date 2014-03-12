@@ -4,7 +4,7 @@ namespace cascade\modules\WidgetWatching\widgets;
 
 class Content extends \cascade\components\web\widgets\Widget
 {
-	public $title = 'Watching';
+	protected $_title = 'Watching';
 	public $icon = 'fa-eye';
 
 	public function getGridCellSettings() {

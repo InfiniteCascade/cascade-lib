@@ -53,22 +53,31 @@ class Header extends Widget {
 		}
 		if ($object->can('update')) {
 			$menu[] = [
-				'label' => Html::tag('span', '', ['class' => 'fa fa-wrench']) .' Update', 
-				'url' => $object->getUrl('update'), 
-				'options' => ['title' => 'Update', 'data-handler' => 'background']
-			];
-		}
-		if ($object->can('update')) {
-			$menu[] = [
 				'label' => Html::tag('span', '', ['class' => 'fa fa-shield']) .' Access', 
 				'url' => $object->getUrl('privacy'), 
 				'options' => ['title' => 'Manage access privileges', 'data-handler' => 'background']
 			];
 		}
+		if ($object->can('update')) {
+			$menu[] = [
+				'label' => Html::tag('span', '', ['class' => 'fa fa-wrench']) .' Update', 
+				'url' => $object->getUrl('update'), 
+				'options' => ['title' => 'Update', 'data-handler' => 'background']
+			];
+		}
+		if ($object->can('delete')) {
+			$menu[] = [
+				'label' => Html::tag('span', '', ['class' => 'fa fa-trash-o']) .' Delete', 
+				'url' => $object->getUrl('delete'), 
+				'options' => ['title' => 'Delete', 'data-handler' => 'background']
+			];
+		}
 		if (!empty($menu)) {
 			$content[] = Html::beginTag('div', ['class' => 'ic-object-menu columns-'. count($menu)]);
 			$content[] = Html::beginTag('ul', ['class' => 'clearfix']);
+			$menuCount = 0;
 			foreach ($menu as $item) {
+				$menuCount++;
 				if (!isset($item['options'])) { $item['options'] = []; }
 				$companionContent = '';
 				if (isset($item['companion'])) {
@@ -77,7 +86,7 @@ class Header extends Widget {
 					Html::addCssClass($companion['options'], 'hidden');
 					$companionContent = Html::a($companion['label'], $companion['url'], $companion['options']);
 				}
-				$content[] = Html::tag('li', $companionContent . Html::a($item['label'], $item['url'], $item['options']));
+				$content[] = Html::tag('li', $companionContent . Html::a($item['label'], $item['url'], $item['options']), ['class' => 'item-'.$menuCount]);
 			}
 			$content[] = Html::endTag('ul');
 			$content[] = Html::endTag('div');

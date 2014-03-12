@@ -26,7 +26,7 @@ $js = [];
 $sectionsMenu = [];
 foreach ($sections as $section) {
 	if ($section->priority === false) { continue; }
-	$sectionsMenu[] = ['label' => $section->sectionTitle, 'url' => '#section-'.$section->systemId];
+	$sectionsMenu[] = ['label' => $section->object->title, 'url' => '#section-'.$section->systemId];
 }
 $this->tinyMenu = $sectionsMenu;
 echo Html::beginTag('div', ['class' => 'dashboard']);
