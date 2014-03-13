@@ -21,20 +21,7 @@ class Header extends Widget {
 		$content[] = Html::beginTag('div', ['class' => 'ic-object-header']);
 		$content[] = $object->descriptor;
 
-		$accessManageUrl = $object->getUrl('sharing');
 		$objectVisibility = Yii::$app->gk->getObjectVisibility($object);
-		$visibilityLinkOptions = ['class' => 'label', 'title' => 'View sharing details', 'data-handler' => 'background'];
-		if ($objectVisibility === 'public') {
-			Html::addCssClass($visibilityLinkOptions, 'label-success');
-			$content[] = Html::a('Public', $accessManageUrl, $visibilityLinkOptions);
-		} elseif ($objectVisibility === 'shared') {
-			Html::addCssClass($visibilityLinkOptions, 'label-info');
-			$content[] = Html::a('Shared', $accessManageUrl, $visibilityLinkOptions);
-		} else {
-			Html::addCssClass($visibilityLinkOptions, 'label-default');
-			$content[] = Html::a('Private', $accessManageUrl, $visibilityLinkOptions);
-		}
-
 		$content[] = Html::endTag('div');
 
 		$menu = [];
@@ -59,6 +46,7 @@ class Header extends Widget {
 				'class' => 'watch-link',
 			]
 		];
+		$accessManageUrl = $object->getUrl('access');
 		$startWatchingItem['companion'] = $stopWatchingItem;
 		$stopWatchingItem['companion'] = $startWatchingItem;
 		if (empty($familiarty->watching)) {
@@ -66,13 +54,29 @@ class Header extends Widget {
 		} else {
 			$menu[] = $stopWatchingItem;
 		}
-		if ($object->can('update')) {
-			$menu[] = [
-				'label' => Html::tag('span', '', ['class' => 'fa fa-shield']) .' Access', 
-				'url' => $accessManageUrl, 
-				'options' => ['title' => 'Manage access privileges', 'data-handler' => 'background']
-			];
+		if ($objectVisibility === 'public') {
+			$accessIcon = 'fa fa-globe';
+			$accessTitle = $object->objectType->title->upperSingular . ' is public';
+			$accessLabel = 'Public';
+		} elseif ($objectVisibility === 'shared') {
+			$accessIcon = 'fa fa-rss';
+			$accessTitle = $object->objectType->title->upperSingular . ' is shared';
+			$accessLabel = 'Shared';
+		} else {
+			$accessIcon = 'fa fa-user';
+			$accessTitle = $object->objectType->title->upperSingular . ' is private';
+			$accessLabel = 'Private';
 		}
+
+		if ($object->can('manageAccess')) {
+			
+		}
+		
+		$menu[] = [
+			'label' => Html::tag('span', '', ['class' => $accessIcon]) .' '. $accessLabel, 
+			'url' => $accessManageUrl, 
+			'options' => ['title' => $accessTitle, 'data-handler' => 'background']
+		];
 		if ($object->can('update')) {
 			$menu[] = [
 				'label' => Html::tag('span', '', ['class' => 'fa fa-wrench']) .' Update', 
