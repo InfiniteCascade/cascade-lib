@@ -29,8 +29,6 @@ trait ActiveRecordTrait {
 	public $artificialFieldClass = 'cascade\\components\\db\\fields\\Artificial';
 	public $modelFieldClass = 'cascade\\components\\db\\fields\\Model';
 	public $relationFieldClass = 'cascade\\components\\db\\fields\\Relation';
-	//public $relationClass = 'cascade\\models\\Relation';
-	public $registryClass = 'cascade\\models\\Registry';
 	public $taxonomyFieldClass = 'cascade\\components\\db\\fields\\Taxonomy';
 	public $formSegmentClass = 'cascade\\components\\web\\form\\Segment';
 	public $columnSchemaClass = 'yii\\db\\ColumnSchema';
@@ -47,12 +45,9 @@ trait ActiveRecordTrait {
 		return [
 			'Registry' => [
 				'class' => 'infinite\\db\\behaviors\\Registry',
-				'registryClass' => 'cascade\\models\\Registry',
 			],
 			'Relatable' => [
 				'class' => 'infinite\\db\\behaviors\\Relatable',
-				'relationClass' => 'cascade\\models\\Relation',
-				'registryClass' => 'cascade\\models\\Registry',
 			],
 			'Taxonomy' => [
 				'class' => 'cascade\\components\\db\\behaviors\\Taxonomy',
@@ -446,7 +441,7 @@ trait ActiveRecordTrait {
 			$objectTypeItem = $this->objectTypeItem;
 			if ($objectTypeItem) {
 				$relationRelationship = null;
-				$relationClass = $this->relationClass;
+				$relationClass = Yii::$app->classes['Relation'];
 				$taxonomies = $objectTypeItem->taxonomies;
 				foreach ($objectTypeItem->parents as $relationship) {
 					$fieldName = 'parent:'. $relationship->parent->systemId;
@@ -571,7 +566,7 @@ trait ActiveRecordTrait {
 	}
 
 	public function getObjectTypeItem() {
-		if (Yii::$app->collectors['types']->has(get_class($this), 'object.primaryModel')) {
+		if (isset(Yii::$app->collectors['types']) && Yii::$app->collectors['types']->has(get_class($this), 'object.primaryModel')) {
 			return Yii::$app->collectors['types']->getOne(get_class($this), 'object.primaryModel');
 		}
 		return false;

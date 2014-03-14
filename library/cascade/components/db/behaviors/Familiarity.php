@@ -6,7 +6,6 @@ use infinite\helpers\ArrayHelper;
 
 class Familiarity extends \infinite\db\behaviors\ActiveRecord
 {
-	public $familiarityClass = 'cascade\\models\\ObjectFamiliarity';
     public $objectField = 'object_id';
     public $userField = 'user_id';
     protected $_familiarity = [];
@@ -22,7 +21,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     public function afterUpdate()
     {
         if ($this->user) {
-            $familiarityClass = $this->familiarityClass;
+            $familiarityClass = Yii::$app->classes['ObjectFamiliarity'];
             $familiarityClass::modified($this->owner, $this->getUser(false));
         }
     }
@@ -30,7 +29,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     public function afterInsert()
     {
         if ($this->user) {
-            $familiarityClass = $this->familiarityClass;
+            $familiarityClass = Yii::$app->classes['ObjectFamiliarity'];
             $familiarityClass::created($this->owner, $this->user);
         }
     }
@@ -70,7 +69,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
         $familarityKey = md5($user);
         if (!isset($this->_familiarity[$familarityKey])) {
             $this->_familiarity[$familarityKey] = false;
-            $familiarityClass = $this->familiarityClass;
+            $familiarityClass = Yii::$app->classes['ObjectFamiliarity'];
             if (!empty($user)) {
                 $attributes = [];
                 $attributes[$this->objectField] = $this->owner->primaryKey;

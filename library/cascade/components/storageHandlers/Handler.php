@@ -9,7 +9,6 @@ use cascade\models\StorageEngine;
 abstract class Handler extends \infinite\base\Component implements \infinite\base\collector\CollectedObjectInterface {
 	use CollectedObjectTrait;
 
-	public $storageClass = 'cascade\\models\\Storage';
 	public $error;
 	
 	abstract public function generateInternal($item);
@@ -36,7 +35,7 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 
 	protected function prepareStorage(StorageEngine $engine)
 	{
-		$storageClass = $this->storageClass;
+		$storageClass = Yii::$app->classes['Storage'];
 		return $storageClass::startBlank($engine);
 	}
 

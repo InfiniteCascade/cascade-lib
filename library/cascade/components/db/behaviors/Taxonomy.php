@@ -5,9 +5,7 @@ use infinite\helpers\ArrayHelper;
 
 class Taxonomy extends \infinite\db\behaviors\ActiveRecord
 {
-	public $taxonomyClass = 'cascade\\models\\Taxonomy';
-	public $taxonomyTypeClass = 'cascade\\models\\TaxonomyType';
-	public $viaModelClass = 'cascade\\models\\ObjectTaxonomy';
+    public $viaModelClass = 'ObjectTaxonomy';
 	public $relationKey = 'object_id';
 	public $taxonomyKey = 'taxonomy_id';
 
@@ -25,7 +23,7 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
     public function afterSave($event)
     {
     	if (!is_null($this->_taxonomy_id)) {
-    		$pivotTableClass = $this->viaModelClass;
+    		$pivotTableClass = Yii::$app->classes[$this->viaModelClass];
     		$current = $this->_currentTaxonomies();
     		foreach ($this->_taxonomy_id as $taxonomyId) {
     			if (in_array($taxonomyId, $current)) {
@@ -66,7 +64,7 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
     public function _currentTaxonomies()
     {
     	if (is_null($this->_current_taxonomy_id)) {
-    		$taxonomyClass = $this->viaModelClass;
+    		$taxonomyClass = Yii::$app->classes[$this->viaModelClass];
     		$taxonomies = $taxonomyClass::find()->where([$this->relationKey => $this->owner->primaryKey])->all();
     		$this->_current_taxonomy_id = ArrayHelper::map($taxonomies, 'taxonomy_id', 'taxonomy_id');
     	}

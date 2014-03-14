@@ -9,9 +9,6 @@ use infinite\base\FileInterface;
 use infinite\base\exceptions\Exception;
 
 class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
-	public $storageEngineClass = 'cascade\\models\\StorageEngine';
-    public $storageClass = 'cascade\\models\\Storage';
-    public $registryClass = 'cascade\\models\\Registry';
 	public $storageAttribute = 'storage_id';
 
 	protected $_storageEngine;
@@ -98,7 +95,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
 
     public function getStorageObject()
     {
-        $registryClass = $this->registryClass;
+        $registryClass = Yii::$app->classes['Registry'];
         return $registryClass::getObject($this->owner->{$this->storageAttribute});
     }
 
@@ -117,7 +114,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
 	public function getStorageEngine()
 	{
         if (is_null($this->_storageEngine)) {
-            $storageEngineClass = $this->storageEngineClass;
+            $storageEngineClass = Yii::$app->classes['StorageEngine'];
             $this->storageEngine = $storageEngineClass::find()->andWhere(['handler' => Yii::$app->params['defaultStorageEngine']])->one();
         }
 		return $this->_storageEngine;
@@ -128,7 +125,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
         if (is_object($value)) {
             $this->_storageEngine = $value;
         } else {
-    		$storageEngineClass = $this->storageEngineClass;
+    		$storageEngineClass = Yii::$app->classes['StorageEngine'];
     		$engineTest = $storageEngineClass::find()->pk($value)->one();
     		if ($engineTest) {
     			return $this->_storageEngine = $engineTest;

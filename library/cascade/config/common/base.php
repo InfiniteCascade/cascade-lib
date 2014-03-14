@@ -12,7 +12,16 @@ return [
 	
 	// application components
 	'components' => [
+		'classes' => [
+			'class' => 'cascade\\components\\base\\ClassManager',
+		],
 		'db' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . "database.php"),
+		'gk' => [
+			'class' => 'cascade\\components\\security\\Gatekeeper',
+			'authority' => [
+				'type' => 'Individual',
+			]
+		],
 		'redis' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'redis.php'),
 		'collectors' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'collectors.php'),
 		'cache' => ['class' => 'yii\redis\Cache'],
@@ -27,22 +36,6 @@ return [
 			'class' => 'infinite\web\Response'
 		],
 		
-		'gk' => [
-			'class' => 'cascade\\components\\security\\Gatekeeper',
-			
-			'acaClass' => 'cascade\\models\\Aca',
-			'aclClass' => 'cascade\\models\\Acl',
-			'aclRoleClass' => 'cascade\\models\\AclRole',
-			'groupClass' => 'cascade\\models\\Group',
-			'registryClass' => 'cascade\\models\\Registry',
-			'userClass' => 'cascade\\models\\User',
-			
-			'authority' => [
-				'type' => 'Individual',
-				
-			]
-
-		],
 		'log' => [
 			'class' => 'yii\log\Logger',
 			'traceLevel' => YII_DEBUG ? 7 : 0,

@@ -9,11 +9,9 @@ class Collector extends \infinite\base\collector\Module
 {
 	const EVENT_AFTER_TAXONOMY_REGISTRY = 'afterTaxonomyRegistry';
 
-	public $taxonomyClass = 'cascade\models\Taxonomy';
-	public $taxonomyTypeClass = 'cascade\models\TaxonomyType';
 
 	public function getCollectorItemClass() {
-		return 'cascade\components\taxonomy\Item';
+		return 'cascade\\components\\taxonomy\\Item';
 	}
 
 	public function getModulePrefix() {
@@ -44,7 +42,7 @@ class Collector extends \infinite\base\collector\Module
 	public function prepareComponent($component) {
 		if (!Yii::$app->isDbAvailable) { return $component; }
 		
-		$taxonomyTypeClass = $this->taxonomyTypeClass;
+		$taxonomyTypeClass = Yii::$app->classes['TaxonomyType'];
 		$component['object'] = $taxonomyTypeClass::findOne(['system_id' => $component['systemId']]);
 		if (empty($component['object'])) {
 			$component['object'] = new $taxonomyTypeClass;
@@ -74,7 +72,7 @@ class Collector extends \infinite\base\collector\Module
 	}
 
 	public function initializeTaxonomies($model, $taxonomies) {
-		$taxonomyClass = $this->taxonomyClass;
+		$taxonomyClass = Yii::$app->classes['Taxonomy'];
 		foreach ($taxonomies as $systemId => $name) {
 			$taxonomy = $taxonomyClass::findOne(['taxonomy_type_id' => $model->id, 'system_id' => $systemId]);
 			if (empty($taxonomy)) {

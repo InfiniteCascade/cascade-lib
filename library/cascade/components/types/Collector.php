@@ -8,12 +8,10 @@ use infinite\helpers\ArrayHelper;
 
 class Collector extends \infinite\base\collector\Module
 {
-	public $objectTypeRegistryClass = 'cascade\models\ObjectType';
-
 	protected $_tableRegistry;
 
 	public function getCollectorItemClass() {
-		return 'cascade\components\types\Item';
+		return 'cascade\\components\\types\\Item';
 	}
 
 
@@ -68,7 +66,7 @@ class Collector extends \infinite\base\collector\Module
 		$systemId = $module->systemId;
 
 		if (!isset($this->tableRegistry[$systemId])) {
-			$objectTypeClass = $this->objectTypeRegistryClass;
+			$objectTypeClass = Yii::$app->classes['ObjectTypeRegistry'];
 			$this->_tableRegistry[$systemId] = new $objectTypeClass;
 			$this->_tableRegistry[$systemId]->name = $systemId;
 			$this->_tableRegistry[$systemId]->system_version = $module->version;
@@ -81,25 +79,12 @@ class Collector extends \infinite\base\collector\Module
 
 	public function getTableRegistry() {
 		if (is_null($this->_tableRegistry)) {
-			Yii::beginProfile(__CLASS__.'::'.__FUNCTION__);
-			$objectTypeClass = $this->objectTypeRegistryClass;
+			$objectTypeClass = Yii::$app->classes['ObjectTypeRegistry'];
 			$this->_tableRegistry = [];
-			
-			Yii::beginProfile(__CLASS__.'::'.__FUNCTION__ .'::tableExists');
 			if ($objectTypeClass::tableExists()) {
-				Yii::endProfile(__CLASS__.'::'.__FUNCTION__ .'::tableExists');
-
-				Yii::beginProfile(__CLASS__.'::'.__FUNCTION__ .'::query');
 				$om = $objectTypeClass::find()->all();
-				Yii::endProfile(__CLASS__.'::'.__FUNCTION__ .'::query');
-
-				Yii::beginProfile(__CLASS__.'::'.__FUNCTION__ .'::index');
 				$this->_tableRegistry = ArrayHelper::index($om, 'name');
-				Yii::endProfile(__CLASS__.'::'.__FUNCTION__ .'::index');
-			} else {
-				Yii::endProfile(__CLASS__.'::'.__FUNCTION__ .'::tableExists');
 			}
-			Yii::endProfile(__CLASS__.'::'.__FUNCTION__);
 		}
 		return $this->_tableRegistry;
 	}

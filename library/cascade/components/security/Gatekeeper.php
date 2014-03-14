@@ -38,7 +38,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 
 	public function getObjectVisibility($object)
 	{
-		$groupClass = $this->groupClass;
+		$groupClass = Yii::$app->classes['Group'];
 		$groupPrefix = $groupClass::modelPrefix();
 		$objectAccess = $this->getObjectAccess($object);
 		$publicGroup = $this->publicGroup;
@@ -80,7 +80,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 
 	public function getObjectAros($object)
 	{
-		$aclClass = $this->aclClass;
+		$aclClass = Yii::$app->classes['Acl'];
 		$typeModel = ActiveRecord::modelAlias(get_class($object));
 		$where = [];
 		$where = ['or', ['controlled_object_id' => $object->primaryKey], ['controlled_object_id' => null, 'object_model' => $typeModel]];
@@ -91,7 +91,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 
 	protected function getTopAccess($baseAccess = [])
 	{
-		$aclClass = $this->aclClass;
+		$aclClass = Yii::$app->classes['Acl'];
 		$base = $aclClass::find()->where(['accessing_object_id' => null, 'controlled_object_id' => null])->asArray()->all();
 		return $this->fillActions($base, $baseAccess);
 	}
@@ -99,7 +99,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 	protected function getModelAccess($typeModel, $baseAccess = [])
 	{
 		$typeModel = ActiveRecord::modelAlias($typeModel);
-		$aclClass = $this->aclClass;
+		$aclClass = Yii::$app->classes['Acl'];
 		$base = $aclClass::find()->where(['accessing_object_id' => null, 'controlled_object_id' => null, 'object_model' => $typeModel])->asArray()->all();
 		return $this->fillActions($base, $baseAccess);
 	}

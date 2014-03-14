@@ -16,8 +16,6 @@ class Relationship extends \infinite\base\Object
 	const HAS_MANY = 0x01;
 	const HAS_ONE = 0x02;
 
-	public static $relationClass = 'cascade\\models\\Relation';
-
 	protected $_parent;
 	protected $_child;
 	static $_cache = [];
@@ -39,7 +37,7 @@ class Relationship extends \infinite\base\Object
 		$key = json_encode([__FUNCTION__, $this->systemId, $parentObject->primaryKey]);
 		if (!isset(self::$_cache[$key])) {
 			self::$_cache[$key] = true;
-			$relationClass = self::$relationClass;
+			$relationClass = Yii::$app->classes['Relation'];
 			$childClass = $this->child->primaryModel;
 			$relation = $relationClass::find();
 			$alias = $relationClass::tableName();
@@ -63,7 +61,7 @@ class Relationship extends \infinite\base\Object
 		$key = json_encode([__FUNCTION__, $this->systemId, $childObject->primaryKey]);
 		if (!isset(self::$_cache[$key])) {
 			self::$_cache[$key] = false;
-			$relationClass = self::$relationClass;
+			$relationClass = Yii::$app->classes['Relation'];
 			$parentClass = $this->parent->primaryModel;
 			$relation = $relationClass::find();
 			$alias = $relationClass::tableName();
@@ -207,7 +205,7 @@ class Relationship extends \infinite\base\Object
 	{
 		$key = json_encode([__FUNCTION__, $this->systemId, $parentObjectId]);
 		if (!isset(self::$_cache[$key])) {
-			$relationClass = self::$relationClass;
+			$relationClass = Yii::$app->classes['Relation'];
 			$all = $relationClass::find();
 			$all->where(
 				['or', 'parent_object_id=:parentObjectId', 'child_object_id=:childObjectId']

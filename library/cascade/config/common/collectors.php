@@ -6,7 +6,7 @@ return [
 	'collectors' => [
 		'roles' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'roles.php'),
 		'types' => [
-			'class' => 'cascade\\components\\types\Collector',
+			'class' => 'cascade\\components\\types\\Collector',
 		],
 		'taxonomies' => [
 			'class' => 'cascade\\components\\taxonomy\\Collector',
