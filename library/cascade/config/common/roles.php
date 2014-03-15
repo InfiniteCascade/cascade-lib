@@ -4,7 +4,12 @@ return [
 	'initialItems' => [
 		'owner' => [
 			'name' => 'Owner',
-			'systemId' => 'owner'
+			'systemId' => 'owner',
+			'exclusive' => true
+		],
+		'manager' => [
+			'name' => 'Manager',
+			'systemId' => 'manager'
 		],
 		'contributor' => [
 			'name' => 'Contributor',

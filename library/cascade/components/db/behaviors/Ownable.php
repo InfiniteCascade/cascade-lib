@@ -12,13 +12,5 @@ class Ownable extends \infinite\db\behaviors\Ownable
     	}
     	return false;
     }
-
-    public function ownerAccess()
-    {
-    	if (isset($this->owner->objectType)) {
-    		return $this->owner->objectType->ownerAccess($this->owner);
-    	}
-    	return false;
-    }
 }
 ?>

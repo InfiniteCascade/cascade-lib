@@ -1,6 +1,7 @@
 <?php
 namespace cascade\components\db\behaviors;
 
+use Yii;
 use infinite\helpers\ArrayHelper;
 
 class Taxonomy extends \infinite\db\behaviors\ActiveRecord

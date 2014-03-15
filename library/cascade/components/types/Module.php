@@ -138,9 +138,23 @@ abstract class Module extends \cascade\components\base\CollectorModule {
         return false;
 	}
 
-	public function ownerAccess($object)
+	public function determineAccessLevel($object, $role, $aro = null)
     {
-        return ['read', 'update', 'delete'];
+    	switch ($role) {
+    		case 'owner':
+    			return ['read', 'update', 'delete', 'manageAccess', 'transfer'];
+    		break;
+    		case 'manager':
+    			return ['read', 'update', 'delete', 'manageAccess'];
+    		break;
+    		case 'contributor':
+    			return ['read', 'update'];
+    		break;
+    		case 'viewer':
+    			return ['read'];
+    		break;
+    	}
+    	return false;
     }
 
 	public function getDisabledFields()

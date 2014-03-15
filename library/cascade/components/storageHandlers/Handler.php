@@ -1,6 +1,7 @@
 <?php
 namespace cascade\components\storageHandlers;
 
+use Yii;
 use infinite\base\collector\CollectedObjectTrait;
 use infinite\helpers\Html;
 use cascade\models\Storage;

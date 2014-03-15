@@ -22,6 +22,7 @@ class ClassManager extends \infinite\base\ClassManager
 			'ObjectFamiliarity' => 'cascade\\models\\ObjectFamiliarity',
 			'Taxonomy' => 'cascade\\models\\Taxonomy',
 			'TaxonomyType' => 'cascade\\models\\TaxonomyType',
+			'RelationTaxonomy' => 'cascade\\models\\RelationTaxonomy',
 			'ObjectTaxonomy' => 'cascade\\models\\ObjectTaxonomy',
 		];
 	}
