@@ -97,16 +97,24 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 	}
 
 
-	public function getControlledObject($object)
+	public function getControlledObject($object, $modelClass = null)
 	{
-		$objects = false;
-		$parent = parent::getControlledObject($object);
+		$objects = [];
+		if (is_null($modelClass) && isset($object) && is_object($object)) {
+			$modelClass = get_class($object);
+		}
+		$parent = parent::getControlledObject($object, $modelClass);
 		if ($parent) {
-			$objects = [];
 			$objects[] = $parent->primaryKey;
-			if (isset($parent->objectType) && ($objectType = $parent->objectType) && $objectType && isset($objectType->objectTypeModel)) {
+		}
+		if (!empty($modelClass)) {
+			$dummyModel = new $modelClass;
+			if (isset($dummyModel->objectType) && ($objectType = $dummyModel->objectType) && $objectType && isset($objectType->objectTypeModel)) {
 				$objects[] = $objectType->objectTypeModel->primaryKey;
 			}
+		}
+		if (empty($objects)) {
+			return false;
 		}
 		return $objects;
 	}

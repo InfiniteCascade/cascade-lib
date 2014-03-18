@@ -14,6 +14,14 @@ use Yii;
  */
 class ObjectType extends \cascade\components\db\ActiveRecord
 {
+	/**
+	 * @inheritdoc
+	 */
+	public static function isAccessControlled()
+    {
+        return false;
+    }
+
     public function behaviors() {
 		return array_merge(parent::behaviors(), [
 			'Registry' => [

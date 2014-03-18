@@ -48,7 +48,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $sectionSingleWidgetClass = 'cascade\\components\\web\\widgets\\section\\SingleSection';
 	public $fallbackDetailsWidgetClass = 'cascade\\components\\web\\widgets\\base\\Details';
 
-	public $objectTypeModel;
+	protected $_objectTypeModel;
 
 	const EVENT_RELATION_CHANGE = 'onRelationChange';
 	const EVENT_VIEW_OBJECT = 'onViewObject';
@@ -215,6 +215,18 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		return $ownerObject;
 	}
 
+	public function getObjectTypeModel()
+	{
+		if (!isset($this->_objectTypeModel) && isset(Yii::$app->collectors['types']->tableRegistry[$this->systemId])) {
+			$this->_objectTypeModel = Yii::$app->collectors['types']->tableRegistry[$this->systemId];
+		}
+		return $this->_objectTypeModel;
+	}
+
+	public function setObjectTypeModel($model)
+	{
+		$this->_objectTypeModel = $model;
+	}
 	/**
 	 *
 	 *
