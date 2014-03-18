@@ -83,7 +83,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 		$aclClass = Yii::$app->classes['Acl'];
 		$typeModel = ActiveRecord::modelAlias(get_class($object));
 		$where = [];
-		$where = ['or', ['controlled_object_id' => $object->primaryKey], ['controlled_object_id' => null, 'object_model' => $typeModel]];
+		$where = ['controlled_object_id' => $this->getControlledObject($object->primaryKey)];
 		$aros = $aclClass::find()->where($where)->groupBy(['accessing_object_id'])->select(['accessing_object_id'])->asArray()->all();
 		$aros = ArrayHelper::getColumn($aros, 'accessing_object_id');
 		return $aros;
@@ -96,14 +96,19 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 		return $this->fillActions($base, $baseAccess);
 	}
 
-	protected function getModelAccess($typeModel, $baseAccess = [])
+
+	public function getControlledObject($object)
 	{
-		$typeModel = ActiveRecord::modelAlias($typeModel);
-		$aclClass = Yii::$app->classes['Acl'];
-		$base = $aclClass::find()->where(['accessing_object_id' => null, 'controlled_object_id' => null, 'object_model' => $typeModel])->asArray()->all();
-		return $this->fillActions($base, $baseAccess);
+		$objects = false;
+		$parent = parent::getControlledObject($object);
+		if ($parent) {
+			$objects = [];
+			$objects[] = $parent->primaryKey;
+			if (isset($parent->objectType) && ($objectType = $parent->objectType) && $objectType && isset($objectType->objectTypeModel)) {
+				$objects[] = $objectType->objectTypeModel->primaryKey;
+			}
+		}
+		return $objects;
 	}
-
-
 }
 ?>

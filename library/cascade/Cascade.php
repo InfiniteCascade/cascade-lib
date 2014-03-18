@@ -6,9 +6,9 @@ class Cascade extends \yii\base\Extension
     /**
      * @inheritdoc
      */
-    public static function init()
+    public static function bootstrap()
     {
-    	parent::init();
+    	parent::bootstrap();
         \Yii::setAlias('@cascade', __DIR__);
         \Yii::$app->registerMigrationAlias('@cascade/migrations');
     }

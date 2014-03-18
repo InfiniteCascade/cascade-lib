@@ -37,6 +37,7 @@ class User extends \infinite\db\models\User
 		$user = self::findOne([self::tableName() .'.'. 'username' => 'system'], false);
 		if (empty($user)) {
 			$superGroup = Group::find()->disableAccessCheck()->where(['system' => 'super_administrators'])->one();
+			if (!$superGroup) { return false; }
 			$userClass = self::className();
 			$user = new $userClass;
 			$user->scenario = 'creation';

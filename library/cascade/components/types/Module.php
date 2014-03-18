@@ -48,6 +48,8 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public $sectionSingleWidgetClass = 'cascade\\components\\web\\widgets\\section\\SingleSection';
 	public $fallbackDetailsWidgetClass = 'cascade\\components\\web\\widgets\\base\\Details';
 
+	public $objectTypeModel;
+
 	const EVENT_RELATION_CHANGE = 'onRelationChange';
 	const EVENT_VIEW_OBJECT = 'onViewObject';
 
@@ -110,13 +112,13 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	
 	public function setup() {
 		$results = [true];
-		if (!empty($this->primaryModel) AND !empty($this->collectorItem->parents)) {
+		if (!empty($this->primaryModel) && !empty($this->collectorItem->parents)) {
 			$groups = ['top'];
 			foreach ($groups as $groupName) {
 				$group = Group::getBySystemName($groupName, false);
 				if (empty($group)) { continue; }
 				if (!$this->hasDashboard) {
-					$results[] = Yii::$app->gk->parentAccess(null, null, $group, $this->primaryModel);
+					$results[] = $this->objectTypeModel->parentAccess(null, $group);
 				}
 			}
 		}

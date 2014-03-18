@@ -2,6 +2,8 @@
 
 namespace cascade\models;
 
+use Yii;
+
 /**
  * This is the model class for table "object_type".
  *
@@ -12,14 +14,29 @@ namespace cascade\models;
  */
 class ObjectType extends \cascade\components\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function isAccessControlled()
+    public function behaviors() {
+		return array_merge(parent::behaviors(), [
+			'Registry' => [
+				'class' => 'infinite\\db\\behaviors\\Registry'
+			],
+			'Roleable' => [
+				'class' => 'cascade\\components\\db\\behaviors\\Roleable',
+			],
+			'ActiveAccess' => [
+				'class' => 'infinite\\db\\behaviors\\ActiveAccess',
+			],
+		]);
+	}
+
+	public function determineAccessLevel($role, $aro = null)
     {
+    	$objectTypeItem = Yii::$app->collectors['types']->getOne($this->name);
+    	if ($objectTypeItem && ($objectType = $objectTypeItem->object) && $objectType) {
+    		return $objectType->determineAccessLevel(null, $role, $aro);
+    	}
         return false;
     }
-    
+	
 	/**
 	 * @inheritdoc
 	 */
@@ -34,6 +51,7 @@ class ObjectType extends \cascade\components\db\ActiveRecord
 	public function rules()
 	{
 		return [
+			[['id'], 'string', 'max' => 36],
 			[['name'], 'required'],
 			[['system_version'], 'number'],
 			[['created', 'modified'], 'safe'],

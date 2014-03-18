@@ -5,9 +5,15 @@ use infinite\setup\Exception;
 
 class Task_000002_db extends \infinite\setup\Task {
 	protected $_migrator;
+    public $skipComplete = true;
 	
 	public function getTitle() {
 		return 'Database';
+	}
+
+	public function skip()
+	{
+		return parent::skip() && $this->setup->markDbReady();
 	}
 
 	public function test()

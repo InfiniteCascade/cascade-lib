@@ -110,12 +110,14 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         // object_type
         $this->dropExistingTable('object_type');
         $this->createTable('object_type', [
-            'name' => 'string NOT NULL PRIMARY KEY',
+            'id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY',
+            'name' => 'string NOT NULL',
             'system_version' => 'float DEFAULT NULL',
             'created' => 'datetime DEFAULT NULL',
             'modified' => 'datetime DEFAULT NULL'
         ]);
-        // $this->addPrimaryKey('primary0', 'object_type', 'name');
+        $this->createIndex('objectTypeName', 'object_type', 'name', true);
+        $this->addForeignKey('objectTypeRegistry', 'object_type', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
 
         // relation_taxonomy
         $this->dropExistingTable('relation_taxonomy');
@@ -217,7 +219,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->dropExistingTable('object_familiarity');
         $this->dropExistingTable('meta_key');
         $this->dropExistingTable('meta');
-        $this->dropExistingTable('object_model');
+        $this->dropExistingTable('object_type');
         $this->dropExistingTable('relation_taxonomy');
         $this->dropExistingTable('taxonomy');
         $this->dropExistingTable('taxonomy_type');

@@ -63,6 +63,7 @@ class Collector extends \infinite\base\collector\Module
 	}
 
 	public function registerObjectType($module) {
+		if (!Yii::$app->isDbAvailable) { return false; }
 		$systemId = $module->systemId;
 
 		if (!isset($this->tableRegistry[$systemId])) {
@@ -70,9 +71,20 @@ class Collector extends \infinite\base\collector\Module
 			$this->_tableRegistry[$systemId] = new $objectTypeClass;
 			$this->_tableRegistry[$systemId]->name = $systemId;
 			$this->_tableRegistry[$systemId]->system_version = $module->version;
-			if (!$module->setup() || !$this->_tableRegistry[$systemId]->save()) {
+			if (!$this->_tableRegistry[$systemId]->save()) {
 				unset($this->_tableRegistry[$systemId]);
+				return false;
 			}
+			$module->objectTypeModel = $this->_tableRegistry[$systemId];
+			if(!$module->setup()) {
+				$this->_tableRegistry[$systemId]->delete();
+				unset($this->_tableRegistry[$systemId]);
+				return false;
+			}
+		}
+
+		if (isset($this->_tableRegistry[$systemId])) {
+			$module->objectTypeModel = $this->_tableRegistry[$systemId];
 		}
 		return true;
 	}

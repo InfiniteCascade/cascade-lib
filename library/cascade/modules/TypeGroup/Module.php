@@ -18,7 +18,7 @@ class Module extends \cascade\components\types\Module
 	 */
 	public function setup() {
 		$results = [true];
-		$results[] = Yii::$app->gk->allow('read', null, null, $this->primaryModel);
+		$results[] = Yii::$app->gk->allow('read', $this->objectTypeModel);
 		return min($results);
 	}
 
