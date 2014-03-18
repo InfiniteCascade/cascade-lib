@@ -109,7 +109,7 @@ class AppController extends Controller
 			if (isset($instructions['objectId'])) {
 				$object = Yii::$app->request->object = Registry::getObject($instructions['objectId']);
 				if (!$object) {
-					$refreshed[$requestId] = ['error' => 'Invalid object'];
+					$refreshed[$requestId] = ['error' => 'Invalid object '. $instructions['objectId'] .''];
 					continue;
 				}
 				$type = $object->objectType;

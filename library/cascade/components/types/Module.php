@@ -181,7 +181,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	}
 
 	public function upgrade($from) {
-		return true;
+		return $this->setup();
 	}
 
 	public function getPossibleRoles() {
@@ -591,6 +591,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		$models = false;
 		if ($input) {
 			$models = $this->_extractModels($input);
+			unset($input['primary']['handler']);
 			$isValid = true;
 			foreach ($models as $model) {
 				if (!$model->validate()) {

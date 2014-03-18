@@ -282,6 +282,15 @@ class DataSource extends \cascade\components\dataInterface\DataSource {
 		}
 	}
 
+	public function getReverseKeyTranslation($localObject) {
+		$key = is_object($localObject) ? $localObject->primaryKey : $localObject;
+		if ($this->settings['universalKey']) {
+			return KeyTranslation::findOne(['registry_id' => $key]);
+		} else {
+			return KeyTranslation::findOne(['registry_id' => $key, 'data_interface_id' => $this->module->collectorItem->interfaceObject->primaryKey]);
+		}
+	}
+
 
 	public function saveKeyTranslation(Model $foreignObject, $localObject) {
 		$key = $this->getKeyTranslation($foreignObject);

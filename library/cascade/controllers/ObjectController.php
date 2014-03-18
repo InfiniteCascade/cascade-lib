@@ -167,15 +167,16 @@ class ObjectController extends Controller
 			throw new HttpException(404, "Unknown object type.");
 		}
 
-		if (!$this->params['type']->hasDashboard || $this->params['type']->uniparental) {
-			$required[] = 'relation';
-		}
-
 		if (isset($_GET['related_object_id']) && isset($_GET['object_relation']) && isset($_GET['relationship_id'])) {
 			$this->params['relationship'] = Relationship::getById($_GET['relationship_id']);
 			if (!$this->params['relationship']) {
 				throw new HttpException(404, "Unknown relationship type.");
 			}
+			$this->params['relatedModel'] = Registry::getObject($_GET['related_object_id'], true);
+			if (isset($this->params['relatedModel']) && (!($this->params['typeItem'] = $this->params['relatedModel']->objectTypeItem) || !($this->params['type'] = $this->params['typeItem']->object))) {
+				throw new HttpException(404, "Unknown object type.");
+			}
+
 			if ($_GET['object_relation'] === 'child') {
 				$this->params['relation'] = $this->params['relationship']->getModel($_GET['related_object_id'], $this->params['object']->primaryKey);
 			} else {
@@ -184,6 +185,11 @@ class ObjectController extends Controller
 			if (empty($this->params['relation'])) {
 				throw new HttpException(404, "Unknown relationship.");
 			}
+
+		}
+
+		if (!$this->params['type']->hasDashboard || $this->params['type']->uniparental) {
+			$required[] = 'relation';
 		}
 
 		if (!empty($_GET['link']) && !($this->params['relation'] = Relation::get($_GET['relation_id']))) {
@@ -360,7 +366,7 @@ class ObjectController extends Controller
 				$base[$relatedObject->tabularId] = $relatedObject;
 				$base['relations'] = [$relatedObject->tabularId => $relation];
 			}
-			$models = $type->getModels($object, $base);
+			$models = $originalModels = $type->getModels($object, $base);
 
 			if (!empty($_POST)) {
 				list($error, $notice, $models, $niceModels) = $handler->handleSaveAll(null, ['allowEmpty' => true]);

@@ -36,6 +36,11 @@ class Search extends \infinite\base\Component {
 		foreach ($searchResults as $k => $r) {
 			if ($r->score < $this->threshold) {
 				unset($searchResults[$k]);
+			} else {
+				$reverseKey = $this->dataSource->getReverseKeyTranslation($r->id);
+				if (!empty($reverseKey)) {
+					unset($searchResults[$k]);
+				}
 			}
 		}
 
