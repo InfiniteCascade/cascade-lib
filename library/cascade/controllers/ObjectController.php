@@ -166,6 +166,10 @@ class ObjectController extends Controller
 		if (isset($this->params['object']) && (!($this->params['typeItem'] = $this->params['object']->objectTypeItem) || !($this->params['type'] = $this->params['typeItem']->object))) {
 			throw new HttpException(404, "Unknown object type.");
 		}
+		
+		if (isset($this->params['object'])) {
+			$this->params['activeObject'] = $this->params['object'];
+		}
 
 		if (isset($_GET['related_object_id']) && isset($_GET['object_relation']) && isset($_GET['relationship_id'])) {
 			$this->params['relationship'] = Relationship::getById($_GET['relationship_id']);
@@ -173,8 +177,8 @@ class ObjectController extends Controller
 				throw new HttpException(404, "Unknown relationship type.");
 			}
 			$this->params['relatedModel'] = Registry::getObject($_GET['related_object_id'], true);
-			if (isset($this->params['relatedModel']) && (!($this->params['typeItem'] = $this->params['relatedModel']->objectTypeItem) || !($this->params['type'] = $this->params['typeItem']->object))) {
-				throw new HttpException(404, "Unknown object type.");
+			if (isset($this->params['relatedModel']) && (!($this->params['relatedTypeItem'] = $this->params['relatedModel']->objectTypeItem) || !($this->params['relatedType'] = $this->params['relatedTypeItem']->object))) {
+				throw new HttpException(404, "Unknown related object type.");
 			}
 
 			if ($_GET['object_relation'] === 'child') {
@@ -229,13 +233,14 @@ class ObjectController extends Controller
 			$this->params['relatedObject']->_moduleHandler = $this->params['subform'];
 			$this->params['relatedObject']->registerRelationModel($this->params['relation']);
 
-			if (isset($this->params['relatedObject']) && (!($this->params['relatedTypeItem'] = $this->params['relatedObject']->objectTypeItem) || !($this->params['relatedType'] = $this->params['relatedTypeItem']->object))) {
-				throw new HttpException(404, "Unknown object type.");
-			}
 		}
 
 		if (!isset($this->params['handler']) && isset($this->params['object'])) {
-			$this->params['handler'] = $this->params['type'];
+			if (isset($this->params['relatedType'])) {
+				$this->params['handler'] = $this->params['relatedType'];
+			} else {
+				$this->params['handler'] = $this->params['type'];
+			}
 		}
 
 		if (!is_null($can) && isset($this->params['object']) && !$this->params['object']->can($can)) {
@@ -339,11 +344,7 @@ class ObjectController extends Controller
 		$subform = null;
 		$this->_parseParams(['object', 'type'], 'update');
 		extract($this->params);
-		if (isset($relatedType)) {
-			$primaryModel = $relatedType->primaryModel;
-		} else {
-			$primaryModel = $type->primaryModel;
-		}
+		$primaryModel = $type->primaryModel;
 		if (isset($subaction) && $subaction === 'setPrimary') {
 			if (!isset($relation)) {
 				throw new HttpException(404, "Invalid relationship!");
@@ -377,7 +378,7 @@ class ObjectController extends Controller
 					if (!empty($notice)) {
 						$noticeExtra = ' However, there were notices: '. $notice;
 					}
-					Yii::$app->response->success = '<em>'. $niceModels['primary']['model']->descriptor .'</em> was saved successfully.'.$noticeExtra;
+					Yii::$app->response->success = '<em>'. $activeObject->descriptor .'</em> was saved successfully.'.$noticeExtra;
 					if (isset($relation)) {
 						Yii::$app->response->trigger = [
 							['refresh', '.model-'. $primaryModel::baseClassName()]
@@ -392,6 +393,28 @@ class ObjectController extends Controller
 			if (!($this->params['form'] = $handler->getForm($models, ['subform' => $subform, 'linkExisting' => false]))) {
 				throw new HttpException(403, "There is nothing to update for {$type->title->getPlural(true)}");
 			}
+		}
+	}
+
+
+	/**
+	 *
+	 */
+	public function actionAccess() {
+		$subform = null;
+		$this->_parseParams(['object', 'type'], 'update');
+		extract($this->params);
+		if (isset($relatedType)) {
+			$primaryModel = $relatedType->primaryModel;
+		} else {
+			$primaryModel = $type->primaryModel;
+		}
+		Yii::$app->response->view = 'access';
+		Yii::$app->response->task = 'dialog';
+		Yii::$app->response->taskOptions = ['title' => 'Manage Access for '. $type->title->getSingular(true)];
+		$this->params['access'] = $object->objectAccess;
+		if (!empty($_POST)) {
+			
 		}
 	}
 

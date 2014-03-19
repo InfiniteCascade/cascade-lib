@@ -21,7 +21,8 @@ class Header extends Widget {
 		$content[] = Html::beginTag('div', ['class' => 'ic-object-header']);
 		$content[] = $object->descriptor;
 
-		$objectVisibility = Yii::$app->gk->getObjectVisibility($object);
+		$objectAccess = $object->objectAccess;
+		$objectVisibility = $objectAccess->visibility;
 		$content[] = Html::endTag('div');
 
 		$menu = [];
@@ -62,6 +63,10 @@ class Header extends Widget {
 			$accessIcon = 'fa fa-rss';
 			$accessTitle = $object->objectType->title->upperSingular . ' is shared';
 			$accessLabel = 'Shared';
+		}elseif ($objectVisibility === 'internal') {
+			$accessIcon = 'fa fa-building-o';
+			$accessTitle = $object->objectType->title->upperSingular . ' is shared internally';
+			$accessLabel = 'Internal';
 		} else {
 			$accessIcon = 'fa fa-user';
 			$accessTitle = $object->objectType->title->upperSingular . ' is private';

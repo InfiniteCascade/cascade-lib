@@ -90,7 +90,6 @@ class AppController extends Controller
 		Yii::$app->response->forceInstructions = true;
 		Yii::$app->response->task = 'status';
 
-
 		if (empty($_GET['requests'])) { return; }
 		$baseInstrictions = (isset($_GET['baseInstructions']) ? $_GET['baseInstructions'] : []);
 		foreach ($_GET['requests'] AS $requestId => $request) {
