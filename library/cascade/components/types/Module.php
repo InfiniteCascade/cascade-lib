@@ -150,7 +150,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
     		case 'manager':
     			return ['read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED, 'delete' => Access::ACCESS_GRANTED, 'manageAccess' => Access::ACCESS_DIRECT_ADMIN];
     		break;
-    		case 'contributor':
+    		case 'editor':
     			return ['read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED];
     		break;
     		case 'viewer':

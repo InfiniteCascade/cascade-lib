@@ -223,10 +223,12 @@ trait ActiveRecordTrait {
 		return [];
 	}
 
-	public function loadDefaultValues() {
+	public function loadDefaultValues($skipIfSet = true)
+	{
+		parent::loadDefaultValues($skipIfSet);
 		$defaultValues = $this->getDefaultValues();
 		foreach ($defaultValues as $k => $v) {
-			if (!$this->isAttributeChanged($k)) {
+			if ($skipIfSet && !$this->isAttributeChanged($k)) {
 				$this->{$k} = $v;
 			}
 		}

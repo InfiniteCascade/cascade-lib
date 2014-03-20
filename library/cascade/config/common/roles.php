@@ -13,9 +13,9 @@ return [
 			'systemId' => 'manager',
 			'level' => 300
 		],
-		'contributor' => [
-			'name' => 'Contributor',
-			'systemId' => 'contributor',
+		'editor' => [
+			'name' => 'Editor',
+			'systemId' => 'editor',
 			'level' => 200
 		],
 		'viewer' => [
