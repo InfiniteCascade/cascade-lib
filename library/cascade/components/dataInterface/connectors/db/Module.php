@@ -18,14 +18,14 @@ abstract class Module extends BaseModule {
 
 	abstract public function dataSources();
 
-	public function getKeyTranslation(Model $foreignObject) {
-		$key = $this->generateKey($foreignObject);
-		if ($this->settings['universalKey']) {
-			return KeyTranslation::get($key);
-		} else {
-			return KeyTranslation::get($key, $this->dataInterface->interfaceItem->interfaceObject);
-		}
-	}
+	// public function getKeyTranslation(Model $foreignObject) {
+	// 	$key = $this->generateKey($foreignObject);
+	// 	if ($this->settings['universalKey']) {
+	// 		return KeyTranslation::get($key);
+	// 	} else {
+	// 		return KeyTranslation::get($key, $this->dataInterface->interfaceItem->interfaceObject);
+	// 	}
+	// }
 	
 	public function run(Action $action)
 	{

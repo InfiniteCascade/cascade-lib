@@ -121,7 +121,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 		if (isset($this->foreignObject) && !isset($this->_localObject)) {
 			$keyTranslation = $this->dataSource->getKeyTranslation($this->foreignObject);
 			if (!empty($keyTranslation) && ($localObject = $keyTranslation->object)) {
-				$this->_localObject = $localObject;
+				$this->localObject = $localObject;
 			}
 		}
 		$this->_isLoadingLocalObject = false;

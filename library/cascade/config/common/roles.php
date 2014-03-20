@@ -5,19 +5,23 @@ return [
 		'owner' => [
 			'name' => 'Owner',
 			'systemId' => 'owner',
-			'exclusive' => true
+			'exclusive' => true,
+			'level' => 400
 		],
 		'manager' => [
 			'name' => 'Manager',
-			'systemId' => 'manager'
+			'systemId' => 'manager',
+			'level' => 300
 		],
 		'contributor' => [
 			'name' => 'Contributor',
-			'systemId' => 'contributor'
+			'systemId' => 'contributor',
+			'level' => 200
 		],
 		'viewer' => [
 			'name' => 'Viewer',
-			'systemId' => 'viewer'
+			'systemId' => 'viewer',
+			'level' => 100
 		]
 	]
 ];

@@ -256,6 +256,7 @@ class ObjectController extends Controller
 				throw new HttpException(400, "Invalid request");
 			}
 		}
+		Yii::$app->request->object = $this->params['object'];
 	}
 	/**
 	 *
@@ -410,10 +411,20 @@ class ObjectController extends Controller
 			$primaryModel = $type->primaryModel;
 		}
 		Yii::$app->response->view = 'access';
+		$taskOptions = ['title' => 'Access for '. $type->title->getSingular(true)];
+		$lookAtPost = false;
+		if ($object->can('manageAccess')) {
+			$lookAtPost = true;
+			$taskOptions['title'] = 'Manage ' . $taskOptions['title'];
+			$taskOptions['isForm'] = false;
+		}
+		$this->params['disableFields'] = !$lookAtPost;
+		$taskOptions['isForm'] = $lookAtPost;
+
 		Yii::$app->response->task = 'dialog';
-		Yii::$app->response->taskOptions = ['title' => 'Manage Access for '. $type->title->getSingular(true)];
+		Yii::$app->response->taskOptions = $taskOptions;
 		$this->params['access'] = $object->objectAccess;
-		if (!empty($_POST)) {
+		if ($lookAtPost && !empty($_POST)) {
 			
 		}
 	}

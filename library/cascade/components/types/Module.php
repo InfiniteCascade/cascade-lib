@@ -19,6 +19,7 @@ use infinite\base\exceptions\Exception;
 use infinite\base\exceptions\HttpException;
 use infinite\base\language\Noun;
 use infinite\db\ActiveRecord;
+use infinite\security\Access;
 
 use yii\base\Controller;
 
@@ -144,16 +145,16 @@ abstract class Module extends \cascade\components\base\CollectorModule {
     {
     	switch ($role) {
     		case 'owner':
-    			return ['read', 'update', 'delete', 'manageAccess', 'transfer'];
+    			return ['read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED, 'delete' => Access::ACCESS_GRANTED, 'manageAccess' => Access::ACCESS_DIRECT_ADMIN, 'transfer' => Access::ACCESS_DIRECT_ADMIN];
     		break;
     		case 'manager':
-    			return ['read', 'update', 'delete', 'manageAccess'];
+    			return ['read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED, 'delete' => Access::ACCESS_GRANTED, 'manageAccess' => Access::ACCESS_DIRECT_ADMIN];
     		break;
     		case 'contributor':
-    			return ['read', 'update'];
+    			return ['read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED];
     		break;
     		case 'viewer':
-    			return ['read'];
+    			return ['read' => Access::ACCESS_GRANTED];
     		break;
     	}
     	return false;

@@ -2,6 +2,8 @@
 
 namespace cascade\models;
 
+use Yii;
+
 /**
  * This is the model class for table "key_translation".
  *
@@ -63,8 +65,16 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
 
 	public function getObject($checkAccess = true)
 	{
-		$registryClass = Registry::className();
-		return $registryClass::getObject($this->registry_id, $checkAccess);
+		$registryClass = Yii::$app->classes['Registry'];
+
+		$return = $registryClass::getObject($this->registry_id, $checkAccess);
+
+			if (get_class($return) === 'cascade\\models\\Registry') {
+				\d($this->registry_id);
+				throw new \Exception("TRANSLATION WHATTTT AGAIN?!");
+				exit;
+			}
+		return $return;
 	}
 
 	/**

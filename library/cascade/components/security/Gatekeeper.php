@@ -11,7 +11,7 @@ use infinite\db\behaviors\ActiveAccess;
 use infinite\helpers\ArrayHelper;
 
 class Gatekeeper extends \infinite\security\Gatekeeper {
-	public $accessClass = 'cascade\\components\\security\\Access';
+	public $objectAccessClass = 'cascade\\components\\security\\ObjectAccess';
 
 	public function getPrimaryAccount() {
 		return ObjectAccount::get(Yii::$app->params['primaryAccount']);

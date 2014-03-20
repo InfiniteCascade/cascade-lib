@@ -321,3 +321,7 @@ footer {
 .object-browse .object-chooser {
   border-right: none;
 }
+
+.ic-access-list .btn {
+  margin-top: 3px;
+}

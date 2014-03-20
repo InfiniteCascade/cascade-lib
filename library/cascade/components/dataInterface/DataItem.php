@@ -30,7 +30,7 @@ abstract class DataItem extends \infinite\base\Component {
 	{
 		if (isset($this->foreignObject) && !isset($this->_localObject) && isset($this->dataSource->search)) {
 			if (($localObject = $this->dataSource->search->searchLocal($this)) && !empty($localObject)) {
-				$this->_localObject = $localObject;
+				$this->localObject = $localObject;
 			}
 		}
 		return true;
@@ -62,7 +62,6 @@ abstract class DataItem extends \infinite\base\Component {
 		if (isset($this->primaryObject)) {
 			return $this->primaryObject->primaryKey;
 		}
-		throw new \Exception("hmmm");
 		return null;
 	}
 
