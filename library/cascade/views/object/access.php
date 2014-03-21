@@ -41,7 +41,13 @@ $baseRequestorParams = [
 		'disableFields' => $disableFields,
 		'roles' => $roles,
 ];
-echo Html::beginTag('ul', ['class' => 'list-group ic-access-list']);
+$htmlOptions = ['class' => 'list-group ic-access-list'];
+
+$dataAccess = [];
+$dataAccess['roles'] = $roles;
+$htmlOptions['data-access'] = json_encode($dataAccess);
+
+echo Html::beginTag('ul', $htmlOptions);
 if ($publicGroup) {
 	$requestorParams = [
 		'requestorObject' => $publicGroup,

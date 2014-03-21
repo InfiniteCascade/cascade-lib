@@ -19,6 +19,7 @@ class ObjectViewAsset extends AssetBundle
 	public $css = [];
 	public $js = [
 		'js/cascade.object.view.js',
+		'js/cascade.object.access.js',
 	];
 	public $depends = [
 		'cascade\\components\\web\\assetBundles\\AppAsset'
