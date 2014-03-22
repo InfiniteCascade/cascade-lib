@@ -36,6 +36,11 @@ class ObjectAccess extends \infinite\security\ObjectAccess {
 		return 'private';
 	}
 
+	public function getRoleHelpText($roleItem)
+	{
+		return $this->object->objectType->getRoleHelpText($roleItem, $this->object);
+	}
+
 	public function getSpecialRequestors()
 	{
 		return array_merge(parent::getSpecialRequestors(), [

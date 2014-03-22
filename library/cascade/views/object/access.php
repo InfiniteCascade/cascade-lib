@@ -1,5 +1,6 @@
 <?php
 use infinite\helpers\Html;
+use yii\widgets\ActiveForm;
 
 $specialRequestors = $access->specialRequestors;
 $primaryAccount = false;
@@ -9,31 +10,9 @@ if (isset($specialRequestors['primaryAccount'])) {
 $publicGroup = $specialRequestors['public'];
 
 // collect roles
-$accessorRoleLevel = $access->getAccessorRoleLevel();
 $objectRoles = $access->roleObjects;
 $object = Yii::$app->request->object;
-$roles = [];
-$nullRole = [];
-$nullRole['id'] = null;
-$nullRole['item'] = null;
-$nullRole['label'] = 'No Access';
-$nullRole['available'] = 0 <= $accessorRoleLevel;
-$roles['null'] = $nullRole;
-
-foreach (Yii::$app->collectors['roles']->getAll() as $roleItem) {
-	$role = [];
-	$role['id'] = $roleItem->object->primaryKey;
-	$role['exclusive'] = $roleItem->exclusive;
-	$role['conflictRole'] = null;
-	if ($roleItem->conflictRole 
-		&& ($conflictRole = Yii::$app->collectors['roles']->getOne($roleItem->conflictRole))
-		&& isset($conflictRole->object)) {
-		$role['conflictRole'] = $conflictRole->object->primaryKey;
-	}
-	$role['label'] = $roleItem->name;
-	$role['available'] = $roleItem->level <= $accessorRoleLevel;
-	$roles[$role['id']] = $role;
-}
+$roles = $access->getPossibleRoles();
 
 $baseRequestorParams = [
 		'objectRoles' => $objectRoles,
@@ -43,16 +22,20 @@ $baseRequestorParams = [
 ];
 $htmlOptions = ['class' => 'list-group ic-access-list'];
 
-$dataAccess = [];
-$dataAccess['roles'] = $roles;
-$htmlOptions['data-access'] = json_encode($dataAccess);
+if (!$disableFields) {
+	$dataAccess = [];
+	$dataAccess['roles'] = $roles;
+	$htmlOptions['data-access'] = json_encode($dataAccess);
+}
+
+$form = ActiveForm::begin(['options' => ['class' => 'ajax']]); 
 
 echo Html::beginTag('ul', $htmlOptions);
 if ($publicGroup) {
 	$requestorParams = [
 		'requestorObject' => $publicGroup,
 		'helpText' => 'Access level for the public',
-		'maxLevel' => 100,
+		'maxRoleLevel' => 199,
 		'htmlOptions' => ['class' => 'list-group-item-warning']
 	];
 	echo $this->renderFile('@cascade/views/object/access_requestor.php', array_merge($baseRequestorParams, $requestorParams), $this);
@@ -63,7 +46,7 @@ if ($primaryAccount) {
 	$requestorParams = [
 		'requestorObject' => $primaryAccount,
 		'helpText' => 'Access level for internal staff',
-		'maxLevel' => 400,
+		'maxRoleLevel' => 399,
 		'htmlOptions' => ['class' => 'list-group-item-info']
 	];
 	echo $this->renderFile('@cascade/views/object/access_requestor.php', array_merge($baseRequestorParams, $requestorParams), $this);
@@ -74,4 +57,5 @@ foreach ($objectRoles as $objectId => $objectRole) {
 	echo $this->renderFile('@cascade/views/object/access_requestor.php', array_merge($baseRequestorParams, ['requestorObject' => $objectRole['object']]), $this);
 }
 echo Html::endTag('ul');
+ActiveForm::end();
 ?>

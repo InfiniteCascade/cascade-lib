@@ -9,16 +9,43 @@
       		'maxParallelRequests': 2,
             'callback': function (object, datum) { $.debug(object); return false; }
    		};
+
    		$this.options = jQuery.extend(true, {}, defaultOptions, opts);
    		if ($this.options.name === undefined) {
    			$this.options.name = $this.attr('id');
    		}
-         $this.options.data['term'] = '--QUERY--';
-         $this.options.remote.url += '?' + jQuery.param($this.options.data);
-         $this.options.remote.url = $this.options.remote.url.replace('--QUERY--', '%QUERY');
-         $this.options.template = '<p><strong>{{descriptor}}</strong>&nbsp;{{subdescriptor}}</p>';
-         $this.options.engine = SingleTemplateEngine;
-         delete $this.options.data;
-      	return $this.typeahead($this.options).on('typeahead:autocompleted', function(event) { event.stopPropagation(); return false; }).on('typeahead:selected', $this.options.callback);
+
+         var engineOptions = {
+            'name': 'objects',
+            'queryTokenizer': Bloodhound.tokenizers.whitespace,
+            'datumTokenizer': Bloodhound.tokenizers.obj.whitespace('descriptor'),
+            'remote': {
+               'url': $this.options.remote.url,
+               'ajax': {
+                  'data': $this.options.data
+               }
+            }
+         };
+         var typeOptions = {};
+         var typeSource = {};
+
+         var data = {'term': '--QUERY--'};
+         engineOptions.remote.url += '?' + jQuery.param(data);
+         engineOptions.remote.url = engineOptions.remote.url.replace('--QUERY--', '%QUERY');
+         var engine = new Bloodhound(engineOptions);
+         engine.initialize();
+
+         typeSource.name = 'objects';
+         typeSource.displayKey = 'label',
+         typeSource.source = engine.ttAdapter()
+         typeSource.templates = {
+            'empty': [
+               '<div class="empty-message">',
+               'No objects matched your query.',
+               '</div>'
+               ].join('\n'),
+            'suggestion': SingleTemplateEngine.compile('<p><strong>{{descriptor}}</strong>&nbsp;{{subdescriptor}}</p>')
+         };
+      	return $this.typeahead(typeOptions, typeSource).on('typeahead:autocompleted', function(event) { event.stopPropagation(); return false; }).on('typeahead:selected', $this.options.callback);
    };
 }(jQuery));

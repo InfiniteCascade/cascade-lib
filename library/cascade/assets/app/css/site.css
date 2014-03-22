@@ -325,3 +325,14 @@ footer {
 .ic-access-list .btn {
   margin-top: 3px;
 }
+
+.access-role-menu {
+  margin-top: 10px;
+  padding-bottom: 1px;
+}
+
+.access-role-menu > ul {
+  float: right;
+  width: 50%;
+  min-width: 300px;
+}

@@ -141,6 +141,25 @@ abstract class Module extends \cascade\components\base\CollectorModule {
         return false;
 	}
 
+	public function getRoleHelpText($roleItem, $object = null)
+	{
+		switch ($roleItem->systemId) {
+			case 'owner':
+    			return 'Able to manage access, delete, edit, and transfer ownership.';
+    		break;
+    		case 'manager':
+    			return 'Able to manage access, delete, and edit.';
+    		break;
+    		case 'editor':
+    			return 'Able to edit and archive.';
+    		break;
+    		case 'viewer':
+    			return 'Able to view content.';
+    		break;
+		}
+		return null;
+	}
+
 	public function determineAccessLevel($object, $role, $aro = null)
     {
     	switch ($role) {
