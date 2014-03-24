@@ -1,14 +1,13 @@
 <?php
 namespace cascade;
 
-class Cascade extends \yii\base\Extension
+class Cascade implements \yii\base\BootstrapInterface
 {
     /**
      * @inheritdoc
      */
-    public static function bootstrap()
+    public function bootstrap(\yii\base\Application $app)
     {
-    	parent::bootstrap();
         \Yii::setAlias('@cascade', __DIR__);
         \Yii::$app->registerMigrationAlias('@cascade/migrations');
     }

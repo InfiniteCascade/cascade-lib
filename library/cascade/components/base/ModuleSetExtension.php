@@ -3,10 +3,10 @@ namespace cascade\components\base;
 
 use Yii;
 
-abstract class ModuleSetExtension extends \yii\base\Extension
+abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
 {
-	public static function bootstrap()
-	{
+	public function bootstrap(\yii\base\Application $app)
+    {
 		Yii::beginProfile(get_called_class());
 		Yii::$app->modules = static::getModules();
 		Yii::endProfile(get_called_class());
