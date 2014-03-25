@@ -9,6 +9,7 @@ use yii\bootstrap\ButtonDropdown;
 
 trait ListWidgetTrait
 {
+	public $renderPager = true;
 	public $emptyMessage = 'No items exist.';
 	public $defaultContentRow = [
 		'class' => 'list-group-item-text',
@@ -118,9 +119,11 @@ trait ListWidgetTrait
 	public function generateFooter()
 	{
 		$footer = '';
-		$pager = $this->renderPager();
-		if ($pager) {
-			$footer = Html::tag('div', $pager, ['class' => 'panel-footer clearfix']);
+		if ($this->renderPager) {
+			$pager = $this->renderPager();
+			if ($pager) {
+				$footer = Html::tag('div', $pager, ['class' => 'panel-footer clearfix']);
+			}
 		}
 		return parent::generateFooter() . $footer;
 	}

@@ -33,13 +33,11 @@ $.fn.cascadeAffix = function (option) {
 // from https://github.com/twitter/typeahead.js/issues/14
 var SingleTemplateEngine = {
     compile: function(template) {
-        return {
-            render: function(context) {
+        return function(context) {
                 return template.replace(/\{\{(\w+)\}\}/g,
 				    function(match, p1) {
 				         return jQuery('<div/>').text(context[p1] || '').html();
 				    });
-			}
         };
     }
 };

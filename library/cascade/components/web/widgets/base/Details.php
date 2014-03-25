@@ -17,8 +17,8 @@ class Details extends Widget implements ListWidgetInterface {
 	public $labelHtmlOptions = ['class' => 'control-label', ];
 	public $valueHtmlOptions = ['class' => 'form-control-static'];
 
-	public $gridClass = 'infinite\web\grid\Grid';
-	public $gridCellClass = 'infinite\web\grid\Cell';
+	public $gridClass = 'infinite\\web\\grid\\Grid';
+	public $gridCellClass = 'infinite\\web\\grid\\Cell';
 	protected $_title = 'Details';
 
 	public function getHeaderMenu()

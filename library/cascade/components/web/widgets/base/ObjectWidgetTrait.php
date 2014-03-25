@@ -61,11 +61,15 @@ trait ObjectWidgetTrait
 					$dataProvider['query'] = $queryModelClass::find();
 				break;
 			}
-			
-			$currentSortBy = $this->currentSortBy;
-			$currentSortByDirection = $this->currentSortByDirection;
-
+			$dummyModel = new $queryModelClass;
+			if (in_array($this->currentSortBy, ['familiarity', 'last_accessed'])) {
+				if ($dataProvider['query']->getBehavior('FamiliarityQuery') === null) {
+					$dataProvider['query']->attachBehavior('FamiliarityQuery', ['class' => 'cascade\\components\\db\\behaviors\\QueryFamiliarity']);
+				}
+				$dataProvider['query']->withFamiliarity();
+			}
 			$dataProvider['pagination'] = $this->paginationSettings;
+			$dataProvider['sort'] = $this->sortSettings;
 			$this->_dataProvider = Yii::createObject($dataProvider);
 		}
 		return $this->_dataProvider;
@@ -84,6 +88,9 @@ trait ObjectWidgetTrait
 		}
 		$sortBy['familiarity'] = [
 			'label' => 'Familiarity'
+		];
+		$sortBy['last_accessed'] = [
+			'label' => 'Last Accessed'
 		];
 		$sortBy[$descriptorField] = [
 			'label' => $descriptorLabel
@@ -105,7 +112,7 @@ trait ObjectWidgetTrait
 	{
 		$menu = [];
 
-		$baseCreate = ['object/create'];
+		$baseCreate = ['/object/create'];
 		$typePrefix = null;
 		$method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
 		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
@@ -174,7 +181,7 @@ trait ObjectWidgetTrait
 				];
 
 				$item['items'][] = [
-					'label' => $sortItem['label'] . $extra,
+					'label' => $extra . $sortItem['label'],
 					'linkOptions' => [
 						'title' => 'Sort by '. $sortItem['label'], 
 						'data-state-change' => json_encode($stateChange)
@@ -246,7 +253,7 @@ trait ObjectWidgetTrait
 			$menu['primary'] = [
 				'icon' => 'fa fa-star',
 				'label' => 'Set as primary',
-				'url' => ['object/update', 'subaction' => 'setPrimary'] + $relationUrl,
+				'url' => ['/object/update', 'subaction' => 'setPrimary'] + $relationUrl,
 				'linkOptions' => ['data-handler' => 'background']
 			];
 		}
@@ -256,7 +263,7 @@ trait ObjectWidgetTrait
 			$menu['update'] = [
 				'icon' => 'fa fa-wrench',
 				'label' => 'Update',
-				'url' => ['object/update'] + $baseUrl,
+				'url' => ['/object/update'] + $baseUrl,
 				'linkOptions' => ['data-handler' => 'background']
 			];
 		}
@@ -264,11 +271,10 @@ trait ObjectWidgetTrait
 		
 		// delete button
 		if ($model->can('delete')) {
-			$deleteUrl = ['object/delete', ];
 			$menu['delete'] = [
 				'icon' => 'fa fa-trash-o',
 				'label' => 'Delete',
-				'url' => ['object/delete'] + $baseUrl,
+				'url' => ['/object/delete'] + $baseUrl,
 				'linkOptions' => ['data-handler' => 'background']
 			];
 		}
@@ -302,23 +308,33 @@ trait ObjectWidgetTrait
 
 	public function getPaginationSettings() {
 		return [
-			'class' => 'infinite\data\Pagination',
+			'class' => 'infinite\\data\\Pagination',
 			'pageSize' => $this->pageSize,
 			'validatePage' => false,
 			'page' => $this->getState('_page', 0),
 		];
 	}
 
+	public function getSortSettings() {
+		return [
+			'class' => 'infinite\\data\\Sort',
+			'sortOrders' => [
+				$this->currentSortBy => $this->currentSortByDirection === 'asc' ? SORT_ASC : SORT_DESC
+			],
+			'attributes' => $this->getSortBy()
+		];
+	}
+
 	public function getPagerSettings() {
 		return [
-			'class' => 'infinite\widgets\LinkPager',
+			'class' => 'infinite\\widgets\\LinkPager',
 			'pageStateKey' => $this->stateKeyName('_page'),
 		];
 	}
 
 	public function getDataProviderSettings() {
 		return [
-			'class' => 'infinite\data\ActiveDataProvider'
+			'class' => 'infinite\\data\\ActiveDataProvider'
 		];
 	}
 }

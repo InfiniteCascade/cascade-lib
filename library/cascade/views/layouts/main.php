@@ -20,7 +20,7 @@ $itemTypes = [];
 foreach (Yii::$app->collectors['types']->getAll() as $type) {
 	if (empty($type->object)) { continue; }
 	if (empty($type->object->hasDashboard)) { continue; }
-	$itemTypes[$type->object->title .'-'.$type->systemId] = ['label' => $type->object->title->upperPlural, 'url' => ['object/browse', 'type' => $type->systemId]];
+	$itemTypes[$type->object->title .'-'.$type->systemId] = ['label' => $type->object->title->upperPlural, 'url' => ['/object/browse', 'type' => $type->systemId]];
 }
 ksort($itemTypes);
 $itemTypes = array_values($itemTypes);
@@ -56,14 +56,14 @@ $this->beginBody(); ?>
 			$topMenu = [];
 			$topMenu[] = [
 				'label' =>  '<span class="glyphicon glyphicon-home"></span> <span class="hidden-xs hidden-sm">Dashboard</span>', 
-				'url' => ['app/index']
+				'url' => ['/app/index']
 			];
 			$topMenu[] = [
 				'label' =>  '<span class="glyphicon glyphicon-th"></span> <span class="hidden-xs hidden-sm">'.$browseLabel.'</span>', 
-				'url' => ['object/index'], 
+				'url' => ['/object/index'], 
 				'items' => $itemTypes,
 				'active' => function($nav, $item) {
-					$check = ['/^object\//']; // , '/^object\/view/', '/^object\/index/', '/^object\/browse/'
+					$check = ['/^\/object\//']; // , '/^object\/view/', '/^object\/index/', '/^object\/browse/'
 
 					foreach ($check as $c) {
 						if (preg_match($c, $nav->route) === 1) {
@@ -75,7 +75,7 @@ $this->beginBody(); ?>
 			];
 			$topMenu[] = [
 				'label' =>  '<span class="glyphicon glyphicon-filter"></span> <span class="hidden-xs hidden-sm">Reports</span>', 
-				'url' => ['reports/index']
+				'url' => ['/reports/index']
 			];
 			//$topMenu[] = ['label' =>  '<span class="glyphicon glyphicon-home"></span> <span class="hidden-xs hidden-sm">Dashboard</span>', 'url' => ['/']];
 

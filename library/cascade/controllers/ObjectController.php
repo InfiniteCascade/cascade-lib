@@ -80,28 +80,32 @@ class ObjectController extends Controller
 	 */
 	public function actionSearch() {
 		$package = [];
-		if (empty($_GET['term'])) {
+		$defaultParams = ['specialFilters' => []];
+		$searchParams = array_merge($defaultParams, $_GET);
+
+		if (empty($searchParams['term'])) {
 			Yii::$app->response->data = $package;
 			return;
 		}
 
-		$modules = isset($_GET['modules']) ? (array)$_GET['modules'] : array_keys(Yii::$app->collectors['types']->getAll());
+		$modules = isset($searchParams['modules']) ? (array)$searchParams['modules'] : array_keys(Yii::$app->collectors['types']->getAll());
 		$params = ['ignore' => [], 'ignoreChildren' => [], 'ignoreParents' => []];
-		if (!empty($_GET['ignore'])) {
-			$params['ignore'] = (array)$_GET['ignore'];
+		if (!empty($searchParams['ignore'])) {
+			$params['ignore'] = (array)$searchParams['ignore'];
 		}
-		if (!empty($_GET['ignoreChildren'])) {
-			$params['ignoreChildren'] = (array)$_GET['ignoreChildren'];
+		if (!empty($searchParams['ignoreChildren'])) {
+			$params['ignoreChildren'] = (array)$searchParams['ignoreChildren'];
 		}
-		if (!empty($_GET['ignoreParents'])) {
-			$params['ignoreParents'] = (array)$_GET['ignoreParents'];
+		if (!empty($searchParams['ignoreParents'])) {
+			$params['ignoreParents'] = (array)$searchParams['ignoreParents'];
 		}
 		$params['modules'] = $modules;
-		$term = $_GET['term'];
+		$term = $searchParams['term'];
 		$scores = [];
 		foreach ($modules as $module) {
 			$moduleItem = Yii::$app->collectors['types']->getOne($module);
 			if (!$moduleItem || !($moduleObject = $moduleItem->object)) { continue; }
+			if (in_array('authority', $searchParams['specialFilters']) && $moduleItem->object->getBehavior('Authority') === null) { continue; }
 			$moduleResults = $moduleObject->search($term, $params);
 			foreach ($moduleResults as $r) {
 				$package[] = $r->toArray();

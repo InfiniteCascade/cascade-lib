@@ -8,8 +8,18 @@ use infinite\helpers\Html;
 
 use yii\bootstrap\Button;
 
-class SimpleLinkList extends BaseList {
+class SimpleLinkList extends BaseList
+{
+	public $renderPager = false;
 
+	public function getGridCellSettings()
+	{
+		return [
+			'columns' => 3,
+			'maxColumns' => 3,
+			'tabletSize' => false
+		];
+	}
 
 	public function getListOptions()
 	{

@@ -34,7 +34,7 @@
          engineOptions.remote.url = engineOptions.remote.url.replace('--QUERY--', '%QUERY');
          var engine = new Bloodhound(engineOptions);
          engine.initialize();
-
+         $.debug(SingleTemplateEngine.compile('<p><strong>{{descriptor}}</strong>&nbsp;{{subdescriptor}}</p>'));
          typeSource.name = 'objects';
          typeSource.displayKey = 'label',
          typeSource.source = engine.ttAdapter()
