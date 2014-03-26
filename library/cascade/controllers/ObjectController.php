@@ -105,6 +105,7 @@ class ObjectController extends Controller
 		foreach ($modules as $module) {
 			$moduleItem = Yii::$app->collectors['types']->getOne($module);
 			if (!$moduleItem || !($moduleObject = $moduleItem->object)) { continue; }
+			if (empty($moduleItem->object->searchWeight)) { continue; }
 			if (in_array('authority', $searchParams['typeFilters']) && $moduleItem->object->getBehavior('Authority') === null) { continue; }
 			if (in_array('dashboard', $searchParams['typeFilters']) && !$moduleItem->object->hasDashboard) { continue; }
 			$moduleResults = $moduleObject->search($term, $params);

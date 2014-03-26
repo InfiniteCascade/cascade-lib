@@ -33,6 +33,8 @@ trait ActiveRecordTrait {
 	public $formSegmentClass = 'cascade\\components\\web\\form\\Segment';
 	public $columnSchemaClass = 'yii\\db\\ColumnSchema';
 
+	public $foreignWeight = .7;
+
 	public $defaultCustomColumnSchema = [
 		'allowNull' => false,
 		'type' => 'string',
@@ -74,25 +76,35 @@ trait ActiveRecordTrait {
     }
 	
 
-    public static function searchForeign($term, $field)
+    public static function searchForeign($term, $field, $params = [])
 	{
+		$defaultParams = ['foreignWeight' => .8, 'ignore' => []];
+		$params = array_merge($defaultParams, $params);
 		$modelClass = get_called_class();
 		$model = new $modelClass;
 
 		$package = [];
 		$parts = explode(':', $field);
-    	if (count($parts) !== 2) { return $package; }
+    	if (count($parts) < 2) { return $package; }
+
     	$relationshipType = $parts[0];
     	if (!in_array($relationshipType, ['child', 'children', 'descendants', 'parent', 'parents', 'ancestors'])) {
     		return null;
     	}
 
-		$searchFields = array_unique(static::searchFields());
+		$searchFields = static::searchFields();
     	$companionName = $parts[1];
     	$fieldName = isset($parts[2]) ? $parts[2] : 'descriptor';
     	$myTypeItem = $model->objectTypeItem;
+    	$weightField = $parts[0].'SearchWeight';
     	$companionTypeItem = Yii::$app->collectors['types']->getOne($companionName);
     	if (!$companionTypeItem || !$myTypeItem || !($companionType = $companionTypeItem->object) || !($myType = $myTypeItem->object)) { return null; }
+
+		if ($companionType->{$weightField} && $companionType->{$weightField} !== true) {
+			$searchWeight = (float) $companionType->{$weightField};
+		} else {
+			$searchWeight = $params['foreignWeight'];
+		}
     	if (in_array($relationshipType, ['child', 'children', 'descendants'])) {
     		// I'm the parent
     		$relationship = Relationship::has($myTypeItem, $companionTypeItem) ? Relationship::getOne($myTypeItem, $companionTypeItem) : false;
@@ -102,11 +114,15 @@ trait ActiveRecordTrait {
     		$seek = 'children';
     	}
     	if (!$relationship) { return $package; }
-    	$results = $companionType->search($term);
+    	$newParams = [];
+    	$newParams['skipForeign'] = true;
+    	$results = $companionType->search($term, $newParams);
     	foreach ($results as $result) {
     		if (empty($result->object)) { continue; }
     		foreach ($result->object->$seek($myType->primaryModel) as $object) {
-    			$package[$object->id] = self::createSearchResult($object, $searchFields, $result->score);
+    			$foreignResult = self::createSearchResult($object, $searchFields, $result->score * $searchWeight);
+    			if (!$foreignResult) { continue; }
+    			$package[$object->id] = $foreignResult;
     			$package[$object->id]->mergeTerms([$result->object->descriptor]);
     			$package[$object->id]->addSubdescriptorValue($result->object->descriptor);
     		}
@@ -185,37 +201,84 @@ trait ActiveRecordTrait {
 		$modelClass = get_called_class();
 		$model = new $modelClass;
 
-		if (is_null($model->descriptorField)) {
-			$fields = [];
-		} elseif(is_array($model->descriptorField)) {
-			$fields = $model->descriptorField;
-		} else {
-			$fields = [$model->descriptorField];
+		$fields = [];
+		if (!is_null($model->descriptorField)) {
+			if (is_array($model->descriptorField)) {
+				$fields[] = $model->descriptorField;
+			} else {
+				$fields[] = [$model->descriptorField];
+			}
 		}
-
-		$fields = array_intersect($fields, $model->attributes());
+		$attributes = $model->attributes();
+		foreach ($fields as $key => $fieldList) {
+			if (!is_array($fieldList)) {
+				\d($fields);exit;
+			}
+			foreach ($fieldList as $fieldKey => $field) {
+				if (!in_array($field, $attributes)) {
+					unset($fields[$key][$fieldKey]);
+				}
+				if (empty($fields[$key])) {
+					unset($fields[$key]);
+				}
+			}
+		}
+		// $fields = array_intersect($fields, );
 		if (($moduleItem = $model->getObjectTypeItem())) {
 			foreach ($moduleItem->children as $key => $relationship) {
-				if ($relationship->child->searchForParent) {
+				if ($relationship->child->childSearchWeight) {
 					$fields[] = 'child:'.$key;
+				}
+			}
+			foreach ($moduleItem->parents as $key => $relationship) {
+				if ($relationship->parent->parentSearchWeight) {
+					$fields[] = 'parent:'.$key;
 				}
 			}
 		}
 		return $fields;
 	}
 
-	public static function parseSearchFields($fields)
+	public static function prepareObjectTerms($object, $fields)
 	{
-		$localFields = [];
-		$foreignTypes = [];
-		foreach ($fields as $field) {
-			if (strpos($field, ':') === false) {
-				$localFields[] = $field;
-			} else {
-				$foreignTypes[] = $field;
+		$terms = [];
+		foreach ($fields as $fieldList) {
+			if (!is_array($fieldList)) {
+				$fieldList = [$fieldList];
+			}
+			foreach ($fieldList as $field) {
+				if (strpos(':', $field) === false) { continue; }
+				if (!empty($object->{$field})) {
+					$terms[] = $object->{$field};
+				}
 			}
 		}
-		return [$localFields, $foreignTypes];
+		return $terms;
+	}
+
+	public static function parseSearchFields($fields)
+	{
+		$result = ['local' => [], 'foreign' => []];
+		foreach ($fields as $fieldKey => $fieldList) {
+			if (!is_array($fieldList)) {
+				$fieldList = [$fieldList];
+			}
+			foreach ($fieldList as $field) {
+				if (strpos($field, ':') === false) {
+					$destination = 'local';
+				} else {
+					$destination = 'foreign';
+				}
+				if (!isset($result[$destination][$fieldKey])) {
+					$result[$destination][$fieldKey] = [];
+				}
+				$result[$destination][$fieldKey][] = $field;
+			}
+
+		}
+		$result['local'] = array_values($result['local']);
+		$result['foreign'] = array_values($result['foreign']);
+		return $result;
 	}
 
 	public function getDefaultValues()

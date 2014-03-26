@@ -59,5 +59,13 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 			'url' => $this->url
 		]);
 	}
+
+	public function getScore()
+	{
+		if (empty($this->object->objectType->searchWeight)) {
+			return 0;
+		}
+		return parent::getScore() * $this->object->objectType->searchWeight;
+	}
 }
 ?>

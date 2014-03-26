@@ -33,7 +33,10 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 
 	public $hasDashboard = true;
 	public $uniparental = false;
-	public $searchForParent = false; // can you find a parent through objects of this type?
+
+	public $searchWeight = 1; // overall weight of item in search results
+	public $childSearchWeight = false; // weight when a child of a searchable object
+	public $parentSearchWeight = false; // weight when a parent of a searchable object
 	
 	public $primaryAsChild = false;
 	public $primaryAsParent = false;

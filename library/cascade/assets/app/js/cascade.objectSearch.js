@@ -45,6 +45,7 @@ var SearchItemResult =  function(context) {
             'name': 'objects',
             'queryTokenizer': Bloodhound.tokenizers.whitespace,
             'datumTokenizer': Bloodhound.tokenizers.obj.whitespace('descriptor'),
+            'limit': 10,
             'remote': {
                'url': $this.options.remote.url,
                'ajax': {
