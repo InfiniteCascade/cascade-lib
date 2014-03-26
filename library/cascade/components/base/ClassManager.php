@@ -24,6 +24,7 @@ class ClassManager extends \infinite\base\ClassManager
 			'TaxonomyType' => 'cascade\\models\\TaxonomyType',
 			'RelationTaxonomy' => 'cascade\\models\\RelationTaxonomy',
 			'ObjectTaxonomy' => 'cascade\\models\\ObjectTaxonomy',
+			'SearchTermResult' => 'cascade\\components\\db\\behaviors\\SearchTermResult',
 		];
 	}
 }

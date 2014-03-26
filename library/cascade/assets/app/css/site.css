@@ -246,48 +246,6 @@ footer {
 
 }
 
-/* Hack for Typeahead */
-.twitter-typeahead {
-  display: block;
-  display: block!important;
-}
-
-.twitter-typeahead .tt-query,
-.twitter-typeahead .tt-hint {
-  margin-bottom: 0;
-}
-
-.tt-hint {
-  display: none;
-}
-.tt-dropdown-menu {
-  min-width: 160px;
-  margin-top: 32px;
-  padding: 5px 0;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  background-clip: padding-box;
-}
-
-.tt-suggestion {
-  display: block;
-  padding: 3px 20px;
-}
-.tt-suggestion.tt-is-under-cursor {
-  color: #fff;
-  background-color: #428bca;
-}
-.tt-suggestion.tt-is-under-cursor a {
-  color: #fff;
-}
-.tt-suggestion p {
-  margin: 0;
-}
-
 /* objectBrowse */
 .object-browse {
   height: 200px;
@@ -335,4 +293,80 @@ footer {
   float: right;
   width: 50%;
   min-width: 300px;
+}
+
+.access-search-input {
+  width: 100%;
+  font-size: 1.1em;
+  height: auto;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+/* Hack for Typeahead */
+.twitter-typeahead {
+  display: block;
+  display: block!important;
+}
+
+.twitter-typeahead .tt-query,
+.twitter-typeahead .tt-hint {
+  margin-bottom: 0;
+}
+
+.tt-hint {
+  display: none;
+}
+.tt-dropdown-menu {
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.tt-suggestion {
+  display: block;
+  padding: 0;
+  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.tt-suggestion:last-child {
+  border-bottom: none;
+}
+
+/* Search */
+.ic-search-result, 
+.ic-search-result:hover {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+.tt-cursor .ic-search-result {
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.ic-search-empty {
+  padding: 5px;
+}
+
+.ic-search-result .ic-search-header {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 1px;
+}
+.ic-search-result .ic-search-sub {
+  font-size: .9em;
+}
+
+.ic-search-result .ic-search-icon {
+  float: left;
+  font-size: 1.1em;
+  margin-right: 5px;
 }

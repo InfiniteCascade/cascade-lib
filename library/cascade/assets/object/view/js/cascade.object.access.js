@@ -14,11 +14,11 @@ function AccessManager($manager) {
 		}
 	});
 
-	this.searchForm = $("<input />", {'type': 'text', 'name': 'search'});
+	this.searchForm = $("<input />", {'type': 'text', 'name': 'search', 'placeholder': 'Search for new item...', 'class': 'form-control access-search-input'});
 	this.searchForm.appendTo($manager);
 	this.searchForm.objectSearch({
 		'data': {
-			'specialFilters': ['authority'],
+			'typeFilters': ['authority'],
 			'ignore': self.getRequestorIds()
 		},
 		'callback': function(object, datum) {

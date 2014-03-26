@@ -15,11 +15,11 @@ use yii\helpers\Inflector;
 
 use infinite\helpers\Html;
 use infinite\helpers\ArrayHelper;
-use infinite\db\behaviors\SearchTerm;
 
 use cascade\components\web\form\Segment as FormSegment;
 use cascade\components\types\Relationship;
 use cascade\components\db\fields\Base as BaseField;
+use cascade\components\db\behaviors\SearchTerm;
 use cascade\models\Relation;
 
 trait ActiveRecordTrait {

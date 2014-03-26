@@ -1,3 +1,21 @@
+var SearchItemResult =  function(context) {
+   var $item = $("<a />", {'class': 'ic-search-result', 'href': '#'}).click(function(e) { e.preventDefault(); });
+   if (context.icon !== undefined) {
+      var $icon = $("<span />", context.icon).appendTo($item).addClass('ic-search-icon');
+   };
+   if (context.descriptor !== undefined) {
+      var $descriptor = $("<h4 />", {class: 'ic-search-header'}).html(context.descriptor).appendTo($item);
+   }
+   if (context.subdescriptor !== undefined) {
+
+      if (typeof context.subdescriptor === 'object' && Array.isArray(context.subdescriptor)) {
+         context.subdescriptor = context.subdescriptor.join("<br />");
+      }
+      var $subdescriptor = $("<div />", {class: 'ic-search-text'}).html(context.subdescriptor).appendTo($item);
+   }
+   return $item;
+};
+
 (function ($) { 
    $.fn.objectSearch = function (opts) {
    		var $this = this;
@@ -5,8 +23,16 @@
       		'remote': {
       			'url': '/search',
       		},
+            'resultsBox': {
+               'maxWidth': 200,
+               'oriented': 'right',
+            },
             'data': {},
       		'maxParallelRequests': 2,
+            'templates': {
+               'empty': '<div class="ic-search-result ic-search-empty"><h4 class="ic-search-header">No objects matched your query.</h4></div>',
+               'suggestion': SearchItemResult
+            },
             'callback': function (object, datum) { $.debug(object); return false; }
    		};
 
@@ -34,18 +60,26 @@
          engineOptions.remote.url = engineOptions.remote.url.replace('--QUERY--', '%QUERY');
          var engine = new Bloodhound(engineOptions);
          engine.initialize();
-         $.debug(SingleTemplateEngine.compile('<p><strong>{{descriptor}}</strong>&nbsp;{{subdescriptor}}</p>'));
+         $.debug(SingleTemplateEngine.compile());
          typeSource.name = 'objects';
          typeSource.displayKey = 'label',
          typeSource.source = engine.ttAdapter()
          typeSource.templates = {
-            'empty': [
-               '<div class="empty-message">',
-               'No objects matched your query.',
-               '</div>'
-               ].join('\n'),
-            'suggestion': SingleTemplateEngine.compile('<p><strong>{{descriptor}}</strong>&nbsp;{{subdescriptor}}</p>')
+            'empty':  $this.options.templates.empty,
+            'suggestion': $this.options.templates.suggestion
          };
-      	return $this.typeahead(typeOptions, typeSource).on('typeahead:autocompleted', function(event) { event.stopPropagation(); return false; }).on('typeahead:selected', $this.options.callback);
+      	var $typeaheadInput = $this
+            .on('typeahead:autocompleted', function(event) { event.stopPropagation(); return false; })
+            .on('typeahead:selected', $this.options.callback)
+            .typeahead(typeOptions, typeSource);
+         var typeahead = $typeaheadInput.data('ttTypeahead');
+         $typeaheadInput.on('typeahead:opened', function() {
+            var typeaheadWidth = Math.max($this.options.resultsBox.maxWidth, parseInt($typeaheadInput.outerWidth(), 10));
+            if ($this.options.resultsBox.oriented === 'left') {
+               typeahead.dropdown.$menu.css({'left': 'auto', 'right': 0});
+            }
+            typeahead.dropdown.$menu.css({'min-width': typeaheadWidth});
+            typeahead.dropdown.$menu.css({'margin-top': parseInt($typeaheadInput.css('padding-bottom'), 10) / 2});
+         });
    };
 }(jQuery));

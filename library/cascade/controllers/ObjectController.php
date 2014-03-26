@@ -80,7 +80,7 @@ class ObjectController extends Controller
 	 */
 	public function actionSearch() {
 		$package = [];
-		$defaultParams = ['specialFilters' => []];
+		$defaultParams = ['typeFilters' => []];
 		$searchParams = array_merge($defaultParams, $_GET);
 
 		if (empty($searchParams['term'])) {
@@ -105,7 +105,8 @@ class ObjectController extends Controller
 		foreach ($modules as $module) {
 			$moduleItem = Yii::$app->collectors['types']->getOne($module);
 			if (!$moduleItem || !($moduleObject = $moduleItem->object)) { continue; }
-			if (in_array('authority', $searchParams['specialFilters']) && $moduleItem->object->getBehavior('Authority') === null) { continue; }
+			if (in_array('authority', $searchParams['typeFilters']) && $moduleItem->object->getBehavior('Authority') === null) { continue; }
+			if (in_array('dashboard', $searchParams['typeFilters']) && !$moduleItem->object->hasDashboard) { continue; }
 			$moduleResults = $moduleObject->search($term, $params);
 			foreach ($moduleResults as $r) {
 				$package[] = $r->toArray();
