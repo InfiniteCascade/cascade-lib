@@ -429,9 +429,23 @@ class ObjectController extends Controller
 
 		Yii::$app->response->task = 'dialog';
 		Yii::$app->response->taskOptions = $taskOptions;
-		$this->params['access'] = $object->objectAccess;
-		if ($lookAtPost && !empty($_POST)) {
-			
+		$this->params['access'] = $access = $object->objectAccess;
+		if ($lookAtPost && !empty($_POST['roles'])) {
+			$result = $access->save($_POST['roles']);
+			if (!empty($result['errors'])) {
+				Yii::$app->response->error = implode('; ', $result['errors']);
+			} else {
+				Yii::$app->response->task = 'status';
+				Yii::$app->response->success = 'Access has been updated.';
+				if (empty($relatedObject)) {
+					Yii::$app->response->refresh = true;
+				} else {
+					$primaryModel = $relatedType->primaryModel;
+					Yii::$app->response->trigger = [
+						['refresh', '.model-'. $primaryModel::baseClassName()]
+					];
+				}
+			}
 		}
 	}
 
