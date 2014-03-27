@@ -21,6 +21,10 @@ return [
 	],
 	'moduleConfig' => [
 	],
-	'defaultStorageEngine' => 'local'
+	'defaultStorageEngine' => 'local',
+	'maxRoleLevels' => [
+		'public' => INFINITE_ROLE_LEVEL_VIEWER, // viewer
+		'primaryAccount' => INFINITE_ROLE_LEVEL_MANAGER // manager
+	]
 ];
 ?>

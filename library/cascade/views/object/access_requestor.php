@@ -17,7 +17,7 @@ $htmlOptions['data-requestor'] = json_encode($requestorOptions);
 echo Html::beginTag('li', $htmlOptions);
 echo $this->renderFile('@cascade/views/object/access_role.php', [
 	'roles' => $roles,
-	'role' => $objectRoles[$requestorObject->primaryKey]['role'],
+	'role' => isset($objectRoles[$requestorObject->primaryKey]['role']) ? $objectRoles[$requestorObject->primaryKey]['role']->object : null,
 	'objectAccess' => $objectAccess,
 	'disableFields' => $disableFields
 ], $this);

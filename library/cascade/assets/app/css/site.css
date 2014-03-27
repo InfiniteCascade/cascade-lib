@@ -291,8 +291,8 @@ footer {
 
 .access-role-menu > ul {
   float: right;
-  width: 50%;
-  min-width: 300px;
+  width: 80%;
+  min-width: 240px;
 }
 
 .access-search-input {

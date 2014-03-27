@@ -30,7 +30,8 @@ function AccessManager($manager) {
 
 AccessManager.prototype.defaultOptions = {
 	'types': {},
-	'roles': {}
+	'roles': {},
+	'universalMaxRoleLevel': true
 };
 
 AccessManager.prototype.addRequestorRow =  function(object, dataset) {
@@ -248,8 +249,10 @@ AccessRequestor.prototype.getRoleMenu = function() {
 AccessRequestor.prototype.getPossibleRoles = function() {
 	var self = this;
 	var roles = {};
+	$.debug(self.getManager().options.universalMaxRoleLevel);
 	jQuery.each(this.getManager().getRoles(), function(index, value) {
-		if (self.options.maxRoleLevel && value.getLevel() >= self.options.maxRoleLevel) { return true; }
+		if (self.options.maxRoleLevel && self.options.maxRoleLevel !== true && value.getLevel() > self.options.maxRoleLevel) { return true; }
+		if (self.getManager().options.universalMaxRoleLevel !== undefined && self.getManager().options.universalMaxRoleLevel !== true && value.getLevel() > self.getManager().options.universalMaxRoleLevel) { return true; }
 		if (!value.getAvailable()) { return true; }
 		roles[index] = value;
 	});

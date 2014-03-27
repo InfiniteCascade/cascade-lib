@@ -212,6 +212,13 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		return [];
 	}
 
+	public function getRoleValidationSettings($object = null)
+	{
+		$settings = [];
+		$settings['possibleRoles'] = $this->possibleRoles;
+		return $settings;
+	}
+
 	public function getPossibleRoles()
 	{
 		$roles = [];

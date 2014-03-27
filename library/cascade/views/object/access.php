@@ -36,6 +36,7 @@ if (!$disableFields) {
 	$dataAccess = [];
 	$dataAccess['roles'] = $roles;
 	$dataAccess['types'] = $types;
+	$dataAccess['universalMaxRoleLevel'] = $access->getUniversalMaxRoleLevel();
 	$htmlOptions['data-access'] = json_encode($dataAccess);
 }
 
@@ -44,24 +45,24 @@ $form = ActiveForm::begin(['options' => ['class' => 'ajax']]);
 echo Html::beginTag('ul', $htmlOptions);
 if ($publicGroup) {
 	$requestorParams = [
-		'requestorObject' => $publicGroup,
+		'requestorObject' => $publicGroup['object'],
 		'helpText' => 'Access level for the public',
-		'maxRoleLevel' => 199,
+		'maxRoleLevel' => $publicGroup['maxRoleLevel'],
 		'htmlOptions' => ['class' => 'list-group-item-warning']
 	];
 	echo $this->renderFile('@cascade/views/object/access_requestor.php', array_merge($baseRequestorParams, $requestorParams), $this);
-	unset($objectRoles[$publicGroup->primaryKey]);
+	unset($objectRoles[$publicGroup['object']->primaryKey]);
 }
 
 if ($primaryAccount) {
 	$requestorParams = [
-		'requestorObject' => $primaryAccount,
+		'requestorObject' => $primaryAccount['object'],
 		'helpText' => 'Access level for internal staff',
-		'maxRoleLevel' => 399,
+		'maxRoleLevel' => $primaryAccount['maxRoleLevel'],
 		'htmlOptions' => ['class' => 'list-group-item-info']
 	];
 	echo $this->renderFile('@cascade/views/object/access_requestor.php', array_merge($baseRequestorParams, $requestorParams), $this);
-	unset($objectRoles[$primaryAccount->primaryKey]);
+	unset($objectRoles[$primaryAccount['object']->primaryKey]);
 }
 
 foreach ($objectRoles as $objectId => $objectRole) {

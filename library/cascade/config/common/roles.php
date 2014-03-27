@@ -6,22 +6,22 @@ return [
 			'name' => 'Owner',
 			'systemId' => 'owner',
 			'exclusive' => true,
-			'level' => 400
+			'level' => INFINITE_ROLE_LEVEL_OWNER
 		],
 		'manager' => [
 			'name' => 'Manager',
 			'systemId' => 'manager',
-			'level' => 300
+			'level' => INFINITE_ROLE_LEVEL_MANAGER
 		],
 		'editor' => [
 			'name' => 'Editor',
 			'systemId' => 'editor',
-			'level' => 200
+			'level' => INFINITE_ROLE_LEVEL_EDITOR
 		],
 		'viewer' => [
 			'name' => 'Viewer',
 			'systemId' => 'viewer',
-			'level' => 100
+			'level' => INFINITE_ROLE_LEVEL_VIEWER
 		]
 	]
 ];
