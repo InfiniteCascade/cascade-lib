@@ -6,6 +6,7 @@ use yii\helpers\Url;
 class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 {
 	protected $_icon;
+	protected $_objectType;
 	protected $_objectTypeDescriptor;
 	protected $_url;
 
@@ -52,11 +53,27 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 		$this->_objectTypeDescriptor = $type;
 	}
 
+
+	public function getObjectType()
+	{
+		if (is_null($this->_objectType) && isset($this->object)) {
+			$this->_objectType = $this->object->objectType->systemId;
+		}
+		return $this->_objectType;
+	}
+
+	public function setObjectType($type) 
+	{
+		$this->_objectType = $type;
+	}
+
+
 	public function toArray()
 	{
 		return array_merge(parent::toArray(), [
 			'icon' => $this->icon,
-			'url' => $this->url
+			'url' => $this->url,
+			'type' => $this->objectType
 		]);
 	}
 

@@ -207,20 +207,59 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 		return $this->setup();
 	}
 
-	public function getPossibleRoles() {
-		return Yii::$app->collectors['roles']->getRoles($this);
-	}
-
-	public function getPossibleRoleList() {
-		return Yii::$app->collectors['roles']->getRoleList($this);
-	}
 
 	public function getCreatorRole() {
 		return [];
 	}
 
+	public function getPossibleRoles()
+	{
+		$roles = [];
+		foreach (Yii::$app->collectors['roles']->getAll() as $roleItem) {
+			$test = true;
+			switch ($roleItem->systemId) {
+				case 'owner':
+					$test = $this->isOwnable;
+				break;
+			}
+			if ($test) {
+				$roles[] = $roleItem->object->primaryKey;
+			}
+		}
+		return $roles;
+	}
+
+	public function getRequiredRoles()
+	{
+		$roles = [];
+		foreach (Yii::$app->collectors['roles']->getAll() as $roleItem) {
+			$test = false;
+			switch ($roleItem->systemId) {
+				case 'owner':
+					$test = $this->isOwnable;
+				break;
+			}
+			if ($test) {
+				$roles[] = $roleItem->object->primaryKey;
+			}
+		}
+		return $roles;
+	}
+
+	public function getInitialRole()
+	{
+		$roles = [];
+		foreach (Yii::$app->collectors['roles']->getAll() as $roleItem) {
+			$test = $roleItem->level < 400;
+			if ($test) {
+				$roles[] = $roleItem->object->primaryKey;
+			}
+		}
+		return $roles;
+	}
+
 	public function getIsOwnable() {
-		return false;
+		return $this->dummyModel->getBehavior('Ownable') !== null && $this->dummyModel->getBehavior('Ownable')->isEnabled();
 	}
 
 	public function getOwnerObject() {

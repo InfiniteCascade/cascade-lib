@@ -1,6 +1,6 @@
 function AccessManager($manager) {
 	var self = this;
-	this.object = $manager;
+	this.$object = $manager;
 	this.activeMenu = false;
 	this.requestors = {};
 	this.options = jQuery.extend(true, {}, this.defaultOptions, $manager.data('access'));
@@ -15,26 +15,50 @@ function AccessManager($manager) {
 	});
 
 	this.searchForm = $("<input />", {'type': 'text', 'name': 'search', 'placeholder': 'Search for new item...', 'class': 'form-control access-search-input'});
-	this.searchForm.appendTo($manager);
+	this.searchForm.insertAfter($manager);
 	this.searchForm.objectSearch({
 		'data': {
 			'typeFilters': ['authority'],
 			'ignore': self.getRequestorIds()
 		},
-		'callback': function(object, datum) {
-			self.addRequestorRow(object, datum);
+		'callback': function(event, object, dataset) {
+			self.addRequestorRow(object, dataset);
 		}
 	});
 
 }
 
 AccessManager.prototype.defaultOptions = {
+	'types': {},
 	'roles': {}
 };
 
-AccessManager.prototype.addRequestorRow =  function(object, datum) {
-	$.debug(object);
-	$.debug(datum);
+AccessManager.prototype.addRequestorRow =  function(object, dataset) {
+	var self = this;
+	var type = this.getType(object.type);
+	if (!type) { return false; }
+	var requestorObject = {};
+	requestorObject.id = object.id;
+	requestorObject.label = object.descriptor;
+	requestorObject.type = object.type;
+
+	var $row = $("<li />", {'class': 'list-group-item'}).data('requestor', requestorObject);
+	var requestor = new AccessRequestor(this, $row, type);
+	this.requestors[requestor.getId()] = requestor;
+	var role = type.getInitialRole();
+	if (!role) { return false; }
+	var $role = $("<button />", {'class': 'btn btn-default pull-right has-role-object'}).html(role.getButtonLabel()).data('role', role).appendTo($row);
+	$role.attr('type', 'button');
+	role.attach(requestor, $role);
+	var $header = $("<h4 />", {'class': 'list-group-item-heading'}).html(object.descriptor).appendTo($row);
+	var $subheader = $("<p />", {'class': 'list-group-item-text help-text'}).html(type.getLabel()).appendTo($row);
+	
+	$row.appendTo(this.$object);
+	return $row;
+};
+
+AccessManager.prototype.getDefaultRole = function() {
+
 };
 
 AccessManager.prototype.getRoles =  function() {
@@ -52,6 +76,26 @@ AccessManager.prototype.getRole = function(role) {
 	var roles = this.getRoles();
 	if (roles[role] !== undefined) {
 		return roles[role];
+	}
+	return false;
+}
+
+
+AccessManager.prototype.getTypes =  function() {
+	var self = this;
+	if (this._types === undefined) {
+		this._types = {};
+		jQuery.each(this.options.types, function(index, value) {
+			self._types[index] = new AccessType(self, value);
+		});
+	}
+	return this._types;
+};
+
+AccessManager.prototype.getType = function(type) {
+	var types = this.getTypes();
+	if (types[type] !== undefined) {
+		return types[type];
 	}
 	return false;
 }
@@ -82,10 +126,14 @@ AccessManager.prototype.getRequestorIds = function() {
 	return ids;
 };
 
-function AccessRequestor(manager, $requestor) {
+function AccessRequestor(manager, $requestor, type) {
 	this.manager = manager;
-	this.object = $requestor;
+	this.$object= $requestor;
 	this.options = jQuery.extend(true, {}, this.defaultOptions, $requestor.data('requestor'));
+	if (type === undefined && this.options.type !== undefined) {
+		type = manager.getType(this.options.type);
+	}
+	this.type = type || false;
 	this.role = null;
 	this.roleObject = null;
 	this.getRole();
@@ -110,21 +158,25 @@ AccessRequestor.prototype.getId = function() {
 AccessRequestor.prototype.getRole = function() {
 	var self = this;
 	if (this.role === null) {
-		this.object.find('[data-role]').each(function() {
+		this.$object.find('.has-role-object').each(function() {
 			self.roleObject = $(this);
-			var role = $(this).data('role');
-			if (role.id !== undefined && (self.role = self.getPossibleRole(role.id))) {
-				self.role.attach(self, $(this));
-				$(this).on('click', function(e) {
-					self.toggleRoleMenu();
-				});
-			} else {
-				$(this).addClass('disabled');
-			}
-			if (self.role) {
-				return false;
-			}
+			self.role = $(this).data('role');
+			return false;
 		});
+		if (this.role === null) {
+			this.$object.find('[data-role]').each(function() {
+				self.roleObject = $(this);
+				var role = $(this).data('role');
+				if (role.id !== undefined && (self.role = self.getPossibleRole(role.id))) {
+					self.role.attach(self, $(this));
+				} else {
+					$(this).addClass('disabled');
+				}
+				if (self.role) {
+					return false;
+				}
+			});
+		}
 	}
 	return this.role;
 };
@@ -134,7 +186,7 @@ AccessRequestor.prototype.getManager = function() {
 };
 
 AccessRequestor.prototype.getObject = function() {
-	return this.object;
+	return this.$object;
 };
 
 
@@ -165,10 +217,10 @@ AccessRequestor.prototype.buildRoleMenu = function() {
 };
 
 AccessRequestor.prototype.switchRole = function(newRole) {
+	if (!newRole) { return false; }
 	this.role = newRole;
-	$.debug(newRole);
-	$.debug(this.roleObject);
 	this.roleObject.find('.role-label').html(newRole.getLabel());
+	newRole.check(this, this.roleObject, true);
 	this.getRoleMenu().destroy();
 	delete this._roleMenu;
 	return true;
@@ -203,47 +255,95 @@ AccessRequestor.prototype.getPossibleRole = function(role) {
 
 AccessRequestor.prototype.toggleRoleMenu = function() {
 	this.getManager().setActiveRoleMenu(this.getRoleMenu());
-	$.debug(this.getRoleMenu());
 };
 
 function AccessMenu($object) {
-	this.object = $object;
+	this.$object= $object;
 }
 
 AccessMenu.prototype.attach = function(requestor) {
-	$.debug(requestor.getObject());
-	$.debug(this.getObject());
 	requestor.getObject().append(this.getObject());
 };
 
 AccessMenu.prototype.show = function(callback) {
-	if (!this.object.is(':visible') && !this.object.is(':animated')) {
-		this.object.slideDown(callback);
+	if (!this.$object.is(':visible') && !this.$object.is(':animated')) {
+		this.$object.slideDown(callback);
 	}
 };
 
 AccessMenu.prototype.hide = function(callback) {
-	if (this.object.is(':visible') && !this.object.is(':animated')) {
-		this.object.slideUp(callback);
+	if (this.$object.is(':visible') && !this.$object.is(':animated')) {
+		this.$object.slideUp(callback);
 	}
 };
 
 AccessMenu.prototype.getObject = function() {
-	return this.object;
+	return this.$object;
 };
 
 AccessMenu.prototype.isVisible = function() {
-	return this.object.is(':visible');
+	return this.$object.is(':visible');
 }
 
 AccessMenu.prototype.destroy = function() {
 	var self = this;
 	if (!this.isVisible()) {
-		return this.object.remove();
+		return this.$object.remove();
 	} else {
-		return this.hide(function() { self.object.remove() });
+		return this.hide(function() { self.$object.remove() });
 	}
 }
+
+
+function AccessType(manager, options) {
+	var self = this;
+	this.manager=  manager;
+	this.options = jQuery.extend(true, {}, this.defaultOptions, options);
+}
+
+AccessType.prototype.defaultOptions = {
+	'label': false,
+	'possibleRoles': [],
+	'initialRole': [],
+	'requiredRoles': []
+
+};
+
+AccessType.prototype.isRequiredRole = function(role) {
+	if (jQuery.inArray(role.getId(), this.options.requiredRoles) !== -1) {
+		return true;
+	}
+	return false;
+};
+
+AccessType.prototype.getManager = function() {
+	return this.manager;
+};
+
+
+AccessType.prototype.getInitialRole = function() {
+	var role = false;
+	var self = this;
+	jQuery.each(this.options.initialRole, function(index, value) {
+		if (jQuery.inArray(value, self.getPossibleRoles()) !== -1) {
+			role = self.getManager().getRole(value);
+			return false;
+		}
+	});
+	return role;
+}
+
+AccessType.prototype.getPossibleRoles = function() {
+	return this.options.possibleRoles;
+};
+
+AccessType.prototype.getRequiredRoles = function() {
+	return this.options.requiredRoles;
+};
+
+AccessType.prototype.getLabel = function() {
+	return this.options.label;
+};
 
 function AccessRole(options) {
 	var self = this;
@@ -253,21 +353,52 @@ function AccessRole(options) {
 AccessRole.prototype.attach = function(requestor, $roleButton) {
 	var self = this;
 	$roleButton.data('role', this);
-	if (this.getRequired()) {
+
+	$roleButton.on('click', function(e) {
+		requestor.toggleRoleMenu();
+	});
+	this.check(requestor, $roleButton, false);
+};
+
+AccessRole.prototype.check = function(requestor, $roleButton, checkConflict) {
+	var self = this;
+	if (requestor.type && requestor.type.isRequiredRole(this)) {
 		$roleButton.addClass("disabled required");
+	} else {
+		$roleButton.removeClass("disabled required");
+	}
+	if (checkConflict) {
+		if (this.options.exclusive) {
+			var manager = requestor.getManager();
+			jQuery.each(manager.requestors, function(index, requestorItem) {
+				if (requestorItem === requestor) { 
+					return true;
+				}
+				if (requestorItem.role && requestorItem.role === self) {
+					var newRole = requestorItem.type.getInitialRole();
+					requestorItem.switchRole(newRole);
+				}
+			});
+		}
 	}
 };
 
 AccessRole.prototype.defaultOptions = {
+	'id': null,
 	'level': 0,
 	'available': true,
-	'required': false,
 	'label': false,
-	'helpText': false
+	'helpText': false,
+	'exclusive': false,
+	'conflictRole': 'none'
 };
 
 AccessRole.prototype.getRequestor = function() {
 	return this.requestor;
+};
+
+AccessRole.prototype.getId = function() {
+	return this.options.id;
 };
 
 AccessRole.prototype.getManager = function() {
@@ -288,6 +419,14 @@ AccessRole.prototype.getAvailable = function() {
 
 AccessRole.prototype.getLabel = function() {
 	return this.options.label;
+};
+
+AccessRole.prototype.getButtonLabel = function() {
+	var $container = $("<div/ >");
+	$container.append($("<span />").addClass('role-label').html(this.getLabel()));
+	$container.append(' ');
+	$container.append($("<span />").addClass('caret'));
+	return $container.html();
 };
 
 AccessRole.prototype.getHelpText = function() {

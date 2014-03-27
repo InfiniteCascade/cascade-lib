@@ -11,6 +11,7 @@ $requestorOptions = [];
 $requestorOptions['id'] = $requestorObject->primaryKey;
 $requestorOptions['label'] = $requestorObject->descriptor;
 $requestorOptions['maxRoleLevel'] = isset($maxRoleLevel) ? $maxRoleLevel : false;
+$requestorOptions['type'] = $requestorObject->objectType->systemId;
 $htmlOptions['data-requestor'] = json_encode($requestorOptions);
 
 echo Html::beginTag('li', $htmlOptions);

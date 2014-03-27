@@ -61,7 +61,6 @@ var SearchItemResult =  function(context) {
          engineOptions.remote.url = engineOptions.remote.url.replace('--QUERY--', '%QUERY');
          var engine = new Bloodhound(engineOptions);
          engine.initialize();
-         $.debug(SingleTemplateEngine.compile());
          typeSource.name = 'objects';
          typeSource.displayKey = 'label',
          typeSource.source = engine.ttAdapter()
@@ -70,9 +69,9 @@ var SearchItemResult =  function(context) {
             'suggestion': $this.options.templates.suggestion
          };
       	var $typeaheadInput = $this
+            .typeahead(typeOptions, typeSource)
             .on('typeahead:autocompleted', function(event) { event.stopPropagation(); return false; })
-            .on('typeahead:selected', $this.options.callback)
-            .typeahead(typeOptions, typeSource);
+            .on('typeahead:selected', $this.options.callback);
          var typeahead = $typeaheadInput.data('ttTypeahead');
          $typeaheadInput.on('typeahead:opened', function() {
             var typeaheadWidth = Math.max($this.options.resultsBox.maxWidth, parseInt($typeaheadInput.outerWidth(), 10));

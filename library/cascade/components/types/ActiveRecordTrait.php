@@ -78,7 +78,7 @@ trait ActiveRecordTrait {
 
     public static function searchForeign($term, $field, $params = [])
 	{
-		$defaultParams = ['foreignWeight' => .8, 'ignore' => []];
+		$defaultParams = ['foreignWeight' => .8, 'foreignLimit' => 5, 'ignore' => []];
 		$params = array_merge($defaultParams, $params);
 		$modelClass = get_called_class();
 		$model = new $modelClass;
@@ -116,15 +116,16 @@ trait ActiveRecordTrait {
     	if (!$relationship) { return $package; }
     	$newParams = [];
     	$newParams['skipForeign'] = true;
+    	$newParams['limit'] = $params['foreignLimit'];
     	$results = $companionType->search($term, $newParams);
     	foreach ($results as $result) {
     		if (empty($result->object)) { continue; }
     		foreach ($result->object->$seek($myType->primaryModel) as $object) {
     			$foreignResult = self::createSearchResult($object, $searchFields, $result->score * $searchWeight);
     			if (!$foreignResult) { continue; }
-    			$package[$object->id] = $foreignResult;
-    			$package[$object->id]->mergeTerms([$result->object->descriptor]);
-    			$package[$object->id]->addSubdescriptorValue($result->object->descriptor);
+    			$package[$object->primaryKey] = $foreignResult;
+    			$package[$object->primaryKey]->mergeTerms([$result->object->descriptor]);
+    			$package[$object->primaryKey]->addSubdescriptorValue($result->object->descriptor);
     		}
     	}
 

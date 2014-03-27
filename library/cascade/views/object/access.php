@@ -23,8 +23,19 @@ $baseRequestorParams = [
 $htmlOptions = ['class' => 'list-group ic-access-list'];
 
 if (!$disableFields) {
+	$types = [];
+	foreach (Yii::$app->collectors['types']->getAll() as $typeItem) {
+		if (!$typeItem->active) { continue; }
+		$types[$typeItem->systemId] = [
+			'label' => $typeItem->object->title->upperSingular,
+			'possibleRoles' => $typeItem->object->possibleRoles,
+			'initialRole' => $typeItem->object->initialRole,
+			'requiredRoles' => $typeItem->object->requiredRoles
+		];
+	}
 	$dataAccess = [];
 	$dataAccess['roles'] = $roles;
+	$dataAccess['types'] = $types;
 	$htmlOptions['data-access'] = json_encode($dataAccess);
 }
 
