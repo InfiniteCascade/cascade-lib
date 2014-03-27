@@ -102,8 +102,19 @@ AccessManager.prototype.getType = function(type) {
 
 AccessManager.prototype.handleFormSubmit = function($form, event) {
 	$.debug("SUBMIT!");
-	$.debug(event);
-	return false;
+	$form.data('data', {'roles': this.packageRoles()});
+	return true;
+};
+
+AccessManager.prototype.packageRoles = function() {
+	var rolePackage = {};
+	var self = this;
+	jQuery.each(this.requestors, function(index, requestor) {
+		var role = requestor.getRole();
+		if (!role) { return true; }
+		rolePackage[requestor.getId()] = role.getId();
+	});
+	return rolePackage;
 };
 
 AccessManager.prototype.setActiveRoleMenu = function(newMenu) {
@@ -441,8 +452,6 @@ $preparer.add(function(context) {
 		$this.data('manager', manager);
 		$form.on('submit', function(e) {
 			manager.handleFormSubmit($(this), e);
-			e.preventDefault(); // during development
-			e.stopPropagation();
 		});
 		$.debug(manager);
 	});
