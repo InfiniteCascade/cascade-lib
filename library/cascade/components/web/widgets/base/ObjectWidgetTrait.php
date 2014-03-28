@@ -268,6 +268,14 @@ trait ObjectWidgetTrait
 			];
 		}
 
+		if (!$objectType->hasDashboard && $model->can('manageAccess')) {
+			$menu['access'] = [
+				'icon' => 'fa fa-key',
+				'label' => 'Access',
+				'url' => ['/object/access'] + $baseUrl,
+				'linkOptions' => ['data-handler' => 'background']
+			];
+		}
 		
 		// delete button
 		if ($model->can('delete')) {

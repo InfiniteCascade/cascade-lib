@@ -38,26 +38,53 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 		return $this->_authority;
 	}
 
-	public function getControlledObject($object, $modelClass = null)
+	public function getControlledObject($object, $modelClass = null, $params = [])
 	{
+		$defaultParams = [
+			'followParents' => true,
+			'doNotFollow' => []
+		];
+		$params = array_merge($defaultParams, $params);
 		$objects = [];
 		if (is_null($modelClass) && isset($object) && is_object($object)) {
 			$modelClass = get_class($object);
 		}
 		$parent = parent::getControlledObject($object, $modelClass);
 		if ($parent) {
-			$objects[] = $parent->primaryKey;
+			if (is_array($parent)) {
+				$objects = array_merge($objects, $parent);
+			} else {
+				$objects[] = $parent->primaryKey;
+			}
 		}
 		if (!empty($modelClass)) {
 			$dummyModel = new $modelClass;
 			if (isset($dummyModel->objectType) && ($objectType = $dummyModel->objectType) && $objectType && isset($objectType->objectTypeModel)) {
 				$objects[] = $objectType->objectTypeModel->primaryKey;
+
+				if ($params['followParents'] && is_object($object) && !in_array($object->primaryKey, $params['doNotFollow']) && $objectType->inheritParentAccess) {
+					$params['doNotFollow'][] = $object->primaryKey;
+					$parentIds = $object->queryParentRelations(false, [], ['disableCheckAccess' => true])->select(['parent_object_id'])->column();
+					if (!empty($parentIds)) {
+						$registryClass = Yii::$app->classes['Registry'];
+						foreach ($parentIds as $parentId) {
+							$parent = $registryClass::getObject($parentId, false);
+							if ($parent) {
+								$parentAccessingObjects = $this->getControlledObject($parent, get_class($parent), $params);
+								if (!empty($parentAccessingObjects)) {
+									//print_r([$objects, $parentAccessingObjects, array_merge($objects, $parentAccessingObjects)]);
+									$objects = array_merge($objects, $parentAccessingObjects);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 		if (empty($objects)) {
 			return false;
 		}
-		return $objects;
+		return array_unique($objects);
 	}
 }
 ?>

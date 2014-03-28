@@ -163,7 +163,7 @@ class ObjectController extends Controller
 
 
 
-	protected function _parseParams($required = [], $can = null)
+	protected function _parseParams($required = [], $can = null, $swap = false)
 	{
 		if (!empty($_GET['id']) && (!($this->params['object'] = Registry::getObject($_GET['id'], false)) || !($this->params['typeItem'] = $this->params['object']->objectTypeItem))) {
 			throw new HttpException(404, "Unknown object.");
@@ -175,6 +175,14 @@ class ObjectController extends Controller
 		
 		if (isset($this->params['object'])) {
 			$this->params['activeObject'] = $this->params['object'];
+		}
+
+		if (isset($this->params['type'])) {
+			$this->params['activeType'] = $this->params['type'];
+		}
+
+		if (isset($this->params['typeItem'])) {
+			$this->params['activeTypeItem'] = $this->params['typeItem'];
 		}
 
 		if (isset($_GET['related_object_id']) && isset($_GET['object_relation']) && isset($_GET['relationship_id'])) {
@@ -262,7 +270,11 @@ class ObjectController extends Controller
 				throw new HttpException(400, "Invalid request");
 			}
 		}
-		Yii::$app->request->object = $this->params['object'];
+		if ($swap) {
+			Yii::$app->request->object = $this->params['activeObject'];
+		} else {
+			Yii::$app->request->object = $this->params['object'];
+		}
 	}
 	/**
 	 *
@@ -409,23 +421,19 @@ class ObjectController extends Controller
 	 */
 	public function actionAccess() {
 		$subform = null;
-		$this->_parseParams(['object', 'type'], 'update');
+		$this->_parseParams(['activeObject', 'activeType'], 'view');
 		extract($this->params);
-		if (isset($relatedType)) {
-			$primaryModel = $relatedType->primaryModel;
-		} else {
-			$primaryModel = $type->primaryModel;
-		}
+		$primaryModel = $activeType->primaryModel;
 		$this->params['errors'] = [];
 		Yii::$app->response->view = 'access';
-		$taskOptions = ['title' => 'Access for '. $type->title->getSingular(true)];
+		$taskOptions = ['title' => 'Access for '. $activeType->title->getSingular(true)];
 		$lookAtPost = false;
-		if ($object->can('manageAccess')) {
+		if ($activeObject->can('manageAccess')) {
 			$lookAtPost = true;
 			$taskOptions['title'] = 'Manage ' . $taskOptions['title'];
 			$taskOptions['isForm'] = false;
 		}
-		$this->params['access'] = $access = $object->objectAccess;
+		$this->params['access'] = $access = $activeObject->objectAccess;
 		$this->params['disableFields'] = !$lookAtPost;
 		$taskOptions['isForm'] = $lookAtPost;
 		$objectRoles = $access->roleObjects;
@@ -441,7 +449,13 @@ class ObjectController extends Controller
 					Yii::$app->response->error = $result['errors'];
 				}
 				foreach ($result['data'] as $requestorId => $roleId) {
-					$objectRoles[$requestorId] = $access->getRoleObject($requestorId, $roleId);
+					$objectRole = $access->getRoleObject($requestorId, $roleId);
+					if (!isset($objectRoles[$requestorId]) 
+							|| (isset($objectRoles[$requestorId]['role']) 
+									&& $objectRoles[$requestorId]['role']->object->primaryKey !== $roleId)
+					) {
+						$objectRoles[$requestorId] = $objectRole;
+					}
 				}
 			} else {
 				Yii::$app->response->task = 'status';

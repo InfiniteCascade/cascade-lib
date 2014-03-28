@@ -121,12 +121,17 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 			foreach ($groups as $groupName) {
 				$group = Group::getBySystemName($groupName, false);
 				if (empty($group)) { continue; }
-				if (!$this->hasDashboard) {
+				if ($this->inheritParentAccess) {
 					$results[] = $this->objectTypeModel->parentAccess(null, $group);
 				}
 			}
 		}
 		return min($results);
+	}
+
+	public function getInheritParentAccess()
+	{
+		return !$this->hasDashboard;
 	}
 
 	public function determineOwner($object)

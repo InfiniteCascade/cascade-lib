@@ -6,6 +6,7 @@ return [
 			'name' => 'Owner',
 			'systemId' => 'owner',
 			'exclusive' => true,
+			'inheritedEditable' => false,
 			'level' => INFINITE_ROLE_LEVEL_OWNER
 		],
 		'manager' => [

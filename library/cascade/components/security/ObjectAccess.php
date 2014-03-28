@@ -36,12 +36,6 @@ class ObjectAccess extends \infinite\security\ObjectAccess {
 			if ($roleItem->levelSection === 'owner') { $foundOwner = true; continue; }
 			return 'shared';
 		}
-		// foreach ($this->requestors as $aro => $access) {
-		// 	if (!$access[$readAction->primaryKey]->can($aro)) { continue; }
-		// 	if (preg_match('/^'. $groupPrefix .'\-/', $aro) === 0) {
-		// 		return 'shared';
-		// 	}
-		// }
 		if ($foundOwner) {
 			return 'private';
 		} else {
@@ -68,8 +62,8 @@ class ObjectAccess extends \infinite\security\ObjectAccess {
 	{
 		$results = parent::validateRole($role, $validationSettings);
 		$objectType = $validationSettings['object']->objectType;
-		if (!in_array($objectType->systemId, $this->specialAuthorities) && $objectType->getBehavior('Authority') === null) {
-			$results['errors'][] = $validationSettings['object']->descriptor . ' can not be shared with.';
+		if (!empty($role) && $role !== 'none' && !in_array($objectType->systemId, $this->specialAuthorities) && $objectType->getBehavior('Authority') === null) {
+			$results['errors'][] = $validationSettings['object']->descriptor . ' can not be shared with.'.print_r($role, true);
 		}
 		return $results;
 	}

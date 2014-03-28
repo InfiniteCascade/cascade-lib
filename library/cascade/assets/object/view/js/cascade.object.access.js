@@ -152,7 +152,8 @@ function AccessRequestor(manager, $requestor, type) {
 }
 
 AccessRequestor.prototype.defaultOptions = {
-	'maxRoleLevel': false
+	'maxRoleLevel': false,
+	'editable': true
 };
 
 AccessRequestor.prototype.getLabel = function() {
@@ -385,7 +386,7 @@ AccessRole.prototype.check = function(requestor, $roleButton, checkConflict) {
 		if (this.options.exclusive) {
 			var manager = requestor.getManager();
 			jQuery.each(manager.requestors, function(index, requestorItem) {
-				if (requestorItem === requestor) { 
+				if (requestorItem === requestor || !requestorItem.options.editable) { 
 					return true;
 				}
 				if (requestorItem.role && requestorItem.role === self) {
