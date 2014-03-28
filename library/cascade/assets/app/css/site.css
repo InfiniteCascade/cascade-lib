@@ -284,6 +284,12 @@ footer {
   margin-top: 3px;
 }
 
+.ic-access-list .alert {
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
 .access-role-menu {
   margin-top: 10px;
   padding-bottom: 1px;

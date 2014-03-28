@@ -13,7 +13,6 @@ $requestorOptions['label'] = $requestorObject->descriptor;
 $requestorOptions['maxRoleLevel'] = isset($maxRoleLevel) ? $maxRoleLevel : false;
 $requestorOptions['type'] = $requestorObject->objectType->systemId;
 $htmlOptions['data-requestor'] = json_encode($requestorOptions);
-
 echo Html::beginTag('li', $htmlOptions);
 echo $this->renderFile('@cascade/views/object/access_role.php', [
 	'roles' => $roles,
@@ -26,5 +25,8 @@ if (!isset($helpText)) {
 	$helpText = $requestorObject->objectType->title->upperSingular;
 }
 echo Html::tag('p', $helpText, ['class' => 'list-group-item-text help-text']);
+if (isset($errors[$requestorObject->primaryKey])) {
+	echo Html::tag('p', $errors[$requestorObject->primaryKey], ['class' => 'alert alert-danger']);
+}
 echo Html::endTag('li');
 ?>

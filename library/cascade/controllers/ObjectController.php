@@ -416,6 +416,7 @@ class ObjectController extends Controller
 		} else {
 			$primaryModel = $type->primaryModel;
 		}
+		$this->params['errors'] = [];
 		Yii::$app->response->view = 'access';
 		$taskOptions = ['title' => 'Access for '. $type->title->getSingular(true)];
 		$lookAtPost = false;
@@ -424,16 +425,24 @@ class ObjectController extends Controller
 			$taskOptions['title'] = 'Manage ' . $taskOptions['title'];
 			$taskOptions['isForm'] = false;
 		}
+		$this->params['access'] = $access = $object->objectAccess;
 		$this->params['disableFields'] = !$lookAtPost;
 		$taskOptions['isForm'] = $lookAtPost;
-
+		$objectRoles = $access->roleObjects;
 		Yii::$app->response->task = 'dialog';
 		Yii::$app->response->taskOptions = $taskOptions;
-		$this->params['access'] = $access = $object->objectAccess;
 		if ($lookAtPost && !empty($_POST['roles'])) {
 			$result = $access->save($_POST['roles']);
 			if (!empty($result['errors'])) {
-				Yii::$app->response->error = implode('; ', $result['errors']);
+				if (is_array($result['errors'])) {
+					$this->params['errors'] = $result['errors'];
+					Yii::$app->response->error = 'An error occurred while saving the object\'s sharing settings.';
+				} else {
+					Yii::$app->response->error = $result['errors'];
+				}
+				foreach ($result['data'] as $requestorId => $roleId) {
+					$objectRoles[$requestorId] = $access->getRoleObject($requestorId, $roleId);
+				}
 			} else {
 				Yii::$app->response->task = 'status';
 				Yii::$app->response->success = 'Access has been updated.';
@@ -447,6 +456,7 @@ class ObjectController extends Controller
 				}
 			}
 		}
+		$this->params['objectRoles'] = $objectRoles;
 	}
 
 	/**

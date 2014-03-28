@@ -10,7 +10,6 @@ if (isset($specialRequestors['primaryAccount'])) {
 $publicGroup = $specialRequestors['public'];
 
 // collect roles
-$objectRoles = $access->roleObjects;
 $object = Yii::$app->request->object;
 $roles = $access->getPossibleRoles();
 
@@ -19,6 +18,7 @@ $baseRequestorParams = [
 		'objectAccess' => $access,
 		'disableFields' => $disableFields,
 		'roles' => $roles,
+		'errors' => $errors,
 ];
 $htmlOptions = ['class' => 'list-group ic-access-list'];
 
