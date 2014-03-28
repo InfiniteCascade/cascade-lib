@@ -43,7 +43,6 @@ return [
 		],
 		
 		'log' => [
-			'class' => 'yii\log\Logger',
 			'traceLevel' => YII_DEBUG ? 7 : 0,
 			'targets' => [
 				[

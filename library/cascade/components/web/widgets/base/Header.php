@@ -67,6 +67,10 @@ class Header extends Widget {
 			$accessIcon = 'fa fa-building-o';
 			$accessTitle = $object->objectType->title->upperSingular . ' is shared internally';
 			$accessLabel = 'Internal';
+		}elseif ($objectVisibility === 'admins') {
+			$accessIcon = 'fa fa-lock';
+			$accessTitle = $object->objectType->title->upperSingular . ' is shared only with administrators';
+			$accessLabel = 'Administrators';
 		} else {
 			$accessIcon = 'fa fa-user';
 			$accessTitle = $object->objectType->title->upperSingular . ' is private';

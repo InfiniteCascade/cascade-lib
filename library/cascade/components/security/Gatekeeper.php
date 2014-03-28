@@ -14,7 +14,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 	public $objectAccessClass = 'cascade\\components\\security\\ObjectAccess';
 
 	public function getPrimaryAccount() {
-		return ObjectAccount::get(Yii::$app->params['primaryAccount']);
+		return ObjectAccount::get(Yii::$app->params['primaryAccount'], false);
 	}
 
 	public function setAuthority($authority)
@@ -37,7 +37,6 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 		}
 		return $this->_authority;
 	}
-
 
 	public function getControlledObject($object, $modelClass = null)
 	{

@@ -23,19 +23,30 @@ class ObjectAccess extends \infinite\security\ObjectAccess {
 		if ($publicAro && $publicAro[$readAction->primaryKey]->can($publicAro)) {
 			return 'public';
 		}
-
+		
 		if ($primaryAccountAro && $primaryAccountAro[$readAction->primaryKey]->can($primaryAccount)) {
 			return 'internal';
 		}
+		$foundOwner = false;
 
-		foreach ($this->requestors as $aro => $access) {
-			if (!$access[$readAction->primaryKey]->can($aro)) { continue; }
-			if (preg_match('/^'. $groupPrefix .'\-/', $aro) === 0) {
-				return 'shared';
-			}
+		foreach ($this->roles as $role) {
+			if (empty($role['role_id'])) { continue; }
+			$roleItem = Yii::$app->collectors['roles']->getById($role['role_id']);
+			if (empty($roleItem) || empty($roleItem->object)) { continue; }
+			if ($roleItem->levelSection === 'owner') { $foundOwner = true; continue; }
+			return 'shared';
 		}
-
-		return 'private';
+		// foreach ($this->requestors as $aro => $access) {
+		// 	if (!$access[$readAction->primaryKey]->can($aro)) { continue; }
+		// 	if (preg_match('/^'. $groupPrefix .'\-/', $aro) === 0) {
+		// 		return 'shared';
+		// 	}
+		// }
+		if ($foundOwner) {
+			return 'private';
+		} else {
+			return 'admins';
+		}
 	}
 
 	public function getRoleHelpText($roleItem)
