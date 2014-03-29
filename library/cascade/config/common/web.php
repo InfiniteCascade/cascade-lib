@@ -19,8 +19,8 @@ $config['components']['user'] = [
 	'identityClass' => 'cascade\models\User',
 	'loginUrl' => ['/app/login'],
 ];
-$config['components']['state'] = [
-	'class' => 'infinite\web\State'
+$config['components']['webState'] = [
+	'class' => 'infinite\\web\\State'
 ];
 $config['components']['session'] = [
 	'class' => 'yii\redis\Session',

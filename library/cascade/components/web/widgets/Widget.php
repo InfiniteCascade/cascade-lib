@@ -42,11 +42,11 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 	}
 
 	public function getState($key, $default = null) {
-		return Yii::$app->state->get($this->stateKeyName($key), $default);
+		return Yii::$app->webState->get($this->stateKeyName($key), $default);
 	}
 
 	public function setState($key, $value) {
-		return Yii::$app->state->set($this->stateKeyName($key), $value);
+		return Yii::$app->webState->set($this->stateKeyName($key), $value);
 	}
 
 	public function getHeaderMenu()

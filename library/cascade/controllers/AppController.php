@@ -101,7 +101,7 @@ class AppController extends Controller
 			if (empty($instructions['type']) || empty($instructions['type'])) { continue; }
 			if (isset($request['state'])) {
 				foreach ($request['state'] as $key => $value) {
-					Yii::$app->state->set($key, $value);
+					Yii::$app->webState->set($key, $value);
 				}
 			}
 
