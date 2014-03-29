@@ -421,7 +421,7 @@ class ObjectController extends Controller
 	 */
 	public function actionAccess() {
 		$subform = null;
-		$this->_parseParams(['activeObject', 'activeType'], 'view');
+		$this->_parseParams(['activeObject', 'activeType'], 'read');
 		extract($this->params);
 		$primaryModel = $activeType->primaryModel;
 		$this->params['errors'] = [];

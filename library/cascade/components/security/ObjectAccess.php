@@ -63,7 +63,7 @@ class ObjectAccess extends \infinite\security\ObjectAccess {
 		$results = parent::validateRole($role, $validationSettings);
 		$objectType = $validationSettings['object']->objectType;
 		if (!empty($role) && $role !== 'none' && !in_array($objectType->systemId, $this->specialAuthorities) && $objectType->getBehavior('Authority') === null) {
-			$results['errors'][] = $validationSettings['object']->descriptor . ' can not be shared with.'.print_r($role, true);
+			$results['errors'][] = $validationSettings['object']->descriptor . ' can not be shared with.';
 		}
 		return $results;
 	}

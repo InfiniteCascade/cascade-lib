@@ -143,7 +143,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
         	if (!empty(Yii::$app->user->identity->object_individual_id)) {
         		return Yii::$app->user->identity->object_individual_id;
         	} else {
-            	return Yii::$app->user->id;
+            	return false; //Yii::$app->user->id;
         	}
         }
         return false;
