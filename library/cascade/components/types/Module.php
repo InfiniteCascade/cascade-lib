@@ -187,6 +187,11 @@ abstract class Module extends \cascade\components\base\CollectorModule {
     	return false;
     }
 
+    public function getActionMap($controlledObject = null)
+	{
+		return [];
+	}
+
 	public function getDisabledFields()
 	{
 		if (is_null($this->_disabledFields)) {

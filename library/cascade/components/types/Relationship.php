@@ -186,7 +186,7 @@ class Relationship extends \infinite\base\Object
 			return false;
 		}
 
-		if (!$object->can('associate:'. $this->systemId)) {
+		if (!$object->can('associate:'. $this->companionRoleType($relationshipRole)->systemId)) {
 			return false;
 		}
 		return true;

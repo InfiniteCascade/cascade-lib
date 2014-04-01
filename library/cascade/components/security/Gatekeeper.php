@@ -86,5 +86,16 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 		}
 		return array_unique($objects);
 	}
+
+	protected function getActionMap($controlledObject = null)
+	{
+		$map = [];
+		$map['associate'] = 'update';
+		if (isset($controlledObject) && !empty($controlledObject->objectType)) {
+			$typeMap = $controlledObject->objectType->getActionMap($controlledObject);
+			$map = array_merge($map, $typeMap);
+		}
+		return $map;
+	}
 }
 ?>

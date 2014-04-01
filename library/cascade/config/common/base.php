@@ -30,23 +30,23 @@ return [
 		],
 		'redis' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'redis.php'),
 		'collectors' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'collectors.php'),
-		'cache' => ['class' => 'yii\redis\Cache'],
-		//'cache' => ['class' => 'yii\caching\DummyCache'],
+		'cache' => ['class' => 'yii\\redis\\Cache'],
+		//'cache' => ['class' => 'yii\\caching\\DummyCache'],
 		'errorHandler' => [
 			'discardExistingOutput' => false
 		],
 		'view' => [
-			'class' => 'cascade\components\web\View',
+			'class' => 'cascade\\components\\web\\View',
 		],
 		'response' => [
-			'class' => 'infinite\web\Response'
+			'class' => 'infinite\\web\\Response'
 		],
 		
 		'log' => [
 			'traceLevel' => YII_DEBUG ? 7 : 0,
 			'targets' => [
 				[
-					'class' => 'yii\log\FileTarget',
+					'class' => 'yii\\log\\FileTarget',
 					'levels' => ['error', 'warning'],
 				],
 			],
