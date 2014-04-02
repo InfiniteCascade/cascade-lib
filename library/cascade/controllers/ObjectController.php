@@ -71,7 +71,51 @@ class ObjectController extends Controller
 	}
 
 	public function actionBrowse() {
-		return $this->render('index');
+		$package = [];
+		$defaultParams = [];
+		$requestParams = array_merge($defaultParams, $_GET);
+
+		if (empty($requestParams['requests'])) {
+			Yii::$app->response->data = $package;
+			return;
+		}
+
+		if (isset($requestParams['modules']) && !is_array($requestParams['modules'])) {
+			$requestParams['modules'] = implode(',', $requestParams['modules']);
+		}
+
+		$modules = isset($requestParams['modules']) ? (array)$requestParams['modules'] : false;
+		$baseInstructions = ['ignore' => [], 'ignoreChildren' => [], 'ignoreParents' => []];
+		if (!empty($searchParams['ignore'])) {
+			$baseInstructions['ignore'] = (array)$searchParams['ignore'];
+		}
+		if (!empty($searchParams['ignoreChildren'])) {
+			$baseInstructions['ignoreChildren'] = (array)$searchParams['ignoreChildren'];
+		}
+		if (!empty($searchParams['ignoreParents'])) {
+			$baseInstructions['ignoreParents'] = (array)$searchParams['ignoreParents'];
+		}
+		$baseInstructions['modules'] = $modules;
+		$requests = [];
+		foreach ($requestParams['requests'] as $requestId => $request) {
+			if (isset($request['task']) && !isset($request['handler'])) {
+				// we're doing something new
+				switch ($request['task']) {
+					case 'root':
+						$request['handler'] = 'types';
+					break;
+					case 'stack':
+						$request = BrowseResponse::parseStack(array_merge($baseInstructions, $instructions));
+					break;
+				}
+			}
+
+			if ($request && isset($request['handler'])) {
+				$requests[$requestId] = $request;
+			}
+		}
+		$package = BrowseResponse::handleRequests($requests, $baseInstructions, true)->package();
+		Yii::$app->response->data = $package;
 	}
 
 

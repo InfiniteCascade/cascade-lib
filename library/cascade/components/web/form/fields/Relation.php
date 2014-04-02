@@ -5,6 +5,8 @@ use infinite\helpers\ArrayHelper;
 use infinite\helpers\Html;
 use cascade\models\Relation as RelationModel;
 
+use cascade\components\web\browser\Response as BrowserResponse;
+
 class Relation extends Base {
 	public $linkExisting = true;
 	public $linkMultiple = false;
@@ -85,16 +87,88 @@ class Relation extends Base {
 		}
 		$r['context']['role'] = $role = $this->modelField->relationship->companionRole($this->modelField->modelRole);
 		// \d($role);exit;
+		
 		if (($modelTypeItem = $this->modelField->relationship->{$role}->collectorItem)) {
-			$parentTypes = $modelTypeItem->parents;
-			$r['browse']['types'] = ArrayHelper::map($parentTypes, 'parent.systemId', 'parent.title.upperPlural');
+			$typeBundle = BrowserResponse::handleInstructions(['handler' => 'types', 'relationshipRole' => $role, 'relationship' => $this->modelField->relationship->systemId]);
+			$r['browse']['root'] = $typeBundle->package();
 		}
-		asort($r['browse']['types']);
 		$r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
 		$this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
 		Html::addCssClass($this->htmlOptions, 'relationship');
 		$parts[] = Html::activeHiddenInput($model, $field, $this->htmlOptions);
 		return implode($parts);
 	}
+
+    /**
+     * Gets the value of linkExisting.
+     *
+     * @return mixed
+     */
+    public function getLinkExisting()
+    {
+        return $this->linkExisting;
+    }
+    
+    /**
+     * Sets the value of linkExisting.
+     *
+     * @param mixed $linkExisting the link existing
+     *
+     * @return self
+     */
+    public function setLinkExisting($linkExisting)
+    {
+        $this->linkExisting = $linkExisting;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of linkMultiple.
+     *
+     * @return mixed
+     */
+    public function getLinkMultiple()
+    {
+        return $this->linkMultiple;
+    }
+    
+    /**
+     * Sets the value of linkMultiple.
+     *
+     * @param mixed $linkMultiple the link multiple
+     *
+     * @return self
+     */
+    public function setLinkMultiple($linkMultiple)
+    {
+        $this->linkMultiple = $linkMultiple;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of relatedObject.
+     *
+     * @return mixed
+     */
+    public function getRelatedObject()
+    {
+        return $this->relatedObject;
+    }
+    
+    /**
+     * Sets the value of relatedObject.
+     *
+     * @param mixed $relatedObject the related object
+     *
+     * @return self
+     */
+    public function setRelatedObject($relatedObject)
+    {
+        $this->relatedObject = $relatedObject;
+
+        return $this;
+    }
 }
 ?>

@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle
 	];
 	public $depends = [
 		'infinite\\web\\assetBundles\\InfiniteAsset',
+		'infinite\\web\\assetBundles\\InfiniteBrowserAsset',
 		'infinite\\web\\assetBundles\\BootstrapSelectAsset',
 		'infinite\\web\\assetBundles\\BootstrapDatepickerAsset',
 		'cascade\\components\\web\\assetBundles\\BootstrapTypeaheadAsset'
