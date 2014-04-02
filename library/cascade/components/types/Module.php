@@ -314,7 +314,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	 * @return unknown
 	 */
 	public function search($term, $params = []) {
-		if (!$this->primaryModel) { echo "boom"; return false; }
+		if (!$this->primaryModel) { return false; }
 
 		$results = [];
 		$modelClass = $this->primaryModel;

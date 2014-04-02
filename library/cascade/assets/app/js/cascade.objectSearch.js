@@ -78,8 +78,12 @@ var SearchItemResult =  function(context) {
             if ($this.options.resultsBox.oriented === 'left') {
                typeahead.dropdown.$menu.css({'left': 'auto', 'right': 0});
             }
+            var marginTop = parseInt($typeaheadInput.css('padding-bottom'), 10) / 2;
+            if ($typeaheadInput.parents('.input-group').length > 0) {
+               marginTop += parseInt($typeaheadInput.outerHeight(), 10);
+            }
             typeahead.dropdown.$menu.css({'min-width': typeaheadWidth});
-            typeahead.dropdown.$menu.css({'margin-top': parseInt($typeaheadInput.css('padding-bottom'), 10) / 2});
+            typeahead.dropdown.$menu.css({'margin-top': marginTop});
          });
    };
 }(jQuery));

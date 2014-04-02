@@ -3,7 +3,7 @@ var relationshipDefaults = {
 	'browseLabel': 'Browse',
 	'multiple': false,
 	'select': false, // object to select on startup
-	'relationshipSeparator': '-',
+	'relationshipSeparator': '.',
 	'context': {
 	    'relationship': false,
 	    'objectId': false,
@@ -25,6 +25,7 @@ $preparer.add(function(context) {
 		var baseQueryData = {};
 		if ($this.options.context.relationship && $this.options.context.role) {
 			var relationshipParts = $this.options.context.relationship.split($this.options.relationshipSeparator);
+			$.debug(relationshipParts);
 			if ($this.options.context.role === 'child') {
 				baseQueryData['modules'] = [relationshipParts[1]];
 			} else {
@@ -58,6 +59,7 @@ $preparer.add(function(context) {
 			$this.select(datum);
 		};
 		var searchOptions = jQuery.extend(true, {}, $this.options.search, {data: selectQueryData});
+		$.debug(searchOptions);
 		searchOptions.callback = selectCallback;
 		$this.elements.input.objectSearch(searchOptions);
 		$this.elements.inputAddon = $("<span />", {'class': 'input-group-btn'}).appendTo($this.elements.inputGroup);
@@ -75,9 +77,8 @@ $preparer.add(function(context) {
 			} else {
 				$this.elements.browseButton.text('Search');
 				$this.elements.input.attr({'disabled': true});
-
 				$this.elements.input.data('previousValue', $this.elements.input.val());
-				$this.elements.input.val('');
+				$this.elements.input.val('Browsing...');
 				objectBrowser.show();
 			}
 		});

@@ -88,6 +88,10 @@ class ObjectController extends Controller
 			return;
 		}
 
+		if (isset($searchParams['modules']) && !is_array($searchParams['modules'])) {
+			$searchParams['modules'] = implode(',', $searchParams['modules']);
+		}
+
 		$modules = isset($searchParams['modules']) ? (array)$searchParams['modules'] : array_keys(Yii::$app->collectors['types']->getAll());
 		$params = ['ignore' => [], 'ignoreChildren' => [], 'ignoreParents' => []];
 		if (!empty($searchParams['ignore'])) {

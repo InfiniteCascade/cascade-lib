@@ -78,7 +78,7 @@ class Relation extends Base {
 		$model = $this->model;
 		$field = $this->getRelationModelField();
 		$parts = [];
-		$r = ['context' => [], 'browse' => []];
+		$r = ['context' => [], 'browse' => [], 'search' => ['data' => []]];
 		$r['context']['relationship'] = $this->modelField->relationship->systemId;
 		if ($this->modelField->baseModel && !$this->modelField->baseModel->isNewRecord) {
 			$r['context']['objectId'] = $this->modelField->baseModel->primaryKey;
