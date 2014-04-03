@@ -102,7 +102,6 @@ AccessManager.prototype.getType = function(type) {
 }
 
 AccessManager.prototype.handleFormSubmit = function($form, event) {
-	$.debug("SUBMIT!");
 	$form.data('data', {'roles': this.packageRoles()});
 	return true;
 };
@@ -250,7 +249,6 @@ AccessRequestor.prototype.getRoleMenu = function() {
 AccessRequestor.prototype.getPossibleRoles = function() {
 	var self = this;
 	var roles = {};
-	$.debug(self.getManager().options.universalMaxRoleLevel);
 	jQuery.each(this.getManager().getRoles(), function(index, value) {
 		if (self.options.maxRoleLevel && self.options.maxRoleLevel !== true && value.getLevel() > self.options.maxRoleLevel) { return true; }
 		if (self.getManager().options.universalMaxRoleLevel !== undefined && self.getManager().options.universalMaxRoleLevel !== true && value.getLevel() > self.getManager().options.universalMaxRoleLevel) { return true; }
@@ -457,7 +455,6 @@ $preparer.add(function(context) {
 		$form.on('submit', function(e) {
 			manager.handleFormSubmit($(this), e);
 		});
-		$.debug(manager);
 	});
 });
 
