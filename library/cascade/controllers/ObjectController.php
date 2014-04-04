@@ -11,6 +11,7 @@ use cascade\models\DeleteForm;
 use cascade\components\types\Module as TypeModule;
 use cascade\components\types\Relationship;
 use cascade\components\web\ObjectViewEvent;
+use cascade\components\web\browser\Response as BrowseResponse;
 
 use infinite\helpers\ArrayHelper;
 use infinite\web\Controller;
@@ -105,7 +106,7 @@ class ObjectController extends Controller
 						$request['handler'] = 'types';
 					break;
 					case 'stack':
-						$request = BrowseResponse::parseStack(array_merge($baseInstructions, $instructions));
+						$request = BrowseResponse::parseStack(array_merge($baseInstructions, $request));
 					break;
 				}
 			}

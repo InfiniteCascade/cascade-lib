@@ -7,15 +7,12 @@ use yii\base\InvalidConfigException;
 
 class Bundle extends \infinite\web\browser\Bundle
 {
-	public function predictTotal()
-	{
-		return false;
-	}
 
 	public function getHandlers()
 	{
 		return [
-			'types' => 'cascade\\components\\web\\browser\\HandlerTypes'
+			'types' => 'cascade\\components\\web\\browser\\HandlerTypes',
+			'objects' => 'cascade\\components\\web\\browser\\HandlerObjects'
 		];
 	}
 }

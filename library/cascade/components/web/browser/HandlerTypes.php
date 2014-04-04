@@ -34,17 +34,24 @@ class HandlerTypes extends \infinite\web\browser\Handler
 			} else {
 				$relationships = $relationship->child->collectorItem->parents;
 			}
-			$types = ArrayHelper::getColumn($relationships, 'parent');
+			$types = ArrayHelper::map($relationships, 'parent.systemId', 'parent');
 		} else {
-			$types = Yii::$app->collectors['types']->getAll();
+			$typesRaw = Yii::$app->collectors['types']->getAll();
+			$types = ArrayHelper::map($typesRaw, 'object.systemId', 'object');
 		}
-
-		foreach ($types as $type) {
+		unset($types['']);
+		if (isset($instructions['limitTypes'])) {
+			foreach ($types as $typeKey => $type) {
+				if (!in_array($typeKey, $instructions['limitTypes'])) {
+					unset($types[$typeKey]);
+				}
+			}
+		}
+		foreach ($types as $typeKey => $type) {
 			$items[] = [
 				'type' => 'type',
 				'id' => $type->systemId,
-				'label' => $type->title->upperPlural,
-				'hasChildren' => true
+				'label' => $type->title->upperPlural
 			];
 		}
 		return $items;

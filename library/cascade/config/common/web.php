@@ -35,8 +35,8 @@ $config['components']['urlManager'] = [
 		
 		'<action:(login|logout)>' => 'app/<action>',
 
-		'<action:(search)>' => 'object/<action>',
 		'<action:(browse)>/<type:\S+>' => 'object/<action>',
+		'<action:(search|browse)>' => 'object/<action>',
 		'<action:(view)>:<subaction:\S+>/<id:\S+>' => 'object/<action>',
 		'<action:(update|delete|view|access)>/<id:\S+>' => 'object/<action>',
 		'<action:(create)>/<type:\S+>/<object_id:\S+>' => 'object/<action>',
