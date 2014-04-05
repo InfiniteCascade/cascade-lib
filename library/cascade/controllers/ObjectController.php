@@ -18,8 +18,8 @@ use infinite\web\Controller;
 use infinite\db\ActiveRecord;
 use infinite\base\exceptions\HttpException;
 
-use yii\web\AccessControl;
-use yii\web\VerbFilter;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 
 
 class ObjectController extends Controller

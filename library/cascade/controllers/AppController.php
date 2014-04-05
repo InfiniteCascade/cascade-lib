@@ -3,8 +3,8 @@
 namespace cascade\controllers;
 
 use Yii;
-use yii\web\AccessControl;
-use yii\web\VerbFilter;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 
 use infinite\web\Controller;
 use infinite\base\exceptions\HttpException;
