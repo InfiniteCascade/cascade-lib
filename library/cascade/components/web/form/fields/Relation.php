@@ -89,7 +89,7 @@ class Relation extends Base {
 		// \d($role);exit;
 		
 		if (($modelTypeItem = $this->modelField->relationship->{$role}->collectorItem)) {
-			$typeBundle = BrowserResponse::handleInstructions(['handler' => 'types', 'relationshipRole' => $role, 'relationship' => $this->modelField->relationship->systemId]);
+			$typeBundle = BrowserResponse::handleInstructions(['handler' => 'types', 'relationshipRole' => $role, 'relationship' => $this->modelField->relationship->systemId, 'hasDashboard' => true]);
 			$r['browse']['root'] = $typeBundle->package();
 		}
 		$r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;

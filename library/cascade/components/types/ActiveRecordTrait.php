@@ -35,6 +35,8 @@ trait ActiveRecordTrait {
 
 	public $foreignWeight = .7;
 
+	public $descriptorLabel = 'Name';
+
 	public $defaultCustomColumnSchema = [
 		'allowNull' => false,
 		'type' => 'string',
@@ -360,6 +362,27 @@ trait ActiveRecordTrait {
 		return $form;
 	}
 
+	public function getSortOptions()
+	{
+		$options = [];
+		$descriptorSort = [];
+		$modelDescriptorFields = $this->descriptorField;
+		if (!is_array($modelDescriptorFields)) {
+			$modelDescriptorFields = [$modelDescriptorFields];
+		}
+		foreach ($modelDescriptorFields as $field) {
+			if ($this->hasAttribute($field)) {
+				$descriptorSort[$field] = SORT_ASC;
+			}
+		}
+		if (!empty($descriptorSort)) {
+			$options[$this->descriptorLabel] = $descriptorSort;
+		}
+		if (empty($options) && $this->hasAttribute('created')) {
+			$options['Created'] = ['created' => SORT_ASC];
+		}
+		return $options;
+	}
 
 	public function getDefaultOrder($alias = 't')
 	{

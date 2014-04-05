@@ -21,6 +21,11 @@ class HandlerTypes extends \infinite\web\browser\Handler
 	{
 		$instructions = $this->instructions;
 		$items = [];
+		if (!isset($instructions['hasDashboard'])) {
+			$instructions['hasDashboard'] = [true, false];
+		} elseif (!is_array($instructions['hasDashboard'])) {
+			$instructions['hasDashboard'] = [$instructions['hasDashboard']];
+		}
 		if (isset($instructions['relationshipRole'])) {
 			if (!isset($instructions['relationship'])) {
 				throw new InvalidConfigException("Relationship type tasks require a relationship ID");
@@ -40,14 +45,15 @@ class HandlerTypes extends \infinite\web\browser\Handler
 			$types = ArrayHelper::map($typesRaw, 'object.systemId', 'object');
 		}
 		unset($types['']);
-		if (isset($instructions['limitTypes'])) {
-			foreach ($types as $typeKey => $type) {
+		foreach ($types as $typeKey => $type) {
+			if (isset($instructions['limitTypes'])) {
 				if (!in_array($typeKey, $instructions['limitTypes'])) {
-					unset($types[$typeKey]);
+					continue;
 				}
 			}
-		}
-		foreach ($types as $typeKey => $type) {
+			if (!in_array($type->hasDashboard, $instructions['hasDashboard'])) {
+				continue;
+			}
 			$items[] = [
 				'type' => 'type',
 				'id' => $type->systemId,

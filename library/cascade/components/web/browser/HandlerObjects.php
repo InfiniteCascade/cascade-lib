@@ -24,9 +24,14 @@ class HandlerObjects extends \infinite\web\browser\Handler
 				$registryClass = Yii::$app->classes['Registry'];
 				$object = $registryClass::getObject($this->instructions['parent']);
 				if (!$object) { return $this->_dataSource = false; }
-				$this->_dataSource = $object->queryChildObjects($type->primaryModel, [], []);
+				$this->_dataSource = $object->queryChildObjects($primaryModel, [], []);
 			} else {
 				$this->_dataSource = $primaryModel::find();
+			}
+			$dummyModel = new $primaryModel;
+			$sortOptions = array_values($dummyModel->sortOptions);
+			if (isset($sortOptions[0])) {
+				$this->_dataSource->orderBy($sortOptions[0]);
 			}
 		}
 		return $this->_dataSource;
