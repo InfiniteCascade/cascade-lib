@@ -64,7 +64,9 @@ class HandlerObjects extends \infinite\web\browser\Handler
 			$items[] = [
 				'type' => 'object',
 				'id' => $object->primaryKey,
-				'label' => $object->descriptor
+				'descriptor' => $object->descriptor,
+				'hasChildren' => !empty($object->objectTypeItem->children),
+				'isSelectable' => in_array($object->objectType->systemId, $instructions['modules'])
 			];
 		}
 		return $items;

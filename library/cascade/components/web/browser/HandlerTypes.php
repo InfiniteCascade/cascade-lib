@@ -57,19 +57,20 @@ class HandlerTypes extends \infinite\web\browser\Handler
 			$item = [
 				'type' => 'type',
 				'id' => $type->systemId,
-				'label' => $type->title->upperPlural
+				'descriptor' => $type->title->upperPlural,
+				'hasChildren' => true
 			];
-			if (!$this->filterQuery || preg_match('/'. preg_quote($this->filterQuery) .'/i', $item['label']) === 1) {
+			if (!$this->filterQuery || preg_match('/'. preg_quote($this->filterQuery) .'/i', $item['descriptor']) === 1) {
 				$items[] = $item; 
 			}
 		}
 		if (!$this->filterQuery) {
-			ArrayHelper::multisort($items, 'label', SORT_ASC);
+			ArrayHelper::multisort($items, 'descriptor', SORT_ASC);
 		} else {
 			$filterQuery = $this->filterQuery;
 			usort($items, function($a, $b) use ($filterQuery) {
-				$a = levenshtein($a['label'], $filterQuery);
-				$b = levenshtein($b['label'], $filterQuery);
+				$a = levenshtein($a['descriptor'], $filterQuery);
+				$b = levenshtein($b['descriptor'], $filterQuery);
 				return ($a < $b) ? -1 : 1;
 			});
 		}

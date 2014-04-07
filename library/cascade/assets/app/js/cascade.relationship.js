@@ -55,19 +55,22 @@ $preparer.add(function(context) {
 		$this.elements.label = $("<label />", {'for': $this.searchInputId}).html($this.options.inputLabel).appendTo($this.elements.selector);
 		$this.elements.inputGroup = $("<div />", {'class': 'input-group'}).appendTo($this.elements.selector);
 		$this.elements.input = $("<input />", {'type': 'text', 'class': 'form-control', 'id': $this.searchInputId}).appendTo($this.elements.inputGroup);
-		var selectCallback = function(object, datum) {
+		var searchSelectCallback = function(object, datum) {
+			$this.select(datum);
+		};
+		var browseSelectCallback = function(datum) {
 			$this.select(datum);
 		};
 		var searchOptions = jQuery.extend(true, {}, $this.options.search, {data: selectQueryData});
 		$.debug(searchOptions);
-		searchOptions.callback = selectCallback;
+		searchOptions.callback = searchSelectCallback;
 		$this.elements.input.objectSearch(searchOptions);
 		$this.elements.inputAddon = $("<span />", {'class': 'input-group-btn'}).appendTo($this.elements.inputGroup);
 		$this.elements.browseArea = $("<div />", {'class': 'object-browse-container'}).appendTo($this.elements.selector);
 		$this.elements.browseButton = $("<button />", {'class': 'btn btn-default', 'type': 'button'}).html($this.options.browseLabel).appendTo($this.elements.inputAddon);
 		$this.elements.browseButton.click(function() {
 			var browseOptions = jQuery.extend(true, {}, $this.options.browse, {data: browseQueryData});
-			browseOptions.callback = selectCallback;
+			browseOptions.callback = browseSelectCallback;
 			var objectBrowser = $this.elements.browseArea.objectBrowse(browseOptions);
 			if (objectBrowser.visible) {
 				$this.elements.browseButton.text('Browse');
