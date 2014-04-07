@@ -54,11 +54,24 @@ class HandlerTypes extends \infinite\web\browser\Handler
 			if (!in_array($type->hasDashboard, $instructions['hasDashboard'])) {
 				continue;
 			}
-			$items[] = [
+			$item = [
 				'type' => 'type',
 				'id' => $type->systemId,
 				'label' => $type->title->upperPlural
 			];
+			if (!$this->filterQuery || preg_match('/'. preg_quote($this->filterQuery) .'/i', $item['label']) === 1) {
+				$items[] = $item; 
+			}
+		}
+		if (!$this->filterQuery) {
+			ArrayHelper::multisort($items, 'label', SORT_ASC);
+		} else {
+			$filterQuery = $this->filterQuery;
+			usort($items, function($a, $b) use ($filterQuery) {
+				$a = levenshtein($a['label'], $filterQuery);
+				$b = levenshtein($b['label'], $filterQuery);
+				return ($a < $b) ? -1 : 1;
+			});
 		}
 		return $items;
 	}

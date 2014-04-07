@@ -30,7 +30,9 @@ class HandlerObjects extends \infinite\web\browser\Handler
 			}
 			$dummyModel = new $primaryModel;
 			$sortOptions = array_values($dummyModel->sortOptions);
-			if (isset($sortOptions[0])) {
+			if ($this->filterQuery) {
+				$primaryModel::simpleSearchTermQuery($this->_dataSource, $this->filterQuery);
+			} elseif (isset($sortOptions[0])) {
 				$this->_dataSource->orderBy($sortOptions[0]);
 			}
 		}
@@ -53,8 +55,10 @@ class HandlerObjects extends \infinite\web\browser\Handler
 			return false;
 		}
 		$dataSource = clone $this->dataSource;
-		$dataSource->limit($this->bundle->limit);
-		$dataSource->offset($this->bundle->offset);
+		if (!$this->filterQuery) {
+			$dataSource->limit($this->bundle->limit);
+			$dataSource->offset($this->bundle->offset);
+		}
 		$items = [];
 		foreach ($dataSource->all() as $object) {
 			$items[] = [
