@@ -548,7 +548,9 @@ class ObjectController extends Controller
 			if (!$this->params['model']->forceObjectDelete) {
 				$this->params['model']->target = 'relationship';
 			}
+			$primaryObject = $relatedObject;
 		} else {
+			$primaryObject = $object;
 			$this->params['model']->object = $object;
 			$this->params['model']->forceObjectDelete = !$object->allowRogue();
 		}
@@ -564,7 +566,7 @@ class ObjectController extends Controller
 					Yii::$app->response->redirect = $_GET['redirect'];
 				} else {
 					Yii::$app->response->trigger = [
-						['refresh', '.model-'. $primaryModel::baseClassName()]
+						['refresh', '.model-'. $primaryObject::baseClassName()]
 					];
 				}
 			}

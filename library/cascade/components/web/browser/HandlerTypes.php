@@ -12,6 +12,35 @@ use infinite\helpers\ArrayHelper;
 class HandlerTypes extends \infinite\web\browser\Handler
 {
 	public $bundleClass = 'cascade\\components\\web\\browser\\Bundle';
+	
+	public static function possibleTypes($topType, $goodTypes)
+	{
+		$possibleTypes = [];
+		foreach ($topType->collectorItem->children as $relationship) {
+			$testType = $relationship->child;
+			if (in_array($testType->systemId, $goodTypes)) {
+				$possibleTypes[$testType->systemId] = $testType;
+			} elseif (self::descendantHas($testType, $goodTypes)) {
+				$possibleTypes[$testType->systemId] = $testType;
+			}
+		}
+		return $possibleTypes;
+	}
+
+	public static function descendantHas($topType, $goodTypes, $depth = 3)
+	{
+		$possibleTypes = [];
+		foreach ($topType->collectorItem->children as $relationship) {
+			$testType = $relationship->child;
+			if (in_array($testType->systemId, $goodTypes)) {
+				return true;
+			} elseif ($depth > 0 && self::descendantHas($testType, $goodTypes, $depth-1)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function getTotal()
 	{
 		return count($this->items);
@@ -36,10 +65,13 @@ class HandlerTypes extends \infinite\web\browser\Handler
 			}
 			if ($instructions['relationshipRole'] === 'parent') {
 				$relationships = $relationship->parent->collectorItem->parents;
+				$baseType = $relationship->parent;
 			} else {
 				$relationships = $relationship->child->collectorItem->parents;
+				$baseType = $relationship->child;
 			}
 			$types = ArrayHelper::map($relationships, 'parent.systemId', 'parent');
+			$types[$baseType->systemId] = $baseType;
 		} else {
 			$typesRaw = Yii::$app->collectors['types']->getAll();
 			$types = ArrayHelper::map($typesRaw, 'object.systemId', 'object');
@@ -58,7 +90,7 @@ class HandlerTypes extends \infinite\web\browser\Handler
 				'type' => 'type',
 				'id' => $type->systemId,
 				'descriptor' => $type->title->upperPlural,
-				'hasChildren' => true
+				'hasChildren' => !empty($type->collectorItem->children) || (isset($instructions['modules']) && in_array($type->systemId, $instructions['modules']))
 			];
 			if (!$this->filterQuery || preg_match('/'. preg_quote($this->filterQuery) .'/i', $item['descriptor']) === 1) {
 				$items[] = $item; 

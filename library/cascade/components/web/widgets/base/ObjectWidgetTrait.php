@@ -247,13 +247,11 @@ trait ObjectWidgetTrait
 			$baseUrl['object_relation'] = 'parent';
 			$primaryRelation = $relationship->getPrimaryParent($model);
 		}
-		if ($primaryRelation && $primaryRelation->primaryKey !== $model->primaryKey) {
-			$relationUrl = ['id' => Yii::$app->request->object->primaryKey];
-			$relationUrl['child_object_id'] = $model->primaryKey;
+		if ($primaryRelation && $primaryRelation->child_object_id !== $model->primaryKey) {
 			$menu['primary'] = [
 				'icon' => 'fa fa-star',
 				'label' => 'Set as primary',
-				'url' => ['/object/update', 'subaction' => 'setPrimary'] + $relationUrl,
+				'url' => ['/object/update', 'subaction' => 'setPrimary'] + $baseUrl,
 				'linkOptions' => ['data-handler' => 'background']
 			];
 		}

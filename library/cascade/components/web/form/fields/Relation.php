@@ -80,21 +80,24 @@ class Relation extends Base {
 		$model = $this->model;
 		$field = $this->getRelationModelField();
 		$parts = [];
-		$r = ['context' => [], 'browse' => [], 'search' => ['data' => []]];
-		$r['context']['relationship'] = $this->modelField->relationship->systemId;
+		$r = [];
+		$r['selector'] = ['context' => [], 'browse' => [], 'search' => ['data' => []]];
+		$r['selector']['context']['relationship'] = $this->modelField->relationship->systemId;
 		if ($this->modelField->baseModel && !$this->modelField->baseModel->isNewRecord) {
-			$r['context']['objectId'] = $this->modelField->baseModel->primaryKey;
+			$r['selector']['context']['objectId'] = $this->modelField->baseModel->primaryKey;
 		}
-		$r['context']['role'] = $role = $this->modelField->relationship->companionRole($this->modelField->modelRole);
+		$r['selector']['context']['role'] = $role = $this->modelField->relationship->companionRole($this->modelField->modelRole);
 		// \d($role);exit;
 		
 		if (($modelTypeItem = $this->modelField->relationship->{$role}->collectorItem)) {
 			$typeBundle = BrowserResponse::handleInstructions(['handler' => 'types', 'relationshipRole' => $role, 'relationship' => $this->modelField->relationship->systemId, 'hasDashboard' => true]);
-			$r['browse']['root'] = $typeBundle->package();
+			$r['selector']['browse']['root'] = $typeBundle->package();
 		}
 		$r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
 		$this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
 		Html::addCssClass($this->htmlOptions, 'relationship');
+		$model->_moduleHandler = $this->modelField->relationship->companionRole($this->modelField->modelRole) .':'. $this->modelField->relationship->companionRoleType($this->modelField->modelRole)->systemId;
+		$parts[] = Html::activeHiddenInput($model, $this->model->tabularPrefix . '_moduleHandler');
 		$parts[] = Html::activeHiddenInput($model, $field, $this->htmlOptions);
 		return implode($parts);
 	}

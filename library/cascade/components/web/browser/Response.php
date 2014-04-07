@@ -44,29 +44,15 @@ class Response extends \infinite\web\browser\Response
 			case 'object': //object type
 				$object = $registryClass::getObject($lastItem['id']);
 				if (!$object) { return false; }
-				$possibleTypes = [];
 				$objectTypeItem = $object->objectTypeItem;
 				$objectType = $objectTypeItem->object;
 				if (!isset($request['modules'])) {
 					$request['modules'] = array_keys(Yii::$app->collectors['types']->getAll());
 				}
-				foreach ($objectTypeItem->children as $relationship) {
-					$testType = $relationship->child;
-					if (in_array($testType->systemId, $request['modules'])) {
-						$possibleTypes[$testType->systemId] = $testType;
-					} else {
-						$grandchildTypes = $testType->collectorItem->children;
-						foreach ($grandchildTypes as $grandRelationship) {
-							$grandTestType = $grandRelationship->child;
-							if (in_array($grandTestType->systemId, $request['modules'])) {
-								$possibleTypes[$testType->systemId] = $testType;
-								break;
-							}
-						}
-					}
-				}
+				$possibleTypes = HandlerTypes::possibleTypes($objectType, $request['modules']);
+				
+				//\d(array_keys($possibleTypes));exit;
 				if (empty($possibleTypes)) {
-					\d("boom");exit;
 					return false;
 				} elseif (count($possibleTypes) === 1) {
 					$type = array_pop($possibleTypes);

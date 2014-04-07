@@ -690,11 +690,13 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 				} else {
 					// loop through parents
 					foreach ($input['parents'] as $parentKey => $parent) {
+						$relation = false;
 						if (isset($parent['relation'])) {
 							$relation = $parent['relation'];
-						} else {
+						} elseif ($parent['model']) {
 							$relation = $parent['model']->getRelationModel($parentKey);
 						}
+						
 						$relation->child_object_id = $parent['model']->primaryKey;
 						if (isset($parent['handler'])) {
 							$descriptor = $parent['handler']->title->singular;
@@ -789,6 +791,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 						throw new HttpException(403, "Unable to update object.");
 					}
 				}
+
 				if ($tab['_moduleHandler'] === ActiveRecord::FORM_PRIMARY_MODEL) {
 					if (isset($results['primary'])) {
 						return false;
@@ -800,6 +803,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					}
 					continue;
 				}
+
 				$handlerParts = explode(':', $tab['_moduleHandler']);
 				if (count($handlerParts) >= 2) {
 					$resultsKey = null;
@@ -807,41 +811,50 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 						$rel = $this->collectorItem->getChild($handlerParts[1]);
 						if (!$rel || !($handler = $rel->child)) { continue; }
 						$resultsKey = 'children';
+						$relationField = 'child_object_id';
 					} elseif ($handlerParts[0] === 'parent') {
 						$handler = $this->collectorItem->getParent($handlerParts[1]);
 						$rel = $this->collectorItem->getParent($handlerParts[1]);
 						if (!$rel || !($handler = $rel->parent)) { continue; }
 						$resultsKey = 'parents';
+						$relationField = 'parent_object_id';
 					}
+					$handleRelation = false;
 					if (!empty($resultsKey)) {
-						$model = $handler->getModel($object, $m);
-						if ($model->getBehavior('Storage') !== null) {
-							$model->loadPostFile($tabId);
-						}
-						$dirty = $model->getDirtyAttributes();
-						if ($model->isNewRecord) {
-							$formName = $model->formName();
-
-							foreach ($m[$formName] as $k => $v) {
-								if (empty($v)) {
-									unset($dirty[$k]);
+						if ($modelTop === 'Relation') {
+							$results['primary']['model']->registerRelationModel($tab, $tabId);
+							continue;
+						} else {
+							$model = $handler->getModel($object, $m);
+							if ($model->getBehavior('Storage') !== null) {
+								$model->loadPostFile($tabId);
+							}
+							$dirty = $model->getDirtyAttributes();
+							if ($model->isNewRecord) {
+								$formName = $model->formName();
+								foreach ($m[$formName] as $k => $v) {
+									if (empty($v)) {
+										unset($dirty[$k]);
+									}
 								}
 							}
-						}
-						if (!empty($settings['allowEmpty']) || count($dirty) > 0) {
-							$relationKey = implode(':', array_slice($handlerParts, 0, 2));
-							if (!empty($model->primaryKey)) {
-								$relationKey = $model->primaryKey;
+							$handleRelation = count($dirty) > 0;
+							if (!empty($settings['allowEmpty']) || $handleRelation) {
+								$relationKey = implode(':', array_slice($handlerParts, 0, 2));
+								if (!empty($model->primaryKey)) {
+									$relationKey = $model->primaryKey;
+								}
+								$relationKey = Relation::generateTabularId($relationKey);
+								$relation = $model->getRelationModel($relationKey);
+								$relationFormClass = $relation->formName();
+								$relationTabularId = $relation->tabularId;
+								if (isset($_POST[$relationFormClass][$relationTabularId])) {
+									$relation->attributes = $_POST[$relationFormClass][$relationTabularId];
+								}
+								$results[$resultsKey][$tabId] = ['handler' => $handler, 'model' => $model, 'relation' => $relation];
 							}
-							$relationKey = Relation::generateTabularId($relationKey);
-							$relation = $model->getRelationModel($relationKey);
-							$relationFormClass = $relation->formName();
-							$relationTabularId = $relation->tabularId;
-							if (isset($_POST[$relationFormClass][$relationTabularId])) {
-								$relation->attributes = $_POST[$relationFormClass][$relationTabularId];
-							}
-							$results[$resultsKey][$tabId] = ['handler' => $handler, 'model' => $model, 'relation' => $relation];
 						}
+						
 					}
 				}
 			}
