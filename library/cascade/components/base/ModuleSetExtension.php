@@ -5,7 +5,7 @@ use Yii;
 
 abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
 {
-	public function bootstrap(\yii\base\Application $app)
+	public function bootstrap($app)
     {
 		Yii::beginProfile(get_called_class());
 		Yii::$app->modules = static::getModules();
