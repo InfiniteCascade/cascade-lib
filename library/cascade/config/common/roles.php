@@ -23,6 +23,11 @@ return [
 			'name' => 'Viewer',
 			'systemId' => 'viewer',
 			'level' => INFINITE_ROLE_LEVEL_VIEWER
+		],
+		'browser' => [
+			'name' => 'Browser',
+			'systemId' => 'browser',
+			'level' => INFINITE_ROLE_LEVEL_BROWSER
 		]
 	]
 ];

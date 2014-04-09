@@ -6,10 +6,10 @@
  * @package cascade
  */
 
-namespace cascade\components\db\fields;
+namespace cascade\components\db\fields\formats;
 
 
-class FormatText extends BaseFormat {
+class Text extends Base {
 	public function get() {
 		$result = $this->field->value;
 		if (empty($result)) {

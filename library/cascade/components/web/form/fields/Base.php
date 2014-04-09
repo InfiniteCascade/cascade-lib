@@ -40,7 +40,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
 	 * @param unknown $formSettings (optional)
 	 * @return unknown
 	 */
-	public function getModelField($formSettings = []) {
+	public function getModelFieldName($formSettings = []) {
 		return "{$this->model->tabularPrefix}{$this->field}";
 	}
 
@@ -54,7 +54,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
 	}
 
 	public function getFieldId() {
-		return Html::getInputId($this->model, $this->getModelField());
+		return Html::getInputId($this->model, $this->getModelFieldName());
 	}
 
 	/**

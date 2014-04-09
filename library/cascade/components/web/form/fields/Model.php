@@ -36,7 +36,7 @@ class Model extends Base {
 		}
 		$form = $this->generator->form;
 		$pre = $post = null;
-		$field = $this->getModelField();
+		$field = $this->getModelFieldName();
 		$fieldConfig = $this->fieldConfig;
 		$templatePrefix = '';
 		if ($this->showLabel) {
@@ -45,6 +45,7 @@ class Model extends Base {
 		}
 		$item = $form->field($model, $field, $fieldConfig);
 		$item->inputOptions =& $this->htmlOptions;
+		$item->inputOptions['value'] = $this->modelField->format->formValue;
 
 		Html::addCssClass($this->htmlOptions, 'form-control');
 		if (substr($this->type, 0, 5) === 'smart') {
@@ -57,7 +58,7 @@ class Model extends Base {
 					$this->smartOptions['watchField'] = '#' . $watchFieldId;
 				}
 			}
-			$this->htmlOptions['data-value'] = Html::getAttributeValue($model, $field);
+			$this->htmlOptions['data-value'] = $fieldConfig['value']; //Html::getAttributeValue($model, $field)
 			$this->htmlOptions['data-smart'] = json_encode($this->smartOptions);
 		}
 

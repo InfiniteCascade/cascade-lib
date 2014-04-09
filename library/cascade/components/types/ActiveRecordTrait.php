@@ -291,13 +291,13 @@ trait ActiveRecordTrait {
 
 	public function loadDefaultValues($skipIfSet = true)
 	{
-		parent::loadDefaultValues($skipIfSet);
 		$defaultValues = $this->getDefaultValues();
 		foreach ($defaultValues as $k => $v) {
-			if ($skipIfSet && !$this->isAttributeChanged($k)) {
+			if ($v !== null && (!$skipIfSet || $this->{$k} === null)) {
 				$this->{$k} = $v;
 			}
 		}
+		parent::loadDefaultValues($skipIfSet);
 	}
 
 	public function getUrl($action = 'view', $base = [], $pathLink = true) {

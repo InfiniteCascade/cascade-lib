@@ -19,7 +19,7 @@ trait ListWidgetTrait
 
 	public function contentTemplate($model)
 	{
-		if ($model->objectType->hasDashboard) {
+		if ($model->objectType->hasDashboard && $model->can('read')) {
 			return [
 				'viewLink' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
 			];

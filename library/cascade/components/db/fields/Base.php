@@ -3,9 +3,9 @@ namespace cascade\components\db\fields;
 
 use Yii;
 use infinite\base\exceptions\Exception;
+use cascade\components\db\fields\formats\Base as BaseFormat;
 
 abstract class Base extends \infinite\base\Object {
-	public $formatClass = 'cascade\\components\\db\\fields\\FormatText';
 	public $formFieldClass;
 	public $default;
 	public $required = false;
@@ -43,6 +43,17 @@ abstract class Base extends \infinite\base\Object {
 		}
 	}
 
+	public function determineFormatClass()
+	{
+		if (isset($this->fieldSchema)) {
+			switch ($this->fieldSchema->type) {
+				case 'date':
+					return 'cascade\\components\\db\\fields\\formats\\Date';
+				break;
+			}
+		}
+		return 'cascade\\components\\db\\fields\\formats\\Text';
+	}
 
 	public function getField()
 	{
@@ -176,7 +187,7 @@ abstract class Base extends \infinite\base\Object {
 	 */
 	public function getFormat() {
 		if (is_null($this->_format)) {
-			return $this->format = [];
+			$this->format = [];
 		}
 		return $this->_format;
 	}
@@ -191,19 +202,18 @@ abstract class Base extends \infinite\base\Object {
 	public function setFormat($value) {
 		if (is_array($value)) {
 			if (!isset($value['class'])) {
-				$value['class'] = $this->formatClass;
+				$value['class'] = $this->determineFormatClass();
 			}
 			$value['field'] = $this;
-			$this->_format = Yii::createObject($value);
+			$value = Yii::createObject($value);
 		}
 		$this->_format = $value;
-		return true;
 	}
 
 	public function getFormattedValue() {
 		if ($this->format instanceof BaseFormat) {
 			$formattedValue = $this->format->get();
-		} elseif (is_callable($this->format) OR (is_array($this->format) AND !empty($this->format[0]) AND is_object($this->format[0]))) {
+		} elseif (is_callable($this->format) || (is_array($this->format) && !empty($this->format[0]) && is_object($this->format[0]))) {
 			$formattedValue = $this->evaluateExpression($this->format, [$this->value]);
 		} else {
 			$formattedValue = $this->value;

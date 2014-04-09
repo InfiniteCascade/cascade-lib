@@ -164,6 +164,9 @@ abstract class Module extends \cascade\components\base\CollectorModule {
     		case 'viewer':
     			return 'Able to view content.';
     		break;
+    		case 'browser':
+    			return 'Able to see name in lists, but cannot see content.';
+    		break;
 		}
 		return null;
 	}
@@ -172,16 +175,19 @@ abstract class Module extends \cascade\components\base\CollectorModule {
     {
     	switch ($role) {
     		case 'owner':
-    			return ['read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED, 'delete' => Access::ACCESS_GRANTED, 'manageAccess' => Access::ACCESS_GRANTED, 'transfer' => Access::ACCESS_GRANTED];
+    			return ['list' => Access::ACCESS_GRANTED, 'read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED, 'delete' => Access::ACCESS_GRANTED, 'manageAccess' => Access::ACCESS_GRANTED, 'transfer' => Access::ACCESS_GRANTED];
     		break;
     		case 'manager':
-    			return ['read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED, 'archive' => Access::ACCESS_GRANTED, 'manageAccess' => Access::ACCESS_GRANTED];
+    			return ['list' => Access::ACCESS_GRANTED, 'read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED, 'archive' => Access::ACCESS_GRANTED, 'manageAccess' => Access::ACCESS_GRANTED];
     		break;
     		case 'editor':
-    			return ['read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED, 'archive' => Access::ACCESS_GRANTED];
+    			return ['list' => Access::ACCESS_GRANTED, 'read' => Access::ACCESS_GRANTED, 'update' => Access::ACCESS_GRANTED, 'archive' => Access::ACCESS_GRANTED];
     		break;
     		case 'viewer':
-    			return ['read' => Access::ACCESS_GRANTED];
+    			return ['list' => Access::ACCESS_GRANTED, 'read' => Access::ACCESS_GRANTED];
+    		break;
+    		case 'browser':
+    			return ['list' => Access::ACCESS_GRANTED];
     		break;
     	}
     	return false;

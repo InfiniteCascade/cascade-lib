@@ -6,11 +6,15 @@
  * @package cascade
  */
 
-namespace cascade\components\db\fields;
+namespace cascade\components\db\fields\formats;
 
-abstract class BaseFormat extends \infinite\base\Object {
+abstract class Base extends \infinite\base\Object {
 	public $field;
 	abstract public function get();
+	public function getFormValue()
+	{
+		return $this->field->value;
+	}
 }
 
 

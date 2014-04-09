@@ -61,6 +61,7 @@ trait ObjectWidgetTrait
 					$dataProvider['query'] = $queryModelClass::find();
 				break;
 			}
+			$dataProvider['query']->allowRole(['system_id' => 'browser']);
 			$dummyModel = new $queryModelClass;
 			if (in_array($this->currentSortBy, ['familiarity', 'last_accessed'])) {
 				if ($dataProvider['query']->getBehavior('FamiliarityQuery') === null) {
@@ -116,7 +117,7 @@ trait ObjectWidgetTrait
 		$typePrefix = null;
 		$method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
 		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
-		$create = true;
+		$create = isset(Yii::$app->request->object) && Yii::$app->request->object->can('update');
 		$link = false;
 
 		if (($create || $link) && in_array($method, ['parents', 'children'])) {

@@ -9,7 +9,7 @@ abstract class AclTask extends \infinite\setup\Task {
 	}
 	public function getBaseAcas()
 	{
-		return ['read', 'create', 'update', 'delete', 'archive'];
+		return ['list', 'read', 'create', 'update', 'delete', 'archive'];
 	}
 	
 	abstract public function getBaseRules();
