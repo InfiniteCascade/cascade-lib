@@ -1,6 +1,7 @@
 <?php
 use infinite\helpers\Html;
 use yii\widgets\ActiveForm;
+use cascade\components\web\browser\Response as BrowserResponse;
 
 $specialRequestors = $access->specialRequestors;
 $primaryAccount = false;
@@ -33,9 +34,12 @@ if (!$disableFields) {
 			'requiredRoles' => $typeItem->object->requiredRoles
 		];
 	}
-	$dataAccess = [];
+	$dataAccess = ['selector' => ['browse' => ['data' => []], 'search' => []]];
 	$dataAccess['roles'] = $roles;
 	$dataAccess['types'] = $types;
+	$typeBundle = BrowserResponse::handleInstructions(['handler' => 'types', 'typeFilters' => ['authority']]);
+	$dataAccess['selector']['browse']['data']['modules'] = array_keys(Yii::$app->collectors['types']->authorities);
+	$dataAccess['selector']['browse']['root'] = $typeBundle->package();
 	$dataAccess['universalMaxRoleLevel'] = $access->getUniversalMaxRoleLevel();
 	$htmlOptions['data-access'] = json_encode($dataAccess);
 }

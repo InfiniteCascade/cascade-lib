@@ -21,6 +21,7 @@
 		};
 
 		$this.options = jQuery.extend(true, {}, defaultOptions, opts);
+      $.debug(['selector', opts, $this.options]);
       var baseQueryData = {};
       if ($this.options.context.relationship && $this.options.context.role) {
          var relationshipParts = $this.options.context.relationship.split($this.options.relationshipSeparator);

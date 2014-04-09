@@ -117,5 +117,16 @@ class Collector extends \infinite\base\collector\Module
 		return true;
 	}
 
+	public function getAuthorities()
+	{
+		$authorities = [];
+		foreach ($this->getAll() as $typeItem) {
+			if (isset($typeItem->object) && $typeItem->object->getBehavior('Authority') !== null) {
+				$authorities[$typeItem->object->systemId] = $typeItem->object;
+			}
+		}
+		return $authorities;
+	}
+
 }
 ?>

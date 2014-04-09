@@ -66,7 +66,7 @@ class HandlerObjects extends \infinite\web\browser\Handler
 				'id' => $object->primaryKey,
 				'descriptor' => $object->descriptor,
 				'hasChildren' => !empty($object->objectTypeItem->children),
-				'isSelectable' => in_array($object->objectType->systemId, $instructions['modules'])
+				'isSelectable' => $instructions['modules'] === false || in_array($object->objectType->systemId, $instructions['modules'])
 			];
 		}
 		return $items;

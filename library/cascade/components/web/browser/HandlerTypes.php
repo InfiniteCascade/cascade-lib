@@ -18,7 +18,7 @@ class HandlerTypes extends \infinite\web\browser\Handler
 		$possibleTypes = [];
 		foreach ($topType->collectorItem->children as $relationship) {
 			$testType = $relationship->child;
-			if (in_array($testType->systemId, $goodTypes)) {
+			if ($goodTypes === false || in_array($testType->systemId, $goodTypes)) {
 				$possibleTypes[$testType->systemId] = $testType;
 			} elseif (self::descendantHas($testType, $goodTypes)) {
 				$possibleTypes[$testType->systemId] = $testType;
@@ -50,10 +50,10 @@ class HandlerTypes extends \infinite\web\browser\Handler
 	{
 		$instructions = $this->instructions;
 		$items = [];
-		if (!isset($instructions['hasDashboard'])) {
-			$instructions['hasDashboard'] = [true, false];
-		} elseif (!is_array($instructions['hasDashboard'])) {
-			$instructions['hasDashboard'] = [$instructions['hasDashboard']];
+		if (!isset($instructions['typeFilters'])) {
+			$instructions['typeFilters'] = [];
+		} elseif (!is_array($instructions['typeFilters'])) {
+			$instructions['typeFilters'] = [$instructions['typeFilters']];
 		}
 		if (isset($instructions['relationshipRole'])) {
 			if (!isset($instructions['relationship'])) {
@@ -83,16 +83,19 @@ class HandlerTypes extends \infinite\web\browser\Handler
 					continue;
 				}
 			}
-			if (!in_array($type->hasDashboard, $instructions['hasDashboard'])) {
+			if (in_array('hasDashboard', $instructions['typeFilters']) && !$type->hasDashboard) {
+				continue;
+			}
+			if (in_array('authority', $instructions['typeFilters']) && $type->getBehavior('Authority') === null) {
 				continue;
 			}
 			$item = [
 				'type' => 'type',
 				'id' => $type->systemId,
 				'descriptor' => $type->title->upperPlural,
-				'hasChildren' => !empty($type->collectorItem->children) || (isset($instructions['modules']) && in_array($type->systemId, $instructions['modules']))
+				'hasChildren' => !empty($type->collectorItem->children) || ($instructions['modules'] !== false && in_array($type->systemId, $instructions['modules']))
 			];
-			if (!$this->filterQuery || preg_match('/'. preg_quote($this->filterQuery) .'/i', $item['descriptor']) === 1) {
+			if ($item['hasChildren'] && (!$this->filterQuery || preg_match('/'. preg_quote($this->filterQuery) .'/i', $item['descriptor']) === 1)) {
 				$items[] = $item; 
 			}
 		}

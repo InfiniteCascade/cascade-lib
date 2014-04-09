@@ -14,27 +14,40 @@ function AccessManager($manager) {
 		}
 	});
 
-	this.searchForm = $("<input />", {'type': 'text', 'name': 'search', 'placeholder': 'Search for new item...', 'class': 'form-control access-search-input'});
-	this.searchForm.insertAfter($manager);
-	this.searchForm.objectSearch({
-		'data': {
-			'typeFilters': ['authority'],
-			'ignore': self.getRequestorIds()
-		},
-		'callback': function(event, object, dataset) {
-			self.addRequestorRow(object, dataset);
-		}
-	});
+	var selectorOptions = this.options.selector;
+	selectorOptions.callback = selectorOptions.browse.callback = function(object) {
+		self.addRequestorRow(object);
+	};
+	var baseData = {
+		'ignore': self.getRequestorIds()
+	};
+
+	if (selectorOptions.search.data === undefined) {
+		selectorOptions.search.data = {};
+	}
+	if (selectorOptions.browse.data === undefined) {
+		selectorOptions.browse.data = {};
+	}
+	selectorOptions.browse.data = jQuery.extend(true, {}, selectorOptions.browse.data, baseData);
+	selectorOptions.search.data = jQuery.extend(true, {}, selectorOptions.search.data, baseData);
+	selectorOptions.search.data.typeFilters = ['authority'];
+	this.selectorField = $("<input />", {'type': 'hidden', 'name': 'search'});
+	this.selectorField.insertAfter($manager);
+	this.selectorField.objectSelector(selectorOptions);
 
 }
 
 AccessManager.prototype.defaultOptions = {
 	'types': {},
 	'roles': {},
-	'universalMaxRoleLevel': true
+	'universalMaxRoleLevel': true,
+	'selector': {
+		'browse': {},
+		'search': {}
+	}
 };
 
-AccessManager.prototype.addRequestorRow =  function(object, dataset) {
+AccessManager.prototype.addRequestorRow =  function(object) {
 	var self = this;
 	var type = this.getType(object.type);
 	if (!type) { return false; }
