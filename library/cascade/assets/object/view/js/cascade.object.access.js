@@ -15,8 +15,9 @@ function AccessManager($manager) {
 	});
 
 	var selectorOptions = this.options.selector;
-	selectorOptions.callback = selectorOptions.browse.callback = function(object) {
+	selectorOptions.callback = function($selector, object) {
 		self.addRequestorRow(object);
+        $selector.resetSelector();
 	};
 	var baseData = {
 		'ignore': self.getRequestorIds()
@@ -49,7 +50,7 @@ AccessManager.prototype.defaultOptions = {
 
 AccessManager.prototype.addRequestorRow =  function(object) {
 	var self = this;
-	var type = this.getType(object.type);
+	var type = this.getType(object.objectType);
 	if (!type) { return false; }
 	var requestorObject = {};
 	requestorObject.id = object.id;

@@ -17,11 +17,10 @@
          'search': {
             'data': {}
          },
-         'callback': function (item) { $.debug(item); return false; }
+         'callback': function ($selector, item) { $.debug(item); return false; }
 		};
 
 		$this.options = jQuery.extend(true, {}, defaultOptions, opts);
-      $.debug(['selector', opts, $this.options]);
       var baseQueryData = {};
       if ($this.options.context.relationship && $this.options.context.role) {
          var relationshipParts = $this.options.context.relationship.split($this.options.relationshipSeparator);
@@ -54,12 +53,10 @@
       $this.selectorElements.inputGroup = $("<div />", {'class': 'input-group'}).appendTo($this.selectorElements.selector);
       $this.selectorElements.input = $("<input />", {'type': 'text', 'class': 'form-control', 'id': $this.searchInputId}).appendTo($this.selectorElements.inputGroup);
       var searchSelectCallback = function(object, datum) {
-         $this.options.callback(datum);
-         $this.hideSelector();
+         $this.options.callback($this, datum);
       };
       var browseSelectCallback = function(datum) {
-         $this.options.callback(datum);
-         $this.hideSelector();
+         $this.options.callback($this, datum);
       };
       var searchOptions = jQuery.extend(true, {}, $this.options.search, {data: selectQueryData});
       searchOptions.callback = searchSelectCallback;

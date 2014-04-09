@@ -7,7 +7,7 @@ use yii\base\InvalidConfigException;
 
 class Bundle extends \infinite\web\browser\Bundle
 {
-
+	public $itemClass = 'cascade\\components\\web\\browser\\Item';
 	public function getHandlers()
 	{
 		return [

@@ -50,7 +50,6 @@ class HandlerObjects extends \infinite\web\browser\Handler
 	public function getItems()
 	{
 		$instructions = $this->instructions;
-		
 		if (!$this->dataSource) {
 			return false;
 		}
@@ -63,6 +62,7 @@ class HandlerObjects extends \infinite\web\browser\Handler
 		foreach ($dataSource->all() as $object) {
 			$items[] = [
 				'type' => 'object',
+				'objectType' => $object->objectType->systemId,
 				'id' => $object->primaryKey,
 				'descriptor' => $object->descriptor,
 				'hasChildren' => !empty($object->objectTypeItem->children),

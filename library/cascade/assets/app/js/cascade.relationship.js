@@ -18,7 +18,8 @@ $preparer.add(function(context) {
       	$this.relationshipElements.canvas = $("<div />").addClass('relationship-canvas').insertAfter($this);
 		$this.relationshipElements.selectedPreview = $("<div />").addClass('relationship-preview panel panel-default').appendTo($this.relationshipElements.canvas);
 		var selectorOptions = $this.options.selector;
-		$this.select = function(datum) {
+		$this.select = function($selector, datum) {
+			$selector.hideSelector();
 			$this.val(datum.id);
 			$.debug($this.relationshipElements);
 			$this.relationshipElements.selectedPreview.html('');

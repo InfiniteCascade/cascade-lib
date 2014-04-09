@@ -73,7 +73,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 		return array_merge(parent::toArray(), [
 			'icon' => $this->icon,
 			'url' => $this->url,
-			'type' => $this->objectType
+			'objectType' => $this->objectType
 		]);
 	}
 
