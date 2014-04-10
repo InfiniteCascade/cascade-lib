@@ -5,6 +5,7 @@ use Yii;
 
 use infinite\base\exceptions\Exception;
 use cascade\modules\core\TypeAccount\models\ObjectAccount;
+use infinite\db\Query;
 
 use cascade\components\db\ActiveRecord;
 use infinite\db\behaviors\ActiveAccess;
@@ -85,6 +86,23 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 			return false;
 		}
 		return array_unique($objects);
+	}
+
+	public function buildInnerRoleCheckConditions(&$innerOnConditions, $innerAlias, $query)
+	{
+		if ($query instanceof \infinite\db\ActiveQuery && $query->model->getBehavior('Relatable') !== null) {
+			$superInnerAlias = 'relation_role_check';
+        	$subquery = $query->model->queryParentRelations(false, ['alias' => $superInnerAlias]);
+        	if (isset($subquery->where[1])) {
+        		$firstKey = array_keys($subquery->where[1])[0];
+        		unset($subquery->where[1][$firstKey]);
+        		$subquery->where[1] = $firstKey .' = {{' .$query->primaryAlias .'}}.[['. $query->primaryTablePk .']]'; 
+        	}
+        	$subquery->select(['{{'. $superInnerAlias .'}}.[[parent_object_id]]']);
+        	$innerOnConditions[] = '{{'. $innerAlias .'}}.[[controlled_object_id]] IN ('.$subquery->createCommand()->rawSql.')';
+        	//echo $subquery->createCommand()->rawSql;exit;
+        }
+		return true;
 	}
 
 	protected function getActionMap($controlledObject = null)
