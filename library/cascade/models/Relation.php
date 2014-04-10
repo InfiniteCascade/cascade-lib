@@ -9,6 +9,7 @@ use cascade\components\db\ActiveRecordTrait;
 use cascade\components\types\Module as TypeModule;
 use cascade\components\types\Relationship;
 use cascade\components\types\RelationshipEvent;
+use infinite\caching\Cacher;
 
 class Relation extends \infinite\db\models\Relation
 {
@@ -30,7 +31,10 @@ class Relation extends \infinite\db\models\Relation
 
 	public function afterSaveRelation($event)
 	{
+		parent::afterSaveRelation($event);
 		if ($this->wasDirty) {
+			Cacher::invalidateGroup(['Object', 'relations', $this->parent_object_id]);
+			Cacher::invalidateGroup(['Object', 'relations', $this->child_object_id]);
 			$parentObject = $this->getParentObject(false);
 			$childObject =  $this->getChildObject(false);
 			$relationshipEvent = new RelationshipEvent(['parentEvent' => $event, 'parentObject' => $parentObject, 'childObject' => $childObject, 'relationship' => $this->relationship]);
@@ -40,6 +44,24 @@ class Relation extends \infinite\db\models\Relation
 			if ($childObject) {
 				$childObject->objectType->trigger(TypeModule::EVENT_RELATION_CHANGE, $relationshipEvent);
 			}
+		}
+	}
+
+
+	public function afterDeleteRelation($event)
+	{
+		parent::afterDeleteRelation($event);
+		Cacher::invalidateGroup(['Object', 'relations', $this->parent_object_id]);
+		Cacher::invalidateGroup(['Object', 'relations', $this->child_object_id]);
+		
+		$parentObject = $this->getParentObject(false);
+		$childObject =  $this->getChildObject(false);
+		$relationshipEvent = new RelationshipEvent(['parentEvent' => $event, 'parentObject' => $parentObject, 'childObject' => $childObject, 'relationship' => $this->relationship]);
+		if ($parentObject) {
+			$parentObject->objectType->trigger(TypeModule::EVENT_RELATION_DELETE, $relationshipEvent);
+		}
+		if ($childObject) {
+			$childObject->objectType->trigger(TypeModule::EVENT_RELATION_DELETE, $relationshipEvent);
 		}
 	}
 

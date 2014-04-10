@@ -55,6 +55,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	protected $_objectTypeModel;
 
 	const EVENT_RELATION_CHANGE = 'onRelationChange';
+	const EVENT_RELATION_DELETE = 'onRelationDelete';
 	const EVENT_VIEW_OBJECT = 'onViewObject';
 
 	protected $_disabledFields;

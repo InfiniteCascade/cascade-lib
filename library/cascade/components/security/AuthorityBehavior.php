@@ -4,7 +4,7 @@ namespace cascade\components\security;
 use Yii;
 use cascade\components\types\Module as TypeModule;
 use cascade\components\types\RelationshipEvent;
-use yii\caching\GroupDependency;
+use infinite\caching\Cacher;
 
 
 class AuthorityBehavior extends \infinite\security\AuthorityBehavior {
@@ -18,7 +18,7 @@ class AuthorityBehavior extends \infinite\security\AuthorityBehavior {
 	public function handleRelationChange(RelationshipEvent $event)
 	{
 		if (get_class($event->parentObject) === $this->owner->primaryModel) {
-			GroupDependency::invalidate(Yii::$app->cache, 'aros');
+			Cacher::invalidateGroup('aros');
 		}
 	}
 }

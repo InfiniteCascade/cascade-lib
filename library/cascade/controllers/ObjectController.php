@@ -180,6 +180,7 @@ class ObjectController extends Controller
 		}
 		$action = isset($_GET['subaction']) ? $_GET['subaction'] : 'view';
 		Yii::$app->request->object = $object;
+		$object->loadChildParentIds();
 		$type = $this->params['type'] = $object->objectType;
 		$viewEvent = new ObjectViewEvent(['object' => $object, 'action' => $action]);
 		$type->trigger(TypeModule::EVENT_VIEW_OBJECT, $viewEvent);
