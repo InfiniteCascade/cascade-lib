@@ -110,19 +110,20 @@ trait ActiveRecordTrait {
     	if (in_array($relationshipType, ['child', 'children', 'descendants'])) {
     		// I'm the parent
     		$relationship = Relationship::has($myTypeItem, $companionTypeItem) ? Relationship::getOne($myTypeItem, $companionTypeItem) : false;
-    		$seek = 'parents';
+    		$seek = 'queryParentObjects';
     	} else {
     		$relationship = Relationship::has($companionTypeItem, $myTypeItem) ? Relationship::getOne($companionTypeItem, $myTypeItem) : false;
-    		$seek = 'children';
+    		$seek = 'queryChildObjects';
     	}
     	if (!$relationship) { return $package; }
     	$newParams = [];
     	$newParams['skipForeign'] = true;
     	$newParams['limit'] = $params['foreignLimit'];
+    	$newParams['action'] = isset($params['action']) ? $params['action'] : null;
     	$results = $companionType->search($term, $newParams);
     	foreach ($results as $result) {
     		if (empty($result->object)) { continue; }
-    		foreach ($result->object->$seek($myType->primaryModel) as $object) {
+    		foreach ($result->object->$seek($myType->primaryModel)->setAction($newParams['action'])->all() as $object) {
     			$foreignResult = self::createSearchResult($object, $searchFields, $result->score * $searchWeight);
     			if (!$foreignResult) { continue; }
     			$package[$object->primaryKey] = $foreignResult;

@@ -88,7 +88,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	public function onAfterInit($event) {
 		if (!isset(Yii::$app->collectors['taxonomies']) || !Yii::$app->collectors['taxonomies']->registerMultiple($this, $this->taxonomies())) { throw new Exception('Could not register taxonmies for '. $this->systemId .'!'); }
 		if (!isset(Yii::$app->collectors['widgets']) || !Yii::$app->collectors['widgets']->registerMultiple($this, $this->widgets())) { throw new Exception('Could not register widgets for '. $this->systemId .'!'); }
-		if (!isset(Yii::$app->collectors['roles']) || !Yii::$app->collectors['roles']->registerMultiple($this, $this->roles())) { throw new Exception('Could not register roles for '. $this->systemId .'!'); }	
+		//if (!isset(Yii::$app->collectors['roles']) || !Yii::$app->collectors['roles']->registerMultiple($this, $this->roles())) { throw new Exception('Could not register roles for '. $this->systemId .'!'); }	
 		// if (!isset(Yii::$app->collectors['tools']) || !Yii::$app->collectors['tools']->registerMultiple($this, $this->tools())) { throw new Exception('Could not register tools for '. $this->systemId .'!'); }
 		// if (!isset(Yii::$app->collectors['reports']) || !Yii::$app->collectors['reports']->registerMultiple($this, $this->reports())) { throw new Exception('Could not register reports for '. $this->systemId .'!'); }
 		return parent::onAfterInit($event);
@@ -704,6 +704,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 						}
 						
 						$relation->child_object_id = $parent['model']->primaryKey;
+						$parent['model']->registerRelationModel($relation, $parentKey);
 						if (isset($parent['handler'])) {
 							$descriptor = $parent['handler']->title->singular;
 							$result = $parent['handler']->handleSave($parent['model']);
@@ -727,7 +728,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 							$relation = $child['model']->getRelationModel($childKey);
 						}
 						$relation->parent_object_id = $primary['model']->primaryKey;
-
+						$child['model']->registerRelationModel($relation, $childKey);
 						if (isset($child['handler'])) {
 							$descriptor = $child['handler']->title->singular;
 							$result = $child['handler']->handleSave($child['model']);

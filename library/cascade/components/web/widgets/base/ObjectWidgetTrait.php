@@ -61,7 +61,7 @@ trait ObjectWidgetTrait
 					$dataProvider['query'] = $queryModelClass::find();
 				break;
 			}
-			$dataProvider['query']->allowRole(['system_id' => 'browser']);
+			$dataProvider['query']->action = 'list';
 			$dummyModel = new $queryModelClass;
 			if (in_array($this->currentSortBy, ['familiarity', 'last_accessed'])) {
 				if ($dataProvider['query']->getBehavior('FamiliarityQuery') === null) {

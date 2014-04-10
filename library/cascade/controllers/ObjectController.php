@@ -148,6 +148,7 @@ class ObjectController extends Controller
 		if (!empty($searchParams['ignoreParents'])) {
 			$params['ignoreParents'] = (array)$searchParams['ignoreParents'];
 		}
+		$params['action'] = 'read';
 		$params['modules'] = $modules;
 		$term = $searchParams['term'];
 		$scores = [];
@@ -255,7 +256,7 @@ class ObjectController extends Controller
 
 		}
 
-		if (!$this->params['type']->hasDashboard || $this->params['type']->uniparental) {
+		if (!$this->params['type']->hasDashboard) { // || $this->params['type']->uniparental) {
 			$required[] = 'relation';
 		}
 
@@ -316,7 +317,7 @@ class ObjectController extends Controller
 
 		foreach ($required as $r) {
 			if (!isset($this->params[$r])) {
-				throw new HttpException(400, "Invalid request");
+				throw new HttpException(400, "Invalid request ({$r} is required)");
 			}
 		}
 		if ($swap) {

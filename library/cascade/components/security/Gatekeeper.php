@@ -90,7 +90,11 @@ class Gatekeeper extends \infinite\security\Gatekeeper {
 
 	public function buildInnerRoleCheckConditions(&$innerOnConditions, $innerAlias, $query)
 	{
-		if ($query instanceof \infinite\db\ActiveQuery && $query->model->getBehavior('Relatable') !== null) {
+		if ($query instanceof \infinite\db\ActiveQuery 
+			&& $query->model->getBehavior('Relatable') !== null
+			&& isset($query->model->objectType)
+			&& is_object($query->model->objectType)
+			&& $query->model->objectType->inheritParentAccess) {
 			$superInnerAlias = 'relation_role_check';
         	$subquery = $query->model->queryParentRelations(false, ['alias' => $superInnerAlias]);
         	if (isset($subquery->where[1])) {
