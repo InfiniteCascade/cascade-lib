@@ -115,7 +115,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
 	{
         if (is_null($this->_storageEngine)) {
             $storageEngineClass = Yii::$app->classes['StorageEngine'];
-            $this->storageEngine = $storageEngineClass::find()->andWhere(['handler' => Yii::$app->params['defaultStorageEngine']])->one();
+            $this->storageEngine = $storageEngineClass::find()->setAction('read')->andWhere(['handler' => Yii::$app->params['defaultStorageEngine']])->one();
         }
 		return $this->_storageEngine;
 	}

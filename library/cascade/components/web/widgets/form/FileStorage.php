@@ -14,7 +14,7 @@ class FileStorage extends Widget {
 	public function generateContent()
 	{
 		$renderedStorageEngines = [];
-		$storageEngines = StorageEngine::find()->all();
+		$storageEngines = StorageEngine::find()->setAction('read')->all();
 		foreach ($storageEngines as $key => $storageEngine) {
 			$storageHandler = $storageEngine->storageHandler;
 			if (!$storageHandler 

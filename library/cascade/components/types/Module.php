@@ -739,7 +739,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 						}
 
 						if (!$result) {
-							$noticeMessage = 'Unable to save '. $descriptor;
+							$noticeMessage = 'Unable to save '. $descriptor .' '. print_r($child['model']->errors, true);
 							if (!in_array($noticeMessage, $notice)) {
 								$notice[] = $noticeMessage;
 							}

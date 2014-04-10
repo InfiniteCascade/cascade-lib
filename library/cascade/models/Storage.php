@@ -62,13 +62,15 @@ class Storage extends \cascade\components\db\ActiveRecord
 		if ($attributes === false) {
 			$this->delete();
 			return false;
-		} else {
+		} elseif ($attributes !== true) {
 			$this->scenario = 'fill';
 			$this->attributes = $attributes;
 			if (!$this->save()) {
 				$this->delete();
 				return false;
 			}
+			return true;
+		} else {
 			return true;
 		}
 	}

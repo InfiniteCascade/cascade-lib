@@ -42,7 +42,7 @@ class Item extends \infinite\base\collector\Item {
 				}
 			}
 			if (!$publicEngine->asGroup($this->publicEngineGroup)->can('read')) {
-				$publicEngine->allow('read');
+				$publicEngine->allow(['list', 'read']);
 			}
 		}
 	}

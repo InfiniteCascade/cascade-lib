@@ -98,6 +98,9 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
 
 	public function handleUpload(Storage $storage, $model, $attribute)
 	{
+		if (!($model->{$attribute} instanceof FileInterface)) {
+			return true;
+		}
 		$package = [];
 		$baseKey = $this->buildKey();
 		$package['storage_key'] = implode('.', $baseKey);
@@ -130,6 +133,8 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
 			} else {
 				$errorMessage = 'An error occurred during file transport.';
 			}
+		} elseif (!$model->isNewRecord) {
+			return true;
 		}
 		$model->addError($attribute, $errorMessage);
 		return false;
