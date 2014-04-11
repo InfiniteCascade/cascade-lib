@@ -31,7 +31,7 @@ class ObjectType extends \cascade\components\db\ActiveRecord
 				'class' => 'cascade\\components\\db\\behaviors\\Roleable',
 			],
 			'ActiveAccess' => [
-				'class' => 'infinite\\db\\behaviors\\ActiveAccess',
+				'class' => 'cascade\\components\\db\\behaviors\\ActiveAccess',
 			],
 		]);
 	}

@@ -274,9 +274,6 @@ class ObjectController extends Controller
 				throw new HttpException(400, "Invalid request object relation");
 			}
 			$this->params['relatedObject'] = $this->params['object'];
-			if (!is_null($can) && !$this->params['relatedObject']->can($can)) {
-				throw new HttpException(403, "You are not authorized to perform this action.");
-			}
 			$can = 'update';
 			$this->params['object'] = null;
 			if ($_GET['object_relation'] === 'child') {
@@ -308,8 +305,16 @@ class ObjectController extends Controller
 			}
 		}
 
-		if (!is_null($can) && isset($this->params['object']) && !$this->params['object']->can($can)) {
-			throw new HttpException(403, "You are not authorized to perform this action.");
+		if (!is_null($can) && isset($this->params['object'])) {
+			if (isset($this->params['relatedObject'])) {
+				$test = $this->params['relatedObject']->can($can, null, $this->params['object']);
+			} else {
+				$test = $this->params['object']->can($can);
+			}
+
+			if (!$test) {
+				throw new HttpException(403, "You are not authorized to perform this action.");
+			}
 		}
 
 		if (isset($_GET['subaction'])) {

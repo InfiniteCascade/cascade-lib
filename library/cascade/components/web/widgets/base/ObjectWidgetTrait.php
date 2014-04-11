@@ -277,7 +277,10 @@ trait ObjectWidgetTrait
 		}
 		
 		// delete button
-		if ($model->can('delete')) {
+		if (
+			$model->can('delete') // they can actually delete it
+			|| $model->canDeleteAssociation(Yii::$app->request->object)
+			) {
 			$menu['delete'] = [
 				'icon' => 'fa fa-trash-o',
 				'label' => 'Delete',

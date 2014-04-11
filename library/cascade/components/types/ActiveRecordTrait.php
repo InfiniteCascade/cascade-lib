@@ -57,7 +57,7 @@ trait ActiveRecordTrait {
 				'class' => 'cascade\\components\\db\\behaviors\\Taxonomy',
 			],
 			'ActiveAccess' => [
-				'class' => 'infinite\\db\\behaviors\\ActiveAccess',
+				'class' => 'cascade\\components\\db\\behaviors\\ActiveAccess',
 			],
 			'Roleable' => [
 				'class' => 'cascade\\components\\db\\behaviors\\Roleable',
@@ -76,7 +76,6 @@ trait ActiveRecordTrait {
     {
         return parent::isForeignField($field) && strpos($field, ':') !== false;
     }
-	
 
     public static function searchForeign($term, $field, $params = [])
 	{
