@@ -99,7 +99,7 @@ class Header extends Widget {
 		if ($object->can('delete') || $object->can('archive')) {
 			$label = 'Delete';
 			$icon = 'fa-trash-o';
-			if (!$object->can('delete')) {
+			if ($object->can('archive')) {
 				$icon = 'fa-archive';
 				if ($object->archived) {
 					$label = 'Unarchive';

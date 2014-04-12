@@ -542,10 +542,6 @@ class ObjectController extends Controller
 			$primaryModel = $type->primaryModel;
 		}
 
-		Yii::$app->response->view = 'delete';
-		Yii::$app->response->task = 'dialog';
-		Yii::$app->response->taskOptions = ['title' => 'Delete '. $type->title->getSingular(true) , 'isConfirmDeletion' => true];
-
 		$this->params['model'] = new DeleteForm;
 		if (isset($relation)) {
 			$this->params['model']->object = $relatedObject;
@@ -561,6 +557,10 @@ class ObjectController extends Controller
 		if (empty($this->params['model']->possibleTargets)) {
 			throw new HttpException(403, "You are not authorized to perform this action.");
 		}
+
+		Yii::$app->response->view = 'delete';
+		Yii::$app->response->task = 'dialog';
+		Yii::$app->response->taskOptions = ['title' => 'Delete '. $type->title->getSingular(true) , 'isConfirmDeletion' => true];
 		
 		if (!empty($_POST['DeleteForm'])) {
 			Yii::$app->response->task = 'status';
