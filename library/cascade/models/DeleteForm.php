@@ -79,7 +79,7 @@ class DeleteForm extends Model
 
 	public function canDeleteObject()
 	{
-		if ($this->object->objectType->hasDashboard && isset($this->relationModel)) {
+		if ($this->object->objectType->hasDashboard && isset($this->relationship) && !$this->relationship->isHasOne()) {
 			return false;
 		}
 		return $this->object->can('delete');
@@ -87,7 +87,7 @@ class DeleteForm extends Model
 
 	public function canArchiveObject()
 	{
-		if ($this->object->objectType->hasDashboard && isset($this->relationModel)) {
+		if ($this->object->objectType->hasDashboard && isset($this->relationship) && !$this->relationship->isHasOne()) {
 			return false;
 		}
 		return $this->object->can('archive');

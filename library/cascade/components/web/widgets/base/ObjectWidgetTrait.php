@@ -122,14 +122,12 @@ trait ObjectWidgetTrait
 		$typePrefix = null;
 		$method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
 		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
-		$create = isset(Yii::$app->request->object) && Yii::$app->request->object->can('update');
-		$link = false;
+		$create = $link = isset(Yii::$app->request->object) && Yii::$app->request->object->can('update');
 
 		if (($create || $link) && in_array($method, ['parents', 'children'])) {
 			if (empty(Yii::$app->request->object) || !$relationship) {
 				throw new Exception("Object widget requested when no object has been set!");
 			}
-			$create = $link = Yii::$app->gk->canGeneral('update', Yii::$app->request->object);
 			$baseCreate['object_id'] = Yii::$app->request->object->primaryKey;
 			$objectRole = $relationship->companionRole($method);
 			$companionRole = $relationship->companionRole($objectRole);

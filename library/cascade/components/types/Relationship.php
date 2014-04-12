@@ -31,6 +31,17 @@ class Relationship extends \infinite\base\Object
 	protected $_options = [];
 	static $_relationships = [];
 
+	public function package()
+	{
+		return [
+			'id' => $this->systemId,
+			'temporal' => $this->temporal,
+			'taxonomy' => $this->taxonomy,
+			'activeAble' => $this->activeAble,
+			'type' => $this->type
+		];
+	}
+
 	public function getPrimaryChild($parentObject)
 	{
 		if (!$this->handlePrimary) { return false; }
@@ -182,7 +193,7 @@ class Relationship extends \infinite\base\Object
 	{
 		$objectModule = $object->objectType;
 		if (!$objectModule 
-			|| ($relationshipRole === 'parent' && ($this->child->uniparental || $this->type === self::HAS_ONE))
+			|| ($relationshipRole === 'parent' && ($this->child->uniparental || $this->isHasOne()))
 		) {
 			return false;
 		}

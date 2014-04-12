@@ -8,7 +8,7 @@
          'relationshipSeparator': '.',
          'context': {
             'relationship': false,
-            'objectId': false,
+            'object': false,
             'role': false
          },
    		'browse': {
@@ -23,7 +23,7 @@
 		$this.options = jQuery.extend(true, {}, defaultOptions, opts);
       var baseQueryData = {};
       if ($this.options.context.relationship && $this.options.context.role) {
-         var relationshipParts = $this.options.context.relationship.split($this.options.relationshipSeparator);
+         var relationshipParts = $this.options.context.relationship.id.split($this.options.relationshipSeparator);
          if ($this.options.context.role === 'child') {
             baseQueryData['modules'] = [relationshipParts[1]];
          } else {
@@ -33,21 +33,25 @@
       var selectQueryData = jQuery.extend(true, {}, baseQueryData);
       var browseQueryData = jQuery.extend(true, {}, baseQueryData);
 
-      if ($this.options.context.objectId) {
+      if ($this.options.context.object) {
          if ($this.options.context.relationship && $this.options.context.role) {
             if ($this.options.context.role === 'child') {
-               selectQueryData['ignoreParents'] = [$this.options.context.objectId];
+               selectQueryData['ignoreParents'] = [$this.options.context.object.id];
             } else {
-               selectQueryData['ignoreChildren'] = [$this.options.context.objectId];
+               selectQueryData['ignoreChildren'] = [$this.options.context.object.id];
             }
          }
-         selectQueryData['ignore'] = browseQueryData['ignore'] = [$this.options.context.objectId];
+         selectQueryData['ignore'] = browseQueryData['ignore'] = [$this.options.context.object.id];
       }
 
 
       $this.selectorElements = {};
       $this.searchInputId = $this.attr("id") + '-search';
-      $this.selectorElements.canvas = $("<div />").addClass('object-selector-canvas').insertAfter($this);
+      if ($this.options.canvasTarget === undefined) {
+         $this.selectorElements.canvas = $("<div />").addClass('object-selector-canvas').insertAfter($this);
+      } else {
+         $this.selectorElements.canvas = $("<div />").addClass('object-selector-canvas').appendTo($this.options.canvasTarget);
+      }
       $this.selectorElements.selector = $("<div />").addClass('object-selector').appendTo($this.selectorElements.canvas);
       $this.selectorElements.label = $("<label />", {'for': $this.searchInputId}).html($this.options.inputLabel).appendTo($this.selectorElements.selector);
       $this.selectorElements.inputGroup = $("<div />", {'class': 'input-group'}).appendTo($this.selectorElements.selector);

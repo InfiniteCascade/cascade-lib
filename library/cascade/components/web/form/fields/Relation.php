@@ -81,13 +81,14 @@ class Relation extends Base {
 		$field = $this->getRelationModelField();
 		$parts = [];
 		$r = [];
-		$r['selector'] = ['context' => [], 'browse' => [], 'search' => ['data' => []]];
-		$r['selector']['context']['relationship'] = $this->modelField->relationship->systemId;
+		$r['context'] = [];
+		$r['selector'] = ['browse' => [], 'search' => ['data' => []]];
+		$r['context']['relationship'] = $this->modelField->relationship->package();
 		if ($this->modelField->baseModel && !$this->modelField->baseModel->isNewRecord) {
-			$r['selector']['context']['objectId'] = $this->modelField->baseModel->primaryKey;
+			$r['context']['object'] = ['id' => $this->modelField->baseModel->primaryKey, 'descriptor' => $this->modelField->baseModel->descriptor];
 		}
-		$r['selector']['context']['role'] = $role = $this->modelField->relationship->companionRole($this->modelField->modelRole);
-		// \d($role);exit;
+		$r['context']['role'] = $role = $this->modelField->relationship->companionRole($this->modelField->modelRole);
+		//\d($r);exit;
 		
 		if (($modelTypeItem = $this->modelField->relationship->{$role}->collectorItem)) {
 			$typeBundle = BrowserResponse::handleInstructions(['handler' => 'types', 'relationshipRole' => $role, 'relationship' => $this->modelField->relationship->systemId, 'typeFilters' => ['hasDashboard']]);
