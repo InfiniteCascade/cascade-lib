@@ -54,6 +54,9 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
 
     public function setTaxonomy_id($value)
     {
+        if (!is_array($value)) {
+            $value = [$value];
+        }
         foreach ($value as $k => $v) {
             if (is_object($v)) {
                 $value[$k] = $v->primaryKey;

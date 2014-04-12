@@ -1,9 +1,15 @@
-$preparer.add(function(context) {
+var datePickerOptions = {
+	autoclose: true,
+	todayHighlight: true
+};
+
+function prepareCascadeFormFields(context) {
 	$("select[multiple]", context).selectpicker();
-	$(".date", context).datepicker({
-		autoclose: true,
-		todayHighlight: true
-	});
+	$(".date", context).datepicker(datePickerOptions);
+}
+
+$preparer.add(function(context) {
+	prepareCascadeFormFields(context);
 	$('#searchform-query').objectSearch({
 		'data': {
 			'typeFilters': ['dashboard']

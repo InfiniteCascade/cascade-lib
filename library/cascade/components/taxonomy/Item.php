@@ -20,6 +20,18 @@ class Item extends \infinite\base\collector\Item {
 
 	protected $_taxonomies;
 
+
+	public function package($override = [])
+	{
+		return array_merge([
+			'id' => $this->systemId,
+			'name' => $this->name,
+			'multiple' => $this->multiple,
+			'required' => $this->required,
+			'default' => $this->default,
+			'taxonomies' => $this->taxonomyList
+		], $override);	
+	}
 	/**
 	 *
 	 *
@@ -61,6 +73,7 @@ class Item extends \infinite\base\collector\Item {
 		}
 		$this->_taxonomies[] = $taxonomy;
 	}
+
 }
 
 

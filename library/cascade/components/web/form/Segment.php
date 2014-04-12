@@ -173,9 +173,10 @@ class Segment extends FormObject {
 			}
 
 			if (!is_null($this->relationField)) {
-				$this->relationField->model->addFields($this->_model, $fields, $this->relationField->relationship, $this);
+				// $this->relationField->model->addFields($this->_model, $fields, $this->relationField->relationship, $this);
+				// \d(get_class($this->relationField));
+				$fields['relation'] = $this->relationField;
 			}
-
 			$requiredFields = $this->_model->getRequiredFields($this);
 			$fieldsTemplate = false;
 			if (!empty($this->subform)) {
@@ -225,7 +226,7 @@ class Segment extends FormObject {
 						$fieldsTemplate[] = [$fieldName];
 					}
 				}
-
+				\d($fieldsTemplate);
 				foreach ($fieldsTemplate as $rowFields) {
 					$rowItems = [];
 					foreach ($rowFields as $fieldKey => $fieldSettings) {

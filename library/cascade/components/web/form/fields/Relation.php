@@ -83,6 +83,9 @@ class Relation extends Base {
 		$r = [];
 		$r['context'] = [];
 		$r['selector'] = ['browse' => [], 'search' => ['data' => []]];
+		if ($this->modelField->relationship->temporal && empty($this->model->start)) {
+			$this->model->start = date("m/d/Y");
+		}
 		$r['context']['relationship'] = $this->modelField->relationship->package();
 		if ($this->modelField->baseModel && !$this->modelField->baseModel->isNewRecord) {
 			$r['context']['object'] = ['id' => $this->modelField->baseModel->primaryKey, 'descriptor' => $this->modelField->baseModel->descriptor];
@@ -94,6 +97,10 @@ class Relation extends Base {
 			$typeBundle = BrowserResponse::handleInstructions(['handler' => 'types', 'relationshipRole' => $role, 'relationship' => $this->modelField->relationship->systemId, 'typeFilters' => ['hasDashboard']]);
 			$r['selector']['browse']['root'] = $typeBundle->package();
 		}
+		$r['model'] = [
+			'prefix' => $this->model->formName() . $this->model->tabularPrefix,
+			'attributes' => $this->model->attributes
+		];
 		$r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
 		$this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
 		Html::addCssClass($this->htmlOptions, 'relationship');

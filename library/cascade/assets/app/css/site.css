@@ -367,9 +367,13 @@ footer {
 
 .relationship-object-fields {
   border: 1px solid rgba(0, 0, 0, .15);
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   padding: 5px;
+}
+
+.relationship-field {
+  text-align: center;
 }
 
 .relationship-object-descriptor {
@@ -383,4 +387,9 @@ footer {
   margin: 0 auto;
   width: 1px;
   height: 20px;
+}
+
+.relationship-date-separator {
+  padding: 5px;
+  font-style: italic;
 }

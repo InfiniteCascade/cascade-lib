@@ -45,7 +45,7 @@ class Model extends Base {
 		}
 		$item = $form->field($model, $field, $fieldConfig);
 		$item->inputOptions =& $this->htmlOptions;
-		$item->inputOptions['value'] = $this->modelField->format->formValue;
+		$item->inputOptions['value'] = $fieldConfig['value'] = $this->modelField->format->formValue;
 
 		Html::addCssClass($this->htmlOptions, 'form-control');
 		if (substr($this->type, 0, 5) === 'smart') {

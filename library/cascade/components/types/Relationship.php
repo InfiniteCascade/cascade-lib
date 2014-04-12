@@ -36,10 +36,26 @@ class Relationship extends \infinite\base\Object
 		return [
 			'id' => $this->systemId,
 			'temporal' => $this->temporal,
-			'taxonomy' => $this->taxonomy,
+			'taxonomy' => $this->taxonomyPackage,
 			'activeAble' => $this->activeAble,
 			'type' => $this->type
 		];
+	}
+
+	public function getTaxonomyPackage()
+	{
+		if (empty($this->taxonomy)) {
+			return false;
+		}
+		$taxonomySettings = $this->taxonomy;
+		if (!is_array($taxonomySettings)) {
+			$taxonomySettings = ['id' => $taxonomySettings];
+		}
+		$taxonomy = Yii::$app->collectors['taxonomies']->getOne($taxonomySettings['id']);
+		if (empty($taxonomy) || empty($taxonomy->object)) {
+			return false;
+		}
+		return $taxonomy->package($taxonomySettings);
 	}
 
 	public function getPrimaryChild($parentObject)
