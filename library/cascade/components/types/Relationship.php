@@ -24,7 +24,8 @@ class Relationship extends \infinite\base\Object
 		'required' => false,
 		'handlePrimary' => true, // should we look at parent and child primary preferences
 		'taxonomy' => null,
-		'fields' => [],
+		'temporal' => false,
+		'activeAble' => false,
 		'type' => self::HAS_MANY
 	];
 	protected $_options = [];

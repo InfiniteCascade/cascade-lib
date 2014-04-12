@@ -4,7 +4,7 @@ namespace cascade\components\db\behaviors;
 use Yii;
 use infinite\helpers\ArrayHelper;
 
-class QueryFamiliarity extends \infinite\db\behaviors\Query
+class QueryFamiliarity extends \infinite\db\behaviors\QueryBehavior
 {
    /**
      * @return \yii\db\ActiveRelation

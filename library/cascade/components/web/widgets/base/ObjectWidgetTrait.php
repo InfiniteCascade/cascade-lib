@@ -69,6 +69,11 @@ trait ObjectWidgetTrait
 				}
 				$dataProvider['query']->withFamiliarity();
 			}
+			if ($this->getState('showHidden', false)) {
+				$dataProvider['query']->includeArchives();
+			} else {
+				$dataProvider['query']->excludeArchives();
+			}
 			$dataProvider['pagination'] = $this->paginationSettings;
 			$dataProvider['sort'] = $this->sortSettings;
 			$this->_dataProvider = Yii::createObject($dataProvider);

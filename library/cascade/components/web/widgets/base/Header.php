@@ -20,10 +20,13 @@ class Header extends Widget {
 		}
 		$content[] = Html::beginTag('div', ['class' => 'ic-object-header']);
 		$content[] = $object->descriptor;
-
 		$objectAccess = $object->objectAccess;
 		$objectVisibility = $objectAccess->visibility;
 		$content[] = Html::endTag('div');
+
+		if ($object->archived) {
+			$content[] = Html::tag('div', Html::tag('span', 'Archived', ['class' => 'label label-warning']), ['class' => 'center-block center-text']);
+		}
 
 		$menu = [];
 		$familiarty = $object->getFamiliarity();
@@ -93,13 +96,24 @@ class Header extends Widget {
 				'options' => ['title' => 'Update', 'data-handler' => 'background']
 			];
 		}
-		if ($object->can('delete')) {
+		if ($object->can('delete') || $object->can('archive')) {
+			$label = 'Delete';
+			$icon = 'fa-trash-o';
+			if (!$object->can('delete')) {
+				$icon = 'fa-archive';
+				if ($object->archived) {
+					$label = 'Unarchive';
+				} else {
+					$label = 'Archive';
+				}
+			}
 			$menu[] = [
-				'label' => Html::tag('span', '', ['class' => 'fa fa-trash-o']) .' Delete', 
+				'label' => Html::tag('span', '', ['class' => 'fa '. $icon]) .' '. $label, 
 				'url' => $object->getUrl('delete'), 
-				'options' => ['title' => 'Delete', 'data-handler' => 'background']
+				'options' => ['title' => $label, 'data-handler' => 'background']
 			];
 		}
+
 		if (!empty($menu)) {
 			$content[] = Html::beginTag('div', ['class' => 'ic-object-menu columns-'. count($menu)]);
 			$content[] = Html::beginTag('ul', ['class' => 'clearfix']);

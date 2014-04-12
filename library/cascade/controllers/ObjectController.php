@@ -534,7 +534,7 @@ class ObjectController extends Controller
 	 */
 	public function actionDelete() {
 		$subform = null;
-		$this->_parseParams(['object', 'type'], 'delete');
+		$this->_parseParams(['object', 'type']);
 		extract($this->params);
 		if (isset($relatedType)) {
 			$primaryModel = $relatedType->primaryModel;
@@ -549,28 +549,36 @@ class ObjectController extends Controller
 		$this->params['model'] = new DeleteForm;
 		if (isset($relation)) {
 			$this->params['model']->object = $relatedObject;
+			$this->params['model']->relationship = $relationship;
 			$this->params['model']->relationModel = $relation;
 			$this->params['model']->relationshipWith = $object;
-			$this->params['model']->forceObjectDelete = !$object->allowRogue($relation);
-			if (!$this->params['model']->forceObjectDelete) {
-				$this->params['model']->target = 'relationship';
-			}
 			$primaryObject = $relatedObject;
 		} else {
 			$primaryObject = $object;
 			$this->params['model']->object = $object;
-			$this->params['model']->forceObjectDelete = !$object->allowRogue();
 		}
+
+		if (empty($this->params['model']->possibleTargets)) {
+			throw new HttpException(403, "You are not authorized to perform this action.");
+		}
+		
 		if (!empty($_POST['DeleteForm'])) {
 			Yii::$app->response->task = 'status';
 			$targetDescriptor = $this->params['model']->targetDescriptor;
 			$this->params['model']->attributes = $_POST['DeleteForm'];
-			if (!$this->params['model']->delete()) {
-				Yii::$app->response->error =  'Could not delete '. $this->params['model']->targetDescriptor;
+			if (!$this->params['model']->handle()) {
+				Yii::$app->response->error =  'Could not '. $this->params['model']->targetLabel['long'];
 			} else {
-				Yii::$app->response->success = ucfirst($targetDescriptor). ' has been deleted!';
-				if (!empty($_GET['redirect'])) {
-					Yii::$app->response->redirect = $_GET['redirect'];
+				Yii::$app->response->success = ucfirst($this->params['model']->targetLabel['past']). '.';
+				if (isset($this->params['model']->targetLabel['response'])) {
+					switch ($this->params['model']->targetLabel['response']) {
+						case 'home':
+							Yii::$app->response->redirect = '/';
+						break;
+						case 'refresh':
+							Yii::$app->response->refresh = true;
+						break;
+					}
 				} else {
 					Yii::$app->response->trigger = [
 						['refresh', '.model-'. $primaryObject::baseClassName()]
