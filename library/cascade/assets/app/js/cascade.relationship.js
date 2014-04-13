@@ -58,14 +58,14 @@ $preparer.add(function(context) {
 				var taxonomyCanvas = $('<div />', {'class': 'relationship-field relationship-field-taxonomy'}).appendTo($target);
 				var taxonomySelectGroup = $('<div />', {'class': 'form-group'}).appendTo(taxonomyCanvas);
 				var taxonomySelectLabel = $('<label />', {'class': ''}).html(taxonomy.name).appendTo(taxonomySelectGroup);
-				var taxonomySelectInput = $('<select />', {'class': 'form-control ignore-focus', 'name': $this.options.model.prefix + '[taxonomy_id]'}).appendTo(taxonomySelectGroup);
+				var taxonomySelectInput = $('<select />', {'class': 'form-control ignore-focus', 'name': $this.options.model.prefix + '[taxonomy_id][]'}).appendTo(taxonomySelectGroup);
 				if ($this.options.model.attributes.taxonomy_id === undefined) {
 					$this.options.model.attributes.taxonomy_id = [];
 				}
-				taxonomySelectInput.renderSelect(taxonomy.taxonomies, this.required, $this.options.model.attributes.taxonomy_id);
 				if (taxonomy.multiple) {
 					taxonomySelectInput.attr("multiple", true);
 				}
+				taxonomySelectInput.renderSelect(taxonomy.taxonomies, this.required, $this.options.model.attributes.taxonomy_id);
 			}
 			if ($this.options.context.relationship.activeAble) {
 				var activeCanvas = $('<div />', {'class': 'relationship-field relationship-field-active'}).appendTo($target);

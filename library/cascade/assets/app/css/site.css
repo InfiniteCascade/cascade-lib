@@ -376,6 +376,11 @@ footer {
   text-align: center;
 }
 
+.relationship-object-fields-alone .relationship-field {
+  text-align: left;
+}
+
+
 .relationship-object-descriptor {
   text-align: center;
   font-weight: 600;

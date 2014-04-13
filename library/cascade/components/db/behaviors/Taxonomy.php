@@ -21,6 +21,12 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
         ];
     }
 
+
+    public function safeAttributes()
+    {
+        return ['taxonomy_id'];
+    }
+
     public function afterSave($event)
     {
     	if (!is_null($this->_taxonomy_id)) {

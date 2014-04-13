@@ -9,6 +9,7 @@ use cascade\components\web\browser\Response as BrowserResponse;
 
 class Relation extends Base {
 	public $linkExisting = true;
+	public $inlineRelation = false;
 	public $linkMultiple = false;
 	public $relatedObject;
 
@@ -57,6 +58,9 @@ class Relation extends Base {
 		if ($this->linkExisting) {
 			// we are matching with an existing document
 			return $this->generateRelationField();
+		} elseif ($this->inlineRelation) {
+			// we are matching with an existing document
+			return $this->generateRelationField(['justFields' => true]);
 		} else {
 			$formSegment = $this->relatedObject->objectType->getFormSegment($this->relatedObject, ['relationField' => $this->modelField]);
 			$formSegment->owner = $this;
@@ -75,12 +79,12 @@ class Relation extends Base {
 		return $field;
 	}
 
-	protected function generateRelationField()
+	protected function generateRelationField($initialSettings = [])
 	{
 		$model = $this->model;
 		$field = $this->getRelationModelField();
 		$parts = [];
-		$r = [];
+		$r = $initialSettings;
 		$r['context'] = [];
 		$r['selector'] = ['browse' => [], 'search' => ['data' => []]];
 		if ($this->modelField->relationship->temporal && empty($this->model->start)) {
@@ -99,7 +103,7 @@ class Relation extends Base {
 		}
 		$r['model'] = [
 			'prefix' => $this->model->formName() . $this->model->tabularPrefix,
-			'attributes' => $this->model->attributes
+			'attributes' => array_merge($this->model->attributes, ['taxonomy_id' => $this->model->taxonomy_id])
 		];
 		$r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
 		$this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
