@@ -170,6 +170,10 @@ class Relationship extends \infinite\base\Object
 		return isset(self::$_relationships[$key]);
 	}
 
+	public function getHasFields()
+	{
+		return ($this->temporal || $this->activeAble || $this->taxonomyPackage);
+	}
 
 	public function isHasOne()
 	{

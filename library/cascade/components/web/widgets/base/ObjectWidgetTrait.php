@@ -261,19 +261,24 @@ trait ObjectWidgetTrait
 		}
 
 		// update button
+		$updateLabel = false;
 		if (!$objectType->hasDashboard && $model->can('update')) {
+			$updateLabel = 'Update';
+		} elseif ($model->canUpdateAssociation(Yii::$app->request->object) && $relationship->hasFields) {
+			$updateLabel = 'Update Relationship';
+		}
+		if ($updateLabel) {
 			$menu['update'] = [
 				'icon' => 'fa fa-wrench',
-				'label' => 'Update',
+				'label' => $updateLabel,
 				'url' => ['/object/update'] + $baseUrl,
 				'linkOptions' => ['data-handler' => 'background']
 			];
 		}
-
 		if (!$objectType->hasDashboard && $model->can('manageAccess')) {
 			$menu['access'] = [
 				'icon' => 'fa fa-key',
-				'label' => 'Access',
+				'label' => 'Manage Access',
 				'url' => ['/object/access'] + $baseUrl,
 				'linkOptions' => ['data-handler' => 'background']
 			];

@@ -294,7 +294,9 @@ class ObjectController extends Controller
 			$this->params['relation']->tabularId = $this->params['relatedObject']->id;
 			$this->params['relatedObject']->_moduleHandler = $this->params['subform'];
 			$this->params['relatedObject']->registerRelationModel($this->params['relation']);
-
+			if (isset($_POST['Relation'][$this->params['relation']->tabularId])) {
+				$this->params['relation']->attributes = $_POST['Relation'][$this->params['relation']->tabularId];
+			}
 		}
 
 		if (!isset($this->params['handler']) && isset($this->params['object'])) {

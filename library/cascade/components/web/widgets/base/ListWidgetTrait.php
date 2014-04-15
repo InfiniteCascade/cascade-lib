@@ -89,7 +89,8 @@ trait ListWidgetTrait
 						'options' => ['class' => 'pull-right'],
 						'encodeLabels' => false,
 						'items' => $menuItems
-					]
+					],
+					'iconOptions' => ['class' => 'fa fa-angle-down']
 				]);
 		}
 		return null;

@@ -20,7 +20,11 @@ if (count($model->possibleTargets) === 1) {
 	foreach ($model->possibleTargets as $target) {
 		$label = $model->labels[$target];
 		$labelOptions = isset($label['options']) ? $label['options'] : [];
-		Html::addCssClass($labelOptions, 'btn btn-default');
+		if (!isset($labelOptions['class'])) {
+			Html::addCssClass($labelOptions, 'btn btn-default');
+		} else {
+			Html::addCssClass($labelOptions, 'btn');
+		}
 		if ($model->target === $target) {
 			Html::addCssClass($labelOptions, 'active');
 		}

@@ -704,7 +704,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 							$relation = $parent['model']->getRelationModel($parentKey);
 						}
 						
-						$relation->child_object_id = $parent['model']->primaryKey;
+						$relation->child_object_id = $primary['model']->primaryKey;
 						$parent['model']->registerRelationModel($relation, $parentKey);
 						if (isset($parent['handler'])) {
 							$descriptor = $parent['handler']->title->singular;
@@ -782,7 +782,7 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 	protected function _handlePost($settings = []) {
 		$results = ['primary' => null, 'children' => [], 'parents' => []];
 		if (empty($_POST)) { return false; }
-		// \d($_POST);
+		//\d($_POST);exit;
 		// \d($_FILES);
 		foreach ($_POST as $modelTop => $tabs) {
 			if (!is_array($tabs)) { continue; }
@@ -811,7 +811,6 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					}
 					continue;
 				}
-
 				$handlerParts = explode(':', $tab['_moduleHandler']);
 				if (count($handlerParts) >= 2) {
 					$resultsKey = null;
@@ -830,7 +829,10 @@ abstract class Module extends \cascade\components\base\CollectorModule {
 					$handleRelation = false;
 					if (!empty($resultsKey)) {
 						if ($modelTop === 'Relation') {
-							$results['primary']['model']->registerRelationModel($tab, $tabId);
+							$childFormName = $handler->dummyModel->formName();
+							if (!isset($_POST[$childFormName][$tabId])) {
+								$results['primary']['model']->registerRelationModel($tab, $tabId);
+							}
 							continue;
 						} else {
 							$model = $handler->getModel($object, $m);

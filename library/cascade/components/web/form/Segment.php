@@ -173,26 +173,33 @@ class Segment extends FormObject {
 			}
 
 			$requiredFields = $this->_model->getRequiredFields($this);
+			$fieldsTemplate = false;
 			if (!is_null($this->relationField)) {
 				// $this->relationField->model->addFields($this->_model, $fields, $this->relationField->relationship, $this);
 				// \d(get_class($this->relationField));
 				$fields['relation'] = $this->relationField;
 				$this->relationField->formField->inlineRelation = true;
+				if (!$this->relationField->model->isNewRecord && $this->relationField->companion->hasDashboard) {
+					$fieldsTemplate = [['relation']];
+					$requiredFields = [];
+				}
+				// 
 				$requiredFields['relation'] = $fields['relation'];
 			}
-			$fieldsTemplate = false;
-			if (!empty($this->subform)) {
-				$fieldsTemplate = [[$this->subform => ['linkExisting' => $this->linkExisting]]];
-			} elseif (!isset($this->_settings['fields'])) {
-				$fieldsTemplate = [];
-				foreach ($fields as $fieldName => $field) {
-					if (!$field->human) { continue; }
-					//if (!$field->required) { continue; }
-					if (!($field instanceof ModelField)) { continue; }
-					$fieldsTemplate[] = [$fieldName];
+			if (!$fieldsTemplate) {
+				if (!empty($this->subform)) {
+					$fieldsTemplate = [[$this->subform => ['linkExisting' => $this->linkExisting]]];
+				} elseif (!isset($this->_settings['fields'])) {
+					$fieldsTemplate = [];
+					foreach ($fields as $fieldName => $field) {
+						if (!$field->human) { continue; }
+						//if (!$field->required) { continue; }
+						if (!($field instanceof ModelField)) { continue; }
+						$fieldsTemplate[] = [$fieldName];
+					}
+				} else {
+					$fieldsTemplate = $this->_settings['fields'];
 				}
-			} else {
-				$fieldsTemplate = $this->_settings['fields'];
 			}
 
 			if ($fieldsTemplate !== false) {
