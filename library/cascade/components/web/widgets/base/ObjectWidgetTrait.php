@@ -225,6 +225,7 @@ trait ObjectWidgetTrait
 			$primaryRelation = $relationship->getPrimaryParent($model);
 			$key = 'parent_object_id';
 		}
+
 		if ($primaryRelation && $primaryRelation->{$key} === $model->primaryKey) {
 			Html::addCssClass($options, 'active');
 		}
@@ -251,7 +252,8 @@ trait ObjectWidgetTrait
 			$baseUrl['object_relation'] = 'parent';
 			$primaryRelation = $relationship->getPrimaryParent($model);
 		}
-		if ($primaryRelation && $primaryRelation->child_object_id !== $model->primaryKey) {
+		//\d($primaryRelation->isActive);
+		if (!$primaryRelation || ($primaryRelation && $primaryRelation->child_object_id !== $model->primaryKey)) {
 			$menu['primary'] = [
 				'icon' => 'fa fa-star',
 				'label' => 'Set as primary',

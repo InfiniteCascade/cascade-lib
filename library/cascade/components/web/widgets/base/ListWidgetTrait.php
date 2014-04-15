@@ -90,7 +90,7 @@ trait ListWidgetTrait
 						'encodeLabels' => false,
 						'items' => $menuItems
 					],
-					'iconOptions' => ['class' => 'fa fa-angle-down']
+					// 'iconOptions' => ['class' => 'fa fa-angle-down']
 				]);
 		}
 		return null;

@@ -16,7 +16,6 @@ class Date extends Base {
 		if (empty($result)) {
 			$result = '<span class="empty">(none)</span>';
 		} else {
-			$dateFormat = strtotime($result);
 			$result = Yii::$app->formatter->asDate($result);
 		}
 		return $result;

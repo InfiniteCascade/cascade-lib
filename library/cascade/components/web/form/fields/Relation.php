@@ -1,6 +1,7 @@
 <?php
 namespace cascade\components\web\form\fields;
 
+use Yii;
 use infinite\helpers\ArrayHelper;
 use infinite\helpers\Html;
 use cascade\models\Relation as RelationModel;
@@ -105,6 +106,12 @@ class Relation extends Base {
 			'prefix' => $this->model->formName() . $this->model->tabularPrefix,
 			'attributes' => array_merge($this->model->attributes, ['taxonomy_id' => $this->model->taxonomy_id])
 		];
+		if (!empty($r['model']['attributes']['start'])) {
+			$r['model']['attributes']['start'] = Yii::$app->formatter->asDate($r['model']['attributes']['start']);
+		}
+		if (!empty($r['model']['attributes']['end'])) {
+			$r['model']['attributes']['end'] = Yii::$app->formatter->asDate($r['model']['attributes']['end']);
+		}
 		$r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
 		$this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
 		Html::addCssClass($this->htmlOptions, 'relationship');

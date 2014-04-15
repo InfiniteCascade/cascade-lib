@@ -64,7 +64,7 @@ class Relationship extends \infinite\base\Object
 		if (!$this->child->primaryAsChild) { return false; }
 		$key = json_encode([__FUNCTION__, $this->systemId, $parentObject->primaryKey]);
 		if (!isset(self::$_cache[$key])) {
-			self::$_cache[$key] = true;
+			self::$_cache[$key] = false;
 			$relationClass = Yii::$app->classes['Relation'];
 			$childClass = $this->child->primaryModel;
 			$relation = $relationClass::find();
@@ -74,7 +74,7 @@ class Relationship extends \infinite\base\Object
 			$relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
 			$parentObject->addActiveConditions($relation, $alias);
 			$relation = $relation->one();
-			if ($relation) {
+			if (!empty($relation)) {
 				self::$_cache[$key] = $relation;
 			}
 		}
@@ -98,7 +98,7 @@ class Relationship extends \infinite\base\Object
 			$relation->params[':prefix'] = $parentClass::modelPrefix() . '-%';
 			$childObject->addActiveConditions($relation, $alias);
 			$relation = $relation->one();
-			if ($relation) {
+			if (!empty($relation)) {
 				self::$_cache[$key] = $relation;
 			}
 		}

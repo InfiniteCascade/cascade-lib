@@ -221,6 +221,18 @@ abstract class Base extends \infinite\base\Object {
 		return $formattedValue;
 	}
 
+
+	public function getFormValue() {
+		if ($this->format instanceof BaseFormat) {
+			$formValue = $this->format->getFormValue();
+		} elseif (is_callable($this->format) || (is_array($this->format) && !empty($this->format[0]) && is_object($this->format[0]))) {
+			$formValue = $this->evaluateExpression($this->format, [$this->value]);
+		} else {
+			$formValue = $this->value;
+		}
+		return $formValue;
+	}
+
 	public function getValuePackage()
 	{
 		return ['plain' => $this->value, 'rich' => $this->formattedValue];
