@@ -5,9 +5,9 @@
  * @license http://www.infinitecascade.com/license/
  */
 
-namespace cascade\components\db\fields;
+namespace cascade\components\db\fields\formats;
 
-class RawText extends BaseFormat
+class RawText extends Base
 {
     public function get()
     {
