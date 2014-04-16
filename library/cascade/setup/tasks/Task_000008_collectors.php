@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link http://www.infinitecascade.com/
+ * @copyright Copyright (c) 2014 Infinite Cascade
+ * @license http://www.infinitecascade.com/license/
+ */
+
 namespace cascade\setup\tasks;
 
 class Task_000008_collectors extends \infinite\setup\Task
