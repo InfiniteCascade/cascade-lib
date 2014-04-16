@@ -68,6 +68,9 @@ trait ActiveRecordTrait {
 			'Familiarity' => [
 				'class' => 'cascade\\components\\db\\behaviors\\Familiarity',
 			],
+			'Auditable' => [
+				'class' => 'cascade\\components\\db\\behaviors\\auditable\\Auditable',
+			],
 		];
 	}
 

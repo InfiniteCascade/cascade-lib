@@ -20,6 +20,7 @@ class ClassManager extends \infinite\base\ClassManager
 			'StorageEngine' => 'cascade\\models\\StorageEngine',
 			'ObjectTypeRegistry' => 'cascade\\models\\ObjectType',
 			'ObjectFamiliarity' => 'cascade\\models\\ObjectFamiliarity',
+			'Audit' => 'cascade\\models\\Audit',
 			'Taxonomy' => 'cascade\\models\\Taxonomy',
 			'TaxonomyType' => 'cascade\\models\\TaxonomyType',
 			'RelationTaxonomy' => 'cascade\\models\\RelationTaxonomy',
