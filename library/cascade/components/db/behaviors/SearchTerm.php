@@ -2,6 +2,7 @@
 
 namespace cascade\components\db\behaviors;
 
-trait SearchTerm {
-	use \infinite\db\behaviors\SearchTerm;
+trait SearchTerm
+{
+    use \infinite\db\behaviors\SearchTerm;
 }

@@ -2,14 +2,12 @@
 namespace cascade\components\db\behaviors;
 
 use Yii;
-use infinite\helpers\ArrayHelper;
 
 class Familiarity extends \infinite\db\behaviors\ActiveRecord
 {
     public $objectField = 'object_id';
     public $userField = 'user_id';
     protected $_familiarity = [];
-    
 
     public function events()
     {
@@ -42,6 +40,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
         } elseif (isset(Yii::$app->user) && isset(Yii::$app->user->identity->primaryKey)) {
             return Yii::$app->user->identity;
         }
+
         return false;
     }
 
@@ -56,6 +55,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
         } else {
             $familiarity->watching = 0;
         }
+
         return $familiarity->save();
     }
 
@@ -82,7 +82,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
                 }
             }
         }
+
         return $this->_familiarity[$familarityKey];
     }
 }
-?>

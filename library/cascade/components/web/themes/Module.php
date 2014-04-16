@@ -1,27 +1,25 @@
 <?php
 namespace cascade\components\web\themes;
 
-use Yii;
+abstract class Module extends \cascade\components\base\CollectorModule
+{
+    public $name;
+    public $version = 1;
 
-use yii\base\Event;
+    public function getCollectorName()
+    {
+        return 'themes';
+    }
 
-abstract class Module extends \cascade\components\base\CollectorModule {
-	public $name;
-	public $version = 1;
+    public function getModuleType()
+    {
+        return 'Theme';
+    }
 
-	public function getCollectorName() {
-		return 'themes';
-	}
+    abstract public function getIdentityAssetBundle();
 
-	public function getModuleType() {
-		return 'Theme';
-	}
-
-	abstract public function getIdentityAssetBundle();
-
-	public function getAssetBundles()
-	{
-		return [$this->identityAssetBundle];
-	}
+    public function getAssetBundles()
+    {
+        return [$this->identityAssetBundle];
+    }
 }
-?>

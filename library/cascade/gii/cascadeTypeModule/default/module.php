@@ -19,85 +19,82 @@ use Yii;
 
 class Module extends \cascade\components\types\Module
 {
-	protected $_title = '<?= $generator->title; ?>';
-	public $icon = '<?= $generator->icon; ?>';
-	public $hasDashboard = <?php echo empty($generator->hasDashboard) ? 'false' : 'true'; ?>;
-	public $uniparental = <?php echo empty($generator->uniparental) ? 'false' : 'true'; ?>;
-	public $priority = <?= $generator->priority; ?>;
+    protected $_title = '<?= $generator->title; ?>';
+    public $icon = '<?= $generator->icon; ?>';
+    public $hasDashboard = <?php echo empty($generator->hasDashboard) ? 'false' : 'true'; ?>;
+    public $uniparental = <?php echo empty($generator->uniparental) ? 'false' : 'true'; ?>;
+    public $priority = <?= $generator->priority; ?>;
 
-	public $widgetNamespace = '<?=$generator->getWidgetNamespace(); ?>';
-	public $modelNamespace = '<?=$generator->getModelNamespace(); ?>';
+    public $widgetNamespace = '<?=$generator->getWidgetNamespace(); ?>';
+    public $modelNamespace = '<?=$generator->getModelNamespace(); ?>';
 
-	/**
-	 * @inheritdoc
-	 */
-	public function init()
-	{
-		parent::init();
-		
-		Yii::$app->registerMigrationAlias('<?= $generator->migrationsAlias; ?>');
-	}
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
 
-	/**
-	 * @inheritdoc
-	 */
-	public function widgets()
-	{
-	<?php
-	if (!empty($generator->section)) {
-		echo "\t\$widgets = parent::widgets();\n";
-		foreach ($generator->widgets as $widget) {
-			echo "\t\t\$widgets['{$widget}']['section'] = Yii::\$app->collectors['sections']->getOne('{$generator->section}');\n";
-		}
-		echo "\t\treturn \$widgets;";
-	} else {
-		echo "\t\treturn parent::widgets();";
-	}
-	?>
+        Yii::$app->registerMigrationAlias('<?= $generator->migrationsAlias; ?>');
+    }
 
-	}
+    /**
+     * @inheritdoc
+     */
+    public function widgets()
+    {
+    <?php
+    if (!empty($generator->section)) {
+        echo "\t\$widgets = parent::widgets();\n";
+        foreach ($generator->widgets as $widget) {
+            echo "\t\t\$widgets['{$widget}']['section'] = Yii::\$app->collectors['sections']->getOne('{$generator->section}');\n";
+        }
+        echo "\t\treturn \$widgets;";
+    } else {
+        echo "\t\treturn parent::widgets();";
+    }
+    ?>
 
-	
-	/**
-	 * @inheritdoc
-	 */
-	public function parents()
-	{
-		return [<?php
-			if (!empty($generator->parents)) {
-				echo "\n";
-				foreach(explode(',', $generator->parents) as $parent) {
-					$parent = trim($parent);
-					echo "\t\t\t'{$parent}' => [],\n";
-				}
-			}
-		?>
-		];
-	}
+    }
 
-	
-	/**
-	 * @inheritdoc
-	 */
-	public function children()
-	{
-		return [<?php
-			if (!empty($generator->children)) {
-				echo "\n";
-				foreach(explode(',', $generator->children) as $child) {
-					$child = trim($child);
-					echo "\t\t\t'{$child}' => [],\n";
-				}
-			}
-		?>];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function parents()
+    {
+        return [<?php
+            if (!empty($generator->parents)) {
+                echo "\n";
+                foreach (explode(',', $generator->parents) as $parent) {
+                    $parent = trim($parent);
+                    echo "\t\t\t'{$parent}' => [],\n";
+                }
+            }
+        ?>
+        ];
+    }
 
-	
-	/**
-	 * @inheritdoc
-	 */
-	public function taxonomies()
-	{
-		return [];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function children()
+    {
+        return [<?php
+            if (!empty($generator->children)) {
+                echo "\n";
+                foreach (explode(',', $generator->children) as $child) {
+                    $child = trim($child);
+                    echo "\t\t\t'{$child}' => [],\n";
+                }
+            }
+        ?>];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function taxonomies()
+    {
+        return [];
+    }
 }

@@ -18,58 +18,58 @@ namespace cascade\models;
 class DataInterfaceLog extends \cascade\components\db\ActiveRecord
 {
 
-	/**
-	 * @inheritdoc
-	 */
-	public static function isAccessControlled()
+    /**
+     * @inheritdoc
+     */
+    public static function isAccessControlled()
     {
         return false;
     }
-    
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'data_interface_log';
-	}
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['data_interface_id'], 'required'],
-			[['message'], 'string'],
-			[['peak_memory'], 'integer'],
-			[['started', 'ended'], 'safe'],
-			[['data_interface_id'], 'string', 'max' => 36],
-			[['status'], 'string', 'max' => 255]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'data_interface_log';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'data_interface_id' => 'Data Interface ID',
-			'status' => 'Status',
-			'message' => 'Message',
-			'peak_memory' => 'Peak Memory',
-			'started' => 'Started',
-			'ended' => 'Ended',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['data_interface_id'], 'required'],
+            [['message'], 'string'],
+            [['peak_memory'], 'integer'],
+            [['started', 'ended'], 'safe'],
+            [['data_interface_id'], 'string', 'max' => 36],
+            [['status'], 'string', 'max' => 255]
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getDataInterface()
-	{
-		return $this->hasOne(DataInterface::className(), ['id' => 'data_interface_id']);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'data_interface_id' => 'Data Interface ID',
+            'status' => 'Status',
+            'message' => 'Message',
+            'peak_memory' => 'Peak Memory',
+            'started' => 'Started',
+            'ended' => 'Ended',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getDataInterface()
+    {
+        return $this->hasOne(DataInterface::className(), ['id' => 'data_interface_id']);
+    }
 }

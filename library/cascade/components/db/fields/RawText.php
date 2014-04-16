@@ -8,11 +8,10 @@
 
 namespace cascade\components\db\fields;
 
-class RawText extends BaseFormat {
-	public function get() {
-		return $this->_field->value;
-	}
+class RawText extends BaseFormat
+{
+    public function get()
+    {
+        return $this->_field->value;
+    }
 }
-
-
-?>

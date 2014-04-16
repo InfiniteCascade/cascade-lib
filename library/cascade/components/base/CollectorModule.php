@@ -5,51 +5,52 @@ use Yii;
 use infinite\base\exceptions\Exception;
 use infinite\base\collector\CollectedObjectTrait;
 
-abstract class CollectorModule extends \infinite\base\Module implements \infinite\base\collector\CollectedObjectInterface {
-	use CollectedObjectTrait;
-	
-	abstract public function getCollectorName();
+abstract class CollectorModule extends \infinite\base\Module implements \infinite\base\collector\CollectedObjectInterface
+{
+    use CollectedObjectTrait;
 
-	/**
-	 * @inheritdoc
-	 */
-	public function __construct($id, $parent, $config=null) {
-		if (isset(Yii::$app->params['modules'][$id])) {
-			if (is_array($config)) {
-				$config = array_merge_recursive($config, Yii::$app->params['modules'][$id]);
-			} else {
-				$config = Yii::$app->params['modules'][$id];
-			}
-		}
-		if (!isset(Yii::$app->collectors[$this->collectorName])) { throw new Exception('Cannot find the collector '. $this->collectorName .'!'); }
-		if (!(Yii::$app->collectors[$this->collectorName]->register(null, $this))) { throw new Exception('Could not register '. $this->shortName .' in '. $this->collectorName .'!'); }
-		$this->loadSubmodules();
-		
-		Yii::$app->collectors->onAfterInit([$this, 'onAfterInit']);
+    abstract public function getCollectorName();
 
-		
-		parent::__construct($id, $parent, $config);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function __construct($id, $parent, $config=null)
+    {
+        if (isset(Yii::$app->params['modules'][$id])) {
+            if (is_array($config)) {
+                $config = array_merge_recursive($config, Yii::$app->params['modules'][$id]);
+            } else {
+                $config = Yii::$app->params['modules'][$id];
+            }
+        }
+        if (!isset(Yii::$app->collectors[$this->collectorName])) { throw new Exception('Cannot find the collector '. $this->collectorName .'!'); }
+        if (!(Yii::$app->collectors[$this->collectorName]->register(null, $this))) { throw new Exception('Could not register '. $this->shortName .' in '. $this->collectorName .'!'); }
+        $this->loadSubmodules();
 
+        Yii::$app->collectors->onAfterInit([$this, 'onAfterInit']);
 
-	public function loadSubmodules() {
-		$this->modules = $this->submodules;
+        parent::__construct($id, $parent, $config);
+    }
 
-		foreach ($this->submodules as $module => $settings) {
-			$mod = $this->getModule($module);
-			$mod->init();
-		}
-		return true;
-	}
+    public function loadSubmodules()
+    {
+        $this->modules = $this->submodules;
 
-	public function getSubmodules() {
-		return [];
-	}
+        foreach ($this->submodules as $module => $settings) {
+            $mod = $this->getModule($module);
+            $mod->init();
+        }
 
+        return true;
+    }
 
-	public function onAfterInit($event) {
-		return true;
-	}
+    public function getSubmodules()
+    {
+        return [];
+    }
+
+    public function onAfterInit($event)
+    {
+        return true;
+    }
 }
-
-?>

@@ -5,8 +5,8 @@ use infinite\helpers\ArrayHelper;
 use infinite\web\grid\Grid;
 $this->title = 'Dashboard';
 $refreshable = [
-	'url' => Url::to('app/refresh'),
-	'data' => [Yii::$app->request->csrfParam => Yii::$app->request->csrfToken, 'baseInstructions' => []]
+    'url' => Url::to('app/refresh'),
+    'data' => [Yii::$app->request->csrfParam => Yii::$app->request->csrfToken, 'baseInstructions' => []]
 ];
 $this->bodyHtmlOptions['data-refreshable'] = json_encode($refreshable);
 
@@ -18,7 +18,7 @@ $grid = new Grid;
 $cells = [];
 Yii::beginProfile("Collect Widgets");
 foreach ($widgets as $item => $widget) {
-	$cells[] = Yii::$app->collectors['widgets']->build(null, $widget, [], []);
+    $cells[] = Yii::$app->collectors['widgets']->build(null, $widget, [], []);
 }
 Yii::endProfile("Collect Widgets");
 $grid->cells = $cells;
@@ -27,4 +27,3 @@ Yii::beginProfile("Render Grid");
 echo $grid->generate();
 Yii::endProfile("Render Grid");
 echo Html::endTag('div');
-?>

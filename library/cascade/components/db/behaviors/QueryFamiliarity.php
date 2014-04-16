@@ -2,7 +2,6 @@
 namespace cascade\components\db\behaviors;
 
 use Yii;
-use infinite\helpers\ArrayHelper;
 
 class QueryFamiliarity extends \infinite\db\behaviors\QueryBehavior
 {
@@ -22,4 +21,3 @@ class QueryFamiliarity extends \infinite\db\behaviors\QueryBehavior
         $this->owner->join('LEFT JOIN', $familiartyTable . ' ft', $where, $params);
     }
 }
-?>

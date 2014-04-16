@@ -18,7 +18,6 @@ namespace <?= $generator->getModelNamespace() ?>;
 
 <?= $uses ?>
 
-
 /**
  * This is the model class for table "<?= $tableName ?>".
  *
@@ -36,67 +35,65 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
 {
 <?= $descriptorField ?>
 
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return '<?= $tableName ?>';
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '<?= $tableName ?>';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function behaviors()
-	{
-		return array_merge(parent::behaviors(), []);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), []);
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [<?= "\n\t\t\t" . implode(",\n\t\t\t", $rules) . "\n\t\t" ?>];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [<?= "\n\t\t\t" . implode(",\n\t\t\t", $rules) . "\n\t\t" ?>];
+    }
 
+    /**
+     * @inheritdoc
+     */
+    public function fieldSettings()
+    {
+        return [<?= "\n\t\t\t" . implode(",\n\t\t\t", $columnSettingSkel) . "\n\t\t" ?>];
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function fieldSettings()
-	{
-		return [<?= "\n\t\t\t" . implode(",\n\t\t\t", $columnSettingSkel) . "\n\t\t" ?>];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function formSettings($name, $settings = [])
+    {
+        return parent::formSettings($name, $settings);
+    }
 
-
-	/**
-	 * @inheritdoc
-	 */
-	public function formSettings($name, $settings = [])
-	{
-		return parent::formSettings($name, $settings);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
 <?php foreach ($labels as $name => $label): ?>
-			<?= "'$name' => '" . addslashes($label) . "',\n" ?>
+            <?= "'$name' => '" . addslashes($label) . "',\n" ?>
 <?php endforeach; ?>
-		];
-	}
+        ];
+    }
 <?php foreach ($relations as $name => $relation): ?>
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function get<?= $name ?>()
-	{
-		<?= $relation[0] . "\n" ?>
-	}
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function get<?= $name ?>()
+    {
+        <?= $relation[0] . "\n" ?>
+    }
 <?php endforeach; ?>
 }

@@ -11,32 +11,30 @@ namespace <?= $migrationsNamespace; ?>;
 
 class <?=$migrationClassName; ?> extends \infinite\db\Migration
 {
-	public function up()
-	{
-		$this->db->createCommand()->checkIntegrity(false)->execute();
+    public function up()
+    {
+        $this->db->createCommand()->checkIntegrity(false)->execute();
 
-		$this->dropExistingTable('<?= $tableName; ?>');
-		
-		$this->createTable('<?= $tableName; ?>', [
-			<?= $createTableSyntax; ?>
+        $this->dropExistingTable('<?= $tableName; ?>');
 
-		]);
+        $this->createTable('<?= $tableName; ?>', [
+            <?= $createTableSyntax; ?>
 
-		<?= $createTableIndices; ?>
+        ]);
 
+        <?= $createTableIndices; ?>
 
-		$this->db->createCommand()->checkIntegrity(true)->execute();
+        $this->db->createCommand()->checkIntegrity(true)->execute();
 
-		return true;
-	}
+        return true;
+    }
 
+    public function down()
+    {
+        $this->db->createCommand()->checkIntegrity(false)->execute();
+        $this->dropExistingTable('<?= $tableName; ?>');
+        $this->db->createCommand()->checkIntegrity(true)->execute();
 
-
-	public function down()
-	{
-		$this->db->createCommand()->checkIntegrity(false)->execute();
-		$this->dropExistingTable('<?= $tableName; ?>');
-		$this->db->createCommand()->checkIntegrity(true)->execute();
-		return true;
-	}
+        return true;
+    }
 }

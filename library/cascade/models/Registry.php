@@ -6,14 +6,14 @@ use cascade\components\db\ActiveRecordTrait;
 
 class Registry extends \infinite\db\models\Registry
 {
-	use ActiveRecordTrait;
+    use ActiveRecordTrait;
 
-	public function behaviors()
-	{
-		return array_merge(parent::behaviors(), [
-			'Relatable' => [
-				'class' => 'infinite\\db\\behaviors\\Relatable',
-			],
-		]);
-	}
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'Relatable' => [
+                'class' => 'infinite\\db\\behaviors\\Relatable',
+            ],
+        ]);
+    }
 }

@@ -1,23 +1,21 @@
 <?php
 namespace cascade\components\dataInterface;
 
-use Yii;
+abstract class Module extends \cascade\components\base\CollectorModule
+{
+    public $name;
+    public $version = 1;
 
-use yii\base\Event;
+    public function getCollectorName()
+    {
+        return 'dataInterfaces';
+    }
 
-abstract class Module extends \cascade\components\base\CollectorModule {
-	public $name;
-	public $version = 1;
+    public function getModuleType()
+    {
+        return 'Interface';
+    }
 
-	public function getCollectorName() {
-		return 'dataInterfaces';
-	}
-
-	public function getModuleType() {
-		return 'Interface';
-	}
-
-	abstract public function getSettings();
-	abstract public function run(Action $action);
+    abstract public function getSettings();
+    abstract public function run(Action $action);
 }
-?>

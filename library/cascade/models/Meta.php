@@ -20,68 +20,68 @@ namespace cascade\models;
  */
 class Meta extends \cascade\components\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function isAccessControlled()
+    /**
+     * @inheritdoc
+     */
+    public static function isAccessControlled()
     {
         return false;
     }
-    
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'meta';
-	}
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['registry_id', 'meta_key_id'], 'required'],
-			[['value_text'], 'string'],
-			[['value_int'], 'integer'],
-			[['value_float'], 'number'],
-			[['value_datetime', 'created', 'modified'], 'safe'],
-			[['registry_id', 'meta_key_id'], 'string', 'max' => 36]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'meta';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'registry_id' => 'Registry ID',
-			'meta_key_id' => 'Meta Key ID',
-			'value_text' => 'Value Text',
-			'value_int' => 'Value Int',
-			'value_float' => 'Value Float',
-			'value_datetime' => 'Value Datetime',
-			'created' => 'Created',
-			'modified' => 'Modified',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['registry_id', 'meta_key_id'], 'required'],
+            [['value_text'], 'string'],
+            [['value_int'], 'integer'],
+            [['value_float'], 'number'],
+            [['value_datetime', 'created', 'modified'], 'safe'],
+            [['registry_id', 'meta_key_id'], 'string', 'max' => 36]
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getMetaKey()
-	{
-		return $this->hasOne(MetaKey::className(), ['id' => 'meta_key_id']);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'registry_id' => 'Registry ID',
+            'meta_key_id' => 'Meta Key ID',
+            'value_text' => 'Value Text',
+            'value_int' => 'Value Int',
+            'value_float' => 'Value Float',
+            'value_datetime' => 'Value Datetime',
+            'created' => 'Created',
+            'modified' => 'Modified',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getRegistry()
-	{
-		return $this->hasOne(Registry::className(), ['id' => 'registry_id']);
-	}
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getMetaKey()
+    {
+        return $this->hasOne(MetaKey::className(), ['id' => 'meta_key_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getRegistry()
+    {
+        return $this->hasOne(Registry::className(), ['id' => 'registry_id']);
+    }
 }

@@ -2,100 +2,100 @@
 namespace cascade\components\security;
 
 use Yii;
-use infinite\db\behaviors\ActiveAccess;
-use infinite\security\Access;
 
+class ObjectAccess extends \infinite\security\ObjectAccess
+{
+    public $specialAuthorities = ['Group'];
 
-class ObjectAccess extends \infinite\security\ObjectAccess {
-	public $specialAuthorities = ['Group'];
+    public function determineVisibility()
+    {
+        $groupClass = Yii::$app->classes['Group'];
+        $groupPrefix = $groupClass::modelPrefix();
+        $publicGroup = Yii::$app->gk->publicGroup;
+        $primaryAccount = Yii::$app->gk->primaryAccount;
+        $actions = Yii::$app->gk->actionsByName;
+        $readAction = $actions['read'];
+        $publicAro = isset($this->requestors[$publicGroup->primaryKey]) ? $this->requestors[$publicGroup->primaryKey] : false;
+        $primaryAccountAro = isset($this->requestors[$primaryAccount->primaryKey]) ? $this->requestors[$primaryAccount->primaryKey] : false;
 
-	public function determineVisibility()
-	{
-		$groupClass = Yii::$app->classes['Group'];
-		$groupPrefix = $groupClass::modelPrefix();
-		$publicGroup = Yii::$app->gk->publicGroup;
-		$primaryAccount = Yii::$app->gk->primaryAccount;
-		$actions = Yii::$app->gk->actionsByName;
-		$readAction = $actions['read'];
-		$publicAro = isset($this->requestors[$publicGroup->primaryKey]) ? $this->requestors[$publicGroup->primaryKey] : false;
-		$primaryAccountAro = isset($this->requestors[$primaryAccount->primaryKey]) ? $this->requestors[$primaryAccount->primaryKey] : false;
+        if ($publicAro && $publicAro[$readAction->primaryKey]->can($publicAro)) {
+            return 'public';
+        }
 
-		if ($publicAro && $publicAro[$readAction->primaryKey]->can($publicAro)) {
-			return 'public';
-		}
-		
-		if ($primaryAccountAro && $primaryAccountAro[$readAction->primaryKey]->can($primaryAccount)) {
-			return 'internal';
-		}
-		$foundOwner = false;
+        if ($primaryAccountAro && $primaryAccountAro[$readAction->primaryKey]->can($primaryAccount)) {
+            return 'internal';
+        }
+        $foundOwner = false;
 
-		foreach ($this->roles as $role) {
-			if (empty($role['role_id'])) { continue; }
-			$roleItem = Yii::$app->collectors['roles']->getById($role['role_id']);
-			if (empty($roleItem) || empty($roleItem->object)) { continue; }
-			if ($roleItem->levelSection === 'owner') { $foundOwner = true; continue; }
-			return 'shared';
-		}
-		if ($foundOwner) {
-			return 'private';
-		} else {
-			return 'admins';
-		}
-	}
+        foreach ($this->roles as $role) {
+            if (empty($role['role_id'])) { continue; }
+            $roleItem = Yii::$app->collectors['roles']->getById($role['role_id']);
+            if (empty($roleItem) || empty($roleItem->object)) { continue; }
+            if ($roleItem->levelSection === 'owner') { $foundOwner = true; continue; }
 
-	public function getRoleHelpText($roleItem)
-	{
-		return $this->object->objectType->getRoleHelpText($roleItem, $this->object);
-	}
+            return 'shared';
+        }
+        if ($foundOwner) {
+            return 'private';
+        } else {
+            return 'admins';
+        }
+    }
 
-	public function getSpecialRequestors()
-	{
-		return array_merge(parent::getSpecialRequestors(), [
-			'primaryAccount' => [
-				'object' =>	Yii::$app->gk->primaryAccount,
-				'maxRoleLevel' => Yii::$app->params['maxRoleLevels']['primaryAccount']
-			]
-		]);
-	}
+    public function getRoleHelpText($roleItem)
+    {
+        return $this->object->objectType->getRoleHelpText($roleItem, $this->object);
+    }
 
-	protected function validateRole($role, $validationSettings)
-	{
-		$results = parent::validateRole($role, $validationSettings);
-		$objectType = $validationSettings['object']->objectType;
-		if (!empty($role) && $role !== 'none' && !in_array($objectType->systemId, $this->specialAuthorities) && $objectType->getBehavior('Authority') === null) {
-			$results['errors'][] = $validationSettings['object']->descriptor . ' can not be shared with.';
-		}
-		return $results;
-	}
+    public function getSpecialRequestors()
+    {
+        return array_merge(parent::getSpecialRequestors(), [
+            'primaryAccount' => [
+                'object' =>	Yii::$app->gk->primaryAccount,
+                'maxRoleLevel' => Yii::$app->params['maxRoleLevels']['primaryAccount']
+            ]
+        ]);
+    }
 
-	protected function fillValidationSettings($validationSettings)
-	{
-		if (isset($validationSettings['object'])) {
-			$objectType = $validationSettings['object']->objectType;
-			$objectTypeSettings = $objectType->getRoleValidationSettings($validationSettings['object']);
-			foreach ($objectTypeSettings as $key => $value) {
-				switch ($key) {
-					case 'maxRoleLevel':
-						if (isset($validationSettings[$key]) && $validationSettings[$key] !== true) {
-							$validationSettings[$key] = min($validationSettings[$key], $value);
-						} else {
-							$validationSettings[$key] = $value;
-						}
-					break;
-					case 'possibleRoles':
-						if (isset($validationSettings[$key]) && $validationSettings[$key] !== true) {
-							$validationSettings[$key] = array_intersect($validationSettings[$key], $value);
-						} else {
-							$validationSettings[$key] = $value;
-						}
-					break;
-					default:
-						$validationSettings[$key] = $value;
-					break;
-				}
-			}
-		}
-		return $validationSettings;
-	}
+    protected function validateRole($role, $validationSettings)
+    {
+        $results = parent::validateRole($role, $validationSettings);
+        $objectType = $validationSettings['object']->objectType;
+        if (!empty($role) && $role !== 'none' && !in_array($objectType->systemId, $this->specialAuthorities) && $objectType->getBehavior('Authority') === null) {
+            $results['errors'][] = $validationSettings['object']->descriptor . ' can not be shared with.';
+        }
+
+        return $results;
+    }
+
+    protected function fillValidationSettings($validationSettings)
+    {
+        if (isset($validationSettings['object'])) {
+            $objectType = $validationSettings['object']->objectType;
+            $objectTypeSettings = $objectType->getRoleValidationSettings($validationSettings['object']);
+            foreach ($objectTypeSettings as $key => $value) {
+                switch ($key) {
+                    case 'maxRoleLevel':
+                        if (isset($validationSettings[$key]) && $validationSettings[$key] !== true) {
+                            $validationSettings[$key] = min($validationSettings[$key], $value);
+                        } else {
+                            $validationSettings[$key] = $value;
+                        }
+                    break;
+                    case 'possibleRoles':
+                        if (isset($validationSettings[$key]) && $validationSettings[$key] !== true) {
+                            $validationSettings[$key] = array_intersect($validationSettings[$key], $value);
+                        } else {
+                            $validationSettings[$key] = $value;
+                        }
+                    break;
+                    default:
+                        $validationSettings[$key] = $value;
+                    break;
+                }
+            }
+        }
+
+        return $validationSettings;
+    }
 }
-?>

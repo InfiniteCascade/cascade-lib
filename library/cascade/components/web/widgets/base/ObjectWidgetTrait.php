@@ -11,351 +11,364 @@ use cascade\components\types\Relationship;
 
 trait ObjectWidgetTrait
 {
-	protected $_dataProvider;
-	public $pageSize = 5;
-	
-	public function generateStart() {
-		$this->htmlOptions['data-instructions'] = json_encode($this->refreshInstructions);
-		return parent::generateStart();
-	}
+    protected $_dataProvider;
+    public $pageSize = 5;
 
-	public function getRefreshInstructions() {
-		$i = [];
-		$i['type'] = 'widget';
-		$i['systemId'] = $this->collectorItem->systemId;
-		$i['recreateParams'] = $this->recreateParams;
-		if ($this->section) {
-			$i['section'] = $this->section->systemId;
-		}
-		return $i;
-	}
+    public function generateStart()
+    {
+        $this->htmlOptions['data-instructions'] = json_encode($this->refreshInstructions);
 
-	public function getWidgetClasses() {
-		$classes = parent::getWidgetClasses();
-		$classes[] = 'refreshable';
-		$queryModelClass = $this->owner->primaryModel;
-		$classes[] = 'model-'. $queryModelClass::baseClassName();
-		return $classes;
-	}
+        return parent::generateStart();
+    }
 
-	public function getDataProvider()
-	{
-		if (is_null($this->_dataProvider)) {
-			$dataProvider = $this->dataProviderSettings;
-			if (!isset($dataProvider['class'])) {
-				$dataProvider['class'] = 'infinite\\data\\ActiveDataProvider';
-			}
-			$method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
-			if (in_array($method, ['parents', 'children']) && empty(Yii::$app->request->object)) {
-				throw new Exception("Object widget requested when no object has been set!");
-			}
-			$queryModelClass = $this->owner->primaryModel;
-			switch ($method) {
-				case 'parents':
-					$dataProvider['query'] = Yii::$app->request->object->queryParentObjects($queryModelClass);
-				break;
-				case 'children':
-					$dataProvider['query'] = Yii::$app->request->object->queryChildObjects($queryModelClass);
-				break;
-				default:
-					$dataProvider['query'] = $queryModelClass::find();
-				break;
-			}
-			$dataProvider['query']->action = 'list';
-			$dummyModel = new $queryModelClass;
-			if (in_array($this->currentSortBy, ['familiarity', 'last_accessed'])) {
-				if ($dataProvider['query']->getBehavior('FamiliarityQuery') === null) {
-					$dataProvider['query']->attachBehavior('FamiliarityQuery', ['class' => 'cascade\\components\\db\\behaviors\\QueryFamiliarity']);
-				}
-				$dataProvider['query']->withFamiliarity();
-			}
-			if ($this->getState('showHidden', false)) {
-				$dataProvider['query']->includeArchives();
-			} else {
-				$dataProvider['query']->excludeArchives();
-			}
-			$dataProvider['pagination'] = $this->paginationSettings;
-			$dataProvider['sort'] = $this->sortSettings;
-			$this->_dataProvider = Yii::createObject($dataProvider);
-		}
-		return $this->_dataProvider;
-	}
+    public function getRefreshInstructions()
+    {
+        $i = [];
+        $i['type'] = 'widget';
+        $i['systemId'] = $this->collectorItem->systemId;
+        $i['recreateParams'] = $this->recreateParams;
+        if ($this->section) {
+            $i['section'] = $this->section->systemId;
+        }
 
-	public function getSortBy()
-	{
-		$sortBy = [];
-		$dummyModel = $this->owner->dummyModel;
-		$descriptorField = $dummyModel->descriptorField;
-		if (is_array($descriptorField)) {
-			$descriptorLabel = $dummyModel->getAttributeLabel('descriptor');
-			$descriptorField = implode(',', array_reverse($descriptorField));
-		} else {
-			$descriptorLabel = $dummyModel->getAttributeLabel($descriptorField);
-		}
-		$sortBy['familiarity'] = [
-			'label' => 'Familiarity'
-		];
-		$sortBy['last_accessed'] = [
-			'label' => 'Last Accessed'
-		];
-		$sortBy[$descriptorField] = [
-			'label' => $descriptorLabel
-		];
-		return $sortBy;
-	}
+        return $i;
+    }
 
-	public function getCurrentSortBy()
-	{
-		return $this->getState('sortBy', 'familiarity');
-	}
+    public function getWidgetClasses()
+    {
+        $classes = parent::getWidgetClasses();
+        $classes[] = 'refreshable';
+        $queryModelClass = $this->owner->primaryModel;
+        $classes[] = 'model-'. $queryModelClass::baseClassName();
 
-	public function getCurrentSortByDirection()
-	{
-		return $this->getState('sortByDirection', ($this->currentSortBy === 'familiarity') ? 'desc' : 'asc');
-	}
+        return $classes;
+    }
 
-	public function getHeaderMenu()
-	{
-		$menu = [];
+    public function getDataProvider()
+    {
+        if (is_null($this->_dataProvider)) {
+            $dataProvider = $this->dataProviderSettings;
+            if (!isset($dataProvider['class'])) {
+                $dataProvider['class'] = 'infinite\\data\\ActiveDataProvider';
+            }
+            $method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
+            if (in_array($method, ['parents', 'children']) && empty(Yii::$app->request->object)) {
+                throw new Exception("Object widget requested when no object has been set!");
+            }
+            $queryModelClass = $this->owner->primaryModel;
+            switch ($method) {
+                case 'parents':
+                    $dataProvider['query'] = Yii::$app->request->object->queryParentObjects($queryModelClass);
+                break;
+                case 'children':
+                    $dataProvider['query'] = Yii::$app->request->object->queryChildObjects($queryModelClass);
+                break;
+                default:
+                    $dataProvider['query'] = $queryModelClass::find();
+                break;
+            }
+            $dataProvider['query']->action = 'list';
+            $dummyModel = new $queryModelClass;
+            if (in_array($this->currentSortBy, ['familiarity', 'last_accessed'])) {
+                if ($dataProvider['query']->getBehavior('FamiliarityQuery') === null) {
+                    $dataProvider['query']->attachBehavior('FamiliarityQuery', ['class' => 'cascade\\components\\db\\behaviors\\QueryFamiliarity']);
+                }
+                $dataProvider['query']->withFamiliarity();
+            }
+            if ($this->getState('showHidden', false)) {
+                $dataProvider['query']->includeArchives();
+            } else {
+                $dataProvider['query']->excludeArchives();
+            }
+            $dataProvider['pagination'] = $this->paginationSettings;
+            $dataProvider['sort'] = $this->sortSettings;
+            $this->_dataProvider = Yii::createObject($dataProvider);
+        }
 
-		$baseCreate = ['/object/create'];
-		$typePrefix = null;
-		$method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
-		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
-		$create = $link = isset(Yii::$app->request->object) && Yii::$app->request->object->can('update');
+        return $this->_dataProvider;
+    }
 
-		if (($create || $link) && in_array($method, ['parents', 'children'])) {
-			if (empty(Yii::$app->request->object) || !$relationship) {
-				throw new Exception("Object widget requested when no object has been set!");
-			}
-			$baseCreate['object_id'] = Yii::$app->request->object->primaryKey;
-			$objectRole = $relationship->companionRole($method);
-			$companionRole = $relationship->companionRole($objectRole);
-			$typePrefix = $companionRole .':';
-			$link = $link && $relationship->canLink($objectRole, Yii::$app->request->object);
-			$create = $create && $relationship->canCreate($objectRole, Yii::$app->request->object);
-		}
-		$baseCreate['type'] = $typePrefix . $this->owner->systemId;
+    public function getSortBy()
+    {
+        $sortBy = [];
+        $dummyModel = $this->owner->dummyModel;
+        $descriptorField = $dummyModel->descriptorField;
+        if (is_array($descriptorField)) {
+            $descriptorLabel = $dummyModel->getAttributeLabel('descriptor');
+            $descriptorField = implode(',', array_reverse($descriptorField));
+        } else {
+            $descriptorLabel = $dummyModel->getAttributeLabel($descriptorField);
+        }
+        $sortBy['familiarity'] = [
+            'label' => 'Familiarity'
+        ];
+        $sortBy['last_accessed'] = [
+            'label' => 'Last Accessed'
+        ];
+        $sortBy[$descriptorField] = [
+            'label' => $descriptorLabel
+        ];
 
-		if ($create && Yii::$app->gk->canGeneral('create', $this->owner->primaryModel)) {
-			$createUrl = $baseCreate;
-			$menu[] = [
-				'label' => '<i class="fa fa-plus"></i>',
-				'linkOptions' => ['title' => 'Create'],
-				'url' => $createUrl
-			];
-		}
-		if ($link) {
-			$createUrl = $baseCreate;
-			$createUrl['link'] = 1;
-			$menu[] = [
-				'label' => '<i class="fa fa-link"></i>',
-				'linkOptions' => ['title' => 'Link'],
-				'url' => $createUrl
-			];
-		}
+        return $sortBy;
+    }
 
-		//sorting
-		$sortBy = $this->sortBy;
-		$currentSortBy = $this->currentSortBy;
-		$currentSortByDirection = $this->currentSortByDirection;
-		$oppositeSortByDirection = ($currentSortByDirection === 'asc') ? 'desc' : 'asc';
+    public function getCurrentSortBy()
+    {
+        return $this->getState('sortBy', 'familiarity');
+    }
 
-		if (!empty($sortBy)) {
-			$item = [
-				'label' => '<i class="fa fa-sort"></i>',
-				'linkOptions' => ['title' => 'Sort by'],
-				'url' => '#',
-				'items' => [],
-				'options' => ['class' => 'dropleft']
-			];
+    public function getCurrentSortByDirection()
+    {
+        return $this->getState('sortByDirection', ($this->currentSortBy === 'familiarity') ? 'desc' : 'asc');
+    }
 
-			foreach ($sortBy as $sortKey => $sortItem) {
-				$newSortByDirection = 'asc';
-				$isActive = $sortKey === $currentSortBy;
-				$extra = '';
-				if ($isActive) {
-					$extra = '<i class="pull-right fa fa-sort-'.$oppositeSortByDirection.'"></i>';
-					$newSortByDirection = $oppositeSortByDirection;
-				}
+    public function getHeaderMenu()
+    {
+        $menu = [];
 
-				$stateChange = [
-					$this->stateKeyName('sortBy') => $sortKey, 
-					$this->stateKeyName('sortByDirection') => $newSortByDirection
-				];
+        $baseCreate = ['/object/create'];
+        $typePrefix = null;
+        $method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
+        $relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
+        $create = $link = isset(Yii::$app->request->object) && Yii::$app->request->object->can('update');
 
-				$item['items'][] = [
-					'label' => $extra . $sortItem['label'],
-					'linkOptions' => [
-						'title' => 'Sort by '. $sortItem['label'], 
-						'data-state-change' => json_encode($stateChange)
-					],
-					'options' => [
-						'class' => $isActive ? 'active' : ''
-					],
-					'url' => '#',
-					'active' => $isActive
-				];
-			}
-			$menu[] = $item;
-		}
+        if (($create || $link) && in_array($method, ['parents', 'children'])) {
+            if (empty(Yii::$app->request->object) || !$relationship) {
+                throw new Exception("Object widget requested when no object has been set!");
+            }
+            $baseCreate['object_id'] = Yii::$app->request->object->primaryKey;
+            $objectRole = $relationship->companionRole($method);
+            $companionRole = $relationship->companionRole($objectRole);
+            $typePrefix = $companionRole .':';
+            $link = $link && $relationship->canLink($objectRole, Yii::$app->request->object);
+            $create = $create && $relationship->canCreate($objectRole, Yii::$app->request->object);
+        }
+        $baseCreate['type'] = $typePrefix . $this->owner->systemId;
 
-		return $menu;
-	}
+        if ($create && Yii::$app->gk->canGeneral('create', $this->owner->primaryModel)) {
+            $createUrl = $baseCreate;
+            $menu[] = [
+                'label' => '<i class="fa fa-plus"></i>',
+                'linkOptions' => ['title' => 'Create'],
+                'url' => $createUrl
+            ];
+        }
+        if ($link) {
+            $createUrl = $baseCreate;
+            $createUrl['link'] = 1;
+            $menu[] = [
+                'label' => '<i class="fa fa-link"></i>',
+                'linkOptions' => ['title' => 'Link'],
+                'url' => $createUrl
+            ];
+        }
 
-	public function getListItemOptions($model, $key, $index)
-	{
-		$options = self::getListItemOptionsBase($model, $key, $index);
-		//return $options;
-		$objectType = $model->objectType;
+        //sorting
+        $sortBy = $this->sortBy;
+        $currentSortBy = $this->currentSortBy;
+        $currentSortByDirection = $this->currentSortByDirection;
+        $oppositeSortByDirection = ($currentSortByDirection === 'asc') ? 'desc' : 'asc';
 
-		$queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
-		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
+        if (!empty($sortBy)) {
+            $item = [
+                'label' => '<i class="fa fa-sort"></i>',
+                'linkOptions' => ['title' => 'Sort by'],
+                'url' => '#',
+                'items' => [],
+                'options' => ['class' => 'dropleft']
+            ];
 
-		if (!$relationship) {
-			return $options;
-		}
-		
-		if ($queryRole === 'children') {
-			$baseUrl['object_relation'] = 'child';
-			$primaryRelation = $relationship->getPrimaryChild(Yii::$app->request->object);
-			$key = 'child_object_id';
-		} else {
-			$baseUrl['object_relation'] = 'parent';
-			$primaryRelation = $relationship->getPrimaryParent($model);
-			$key = 'parent_object_id';
-		}
+            foreach ($sortBy as $sortKey => $sortItem) {
+                $newSortByDirection = 'asc';
+                $isActive = $sortKey === $currentSortBy;
+                $extra = '';
+                if ($isActive) {
+                    $extra = '<i class="pull-right fa fa-sort-'.$oppositeSortByDirection.'"></i>';
+                    $newSortByDirection = $oppositeSortByDirection;
+                }
 
-		if ($primaryRelation && $primaryRelation->{$key} === $model->primaryKey) {
-			Html::addCssClass($options, 'active');
-		}
+                $stateChange = [
+                    $this->stateKeyName('sortBy') => $sortKey,
+                    $this->stateKeyName('sortByDirection') => $newSortByDirection
+                ];
 
-		return $options;
-	}
+                $item['items'][] = [
+                    'label' => $extra . $sortItem['label'],
+                    'linkOptions' => [
+                        'title' => 'Sort by '. $sortItem['label'],
+                        'data-state-change' => json_encode($stateChange)
+                    ],
+                    'options' => [
+                        'class' => $isActive ? 'active' : ''
+                    ],
+                    'url' => '#',
+                    'active' => $isActive
+                ];
+            }
+            $menu[] = $item;
+        }
 
-	public function getMenuItems($model, $key, $index)
-	{
-		$objectType = $model->objectType;
+        return $menu;
+    }
 
-		$menu = [];
-		$baseUrl = ['id' => $model->primaryKey];
-		$queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
-		$relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
-		// $relationModel = $this->getRelationModel($model);
-		$baseUrl['related_object_id'] = Yii::$app->request->object->primaryKey;
-		$baseUrl['relationship_id'] = $relationship->systemId;
+    public function getListItemOptions($model, $key, $index)
+    {
+        $options = self::getListItemOptionsBase($model, $key, $index);
+        //return $options;
+        $objectType = $model->objectType;
 
-		if ($queryRole === 'children') {
-			$baseUrl['object_relation'] = 'child';
-			$primaryRelation = $relationship->getPrimaryChild(Yii::$app->request->object);
-		} else {
-			$baseUrl['object_relation'] = 'parent';
-			$primaryRelation = $relationship->getPrimaryParent($model);
-		}
-		//\d($primaryRelation->isActive);
-		if (!$primaryRelation || ($primaryRelation && $primaryRelation->child_object_id !== $model->primaryKey)) {
-			$menu['primary'] = [
-				'icon' => 'fa fa-star',
-				'label' => 'Set as primary',
-				'url' => ['/object/update', 'subaction' => 'setPrimary'] + $baseUrl,
-				'linkOptions' => ['data-handler' => 'background']
-			];
-		}
+        $queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
+        $relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
 
-		// update button
-		$updateLabel = false;
-		if (!$objectType->hasDashboard && $model->can('update')) {
-			$updateLabel = 'Update';
-		} elseif ($model->canUpdateAssociation(Yii::$app->request->object) && $relationship->hasFields) {
-			$updateLabel = 'Update Relationship';
-		}
-		if ($updateLabel) {
-			$menu['update'] = [
-				'icon' => 'fa fa-wrench',
-				'label' => $updateLabel,
-				'url' => ['/object/update'] + $baseUrl,
-				'linkOptions' => ['data-handler' => 'background']
-			];
-		}
-		if (!$objectType->hasDashboard && $model->can('manageAccess')) {
-			$menu['access'] = [
-				'icon' => 'fa fa-key',
-				'label' => 'Manage Access',
-				'url' => ['/object/access'] + $baseUrl,
-				'linkOptions' => ['data-handler' => 'background']
-			];
-		}
-		
-		// delete button
-		if (
-			$model->can('delete') // they can actually delete it
-			|| $model->canDeleteAssociation(Yii::$app->request->object)
-			) {
-			$menu['delete'] = [
-				'icon' => 'fa fa-trash-o',
-				'label' => 'Delete',
-				'url' => ['/object/delete'] + $baseUrl,
-				'linkOptions' => ['data-handler' => 'background']
-			];
-		}
+        if (!$relationship) {
+            return $options;
+        }
 
-		return $menu;
-	}
+        if ($queryRole === 'children') {
+            $baseUrl['object_relation'] = 'child';
+            $primaryRelation = $relationship->getPrimaryChild(Yii::$app->request->object);
+            $key = 'child_object_id';
+        } else {
+            $baseUrl['object_relation'] = 'parent';
+            $primaryRelation = $relationship->getPrimaryParent($model);
+            $key = 'parent_object_id';
+        }
 
-	protected function getPossibleMenuItems($model)
-	{
-		$possible = [];
-		return $possible;
-	}
+        if ($primaryRelation && $primaryRelation->{$key} === $model->primaryKey) {
+            Html::addCssClass($options, 'active');
+        }
 
-	public function getVariables()
-	{
-		$vars = [];
-		if (
-			isset($this->settings['relationship']) 
-			&& isset($this->settings['queryRole'])
-			&& $this->settings['relationship']->child === $this->settings['relationship']->parent
-			) {
+        return $options;
+    }
 
-			if ($this->settings['queryRole'] === 'parents') {
-				$vars['relationship'] = 'Parent';
-			} elseif ($this->settings['queryRole'] === 'children') {
-				$vars['relationship'] = 'Child';
-			}
-		}
-		return array_merge(parent::getVariables(), $vars);
-	}
+    public function getMenuItems($model, $key, $index)
+    {
+        $objectType = $model->objectType;
 
-	public function getPaginationSettings() {
-		return [
-			'class' => 'infinite\\data\\Pagination',
-			'pageSize' => $this->pageSize,
-			'validatePage' => false,
-			'page' => $this->getState('_page', 0),
-		];
-	}
+        $menu = [];
+        $baseUrl = ['id' => $model->primaryKey];
+        $queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
+        $relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
+        // $relationModel = $this->getRelationModel($model);
+        $baseUrl['related_object_id'] = Yii::$app->request->object->primaryKey;
+        $baseUrl['relationship_id'] = $relationship->systemId;
 
-	public function getSortSettings() {
-		return [
-			'class' => 'infinite\\data\\Sort',
-			'sortOrders' => [
-				$this->currentSortBy => $this->currentSortByDirection === 'asc' ? SORT_ASC : SORT_DESC
-			],
-			'attributes' => $this->getSortBy()
-		];
-	}
+        if ($queryRole === 'children') {
+            $baseUrl['object_relation'] = 'child';
+            $primaryRelation = $relationship->getPrimaryChild(Yii::$app->request->object);
+        } else {
+            $baseUrl['object_relation'] = 'parent';
+            $primaryRelation = $relationship->getPrimaryParent($model);
+        }
+        //\d($primaryRelation->isActive);
+        if (!$primaryRelation || ($primaryRelation && $primaryRelation->child_object_id !== $model->primaryKey)) {
+            $menu['primary'] = [
+                'icon' => 'fa fa-star',
+                'label' => 'Set as primary',
+                'url' => ['/object/update', 'subaction' => 'setPrimary'] + $baseUrl,
+                'linkOptions' => ['data-handler' => 'background']
+            ];
+        }
 
-	public function getPagerSettings() {
-		return [
-			'class' => 'infinite\\widgets\\LinkPager',
-			'pageStateKey' => $this->stateKeyName('_page'),
-		];
-	}
+        // update button
+        $updateLabel = false;
+        if (!$objectType->hasDashboard && $model->can('update')) {
+            $updateLabel = 'Update';
+        } elseif ($model->canUpdateAssociation(Yii::$app->request->object) && $relationship->hasFields) {
+            $updateLabel = 'Update Relationship';
+        }
+        if ($updateLabel) {
+            $menu['update'] = [
+                'icon' => 'fa fa-wrench',
+                'label' => $updateLabel,
+                'url' => ['/object/update'] + $baseUrl,
+                'linkOptions' => ['data-handler' => 'background']
+            ];
+        }
+        if (!$objectType->hasDashboard && $model->can('manageAccess')) {
+            $menu['access'] = [
+                'icon' => 'fa fa-key',
+                'label' => 'Manage Access',
+                'url' => ['/object/access'] + $baseUrl,
+                'linkOptions' => ['data-handler' => 'background']
+            ];
+        }
 
-	public function getDataProviderSettings() {
-		return [
-			'class' => 'infinite\\data\\ActiveDataProvider'
-		];
-	}
+        // delete button
+        if (
+            $model->can('delete') // they can actually delete it
+            || $model->canDeleteAssociation(Yii::$app->request->object)
+            ) {
+            $menu['delete'] = [
+                'icon' => 'fa fa-trash-o',
+                'label' => 'Delete',
+                'url' => ['/object/delete'] + $baseUrl,
+                'linkOptions' => ['data-handler' => 'background']
+            ];
+        }
+
+        return $menu;
+    }
+
+    protected function getPossibleMenuItems($model)
+    {
+        $possible = [];
+
+        return $possible;
+    }
+
+    public function getVariables()
+    {
+        $vars = [];
+        if (
+            isset($this->settings['relationship'])
+            && isset($this->settings['queryRole'])
+            && $this->settings['relationship']->child === $this->settings['relationship']->parent
+            ) {
+
+            if ($this->settings['queryRole'] === 'parents') {
+                $vars['relationship'] = 'Parent';
+            } elseif ($this->settings['queryRole'] === 'children') {
+                $vars['relationship'] = 'Child';
+            }
+        }
+
+        return array_merge(parent::getVariables(), $vars);
+    }
+
+    public function getPaginationSettings()
+    {
+        return [
+            'class' => 'infinite\\data\\Pagination',
+            'pageSize' => $this->pageSize,
+            'validatePage' => false,
+            'page' => $this->getState('_page', 0),
+        ];
+    }
+
+    public function getSortSettings()
+    {
+        return [
+            'class' => 'infinite\\data\\Sort',
+            'sortOrders' => [
+                $this->currentSortBy => $this->currentSortByDirection === 'asc' ? SORT_ASC : SORT_DESC
+            ],
+            'attributes' => $this->getSortBy()
+        ];
+    }
+
+    public function getPagerSettings()
+    {
+        return [
+            'class' => 'infinite\\widgets\\LinkPager',
+            'pageStateKey' => $this->stateKeyName('_page'),
+        ];
+    }
+
+    public function getDataProviderSettings()
+    {
+        return [
+            'class' => 'infinite\\data\\ActiveDataProvider'
+        ];
+    }
 }
-?>

@@ -131,7 +131,6 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->createIndex('rtTaxonomy', 'relation_taxonomy', 'taxonomy_id', false);
         $this->addForeignKey('rtRelationFk', 'relation_taxonomy', 'relation_id', 'relation', 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('rtTaxonomyFk', 'relation_taxonomy', 'taxonomy_id', 'taxonomy', 'id', 'CASCADE', 'CASCADE');
-        
 
         // object_taxonomy
         $this->dropExistingTable('object_taxonomy');
@@ -145,7 +144,6 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->createIndex('otTaxonomy', 'object_taxonomy', 'taxonomy_id', false);
         $this->addForeignKey('otRelationFk', 'object_taxonomy', 'object_id', 'registry', 'id', 'CASCADE', 'CASCADE');
         $this->addForeignKey('otTaxonomyFk', 'object_taxonomy', 'taxonomy_id', 'taxonomy', 'id', 'CASCADE', 'CASCADE');
-        
 
         // taxonomy
         $this->dropExistingTable('taxonomy');
@@ -176,7 +174,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->addForeignKey('taxonomyTypeRegistry', 'taxonomy_type', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
 
         $this->dropExistingTable('storage_engine');
-        
+
         $this->createTable('storage_engine', [
             'id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY',
             'handler' => 'string(255) DEFAULT NULL',
@@ -188,7 +186,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->addForeignKey('storageEngineRegistry', 'storage_engine', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
 
         $this->dropExistingTable('storage');
-        
+
         $this->createTable('storage', [
             'id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY',
             'storage_engine_id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
@@ -227,6 +225,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->dropExistingTable('storage');
 
         $this->db->createCommand()->checkIntegrity(true)->execute();
+
         return true;
     }
 }

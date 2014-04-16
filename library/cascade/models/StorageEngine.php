@@ -17,66 +17,67 @@ use cascade\components\types\ActiveRecordTrait;
  */
 class StorageEngine extends \cascade\components\db\ActiveRecord
 {
-	use ActiveRecordTrait {
-		behaviors as baseBehaviors;
-	}
-	
-	/**
-	 * @inheritdoc
-	 */
-	public function behaviors()
-	{
-		return array_merge(parent::behaviors(), self::baseBehaviors(), []);
-	}
-	
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'storage_engine';
-	}
+    use ActiveRecordTrait {
+        behaviors as baseBehaviors;
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['data'], 'string'],
-			[['created', 'modified'], 'safe'],
-			[['id'], 'string', 'max' => 36],
-			[['handler'], 'string', 'max' => 255]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), self::baseBehaviors(), []);
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'handler' => 'Handler',
-			'data' => 'Data',
-			'created' => 'Created',
-			'modified' => 'Modified',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'storage_engine';
+    }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getRegistry()
-	{
-		return $this->hasOne(Registry::className(), ['id' => 'id']);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['data'], 'string'],
+            [['created', 'modified'], 'safe'],
+            [['id'], 'string', 'max' => 36],
+            [['handler'], 'string', 'max' => 255]
+        ];
+    }
 
-	public function getStorageHandler()
-	{
-		if (Yii::$app->collectors['storageHandlers']->has($this->handler)) {
-			return Yii::$app->collectors['storageHandlers']->getOne($this->handler);
-		}
-		return false;
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'handler' => 'Handler',
+            'data' => 'Data',
+            'created' => 'Created',
+            'modified' => 'Modified',
+        ];
+    }
+
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getRegistry()
+    {
+        return $this->hasOne(Registry::className(), ['id' => 'id']);
+    }
+
+    public function getStorageHandler()
+    {
+        if (Yii::$app->collectors['storageHandlers']->has($this->handler)) {
+            return Yii::$app->collectors['storageHandlers']->getOne($this->handler);
+        }
+
+        return false;
+    }
 }

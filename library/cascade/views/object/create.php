@@ -6,6 +6,4 @@
  * @package cascade
  */
 
-
 $form->output();
-?>

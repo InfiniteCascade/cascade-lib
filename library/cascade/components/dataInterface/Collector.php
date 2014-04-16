@@ -1,14 +1,15 @@
 <?php
 namespace cascade\components\dataInterface;
 
-class Collector extends \infinite\base\collector\Module {
+class Collector extends \infinite\base\collector\Module
+{
+    public function getCollectorItemClass()
+    {
+        return 'cascade\\components\\dataInterface\\Item';
+    }
 
-	public function getCollectorItemClass() {
-		return 'cascade\\components\\dataInterface\\Item';
-	}
-	
-	public function getModulePrefix() {
-		return 'Interface';
-	}
+    public function getModulePrefix()
+    {
+        return 'Interface';
+    }
 }
-?>

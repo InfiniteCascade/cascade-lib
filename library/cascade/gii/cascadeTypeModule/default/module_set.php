@@ -18,18 +18,19 @@ namespace <?= $generator->getBaseNamespace() ?>;
 
 use Yii;
 
-class Extension extends \cascade\components\base\ModuleSetExtension {
-	public static function init()
-	{
-		parent::init();
-		Yii::setAlias('@<?= str_replace('\\', '/', $generator->getBaseNamespace()) ?>', __DIR__);
-	}
+class Extension extends \cascade\components\base\ModuleSetExtension
+{
+    public static function init()
+    {
+        parent::init();
+        Yii::setAlias('@<?= str_replace('\\', '/', $generator->getBaseNamespace()) ?>', __DIR__);
+    }
 
-	public static function getModules()
-	{
-		$m = [];
-		<?= $generator->getModuleSetModules() ?>
+    public static function getModules()
+    {
+        $m = [];
+        <?= $generator->getModuleSetModules() ?>
 
-		return $m;
-	}
+        return $m;
+    }
 }

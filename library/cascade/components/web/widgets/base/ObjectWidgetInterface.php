@@ -1,12 +1,9 @@
 <?php
 namespace cascade\components\web\widgets\base;
 
-use Yii;
-
 interface ObjectWidgetInterface
 {
-	public function getSortBy();
-	public function getHeaderMenu();
-	public function renderItemMenu($model, $key, $index);
+    public function getSortBy();
+    public function getHeaderMenu();
+    public function renderItemMenu($model, $key, $index);
 }
-?>

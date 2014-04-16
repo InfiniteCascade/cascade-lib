@@ -1,7 +1,7 @@
 <?php
 namespace cascade\components\storageHandlers;
 
-interface BrowseInterface {
-	public function listItems();
+interface BrowseInterface
+{
+    public function listItems();
 }
-?>

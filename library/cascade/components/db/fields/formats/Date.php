@@ -10,29 +10,31 @@ namespace cascade\components\db\fields\formats;
 
 use Yii;
 
-class Date extends Base {
-	public function get() {
-		$result = $this->field->value;
-		if (empty($result)) {
-			$result = '<span class="empty">(none)</span>';
-		} else {
-			$result = Yii::$app->formatter->asDate($result);
-		}
-		return $result;
-	}
+class Date extends Base
+{
+    public function get()
+    {
+        $result = $this->field->value;
+        if (empty($result)) {
+            $result = '<span class="empty">(none)</span>';
+        } else {
+            $result = Yii::$app->formatter->asDate($result);
+        }
 
-	public function getFormValue()
-	{
-		$result = $this->field->value;
-		if (empty($result)) {
-			$result = null;
-		} else {
-			$dateFormat = strtotime($result);
-			return Yii::$app->formatter->asDate($result);
-		}
-		return $result;
-	}
+        return $result;
+    }
+
+    public function getFormValue()
+    {
+        $result = $this->field->value;
+        if (empty($result)) {
+            $result = null;
+        } else {
+            $dateFormat = strtotime($result);
+
+            return Yii::$app->formatter->asDate($result);
+        }
+
+        return $result;
+    }
 }
-
-
-?>

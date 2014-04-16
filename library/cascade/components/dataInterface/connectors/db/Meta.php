@@ -3,92 +3,101 @@ namespace cascade\components\dataInterface\connectors\db;
 
 use infinite\base\exceptions\Exception;
 
-class Meta extends \infinite\base\Object {
-	protected $_hasMany = [];
-	protected $_hasOne = [];
-	protected $_belongsTo = [];
-	protected $_foreignTable;
-	protected $_db;
-	protected $_schema;
-	protected $_interface;
+class Meta extends \infinite\base\Object
+{
+    protected $_hasMany = [];
+    protected $_hasOne = [];
+    protected $_belongsTo = [];
+    protected $_foreignTable;
+    protected $_db;
+    protected $_schema;
+    protected $_interface;
 
-	static $_metas = [];
+    static $_metas = [];
 
-	public static function get($interface, $foreignTable) {
-		if (!isset(self::$_metas[$foreignTable])) {
-			self::$_metas[$foreignTable] = new Meta($interface, $foreignTable);
-		}
-		return self::$_metas[$foreignTable];
-	}
+    public static function get($interface, $foreignTable)
+    {
+        if (!isset(self::$_metas[$foreignTable])) {
+            self::$_metas[$foreignTable] = new Meta($interface, $foreignTable);
+        }
 
-	public function __construct($interface, $foreignTable) {
-		$this->_db = $interface->db;
-		$this->_interface = $interface;
-		$this->_foreignTable = $foreignTable;
-		if (!($this->_schema = $interface->db->schema->getTableSchema($foreignTable))) {
-			throw new Exception("Foreign table does not exist {$foreignTable}!");
-		}
-		
-	}
+        return self::$_metas[$foreignTable];
+    }
 
-	public function setHasMany($config)
-	{
-		foreach ($config as $value) {
-			$this->_hasMany[] = $value;
-		}
-	}
+    public function __construct($interface, $foreignTable)
+    {
+        $this->_db = $interface->db;
+        $this->_interface = $interface;
+        $this->_foreignTable = $foreignTable;
+        if (!($this->_schema = $interface->db->schema->getTableSchema($foreignTable))) {
+            throw new Exception("Foreign table does not exist {$foreignTable}!");
+        }
 
-	// public function addHasMany(Model $foreignModel, $foreignKey, $settings = []) {
-	// 	$settings['foreignModel'] = $foreignModel;
-	// 	$settings['foreignKey'] = $foreignKey;
-	// 	$this->_hasMany[] = $settings;
-	// }
+    }
 
-	// public function addHasOne(Model $foreignModel, $foreignKey, $params = []) {
-	// 	$this->_hasOne[] = ['foreignModel' => $foreignModel, 'foreignKey' => $foreignKey, 'params' => $params];
+    public function setHasMany($config)
+    {
+        foreach ($config as $value) {
+            $this->_hasMany[] = $value;
+        }
+    }
 
-	// }
+    // public function addHasMany(Model $foreignModel, $foreignKey, $settings = []) {
+    // 	$settings['foreignModel'] = $foreignModel;
+    // 	$settings['foreignKey'] = $foreignKey;
+    // 	$this->_hasMany[] = $settings;
+    // }
 
-	// public function addBelongsTo(Model $foreignModel, $localKey, $params = []) {
-	// 	$this->_belongsTo[] = ['foreignModel' => $foreignModel, 'localKey' => $localKey, 'params' => $params];
-	// }
+    // public function addHasOne(Model $foreignModel, $foreignKey, $params = []) {
+    // 	$this->_hasOne[] = ['foreignModel' => $foreignModel, 'foreignKey' => $foreignKey, 'params' => $params];
 
-	// public function addHabtm(Model $foreignModel, Model $connectorModel, $localKey, $foreignKey, $params = []) {
-	// 	$this->_habtm[] = ['foreignModel' => $foreignModel, 'connectorModel' => $connectorModel, 'localKey' => $localKey, 'foreignKey' => $foreignKey, 'params' => $params];
-	// }
+    // }
 
-	public function getHasMany() {
-		return $this->_hasMany;
-	}
+    // public function addBelongsTo(Model $foreignModel, $localKey, $params = []) {
+    // 	$this->_belongsTo[] = ['foreignModel' => $foreignModel, 'localKey' => $localKey, 'params' => $params];
+    // }
 
-	public function getHasOne() {
-		return $this->_hasOne;
-	}
+    // public function addHabtm(Model $foreignModel, Model $connectorModel, $localKey, $foreignKey, $params = []) {
+    // 	$this->_habtm[] = ['foreignModel' => $foreignModel, 'connectorModel' => $connectorModel, 'localKey' => $localKey, 'foreignKey' => $foreignKey, 'params' => $params];
+    // }
 
-	public function getBelongsTo() {
-		return $this->_belongsTo;
-	}
+    public function getHasMany()
+    {
+        return $this->_hasMany;
+    }
 
+    public function getHasOne()
+    {
+        return $this->_hasOne;
+    }
 
-	public function hasAttribute($name) {
-		return isset($this->_schema->columns[$name]);
-	}
+    public function getBelongsTo()
+    {
+        return $this->_belongsTo;
+    }
 
-	public function getAttributeKeys() {
-		return array_keys($this->_schema->columns);
-	}
+    public function hasAttribute($name)
+    {
+        return isset($this->_schema->columns[$name]);
+    }
 
-	public function getSchema() {
-		return $this->_schema;
-	}
+    public function getAttributeKeys()
+    {
+        return array_keys($this->_schema->columns);
+    }
 
-	public function setInterface($value)
-	{
-		$this->_interface = $value;
-	}
+    public function getSchema()
+    {
+        return $this->_schema;
+    }
 
-	public function getInterface() {
-		return $this->_interface;
-	}
+    public function setInterface($value)
+    {
+        $this->_interface = $value;
+    }
+
+    public function getInterface()
+    {
+        return $this->_interface;
+    }
 }
-?>

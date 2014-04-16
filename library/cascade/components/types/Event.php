@@ -5,5 +5,5 @@ use yii\base\Event as BaseEvent;
 
 class Event extends BaseEvent
 {
-	public $object;
+    public $object;
 }

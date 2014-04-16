@@ -11,44 +11,44 @@ namespace cascade\models;
  */
 class HttpSession extends \cascade\components\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function isAccessControlled()
+    /**
+     * @inheritdoc
+     */
+    public static function isAccessControlled()
     {
         return false;
     }
-    
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'http_session';
-	}
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['id'], 'required'],
-			[['expire'], 'integer'],
-			[['data'], 'string'],
-			[['id'], 'string', 'max' => 255]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'http_session';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'expire' => 'Expire',
-			'data' => 'Data',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['id'], 'required'],
+            [['expire'], 'integer'],
+            [['data'], 'string'],
+            [['id'], 'string', 'max' => 255]
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'expire' => 'Expire',
+            'data' => 'Data',
+        ];
+    }
 }

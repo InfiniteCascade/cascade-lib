@@ -19,77 +19,78 @@ use Yii;
  */
 class KeyTranslation extends \cascade\components\db\ActiveRecord
 {
-	/**
-	 * @inheritdoc
-	 */
-	public static function isAccessControlled()
+    /**
+     * @inheritdoc
+     */
+    public static function isAccessControlled()
     {
         return false;
     }
-    
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'key_translation';
-	}
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['key'], 'required'],
-			[['created', 'modified'], 'safe'],
-			[['data_interface_id', 'registry_id'], 'string', 'max' => 36],
-			[['key'], 'string', 'max' => 255]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'key_translation';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'data_interface_id' => 'Data Interface ID',
-			'registry_id' => 'Registry ID',
-			'key' => 'Key',
-			'created' => 'Created',
-			'modified' => 'Modified',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['key'], 'required'],
+            [['created', 'modified'], 'safe'],
+            [['data_interface_id', 'registry_id'], 'string', 'max' => 36],
+            [['key'], 'string', 'max' => 255]
+        ];
+    }
 
-	public function getObject($checkAccess = true)
-	{
-		$registryClass = Yii::$app->classes['Registry'];
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'data_interface_id' => 'Data Interface ID',
+            'registry_id' => 'Registry ID',
+            'key' => 'Key',
+            'created' => 'Created',
+            'modified' => 'Modified',
+        ];
+    }
 
-		$return = $registryClass::getObject($this->registry_id, $checkAccess);
+    public function getObject($checkAccess = true)
+    {
+        $registryClass = Yii::$app->classes['Registry'];
 
-			if (get_class($return) === 'cascade\\models\\Registry') {
-				\d($this->registry_id);
-				throw new \Exception("TRANSLATION WHATTTT AGAIN?!");
-				exit;
-			}
-		return $return;
-	}
+        $return = $registryClass::getObject($this->registry_id, $checkAccess);
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getRegistry()
-	{
-		return $this->hasOne(Registry::className(), ['id' => 'registry_id']);
-	}
+            if (get_class($return) === 'cascade\\models\\Registry') {
+                \d($this->registry_id);
+                throw new \Exception("TRANSLATION WHATTTT AGAIN?!");
+                exit;
+            }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getDataInterface()
-	{
-		return $this->hasOne(DataInterface::className(), ['id' => 'data_interface_id']);
-	}
+        return $return;
+    }
+
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getRegistry()
+    {
+        return $this->hasOne(Registry::className(), ['id' => 'registry_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getDataInterface()
+    {
+        return $this->hasOne(DataInterface::className(), ['id' => 'data_interface_id']);
+    }
 }

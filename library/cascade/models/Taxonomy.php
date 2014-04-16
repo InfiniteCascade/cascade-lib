@@ -20,85 +20,83 @@ use cascade\components\types\ActiveRecordTrait;
  */
 class Taxonomy extends \cascade\components\db\ActiveRecord
 {
-	use ActiveRecordTrait {
-		behaviors as baseBehaviors;
-	}
-	
+    use ActiveRecordTrait {
+        behaviors as baseBehaviors;
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public static function isAccessControlled()
+    /**
+     * @inheritdoc
+     */
+    public static function isAccessControlled()
     {
         return false;
     }
-    
-	/**
-	 * @inheritdoc
-	 */
-	public function behaviors()
-	{
-		return array_merge(parent::behaviors(), self::baseBehaviors(), []);
-	}
-	
 
-	/**
-	 * @inheritdoc
-	 */
-	public static function tableName()
-	{
-		return 'taxonomy';
-	}
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), self::baseBehaviors(), []);
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function rules()
-	{
-		return [
-			[['taxonomy_type_id', 'name'], 'required'],
-			[['created', 'modified'], 'safe'],
-			[['id', 'taxonomy_type_id'], 'string', 'max' => 36],
-			[['name', 'system_id'], 'string', 'max' => 255]
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'taxonomy';
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'taxonomy_type_id' => 'Taxonomy Type ID',
-			'name' => 'Name',
-			'system_id' => 'System ID',
-			'created' => 'Created',
-			'modified' => 'Modified',
-		];
-	}
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['taxonomy_type_id', 'name'], 'required'],
+            [['created', 'modified'], 'safe'],
+            [['id', 'taxonomy_type_id'], 'string', 'max' => 36],
+            [['name', 'system_id'], 'string', 'max' => 255]
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getRelationTaxonomies()
-	{
-		return $this->hasMany(Taxonomy::className(), ['taxonomy_id' => 'id']);
-	}
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'taxonomy_type_id' => 'Taxonomy Type ID',
+            'name' => 'Name',
+            'system_id' => 'System ID',
+            'created' => 'Created',
+            'modified' => 'Modified',
+        ];
+    }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getTaxonomyType()
-	{
-		return $this->hasOne(TaxonomyType::className(), ['id' => 'taxonomy_type_id']);
-	}
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getRelationTaxonomies()
+    {
+        return $this->hasMany(Taxonomy::className(), ['taxonomy_id' => 'id']);
+    }
 
-	/**
-	 * @return \yii\db\ActiveRelation
-	 */
-	public function getId()
-	{
-		return $this->hasOne(Registry::className(), ['id' => 'id']);
-	}
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getTaxonomyType()
+    {
+        return $this->hasOne(TaxonomyType::className(), ['id' => 'taxonomy_type_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveRelation
+     */
+    public function getId()
+    {
+        return $this->hasOne(Registry::className(), ['id' => 'id']);
+    }
 }

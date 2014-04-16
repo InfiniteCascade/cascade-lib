@@ -6,11 +6,10 @@
  * @package cascade
  */
 
-
 return [
-	'WidgetWatching' => [
-	    'class' => 'cascade\modules\WidgetWatching\Module',
-	],
+    'WidgetWatching' => [
+        'class' => 'cascade\modules\WidgetWatching\Module',
+    ],
     'TypeUser' => [
         'class' => 'cascade\modules\TypeUser\Module',
     ],
@@ -21,4 +20,3 @@ return [
         'class' => 'cascade\modules\ThemeCascade\Module',
     ]
 ];
-?>

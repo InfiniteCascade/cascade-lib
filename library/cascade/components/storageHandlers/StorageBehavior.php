@@ -8,17 +8,18 @@ use infinite\web\UploadedFile;
 use infinite\base\FileInterface;
 use infinite\base\exceptions\Exception;
 
-class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
-	public $storageAttribute = 'storage_id';
+class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
+{
+    public $storageAttribute = 'storage_id';
 
-	protected $_storageEngine;
+    protected $_storageEngine;
 
-	public function __toString()
+    public function __toString()
     {
         return $this->primaryKey;
     }
 
-	public function events()
+    public function events()
     {
         return [
             \infinite\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
@@ -29,9 +30,9 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
     }
 
     public function safeAttributes()
-	{
-		return ['storageEngine', 'storage'];
-	}
+    {
+        return ['storageEngine', 'storage'];
+    }
 
     public function setStorage($value)
     {
@@ -48,6 +49,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
         if (isset($this->owner->{$this->storageAttribute}) && $this->owner->{$this->storageAttribute} instanceof FileInterface) {
             return $this->owner->{$this->storageAttribute};
         }
+
         return null;
     }
 
@@ -67,10 +69,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
         if (!$this->storageEngine->storageHandler->object->beforeSave($this->storageEngine, $this->owner, $this->storageAttribute)) {
             $event->isValid = false;
             $this->owner->addError($this->storageAttribute, 'Unable to save file in storage engine. Try again later. ('.$this->storageEngine->storageHandler->object->error . ')');
+
             return false;
         }
     }
-
 
     public function afterDelete($event)
     {
@@ -80,6 +82,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
         }
         if (!$this->storageEngine->storageHandler->object->afterDelete($this->storageEngine, $storageObject)) {
             $event->isValid = false;
+
             return false;
         }
     }
@@ -90,48 +93,52 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord {
         $storageObject = $this->storageObject;
         if (!$storageObject) { return false; }
         if (!$this->storageEngine->storageHandler->object->serve($storageObject)) { return false; }
+
         return true;
     }
 
     public function getStorageObject()
     {
         $registryClass = Yii::$app->classes['Registry'];
+
         return $registryClass::getObject($this->owner->{$this->storageAttribute});
     }
 
-
     public function beforeValidate($event)
     {
-    	if (empty($this->storageEngine)) {
-    		$this->owner->addError($this->storageAttribute, 'Unknown storage engine!');
-    		return false;
-    	} elseif (!$this->storageEngine->storageHandler->object->validate($this->storageEngine, $this->owner, $this->storageAttribute)) {
-    		return false;
-    	}
-    	return true;
+        if (empty($this->storageEngine)) {
+            $this->owner->addError($this->storageAttribute, 'Unknown storage engine!');
+
+            return false;
+        } elseif (!$this->storageEngine->storageHandler->object->validate($this->storageEngine, $this->owner, $this->storageAttribute)) {
+            return false;
+        }
+
+        return true;
     }
 
-	public function getStorageEngine()
-	{
+    public function getStorageEngine()
+    {
         if (is_null($this->_storageEngine)) {
             $storageEngineClass = Yii::$app->classes['StorageEngine'];
             $this->storageEngine = $storageEngineClass::find()->setAction('read')->andWhere(['handler' => Yii::$app->params['defaultStorageEngine']])->one();
         }
-		return $this->_storageEngine;
-	}
 
-	public function setStorageEngine($value)
-	{
+        return $this->_storageEngine;
+    }
+
+    public function setStorageEngine($value)
+    {
         if (is_object($value)) {
             $this->_storageEngine = $value;
         } else {
-    		$storageEngineClass = Yii::$app->classes['StorageEngine'];
-    		$engineTest = $storageEngineClass::find()->pk($value)->one();
-    		if ($engineTest) {
-    			return $this->_storageEngine = $engineTest;
-    		}
+            $storageEngineClass = Yii::$app->classes['StorageEngine'];
+            $engineTest = $storageEngineClass::find()->pk($value)->one();
+            if ($engineTest) {
+                return $this->_storageEngine = $engineTest;
+            }
         }
-		return false;
-	}
+
+        return false;
+    }
 }
-?>

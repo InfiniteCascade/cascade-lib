@@ -5,269 +5,289 @@ use Yii;
 use infinite\base\exceptions\Exception;
 use cascade\components\db\fields\formats\Base as BaseFormat;
 
-abstract class Base extends \infinite\base\Object {
-	public $formFieldClass;
-	public $default;
-	public $required = false;
-	public $fieldSchema;
-	public $priority;
+abstract class Base extends \infinite\base\Object
+{
+    public $formFieldClass;
+    public $default;
+    public $required = false;
+    public $fieldSchema;
+    public $priority;
 
-	public $url; // wrap formatted text in link
-	public $linkOptions = [];
+    public $url; // wrap formatted text in link
+    public $linkOptions = [];
 
-	public $possiblePrimaryKeys = ['id'];
-	
-	protected $_human;
-	protected $_format;
-	protected $_label;
-	protected $_model;
-	protected $_formField;
-	protected $_multiline;
-	protected $_locations;
+    public $possiblePrimaryKeys = ['id'];
 
-	const LOCATION_HIDDEN = 0x00;
-	const LOCATION_DETAILS = 0x01;
-	const LOCATION_HEADER = 0x02;
-	const LOCATION_SUBHEADER = 0x03;
+    protected $_human;
+    protected $_format;
+    protected $_label;
+    protected $_model;
+    protected $_formField;
+    protected $_multiline;
+    protected $_locations;
 
-	
+    const LOCATION_HIDDEN = 0x00;
+    const LOCATION_DETAILS = 0x01;
+    const LOCATION_HEADER = 0x02;
+    const LOCATION_SUBHEADER = 0x03;
 
-	public function init() {
-		parent::init();
+    public function init()
+    {
+        parent::init();
 
-		if (!is_null($this->default) && !$this->model->isAttributeChanged($this->field)) {
-			$this->model->{$this->field} = $this->default;
-		}
-		if (in_array($this->field, $this->possiblePrimaryKeys)) {
-			$this->required = true;
-		}
-	}
+        if (!is_null($this->default) && !$this->model->isAttributeChanged($this->field)) {
+            $this->model->{$this->field} = $this->default;
+        }
+        if (in_array($this->field, $this->possiblePrimaryKeys)) {
+            $this->required = true;
+        }
+    }
 
-	public function determineFormatClass()
-	{
-		if (isset($this->fieldSchema)) {
-			switch ($this->fieldSchema->type) {
-				case 'date':
-					return 'cascade\\components\\db\\fields\\formats\\Date';
-				break;
-			}
-		}
-		return 'cascade\\components\\db\\fields\\formats\\Text';
-	}
+    public function determineFormatClass()
+    {
+        if (isset($this->fieldSchema)) {
+            switch ($this->fieldSchema->type) {
+                case 'date':
+                    return 'cascade\\components\\db\\fields\\formats\\Date';
+                break;
+            }
+        }
 
-	public function getField()
-	{
-		if (isset($this->fieldSchema)) {
-			return $this->fieldSchema->name;
-		}
-		return null;
-	}
+        return 'cascade\\components\\db\\fields\\formats\\Text';
+    }
 
-	public function hasFile()
-	{
-		return false;
-	}
+    public function getField()
+    {
+        if (isset($this->fieldSchema)) {
+            return $this->fieldSchema->name;
+        }
 
-	public function setLocations($value)
-	{
-		$this->_locations = $value;
-	}
+        return null;
+    }
 
-	public function getLocations()
-	{
-		if (is_null($this->_locations)) {
-			$this->_locations = $this->determineLocations();
-		}
-		return $this->_locations;
-	}
+    public function hasFile()
+    {
+        return false;
+    }
 
-	public function determineLocations()
-	{
-		if (!$this->human) {
-			return [self::LOCATION_HIDDEN];
-		}
-		return [self::LOCATION_DETAILS];
-	}
+    public function setLocations($value)
+    {
+        $this->_locations = $value;
+    }
 
-	public function setFormField($value)
-	{
-		if (is_array($value)) {
-			if (is_null($this->formFieldClass)) {
-				throw new Exception("DB Field incorrectly set up. What is the form class?");
-			}
-			$config = $value;
-			$config['class'] = $this->formFieldClass;
-			$config['modelField'] = $this;
-			$value = Yii::createObject($config);
-		}
+    public function getLocations()
+    {
+        if (is_null($this->_locations)) {
+            $this->_locations = $this->determineLocations();
+        }
 
-		$this->_formField = $value;
-		return true;
-	}
+        return $this->_locations;
+    }
 
+    public function determineLocations()
+    {
+        if (!$this->human) {
+            return [self::LOCATION_HIDDEN];
+        }
 
-	/**
-	 *
-	 *
-	 * @param unknown $value
-	 * @return unknown
-	 */
-	public function setHuman($value) {
-		$this->_human = $value;
-		return true;
-	}
+        return [self::LOCATION_DETAILS];
+    }
 
+    public function setFormField($value)
+    {
+        if (is_array($value)) {
+            if (is_null($this->formFieldClass)) {
+                throw new Exception("DB Field incorrectly set up. What is the form class?");
+            }
+            $config = $value;
+            $config['class'] = $this->formFieldClass;
+            $config['modelField'] = $this;
+            $value = Yii::createObject($config);
+        }
 
-	/**
-	 *
-	 *
-	 * @return unknown
-	 */
-	public function getHuman() {
-		if (is_null($this->_human)) {
-			$this->_human = HumanFieldDetector::test($this->fieldSchema);
-		}
-		return $this->_human;
-	}
+        $this->_formField = $value;
 
-	public function getMultiline()
-	{
-		if (is_null($this->_multiline)) {
-			$this->_multiline = MultilineDetector::test($this->fieldSchema);
-		}
-		return $this->_multiline;
-	}
+        return true;
+    }
 
-	public function setMultiline($value)
-	{
-		$this->_multiline = $value;
-	}
+    /**
+     *
+     *
+     * @param  unknown $value
+     * @return unknown
+     */
+    public function setHuman($value)
+    {
+        $this->_human = $value;
 
-	/**
-	 *
-	 *
-	 * @return unknown
-	 */
-	public function getFormField() {
-		if (is_null($this->_formField)) {
-			$this->formField = [];
-		}
-		return $this->_formField;
-	}
+        return true;
+    }
 
-	/**
-	 *
-	 *
-	 * @return unknown
-	 */
-	public function getModel() {
-		if (is_null($this->_model)) {
-			return false;
-		}
-		return $this->_model;
-	}
+    /**
+     *
+     *
+     * @return unknown
+     */
+    public function getHuman()
+    {
+        if (is_null($this->_human)) {
+            $this->_human = HumanFieldDetector::test($this->fieldSchema);
+        }
 
+        return $this->_human;
+    }
 
-	/**
-	 *
-	 *
-	 * @param unknown $value
-	 * @return unknown
-	 */
-	public function setModel($value) {
-		$this->_model = $value;
-		return true;
-	}
+    public function getMultiline()
+    {
+        if (is_null($this->_multiline)) {
+            $this->_multiline = MultilineDetector::test($this->fieldSchema);
+        }
 
+        return $this->_multiline;
+    }
 
-	/**
-	 *
-	 *
-	 * @return unknown
-	 */
-	public function getFormat() {
-		if (is_null($this->_format)) {
-			$this->format = [];
-		}
-		return $this->_format;
-	}
+    public function setMultiline($value)
+    {
+        $this->_multiline = $value;
+    }
 
+    /**
+     *
+     *
+     * @return unknown
+     */
+    public function getFormField()
+    {
+        if (is_null($this->_formField)) {
+            $this->formField = [];
+        }
 
-	/**
-	 *
-	 *
-	 * @param unknown $value
-	 * @return unknown
-	 */
-	public function setFormat($value) {
-		if (is_array($value)) {
-			if (!isset($value['class'])) {
-				$value['class'] = $this->determineFormatClass();
-			}
-			$value['field'] = $this;
-			$value = Yii::createObject($value);
-		}
-		$this->_format = $value;
-	}
+        return $this->_formField;
+    }
 
-	public function getFormattedValue() {
-		if ($this->format instanceof BaseFormat) {
-			$formattedValue = $this->format->get();
-		} elseif (is_callable($this->format) || (is_array($this->format) && !empty($this->format[0]) && is_object($this->format[0]))) {
-			$formattedValue = $this->evaluateExpression($this->format, [$this->value]);
-		} else {
-			$formattedValue = $this->value;
-		}
-		return $formattedValue;
-	}
+    /**
+     *
+     *
+     * @return unknown
+     */
+    public function getModel()
+    {
+        if (is_null($this->_model)) {
+            return false;
+        }
 
+        return $this->_model;
+    }
 
-	public function getFormValue() {
-		if ($this->format instanceof BaseFormat) {
-			$formValue = $this->format->getFormValue();
-		} elseif (is_callable($this->format) || (is_array($this->format) && !empty($this->format[0]) && is_object($this->format[0]))) {
-			$formValue = $this->evaluateExpression($this->format, [$this->value]);
-		} else {
-			$formValue = $this->value;
-		}
-		return $formValue;
-	}
+    /**
+     *
+     *
+     * @param  unknown $value
+     * @return unknown
+     */
+    public function setModel($value)
+    {
+        $this->_model = $value;
 
-	public function getValuePackage()
-	{
-		return ['plain' => $this->value, 'rich' => $this->formattedValue];
-	}
+        return true;
+    }
 
-	public function getValue() {
-		if (!isset($this->model->{$this->field})) {
-			return null;
-		}
-		return $this->model->{$this->field};
-	}
+    /**
+     *
+     *
+     * @return unknown
+     */
+    public function getFormat()
+    {
+        if (is_null($this->_format)) {
+            $this->format = [];
+        }
 
+        return $this->_format;
+    }
 
-	/**
-	 *
-	 *
-	 * @return unknown
-	 */
-	public function getLabel() {
-		if (is_null($this->_label)) {
-			$this->_label = $this->getModel()->getAttributeLabel($this->field);
-		}
-		return $this->_label;
-	}
+    /**
+     *
+     *
+     * @param  unknown $value
+     * @return unknown
+     */
+    public function setFormat($value)
+    {
+        if (is_array($value)) {
+            if (!isset($value['class'])) {
+                $value['class'] = $this->determineFormatClass();
+            }
+            $value['field'] = $this;
+            $value = Yii::createObject($value);
+        }
+        $this->_format = $value;
+    }
 
+    public function getFormattedValue()
+    {
+        if ($this->format instanceof BaseFormat) {
+            $formattedValue = $this->format->get();
+        } elseif (is_callable($this->format) || (is_array($this->format) && !empty($this->format[0]) && is_object($this->format[0]))) {
+            $formattedValue = $this->evaluateExpression($this->format, [$this->value]);
+        } else {
+            $formattedValue = $this->value;
+        }
 
-	/**
-	 *
-	 *
-	 * @param unknown $value
-	 * @return unknown
-	 */
-	public function setLabel($value) {
-		$this->_label = $value;
-		return true;
-	}
+        return $formattedValue;
+    }
+
+    public function getFormValue()
+    {
+        if ($this->format instanceof BaseFormat) {
+            $formValue = $this->format->getFormValue();
+        } elseif (is_callable($this->format) || (is_array($this->format) && !empty($this->format[0]) && is_object($this->format[0]))) {
+            $formValue = $this->evaluateExpression($this->format, [$this->value]);
+        } else {
+            $formValue = $this->value;
+        }
+
+        return $formValue;
+    }
+
+    public function getValuePackage()
+    {
+        return ['plain' => $this->value, 'rich' => $this->formattedValue];
+    }
+
+    public function getValue()
+    {
+        if (!isset($this->model->{$this->field})) {
+            return null;
+        }
+
+        return $this->model->{$this->field};
+    }
+
+    /**
+     *
+     *
+     * @return unknown
+     */
+    public function getLabel()
+    {
+        if (is_null($this->_label)) {
+            $this->_label = $this->getModel()->getAttributeLabel($this->field);
+        }
+
+        return $this->_label;
+    }
+
+    /**
+     *
+     *
+     * @param  unknown $value
+     * @return unknown
+     */
+    public function setLabel($value)
+    {
+        $this->_label = $value;
+
+        return true;
+    }
 }
-?>

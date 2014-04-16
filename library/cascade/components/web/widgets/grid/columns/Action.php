@@ -8,8 +8,6 @@
 
 namespace cascade\components\web\widgets\grid\columns;
 
-class Action extends \yii\grid\ActionColumn {
+class Action extends \yii\grid\ActionColumn
+{
 }
-
-
-?>

@@ -10,16 +10,16 @@ use yii\base\Model;
  */
 class SearchForm extends Model
 {
-	public $query;
+    public $query;
 
-	/**
-	 * @return array the validation rules.
-	 */
-	public function rules()
-	{
-		return [
-			// query
-			[['query'], 'required'],
-		];
-	}
+    /**
+     * @return array the validation rules.
+     */
+    public function rules()
+    {
+        return [
+            // query
+            [['query'], 'required'],
+        ];
+    }
 }
