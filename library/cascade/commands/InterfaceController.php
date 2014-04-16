@@ -15,6 +15,7 @@ class InterfaceController extends \infinite\console\Controller
     protected $_interface;
     public $verbose;
     protected $_started = false;
+
     public function events()
     {
         return [

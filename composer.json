@@ -18,9 +18,9 @@
 		"yiisoft/yii2-debug": "*",
 		"yiisoft/yii2-gii": "*",
 		"yiisoft/yii2-jui": "*",
-		"mustangostang/spyc": "*"
+		"mustangostang/spyc": "*",
+		"fabpot/php-cs-fixer": "@stable"
 	},
-
     "autoload": {
 		"classmap": ["library/cascade/Cascade.php"],
 		"psr-0": { "cascade\\": "library" }
