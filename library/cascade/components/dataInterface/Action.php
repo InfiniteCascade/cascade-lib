@@ -16,6 +16,7 @@ class Action extends \infinite\base\Object {
 	protected $_progress = false;
 	protected $_progressTotal = 1;
 	protected $_progressRemaining;
+	protected $_progressPercentage;
 
 	public function __construct(Item $interface = null, $resumeLog = null) {
 		$this->_interface = $interface;
@@ -27,11 +28,16 @@ class Action extends \infinite\base\Object {
 
 	public function progress()
 	{
+		return;
 		if (!$this->_progress) {
 			$this->_progress = true;
 			Console::startProgress($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
 		}
-		Console::updateProgress($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
+		$currentPercentage = (int)floor(($this->progressDone / $this->progressTotal) * 100);
+		if ($this->_progressPercentage !== $currentPercentage) {
+			$this->_progressPercentage = $currentPercentage;
+			Console::updateProgress($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
+		}
 	}
 
 	public function setProgressTotal($total)

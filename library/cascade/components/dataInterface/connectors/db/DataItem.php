@@ -67,7 +67,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem {
 				if (!($dataItem = $dataSource->getForeignDataItem($childId))) {
 					continue;
 				}
-				$childLocalObject = $dataItem->handle(true, ['relationModels' => [['parent_object_id' => $this->localObject->primaryKey]]]);
+				$childLocalObject = $dataItem->handle(true, ['indirectObject' => $this->localObject, 'relationModels' => [['parent_object_id' => $this->localObject->primaryKey]]]);
 			}
 		}
 		return $this->localObject;

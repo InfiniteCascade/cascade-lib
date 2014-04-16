@@ -1,6 +1,7 @@
 <?php
 namespace cascade\components\dataInterface;
 
+use Yii;
 use infinite\base\exceptions\Exception;
 use cascade\models\DataInterface;
 
@@ -46,6 +47,7 @@ abstract class DataItem extends \infinite\base\Component {
 			$this->localPrimaryKey = $this->localObject->primaryKey;
 			$this->localObject = null;
 		}
+		Yii::getLogger()->flush();
 	}
 
 	public function getId()
