@@ -5,10 +5,15 @@
  * @license http://www.infinitecascade.com/license/
  */
 
-namespace yii\base;
+namespace cascade\components\types;
 
 use yii\base\Event as BaseEvent;
 
+/**
+ * Event [@doctodo write class description for Event]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Event extends BaseEvent
 {
     public $object;
