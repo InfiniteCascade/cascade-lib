@@ -64,7 +64,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * __method_getUser_description__
-     * @param  boolean                 $owner __param_owner_description__ [optional]
+     * @param boolean                 $owner __param_owner_description__ [optional]
      * @return __return_getUser_type__ __return_getUser_description__
      */
     public function getUser($owner = true)
@@ -80,8 +80,8 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * __method_watch_description__
-     * @param  boolean               $doWatch __param_doWatch_description__ [optional]
-     * @param  __param_user_type__   $user    __param_user_description__ [optional]
+     * @param boolean               $doWatch __param_doWatch_description__ [optional]
+     * @param __param_user_type__   $user    __param_user_description__ [optional]
      * @return __return_watch_type__ __return_watch_description__
      */
     public function watch($doWatch = true, $user = null)
@@ -101,7 +101,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * __method_getFamiliarity_description__
-     * @param  __param_user_type__            $user __param_user_description__ [optional]
+     * @param __param_user_type__            $user __param_user_description__ [optional]
      * @return __return_getFamiliarity_type__ __return_getFamiliarity_description__
      */
     public function getFamiliarity($user = null)

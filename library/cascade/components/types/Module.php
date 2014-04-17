@@ -153,8 +153,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_onBeforeControllerAction_description__
-     * @param  unknown       $controller
-     * @param  unknown       $action
+     * @param unknown       $controller
+     * @param unknown       $action
      * @return unknown
      * @throws HttpException __exception_HttpException_description__
      */
@@ -182,7 +182,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_subactionHandle_description__
-     * @param  cascade\components\web\ObjectViewEvent $event __param_event_description__
+     * @param cascade\components\web\ObjectViewEvent $event __param_event_description__
      * @return __return_subactionHandle_type__        __return_subactionHandle_description__
      */
     public function subactionHandle(ObjectViewEvent $event)
@@ -243,7 +243,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_determineOwner_description__
-     * @param  __param_object_type__          $object __param_object_description__
+     * @param __param_object_type__          $object __param_object_description__
      * @return __return_determineOwner_type__ __return_determineOwner_description__
      */
     public function determineOwner($object)
@@ -264,8 +264,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_getRoleHelpText_description__
-     * @param  __param_roleItem_type__         $roleItem __param_roleItem_description__
-     * @param  __param_object_type__           $object   __param_object_description__ [optional]
+     * @param __param_roleItem_type__         $roleItem __param_roleItem_description__
+     * @param __param_object_type__           $object   __param_object_description__ [optional]
      * @return __return_getRoleHelpText_type__ __return_getRoleHelpText_description__
      */
     public function getRoleHelpText($roleItem, $object = null)
@@ -293,9 +293,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_determineAccessLevel_description__
-     * @param  __param_object_type__                $object __param_object_description__
-     * @param  __param_role_type__                  $role   __param_role_description__
-     * @param  __param_aro_type__                   $aro    __param_aro_description__ [optional]
+     * @param __param_object_type__                $object __param_object_description__
+     * @param __param_role_type__                  $role   __param_role_description__
+     * @param __param_aro_type__                   $aro    __param_aro_description__ [optional]
      * @return __return_determineAccessLevel_type__ __return_determineAccessLevel_description__
      */
     public function determineAccessLevel($object, $role, $aro = null)
@@ -323,7 +323,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_getActionMap_description__
-     * @param  __param_controlledObject_type__ $controlledObject __param_controlledObject_description__ [optional]
+     * @param __param_controlledObject_type__ $controlledObject __param_controlledObject_description__ [optional]
      * @return __return_getActionMap_type__    __return_getActionMap_description__
      */
     public function getActionMap($controlledObject = null)
@@ -372,7 +372,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_upgrade_description__
-     * @param  __param_from_type__     $from __param_from_description__
+     * @param __param_from_type__     $from __param_from_description__
      * @return __return_upgrade_type__ __return_upgrade_description__
      */
     public function upgrade($from)
@@ -391,7 +391,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_getRoleValidationSettings_description__
-     * @param  __param_object_type__                     $object __param_object_description__ [optional]
+     * @param __param_object_type__                     $object __param_object_description__ [optional]
      * @return __return_getRoleValidationSettings_type__ __return_getRoleValidationSettings_description__
      */
     public function getRoleValidationSettings($object = null)
@@ -521,8 +521,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
     /**
      * __method_search_description__
-     * @param  unknown $term
-     * @param  array   $params __param_params_description__ [optional]
+     * @param unknown $term
+     * @param array   $params __param_params_description__ [optional]
      * @return unknown
      */
     public function search($term, $params = [])
@@ -562,8 +562,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
     /**
      * __method_getSection_description__
-     * @param  __param_parentWidget_type__ $parentWidget __param_parentWidget_description__ [optional]
-     * @param  unknown                     $settings     (optional)
+     * @param __param_parentWidget_type__ $parentWidget __param_parentWidget_description__ [optional]
+     * @param unknown                     $settings     (optional)
      * @return unknown
      */
     public function getSection($parentWidget = null, $settings = [])
@@ -640,7 +640,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_getDetailsWidget_description__
-     * @param  __param_objectModel_type__       $objectModel __param_objectModel_description__ [optional]
+     * @param __param_objectModel_type__       $objectModel __param_objectModel_description__ [optional]
      * @return __return_getDetailsWidget_type__ __return_getDetailsWidget_description__
      */
     public function getDetailsWidget($objectModel = null)
@@ -879,8 +879,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_getModel_description__
-     * @param  __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
-     * @param  array                       $input        __param_input_description__ [optional]
+     * @param __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
+     * @param array                       $input        __param_input_description__ [optional]
      * @return unknown
      */
     public function getModel($primaryModel = null, $input = [])
@@ -904,8 +904,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_getModels_description__
-     * @param  __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
-     * @param  array                       $models       __param_models_description__ [optional]
+     * @param __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
+     * @param array                       $models       __param_models_description__ [optional]
      * @return __return_getModels_type__   __return_getModels_description__
      */
     public function getModels($primaryModel = null, $models = [])
@@ -919,7 +919,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_handleSave_description__
-     * @param  __param_model_type__ $model __param_model_description__
+     * @param __param_model_type__ $model __param_model_description__
      * @return unknown
      */
     public function handleSave($model)
@@ -933,7 +933,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_internalSave_description__
-     * @param  __param_model_type__         $model __param_model_description__
+     * @param __param_model_type__         $model __param_model_description__
      * @return __return_internalSave_type__ __return_internalSave_description__
      */
     protected function internalSave($model)
@@ -943,8 +943,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_handleSaveAll_description__
-     * @param  __param_input_type__          $input    __param_input_description__ [optional]
-     * @param  array                         $settings __param_settings_description__ [optional]
+     * @param __param_input_type__          $input    __param_input_description__ [optional]
+     * @param array                         $settings __param_settings_description__ [optional]
      * @return __return_handleSaveAll_type__ __return_handleSaveAll_description__
      */
     public function handleSaveAll($input = null, $settings = [])
@@ -1043,7 +1043,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method__extractModels_description__
-     * @param  __param_input_type__           $input __param_input_description__
+     * @param __param_input_type__           $input __param_input_description__
      * @return __return__extractModels_type__ __return__extractModels_description__
      */
     protected function _extractModels($input)
@@ -1069,9 +1069,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method__handlePost_description__
-     * @param  array                       $settings __param_settings_description__ [optional]
+     * @param array                       $settings __param_settings_description__ [optional]
      * @return __return__handlePost_type__ __return__handlePost_description__
-     * @throws HttpException               __exception_HttpException_description__
+     * @throws HttpException __exception_HttpException_description__
      */
     protected function _handlePost($settings = [])
     {
@@ -1172,8 +1172,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_getForm_description__
-     * @param  __param_models_type__ $models   __param_models_description__ [optional]
-     * @param  array                 $settings __param_settings_description__ [optional]
+     * @param __param_models_type__ $models   __param_models_description__ [optional]
+     * @param array                 $settings __param_settings_description__ [optional]
      * @return unknown
      */
     public function getForm($models = null, $settings = [])
@@ -1189,8 +1189,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * __method_getFormSegment_description__
-     * @param  __param_primaryModel_type__    $primaryModel __param_primaryModel_description__ [optional]
-     * @param  array                          $settings     __param_settings_description__ [optional]
+     * @param __param_primaryModel_type__    $primaryModel __param_primaryModel_description__ [optional]
+     * @param array                          $settings     __param_settings_description__ [optional]
      * @return __return_getFormSegment_type__ __return_getFormSegment_description__
      */
     public function getFormSegment($primaryModel = null, $settings = [])

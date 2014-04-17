@@ -26,8 +26,8 @@ class HandlerTypes extends \infinite\web\browser\Handler
 
     /**
      * __method_possibleTypes_description__
-     * @param  __param_topType_type__        $topType   __param_topType_description__
-     * @param  __param_goodTypes_type__      $goodTypes __param_goodTypes_description__
+     * @param __param_topType_type__        $topType   __param_topType_description__
+     * @param __param_goodTypes_type__      $goodTypes __param_goodTypes_description__
      * @return __return_possibleTypes_type__ __return_possibleTypes_description__
      */
     public static function possibleTypes($topType, $goodTypes)
@@ -47,9 +47,9 @@ class HandlerTypes extends \infinite\web\browser\Handler
 
     /**
      * __method_descendantHas_description__
-     * @param  __param_topType_type__        $topType   __param_topType_description__
-     * @param  __param_goodTypes_type__      $goodTypes __param_goodTypes_description__
-     * @param  integer                       $depth     __param_depth_description__ [optional]
+     * @param __param_topType_type__        $topType   __param_topType_description__
+     * @param __param_goodTypes_type__      $goodTypes __param_goodTypes_description__
+     * @param integer                       $depth     __param_depth_description__ [optional]
      * @return __return_descendantHas_type__ __return_descendantHas_description__
      */
     public static function descendantHas($topType, $goodTypes, $depth = 3)

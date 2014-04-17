@@ -249,8 +249,8 @@ class DeleteForm extends Model
 
     /**
      * __method_setTarget_description__
-     * @param  __param_value_type__ $value __param_value_description__
-     * @throws Exception            __exception_Exception_description__
+     * @param __param_value_type__ $value __param_value_description__
+     * @throws Exception __exception_Exception_description__
      */
     public function setTarget($value)
     {

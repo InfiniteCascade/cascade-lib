@@ -63,8 +63,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * __method_setStorage_description__
-     * @param  __param_value_type__ $value __param_value_description__
-     * @throws Exception            __exception_Exception_description__
+     * @param __param_value_type__ $value __param_value_description__
+     * @throws Exception __exception_Exception_description__
      */
     public function setStorage($value)
     {
@@ -106,7 +106,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * __method_beforeSave_description__
-     * @param  __param_event_type__       $event __param_event_description__
+     * @param __param_event_type__       $event __param_event_description__
      * @return __return_beforeSave_type__ __return_beforeSave_description__
      */
     public function beforeSave($event)
@@ -121,7 +121,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * __method_afterDelete_description__
-     * @param  __param_event_type__        $event __param_event_description__
+     * @param __param_event_type__        $event __param_event_description__
      * @return __return_afterDelete_type__ __return_afterDelete_description__
      */
     public function afterDelete($event)
@@ -164,7 +164,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * __method_beforeValidate_description__
-     * @param  __param_event_type__           $event __param_event_description__
+     * @param __param_event_type__           $event __param_event_description__
      * @return __return_beforeValidate_type__ __return_beforeValidate_description__
      */
     public function beforeValidate($event)
@@ -196,7 +196,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * __method_setStorageEngine_description__
-     * @param  __param_value_type__             $value __param_value_description__
+     * @param __param_value_type__             $value __param_value_description__
      * @return __return_setStorageEngine_type__ __return_setStorageEngine_description__
      */
     public function setStorageEngine($value)

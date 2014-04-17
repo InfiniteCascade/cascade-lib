@@ -195,7 +195,7 @@ class ObjectController extends Controller
     /**
      * __method_actionView_description__
      * @return __return_actionView_type__ __return_actionView_description__
-     * @throws HttpException              __exception_HttpException_description__
+     * @throws HttpException __exception_HttpException_description__
      */
     public function actionView()
     {
@@ -244,10 +244,10 @@ class ObjectController extends Controller
 
     /**
      * __method__parseParams_description__
-     * @param  array              $required __param_required_description__ [optional]
-     * @param  __param_can_type__ $can      __param_can_description__ [optional]
-     * @param  boolean            $swap     __param_swap_description__ [optional]
-     * @throws HttpException      __exception_HttpException_description__
+     * @param array              $required __param_required_description__ [optional]
+     * @param __param_can_type__ $can      __param_can_description__ [optional]
+     * @param boolean            $swap     __param_swap_description__ [optional]
+     * @throws HttpException __exception_HttpException_description__
      */
     protected function _parseParams($required = [], $can = null, $swap = false)
     {
@@ -454,7 +454,7 @@ class ObjectController extends Controller
     /**
      * __method_actionUpdate_description__
      * @return __return_actionUpdate_type__ __return_actionUpdate_description__
-     * @throws HttpException                __exception_HttpException_description__
+     * @throws HttpException __exception_HttpException_description__
      */
     public function actionUpdate()
     {

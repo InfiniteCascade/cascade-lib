@@ -75,7 +75,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
 
     /**
      * __method_getModelFieldName_description__
-     * @param  unknown $formSettings (optional)
+     * @param unknown $formSettings (optional)
      * @return unknown
      */
     public function getModelFieldName($formSettings = [])
@@ -85,7 +85,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
 
     /**
      * __method_neightborFieldId_description__
-     * @param  __param_field_type__             $field __param_field_description__
+     * @param __param_field_type__             $field __param_field_description__
      * @return __return_neightborFieldId_type__ __return_neightborFieldId_description__
      */
     public function neightborFieldId($field)
@@ -123,7 +123,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
 
     /**
      * __method_setType_description__
-     * @param  unknown $value
+     * @param unknown $value
      * @return unknown
      */
     public function setType($value)

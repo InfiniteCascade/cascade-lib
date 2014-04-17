@@ -114,7 +114,7 @@ class Section extends \cascade\components\web\widgets\Widget
 
     /**
      * __method_defaultItems_description__
-     * @param  __param_parent_type__        $parent __param_parent_description__ [optional]
+     * @param __param_parent_type__        $parent __param_parent_description__ [optional]
      * @return __return_defaultItems_type__ __return_defaultItems_description__
      */
     public function defaultItems($parent = null)

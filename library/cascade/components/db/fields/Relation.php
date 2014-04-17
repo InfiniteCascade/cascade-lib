@@ -50,6 +50,9 @@ class Relation extends Base
     /**
      * @var __var__moduleHandler_type__ __var__moduleHandler_description__
      */
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
     static $_moduleHandlers = [];
 
     /**

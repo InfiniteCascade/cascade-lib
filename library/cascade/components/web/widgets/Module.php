@@ -56,8 +56,8 @@ abstract class Module extends \infinite\base\Module
 
     /**
      * __method_onAfterInit_description__
-     * @param  __param_event_type__ $event __param_event_description__
-     * @throws Exception            __exception_Exception_description__
+     * @param __param_event_type__ $event __param_event_description__
+     * @throws Exception __exception_Exception_description__
      */
     public function onAfterInit($event)
     {
@@ -92,7 +92,7 @@ abstract class Module extends \infinite\base\Module
     /**
      * __method_getShortName_description__
      * @return __return_getShortName_type__ __return_getShortName_description__
-     * @throws Exception                    __exception_Exception_description__
+     * @throws Exception __exception_Exception_description__
      */
     public function getShortName()
     {

@@ -48,7 +48,7 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 
     /**
      * __method_generate_description__
-     * @param  __param_item_type__      $item __param_item_description__
+     * @param __param_item_type__      $item __param_item_description__
      * @return __return_generate_type__ __return_generate_description__
      */
     public function generate($item)
@@ -81,7 +81,7 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 
     /**
      * __method_prepareStorage_description__
-     * @param  cascade\models\StorageEngine   $engine __param_engine_description__
+     * @param cascade\models\StorageEngine   $engine __param_engine_description__
      * @return __return_prepareStorage_type__ __return_prepareStorage_description__
      */
     protected function prepareStorage(StorageEngine $engine)
@@ -93,8 +93,8 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 
     /**
      * __method_afterDelete_description__
-     * @param  cascade\models\StorageEngine $engine __param_engine_description__
-     * @param  cascade\models\Storage       $model  __param_model_description__
+     * @param cascade\models\StorageEngine $engine __param_engine_description__
+     * @param cascade\models\Storage       $model  __param_model_description__
      * @return __return_afterDelete_type__  __return_afterDelete_description__
      */
     public function afterDelete(StorageEngine $engine, Storage $model)
@@ -104,9 +104,9 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 
     /**
      * __method_beforeSave_description__
-     * @param  cascade\models\StorageEngine $engine    __param_engine_description__
-     * @param  __param_model_type__         $model     __param_model_description__
-     * @param  __param_attribute_type__     $attribute __param_attribute_description__
+     * @param cascade\models\StorageEngine $engine    __param_engine_description__
+     * @param __param_model_type__         $model     __param_model_description__
+     * @param __param_attribute_type__     $attribute __param_attribute_description__
      * @return __return_beforeSave_type__   __return_beforeSave_description__
      */
     public function beforeSave(StorageEngine $engine, $model, $attribute)
@@ -125,7 +125,7 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 
     /**
      * __method_beforeSetStorage_description__
-     * @param  __param_value_type__             $value __param_value_description__
+     * @param __param_value_type__             $value __param_value_description__
      * @return __return_beforeSetStorage_type__ __return_beforeSetStorage_description__
      */
     public function beforeSetStorage($value)

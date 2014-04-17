@@ -178,9 +178,9 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * __method_setFormField_description__
-     * @param  __param_value_type__         $value __param_value_description__
+     * @param __param_value_type__         $value __param_value_description__
      * @return __return_setFormField_type__ __return_setFormField_description__
-     * @throws Exception                    __exception_Exception_description__
+     * @throws Exception __exception_Exception_description__
      */
     public function setFormField($value)
     {
@@ -201,7 +201,7 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * __method_setHuman_description__
-     * @param  unknown $value
+     * @param unknown $value
      * @return unknown
      */
     public function setHuman($value)
@@ -274,7 +274,7 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * __method_setModel_description__
-     * @param  unknown $value
+     * @param unknown $value
      * @return unknown
      */
     public function setModel($value)
@@ -299,7 +299,7 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * __method_setFormat_description__
-     * @param  unknown $value
+     * @param unknown $value
      * @return unknown
      */
     public function setFormat($value)
@@ -385,7 +385,7 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * __method_setLabel_description__
-     * @param  unknown $value
+     * @param unknown $value
      * @return unknown
      */
     public function setLabel($value)

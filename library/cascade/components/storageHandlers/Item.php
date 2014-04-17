@@ -35,6 +35,9 @@ class Item extends \infinite\base\collector\Item
     /**
      * @var __var_publicEngine_type__ __var_publicEngine_description__
      */
+    /**
+     * @var __var_publicEngine_type__ __var_publicEngine_description__
+     */
     public $publicEngineGroup = 'top';
 
     /**

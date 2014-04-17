@@ -245,7 +245,7 @@ class Model extends \infinite\base\Object
 
     /**
      * __method_populateRecord_description__
-     * @param  __param_attributes_type__      $attributes __param_attributes_description__
+     * @param __param_attributes_type__      $attributes __param_attributes_description__
      * @return __return_populateRecord_type__ __return_populateRecord_description__
      */
     public function populateRecord($attributes)
@@ -261,7 +261,7 @@ class Model extends \infinite\base\Object
 
     /**
      * __method_populateRecords_description__
-     * @param  __param_results_type__          $results __param_results_description__
+     * @param __param_results_type__          $results __param_results_description__
      * @return __return_populateRecords_type__ __return_populateRecords_description__
      */
     public function populateRecords($results)
@@ -320,7 +320,7 @@ class Model extends \infinite\base\Object
 
     /**
      * __method_find_description__
-     * @param  __param_params_type__ $params __param_params_description__
+     * @param __param_params_type__ $params __param_params_description__
      * @return __return_find_type__  __return_find_description__
      */
     public function find($params)
@@ -356,7 +356,7 @@ class Model extends \infinite\base\Object
 
     /**
      * __method_findAll_description__
-     * @param  array                   $params __param_params_description__ [optional]
+     * @param array                   $params __param_params_description__ [optional]
      * @return __return_findAll_type__ __return_findAll_description__
      */
     public function findAll($params = [])
@@ -368,7 +368,7 @@ class Model extends \infinite\base\Object
 
     /**
      * __method_findOne_description__
-     * @param  array                   $params __param_params_description__ [optional]
+     * @param array                   $params __param_params_description__ [optional]
      * @return __return_findOne_type__ __return_findOne_description__
      */
     public function findOne($params = [])
@@ -378,7 +378,7 @@ class Model extends \infinite\base\Object
 
     /**
      * __method_findPrimaryKeys_description__
-     * @param  array                           $params __param_params_description__ [optional]
+     * @param array                           $params __param_params_description__ [optional]
      * @return __return_findPrimaryKeys_type__ __return_findPrimaryKeys_description__
      */
     public function findPrimaryKeys($params = [])

@@ -51,7 +51,7 @@ class User extends \infinite\db\models\User
     /**
      * __method_systemUser_description__
      * @return __return_systemUser_type__ __return_systemUser_description__
-     * @throws Exception                  __exception_Exception_description__
+     * @throws Exception __exception_Exception_description__
      */
     public static function systemUser()
     {

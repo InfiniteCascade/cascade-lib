@@ -52,8 +52,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * __method_get_description__
-     * @param  __param_interface_type__    $interface    __param_interface_description__
-     * @param  __param_foreignTable_type__ $foreignTable __param_foreignTable_description__
+     * @param __param_interface_type__    $interface    __param_interface_description__
+     * @param __param_foreignTable_type__ $foreignTable __param_foreignTable_description__
      * @return __return_get_type__         __return_get_description__
      */
     public static function get($interface, $foreignTable)
@@ -138,7 +138,7 @@ class Meta extends \infinite\base\Object
 
     /**
      * __method_hasAttribute_description__
-     * @param  __param_name_type__          $name __param_name_description__
+     * @param __param_name_type__          $name __param_name_description__
      * @return __return_hasAttribute_type__ __return_hasAttribute_description__
      */
     public function hasAttribute($name)

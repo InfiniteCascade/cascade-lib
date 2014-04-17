@@ -92,7 +92,7 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_getPrimaryChild_description__
-     * @param  __param_parentObject_type__     $parentObject __param_parentObject_description__
+     * @param __param_parentObject_type__     $parentObject __param_parentObject_description__
      * @return __return_getPrimaryChild_type__ __return_getPrimaryChild_description__
      */
     public function getPrimaryChild($parentObject)
@@ -121,7 +121,7 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_getPrimaryParent_description__
-     * @param  __param_childObject_type__       $childObject __param_childObject_description__
+     * @param __param_childObject_type__       $childObject __param_childObject_description__
      * @return __return_getPrimaryParent_type__ __return_getPrimaryParent_description__
      */
     public function getPrimaryParent($childObject)
@@ -191,9 +191,9 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_getOne_description__
-     * @param  object  $parent
-     * @param  object  $child
-     * @param  unknown $options (optional)
+     * @param object  $parent
+     * @param object  $child
+     * @param unknown $options (optional)
      * @return unknown
      */
     static public function getOne(Item $parent, Item $child, $options = [])
@@ -210,7 +210,7 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_getById_description__
-     * @param  __param_relationshipId_type__ $relationshipId __param_relationshipId_description__
+     * @param __param_relationshipId_type__ $relationshipId __param_relationshipId_description__
      * @return __return_getById_type__       __return_getById_description__
      */
     static public function getById($relationshipId)
@@ -225,8 +225,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_has_description__
-     * @param  cascade\components\types\Item $parent __param_parent_description__
-     * @param  cascade\components\types\Item $child  __param_child_description__
+     * @param cascade\components\types\Item $parent __param_parent_description__
+     * @param cascade\components\types\Item $child  __param_child_description__
      * @return __return_has_type__           __return_has_description__
      */
     static public function has(Item $parent, Item $child)
@@ -265,7 +265,7 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_companionRole_description__
-     * @param  __param_queryRole_type__      $queryRole __param_queryRole_description__
+     * @param __param_queryRole_type__      $queryRole __param_queryRole_description__
      * @return __return_companionRole_type__ __return_companionRole_description__
      */
     public function companionRole($queryRole)
@@ -279,7 +279,7 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_companionRoleType_description__
-     * @param  __param_queryRole_type__          $queryRole __param_queryRole_description__
+     * @param __param_queryRole_type__          $queryRole __param_queryRole_description__
      * @return __return_companionRoleType_type__ __return_companionRoleType_description__
      */
     public function companionRoleType($queryRole)
@@ -293,7 +293,7 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_roleType_description__
-     * @param  __param_queryRole_type__ $queryRole __param_queryRole_description__
+     * @param __param_queryRole_type__ $queryRole __param_queryRole_description__
      * @return __return_roleType_type__ __return_roleType_description__
      */
     public function roleType($queryRole)
@@ -307,8 +307,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_canLink_description__
-     * @param  __param_relationshipRole_type__ $relationshipRole __param_relationshipRole_description__
-     * @param  __param_object_type__           $object           __param_object_description__
+     * @param __param_relationshipRole_type__ $relationshipRole __param_relationshipRole_description__
+     * @param __param_object_type__           $object           __param_object_description__
      * @return __return_canLink_type__         __return_canLink_description__
      */
     public function canLink($relationshipRole, $object)
@@ -329,8 +329,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_canCreate_description__
-     * @param  __param_relationshipRole_type__ $relationshipRole __param_relationshipRole_description__
-     * @param  __param_object_type__           $object           __param_object_description__
+     * @param __param_relationshipRole_type__ $relationshipRole __param_relationshipRole_description__
+     * @param __param_object_type__           $object           __param_object_description__
      * @return __return_canCreate_type__       __return_canCreate_description__
      */
     public function canCreate($relationshipRole, $object)
@@ -346,8 +346,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_getModel_description__
-     * @param  __param_parentObjectId_type__ $parentObjectId __param_parentObjectId_description__
-     * @param  __param_childObjectId_type__  $childObjectId  __param_childObjectId_description__
+     * @param __param_parentObjectId_type__ $parentObjectId __param_parentObjectId_description__
+     * @param __param_childObjectId_type__  $childObjectId  __param_childObjectId_description__
      * @return __return_getModel_type__      __return_getModel_description__
      */
     public function getModel($parentObjectId, $childObjectId)
@@ -379,7 +379,7 @@ class Relationship extends \infinite\base\Object
 
     /**
      * __method_mergeOptions_description__
-     * @param  unknown   $newOptions
+     * @param unknown   $newOptions
      * @throws Exception __exception_Exception_description__
      */
     public function mergeOptions($newOptions)

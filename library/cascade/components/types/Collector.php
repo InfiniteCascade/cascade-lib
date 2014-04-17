@@ -97,7 +97,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * __method_registerObjectType_description__
-     * @param  __param_module_type__              $module __param_module_description__
+     * @param __param_module_type__              $module __param_module_description__
      * @return __return_registerObjectType_type__ __return_registerObjectType_description__
      */
     public function registerObjectType($module)
@@ -150,9 +150,9 @@ class Collector extends \infinite\base\collector\Module
     }
     /**
      * __method_addRelationship_description__
-     * @param  unknown $parent
-     * @param  unknown $child
-     * @param  unknown $options (optional)
+     * @param unknown $parent
+     * @param unknown $child
+     * @param unknown $options (optional)
      * @return unknown
      */
     public function addRelationship($parent, $child, $options = [])

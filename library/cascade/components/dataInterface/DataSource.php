@@ -309,7 +309,7 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * __method_setSettings_description__
-     * @param  __param_settings_type__     $settings __param_settings_description__
+     * @param __param_settings_type__     $settings __param_settings_description__
      * @return __return_setSettings_type__ __return_setSettings_description__
      */
     public function setSettings($settings)
@@ -399,7 +399,7 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * __method_setMap_description__
-     * @param  __param_m_type__       $m __param_m_description__
+     * @param __param_m_type__       $m __param_m_description__
      * @return __return_setMap_type__ __return_setMap_description__
      */
     public function setMap($m)

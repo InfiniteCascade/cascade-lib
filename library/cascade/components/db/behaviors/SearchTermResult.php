@@ -36,6 +36,9 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     /**
      * @var __var__objectType_type__ __var__objectType_description__
      */
+    /**
+     * @var __var__objectType_type__ __var__objectType_description__
+     */
     protected $_objectTypeDescriptor;
     /**
      * @var __var__url_type__ __var__url_description__

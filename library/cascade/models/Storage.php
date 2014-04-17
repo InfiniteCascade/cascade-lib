@@ -66,7 +66,7 @@ class Storage extends \cascade\components\db\ActiveRecord
 
     /**
      * __method_fillKill_description__
-     * @param  __param_attributes_type__ $attributes __param_attributes_description__
+     * @param __param_attributes_type__ $attributes __param_attributes_description__
      * @return __return_fillKill_type__  __return_fillKill_description__
      */
     public function fillKill($attributes)
@@ -92,7 +92,7 @@ class Storage extends \cascade\components\db\ActiveRecord
 
     /**
      * __method_startBlank_description__
-     * @param  __param_engine_type__      $engine __param_engine_description__
+     * @param __param_engine_type__      $engine __param_engine_description__
      * @return __return_startBlank_type__ __return_startBlank_description__
      */
     public static function startBlank($engine)

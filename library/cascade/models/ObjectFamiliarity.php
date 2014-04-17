@@ -111,8 +111,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
 
     /**
      * __method_created_description__
-     * @param  unknown $object
-     * @param  unknown $user   (optional)
+     * @param unknown $object
+     * @param unknown $user   (optional)
      * @return unknown
      */
     public static function created($object, $user = null)
@@ -140,8 +140,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
 
     /**
      * __method_modified_description__
-     * @param  unknown $object
-     * @param  unknown $user   (optional)
+     * @param unknown $object
+     * @param unknown $user   (optional)
      * @return unknown
      */
     public static function modified($object, $user = null)
@@ -169,8 +169,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
 
     /**
      * __method_accessed_description__
-     * @param  unknown $object
-     * @param  unknown $user   (optional)
+     * @param unknown $object
+     * @param unknown $user   (optional)
      * @return unknown
      */
     public static function accessed($object, $user = null)
@@ -198,8 +198,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
 
     /**
      * __method_familiarObjects_description__
-     * @param  __param_model_type__            $model __param_model_description__
-     * @param  integer                         $limit __param_limit_description__ [optional]
+     * @param __param_model_type__            $model __param_model_description__
+     * @param integer                         $limit __param_limit_description__ [optional]
      * @return __return_familiarObjects_type__ __return_familiarObjects_description__
      */
     public static function familiarObjects($model, $limit = 10)
@@ -218,8 +218,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
 
     /**
      * __method_familiarObjectsProvider_description__
-     * @param  __param_model_type__                    $model __param_model_description__
-     * @param  __param_state_type__                    $state __param_state_description__
+     * @param __param_model_type__                    $model __param_model_description__
+     * @param __param_state_type__                    $state __param_state_description__
      * @return __return_familiarObjectsProvider_type__ __return_familiarObjectsProvider_description__
      */
     public static function familiarObjectsProvider($model, $state)
@@ -252,8 +252,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
 
     /**
      * __method_familiarObjectsList_description__
-     * @param  __param_model_type__                $model __param_model_description__
-     * @param  integer                             $limit __param_limit_description__ [optional]
+     * @param __param_model_type__                $model __param_model_description__
+     * @param integer                             $limit __param_limit_description__ [optional]
      * @return __return_familiarObjectsList_type__ __return_familiarObjectsList_description__
      */
     public static function familiarObjectsList($model, $limit = 10)

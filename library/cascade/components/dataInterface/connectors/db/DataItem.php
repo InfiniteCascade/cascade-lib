@@ -127,7 +127,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem
 
     /**
      * __method_loadForeignObject_description__
-     * @throws RecursionException   __exception_RecursionException_description__
+     * @throws RecursionException __exception_RecursionException_description__
      * @throws MissingItemException __exception_MissingItemException_description__
      */
     protected function loadForeignObject()

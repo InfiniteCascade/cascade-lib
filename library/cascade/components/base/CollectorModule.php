@@ -73,7 +73,7 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
 
     /**
      * __method_onAfterInit_description__
-     * @param  __param_event_type__        $event __param_event_description__
+     * @param __param_event_type__        $event __param_event_description__
      * @return __return_onAfterInit_type__ __return_onAfterInit_description__
      */
     public function onAfterInit($event)
