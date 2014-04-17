@@ -16,6 +16,9 @@ use cascade\models\User;
 **/
 class Task_000004_acl extends AclTask
 {
+    /**
+    * @inheritdoc
+    **/
     public function getBaseRules()
     {
         return [
@@ -29,12 +32,18 @@ class Task_000004_acl extends AclTask
         ];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function test()
     {
         $run = User::find()->disableAccessCheck()->andWhere(['and', ['username' => 'system']])->count() > 0;
 
         return $run && parent::test();
     }
+    /**
+    * @inheritdoc
+    **/
     public function run()
     {
         if (!User::systemUser()) {

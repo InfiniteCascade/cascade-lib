@@ -17,6 +17,9 @@ class Status extends \infinite\base\status\Status
     protected $_action;
     protected $_errors = [];
 
+    /**
+    * @inheritdoc
+    **/
     public function __construct($action)
     {
         $this->_action = $action;

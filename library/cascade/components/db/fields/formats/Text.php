@@ -14,6 +14,9 @@ namespace cascade\components\db\fields\formats;
 **/
 class Text extends Base
 {
+    /**
+    * @inheritdoc
+    **/
     public function get()
     {
         $result = $this->field->value;

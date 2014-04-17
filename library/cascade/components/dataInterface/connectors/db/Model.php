@@ -25,6 +25,9 @@ class Model extends \infinite\base\Object
     protected $_keys;
     protected $_children;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();
@@ -41,6 +44,9 @@ class Model extends \infinite\base\Object
         $this->reset();
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function __get($name)
     {
         if (isset($this->_attributes[$name])) {
@@ -50,6 +56,9 @@ class Model extends \infinite\base\Object
         return parent::__get($name);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function __set($name, $value)
     {
         if (isset($this->meta) && is_object($this->meta) && $this->meta->hasAttribute($name)) {
@@ -61,6 +70,9 @@ class Model extends \infinite\base\Object
         return parent::__set($name, $value);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function __isset($name)
     {
         if (isset($this->meta) && $this->meta->hasAttribute($name) && isset($this->_attributes[$name])) {
@@ -70,6 +82,9 @@ class Model extends \infinite\base\Object
         return parent::__isset($name);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function __unset($name)
     {
         if (isset($this->meta) && $this->meta->hasAttribute($name)) {

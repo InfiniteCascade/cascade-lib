@@ -25,6 +25,9 @@ class Relation extends Base
     public $linkMultiple = false;
     public $relatedObject;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();

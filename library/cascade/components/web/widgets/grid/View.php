@@ -45,6 +45,9 @@ class View extends \yii\base\Widget
     protected $_columnSettings;
     protected $_formatter;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         if ($this->dataProvider===null) {
@@ -56,6 +59,9 @@ class View extends \yii\base\Widget
         $this->_prepareDataProvider();
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function run()
     {
         $this->_prepareDataProvider();

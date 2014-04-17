@@ -19,6 +19,9 @@ use cascade\components\web\widgets\Widget;
 **/
 class Header extends Widget
 {
+    /**
+    * @inheritdoc
+    **/
     public function generateContent()
     {
         if (!isset(Yii::$app->request->object)) { return false; }

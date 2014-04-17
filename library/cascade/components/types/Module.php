@@ -65,6 +65,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     protected $_disabledFields;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         if (isset($this->modelNamespace)) {
@@ -74,6 +77,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
         parent::init();
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorName()
     {
         return 'types';
@@ -95,6 +101,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return parent::onBeforeControllerAction($event);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function onAfterInit($event)
     {
         if (!isset(Yii::$app->collectors['taxonomies']) || !Yii::$app->collectors['taxonomies']->registerMultiple($this, $this->taxonomies())) { throw new Exception('Could not register taxonmies for '. $this->systemId .'!'); }
@@ -235,6 +244,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $this->modelNamespace .'\\'. 'Object'.$this->systemId;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getModuleType()
     {
         return 'Type';

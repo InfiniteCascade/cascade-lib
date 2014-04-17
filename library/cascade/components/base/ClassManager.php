@@ -14,6 +14,9 @@ namespace cascade\components\base;
 **/
 class ClassManager extends \infinite\base\ClassManager
 {
+    /**
+    * @inheritdoc
+    **/
     public function baseClasses()
     {
         return [

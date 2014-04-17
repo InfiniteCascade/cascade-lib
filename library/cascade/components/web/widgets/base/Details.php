@@ -33,6 +33,9 @@ class Details extends Widget implements ListWidgetInterface
     public $gridCellClass = 'infinite\\web\\grid\\Cell';
     protected $_title = 'Details';
 
+    /**
+    * @inheritdoc
+    **/
     public function getHeaderMenu()
     {
         $menu = [];
@@ -40,6 +43,9 @@ class Details extends Widget implements ListWidgetInterface
         return $menu;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function generateContent()
     {
         if (empty(Yii::$app->request->object)) { return false; }

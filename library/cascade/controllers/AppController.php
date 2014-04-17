@@ -23,6 +23,9 @@ use cascade\models\Registry;
 **/
 class AppController extends Controller
 {
+    /**
+    * @inheritdoc
+    **/
     public function behaviors()
     {
         return [
@@ -59,6 +62,9 @@ class AppController extends Controller
         ];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function actions()
     {
         return [

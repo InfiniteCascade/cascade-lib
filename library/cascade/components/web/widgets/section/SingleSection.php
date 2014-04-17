@@ -47,6 +47,9 @@ class SingleSection extends Section
         return $this->_singleWidget;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getTitle()
     {
         $singleWidget = $this->singleWidget;

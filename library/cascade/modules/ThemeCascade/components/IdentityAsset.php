@@ -16,6 +16,9 @@ class IdentityAsset extends \cascade\components\web\themes\IdentityAsset
 {
     public $sourcePath = '@cascade/modules/ThemeCascade/assets';
 
+    /**
+    * @inheritdoc
+    **/
     public function getLogoPath()
     {
         if (empty($this->basePath)) { return false; }

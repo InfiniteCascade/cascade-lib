@@ -18,6 +18,9 @@ use infinite\caching\Cacher;
 **/
 class AuthorityBehavior extends \infinite\security\AuthorityBehavior
 {
+    /**
+    * @inheritdoc
+    **/
     public function events()
     {
         return array_merge(parent::events(), [

@@ -19,6 +19,9 @@ class Module extends \cascade\components\web\themes\Module
         return 'cascade\\modules\\ThemeCascade\\components';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getIdentityAssetBundle()
     {
         return $this->componentNamespace . '\\IdentityAsset';

@@ -45,6 +45,9 @@ class HandlerObjects extends \infinite\web\browser\Handler
         return $this->_dataSource;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getTotal()
     {
         if (!$this->dataSource) {
@@ -54,6 +57,9 @@ class HandlerObjects extends \infinite\web\browser\Handler
         return $this->dataSource->count();
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getItems()
     {
         $instructions = $this->instructions;

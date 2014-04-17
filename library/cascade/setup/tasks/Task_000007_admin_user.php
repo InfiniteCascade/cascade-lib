@@ -18,16 +18,25 @@ use infinite\base\exceptions\Exception;
 **/
 class Task_000007_admin_user extends \infinite\setup\Task
 {
+    /**
+    * @inheritdoc
+    **/
     public function getTitle()
     {
         return 'Admin User';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function test()
     {
         return User::find()->disableAccessCheck()->andWhere(['not', ['username' => 'system']])->count() > 0;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function run()
     {
         $user = new User;
@@ -50,6 +59,9 @@ class Task_000007_admin_user extends \infinite\setup\Task
         return false;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getFields()
     {
         $fields = [];

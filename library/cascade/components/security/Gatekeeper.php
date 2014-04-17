@@ -27,6 +27,9 @@ class Gatekeeper extends \infinite\security\Gatekeeper
         return ObjectAccount::get(Yii::$app->params['primaryAccount'], false);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function setAuthority($authority)
     {
         if (!isset($authority['type'])
@@ -41,6 +44,9 @@ class Gatekeeper extends \infinite\security\Gatekeeper
         return parent::setAuthority($authority);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getAuthority()
     {
         if (is_null($this->_authority)) {
@@ -50,6 +56,9 @@ class Gatekeeper extends \infinite\security\Gatekeeper
         return $this->_authority;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getControlledObject($object, $modelClass = null, $params = [])
     {
         $defaultParams = [
@@ -100,6 +109,9 @@ class Gatekeeper extends \infinite\security\Gatekeeper
         return array_unique($objects);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function buildInnerRoleCheckConditions(&$innerOnConditions, $innerAlias, $query)
     {
         if ($query instanceof \infinite\db\ActiveQuery
@@ -122,6 +134,9 @@ class Gatekeeper extends \infinite\security\Gatekeeper
         return true;
     }
 
+    /**
+    * @inheritdoc
+    **/
     protected function getActionMap($controlledObject = null)
     {
         $map = [];

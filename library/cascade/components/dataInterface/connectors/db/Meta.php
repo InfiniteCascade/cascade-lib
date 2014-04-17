@@ -35,6 +35,9 @@ class Meta extends \infinite\base\Object
         return self::$_metas[$foreignTable];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function __construct($interface, $foreignTable)
     {
         $this->_db = $interface->db;

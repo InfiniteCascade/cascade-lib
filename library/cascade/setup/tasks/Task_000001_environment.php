@@ -17,11 +17,17 @@ use yii\helpers\Inflector;
 **/
 class Task_000001_environment extends \infinite\setup\Task
 {
+    /**
+    * @inheritdoc
+    **/
     public function getTitle()
     {
         return 'Environment';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function test()
     {
         if ($this->setup->isEnvironmented) {
@@ -50,6 +56,9 @@ class Task_000001_environment extends \infinite\setup\Task
         return $salt;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function run()
     {
         if ($this->fields) {
@@ -131,6 +140,9 @@ class Task_000001_environment extends \infinite\setup\Task
         return strtolower(Inflector::slug($name));
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function loadInput($input)
     {
         if (!parent::loadInput($input)) {
@@ -175,6 +187,9 @@ class Task_000001_environment extends \infinite\setup\Task
         return $list;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getFields()
     {
         if ($this->setup->isEnvironmented AND $this->setup->app()) {

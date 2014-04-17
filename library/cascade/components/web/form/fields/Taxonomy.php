@@ -16,6 +16,9 @@ use infinite\helpers\ArrayHelper;
 **/
 class Taxonomy extends Model
 {
+    /**
+    * @inheritdoc
+    **/
     public function getFieldConfig()
     {
         $fieldConfig = parent::getFieldConfig();

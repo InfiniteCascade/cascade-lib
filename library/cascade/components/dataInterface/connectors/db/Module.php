@@ -39,6 +39,9 @@ abstract class Module extends BaseModule
     // 	}
     // }
 
+    /**
+    * @inheritdoc
+    **/
     public function run(Action $action)
     {
         $this->_action = $action;

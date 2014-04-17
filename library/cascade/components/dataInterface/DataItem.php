@@ -31,6 +31,9 @@ abstract class DataItem extends \infinite\base\Component
     const EVENT_LOAD_FOREIGN_OBJECT = 0x01;
     const EVENT_LOAD_LOCAL_OBJECT = 0x02;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         $this->on(self::EVENT_LOAD_LOCAL_OBJECT, [$this, 'searchLocalObject']);

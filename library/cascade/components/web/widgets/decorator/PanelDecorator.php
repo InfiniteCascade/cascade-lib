@@ -42,6 +42,9 @@ class PanelDecorator extends Decorator
         return implode("", $parts);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function generateStart()
     {
         Html::addCssClass($this->owner->htmlOptions, $this->owner->panelCssClass);

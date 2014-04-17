@@ -14,19 +14,31 @@ namespace cascade\setup\tasks;
 **/
 class Task_000008_collectors extends \infinite\setup\Task
 {
+    /**
+    * @inheritdoc
+    **/
     public function getTitle()
     {
         return 'Collector Item Setup';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function test()
     {
         return $this->setup->app()->collectors->areReady();
     }
+    /**
+    * @inheritdoc
+    **/
     public function run()
     {
         return $this->setup->app()->collectors->initialize();
     }
+    /**
+    * @inheritdoc
+    **/
     public function getFields()
     {
         return false;

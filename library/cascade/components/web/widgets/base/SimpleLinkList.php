@@ -30,11 +30,17 @@ class SimpleLinkList extends BaseList
         ];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getListOptions()
     {
         return array_merge(parent::getListOptions(), ['tag' => 'div']);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getListItemOptions($model, $key, $index)
     {
         $options = array_merge(parent::getListItemOptions($model, $key, $index), ['tag' => 'a', 'href' => Url::to($model->getUrl('view'))]);
@@ -46,11 +52,17 @@ class SimpleLinkList extends BaseList
         return $options;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getMenuItems($model, $key, $index)
     {
         return [];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function contentTemplate($model)
     {
         return [
@@ -58,6 +70,9 @@ class SimpleLinkList extends BaseList
         ];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function renderItemContent($model, $key, $index)
     {
         return parent::renderItemContent($model, $key, $index);

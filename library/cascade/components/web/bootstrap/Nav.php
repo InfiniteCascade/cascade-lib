@@ -15,6 +15,9 @@ use Yii;
 **/
 class Nav extends \yii\bootstrap\Nav
 {
+    /**
+    * @inheritdoc
+    **/
     public function renderItem($item)
     {
         if ($this->route === null && Yii::$app->response !== null) {

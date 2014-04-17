@@ -28,6 +28,9 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     protected $_section;
     public $settings = [];
 
+    /**
+    * @inheritdoc
+    **/
     public function getObject()
     {
         if (is_null($this->widget)) {

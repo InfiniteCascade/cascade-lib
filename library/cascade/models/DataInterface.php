@@ -41,6 +41,9 @@ class DataInterface extends \cascade\components\db\ActiveRecord
         return 'data_interface';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [

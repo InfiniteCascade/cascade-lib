@@ -16,6 +16,9 @@ class DeleteEvent extends \infinite\db\behaviors\auditable\DeleteEvent
 {
     public $objectType;
 
+    /**
+    * @inheritdoc
+    **/
     public function setDirectObject($object)
     {
         parent::setDirectObject($object);

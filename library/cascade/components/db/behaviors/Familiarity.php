@@ -20,6 +20,9 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     public $userField = 'user_id';
     protected $_familiarity = [];
 
+    /**
+    * @inheritdoc
+    **/
     public function events()
     {
         return [

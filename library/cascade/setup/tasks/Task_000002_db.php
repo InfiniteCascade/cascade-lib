@@ -19,16 +19,25 @@ class Task_000002_db extends \infinite\setup\Task
     protected $_migrator;
     public $skipComplete = true;
 
+    /**
+    * @inheritdoc
+    **/
     public function getTitle()
     {
         return 'Database';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function skip()
     {
         return parent::skip() && $this->setup->markDbReady();
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function test()
     {
         if ($this->isNewInstall()) { return false; }
@@ -56,6 +65,9 @@ class Task_000002_db extends \infinite\setup\Task
         return false;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function run()
     {
         $request = $this->migrator->getRequest();
@@ -82,6 +94,9 @@ class Task_000002_db extends \infinite\setup\Task
         return $this->_migrator;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getVerification()
     {
         if (!$this->isNewInstall() && !$this->test()) {

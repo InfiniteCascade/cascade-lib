@@ -80,6 +80,9 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
         $this->_objectType = $type;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function toArray()
     {
         return array_merge(parent::toArray(), [
@@ -89,6 +92,9 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
         ]);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getScore()
     {
         if (empty($this->object->objectType->searchWeight)) {

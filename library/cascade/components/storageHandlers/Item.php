@@ -22,6 +22,9 @@ class Item extends \infinite\base\collector\Item
     public $publicEngine = false;
     public $publicEngineGroup = 'top';
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();

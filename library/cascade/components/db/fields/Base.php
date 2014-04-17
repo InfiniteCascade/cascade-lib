@@ -42,6 +42,9 @@ abstract class Base extends \infinite\base\Object
     const LOCATION_HEADER = 0x02;
     const LOCATION_SUBHEADER = 0x03;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();

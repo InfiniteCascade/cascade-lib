@@ -70,6 +70,9 @@ class InterfaceController extends \infinite\console\Controller
         }
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function options($id)
     {
         return array_merge(parent::options($id), ['interface', 'verbose']);

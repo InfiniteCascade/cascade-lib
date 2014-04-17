@@ -14,6 +14,9 @@ namespace cascade\components\web\widgets\section;
 **/
 class SideSection extends Section
 {
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();
@@ -21,11 +24,17 @@ class SideSection extends Section
         $this->icon = false;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getWidgetDecoratorClass()
     {
         return 'cascade\\components\\web\\widgets\\decorator\\EmbeddedDecorator';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function widgetCellSettings()
     {
         return [
@@ -40,6 +49,9 @@ class SideSection extends Section
         return false;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function defaultItems($parent = null)
     {
         $default = [];

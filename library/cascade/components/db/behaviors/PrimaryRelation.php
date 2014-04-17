@@ -20,6 +20,9 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 {
     protected $_relationship;
 
+    /**
+    * @inheritdoc
+    **/
     public function handlePrimary()
     {
         if (!parent::handlePrimary()) {

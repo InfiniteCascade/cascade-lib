@@ -14,6 +14,9 @@ namespace cascade\components\web\widgets\section;
 **/
 class ParentSection extends Section
 {
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();
@@ -21,6 +24,9 @@ class ParentSection extends Section
         $this->icon = false;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function widgetCellSettings()
     {
         return [

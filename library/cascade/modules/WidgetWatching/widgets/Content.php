@@ -26,6 +26,9 @@ class Content extends \cascade\components\web\widgets\Widget
         return $gridSettings;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function generateContent()
     {
         return 'noo<br ><br><br><br>hey';

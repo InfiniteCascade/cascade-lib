@@ -16,6 +16,9 @@ use Yii;
 **/
 class StringHelper extends \infinite\helpers\StringHelper
 {
+    /**
+    * @inheritdoc
+    **/
     static public function parseInstructions()
     {
         $instructions = parent::parseInstructions();

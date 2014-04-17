@@ -20,11 +20,17 @@ class Collector extends \infinite\base\collector\Module
     protected $_lastLoadedTheme;
     protected $_theme;
 
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorItemClass()
     {
         return 'cascade\\components\\web\\themes\\Item';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getModulePrefix()
     {
         return 'Theme';
@@ -54,6 +60,9 @@ class Collector extends \infinite\base\collector\Module
         return $this->theme->identityAssetBundle;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function register($owner, $itemComponent, $systemId = null)
     {
         $item = parent::register($owner, $itemComponent, $systemId);

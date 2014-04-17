@@ -51,11 +51,17 @@ class HandlerTypes extends \infinite\web\browser\Handler
         return false;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getTotal()
     {
         return count($this->items);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getItems()
     {
         $instructions = $this->instructions;

@@ -17,11 +17,17 @@ abstract class Module extends \cascade\components\base\CollectorModule
     public $name;
     public $version = 1;
 
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorName()
     {
         return 'dataInterfaces';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getModuleType()
     {
         return 'Interface';

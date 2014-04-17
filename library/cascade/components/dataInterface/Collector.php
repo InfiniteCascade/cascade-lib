@@ -14,11 +14,17 @@ namespace cascade\components\dataInterface;
 **/
 class Collector extends \infinite\base\collector\Module
 {
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorItemClass()
     {
         return 'cascade\\components\\dataInterface\\Item';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getModulePrefix()
     {
         return 'Interface';

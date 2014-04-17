@@ -19,6 +19,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
     public $priority = 1000;
     public $version = 1;
 
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorName()
     {
         return 'types';

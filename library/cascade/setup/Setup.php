@@ -14,6 +14,9 @@ namespace cascade\setup;
 **/
 class Setup extends \infinite\setup\Setup
 {
+    /**
+    * @inheritdoc
+    **/
     public static function createSetupApplication($config = [])
     {
         if (is_null(self::$_instance)) {

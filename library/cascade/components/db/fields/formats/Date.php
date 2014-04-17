@@ -16,6 +16,9 @@ use Yii;
 **/
 class Date extends Base
 {
+    /**
+    * @inheritdoc
+    **/
     public function get()
     {
         $result = $this->field->value;
@@ -28,6 +31,9 @@ class Date extends Base
         return $result;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getFormValue()
     {
         $result = $this->field->value;

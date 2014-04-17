@@ -29,6 +29,9 @@ class ObjectType extends \cascade\components\db\ActiveRecord
         return false;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [

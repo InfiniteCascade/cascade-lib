@@ -14,6 +14,9 @@ namespace cascade\components\db\behaviors;
 **/
 class Ownable extends \infinite\db\behaviors\Ownable
 {
+    /**
+    * @inheritdoc
+    **/
     public function determineOwner()
     {
         if (!empty($this->owner->objectType)) {

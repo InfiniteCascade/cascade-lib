@@ -20,6 +20,9 @@ class AreaDecorator extends Decorator
     public $panelStateCssClass = 'panel-default';
     public $gridCellClass = 'infinite\web\grid\Cell';
 
+    /**
+    * @inheritdoc
+    **/
     public function generateStart()
     {
         Html::addCssClass($this->owner->htmlOptions, $this->owner->panelCssClass);

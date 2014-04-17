@@ -14,16 +14,25 @@ namespace cascade\components\section;
 **/
 class Collector extends \infinite\base\collector\Module
 {
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorItemClass()
     {
         return '\cascade\components\section\Item';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getModulePrefix()
     {
         return 'Section';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getInitialItems()
     {
         return [

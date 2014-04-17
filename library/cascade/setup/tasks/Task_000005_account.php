@@ -17,14 +17,23 @@ use cascade\modules\core\TypeAccount\models\ObjectAccount;
 **/
 class Task_000005_account extends \infinite\setup\Task
 {
+    /**
+    * @inheritdoc
+    **/
     public function getTitle()
     {
         return 'Primary Account';
     }
+    /**
+    * @inheritdoc
+    **/
     public function test()
     {
         return ObjectAccount::find()->disableAccessCheck()->count() > 0 && $this->setup->app()->params['primaryAccount'] !== '##primaryAccount##';
     }
+    /**
+    * @inheritdoc
+    **/
     public function run()
     {
         $account = new ObjectAccount;
@@ -66,6 +75,9 @@ class Task_000005_account extends \infinite\setup\Task
         return false;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getFields()
     {
         $fields = [];

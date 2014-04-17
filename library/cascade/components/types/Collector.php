@@ -21,16 +21,25 @@ class Collector extends \infinite\base\collector\Module
 {
     protected $_tableRegistry;
 
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorItemClass()
     {
         return 'cascade\\components\\types\\Item';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getModulePrefix()
     {
         return 'Type';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function isReady()
     {
         $this->load();
@@ -52,6 +61,9 @@ class Collector extends \infinite\base\collector\Module
         return true;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function initialize()
     {
         foreach ($this->bucket as $type) {

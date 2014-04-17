@@ -20,16 +20,25 @@ class Collector extends \infinite\base\collector\Module
 {
     const EVENT_AFTER_TAXONOMY_REGISTRY = 'afterTaxonomyRegistry';
 
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorItemClass()
     {
         return 'cascade\\components\\taxonomy\\Item';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getModulePrefix()
     {
         return 'TaxonomyType';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function register($owner, $itemComponent, $systemId = null)
     {
         if ($itemComponent instanceof Module) {
@@ -39,6 +48,9 @@ class Collector extends \infinite\base\collector\Module
         return parent::register($owner, $itemComponent, $systemId);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function mergeExistingItems($originalItem, $newItem)
     {
         $originalItem = parent::mergeExistingItems($originalItem, $newItem);
@@ -55,6 +67,9 @@ class Collector extends \infinite\base\collector\Module
         return $originalItem;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function prepareComponent($component)
     {
         if (!Yii::$app->isDbAvailable) { return $component; }

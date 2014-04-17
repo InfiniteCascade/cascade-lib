@@ -20,11 +20,17 @@ class Collector extends \infinite\base\collector\Module
     public $producedWidgets = [];
     public $lastBuildId;
 
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorItemClass()
     {
         return '\cascade\components\web\widgets\Item';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getModulePrefix()
     {
         return 'Widget';

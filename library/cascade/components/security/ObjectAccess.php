@@ -18,6 +18,9 @@ class ObjectAccess extends \infinite\security\ObjectAccess
 {
     public $specialAuthorities = ['Group'];
 
+    /**
+    * @inheritdoc
+    **/
     public function determineVisibility()
     {
         $groupClass = Yii::$app->classes['Group'];
@@ -53,11 +56,17 @@ class ObjectAccess extends \infinite\security\ObjectAccess
         }
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getRoleHelpText($roleItem)
     {
         return $this->object->objectType->getRoleHelpText($roleItem, $this->object);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getSpecialRequestors()
     {
         return array_merge(parent::getSpecialRequestors(), [
@@ -68,6 +77,9 @@ class ObjectAccess extends \infinite\security\ObjectAccess
         ]);
     }
 
+    /**
+    * @inheritdoc
+    **/
     protected function validateRole($role, $validationSettings)
     {
         $results = parent::validateRole($role, $validationSettings);
@@ -79,6 +91,9 @@ class ObjectAccess extends \infinite\security\ObjectAccess
         return $results;
     }
 
+    /**
+    * @inheritdoc
+    **/
     protected function fillValidationSettings($validationSettings)
     {
         if (isset($validationSettings['object'])) {

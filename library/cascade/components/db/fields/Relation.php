@@ -52,6 +52,9 @@ class Relation extends Base
         return $this->_moduleHandler;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function hasFile()
     {
         return $this->companion->dummyModel->getBehavior('Storage') !== null;
@@ -67,6 +70,9 @@ class Relation extends Base
         }
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function determineLocations()
     {
         if (!($this->modelRole === 'child' && !$this->relationship->isHasOne())

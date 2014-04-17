@@ -25,6 +25,9 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     public $dataItemClass = 'cascade\\components\\dataInterface\\connectors\\db\\DataItem';
     public $searchClass = 'cascade\\components\\dataInterface\\connectors\\db\\Search';
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         $this->on(self::EVENT_LOAD_FOREIGN_DATA_ITEMS, [$this, 'loadForeignDataItems']);

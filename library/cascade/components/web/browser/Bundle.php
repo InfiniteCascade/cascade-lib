@@ -15,6 +15,9 @@ namespace cascade\components\web\browser;
 class Bundle extends \infinite\web\browser\Bundle
 {
     public $itemClass = 'cascade\\components\\web\\browser\\Item';
+    /**
+    * @inheritdoc
+    **/
     public function getHandlers()
     {
         return [

@@ -72,6 +72,9 @@ class Generator extends \yii\gii\Generator
     public $parents = '';
     public $section;
 
+    /**
+    * @inheritdoc
+    **/
     public function __construct()
     {
         if (is_null($this->migrationTimestamp)) {

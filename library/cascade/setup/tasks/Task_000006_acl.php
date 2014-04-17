@@ -14,6 +14,9 @@ namespace cascade\setup\tasks;
 **/
 class Task_000006_acl extends AclTask
 {
+    /**
+    * @inheritdoc
+    **/
     public function getBaseRules()
     {
         return [

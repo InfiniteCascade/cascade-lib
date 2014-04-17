@@ -20,6 +20,9 @@ class DataItem extends \cascade\components\dataInterface\DataItem
     protected $_isLoadingForeignObject = false;
     protected $_isLoadingLocalObject = false;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         $this->on(self::EVENT_LOAD_FOREIGN_OBJECT, [$this, 'loadForeignObject']);
@@ -27,6 +30,9 @@ class DataItem extends \cascade\components\dataInterface\DataItem
         parent::init();
     }
 
+    /**
+    * @inheritdoc
+    **/
     protected function handleForeign($baseAttributes = [])
     {
         if ($this->ignoreForeignObject) {
@@ -94,6 +100,9 @@ class DataItem extends \cascade\components\dataInterface\DataItem
         }
     }
 
+    /**
+    * @inheritdoc
+    **/
     protected function handleLocal($baseAttributes = [])
     {
         if ($this->ignoreLocalObject) {

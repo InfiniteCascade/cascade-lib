@@ -32,6 +32,9 @@ class Segment extends FormObject
     protected $_grid;
     protected $_fields;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();

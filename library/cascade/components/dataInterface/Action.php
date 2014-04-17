@@ -30,6 +30,9 @@ class Action extends \infinite\base\Object
     protected $_progressRemaining;
     protected $_progressPercentage;
 
+    /**
+    * @inheritdoc
+    **/
     public function __construct(Item $interface = null, $resumeLog = null)
     {
         $this->_interface = $interface;

@@ -16,16 +16,25 @@ class Collector extends \infinite\base\collector\Module
 {
     protected $_initialItems = [];
 
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorItemClass()
     {
         return 'cascade\\components\\storageHandlers\\Item';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getModulePrefix()
     {
         return 'Storage';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getInitialItems()
     {
         return $this->_initialItems;

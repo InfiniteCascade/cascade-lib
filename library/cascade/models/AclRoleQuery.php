@@ -17,6 +17,9 @@ use infinite\db\ActiveQuery;
 **/
 class AclRoleQuery extends ActiveQuery
 {
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();

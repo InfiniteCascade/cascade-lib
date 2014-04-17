@@ -21,11 +21,17 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     public $version = 1;
     public $priority = 1000; //lower is better
 
+    /**
+    * @inheritdoc
+    **/
     public function getModuleType()
     {
         return 'Section';
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getCollectorName()
     {
         return 'sections';
@@ -36,6 +42,9 @@ class Module extends \cascade\components\base\CollectorModule implements Section
         $this->_title = $value;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getCollectedObject(BaseItem $item)
     {
         $widget = $this->widget;

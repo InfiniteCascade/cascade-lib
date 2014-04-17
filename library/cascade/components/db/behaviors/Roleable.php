@@ -14,6 +14,9 @@ namespace cascade\components\db\behaviors;
 **/
 class Roleable extends \infinite\db\behaviors\Roleable
 {
+    /**
+    * @inheritdoc
+    **/
     public function determineAccessLevel($role, $aro = null)
     {
         if (!empty($this->owner->objectType)) {

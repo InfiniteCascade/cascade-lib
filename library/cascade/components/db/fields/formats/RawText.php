@@ -14,6 +14,9 @@ namespace cascade\components\db\fields\formats;
 **/
 class RawText extends Base
 {
+    /**
+    * @inheritdoc
+    **/
     public function get()
     {
         return $this->_field->value;

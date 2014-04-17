@@ -14,6 +14,9 @@ namespace cascade\components\web\themes;
 **/
 class Exception extends \infinite\base\exceptions\Exception
 {
+    /**
+    * @inheritdoc
+    **/
     public function getName()
     {
         return 'Theme';

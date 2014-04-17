@@ -23,6 +23,9 @@ class Item extends \infinite\base\collector\Item
     protected $_checked;
     protected $_init = false;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();
@@ -30,6 +33,9 @@ class Item extends \infinite\base\collector\Item
         $this->distributeRelationships();
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function setObject($object)
     {
         parent::setObject($object);

@@ -21,6 +21,9 @@ class FileStorage extends Widget
 {
     public $item;
 
+    /**
+    * @inheritdoc
+    **/
     public function generateContent()
     {
         $renderedStorageEngines = [];

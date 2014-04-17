@@ -16,6 +16,9 @@ use infinite\setup\Exception;
 **/
 abstract class AclTask extends \infinite\setup\Task
 {
+    /**
+    * @inheritdoc
+    **/
     public function getTitle()
     {
         return 'ACL';
@@ -27,6 +30,9 @@ abstract class AclTask extends \infinite\setup\Task
 
     abstract public function getBaseRules();
 
+    /**
+    * @inheritdoc
+    **/
     public function test()
     {
         foreach ($this->baseAcas as $aca) {
@@ -66,6 +72,9 @@ abstract class AclTask extends \infinite\setup\Task
 
         return true;
     }
+    /**
+    * @inheritdoc
+    **/
     public function run()
     {
         foreach ($this->baseRules as $rule) {
@@ -101,6 +110,9 @@ abstract class AclTask extends \infinite\setup\Task
 
         return true;
     }
+    /**
+    * @inheritdoc
+    **/
     public function getFields()
     {
         return false;

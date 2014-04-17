@@ -33,6 +33,9 @@ use yii\filters\VerbFilter;
 **/
 class ObjectController extends Controller
 {
+    /**
+    * @inheritdoc
+    **/
     public function behaviors()
     {
         return [
@@ -71,6 +74,9 @@ class ObjectController extends Controller
         ];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function actions()
     {
         return [

@@ -22,6 +22,9 @@ abstract class WidgetArea extends BaseWidget
     public $parentWidget;
     public $defaultDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\AreaDecorator';
 
+    /**
+    * @inheritdoc
+    **/
     public function generate()
     {
         Yii::beginProfile(get_called_class() .':'. __FUNCTION__);

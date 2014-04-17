@@ -23,6 +23,9 @@ class Section extends \cascade\components\web\widgets\Widget
     public $defaultWidgetDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\PanelDecorator';
     public $section;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();
@@ -58,6 +61,9 @@ class Section extends \cascade\components\web\widgets\Widget
         ];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function generateContent()
     {
         $items = [];

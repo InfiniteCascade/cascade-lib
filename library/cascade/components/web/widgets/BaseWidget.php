@@ -64,6 +64,9 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
         return $this->_decorator = $this->attachBehavior('__decorator', ['class' => $decorator]);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function behaviors()
     {
         return [
@@ -78,6 +81,9 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
         echo $this->generate();
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function run()
     {
         echo $this->generate();

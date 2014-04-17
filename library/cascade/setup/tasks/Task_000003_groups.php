@@ -17,6 +17,9 @@ use cascade\models\Relation;
 **/
 class Task_000003_groups extends \infinite\setup\Task
 {
+    /**
+    * @inheritdoc
+    **/
     public function getTitle()
     {
         return 'Groups';
@@ -26,11 +29,17 @@ class Task_000003_groups extends \infinite\setup\Task
         return ['Top' => ['Users' => ['Administrators' => ['Super Administrators']], 'Public']];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function test()
     {
         return Group::find()->disableAccessCheck()->where(['system' => 'top'])->count() > 0;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function run()
     {
         $groups = $this->baseGroups;

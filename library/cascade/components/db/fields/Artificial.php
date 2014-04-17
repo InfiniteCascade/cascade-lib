@@ -20,16 +20,25 @@ class Artificial extends Base
     public $human = true;
     public $multiline = false;
 
+    /**
+    * @inheritdoc
+    **/
     public function getField()
     {
         return $this->fieldName;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function setFormField($value)
     {
         $this->_formField = false;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getFormField()
     {
         return false;

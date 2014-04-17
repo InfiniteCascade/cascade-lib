@@ -24,6 +24,9 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
     protected $_taxonomy_id;
     protected $_current_taxonomy_id;
 
+    /**
+    * @inheritdoc
+    **/
     public function events()
     {
         return [
@@ -32,6 +35,9 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
         ];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function safeAttributes()
     {
         return ['taxonomy_id'];

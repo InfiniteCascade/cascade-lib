@@ -16,6 +16,9 @@ class Item extends \infinite\web\browser\Item
 {
     public $objectType = false;
 
+    /**
+    * @inheritdoc
+    **/
     public function package()
     {
         return parent::package() + [

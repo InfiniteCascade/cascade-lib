@@ -30,6 +30,9 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         return $this->primaryKey;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function events()
     {
         return [
@@ -40,6 +43,9 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         ];
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function safeAttributes()
     {
         return ['storageEngine', 'storage'];

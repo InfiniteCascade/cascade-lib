@@ -22,6 +22,9 @@ class Request extends \infinite\web\Request
     protected $_object;
     protected $_previousObject;
 
+    /**
+    * @inheritdoc
+    **/
     public function init()
     {
         parent::init();

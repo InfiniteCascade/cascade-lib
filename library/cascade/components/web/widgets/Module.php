@@ -34,6 +34,9 @@ abstract class Module extends \infinite\base\Module
         parent::__construct($id, $parent, $config);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function getModuleType()
     {
         return 'Widget';

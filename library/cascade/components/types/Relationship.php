@@ -126,6 +126,9 @@ class Relationship extends \infinite\base\Object
         $this->mergeOptions($options);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function __get($name)
     {
         if (array_key_exists($name, $this->_options)) {
@@ -137,6 +140,9 @@ class Relationship extends \infinite\base\Object
         return parent::__get($name);
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function __isset($name)
     {
         if (array_key_exists($name, $this->_options)) {

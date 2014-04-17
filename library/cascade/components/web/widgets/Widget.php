@@ -63,6 +63,9 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
         $this->_title = $title;
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function generate()
     {
         Yii::beginProfile(get_called_class() .':'. __FUNCTION__);
@@ -133,6 +136,9 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
         return $this->_widgetId = 'ic-widget-'. md5(microtime() . mt_rand());
     }
 
+    /**
+    * @inheritdoc
+    **/
     public function setWidgetId($value)
     {
         $this->_widgetId = $value;
