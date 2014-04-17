@@ -6,4 +6,5 @@
  * @package cascade
  */
 
+cascade\components\web\assetBundles\ObjectViewAsset::register($this);
 $form->output();
