@@ -10,7 +10,7 @@ namespace cascade\models;
 use Yii;
 
 /**
- * This is the model class for table "key_translation".
+ * KeyTranslation is the model class for table "key_translation".
  *
  * @property string $id
  * @property string $data_interface_id
@@ -21,6 +21,8 @@ use Yii;
  *
  * @property Registry $registry
  * @property DataInterface $dataInterface
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class KeyTranslation extends \cascade\components\db\ActiveRecord
 {

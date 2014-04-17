@@ -8,14 +8,20 @@
 namespace cascade\models;
 
 /**
- * This is the model class for table "object_taxonomy".
+ * ObjectTaxonomy is the model class for table "object_taxonomy".
  *
  * @property string $id
  * @property string $object_id
  * @property string $taxonomy_id
  *
+ * @property \yii\db\ActiveObject $taxonomy This property is read-only.
+ *
  * @property Taxonomy $taxonomy
  * @property Object $object
+ *
+ * @property \yii\db\ActiveObject $taxonomy This property is read-only.
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class ObjectTaxonomy extends \cascade\components\db\ActiveRecord
 {

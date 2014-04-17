@@ -10,6 +10,8 @@ namespace cascade\components\web;
 use yii\web\AssetBundle;
 
 /**
+ * ThemeAssetBundle [@doctodo write class description for ThemeAssetBundle]
+ *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */

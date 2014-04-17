@@ -9,7 +9,7 @@ namespace cascade\models;
 
 use cascade\components\types\ActiveRecordTrait;
 /**
- * This is the model class for table "storage".
+ * Storage is the model class for table "storage".
  *
  * @property string $id
  * @property string $storage_engine_id
@@ -23,6 +23,8 @@ use cascade\components\types\ActiveRecordTrait;
  * @property ObjectFile[] $objectFiles
  * @property Registry $registry
  * @property StorageEngineId $storageEngine
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class Storage extends \cascade\components\db\ActiveRecord
 {

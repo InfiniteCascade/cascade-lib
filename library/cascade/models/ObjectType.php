@@ -10,12 +10,14 @@ namespace cascade\models;
 use Yii;
 
 /**
- * This is the model class for table "object_type".
+ * ObjectType is the model class for table "object_type".
  *
  * @property string $name
  * @property double $system_version
  * @property string $created
  * @property string $modified
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class ObjectType extends \cascade\components\db\ActiveRecord
 {

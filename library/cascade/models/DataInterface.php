@@ -8,7 +8,7 @@
 namespace cascade\models;
 
 /**
- * This is the model class for table "data_interface".
+ * DataInterface is the model class for table "data_interface".
  *
  * @property string $id
  * @property string $name
@@ -20,6 +20,8 @@ namespace cascade\models;
  * @property Registry $id
  * @property DataInterfaceLog[] $dataInterfaceLogs
  * @property KeyTranslation[] $keyTranslations
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class DataInterface extends \cascade\components\db\ActiveRecord
 {

@@ -21,12 +21,30 @@ use yii\helpers\Inflector;
 use cascade\components\base\ModuleSetExtension;
 
 /**
+ * Generator [@doctodo write class description for Generator]
+ *
+/**
+ * Generator [@doctodo write class description for Generator]
+ *
  * This generator will generate the skeleton code needed for a
+ *
+ * @property string $migrationClassName The model namespace of the module. This property is read-only.
+ * @property string $migrationsAlias The model namespace of the module. This property is read-only.
+ * @property string $migrationsNamespace The model namespace of the module. This property is read-only.
+ * @property string $modelNamespace The model namespace of the module. This property is read-only.
+ * @property boolean $modulePath The directory that contains the module class. This property is read-only.
+ * @property string $widgetNamespace The widget namespace of the module. This property is read-only.
+ *
+ * @property string $migrationClassName The model namespace of the module. This property is read-only.
+ * @property string $migrationsAlias The model namespace of the module. This property is read-only.
+ * @property string $migrationsNamespace The model namespace of the module. This property is read-only.
+ * @property string $modelNamespace The model namespace of the module. This property is read-only.
+ * @property boolean $modulePath The directory that contains the module class. This property is read-only.
+ * @property string $widgetNamespace The widget namespace of the module. This property is read-only.
  *
  * @author Jacob Morrison <jacob@infinitecascade.com>
  * @since 1.0
  */
-
 class Generator extends \yii\gii\Generator
 {
     public $db = 'db';

@@ -11,7 +11,7 @@ use cascade\components\types\ActiveRecordTrait;
 use infinite\base\collector\CollectedObjectTrait;
 
 /**
- * This is the model class for table "taxonomy_type".
+ * TaxonomyType is the model class for table "taxonomy_type".
  *
  * @property string $id
  * @property string $name
@@ -22,6 +22,8 @@ use infinite\base\collector\CollectedObjectTrait;
  *
  * @property Taxonomy[] $taxonomies
  * @property Registry $id
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class TaxonomyType extends \cascade\components\db\ActiveRecord implements \infinite\base\collector\CollectedObjectInterface
 {

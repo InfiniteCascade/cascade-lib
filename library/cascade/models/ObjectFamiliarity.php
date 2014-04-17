@@ -12,7 +12,7 @@ use Yii;
 use infinite\data\ActiveDataProvider;
 
 /**
- * This is the model class for table "object_familiarity".
+ * ObjectFamiliarity is the model class for table "object_familiarity".
  *
  * @property string $object_id
  * @property string $user_id
@@ -29,6 +29,8 @@ use infinite\data\ActiveDataProvider;
  *
  * @property User $user
  * @property Registry $object
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
 {

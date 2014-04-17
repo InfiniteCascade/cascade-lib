@@ -15,7 +15,11 @@ use cascade\components\types\Relationship;
 use yii\base\Model;
 
 /**
+ * DeleteForm [@doctodo write class description for DeleteForm]
+ *
  * LoginForm is the model behind the login form.
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class DeleteForm extends Model
 {

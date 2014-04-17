@@ -10,7 +10,7 @@ namespace cascade\models;
 use cascade\components\types\ActiveRecordTrait;
 
 /**
- * This is the model class for table "taxonomy".
+ * Taxonomy is the model class for table "taxonomy".
  *
  * @property string $id
  * @property string $taxonomy_type_id
@@ -22,6 +22,8 @@ use cascade\components\types\ActiveRecordTrait;
  * @property RelationTaxonomy[] $relationTaxonomies
  * @property TaxonomyType $taxonomyType
  * @property Registry $id
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class Taxonomy extends \cascade\components\db\ActiveRecord
 {

@@ -11,7 +11,7 @@ use Yii;
 use cascade\components\types\ActiveRecordTrait;
 
 /**
- * This is the model class for table "storage_engine".
+ * StorageEngine is the model class for table "storage_engine".
  *
  * @property string $id
  * @property string $handler
@@ -20,6 +20,8 @@ use cascade\components\types\ActiveRecordTrait;
  * @property string $modified
  *
  * @property Registry $registry
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class StorageEngine extends \cascade\components\db\ActiveRecord
 {

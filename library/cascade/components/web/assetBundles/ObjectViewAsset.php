@@ -10,6 +10,8 @@ namespace cascade\components\web\assetBundles;
 use yii\web\AssetBundle;
 
 /**
+ * ObjectViewAsset [@doctodo write class description for ObjectViewAsset]
+ *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */

@@ -8,7 +8,7 @@
 namespace cascade\models;
 
 /**
- * This is the model class for table "meta_key".
+ * MetaKey is the model class for table "meta_key".
  *
  * @property string $id
  * @property string $name
@@ -18,6 +18,8 @@ namespace cascade\models;
  *
  * @property Meta[] $metas
  * @property Registry $id
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class MetaKey extends \cascade\components\db\ActiveRecord
 {

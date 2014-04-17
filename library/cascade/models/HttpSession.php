@@ -8,11 +8,13 @@
 namespace cascade\models;
 
 /**
- * This is the model class for table "http_session".
+ * HttpSession is the model class for table "http_session".
  *
  * @property string $id
  * @property integer $expire
  * @property string $data
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class HttpSession extends \cascade\components\db\ActiveRecord
 {

@@ -12,6 +12,8 @@ use yii\base\Model;
 
 /**
  * SearchForm is the model behind the search form.
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class SearchForm extends Model
 {

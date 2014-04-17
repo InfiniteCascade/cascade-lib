@@ -8,7 +8,7 @@
 namespace cascade\models;
 
 /**
- * This is the model class for table "relation_taxonomy".
+ * RelationTaxonomy is the model class for table "relation_taxonomy".
  *
  * @property string $id
  * @property string $relation_id
@@ -16,6 +16,8 @@ namespace cascade\models;
  *
  * @property Taxonomy $taxonomy
  * @property Relation $relation
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
  */
 class RelationTaxonomy extends \cascade\components\db\ActiveRecord
 {

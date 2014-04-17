@@ -14,6 +14,8 @@ use yii\bootstrap\Widget;
 use yii\bootstrap\BootstrapPluginAsset;
 
 /**
+ * TopNavBar [@doctodo write class description for TopNavBar]
+ *
  * NavBar renders a navbar HTML component.
  *
  * Any content enclosed between the [[begin()]] and [[end()]] calls of NavBar
