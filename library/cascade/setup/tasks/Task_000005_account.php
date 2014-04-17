@@ -10,6 +10,11 @@ namespace cascade\setup\tasks;
 use cascade\models\User;
 use cascade\modules\core\TypeAccount\models\ObjectAccount;
 
+/**
+ * Task_000005_account [@doctodo write class description for Task_000005_account]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Task_000005_account extends \infinite\setup\Task
 {
     public function getTitle()

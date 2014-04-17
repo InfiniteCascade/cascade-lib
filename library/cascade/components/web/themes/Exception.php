@@ -7,6 +7,11 @@
 
 namespace cascade\components\web\themes;
 
+/**
+ * Exception [@doctodo write class description for Exception]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Exception extends \infinite\base\exceptions\Exception
 {
     public function getName()

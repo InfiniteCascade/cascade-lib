@@ -11,6 +11,11 @@ use Yii;
 
 use infinite\helpers\Html;
 
+/**
+ * Generator [@doctodo write class description for Generator]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Generator extends \infinite\base\Object implements \infinite\web\RenderInterface
 {
     protected $_items;

@@ -7,6 +7,11 @@
 
 namespace cascade\components\db;
 
+/**
+ * ActiveRecord is the model class for table "{{%active_record}}".
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class ActiveRecord extends \infinite\db\ActiveRecord
 {
     use ActiveRecordTrait;

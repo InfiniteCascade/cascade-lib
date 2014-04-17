@@ -7,6 +7,11 @@
 
 namespace cascade\components\web\browser;
 
+/**
+ * Bundle [@doctodo write class description for Bundle]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Bundle extends \infinite\web\browser\Bundle
 {
     public $itemClass = 'cascade\\components\\web\\browser\\Item';

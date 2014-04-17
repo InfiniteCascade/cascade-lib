@@ -9,6 +9,11 @@ namespace cascade\components\db\behaviors;
 
 use Yii;
 
+/**
+ * Familiarity [@doctodo write class description for Familiarity]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Familiarity extends \infinite\db\behaviors\ActiveRecord
 {
     public $objectField = 'object_id';

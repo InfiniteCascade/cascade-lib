@@ -11,6 +11,11 @@ use Yii;
 
 use infinite\base\exceptions\Exception;
 
+/**
+ * Collector [@doctodo write class description for Collector]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Collector extends \infinite\base\collector\Module
 {
     const EVENT_AFTER_TAXONOMY_REGISTRY = 'afterTaxonomyRegistry';

@@ -14,6 +14,11 @@ use infinite\web\UploadedFile;
 use infinite\base\FileInterface;
 use infinite\base\exceptions\Exception;
 
+/**
+ * StorageBehavior [@doctodo write class description for StorageBehavior]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 {
     public $storageAttribute = 'storage_id';

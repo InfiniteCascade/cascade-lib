@@ -9,6 +9,11 @@ namespace cascade\models;
 
 use cascade\components\db\ActiveRecordTrait;
 
+/**
+ * Registry is the model class for table "registry".
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Registry extends \infinite\db\models\Registry
 {
     use ActiveRecordTrait;

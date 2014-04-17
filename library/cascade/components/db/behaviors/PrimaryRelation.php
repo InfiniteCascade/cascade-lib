@@ -11,6 +11,11 @@ use Yii;
 
 use cascade\components\types\Relationship;
 
+/**
+ * PrimaryRelation [@doctodo write class description for PrimaryRelation]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 {
     protected $_relationship;

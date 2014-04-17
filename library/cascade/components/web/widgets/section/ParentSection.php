@@ -7,6 +7,11 @@
 
 namespace cascade\components\web\widgets\section;
 
+/**
+ * ParentSection [@doctodo write class description for ParentSection]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class ParentSection extends Section
 {
     public function init()

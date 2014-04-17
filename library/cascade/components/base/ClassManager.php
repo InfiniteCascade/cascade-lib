@@ -7,6 +7,11 @@
 
 namespace cascade\components\base;
 
+/**
+ * ClassManager [@doctodo write class description for ClassManager]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class ClassManager extends \infinite\base\ClassManager
 {
     public function baseClasses()

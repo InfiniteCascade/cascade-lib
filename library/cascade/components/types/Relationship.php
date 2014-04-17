@@ -11,6 +11,11 @@ use Yii;
 
 use infinite\base\exceptions\Exception;
 
+/**
+ * Relationship [@doctodo write class description for Relationship]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Relationship extends \infinite\base\Object
 {
     const HAS_MANY = 0x01;

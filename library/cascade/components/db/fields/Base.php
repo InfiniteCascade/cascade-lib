@@ -11,6 +11,11 @@ use Yii;
 use infinite\base\exceptions\Exception;
 use cascade\components\db\fields\formats\Base as BaseFormat;
 
+/**
+ * Base [@doctodo write class description for Base]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class Base extends \infinite\base\Object
 {
     public $formFieldClass;

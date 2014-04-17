@@ -10,6 +10,11 @@ namespace cascade\components\dataInterface;
 use Yii;
 use cascade\models\DataInterface;
 
+/**
+ * DataItem [@doctodo write class description for DataItem]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class DataItem extends \infinite\base\Component
 {
     public $dataSource;

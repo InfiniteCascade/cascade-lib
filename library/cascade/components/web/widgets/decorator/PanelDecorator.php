@@ -10,6 +10,11 @@ namespace cascade\components\web\widgets\decorator;
 use infinite\helpers\Html;
 use yii\bootstrap\Nav;
 
+/**
+ * PanelDecorator [@doctodo write class description for PanelDecorator]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class PanelDecorator extends Decorator
 {
     public $panelCssClass = 'panel';

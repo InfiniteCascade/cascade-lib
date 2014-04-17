@@ -10,6 +10,11 @@ namespace cascade\components\dataInterface\connectors\db;
 use Yii;
 use yii\db\Query;
 
+/**
+ * Model [@doctodo write class description for Model]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Model extends \infinite\base\Object
 {
     public $modelName;

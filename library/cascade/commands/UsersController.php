@@ -12,6 +12,11 @@ use yii\helpers\Console;
 use cascade\models\User;
 use cascade\models\Group;
 
+/**
+ * UsersController [@doctodo write class description for UsersController]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class UsersController extends \infinite\console\Controller
 {
     public function actionIndex()

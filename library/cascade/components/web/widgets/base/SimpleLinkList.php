@@ -12,6 +12,11 @@ use yii\helpers\Url;
 
 use infinite\helpers\Html;
 
+/**
+ * SimpleLinkList [@doctodo write class description for SimpleLinkList]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class SimpleLinkList extends BaseList
 {
     public $renderPager = false;

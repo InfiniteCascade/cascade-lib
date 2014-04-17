@@ -10,6 +10,11 @@ namespace cascade\components\dataInterface;
 use cascade\models\DataInterfaceLog;
 use yii\helpers\Console;
 
+/**
+ * Action [@doctodo write class description for Action]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Action extends \infinite\base\Object
 {
     protected $_interface;

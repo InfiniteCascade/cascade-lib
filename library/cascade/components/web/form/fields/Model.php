@@ -10,6 +10,11 @@ namespace cascade\components\web\form\fields;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\Html;
 
+/**
+ * Model [@doctodo write class description for Model]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Model extends Base
 {
     public $fileStorageWidgetClass = 'cascade\\components\\web\\widgets\\form\\FileStorage';

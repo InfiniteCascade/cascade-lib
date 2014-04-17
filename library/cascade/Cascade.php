@@ -7,6 +7,11 @@
 
 namespace cascade;
 
+/**
+ * Cascade [@doctodo write class description for Cascade]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Cascade implements \yii\base\BootstrapInterface
 {
     /**

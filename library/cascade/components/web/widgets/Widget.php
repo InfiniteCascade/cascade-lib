@@ -11,6 +11,11 @@ use Yii;
 
 use infinite\base\collector\CollectedObjectTrait;
 
+/**
+ * Widget [@doctodo write class description for Widget]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterface, \infinite\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;

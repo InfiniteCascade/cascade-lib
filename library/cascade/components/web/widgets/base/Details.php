@@ -12,6 +12,11 @@ use Yii;
 use infinite\helpers\Html;
 use cascade\components\web\widgets\Widget;
 
+/**
+ * Details [@doctodo write class description for Details]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Details extends Widget implements ListWidgetInterface
 {
     use ListWidgetTrait, ObjectWidgetTrait {

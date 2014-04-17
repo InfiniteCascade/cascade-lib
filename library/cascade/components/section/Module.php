@@ -9,6 +9,11 @@ namespace cascade\components\section;
 
 use infinite\base\collector\Item as BaseItem;
 
+/**
+ * Module [@doctodo write class description for Module]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Module extends \cascade\components\base\CollectorModule implements SectionInterface
 {
     use SectionTrait;

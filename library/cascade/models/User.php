@@ -15,6 +15,11 @@ use cascade\components\types\ActiveRecordTrait as TypesActiveRecordTrait;
 use yii\helpers\Security;
 use infinite\base\exceptions\Exception;
 
+/**
+ * User is the model class for table "user".
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class User extends \infinite\db\models\User
 {
     protected $_individual;

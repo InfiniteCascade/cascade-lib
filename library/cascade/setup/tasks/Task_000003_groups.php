@@ -10,6 +10,11 @@ namespace cascade\setup\tasks;
 use cascade\models\Group;
 use cascade\models\Relation;
 
+/**
+ * Task_000003_groups [@doctodo write class description for Task_000003_groups]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Task_000003_groups extends \infinite\setup\Task
 {
     public function getTitle()

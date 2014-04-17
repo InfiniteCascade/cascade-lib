@@ -11,6 +11,11 @@ use Yii;
 
 use infinite\base\collector\CollectedObjectTrait;
 
+/**
+ * Item [@doctodo write class description for Item]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Item extends \infinite\base\collector\Item implements \infinite\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;

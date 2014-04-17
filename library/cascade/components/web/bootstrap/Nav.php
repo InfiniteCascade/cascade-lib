@@ -8,6 +8,11 @@
 namespace cascade\components\web\bootstrap;
 
 use Yii;
+/**
+ * Nav [@doctodo write class description for Nav]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Nav extends \yii\bootstrap\Nav
 {
     public function renderItem($item)

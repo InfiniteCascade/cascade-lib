@@ -13,6 +13,11 @@ use infinite\base\exceptions\Exception;
 use cascade\modules\core\TypeAccount\models\ObjectAccount;
 use infinite\db\Query;
 
+/**
+ * Gatekeeper [@doctodo write class description for Gatekeeper]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Gatekeeper extends \infinite\security\Gatekeeper
 {
     public $objectAccessClass = 'cascade\\components\\security\\ObjectAccess';

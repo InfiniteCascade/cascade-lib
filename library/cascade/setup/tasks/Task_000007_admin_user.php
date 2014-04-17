@@ -11,6 +11,11 @@ use cascade\models\Group;
 use cascade\models\User;
 use infinite\base\exceptions\Exception;
 
+/**
+ * Task_000007_admin_user [@doctodo write class description for Task_000007_admin_user]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Task_000007_admin_user extends \infinite\setup\Task
 {
     public function getTitle()

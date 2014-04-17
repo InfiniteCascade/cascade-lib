@@ -10,6 +10,11 @@ namespace cascade\components\db\behaviors;
 use Yii;
 use infinite\helpers\ArrayHelper;
 
+/**
+ * Taxonomy [@doctodo write class description for Taxonomy]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Taxonomy extends \infinite\db\behaviors\ActiveRecord
 {
     public $viaModelClass = 'ObjectTaxonomy';

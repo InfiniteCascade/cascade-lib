@@ -9,6 +9,11 @@ namespace cascade\models;
 
 use cascade\components\db\ActiveRecordTrait;
 
+/**
+ * Acl is the model class for table "acl".
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Acl extends \infinite\db\models\Acl
 {
     use ActiveRecordTrait;

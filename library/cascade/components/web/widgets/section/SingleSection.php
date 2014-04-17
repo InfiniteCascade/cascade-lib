@@ -11,6 +11,11 @@ use Yii;
 
 use infinite\helpers\Html;
 
+/**
+ * SingleSection [@doctodo write class description for SingleSection]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class SingleSection extends Section
 {
     public $section;

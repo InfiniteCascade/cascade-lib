@@ -16,6 +16,11 @@ use infinite\web\Controller;
 use cascade\models\LoginForm;
 use cascade\models\Registry;
 
+/**
+ * AppController [@doctodo write class description for AppController]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class AppController extends Controller
 {
     public function behaviors()

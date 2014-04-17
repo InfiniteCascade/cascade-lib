@@ -7,6 +7,11 @@
 
 namespace cascade\components\web\form\fields;
 
+/**
+ * Cell [@doctodo write class description for Cell]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Cell extends \infinite\web\grid\Cell
 {
     public $baseSize = 'tablet';

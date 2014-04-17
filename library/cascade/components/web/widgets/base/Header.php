@@ -12,6 +12,11 @@ use Yii;
 use infinite\helpers\Html;
 use cascade\components\web\widgets\Widget;
 
+/**
+ * Header [@doctodo write class description for Header]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Header extends Widget
 {
     public function generateContent()

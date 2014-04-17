@@ -9,6 +9,11 @@ namespace cascade\components\db\behaviors;
 
 use Yii;
 
+/**
+ * ActiveAccess [@doctodo write class description for ActiveAccess]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class ActiveAccess extends \infinite\db\behaviors\ActiveAccess
 {
     public function can($aca, $accessingObject = null, $relatedObject = false)

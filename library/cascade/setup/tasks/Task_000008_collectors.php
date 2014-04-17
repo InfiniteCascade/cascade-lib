@@ -7,6 +7,11 @@
 
 namespace cascade\setup\tasks;
 
+/**
+ * Task_000008_collectors [@doctodo write class description for Task_000008_collectors]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Task_000008_collectors extends \infinite\setup\Task
 {
     public function getTitle()

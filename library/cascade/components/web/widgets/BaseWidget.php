@@ -16,6 +16,11 @@ use infinite\base\ComponentTrait;
 use infinite\web\grid\CellContentTrait;
 use infinite\web\RenderTrait;
 
+/**
+ * BaseWidget [@doctodo write class description for BaseWidget]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class BaseWidget extends \yii\bootstrap\Widget
 {
     use ObjectTrait;

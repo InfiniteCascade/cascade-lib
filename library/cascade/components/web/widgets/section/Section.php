@@ -12,6 +12,11 @@ use Yii;
 use infinite\helpers\ArrayHelper;
 use infinite\helpers\Html;
 
+/**
+ * Section [@doctodo write class description for Section]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Section extends \cascade\components\web\widgets\Widget
 {
     public $gridClass = 'infinite\\web\\grid\\Grid';

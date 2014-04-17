@@ -10,6 +10,11 @@ namespace cascade\components\web\widgets;
 use Yii;
 use cascade\components\web\widgets\section\Section;
 
+/**
+ * Collector [@doctodo write class description for Collector]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Collector extends \infinite\base\collector\Module
 {
     public $producedWidgets = [];

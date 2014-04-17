@@ -13,6 +13,11 @@ use cascade\web\widgets\grid\columns\Data as DataColumn;
 
 use infinite\base\exceptions\Exception;
 
+/**
+ * View [@doctodo write class description for View]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class View extends \yii\base\Widget
 {
     public $widget;

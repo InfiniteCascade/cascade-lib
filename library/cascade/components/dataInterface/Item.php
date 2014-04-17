@@ -10,6 +10,11 @@ namespace cascade\components\dataInterface;
 use infinite\base\exceptions\Exception;
 use cascade\models\DataInterface;
 
+/**
+ * Item [@doctodo write class description for Item]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Item extends \infinite\base\collector\Item
 {
     public $error;

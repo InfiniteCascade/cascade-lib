@@ -7,6 +7,11 @@
 
 namespace cascade\modules\TypeUser\widgets;
 
+/**
+ * SimpleLinkList [@doctodo write class description for SimpleLinkList]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class SimpleLinkList extends \cascade\components\web\widgets\base\SimpleLinkList
 {
 }

@@ -14,6 +14,11 @@ use cascade\models\KeyTranslation;
 
 use infinite\helpers\ArrayHelper;
 
+/**
+ * DataSource [@doctodo write class description for DataSource]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class DataSource extends \cascade\components\dataInterface\DataSource
 {
     public $fieldMapClass = 'cascade\\components\\dataInterface\\connectors\\db\\FieldMap';

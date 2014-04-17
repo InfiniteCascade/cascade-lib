@@ -9,6 +9,11 @@ namespace cascade\setup\tasks;
 
 use infinite\setup\Exception;
 
+/**
+ * AclTask [@doctodo write class description for AclTask]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class AclTask extends \infinite\setup\Task
 {
     public function getTitle()

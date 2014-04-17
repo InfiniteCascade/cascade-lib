@@ -7,6 +7,11 @@
 
 namespace cascade\components\db\fields;
 
+/**
+ * Relation [@doctodo write class description for Relation]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Relation extends Base
 {
     public $formFieldClass = 'cascade\components\web\form\fields\Relation';

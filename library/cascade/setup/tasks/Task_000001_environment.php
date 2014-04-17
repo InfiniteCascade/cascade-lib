@@ -10,6 +10,11 @@ namespace cascade\setup\tasks;
 use infinite\setup\Exception;
 use yii\helpers\Inflector;
 
+/**
+ * Task_000001_environment [@doctodo write class description for Task_000001_environment]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Task_000001_environment extends \infinite\setup\Task
 {
     public function getTitle()

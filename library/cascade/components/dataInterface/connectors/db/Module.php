@@ -13,6 +13,11 @@ use infinite\base\exceptions\Exception;
 use cascade\components\dataInterface\Action;
 use cascade\components\dataInterface\Module as BaseModule;
 
+/**
+ * Module [@doctodo write class description for Module]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class Module extends BaseModule
 {
     public $dataSourceClass = 'cascade\\components\\dataInterface\\connectors\\db\\DataSource';

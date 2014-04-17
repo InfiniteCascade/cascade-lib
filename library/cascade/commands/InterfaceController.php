@@ -16,6 +16,11 @@ use infinite\helpers\ArrayHelper;
 
 ini_set('memory_limit', -1);
 
+/**
+ * InterfaceController [@doctodo write class description for InterfaceController]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class InterfaceController extends \infinite\console\Controller
 {
     protected $_interface;

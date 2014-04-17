@@ -9,6 +9,11 @@ namespace cascade\components\web\browser;
 
 use Yii;
 
+/**
+ * Response [@doctodo write class description for Response]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Response extends \infinite\web\browser\Response
 {
     public $bundleClass = 'cascade\\components\\web\\browser\\Bundle';

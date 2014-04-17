@@ -9,6 +9,11 @@ namespace cascade\components\web\themes;
 
 use Yii;
 
+/**
+ * Collector [@doctodo write class description for Collector]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Collector extends \infinite\base\collector\Module
 {
     public $initial = [];

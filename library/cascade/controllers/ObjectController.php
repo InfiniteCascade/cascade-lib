@@ -26,6 +26,11 @@ use infinite\base\exceptions\HttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
+/**
+ * ObjectController [@doctodo write class description for ObjectController]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class ObjectController extends Controller
 {
     public function behaviors()

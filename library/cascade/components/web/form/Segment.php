@@ -14,6 +14,11 @@ use cascade\components\db\fields\Model as ModelField;
 use infinite\web\grid\Grid;
 use infinite\helpers\Html;
 
+/**
+ * Segment [@doctodo write class description for Segment]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Segment extends FormObject
 {
     public $cellClass = 'cascade\components\web\form\fields\Cell';

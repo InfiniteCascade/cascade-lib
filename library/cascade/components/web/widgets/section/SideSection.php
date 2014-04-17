@@ -7,6 +7,11 @@
 
 namespace cascade\components\web\widgets\section;
 
+/**
+ * SideSection [@doctodo write class description for SideSection]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class SideSection extends Section
 {
     public function init()

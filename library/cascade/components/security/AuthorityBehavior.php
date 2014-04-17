@@ -11,6 +11,11 @@ use cascade\components\types\Module as TypeModule;
 use cascade\components\types\RelationshipEvent;
 use infinite\caching\Cacher;
 
+/**
+ * AuthorityBehavior [@doctodo write class description for AuthorityBehavior]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class AuthorityBehavior extends \infinite\security\AuthorityBehavior
 {
     public function events()

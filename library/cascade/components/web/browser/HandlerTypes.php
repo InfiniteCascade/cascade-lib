@@ -12,6 +12,11 @@ use yii\base\InvalidConfigException;
 use cascade\components\types\Relationship;
 use infinite\helpers\ArrayHelper;
 
+/**
+ * HandlerTypes [@doctodo write class description for HandlerTypes]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class HandlerTypes extends \infinite\web\browser\Handler
 {
     public $bundleClass = 'cascade\\components\\web\\browser\\Bundle';

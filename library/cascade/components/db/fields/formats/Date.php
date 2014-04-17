@@ -9,6 +9,11 @@ namespace cascade\components\db\fields\formats;
 
 use Yii;
 
+/**
+ * Date [@doctodo write class description for Date]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Date extends Base
 {
     public function get()

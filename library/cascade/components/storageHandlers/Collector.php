@@ -7,6 +7,11 @@
 
 namespace cascade\components\storageHandlers;
 
+/**
+ * Collector [@doctodo write class description for Collector]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Collector extends \infinite\base\collector\Module
 {
     protected $_initialItems = [];

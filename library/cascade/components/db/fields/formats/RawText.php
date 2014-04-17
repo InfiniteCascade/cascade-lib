@@ -7,6 +7,11 @@
 
 namespace cascade\components\db\fields\formats;
 
+/**
+ * RawText [@doctodo write class description for RawText]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class RawText extends Base
 {
     public function get()

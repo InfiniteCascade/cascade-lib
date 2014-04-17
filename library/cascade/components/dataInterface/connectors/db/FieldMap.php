@@ -7,6 +7,11 @@
 
 namespace cascade\components\dataInterface\connectors\db;
 
+/**
+ * FieldMap [@doctodo write class description for FieldMap]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class FieldMap extends \cascade\components\dataInterface\FieldMap
 {
 }

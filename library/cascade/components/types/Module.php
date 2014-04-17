@@ -22,6 +22,11 @@ use infinite\security\Access;
 
 use yii\base\Controller;
 
+/**
+ * Module [@doctodo write class description for Module]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class Module extends \cascade\components\base\CollectorModule
 {
     protected $_title;

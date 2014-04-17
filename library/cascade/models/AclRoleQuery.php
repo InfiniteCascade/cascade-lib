@@ -10,6 +10,11 @@ namespace cascade\models;
 use infinite\db\Query;
 use infinite\db\ActiveQuery;
 
+/**
+ * AclRoleQuery [@doctodo write class description for AclRoleQuery]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class AclRoleQuery extends ActiveQuery
 {
     public function init()

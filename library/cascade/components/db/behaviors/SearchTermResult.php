@@ -9,6 +9,11 @@ namespace cascade\components\db\behaviors;
 
 use yii\helpers\Url;
 
+/**
+ * SearchTermResult [@doctodo write class description for SearchTermResult]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 {
     protected $_icon;

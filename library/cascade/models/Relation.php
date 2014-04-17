@@ -16,6 +16,11 @@ use cascade\components\types\Relationship;
 use cascade\components\types\RelationshipEvent;
 use infinite\caching\Cacher;
 
+/**
+ * Relation is the model class for table "relation".
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Relation extends \infinite\db\models\Relation
 {
     use ActiveRecordTrait;

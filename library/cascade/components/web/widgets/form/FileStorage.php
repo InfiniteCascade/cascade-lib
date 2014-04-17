@@ -12,6 +12,11 @@ use infinite\base\exceptions\Exception;
 use cascade\components\web\widgets\Widget;
 use cascade\models\StorageEngine;
 
+/**
+ * FileStorage [@doctodo write class description for FileStorage]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class FileStorage extends Widget
 {
     public $item;

@@ -10,6 +10,11 @@ namespace cascade\components\dataInterface\connectors\db;
 use cascade\components\dataInterface\RecursionException;
 use cascade\components\dataInterface\MissingItemException;
 
+/**
+ * DataItem [@doctodo write class description for DataItem]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class DataItem extends \cascade\components\dataInterface\DataItem
 {
     protected $_isLoadingForeignObject = false;

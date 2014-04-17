@@ -7,6 +7,11 @@
 
 namespace cascade\modules\WidgetWatching\widgets;
 
+/**
+ * Content [@doctodo write class description for Content]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Content extends \cascade\components\web\widgets\Widget
 {
     protected $_title = 'Watching';

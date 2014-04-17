@@ -7,6 +7,11 @@
 
 namespace cascade\modules\ThemeCascade\components;
 
+/**
+ * IdentityAsset [@doctodo write class description for IdentityAsset]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class IdentityAsset extends \cascade\components\web\themes\IdentityAsset
 {
     public $sourcePath = '@cascade/modules/ThemeCascade/assets';

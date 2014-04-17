@@ -11,6 +11,11 @@ use Yii;
 use infinite\base\exceptions\Exception;
 use infinite\base\collector\CollectedObjectTrait;
 
+/**
+ * CollectorModule [@doctodo write class description for CollectorModule]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class CollectorModule extends \infinite\base\Module implements \infinite\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;

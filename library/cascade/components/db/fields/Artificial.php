@@ -7,6 +7,11 @@
 
 namespace cascade\components\db\fields;
 
+/**
+ * Artificial [@doctodo write class description for Artificial]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Artificial extends Base
 {
     public $formFieldClass = false;

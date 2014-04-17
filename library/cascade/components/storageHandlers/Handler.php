@@ -12,6 +12,11 @@ use infinite\base\collector\CollectedObjectTrait;
 use cascade\models\Storage;
 use cascade\models\StorageEngine;
 
+/**
+ * Handler [@doctodo write class description for Handler]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class Handler extends \infinite\base\Component implements \infinite\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;

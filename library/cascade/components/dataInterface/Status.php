@@ -7,6 +7,11 @@
 
 namespace cascade\components\dataInterface;
 
+/**
+ * Status [@doctodo write class description for Status]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Status extends \infinite\base\status\Status
 {
     protected $_action;

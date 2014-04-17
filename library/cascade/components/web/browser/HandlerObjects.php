@@ -9,6 +9,11 @@ namespace cascade\components\web\browser;
 
 use Yii;
 
+/**
+ * HandlerObjects [@doctodo write class description for HandlerObjects]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class HandlerObjects extends \infinite\web\browser\Handler
 {
     public $bundleClass = 'cascade\\components\\web\\browser\\Bundle';

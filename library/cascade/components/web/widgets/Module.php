@@ -11,6 +11,11 @@ use Yii;
 
 use infinite\base\exceptions\Exception;
 
+/**
+ * Module [@doctodo write class description for Module]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class Module extends \infinite\base\Module
 {
     public $title;

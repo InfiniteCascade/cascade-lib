@@ -9,6 +9,11 @@ namespace cascade\modules\TypeUser;
 
 use Yii;
 
+/**
+ * Module [@doctodo write class description for Module]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Module extends \cascade\components\types\Module
 {
     protected $_title = 'User';

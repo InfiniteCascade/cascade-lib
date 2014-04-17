@@ -10,6 +10,11 @@ namespace cascade\components\dataInterface;
 use Yii;
 use cascade\components\db\ActiveRecord;
 
+/**
+ * DataSource [@doctodo write class description for DataSource]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class DataSource extends \infinite\base\Component
 {
     const EVENT_LOAD_FOREIGN_DATA_ITEMS = 0x01;

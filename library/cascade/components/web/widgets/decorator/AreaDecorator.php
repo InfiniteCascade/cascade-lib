@@ -9,6 +9,11 @@ namespace cascade\components\web\widgets\decorator;
 
 use infinite\helpers\Html;
 
+/**
+ * AreaDecorator [@doctodo write class description for AreaDecorator]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class AreaDecorator extends Decorator
 {
     public $panelCssClass = 'panel';

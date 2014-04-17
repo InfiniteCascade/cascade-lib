@@ -7,6 +7,11 @@
 
 namespace cascade\components\db\behaviors;
 
+/**
+ * Ownable [@doctodo write class description for Ownable]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Ownable extends \infinite\db\behaviors\Ownable
 {
     public function determineOwner()

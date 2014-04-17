@@ -11,6 +11,11 @@ use Yii;
 
 use cascade\components\web\widgets\BaseWidget;
 
+/**
+ * WidgetArea [@doctodo write class description for WidgetArea]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 abstract class WidgetArea extends BaseWidget
 {
     public $location = 'right';

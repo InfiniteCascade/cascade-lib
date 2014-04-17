@@ -9,6 +9,11 @@ namespace cascade\components\web\form\fields;
 
 use infinite\helpers\ArrayHelper;
 
+/**
+ * Taxonomy [@doctodo write class description for Taxonomy]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Taxonomy extends Model
 {
     public function getFieldConfig()

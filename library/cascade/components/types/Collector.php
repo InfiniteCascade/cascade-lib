@@ -12,6 +12,11 @@ use Yii;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\ArrayHelper;
 
+/**
+ * Collector [@doctodo write class description for Collector]
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+**/
 class Collector extends \infinite\base\collector\Module
 {
     protected $_tableRegistry;
