@@ -37,7 +37,6 @@ class AppAsset extends AssetBundle
         'js/cascade.objectSearch.js',
         'js/cascade.objectBrowse.js',
         'js/cascade.objectSelector.js',
-        'js/cascade.relationship.js',
         'js/cascade.infiniteFilter.js'
     ];
     /**

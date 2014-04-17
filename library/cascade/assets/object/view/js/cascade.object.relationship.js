@@ -119,6 +119,7 @@ $preparer.add(function(context) {
 				$selector.hideSelector();
 				$this.val(datum.id);
 				$.debug($this.relationshipElements);
+				$this.relationshipElements.relatedSelectedObjectTarget.show();
 				$this.relationshipElements.relatedSelectedObjectTarget.html('');
 				$this.relationshipElements.relatedSelectedObjectTarget.append($('<div />', {'class': 'relationship-object-descriptor'}).html(datum.descriptor));
 				if (datum.subdescriptor !== undefined) {
@@ -129,7 +130,7 @@ $preparer.add(function(context) {
 
 			$this.resetRelationship = function(datum) {
 				$this.val('');
-				$this.relationshipElements.selectedPreview.hide();
+				$this.relationshipElements.relatedSelectedObjectTarget.hide();
 				$this.showSelector();
 			};
 

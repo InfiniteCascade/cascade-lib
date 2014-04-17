@@ -83,11 +83,24 @@ class HandlerObjects extends \infinite\web\browser\Handler
         }
         $items = [];
         foreach ($dataSource->all() as $object) {
+            $subdescriptor = [];
+            foreach ($object->subdescriptor as $subValue) {
+                if (!empty($subValue)) {
+                    if (is_array($subValue) && isset($subValue['plain'])) {
+                        $subdescriptor[] = $subValue['plain'];
+                    } elseif (is_array($subValue) && isset($subValue['rich'])) {
+                        $subdescriptor[] = strip_tags($subValue['rich']);
+                    } elseif (is_string($subValue) || is_numeric($subValue)) {
+                        $subdescriptor[] = strip_tags($subValue);
+                    }
+                }
+            }
             $items[] = [
                 'type' => 'object',
                 'objectType' => $object->objectType->systemId,
                 'id' => $object->primaryKey,
                 'descriptor' => $object->descriptor,
+                'subdescriptor' => isset($subdescriptor[0]) ? $subdescriptor[0] : null,
                 'hasChildren' => !empty($object->objectTypeItem->children),
                 'isSelectable' => $instructions['modules'] === false || in_array($object->objectType->systemId, $instructions['modules'])
             ];

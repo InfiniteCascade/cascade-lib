@@ -24,13 +24,16 @@ class ObjectViewAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $css = [];
+    public $css = [
+        'css/relationship.css'
+    ];
     /**
      * @inheritdoc
      */
     public $js = [
         'js/cascade.object.view.js',
         'js/cascade.object.access.js',
+        'js/cascade.object.relationship.js',
     ];
     /**
      * @inheritdoc
