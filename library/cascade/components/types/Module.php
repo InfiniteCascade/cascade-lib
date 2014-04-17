@@ -26,7 +26,7 @@ use yii\base\Controller;
  * Module [@doctodo write class description for Module]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class Module extends \cascade\components\base\CollectorModule
 {
     /**
@@ -133,7 +133,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         if (isset($this->modelNamespace)) {
@@ -145,7 +145,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getCollectorName()
     {
         return 'types';
@@ -169,7 +169,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
     * @inheritdoc
-    **/
+     */
     public function onAfterInit($event)
     {
         if (!isset(Yii::$app->collectors['taxonomies']) || !Yii::$app->collectors['taxonomies']->registerMultiple($this, $this->taxonomies())) { throw new Exception('Could not register taxonmies for '. $this->systemId .'!'); }
@@ -364,7 +364,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getModuleType()
     {
         return 'Type';

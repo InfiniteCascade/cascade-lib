@@ -11,7 +11,7 @@ namespace cascade\modules\WidgetWatching\widgets;
  * Content [@doctodo write class description for Content]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Content extends \cascade\components\web\widgets\Widget
 {
     /**
@@ -38,7 +38,7 @@ class Content extends \cascade\components\web\widgets\Widget
 
     /**
     * @inheritdoc
-    **/
+     */
     public function generateContent()
     {
         return 'noo<br ><br><br><br>hey';

@@ -13,7 +13,7 @@ use cascade\components\db\ActiveRecordTrait;
  * AclRole is the model class for table "acl_role".
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class AclRole extends \infinite\db\models\AclRole
 {
     use ActiveRecordTrait;

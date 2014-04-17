@@ -11,7 +11,7 @@ namespace cascade\components\db\behaviors\auditable;
  * DeleteEvent [@doctodo write class description for DeleteEvent]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class DeleteEvent extends \infinite\db\behaviors\auditable\DeleteEvent
 {
     /**
@@ -21,7 +21,7 @@ class DeleteEvent extends \infinite\db\behaviors\auditable\DeleteEvent
 
     /**
     * @inheritdoc
-    **/
+     */
     public function setDirectObject($object)
     {
         parent::setDirectObject($object);

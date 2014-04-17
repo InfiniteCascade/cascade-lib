@@ -11,7 +11,7 @@ namespace cascade\components\web\form;
  * FormObject [@doctodo write class description for FormObject]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class FormObject extends \infinite\base\Object implements \infinite\web\RenderInterface
 {
     use FormObjectTrait;

@@ -16,7 +16,7 @@ use yii\web\Application;
  * Request [@doctodo write class description for Request]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Request extends \infinite\web\Request
 {
     /**
@@ -30,7 +30,7 @@ class Request extends \infinite\web\Request
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         parent::init();

@@ -11,7 +11,7 @@ namespace cascade\components\web\themes;
  * Module [@doctodo write class description for Module]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class Module extends \cascade\components\base\CollectorModule
 {
     /**
@@ -25,7 +25,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getCollectorName()
     {
         return 'themes';
@@ -33,7 +33,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getModuleType()
     {
         return 'Theme';

@@ -15,7 +15,7 @@ use infinite\helpers\Html;
  * SingleSection [@doctodo write class description for SingleSection]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class SingleSection extends Section
 {
     /**
@@ -63,7 +63,7 @@ class SingleSection extends Section
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getTitle()
     {
         $singleWidget = $this->singleWidget;

@@ -13,7 +13,7 @@ use infinite\base\exceptions\Exception;
  * Meta [@doctodo write class description for Meta]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Meta extends \infinite\base\Object
 {
     /**
@@ -67,7 +67,7 @@ class Meta extends \infinite\base\Object
 
     /**
     * @inheritdoc
-    **/
+     */
     public function __construct($interface, $foreignTable)
     {
         $this->_db = $interface->db;

@@ -11,7 +11,7 @@ namespace cascade\components\dataInterface;
  * FieldMap [@doctodo write class description for FieldMap]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class FieldMap extends \infinite\base\Object
 {
     /**

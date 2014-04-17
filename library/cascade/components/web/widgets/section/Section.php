@@ -16,7 +16,7 @@ use infinite\helpers\Html;
  * Section [@doctodo write class description for Section]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Section extends \cascade\components\web\widgets\Widget
 {
     /**
@@ -34,7 +34,7 @@ class Section extends \cascade\components\web\widgets\Widget
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         parent::init();
@@ -84,7 +84,7 @@ class Section extends \cascade\components\web\widgets\Widget
 
     /**
     * @inheritdoc
-    **/
+     */
     public function generateContent()
     {
         $items = [];

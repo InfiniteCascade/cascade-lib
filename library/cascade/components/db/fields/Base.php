@@ -15,7 +15,7 @@ use cascade\components\db\fields\formats\Base as BaseFormat;
  * Base [@doctodo write class description for Base]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class Base extends \infinite\base\Object
 {
     /**
@@ -89,7 +89,7 @@ abstract class Base extends \infinite\base\Object
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         parent::init();

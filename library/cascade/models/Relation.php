@@ -20,14 +20,14 @@ use infinite\caching\Cacher;
  * Relation is the model class for table "relation".
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Relation extends \infinite\db\models\Relation
 {
     use ActiveRecordTrait;
 
     /**
     * @inheritdoc
-    **/
+     */
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
@@ -44,7 +44,7 @@ class Relation extends \infinite\db\models\Relation
 
     /**
     * @inheritdoc
-    **/
+     */
     public function afterSaveRelation($event)
     {
         parent::afterSaveRelation($event);
@@ -65,7 +65,7 @@ class Relation extends \infinite\db\models\Relation
 
     /**
     * @inheritdoc
-    **/
+     */
     public function afterDeleteRelation($event)
     {
         parent::afterDeleteRelation($event);

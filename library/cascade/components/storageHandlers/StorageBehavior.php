@@ -18,7 +18,7 @@ use infinite\base\exceptions\Exception;
  * StorageBehavior [@doctodo write class description for StorageBehavior]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 {
     /**
@@ -42,7 +42,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
     * @inheritdoc
-    **/
+     */
     public function events()
     {
         return [
@@ -55,7 +55,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
     * @inheritdoc
-    **/
+     */
     public function safeAttributes()
     {
         return ['storageEngine', 'storage'];

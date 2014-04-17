@@ -11,12 +11,12 @@ namespace cascade\components\web\widgets\section;
  * ParentSection [@doctodo write class description for ParentSection]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class ParentSection extends Section
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         parent::init();
@@ -26,7 +26,7 @@ class ParentSection extends Section
 
     /**
     * @inheritdoc
-    **/
+     */
     public function widgetCellSettings()
     {
         return [

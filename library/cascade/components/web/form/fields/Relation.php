@@ -17,7 +17,7 @@ use cascade\components\web\browser\Response as BrowserResponse;
  * Relation [@doctodo write class description for Relation]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Relation extends Base
 {
     /**
@@ -39,7 +39,7 @@ class Relation extends Base
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         parent::init();

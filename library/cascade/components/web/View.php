@@ -11,7 +11,7 @@ namespace cascade\components\web;
  * View [@doctodo write class description for View]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class View extends \infinite\web\View
 {
     /**

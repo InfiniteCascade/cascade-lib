@@ -11,7 +11,7 @@ namespace cascade\components\web\widgets\base;
  * DetailList [@doctodo write class description for DetailList]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class DetailList extends BaseList
 {
 }

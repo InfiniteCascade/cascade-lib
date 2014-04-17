@@ -11,12 +11,12 @@ namespace cascade\components\db\behaviors;
  * Roleable [@doctodo write class description for Roleable]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Roleable extends \infinite\db\behaviors\Roleable
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function determineAccessLevel($role, $aro = null)
     {
         if (!empty($this->owner->objectType)) {

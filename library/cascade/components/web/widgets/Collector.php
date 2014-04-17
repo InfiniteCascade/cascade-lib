@@ -14,7 +14,7 @@ use cascade\components\web\widgets\section\Section;
  * Collector [@doctodo write class description for Collector]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Collector extends \infinite\base\collector\Module
 {
     /**
@@ -28,7 +28,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getCollectorItemClass()
     {
         return '\cascade\components\web\widgets\Item';
@@ -36,7 +36,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getModulePrefix()
     {
         return 'Widget';

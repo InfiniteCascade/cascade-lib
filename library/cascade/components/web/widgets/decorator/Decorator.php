@@ -13,7 +13,7 @@ use infinite\helpers\Html;
  * Decorator [@doctodo write class description for Decorator]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class Decorator extends \yii\base\Behavior implements DecoratorInterface
 {
     /**

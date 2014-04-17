@@ -15,14 +15,14 @@ use infinite\base\exceptions\Exception;
  * Collector [@doctodo write class description for Collector]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Collector extends \infinite\base\collector\Module
 {
     const EVENT_AFTER_TAXONOMY_REGISTRY = 'afterTaxonomyRegistry';
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getCollectorItemClass()
     {
         return 'cascade\\components\\taxonomy\\Item';
@@ -30,7 +30,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getModulePrefix()
     {
         return 'TaxonomyType';
@@ -38,7 +38,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function register($owner, $itemComponent, $systemId = null)
     {
         if ($itemComponent instanceof Module) {
@@ -50,7 +50,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function mergeExistingItems($originalItem, $newItem)
     {
         $originalItem = parent::mergeExistingItems($originalItem, $newItem);
@@ -69,7 +69,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function prepareComponent($component)
     {
         if (!Yii::$app->isDbAvailable) { return $component; }

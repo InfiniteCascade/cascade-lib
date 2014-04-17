@@ -17,7 +17,7 @@ use cascade\components\dataInterface\Module as BaseModule;
  * Module [@doctodo write class description for Module]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class Module extends BaseModule
 {
     /**
@@ -62,7 +62,7 @@ abstract class Module extends BaseModule
 
     /**
     * @inheritdoc
-    **/
+     */
     public function run(Action $action)
     {
         $this->_action = $action;

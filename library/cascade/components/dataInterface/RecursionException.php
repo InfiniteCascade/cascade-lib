@@ -11,7 +11,7 @@ namespace cascade\components\dataInterface;
  * RecursionException [@doctodo write class description for RecursionException]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class RecursionException extends \infinite\base\exceptions\Exception
 {
     /**

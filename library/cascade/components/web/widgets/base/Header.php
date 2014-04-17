@@ -16,12 +16,12 @@ use cascade\components\web\widgets\Widget;
  * Header [@doctodo write class description for Header]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Header extends Widget
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function generateContent()
     {
         if (!isset(Yii::$app->request->object)) { return false; }

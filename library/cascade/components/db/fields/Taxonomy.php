@@ -11,7 +11,7 @@ namespace cascade\components\db\fields;
  * Taxonomy [@doctodo write class description for Taxonomy]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Taxonomy extends Base
 {
     /**

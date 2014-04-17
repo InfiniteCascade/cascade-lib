@@ -11,7 +11,7 @@ namespace cascade\components\web\form;
  * ActiveForm [@doctodo write class description for ActiveForm]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class ActiveForm extends \infinite\widgets\ActiveForm
 {
 }

@@ -16,7 +16,7 @@ use cascade\models\StorageEngine;
  * Item [@doctodo write class description for Item]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Item extends \infinite\base\collector\Item
 {
     /**
@@ -30,7 +30,7 @@ class Item extends \infinite\base\collector\Item
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         parent::init();

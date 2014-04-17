@@ -16,7 +16,7 @@ use infinite\helpers\ArrayHelper;
  * HandlerTypes [@doctodo write class description for HandlerTypes]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class HandlerTypes extends \infinite\web\browser\Handler
 {
     /**
@@ -69,7 +69,7 @@ class HandlerTypes extends \infinite\web\browser\Handler
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getTotal()
     {
         return count($this->items);
@@ -77,7 +77,7 @@ class HandlerTypes extends \infinite\web\browser\Handler
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getItems()
     {
         $instructions = $this->instructions;

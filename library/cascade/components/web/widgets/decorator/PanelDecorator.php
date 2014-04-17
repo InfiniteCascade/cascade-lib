@@ -14,7 +14,7 @@ use yii\bootstrap\Nav;
  * PanelDecorator [@doctodo write class description for PanelDecorator]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class PanelDecorator extends Decorator
 {
     /**
@@ -57,7 +57,7 @@ class PanelDecorator extends Decorator
 
     /**
     * @inheritdoc
-    **/
+     */
     public function generateStart()
     {
         Html::addCssClass($this->owner->htmlOptions, $this->owner->panelCssClass);

@@ -14,7 +14,7 @@ use yii\db\Query;
  * Model [@doctodo write class description for Model]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Model extends \infinite\base\Object
 {
     /**
@@ -48,7 +48,7 @@ class Model extends \infinite\base\Object
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         parent::init();
@@ -70,7 +70,7 @@ class Model extends \infinite\base\Object
 
     /**
     * @inheritdoc
-    **/
+     */
     public function __get($name)
     {
         if (isset($this->_attributes[$name])) {
@@ -82,7 +82,7 @@ class Model extends \infinite\base\Object
 
     /**
     * @inheritdoc
-    **/
+     */
     public function __set($name, $value)
     {
         if (isset($this->meta) && is_object($this->meta) && $this->meta->hasAttribute($name)) {
@@ -96,7 +96,7 @@ class Model extends \infinite\base\Object
 
     /**
     * @inheritdoc
-    **/
+     */
     public function __isset($name)
     {
         if (isset($this->meta) && $this->meta->hasAttribute($name) && isset($this->_attributes[$name])) {
@@ -108,7 +108,7 @@ class Model extends \infinite\base\Object
 
     /**
     * @inheritdoc
-    **/
+     */
     public function __unset($name)
     {
         if (isset($this->meta) && $this->meta->hasAttribute($name)) {

@@ -11,7 +11,7 @@ namespace cascade\modules\ThemeCascade;
  * Module [@doctodo write class description for Module]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Module extends \cascade\components\web\themes\Module
 {
     /**
@@ -25,7 +25,7 @@ class Module extends \cascade\components\web\themes\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getIdentityAssetBundle()
     {
         return $this->componentNamespace . '\\IdentityAsset';

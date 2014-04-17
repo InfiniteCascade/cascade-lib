@@ -13,7 +13,7 @@ use cascade\components\types\ActiveRecordTrait;
  * Aca is the model class for table "aca".
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Aca extends \infinite\db\models\Aca
 {
     use ActiveRecordTrait {

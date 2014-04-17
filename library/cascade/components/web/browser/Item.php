@@ -11,7 +11,7 @@ namespace cascade\components\web\browser;
  * Item [@doctodo write class description for Item]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Item extends \infinite\web\browser\Item
 {
     /**
@@ -21,7 +21,7 @@ class Item extends \infinite\web\browser\Item
 
     /**
     * @inheritdoc
-    **/
+     */
     public function package()
     {
         return parent::package() + [

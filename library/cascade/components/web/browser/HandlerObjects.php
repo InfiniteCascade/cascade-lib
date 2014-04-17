@@ -13,7 +13,7 @@ use Yii;
  * HandlerObjects [@doctodo write class description for HandlerObjects]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class HandlerObjects extends \infinite\web\browser\Handler
 {
     /**
@@ -57,7 +57,7 @@ class HandlerObjects extends \infinite\web\browser\Handler
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getTotal()
     {
         if (!$this->dataSource) {
@@ -69,7 +69,7 @@ class HandlerObjects extends \infinite\web\browser\Handler
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getItems()
     {
         $instructions = $this->instructions;

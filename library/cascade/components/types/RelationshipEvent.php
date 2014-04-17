@@ -13,7 +13,7 @@ use yii\base\Event as BaseEvent;
  * RelationshipEvent [@doctodo write class description for RelationshipEvent]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class RelationshipEvent extends BaseEvent
 {
     /**

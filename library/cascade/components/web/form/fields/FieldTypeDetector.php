@@ -13,7 +13,7 @@ use cascade\components\db\fields\Base as DbBaseField;
  * FieldTypeDetector [@doctodo write class description for FieldTypeDetector]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class FieldTypeDetector extends \infinite\base\object
 {
     /**

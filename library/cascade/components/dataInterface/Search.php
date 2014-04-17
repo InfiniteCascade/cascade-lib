@@ -11,7 +11,7 @@ namespace cascade\components\dataInterface;
  * Search [@doctodo write class description for Search]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Search extends \infinite\base\Component
 {
     /**

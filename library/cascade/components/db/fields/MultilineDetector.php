@@ -14,7 +14,7 @@ use yii\db\ColumnSchema;
  * MultilineDetector [@doctodo write class description for MultilineDetector]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class MultilineDetector extends \infinite\base\Object
 {
     /**

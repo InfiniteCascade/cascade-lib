@@ -11,7 +11,7 @@ namespace cascade\components\web\themes;
  * IdentityAsset [@doctodo write class description for IdentityAsset]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class IdentityAsset extends AssetBundle
 {
     /**

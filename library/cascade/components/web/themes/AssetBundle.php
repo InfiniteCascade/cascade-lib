@@ -13,7 +13,7 @@ use yii\imagine\Image;
  * AssetBundle [@doctodo write class description for AssetBundle]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class AssetBundle extends \yii\web\AssetBundle
 {
     /**

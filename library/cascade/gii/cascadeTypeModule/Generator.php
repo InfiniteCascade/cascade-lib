@@ -125,7 +125,7 @@ class Generator extends \yii\gii\Generator
 
     /**
     * @inheritdoc
-    **/
+     */
     public function __construct()
     {
         if (is_null($this->migrationTimestamp)) {

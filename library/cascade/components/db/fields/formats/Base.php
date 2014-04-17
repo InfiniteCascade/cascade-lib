@@ -11,7 +11,7 @@ namespace cascade\components\db\fields\formats;
  * Base [@doctodo write class description for Base]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class Base extends \infinite\base\Object
 {
     /**

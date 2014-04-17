@@ -17,7 +17,7 @@ use infinite\base\exceptions\Exception;
  * View [@doctodo write class description for View]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class View extends \yii\base\Widget
 {
     /**
@@ -111,7 +111,7 @@ class View extends \yii\base\Widget
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         if ($this->dataProvider===null) {
@@ -125,7 +125,7 @@ class View extends \yii\base\Widget
 
     /**
     * @inheritdoc
-    **/
+     */
     public function run()
     {
         $this->_prepareDataProvider();

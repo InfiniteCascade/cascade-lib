@@ -13,7 +13,7 @@ use infinite\setup\Exception;
  * Task_000002_db [@doctodo write class description for Task_000002_db]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Task_000002_db extends \infinite\setup\Task
 {
     /**
@@ -27,7 +27,7 @@ class Task_000002_db extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getTitle()
     {
         return 'Database';
@@ -35,7 +35,7 @@ class Task_000002_db extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function skip()
     {
         return parent::skip() && $this->setup->markDbReady();
@@ -43,7 +43,7 @@ class Task_000002_db extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function test()
     {
         if ($this->isNewInstall()) { return false; }
@@ -77,7 +77,7 @@ class Task_000002_db extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function run()
     {
         $request = $this->migrator->getRequest();
@@ -111,7 +111,7 @@ class Task_000002_db extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getVerification()
     {
         if (!$this->isNewInstall() && !$this->test()) {

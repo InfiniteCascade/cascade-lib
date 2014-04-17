@@ -13,7 +13,7 @@ use Yii;
  * ModuleSetExtension [@doctodo write class description for ModuleSetExtension]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
 {
     /**

@@ -11,7 +11,7 @@ namespace cascade\components\web\widgets\decorator;
  * BlankDecorator [@doctodo write class description for BlankDecorator]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class BlankDecorator extends Decorator
 {
     /**

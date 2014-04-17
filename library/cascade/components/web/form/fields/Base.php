@@ -16,7 +16,7 @@ use infinite\web\grid\CellContentTrait;
  * Base [@doctodo write class description for Base]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class Base extends \infinite\base\Object implements \infinite\web\grid\CellContentInterface
 {
     use FormObjectTrait;

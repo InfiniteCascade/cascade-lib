@@ -15,12 +15,12 @@ use infinite\caching\Cacher;
  * AuthorityBehavior [@doctodo write class description for AuthorityBehavior]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class AuthorityBehavior extends \infinite\security\AuthorityBehavior
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function events()
     {
         return array_merge(parent::events(), [

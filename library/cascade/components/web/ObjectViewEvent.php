@@ -11,7 +11,7 @@ namespace cascade\components\web;
  * ObjectViewEvent [@doctodo write class description for ObjectViewEvent]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class ObjectViewEvent extends \yii\base\Event
 {
     /**

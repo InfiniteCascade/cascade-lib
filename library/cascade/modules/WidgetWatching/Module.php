@@ -11,7 +11,7 @@ namespace cascade\modules\WidgetWatching;
  * Module [@doctodo write class description for Module]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Module extends \cascade\components\web\widgets\Module
 {
     /**

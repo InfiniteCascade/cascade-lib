@@ -13,7 +13,7 @@ use Yii;
  * QueryFamiliarity [@doctodo write class description for QueryFamiliarity]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class QueryFamiliarity extends \infinite\db\behaviors\QueryBehavior
 {
     /**

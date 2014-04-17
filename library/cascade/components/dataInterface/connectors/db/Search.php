@@ -11,7 +11,7 @@ namespace cascade\components\dataInterface\connectors\db;
  * Search [@doctodo write class description for Search]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Search extends \cascade\components\dataInterface\Search
 {
 }

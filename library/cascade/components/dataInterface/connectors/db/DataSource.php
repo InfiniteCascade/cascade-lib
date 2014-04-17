@@ -18,7 +18,7 @@ use infinite\helpers\ArrayHelper;
  * DataSource [@doctodo write class description for DataSource]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class DataSource extends \cascade\components\dataInterface\DataSource
 {
     /**
@@ -36,7 +36,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         $this->on(self::EVENT_LOAD_FOREIGN_DATA_ITEMS, [$this, 'loadForeignDataItems']);

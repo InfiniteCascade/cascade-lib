@@ -14,7 +14,7 @@ use yii\helpers\Console;
  * Action [@doctodo write class description for Action]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Action extends \infinite\base\Object
 {
     /**
@@ -65,7 +65,7 @@ class Action extends \infinite\base\Object
 
     /**
     * @inheritdoc
-    **/
+     */
     public function __construct(Item $interface = null, $resumeLog = null)
     {
         $this->_interface = $interface;

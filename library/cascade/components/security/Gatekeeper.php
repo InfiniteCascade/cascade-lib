@@ -17,7 +17,7 @@ use infinite\db\Query;
  * Gatekeeper [@doctodo write class description for Gatekeeper]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Gatekeeper extends \infinite\security\Gatekeeper
 {
     /**
@@ -36,7 +36,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
 
     /**
     * @inheritdoc
-    **/
+     */
     public function setAuthority($authority)
     {
         if (!isset($authority['type'])
@@ -53,7 +53,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getAuthority()
     {
         if (is_null($this->_authority)) {
@@ -65,7 +65,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getControlledObject($object, $modelClass = null, $params = [])
     {
         $defaultParams = [
@@ -118,7 +118,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
 
     /**
     * @inheritdoc
-    **/
+     */
     public function buildInnerRoleCheckConditions(&$innerOnConditions, $innerAlias, $query)
     {
         if ($query instanceof \infinite\db\ActiveQuery
@@ -143,7 +143,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
 
     /**
     * @inheritdoc
-    **/
+     */
     protected function getActionMap($controlledObject = null)
     {
         $map = [];

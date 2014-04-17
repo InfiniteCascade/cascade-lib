@@ -13,7 +13,7 @@ use Yii;
  * Collector [@doctodo write class description for Collector]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Collector extends \infinite\base\collector\Module
 {
     /**
@@ -31,7 +31,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getCollectorItemClass()
     {
         return 'cascade\\components\\web\\themes\\Item';
@@ -39,7 +39,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getModulePrefix()
     {
         return 'Theme';
@@ -84,7 +84,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function register($owner, $itemComponent, $systemId = null)
     {
         $item = parent::register($owner, $itemComponent, $systemId);

@@ -16,7 +16,7 @@ use cascade\components\web\widgets\Widget;
  * Details [@doctodo write class description for Details]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Details extends Widget implements ListWidgetInterface
 {
     use ListWidgetTrait, ObjectWidgetTrait {
@@ -56,7 +56,7 @@ class Details extends Widget implements ListWidgetInterface
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getHeaderMenu()
     {
         $menu = [];
@@ -66,7 +66,7 @@ class Details extends Widget implements ListWidgetInterface
 
     /**
     * @inheritdoc
-    **/
+     */
     public function generateContent()
     {
         if (empty(Yii::$app->request->object)) { return false; }

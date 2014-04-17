@@ -13,7 +13,7 @@ use yii\helpers\Url;
  * SearchTermResult [@doctodo write class description for SearchTermResult]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 {
     /**
@@ -126,7 +126,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 
     /**
     * @inheritdoc
-    **/
+     */
     public function toArray()
     {
         return array_merge(parent::toArray(), [
@@ -138,7 +138,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getScore()
     {
         if (empty($this->object->objectType->searchWeight)) {

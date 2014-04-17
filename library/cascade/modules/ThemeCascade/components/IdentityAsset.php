@@ -11,7 +11,7 @@ namespace cascade\modules\ThemeCascade\components;
  * IdentityAsset [@doctodo write class description for IdentityAsset]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class IdentityAsset extends \cascade\components\web\themes\IdentityAsset
 {
     /**
@@ -21,7 +21,7 @@ class IdentityAsset extends \cascade\components\web\themes\IdentityAsset
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getLogoPath()
     {
         if (empty($this->basePath)) { return false; }

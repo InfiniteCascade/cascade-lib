@@ -13,7 +13,7 @@ use infinite\caching\Cacher;
  * ToolsController [@doctodo write class description for ToolsController]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class ToolsController extends \infinite\console\Controller
 {
     /**

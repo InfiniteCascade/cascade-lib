@@ -13,7 +13,7 @@ use Yii;
  * CellBehavior [@doctodo write class description for CellBehavior]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class CellBehavior extends \yii\base\Behavior
 {
     /**

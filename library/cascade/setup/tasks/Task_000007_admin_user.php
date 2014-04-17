@@ -15,12 +15,12 @@ use infinite\base\exceptions\Exception;
  * Task_000007_admin_user [@doctodo write class description for Task_000007_admin_user]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Task_000007_admin_user extends \infinite\setup\Task
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function getTitle()
     {
         return 'Admin User';
@@ -28,7 +28,7 @@ class Task_000007_admin_user extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function test()
     {
         return User::find()->disableAccessCheck()->andWhere(['not', ['username' => 'system']])->count() > 0;
@@ -36,7 +36,7 @@ class Task_000007_admin_user extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function run()
     {
         $user = new User;
@@ -61,7 +61,7 @@ class Task_000007_admin_user extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getFields()
     {
         $fields = [];

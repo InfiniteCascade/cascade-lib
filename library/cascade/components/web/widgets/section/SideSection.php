@@ -11,12 +11,12 @@ namespace cascade\components\web\widgets\section;
  * SideSection [@doctodo write class description for SideSection]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class SideSection extends Section
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         parent::init();
@@ -26,7 +26,7 @@ class SideSection extends Section
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getWidgetDecoratorClass()
     {
         return 'cascade\\components\\web\\widgets\\decorator\\EmbeddedDecorator';
@@ -34,7 +34,7 @@ class SideSection extends Section
 
     /**
     * @inheritdoc
-    **/
+     */
     public function widgetCellSettings()
     {
         return [
@@ -55,7 +55,7 @@ class SideSection extends Section
 
     /**
     * @inheritdoc
-    **/
+     */
     public function defaultItems($parent = null)
     {
         $default = [];

@@ -13,7 +13,7 @@ use infinite\helpers\Html;
  * AreaDecorator [@doctodo write class description for AreaDecorator]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class AreaDecorator extends Decorator
 {
     /**
@@ -31,7 +31,7 @@ class AreaDecorator extends Decorator
 
     /**
     * @inheritdoc
-    **/
+     */
     public function generateStart()
     {
         Html::addCssClass($this->owner->htmlOptions, $this->owner->panelCssClass);

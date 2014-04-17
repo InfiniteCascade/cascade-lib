@@ -13,12 +13,12 @@ use infinite\helpers\ArrayHelper;
  * Taxonomy [@doctodo write class description for Taxonomy]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Taxonomy extends Model
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function getFieldConfig()
     {
         $fieldConfig = parent::getFieldConfig();

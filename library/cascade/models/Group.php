@@ -14,7 +14,7 @@ use cascade\components\types\ActiveRecordTrait as TypesActiveRecordTrait;
  * Group is the model class for table "group".
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Group extends \infinite\db\models\Group
 {
     use TypesActiveRecordTrait {

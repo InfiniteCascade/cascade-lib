@@ -11,7 +11,7 @@ namespace cascade\components\web\widgets\grid\columns;
  * Action [@doctodo write class description for Action]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Action extends \yii\grid\ActionColumn
 {
 }

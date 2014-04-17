@@ -14,7 +14,7 @@ use infinite\helpers\ArrayHelper;
  * Item [@doctodo write class description for Item]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Item extends \infinite\base\collector\Item
 {
     /**
@@ -40,7 +40,7 @@ class Item extends \infinite\base\collector\Item
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         parent::init();
@@ -50,7 +50,7 @@ class Item extends \infinite\base\collector\Item
 
     /**
     * @inheritdoc
-    **/
+     */
     public function setObject($object)
     {
         parent::setObject($object);

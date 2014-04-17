@@ -14,12 +14,12 @@ use yii\helpers\Inflector;
  * Task_000001_environment [@doctodo write class description for Task_000001_environment]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Task_000001_environment extends \infinite\setup\Task
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function getTitle()
     {
         return 'Environment';
@@ -27,7 +27,7 @@ class Task_000001_environment extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function test()
     {
         if ($this->setup->isEnvironmented) {
@@ -63,7 +63,7 @@ class Task_000001_environment extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function run()
     {
         if ($this->fields) {
@@ -152,7 +152,7 @@ class Task_000001_environment extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function loadInput($input)
     {
         if (!parent::loadInput($input)) {
@@ -207,7 +207,7 @@ class Task_000001_environment extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getFields()
     {
         if ($this->setup->isEnvironmented AND $this->setup->app()) {

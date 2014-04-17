@@ -13,7 +13,7 @@ use Yii;
  * Familiarity [@doctodo write class description for Familiarity]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Familiarity extends \infinite\db\behaviors\ActiveRecord
 {
     /**
@@ -31,7 +31,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
 
     /**
     * @inheritdoc
-    **/
+     */
     public function events()
     {
         return [

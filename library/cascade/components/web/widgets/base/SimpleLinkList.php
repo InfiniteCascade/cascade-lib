@@ -16,7 +16,7 @@ use infinite\helpers\Html;
  * SimpleLinkList [@doctodo write class description for SimpleLinkList]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class SimpleLinkList extends BaseList
 {
     /**
@@ -39,7 +39,7 @@ class SimpleLinkList extends BaseList
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getListOptions()
     {
         return array_merge(parent::getListOptions(), ['tag' => 'div']);
@@ -47,7 +47,7 @@ class SimpleLinkList extends BaseList
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getListItemOptions($model, $key, $index)
     {
         $options = array_merge(parent::getListItemOptions($model, $key, $index), ['tag' => 'a', 'href' => Url::to($model->getUrl('view'))]);
@@ -61,7 +61,7 @@ class SimpleLinkList extends BaseList
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getMenuItems($model, $key, $index)
     {
         return [];
@@ -69,7 +69,7 @@ class SimpleLinkList extends BaseList
 
     /**
     * @inheritdoc
-    **/
+     */
     public function contentTemplate($model)
     {
         return [
@@ -79,7 +79,7 @@ class SimpleLinkList extends BaseList
 
     /**
     * @inheritdoc
-    **/
+     */
     public function renderItemContent($model, $key, $index)
     {
         return parent::renderItemContent($model, $key, $index);

@@ -11,12 +11,12 @@ namespace cascade\components\db\fields\formats;
  * Text [@doctodo write class description for Text]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Text extends Base
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function get()
     {
         $result = $this->field->value;

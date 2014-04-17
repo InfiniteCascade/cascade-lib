@@ -14,7 +14,7 @@ use cascade\models\DataInterface;
  * DataItem [@doctodo write class description for DataItem]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class DataItem extends \infinite\base\Component
 {
     /**
@@ -57,7 +57,7 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         $this->on(self::EVENT_LOAD_LOCAL_OBJECT, [$this, 'searchLocalObject']);

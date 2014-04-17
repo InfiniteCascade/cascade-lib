@@ -15,7 +15,7 @@ use infinite\base\collector\CollectedObjectTrait;
  * Widget [@doctodo write class description for Widget]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterface, \infinite\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;
@@ -124,7 +124,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
     * @inheritdoc
-    **/
+     */
     public function generate()
     {
         Yii::beginProfile(get_called_class() .':'. __FUNCTION__);
@@ -200,7 +200,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
     * @inheritdoc
-    **/
+     */
     public function setWidgetId($value)
     {
         $this->_widgetId = $value;

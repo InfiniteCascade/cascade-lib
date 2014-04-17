@@ -11,7 +11,7 @@ namespace cascade\components\db\fields;
  * Model [@doctodo write class description for Model]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Model extends Base
 {
     /**
@@ -20,7 +20,7 @@ class Model extends Base
     public $formFieldClass = 'cascade\\components\\web\\form\\fields\\Model';
     /**
     * @inheritdoc
-    **/
+     */
     public function determineLocations()
     {
         if (isset($this->model)) {

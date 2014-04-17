@@ -11,7 +11,7 @@ namespace cascade\components\db\behaviors\auditable;
  * Auditable [@doctodo write class description for Auditable]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Auditable extends \infinite\db\behaviors\auditable\Auditable
 {
     /**

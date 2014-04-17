@@ -13,12 +13,12 @@ use Yii;
  * ActiveAccess [@doctodo write class description for ActiveAccess]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class ActiveAccess extends \infinite\db\behaviors\ActiveAccess
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function can($aca, $accessingObject = null, $relatedObject = false)
     {
         if (!is_object($aca)) {
@@ -35,7 +35,7 @@ class ActiveAccess extends \infinite\db\behaviors\ActiveAccess
 
     /**
     * @inheritdoc
-    **/
+     */
     public function canDeleteAssociation($relatedObject)
     {
         return parent::canDeleteAssociation($relatedObject)
@@ -44,7 +44,7 @@ class ActiveAccess extends \infinite\db\behaviors\ActiveAccess
 
     /**
     * @inheritdoc
-    **/
+     */
     public function canUpdateAssociation($relatedObject)
     {
         return parent::canUpdateAssociation($relatedObject)

@@ -20,7 +20,7 @@ ini_set('memory_limit', -1);
  * InterfaceController [@doctodo write class description for InterfaceController]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class InterfaceController extends \infinite\console\Controller
 {
     /**
@@ -103,7 +103,7 @@ class InterfaceController extends \infinite\console\Controller
 
     /**
     * @inheritdoc
-    **/
+     */
     public function options($id)
     {
         return array_merge(parent::options($id), ['interface', 'verbose']);

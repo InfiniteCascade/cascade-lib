@@ -14,12 +14,12 @@ use cascade\models\Relation;
  * Task_000003_groups [@doctodo write class description for Task_000003_groups]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Task_000003_groups extends \infinite\setup\Task
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function getTitle()
     {
         return 'Groups';
@@ -35,7 +35,7 @@ class Task_000003_groups extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function test()
     {
         return Group::find()->disableAccessCheck()->where(['system' => 'top'])->count() > 0;
@@ -43,7 +43,7 @@ class Task_000003_groups extends \infinite\setup\Task
 
     /**
     * @inheritdoc
-    **/
+     */
     public function run()
     {
         $groups = $this->baseGroups;

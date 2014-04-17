@@ -11,7 +11,7 @@ namespace cascade\components\db\fields;
  * Artificial [@doctodo write class description for Artificial]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Artificial extends Base
 {
     /**
@@ -37,7 +37,7 @@ class Artificial extends Base
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getField()
     {
         return $this->fieldName;
@@ -45,7 +45,7 @@ class Artificial extends Base
 
     /**
     * @inheritdoc
-    **/
+     */
     public function setFormField($value)
     {
         $this->_formField = false;
@@ -53,7 +53,7 @@ class Artificial extends Base
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getFormField()
     {
         return false;

@@ -11,7 +11,7 @@ namespace cascade\components\dataInterface\connectors\db;
  * Connection [@doctodo write class description for Connection]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Connection extends \yii\db\Connection
 {
 }

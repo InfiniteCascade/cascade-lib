@@ -14,7 +14,7 @@ use cascade\components\dataInterface\MissingItemException;
  * DataItem [@doctodo write class description for DataItem]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class DataItem extends \cascade\components\dataInterface\DataItem
 {
     /**
@@ -28,7 +28,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         $this->on(self::EVENT_LOAD_FOREIGN_OBJECT, [$this, 'loadForeignObject']);
@@ -38,7 +38,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem
 
     /**
     * @inheritdoc
-    **/
+     */
     protected function handleForeign($baseAttributes = [])
     {
         if ($this->ignoreForeignObject) {
@@ -113,7 +113,7 @@ class DataItem extends \cascade\components\dataInterface\DataItem
 
     /**
     * @inheritdoc
-    **/
+     */
     protected function handleLocal($baseAttributes = [])
     {
         if ($this->ignoreLocalObject) {

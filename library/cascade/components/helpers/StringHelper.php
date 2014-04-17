@@ -13,12 +13,12 @@ use Yii;
  * StringHelper [@doctodo write class description for StringHelper]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class StringHelper extends \infinite\helpers\StringHelper
 {
     /**
     * @inheritdoc
-    **/
+     */
     static public function parseInstructions()
     {
         $instructions = parent::parseInstructions();

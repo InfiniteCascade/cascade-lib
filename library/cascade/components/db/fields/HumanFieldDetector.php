@@ -14,7 +14,7 @@ use yii\db\ColumnSchema;
  * HumanFieldDetector [@doctodo write class description for HumanFieldDetector]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class HumanFieldDetector extends \infinite\base\Object
 {
     /**

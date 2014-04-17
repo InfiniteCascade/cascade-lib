@@ -11,12 +11,12 @@ namespace cascade\components\section;
  * Collector [@doctodo write class description for Collector]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Collector extends \infinite\base\collector\Module
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function getCollectorItemClass()
     {
         return '\cascade\components\section\Item';
@@ -24,7 +24,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getModulePrefix()
     {
         return 'Section';
@@ -32,7 +32,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getInitialItems()
     {
         return [

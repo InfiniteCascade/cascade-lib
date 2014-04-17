@@ -13,7 +13,7 @@ use cascade\components\types\ActiveRecordTrait;
  * Role is the model class for table "role".
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Role extends \infinite\db\models\Role
 {
     use ActiveRecordTrait {

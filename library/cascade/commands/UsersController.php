@@ -16,7 +16,7 @@ use cascade\models\Group;
  * UsersController [@doctodo write class description for UsersController]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class UsersController extends \infinite\console\Controller
 {
     /**

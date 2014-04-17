@@ -11,7 +11,7 @@ namespace cascade\components\db\fields;
  * Relation [@doctodo write class description for Relation]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Relation extends Base
 {
     /**
@@ -87,7 +87,7 @@ class Relation extends Base
 
     /**
     * @inheritdoc
-    **/
+     */
     public function hasFile()
     {
         return $this->companion->dummyModel->getBehavior('Storage') !== null;
@@ -109,7 +109,7 @@ class Relation extends Base
 
     /**
     * @inheritdoc
-    **/
+     */
     public function determineLocations()
     {
         if (!($this->modelRole === 'child' && !$this->relationship->isHasOne())

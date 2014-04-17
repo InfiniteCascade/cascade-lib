@@ -18,7 +18,7 @@ use infinite\helpers\Html;
  * Segment [@doctodo write class description for Segment]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Segment extends FormObject
 {
     /**
@@ -61,7 +61,7 @@ class Segment extends FormObject
 
     /**
     * @inheritdoc
-    **/
+     */
     public function init()
     {
         parent::init();

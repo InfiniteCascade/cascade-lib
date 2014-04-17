@@ -15,7 +15,7 @@ use cascade\components\web\widgets\BaseWidget;
  * WidgetArea [@doctodo write class description for WidgetArea]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class WidgetArea extends BaseWidget
 {
     /**
@@ -33,7 +33,7 @@ abstract class WidgetArea extends BaseWidget
 
     /**
     * @inheritdoc
-    **/
+     */
     public function generate()
     {
         Yii::beginProfile(get_called_class() .':'. __FUNCTION__);

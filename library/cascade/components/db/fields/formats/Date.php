@@ -13,12 +13,12 @@ use Yii;
  * Date [@doctodo write class description for Date]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Date extends Base
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function get()
     {
         $result = $this->field->value;
@@ -33,7 +33,7 @@ class Date extends Base
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getFormValue()
     {
         $result = $this->field->value;

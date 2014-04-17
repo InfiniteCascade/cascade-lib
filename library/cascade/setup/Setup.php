@@ -11,12 +11,12 @@ namespace cascade\setup;
  * Setup [@doctodo write class description for Setup]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Setup extends \infinite\setup\Setup
 {
     /**
     * @inheritdoc
-    **/
+     */
     public static function createSetupApplication($config = [])
     {
         if (is_null(self::$_instance)) {

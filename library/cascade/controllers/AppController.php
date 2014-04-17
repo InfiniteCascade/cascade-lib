@@ -20,12 +20,12 @@ use cascade\models\Registry;
  * AppController [@doctodo write class description for AppController]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class AppController extends Controller
 {
     /**
     * @inheritdoc
-    **/
+     */
     public function behaviors()
     {
         return [
@@ -64,7 +64,7 @@ class AppController extends Controller
 
     /**
     * @inheritdoc
-    **/
+     */
     public function actions()
     {
         return [

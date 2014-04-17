@@ -13,7 +13,7 @@ use Yii;
  * ObjectAccess [@doctodo write class description for ObjectAccess]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class ObjectAccess extends \infinite\security\ObjectAccess
 {
     /**
@@ -23,7 +23,7 @@ class ObjectAccess extends \infinite\security\ObjectAccess
 
     /**
     * @inheritdoc
-    **/
+     */
     public function determineVisibility()
     {
         $groupClass = Yii::$app->classes['Group'];
@@ -61,7 +61,7 @@ class ObjectAccess extends \infinite\security\ObjectAccess
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getRoleHelpText($roleItem)
     {
         return $this->object->objectType->getRoleHelpText($roleItem, $this->object);
@@ -69,7 +69,7 @@ class ObjectAccess extends \infinite\security\ObjectAccess
 
     /**
     * @inheritdoc
-    **/
+     */
     public function getSpecialRequestors()
     {
         return array_merge(parent::getSpecialRequestors(), [
@@ -82,7 +82,7 @@ class ObjectAccess extends \infinite\security\ObjectAccess
 
     /**
     * @inheritdoc
-    **/
+     */
     protected function validateRole($role, $validationSettings)
     {
         $results = parent::validateRole($role, $validationSettings);
@@ -96,7 +96,7 @@ class ObjectAccess extends \infinite\security\ObjectAccess
 
     /**
     * @inheritdoc
-    **/
+     */
     protected function fillValidationSettings($validationSettings)
     {
         if (isset($validationSettings['object'])) {

@@ -20,7 +20,7 @@ use infinite\web\RenderTrait;
  * BaseWidget [@doctodo write class description for BaseWidget]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 abstract class BaseWidget extends \yii\bootstrap\Widget
 {
     use ObjectTrait;
@@ -108,7 +108,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
 
     /**
     * @inheritdoc
-    **/
+     */
     public function behaviors()
     {
         return [
@@ -128,7 +128,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
 
     /**
     * @inheritdoc
-    **/
+     */
     public function run()
     {
         echo $this->generate();

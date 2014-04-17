@@ -11,7 +11,7 @@ namespace cascade\components\dataInterface;
  * MissingItemException [@doctodo write class description for MissingItemException]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class MissingItemException extends \infinite\base\exceptions\Exception
 {
     /**

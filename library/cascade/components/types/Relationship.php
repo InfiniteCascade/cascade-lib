@@ -15,7 +15,7 @@ use infinite\base\exceptions\Exception;
  * Relationship [@doctodo write class description for Relationship]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Relationship extends \infinite\base\Object
 {
     const HAS_MANY = 0x01;
@@ -163,7 +163,7 @@ class Relationship extends \infinite\base\Object
 
     /**
     * @inheritdoc
-    **/
+     */
     public function __get($name)
     {
         if (array_key_exists($name, $this->_options)) {
@@ -177,7 +177,7 @@ class Relationship extends \infinite\base\Object
 
     /**
     * @inheritdoc
-    **/
+     */
     public function __isset($name)
     {
         if (array_key_exists($name, $this->_options)) {

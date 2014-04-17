@@ -14,7 +14,7 @@ use infinite\helpers\ArrayHelper;
  * Taxonomy [@doctodo write class description for Taxonomy]
  *
  * @author Jacob Morrison <email@ofjacob.com>
-**/
+ */
 class Taxonomy extends \infinite\db\behaviors\ActiveRecord
 {
     /**
@@ -41,7 +41,7 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
 
     /**
     * @inheritdoc
-    **/
+     */
     public function events()
     {
         return [
@@ -52,7 +52,7 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
 
     /**
     * @inheritdoc
-    **/
+     */
     public function safeAttributes()
     {
         return ['taxonomy_id'];
