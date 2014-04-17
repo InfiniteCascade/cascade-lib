@@ -16,7 +16,13 @@ use infinite\setup\Exception;
 **/
 class Task_000002_db extends \infinite\setup\Task
 {
+    /**
+     * @var __var__migrator_type__ __var__migrator_description__
+     */
     protected $_migrator;
+    /**
+     * @inheritdoc
+     */
     public $skipComplete = true;
 
     /**
@@ -56,6 +62,10 @@ class Task_000002_db extends \infinite\setup\Task
         return $numberMatches === 0;
     }
 
+    /**
+     * __method_isNewInstall_description__
+     * @return __return_isNewInstall_type__ __return_isNewInstall_description__
+     */
     public function isNewInstall()
     {
         if (count($this->setup->app()->db->schema->tableNames) < 2) {
@@ -79,6 +89,11 @@ class Task_000002_db extends \infinite\setup\Task
         return preg_match('/Migrated up successfully./', $result) === 1;
     }
 
+    /**
+     * __method_getMigrator_description__
+     * @return __return_getMigrator_type__ __return_getMigrator_description__
+     * @throws Exception __exception_Exception_description__
+     */
     public function getMigrator()
     {
         if (is_null($this->_migrator)) {

@@ -19,11 +19,17 @@ use cascade\models\Group;
 **/
 class UsersController extends \infinite\console\Controller
 {
+    /**
+     * __method_actionIndex_description__
+     */
     public function actionIndex()
     {
         echo "Boom";
     }
 
+    /**
+     * __method_actionCreate_description__
+     */
     public function actionCreate()
     {
         $groups = Group::find()->disableAccessCheck()->orderBy('name')->all();

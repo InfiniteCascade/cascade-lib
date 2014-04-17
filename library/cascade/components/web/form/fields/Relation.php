@@ -20,9 +20,21 @@ use cascade\components\web\browser\Response as BrowserResponse;
 **/
 class Relation extends Base
 {
+    /**
+     * @var __var_linkExisting_type__ __var_linkExisting_description__
+     */
     public $linkExisting = true;
+    /**
+     * @var __var_inlineRelation_type__ __var_inlineRelation_description__
+     */
     public $inlineRelation = false;
+    /**
+     * @var __var_linkMultiple_type__ __var_linkMultiple_description__
+     */
     public $linkMultiple = false;
+    /**
+     * @var __var_relatedObject_type__ __var_relatedObject_description__
+     */
     public $relatedObject;
 
     /**
@@ -64,10 +76,7 @@ class Relation extends Base
     }
 
     /**
-     *
-     *
-     * @param  unknown $model        (optional)
-     * @param  unknown $formSettings (optional)
+     * __method_generate_description__
      * @return unknown
      */
     public function generate()
@@ -86,6 +95,10 @@ class Relation extends Base
         }
     }
 
+    /**
+     * __method_getRelationModelField_description__
+     * @return __return_getRelationModelField_type__ __return_getRelationModelField_description__
+     */
     public function getRelationModelField()
     {
         $field = $this->model->tabularPrefix;
@@ -98,6 +111,11 @@ class Relation extends Base
         return $field;
     }
 
+    /**
+     * __method_generateRelationField_description__
+     * @param array $initialSettings __param_initialSettings_description__ [optional]
+     * @return __return_generateRelationField_type__ __return_generateRelationField_description__
+     */
     protected function generateRelationField($initialSettings = [])
     {
         $model = $this->model;
@@ -142,7 +160,6 @@ class Relation extends Base
 
     /**
      * Gets the value of linkExisting.
-     *
      * @return mixed
      */
     public function getLinkExisting()
@@ -152,9 +169,7 @@ class Relation extends Base
 
     /**
      * Sets the value of linkExisting.
-     *
      * @param mixed $linkExisting the link existing
-     *
      * @return self
      */
     public function setLinkExisting($linkExisting)
@@ -166,7 +181,6 @@ class Relation extends Base
 
     /**
      * Gets the value of linkMultiple.
-     *
      * @return mixed
      */
     public function getLinkMultiple()
@@ -176,9 +190,7 @@ class Relation extends Base
 
     /**
      * Sets the value of linkMultiple.
-     *
      * @param mixed $linkMultiple the link multiple
-     *
      * @return self
      */
     public function setLinkMultiple($linkMultiple)
@@ -190,7 +202,6 @@ class Relation extends Base
 
     /**
      * Gets the value of relatedObject.
-     *
      * @return mixed
      */
     public function getRelatedObject()
@@ -200,9 +211,7 @@ class Relation extends Base
 
     /**
      * Sets the value of relatedObject.
-     *
      * @param mixed $relatedObject the related object
-     *
      * @return self
      */
     public function setRelatedObject($relatedObject)

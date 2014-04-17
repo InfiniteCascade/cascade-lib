@@ -21,8 +21,17 @@ use infinite\helpers\ArrayHelper;
 **/
 class DataSource extends \cascade\components\dataInterface\DataSource
 {
+    /**
+     * @inheritdoc
+     */
     public $fieldMapClass = 'cascade\\components\\dataInterface\\connectors\\db\\FieldMap';
+    /**
+     * @inheritdoc
+     */
     public $dataItemClass = 'cascade\\components\\dataInterface\\connectors\\db\\DataItem';
+    /**
+     * @inheritdoc
+     */
     public $searchClass = 'cascade\\components\\dataInterface\\connectors\\db\\Search';
 
     /**
@@ -36,6 +45,11 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return parent::init();
     }
 
+    /**
+     * __method_getForeignDataItem_description__
+     * @param __param_key_type__ $key __param_key_description__
+     * @return __return_getForeignDataItem_type__ __return_getForeignDataItem_description__
+     */
     public function getForeignDataItem($key)
     {
         if (!isset($this->_foreignDataItems[$key])) {
@@ -48,6 +62,11 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return false;
     }
 
+    /**
+     * __method_getForeignDataModel_description__
+     * @param __param_key_type__ $key __param_key_description__
+     * @return __return_getForeignDataModel_type__ __return_getForeignDataModel_description__
+     */
     public function getForeignDataModel($key)
     {
         $config = $this->settings['foreignPullParams'];
@@ -63,6 +82,12 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return $this->foreignModel->findOne($config);
     }
 
+    /**
+     * __method_buildLocalAttributes_description__
+     * @param cascade\components\dataInterface\connectors\db\Model $foreignModel __param_foreignModel_description__
+     * @param __param_localModel_type__ $localModel __param_localModel_description__ [optional]
+     * @return __return_buildLocalAttributes_type__ __return_buildLocalAttributes_description__
+     */
     public function buildLocalAttributes(Model $foreignModel, $localModel = null)
     {
         $a = [];
@@ -156,6 +181,12 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return $a;
     }
 
+    /**
+     * __method_buildLocalAttributesOld_description__
+     * @param cascade\components\dataInterface\connectors\db\Model $foreignModel __param_foreignModel_description__
+     * @param __param_localModel_type__ $localModel __param_localModel_description__ [optional]
+     * @return __return_buildLocalAttributesOld_type__ __return_buildLocalAttributesOld_description__
+     */
     public function buildLocalAttributesOld(Model $foreignModel, $localModel = null)
     {
         $a = [];
@@ -235,6 +266,10 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return $a;
     }
 
+    /**
+     * __method_getUnmappedKeys_description__
+     * @return __return_getUnmappedKeys_type__ __return_getUnmappedKeys_description__
+     */
     public function getUnmappedKeys()
     {
         $u = [];
@@ -246,6 +281,10 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return $u;
     }
 
+    /**
+     * __method_getUnmappedLocalKeys_description__
+     * @return __return_getUnmappedLocalKeys_type__ __return_getUnmappedLocalKeys_description__
+     */
     public function getUnmappedLocalKeys()
     {
         $u = array_diff(array_keys($this->localModel->getMetaData()->columns), array_keys($this->_map));
@@ -254,6 +293,10 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return $u;
     }
 
+    /**
+     * __method_getUnmappedForeignKeys_description__
+     * @return __return_getUnmappedForeignKeys_type__ __return_getUnmappedForeignKeys_description__
+     */
     public function getUnmappedForeignKeys()
     {
         $mappedForeign = ArrayHelper::getColumn($this->_map, 'foreignKey');
@@ -263,21 +306,39 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return $u;
     }
 
+    /**
+     * __method_getLocalPrimaryKeyName_description__
+     * @return __return_getLocalPrimaryKeyName_type__ __return_getLocalPrimaryKeyName_description__
+     */
     public function getLocalPrimaryKeyName()
     {
         return $this->dummyLocalModel->tableSchema->primaryKey;
     }
 
+    /**
+     * __method_getForeignPrimaryKeyName_description__
+     * @return __return_getForeignPrimaryKeyName_type__ __return_getForeignPrimaryKeyName_description__
+     */
     public function getForeignPrimaryKeyName()
     {
         return $this->foreignModel->meta->schema->primaryKey;
     }
 
+    /**
+     * __method_isRelationKey_description__
+     * @param __param_key_type__ $key __param_key_description__
+     * @return __return_isRelationKey_type__ __return_isRelationKey_description__
+     */
     public function isRelationKey($key)
     {
         return substr($key, -3) === '_id';
     }
 
+    /**
+     * __method_generateKey_description__
+     * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
+     * @return __return_generateKey_type__ __return_generateKey_description__
+     */
     public function generateKey(Model $foreignObject)
     {
         if (is_null($this->keyGenerator)) {
@@ -300,6 +361,11 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return null;
     }
 
+    /**
+     * __method_getKeyTranslation_description__
+     * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
+     * @return __return_getKeyTranslation_type__ __return_getKeyTranslation_description__
+     */
     public function getKeyTranslation(Model $foreignObject)
     {
         $key = $this->generateKey($foreignObject);
@@ -310,6 +376,11 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         }
     }
 
+    /**
+     * __method_getReverseKeyTranslation_description__
+     * @param __param_localObject_type__ $localObject __param_localObject_description__
+     * @return __return_getReverseKeyTranslation_type__ __return_getReverseKeyTranslation_description__
+     */
     public function getReverseKeyTranslation($localObject)
     {
         $key = is_object($localObject) ? $localObject->primaryKey : $localObject;
@@ -320,6 +391,12 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         }
     }
 
+    /**
+     * __method_saveKeyTranslation_description__
+     * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
+     * @param __param_localObject_type__ $localObject __param_localObject_description__
+     * @return __return_saveKeyTranslation_type__ __return_saveKeyTranslation_description__
+     */
     public function saveKeyTranslation(Model $foreignObject, $localObject)
     {
         $key = $this->getKeyTranslation($foreignObject);
@@ -340,6 +417,9 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return $key;
     }
 
+    /**
+     * __method_loadForeignDataItems_description__
+     */
     protected function loadForeignDataItems()
     {
         $this->_foreignDataItems = [];
@@ -357,6 +437,12 @@ class DataSource extends \cascade\components\dataInterface\DataSource
 
     }
 
+    /**
+     * __method_createForeignDataItem_description__
+     * @param __param_model_type__ $model __param_model_description__
+     * @param array $config __param_config_description__ [optional]
+     * @return __return_createForeignDataItem_type__ __return_createForeignDataItem_description__
+     */
     public function createForeignDataItem($model, $config = [])
     {
         $config['isForeign'] = true;
@@ -366,6 +452,12 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return $this->_foreignDataItems[$object->id] = $this->createDataItem($config);
     }
 
+    /**
+     * __method_createLocalDataItem_description__
+     * @param __param_model_type__ $model __param_model_description__
+     * @param array $config __param_config_description__ [optional]
+     * @return __return_createLocalDataItem_type__ __return_createLocalDataItem_description__
+     */
     public function createLocalDataItem($model, $config = [])
     {
         $config['isForeign'] = false;
@@ -374,6 +466,11 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return $this->createDataItem($config);
     }
 
+    /**
+     * __method_createDataItem_description__
+     * @param array $config __param_config_description__ [optional]
+     * @return __return_createDataItem_type__ __return_createDataItem_description__
+     */
     protected function createDataItem($config = [])
     {
         if (!isset($config['class'])) {
@@ -384,11 +481,18 @@ class DataSource extends \cascade\components\dataInterface\DataSource
         return Yii::createObject($config);
     }
 
+    /**
+     * __method_loadLocalDataItems_description__
+     */
     protected function loadLocalDataItems()
     {
         $this->_localDataItems = [];
     }
 
+    /**
+     * __method_getModule_description__
+     * @return __return_getModule_type__ __return_getModule_description__
+     */
     public function getModule()
     {
         return $this->dataSource->module;

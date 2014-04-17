@@ -17,7 +17,13 @@ use cascade\components\dataInterface\MissingItemException;
 **/
 class DataItem extends \cascade\components\dataInterface\DataItem
 {
+    /**
+     * @var __var__isLoadingForeignObject_type__ __var__isLoadingForeignObject_description__
+     */
     protected $_isLoadingForeignObject = false;
+    /**
+     * @var __var__isLoadingLocalObject_type__ __var__isLoadingLocalObject_description__
+     */
     protected $_isLoadingLocalObject = false;
 
     /**
@@ -91,6 +97,11 @@ class DataItem extends \cascade\components\dataInterface\DataItem
         return $this->localObject;
     }
 
+    /**
+     * __method_fillRelationConfig_description__
+     * @param __param_config_type__ $config __param_config_description__
+     * @param __param_otherObject_type__ $otherObject __param_otherObject_description__
+     */
     protected function fillRelationConfig(&$config, $otherObject)
     {
         if (isset($config['parent_object_id'])) {
@@ -114,6 +125,11 @@ class DataItem extends \cascade\components\dataInterface\DataItem
         return false;
     }
 
+    /**
+     * __method_loadForeignObject_description__
+     * @throws RecursionException __exception_RecursionException_description__
+     * @throws MissingItemException __exception_MissingItemException_description__
+     */
     protected function loadForeignObject()
     {
         if ($this->_isLoadingForeignObject) {
@@ -134,6 +150,10 @@ class DataItem extends \cascade\components\dataInterface\DataItem
         $this->_isLoadingForeignObject = false;
     }
 
+    /**
+     * __method_loadLocalObject_description__
+     * @throws RecursionException __exception_RecursionException_description__
+     */
     protected function loadLocalObject()
     {
         if ($this->_isLoadingLocalObject) {

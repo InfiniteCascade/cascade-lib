@@ -14,6 +14,9 @@ namespace cascade\components\storageHandlers;
 **/
 class Collector extends \infinite\base\collector\Module
 {
+    /**
+     * @var __var__initialItems_type__ __var__initialItems_description__
+     */
     protected $_initialItems = [];
 
     /**
@@ -40,6 +43,10 @@ class Collector extends \infinite\base\collector\Module
         return $this->_initialItems;
     }
 
+    /**
+     * __method_setInitialItems_description__
+     * @param __param_value_type__ $value __param_value_description__
+     */
     public function setInitialItems($value)
     {
         $this->_initialItems = $value;

@@ -17,11 +17,20 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
+    /**
+     * @inheritdoc
+     */
     public $sourcePath = '@cascade/assets/app';
 
     // public $basePath = '@webroot';
     // public $baseUrl = '@web';
+    /**
+     * @inheritdoc
+     */
     public $css = ['css/site.css'];
+    /**
+     * @inheritdoc
+     */
     public $js = [
         'js/cascade.core.js',
         'js/cascade.refreshable.js',
@@ -31,6 +40,9 @@ class AppAsset extends AssetBundle
         'js/cascade.relationship.js',
         'js/cascade.infiniteFilter.js'
     ];
+    /**
+     * @inheritdoc
+     */
     public $depends = [
         'infinite\\web\\assetBundles\\InfiniteAsset',
         'infinite\\web\\assetBundles\\InfiniteBrowserAsset',

@@ -23,11 +23,18 @@ abstract class AclTask extends \infinite\setup\Task
     {
         return 'ACL';
     }
+    /**
+     * __method_getBaseAcas_description__
+     * @return __return_getBaseAcas_type__ __return_getBaseAcas_description__
+     */
     public function getBaseAcas()
     {
         return ['list', 'read', 'create', 'update', 'delete', 'archive'];
     }
 
+    /**
+     * __method_getBaseRules_description__
+     */
     abstract public function getBaseRules();
 
     /**

@@ -14,6 +14,9 @@ namespace cascade\modules\ThemeCascade\components;
 **/
 class IdentityAsset extends \cascade\components\web\themes\IdentityAsset
 {
+    /**
+     * @inheritdoc
+     */
     public $sourcePath = '@cascade/modules/ThemeCascade/assets';
 
     /**

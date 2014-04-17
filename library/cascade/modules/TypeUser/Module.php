@@ -16,12 +16,27 @@ use Yii;
 **/
 class Module extends \cascade\components\types\Module
 {
+    /**
+     * @inheritdoc
+     */
     protected $_title = 'User';
+    /**
+     * @inheritdoc
+     */
     public $icon = 'fa fa-user';
 
+    /**
+     * @inheritdoc
+     */
     public $hasDashboard = true;
 
+    /**
+     * @inheritdoc
+     */
     public $widgetNamespace = 'cascade\\modules\\TypeUser\\widgets';
+    /**
+     * @inheritdoc
+     */
     public $modelNamespace = false;
 
     /**

@@ -14,14 +14,48 @@ namespace cascade\components\db\fields;
 **/
 class Relation extends Base
 {
+    /**
+     * @inheritdoc
+     */
     public $formFieldClass = 'cascade\components\web\form\fields\Relation';
+    /**
+     * @inheritdoc
+     */
     protected $_human = true;
     protected $_moduleHandler;
+    /**
+     * @var __var_relationship_type__ __var_relationship_description__
+     */
     public $relationship;
+    /**
+     * @var __var_modelRole_type__ __var_modelRole_description__
+     */
     public $modelRole; // either parent or child
+    /**
+     * @var __var_baseModel_type__ __var_baseModel_description__
+     */
     public $baseModel;
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
+    /**
+     * @var __var__moduleHandlers_type__ __var__moduleHandlers_description__
+     */
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
     static $_moduleHandlers = [];
 
+    /**
+     * __method_getCompanion_description__
+     * @return __return_getCompanion_type__ __return_getCompanion_description__
+     */
     public function getCompanion()
     {
         if ($this->modelRole === 'parent') {
@@ -30,6 +64,10 @@ class Relation extends Base
             return $this->relationship->parent;
         }
     }
+    /**
+     * __method_getModule_description__
+     * @return __return_getModule_type__ __return_getModule_description__
+     */
     public function getModule()
     {
         if ($this->modelRole === 'child') {
@@ -39,6 +77,10 @@ class Relation extends Base
         }
     }
 
+    /**
+     * __method_getModuleHandler_description__
+     * @return __return_getModuleHandler_type__ __return_getModuleHandler_description__
+     */
     public function getModuleHandler()
     {
         if (is_null($this->_moduleHandler)) {
@@ -60,6 +102,10 @@ class Relation extends Base
         return $this->companion->dummyModel->getBehavior('Storage') !== null;
     }
 
+    /**
+     * __method_getCompanionField_description__
+     * @return __return_getCompanionField_type__ __return_getCompanionField_description__
+     */
     public function getCompanionField()
     {
         $fieldParts = explode(':', $this->field);

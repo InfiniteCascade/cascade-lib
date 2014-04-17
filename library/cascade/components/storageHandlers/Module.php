@@ -14,7 +14,13 @@ namespace cascade\components\storageHandlers;
 **/
 abstract class Module extends \cascade\components\base\CollectorModule
 {
+    /**
+     * @var __var_name_type__ __var_name_description__
+     */
     public $name;
+    /**
+     * @var __var_version_type__ __var_version_description__
+     */
     public $version = 1;
 
     /**

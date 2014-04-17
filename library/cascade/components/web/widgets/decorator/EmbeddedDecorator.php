@@ -14,5 +14,8 @@ namespace cascade\components\web\widgets\decorator;
 **/
 class EmbeddedDecorator extends PanelDecorator
 {
+    /**
+     * @inheritdoc
+     */
     public $panelCssClass = 'embedded-panel';
 }

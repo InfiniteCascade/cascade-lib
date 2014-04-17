@@ -14,6 +14,9 @@ namespace cascade\components\db\behaviors\auditable;
 **/
 class Auditable extends \infinite\db\behaviors\auditable\Auditable
 {
+    /**
+     * @inheritdoc
+     */
     public $deleteEventClass = 'cascade\\components\\db\\behaviors\\auditable\\DeleteEvent';
 
 }

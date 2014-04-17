@@ -20,8 +20,15 @@ use infinite\db\Query;
 **/
 class Gatekeeper extends \infinite\security\Gatekeeper
 {
+    /**
+     * @inheritdoc
+     */
     public $objectAccessClass = 'cascade\\components\\security\\ObjectAccess';
 
+    /**
+     * __method_getPrimaryAccount_description__
+     * @return __return_getPrimaryAccount_type__ __return_getPrimaryAccount_description__
+     */
     public function getPrimaryAccount()
     {
         return ObjectAccount::get(Yii::$app->params['primaryAccount'], false);

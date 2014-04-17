@@ -16,6 +16,9 @@ use Yii;
 **/
 class ObjectAccess extends \infinite\security\ObjectAccess
 {
+    /**
+     * @var __var_specialAuthorities_type__ __var_specialAuthorities_description__
+     */
     public $specialAuthorities = ['Group'];
 
     /**

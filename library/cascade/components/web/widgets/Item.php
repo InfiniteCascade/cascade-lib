@@ -20,12 +20,33 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
 {
     use CollectedObjectTrait;
 
+    /**
+     * @var __var_name_type__ __var_name_description__
+     */
     public $name;
+    /**
+     * @var __var_widget_type__ __var_widget_description__
+     */
     public $widget;
+    /**
+     * @var __var_tab_type__ __var_tab_description__
+     */
     public $tab;
+    /**
+     * @var __var_priority_type__ __var_priority_description__
+     */
     public $priority = 0;
+    /**
+     * @var __var_locations_type__ __var_locations_description__
+     */
     public $locations = [];
+    /**
+     * @var __var__section_type__ __var__section_description__
+     */
     protected $_section;
+    /**
+     * @var __var_settings_type__ __var_settings_description__
+     */
     public $settings = [];
 
     /**
@@ -43,6 +64,12 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
         return $object;
     }
 
+    /**
+     * __method_getSection_description__
+     * @param __param_parent_type__ $parent __param_parent_description__ [optional]
+     * @param array $settings __param_settings_description__ [optional]
+     * @return __return_getSection_type__ __return_getSection_description__
+     */
     public function getSection($parent = null, $settings = [])
     {
         $settings = array_merge($this->settings, $settings);
@@ -56,6 +83,10 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
         return $this->_section;
     }
 
+    /**
+     * __method_setSection_description__
+     * @param __param_value_type__ $value __param_value_description__
+     */
     public function setSection($value)
     {
         $this->_section = $value;

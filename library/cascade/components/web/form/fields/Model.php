@@ -17,8 +17,18 @@ use infinite\helpers\Html;
 **/
 class Model extends Base
 {
+    /**
+     * @var __var_fileStorageWidgetClass_type__ __var_fileStorageWidgetClass_description__
+     */
     public $fileStorageWidgetClass = 'cascade\\components\\web\\widgets\\form\\FileStorage';
+    /**
+     * @var __var__fieldConfig_type__ __var__fieldConfig_description__
+     */
     protected $_fieldConfig = [];
+    /**
+     * __method_getFieldConfig_description__
+     * @return __return_getFieldConfig_type__ __return_getFieldConfig_description__
+     */
     public function getFieldConfig()
     {
         return array_merge([
@@ -27,16 +37,18 @@ class Model extends Base
         ], $this->_fieldConfig);
     }
 
+    /**
+     * __method_setFieldConfig_description__
+     * @param __param_value_type__ $value __param_value_description__
+     */
     public function setFieldConfig($value)
     {
         $this->_fieldConfig = $value;
     }
     /**
-     *
-     *
-     * @param  unknown $model        (optional)
-     * @param  unknown $formSettings (optional)
+     * __method_generate_description__
      * @return unknown
+     * @throws Exception __exception_Exception_description__
      */
     public function generate()
     {

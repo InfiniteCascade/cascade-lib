@@ -17,12 +17,33 @@ use yii\db\Query;
 **/
 class Model extends \infinite\base\Object
 {
+    /**
+     * @var __var_modelName_type__ __var_modelName_description__
+     */
     public $modelName;
+    /**
+     * @var __var__interface_type__ __var__interface_description__
+     */
     protected $_interface;
+    /**
+     * @var __var__tableName_type__ __var__tableName_description__
+     */
     protected $_tableName;
+    /**
+     * @var __var__meta_type__ __var__meta_description__
+     */
     protected $_meta;
+    /**
+     * @var __var__attributes_type__ __var__attributes_description__
+     */
     protected $_attributes;
+    /**
+     * @var __var__keys_type__ __var__keys_description__
+     */
     protected $_keys;
+    /**
+     * @var __var__children_type__ __var__children_description__
+     */
     protected $_children;
 
     /**
@@ -39,6 +60,9 @@ class Model extends \infinite\base\Object
         Yii::configure($this->_meta, $metaConfig);
     }
 
+    /**
+     * __method___clone_description__
+     */
     public function __clone()
     {
         $this->reset();
@@ -96,21 +120,36 @@ class Model extends \infinite\base\Object
         return parent::__unset($name);
     }
 
+    /**
+     * __method_setTableName_description__
+     * @param __param_value_type__ $value __param_value_description__
+     */
     public function setTableName($value)
     {
         $this->_tableName = $value;
     }
 
+    /**
+     * __method_setInterface_description__
+     * @param __param_value_type__ $value __param_value_description__
+     */
     public function setInterface($value)
     {
         $this->_interface = $value;
     }
 
+    /**
+     * __method_reset_description__
+     */
     public function reset()
     {
         $this->_attributes = [];
     }
 
+    /**
+     * __method_setAttributes_description__
+     * @param __param_value_type__ $value __param_value_description__
+     */
     public function setAttributes($value)
     {
         foreach ($value as $key => $val) {
@@ -118,6 +157,10 @@ class Model extends \infinite\base\Object
         }
     }
 
+    /**
+     * __method_getChildren_description__
+     * @return __return_getChildren_type__ __return_getChildren_description__
+     */
     public function getChildren()
     {
         if (is_null($this->_children)) {
@@ -155,6 +198,10 @@ class Model extends \infinite\base\Object
 
         return $this->_children;
     }
+    /**
+     * __method_primaryKey_description__
+     * @return __return_primaryKey_type__ __return_primaryKey_description__
+     */
     public function primaryKey()
     {
         $pk = $this->meta->schema->primaryKey;
@@ -170,6 +217,10 @@ class Model extends \infinite\base\Object
         return $pk;
     }
 
+    /**
+     * __method_getPrimaryKey_description__
+     * @return __return_getPrimaryKey_type__ __return_getPrimaryKey_description__
+     */
     public function getPrimaryKey()
     {
         $pk = $this->meta->schema->primaryKey;
@@ -192,6 +243,11 @@ class Model extends \infinite\base\Object
         return $this->attributes[$pk];
     }
 
+    /**
+     * __method_populateRecord_description__
+     * @param __param_attributes_type__ $attributes __param_attributes_description__
+     * @return __return_populateRecord_type__ __return_populateRecord_description__
+     */
     public function populateRecord($attributes)
     {
         if ($attributes === false) {
@@ -203,6 +259,11 @@ class Model extends \infinite\base\Object
         return $clone;
     }
 
+    /**
+     * __method_populateRecords_description__
+     * @param __param_results_type__ $results __param_results_description__
+     * @return __return_populateRecords_type__ __return_populateRecords_description__
+     */
     public function populateRecords($results)
     {
         $r = [];
@@ -213,6 +274,10 @@ class Model extends \infinite\base\Object
         return $r;
     }
 
+    /**
+     * __method_getAttributes_description__
+     * @return __return_getAttributes_type__ __return_getAttributes_description__
+     */
     public function getAttributes()
     {
         $a = [];
@@ -226,21 +291,38 @@ class Model extends \infinite\base\Object
         return $a;
     }
 
+    /**
+     * __method_getMeta_description__
+     * @return __return_getMeta_type__ __return_getMeta_description__
+     */
     public function getMeta()
     {
         return $this->_meta;
     }
 
+    /**
+     * __method_setMeta_description__
+     * @param __param_value_type__ $value __param_value_description__
+     */
     public function setMeta($value)
     {
         $this->_meta = $value;
     }
 
+    /**
+     * __method_getInterface_description__
+     * @return __return_getInterface_type__ __return_getInterface_description__
+     */
     public function getInterface()
     {
         return $this->_interface;
     }
 
+    /**
+     * __method_find_description__
+     * @param __param_params_type__ $params __param_params_description__
+     * @return __return_find_type__ __return_find_description__
+     */
     public function find($params)
     {
         $debug = false;
@@ -272,6 +354,11 @@ class Model extends \infinite\base\Object
         return $q;
     }
 
+    /**
+     * __method_findAll_description__
+     * @param array $params __param_params_description__ [optional]
+     * @return __return_findAll_type__ __return_findAll_description__
+     */
     public function findAll($params = [])
     {
         $return = $this->populateRecords($this->find($params)->all($this->interface->db));
@@ -279,11 +366,21 @@ class Model extends \infinite\base\Object
         return $return;
     }
 
+    /**
+     * __method_findOne_description__
+     * @param array $params __param_params_description__ [optional]
+     * @return __return_findOne_type__ __return_findOne_description__
+     */
     public function findOne($params = [])
     {
         return $this->populateRecord($this->find($params)->one($this->interface->db));
     }
 
+    /**
+     * __method_findPrimaryKeys_description__
+     * @param array $params __param_params_description__ [optional]
+     * @return __return_findPrimaryKeys_type__ __return_findPrimaryKeys_description__
+     */
     public function findPrimaryKeys($params = [])
     {
         $q = $this->find($params);
@@ -292,6 +389,10 @@ class Model extends \infinite\base\Object
         return $q->column($this->interface->db);
     }
 
+    /**
+     * __method_getTableName_description__
+     * @return __return_getTableName_type__ __return_getTableName_description__
+     */
     public function getTableName()
     {
         return $this->_tableName;

@@ -20,14 +20,35 @@ use cascade\components\dataInterface\Module as BaseModule;
 **/
 abstract class Module extends BaseModule
 {
+    /**
+     * @var __var_dataSourceClass_type__ __var_dataSourceClass_description__
+     */
     public $dataSourceClass = 'cascade\\components\\dataInterface\\connectors\\db\\DataSource';
+    /**
+     * @var __var_dbConfig_type__ __var_dbConfig_description__
+     */
     public $dbConfig = [];
+    /**
+     * @var __var__action_type__ __var__action_description__
+     */
     protected $_action;
 
+    /**
+     * @var __var__models_type__ __var__models_description__
+     */
     protected $_models;
+    /**
+     * @var __var__db_type__ __var__db_description__
+     */
     protected $_db;
+    /**
+     * @var __var__dataSources_type__ __var__dataSources_description__
+     */
     protected $_dataSources;
 
+    /**
+     * __method_dataSources_description__
+     */
     abstract public function dataSources();
 
     // public function getKeyTranslation(Model $foreignObject) {
@@ -64,6 +85,11 @@ abstract class Module extends BaseModule
         }
     }
 
+    /**
+     * __method_getDataSource_description__
+     * @param __param_tableName_type__ $tableName __param_tableName_description__
+     * @return __return_getDataSource_type__ __return_getDataSource_description__
+     */
     public function getDataSource($tableName)
     {
         $model = $this->getForeignModelName($tableName);
@@ -79,6 +105,10 @@ abstract class Module extends BaseModule
         return false;
     }
 
+    /**
+     * __method_getDataSources_description__
+     * @return __return_getDataSources_type__ __return_getDataSources_description__
+     */
     public function getDataSources()
     {
         if (is_null($this->_dataSources)) {
@@ -97,6 +127,15 @@ abstract class Module extends BaseModule
         return $this->_dataSources;
     }
 
+    /**
+     * __method_updateLocalObject_description__
+     * @param __param_relatedType_type__ $relatedType __param_relatedType_description__
+     * @param __param_foreignPrimaryKey_type__ $foreignPrimaryKey __param_foreignPrimaryKey_description__
+     * @param __param_valueMap_type__ $valueMap __param_valueMap_description__
+     * @param __param_fieldMap_type__ $fieldMap __param_fieldMap_description__
+     * @param __param_localModel_type__ $localModel __param_localModel_description__
+     * @return __return_updateLocalObject_type__ __return_updateLocalObject_description__
+     */
     public function updateLocalObject($relatedType, $foreignPrimaryKey, $valueMap, $fieldMap, $localModel)
     {
         $localModelClass = $relatedType->primaryModel;
@@ -141,6 +180,12 @@ abstract class Module extends BaseModule
         }
     }
 
+    /**
+     * __method_getLocalObject_description__
+     * @param __param_localModelClass_type__ $localModelClass __param_localModelClass_description__
+     * @param __param_foreignPrimaryKey_type__ $foreignPrimaryKey __param_foreignPrimaryKey_description__
+     * @return __return_getLocalObject_type__ __return_getLocalObject_description__
+     */
     public function getLocalObject($localModelClass, $foreignPrimaryKey)
     {
         $dataSource = $this->getLocalDataSource($localModelClass);
@@ -151,6 +196,12 @@ abstract class Module extends BaseModule
         return false;
     }
 
+    /**
+     * __method_getForeignObject_description__
+     * @param __param_foreignModelClass_type__ $foreignModelClass __param_foreignModelClass_description__
+     * @param __param_foreignPrimaryKey_type__ $foreignPrimaryKey __param_foreignPrimaryKey_description__
+     * @return __return_getForeignObject_type__ __return_getForeignObject_description__
+     */
     public function getForeignObject($foreignModelClass, $foreignPrimaryKey)
     {
         $dataSource = $this->getForeignDataSource($foreignModelClass);
@@ -161,6 +212,11 @@ abstract class Module extends BaseModule
         return false;
     }
 
+    /**
+     * __method_getLocalDataSource_description__
+     * @param __param_localModelClass_type__ $localModelClass __param_localModelClass_description__
+     * @return __return_getLocalDataSource_type__ __return_getLocalDataSource_description__
+     */
     public function getLocalDataSource($localModelClass)
     {
         foreach ($this->dataSources as $dataSource) {
@@ -172,6 +228,11 @@ abstract class Module extends BaseModule
         return false;
     }
 
+    /**
+     * __method_getForeignDataSource_description__
+     * @param __param_foreignModelClass_type__ $foreignModelClass __param_foreignModelClass_description__
+     * @return __return_getForeignDataSource_type__ __return_getForeignDataSource_description__
+     */
     public function getForeignDataSource($foreignModelClass)
     {
         foreach ($this->dataSources as $dataSource) {
@@ -183,6 +244,11 @@ abstract class Module extends BaseModule
         return false;
     }
 
+    /**
+     * __method_getForeignModel_description__
+     * @param __param_model_type__ $model __param_model_description__
+     * @return __return_getForeignModel_type__ __return_getForeignModel_description__
+     */
     public function getForeignModel($model)
     {
         $models = $this->foreignModels;
@@ -193,11 +259,21 @@ abstract class Module extends BaseModule
         return false;
     }
 
+    /**
+     * __method_getForeignModelsConfig_description__
+     * @return __return_getForeignModelsConfig_type__ __return_getForeignModelsConfig_description__
+     */
     public function getForeignModelsConfig()
     {
         return [];
     }
 
+    /**
+     * __method_getForeignModelConfig_description__
+     * @param __param_tableName_type__ $tableName __param_tableName_description__
+     * @param __param_modelName_type__ $modelName __param_modelName_description__
+     * @return __return_getForeignModelConfig_type__ __return_getForeignModelConfig_description__
+     */
     public function getForeignModelConfig($tableName, $modelName)
     {
         $config = ['class' => 'cascade\\components\\dataInterface\\connectors\\db\\Model'];
@@ -211,11 +287,20 @@ abstract class Module extends BaseModule
         return $config;
     }
 
+    /**
+     * __method_getForeignModelName_description__
+     * @param __param_tableName_type__ $tableName __param_tableName_description__
+     * @return __return_getForeignModelName_type__ __return_getForeignModelName_description__
+     */
     public function getForeignModelName($tableName)
     {
         return Inflector::singularize(Inflector::id2camel($tableName, '_'));
     }
 
+    /**
+     * __method_getForeignModels_description__
+     * @return __return_getForeignModels_type__ __return_getForeignModels_description__
+     */
     public function getForeignModels()
     {
         if (is_null($this->_models)) {
@@ -229,6 +314,11 @@ abstract class Module extends BaseModule
         return $this->_models;
     }
 
+    /**
+     * __method_getDb_description__
+     * @return __return_getDb_type__ __return_getDb_description__
+     * @throws Exception __exception_Exception_description__
+     */
     public function getDb()
     {
         if (is_null($this->_db)) {
@@ -245,6 +335,10 @@ abstract class Module extends BaseModule
         return $this->_db;
     }
 
+    /**
+     * __method_getAction_description__
+     * @return __return_getAction_type__ __return_getAction_description__
+     */
     public function getAction()
     {
         if (is_null($this->_action)) {

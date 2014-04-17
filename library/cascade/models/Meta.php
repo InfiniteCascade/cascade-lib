@@ -77,6 +77,7 @@ class Meta extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getMetaKey_description__
      * @return \yii\db\ActiveRelation
      */
     public function getMetaKey()
@@ -85,6 +86,7 @@ class Meta extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getRegistry_description__
      * @return \yii\db\ActiveRelation
      */
     public function getRegistry()

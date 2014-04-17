@@ -22,6 +22,9 @@ use infinite\base\exceptions\Exception;
 **/
 class User extends \infinite\db\models\User
 {
+    /**
+     * @var __var__individual_type__ __var__individual_description__
+     */
     protected $_individual;
 
     use TypesActiveRecordTrait {
@@ -32,6 +35,9 @@ class User extends \infinite\db\models\User
         BaseActiveRecordTrait::behaviors as baseBehaviors;
     }
 
+    /**
+     * @inheritdoc
+     */
     public $descriptorField = ['first_name', 'last_name'];
 
     /**
@@ -42,6 +48,11 @@ class User extends \infinite\db\models\User
         return array_merge(parent::behaviors(), self::baseBehaviors(), self::typesBehaviors(), []);
     }
 
+    /**
+     * __method_systemUser_description__
+     * @return __return_systemUser_type__ __return_systemUser_description__
+     * @throws Exception __exception_Exception_description__
+     */
     public static function systemUser()
     {
         $user = self::findOne([self::tableName() .'.'. 'username' => 'system'], false);
@@ -66,6 +77,7 @@ class User extends \infinite\db\models\User
     }
 
     /**
+     * __method_getIndividual_description__
      * @return \yii\db\ActiveRelation
      */
     public function getIndividual()

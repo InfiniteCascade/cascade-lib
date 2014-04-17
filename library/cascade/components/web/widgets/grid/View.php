@@ -20,29 +20,104 @@ use infinite\base\exceptions\Exception;
 **/
 class View extends \yii\base\Widget
 {
+    /**
+     * @var __var_widget_type__ __var_widget_description__
+     */
     public $widget;
+    /**
+     * @var __var_state_type__ __var_state_description__
+     */
     public $state;
+    /**
+     * @var __var_dataProvider_type__ __var_dataProvider_description__
+     */
     public $dataProvider;
+    /**
+     * @var __var_emptyText_type__ __var_emptyText_description__
+     */
     public $emptyText = 'No items found';
+    /**
+     * @var __var_htmlOptions_type__ __var_htmlOptions_description__
+     */
     public $htmlOptions = [];
+    /**
+     * @var __var_sortableAttributes_type__ __var_sortableAttributes_description__
+     */
     public $sortableAttributes;
+    /**
+     * @var __var_filters_type__ __var_filters_description__
+     */
     public $filters;
+    /**
+     * @var __var_views_type__ __var_views_description__
+     */
     public $views = ['list'];
+    /**
+     * @var __var_currentView_type__ __var_currentView_description__
+     */
     public $currentView = 'list';
+    /**
+     * @var __var_itemsPerRequest_type__ __var_itemsPerRequest_description__
+     */
     public $itemsPerRequest = 20;
+    /**
+     * @var __var_limit_type__ __var_limit_description__
+     */
     public $limit;
+    /**
+     * @var __var_rendererSettings_type__ __var_rendererSettings_description__
+     */
     public $rendererSettings = [];
+    /**
+     * @var __var_itemMenu_type__ __var_itemMenu_description__
+     */
     public $itemMenu = [];
+    /**
+     * @var __var_additionalClasses_type__ __var_additionalClasses_description__
+     */
     public $additionalClasses;
+    /**
+     * @var __var_specialItemClasses_type__ __var_specialItemClasses_description__
+     */
     public $specialItemClasses = [];
 
+    /**
+     * @var __var_nullDisplay_type__ __var_nullDisplay_description__
+     */
     public $nullDisplay = '';
 
+    /**
+     * @var __var__totalItems_type__ __var__totalItems_description__
+     */
     protected $_totalItems;
     protected $_currentData;
+    /**
+     * @var __var__currentDataRaw_type__ __var__currentDataRaw_description__
+     */
+    /**
+     * @var __var__currentData_type__ __var__currentData_description__
+     */
+    /**
+     * @var __var__currentData_type__ __var__currentData_description__
+     */
+    /**
+     * @var __var__currentData_type__ __var__currentData_description__
+     */
+    /**
+     * @var __var__currentData_type__ __var__currentData_description__
+     */
     protected $_currentDataRaw;
+    /**
+     * @var __var__columns_type__ __var__columns_description__
+     */
     protected $_columns;
+    /**
+     * @var __var__columnSettings_type__ __var__columnSettings_description__
+     */
     protected $_columnSettings;
+    /**
+     * @var __var__formatter_type__ __var__formatter_description__
+     */
     protected $_formatter;
 
     /**
@@ -98,6 +173,10 @@ class View extends \yii\base\Widget
         }
     }
 
+    /**
+     * __method_getColumnSettings_description__
+     * @return __return_getColumnSettings_type__ __return_getColumnSettings_description__
+     */
     public function getColumnSettings()
     {
         if (is_null($this->_columnSettings)) {
@@ -118,6 +197,10 @@ class View extends \yii\base\Widget
         return $this->_columnSettings;
     }
 
+    /**
+     * __method_getData_description__
+     * @return __return_getData_type__ __return_getData_description__
+     */
     public function getData()
     {
         if (is_null($this->_currentData)) {
@@ -146,6 +229,11 @@ class View extends \yii\base\Widget
         return $this->_currentData;
     }
 
+    /**
+     * __method_setColumns_description__
+     * @param __param_columns_type__ $columns __param_columns_description__
+     * @return __return_setColumns_type__ __return_setColumns_description__
+     */
     public function setColumns($columns)
     {
         $this->_columns = [];
@@ -197,6 +285,12 @@ class View extends \yii\base\Widget
         }
     }
 
+    /**
+     * __method_createGridColumn_description__
+     * @param __param_text_type__ $text __param_text_description__
+     * @return __return_createGridColumn_type__ __return_createGridColumn_description__
+     * @throws Exception __exception_Exception_description__
+     */
     protected function createGridColumn($text)
     {
         if (!preg_match('/^([\w\.]+)(:(\w*))?(:(.*))?$/', $text, $matches)) {
@@ -212,6 +306,10 @@ class View extends \yii\base\Widget
         return $column;
     }
 
+    /**
+     * __method_getColumns_description__
+     * @return __return_getColumns_type__ __return_getColumns_description__
+     */
     public function getColumns()
     {
         if (is_null($this->_columns)) {
@@ -221,11 +319,19 @@ class View extends \yii\base\Widget
         return $this->_columns;
     }
 
+    /**
+     * __method_getDataKey_description__
+     * @return __return_getDataKey_type__ __return_getDataKey_description__
+     */
     public function getDataKey()
     {
         return 'ajax-'. $this->id;
     }
 
+    /**
+     * __method_getTotalItems_description__
+     * @return __return_getTotalItems_type__ __return_getTotalItems_description__
+     */
     public function getTotalItems()
     {
         if (is_null($this->_totalItems)) {
@@ -235,6 +341,9 @@ class View extends \yii\base\Widget
         return $this->_totalItems;
     }
 
+    /**
+     * __method__prepareDataProvider_description__
+     */
     protected function _prepareDataProvider()
     {
         if (!is_null($this->limit)) {
@@ -245,8 +354,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     *
-     *
+     * __method_getFormatter_description__
      * @return CFormatter the formatter instance. Defaults to the 'format' application component.
      */
     public function getFormatter()
@@ -258,8 +366,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     *
-     *
+     * __method_setFormatter_description__
      * @param CFormatter $value the formatter instance
      */
     public function setFormatter($value)

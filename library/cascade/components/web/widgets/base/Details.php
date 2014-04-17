@@ -24,13 +24,34 @@ class Details extends Widget implements ListWidgetInterface
         ListWidgetTrait::getListItemOptions as getListItemOptionsBase;
     }
 
+    /**
+     * @var __var_contentHtmlOptions_type__ __var_contentHtmlOptions_description__
+     */
     public $contentHtmlOptions = ['class' => 'form-panel'];
+    /**
+     * @var __var_fieldHtmlOptions_type__ __var_fieldHtmlOptions_description__
+     */
     public $fieldHtmlOptions = ['class' => 'form-group'];
+    /**
+     * @var __var_labelHtmlOptions_type__ __var_labelHtmlOptions_description__
+     */
     public $labelHtmlOptions = ['class' => 'control-label', ];
+    /**
+     * @var __var_valueHtmlOptions_type__ __var_valueHtmlOptions_description__
+     */
     public $valueHtmlOptions = ['class' => 'form-control-static'];
 
+    /**
+     * @inheritdoc
+     */
     public $gridClass = 'infinite\\web\\grid\\Grid';
+    /**
+     * @inheritdoc
+     */
     public $gridCellClass = 'infinite\\web\\grid\\Cell';
+    /**
+     * @inheritdoc
+     */
     protected $_title = 'Details';
 
     /**
@@ -78,11 +99,20 @@ class Details extends Widget implements ListWidgetInterface
         return implode($parts);
     }
 
+    /**
+     * __method_generateCell_description__
+     * @param __param_content_type__ $content __param_content_description__
+     * @return __return_generateCell_type__ __return_generateCell_description__
+     */
     protected function generateCell($content)
     {
         return Yii::createObject(['class' => $this->gridCellClass, 'content' => $content, 'tabletSize' => false]);
     }
 
+    /**
+     * __method_getPaginationSettings_description__
+     * @return __return_getPaginationSettings_type__ __return_getPaginationSettings_description__
+     */
     public function getPaginationSettings()
     {
         return false;

@@ -16,6 +16,12 @@ use yii\imagine\Image;
 **/
 class AssetBundle extends \yii\web\AssetBundle
 {
+    /**
+     * __method_sizeImageCache_description__
+     * @param __param_imagePath_type__ $imagePath __param_imagePath_description__
+     * @param __param_size_type__ $size __param_size_description__
+     * @return __return_sizeImageCache_type__ __return_sizeImageCache_description__
+     */
     public function sizeImageCache($imagePath, $size)
     {
         $sizeKey = md5(json_encode($size));
@@ -40,6 +46,12 @@ class AssetBundle extends \yii\web\AssetBundle
         return false;
     }
 
+    /**
+     * __method_followResizeInstructions_description__
+     * @param __param_imagePath_type__ $imagePath __param_imagePath_description__
+     * @param __param_resize_type__ $resize __param_resize_description__
+     * @return __return_followResizeInstructions_type__ __return_followResizeInstructions_description__
+     */
     protected function followResizeInstructions($imagePath, $resize)
     {
         if (is_object($imagePath)) {
@@ -60,6 +72,10 @@ class AssetBundle extends \yii\web\AssetBundle
         return $image;
     }
 
+    /**
+     * __method_getCachePath_description__
+     * @return __return_getCachePath_type__ __return_getCachePath_description__
+     */
     public function getCachePath()
     {
         if (empty($this->basePath)) { return false; }
@@ -74,6 +90,10 @@ class AssetBundle extends \yii\web\AssetBundle
         return $cachePath;
     }
 
+    /**
+     * __method_getCacheUrl_description__
+     * @return __return_getCacheUrl_type__ __return_getCacheUrl_description__
+     */
     public function getCacheUrl()
     {
         if (empty($this->baseUrl)) { return false; }
@@ -82,6 +102,11 @@ class AssetBundle extends \yii\web\AssetBundle
         return $cacheUrl;
     }
 
+    /**
+     * __method_getCacheAssetUrl_description__
+     * @param __param_path_type__ $path __param_path_description__
+     * @return __return_getCacheAssetUrl_type__ __return_getCacheAssetUrl_description__
+     */
     public function getCacheAssetUrl($path)
     {
         $url = $this->cacheUrl .'/'. basename($path);

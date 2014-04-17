@@ -16,5 +16,8 @@ use yii\base\Event as BaseEvent;
 **/
 class Event extends BaseEvent
 {
+    /**
+     * @var __var_object_type__ __var_object_description__
+     */
     public $object;
 }

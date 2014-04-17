@@ -21,10 +21,20 @@ use infinite\base\exceptions\Exception;
 **/
 class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 {
+    /**
+     * @var __var_storageAttribute_type__ __var_storageAttribute_description__
+     */
     public $storageAttribute = 'storage_id';
 
+    /**
+     * @var __var__storageEngine_type__ __var__storageEngine_description__
+     */
     protected $_storageEngine;
 
+    /**
+     * Converts object to string.
+     * @return __return___toString_type__ __return___toString_description__
+     */
     public function __toString()
     {
         return $this->primaryKey;
@@ -51,6 +61,11 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         return ['storageEngine', 'storage'];
     }
 
+    /**
+     * __method_setStorage_description__
+     * @param __param_value_type__ $value __param_value_description__
+     * @throws Exception __exception_Exception_description__
+     */
     public function setStorage($value)
     {
         $value = $this->storageEngine->storageHandler->object->beforeSetStorage($value);
@@ -61,6 +76,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * __method_getStorage_description__
+     * @return __return_getStorage_type__ __return_getStorage_description__
+     */
     public function getStorage()
     {
         if (isset($this->owner->{$this->storageAttribute}) && $this->owner->{$this->storageAttribute} instanceof FileInterface) {
@@ -70,6 +89,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         return null;
     }
 
+    /**
+     * __method_loadPostFile_description__
+     * @param string $tabId __param_tabId_description__ [optional]
+     */
     public function loadPostFile($tabId = '')
     {
         $attribute = $this->storageAttribute;
@@ -81,6 +104,11 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * __method_beforeSave_description__
+     * @param __param_event_type__ $event __param_event_description__
+     * @return __return_beforeSave_type__ __return_beforeSave_description__
+     */
     public function beforeSave($event)
     {
         if (!$this->storageEngine->storageHandler->object->beforeSave($this->storageEngine, $this->owner, $this->storageAttribute)) {
@@ -91,6 +119,11 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * __method_afterDelete_description__
+     * @param __param_event_type__ $event __param_event_description__
+     * @return __return_afterDelete_type__ __return_afterDelete_description__
+     */
     public function afterDelete($event)
     {
         $storageObject = $this->storageObject;
@@ -104,6 +137,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * __method_serve_description__
+     * @return __return_serve_type__ __return_serve_description__
+     */
     public function serve()
     {
         if (!$this->storageEngine || !$this->storageEngine->storageHandler) { return false; }
@@ -114,6 +151,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         return true;
     }
 
+    /**
+     * __method_getStorageObject_description__
+     * @return __return_getStorageObject_type__ __return_getStorageObject_description__
+     */
     public function getStorageObject()
     {
         $registryClass = Yii::$app->classes['Registry'];
@@ -121,6 +162,11 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         return $registryClass::getObject($this->owner->{$this->storageAttribute});
     }
 
+    /**
+     * __method_beforeValidate_description__
+     * @param __param_event_type__ $event __param_event_description__
+     * @return __return_beforeValidate_type__ __return_beforeValidate_description__
+     */
     public function beforeValidate($event)
     {
         if (empty($this->storageEngine)) {
@@ -134,6 +180,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         return true;
     }
 
+    /**
+     * __method_getStorageEngine_description__
+     * @return __return_getStorageEngine_type__ __return_getStorageEngine_description__
+     */
     public function getStorageEngine()
     {
         if (is_null($this->_storageEngine)) {
@@ -144,6 +194,11 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         return $this->_storageEngine;
     }
 
+    /**
+     * __method_setStorageEngine_description__
+     * @param __param_value_type__ $value __param_value_description__
+     * @return __return_setStorageEngine_type__ __return_setStorageEngine_description__
+     */
     public function setStorageEngine($value)
     {
         if (is_object($value)) {

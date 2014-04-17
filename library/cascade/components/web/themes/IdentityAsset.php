@@ -14,8 +14,16 @@ namespace cascade\components\web\themes;
 **/
 abstract class IdentityAsset extends AssetBundle
 {
+    /**
+     * __method_getLogoPath_description__
+     */
     abstract public function getLogoPath();
 
+    /**
+     * __method_getLogo_description__
+     * @param __param_size_type__ $size __param_size_description__ [optional]
+     * @return __return_getLogo_type__ __return_getLogo_description__
+     */
     public function getLogo($size = null)
     {
         if (!$this->logoPath || !file_exists($this->logoPath)) { return; }

@@ -104,6 +104,12 @@ class Collector extends \infinite\base\collector\Module
         return $component;
     }
 
+    /**
+     * __method_initializeTaxonomies_description__
+     * @param __param_model_type__ $model __param_model_description__
+     * @param __param_taxonomies_type__ $taxonomies __param_taxonomies_description__
+     * @return __return_initializeTaxonomies_type__ __return_initializeTaxonomies_description__
+     */
     public function initializeTaxonomies($model, $taxonomies)
     {
         $taxonomyClass = Yii::$app->classes['Taxonomy'];

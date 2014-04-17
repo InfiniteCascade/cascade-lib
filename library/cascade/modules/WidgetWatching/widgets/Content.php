@@ -14,9 +14,19 @@ namespace cascade\modules\WidgetWatching\widgets;
 **/
 class Content extends \cascade\components\web\widgets\Widget
 {
+    /**
+     * @inheritdoc
+     */
     protected $_title = 'Watching';
+    /**
+     * @inheritdoc
+     */
     public $icon = 'fa-eye';
 
+    /**
+     * __method_getGridCellSettings_description__
+     * @return __return_getGridCellSettings_type__ __return_getGridCellSettings_description__
+     */
     public function getGridCellSettings()
     {
         $gridSettings = parent::getGridCellSettings();

@@ -86,6 +86,10 @@ class ObjectController extends Controller
         ];
     }
 
+    /**
+     * __method_actionBrowse_description__
+     * @return __return_actionBrowse_type__ __return_actionBrowse_description__
+     */
     public function actionBrowse()
     {
         $package = [];
@@ -138,7 +142,8 @@ class ObjectController extends Controller
 
 
     /**
-     *
+     * __method_actionSearch_description__
+     * @return __return_actionSearch_type__ __return_actionSearch_description__
      */
     public function actionSearch()
     {
@@ -188,7 +193,9 @@ class ObjectController extends Controller
 
 
     /**
-     *
+     * __method_actionView_description__
+     * @return __return_actionView_type__ __return_actionView_description__
+     * @throws HttpException __exception_HttpException_description__
      */
     public function actionView()
     {
@@ -235,6 +242,13 @@ class ObjectController extends Controller
 
 
 
+    /**
+     * __method__parseParams_description__
+     * @param array $required __param_required_description__ [optional]
+     * @param __param_can_type__ $can __param_can_description__ [optional]
+     * @param boolean $swap __param_swap_description__ [optional]
+     * @throws HttpException __exception_HttpException_description__
+     */
     protected function _parseParams($required = [], $can = null, $swap = false)
     {
         if (!empty($_GET['id']) && (!($this->params['object'] = Registry::getObject($_GET['id'], false)) || !($this->params['typeItem'] = $this->params['object']->objectTypeItem))) {
@@ -356,7 +370,8 @@ class ObjectController extends Controller
         }
     }
     /**
-     *
+     * __method_actionCreate_description__
+     * @throws HttpException __exception_HttpException_description__
      */
     public function actionCreate()
     {
@@ -437,7 +452,9 @@ class ObjectController extends Controller
     }
 
     /**
-     *
+     * __method_actionUpdate_description__
+     * @return __return_actionUpdate_type__ __return_actionUpdate_description__
+     * @throws HttpException __exception_HttpException_description__
      */
     public function actionUpdate()
     {
@@ -499,7 +516,7 @@ class ObjectController extends Controller
 
 
     /**
-     *
+     * __method_actionAccess_description__
      */
     public function actionAccess()
     {
@@ -557,7 +574,8 @@ class ObjectController extends Controller
     }
 
     /**
-     *
+     * __method_actionDelete_description__
+     * @throws HttpException __exception_HttpException_description__
      */
     public function actionDelete()
     {
@@ -617,7 +635,8 @@ class ObjectController extends Controller
     }
 
     /**
-     *
+     * __method_actionWatch_description__
+     * @throws HttpException __exception_HttpException_description__
      */
     public function actionWatch()
     {
@@ -649,7 +668,7 @@ class ObjectController extends Controller
     }
 
     /**
-     *
+     * __method_actionWidget_description__
      */
     public function actionWidget()
     {

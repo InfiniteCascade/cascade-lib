@@ -26,6 +26,10 @@ class AclRoleQuery extends ActiveQuery
         $this->on(Query::EVENT_BEFORE_QUERY, [$this, 'prioritizeNonType']);
     }
 
+    /**
+     * __method_prioritizeNonType_description__
+     * @param __param_event_type__ $event __param_event_description__ [optional]
+     */
     public function prioritizeNonType($event = null)
     {
         $objectTypePrefix = ObjectType::modelPrefix() .'-';

@@ -16,11 +16,13 @@ use infinite\helpers\Html;
 **/
 class LinkPager extends \yii\widgets\LinkPager
 {
+    /**
+     * @var __var__state_type__ __var__state_description__
+     */
     protected $_state;
 
     /**
-     *
-     *
+     * __method_getState_description__
      * @return unknown
      */
     public function getState()
@@ -29,8 +31,7 @@ class LinkPager extends \yii\widgets\LinkPager
     }
 
     /**
-     *
-     *
+     * __method_setState_description__
      * @param unknown $state
      */
     public function setState($state)
@@ -41,11 +42,12 @@ class LinkPager extends \yii\widgets\LinkPager
     /**
      * Renders a page button.
      * You may override this method to customize the generation of page buttons.
-     * @param  string  $label    the text label for the button
-     * @param  integer $page     the page number
-     * @param  string  $class    the CSS class for the page button.
-     * @param  boolean $disabled whether this page button is disabled
-     * @param  boolean $active   whether this page button is active
+     *
+     * @param string  $label    the text label for the button
+     * @param integer $page     the page number
+     * @param string  $class    the CSS class for the page button.
+     * @param boolean $disabled whether this page button is disabled
+     * @param boolean $active   whether this page button is active
      * @return string  the rendering result
      */
     protected function renderPageButton($label, $page, $class, $disabled, $active)

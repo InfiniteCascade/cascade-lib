@@ -16,6 +16,10 @@ use infinite\helpers\Html;
 **/
 abstract class Decorator extends \yii\base\Behavior implements DecoratorInterface
 {
+    /**
+     * __method_generateStart_description__
+     * @return __return_generateStart_type__ __return_generateStart_description__
+     */
     public function generateStart()
     {
         $parts = [];
@@ -27,6 +31,10 @@ abstract class Decorator extends \yii\base\Behavior implements DecoratorInterfac
         return implode("", $parts);
     }
 
+    /**
+     * __method_generateEnd_description__
+     * @return __return_generateEnd_type__ __return_generateEnd_description__
+     */
     public function generateEnd()
     {
         $parts = [];
@@ -35,6 +43,10 @@ abstract class Decorator extends \yii\base\Behavior implements DecoratorInterfac
         return implode("", $parts);
     }
 
+    /**
+     * __method_getWidgetClasses_description__
+     * @return __return_getWidgetClasses_type__ __return_getWidgetClasses_description__
+     */
     public function getWidgetClasses()
     {
         return [];

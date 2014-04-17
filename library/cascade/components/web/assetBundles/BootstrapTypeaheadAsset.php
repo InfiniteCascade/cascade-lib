@@ -16,10 +16,22 @@ use yii\web\AssetBundle;
 **/
 class BootstrapTypeaheadAsset extends AssetBundle
 {
+    /**
+     * @inheritdoc
+     */
     public $sourcePath = '@vendor/twitter/typeahead.js/dist';
+    /**
+     * @inheritdoc
+     */
     public $css = [];
+    /**
+     * @inheritdoc
+     */
     public $js = [
         'typeahead.bundle.min.js'
     ];
+    /**
+     * @inheritdoc
+     */
     public $depends = ['yii\web\JqueryAsset', 'yii\bootstrap\BootstrapAsset'];
 }

@@ -19,7 +19,13 @@ use yii\web\Application;
 **/
 class Request extends \infinite\web\Request
 {
+    /**
+     * @var __var__object_type__ __var__object_description__
+     */
     protected $_object;
+    /**
+     * @var __var__previousObject_type__ __var__previousObject_description__
+     */
     protected $_previousObject;
 
     /**
@@ -31,6 +37,9 @@ class Request extends \infinite\web\Request
         Yii::$app->on(Application::EVENT_BEFORE_REQUEST, [$this, 'startRequest']);
     }
 
+    /**
+     * __method_startRequest_description__
+     */
     public function startRequest()
     {
         if (isset($_GET['p'])) {
@@ -38,16 +47,28 @@ class Request extends \infinite\web\Request
         }
     }
 
+    /**
+     * __method_setObject_description__
+     * @param __param_object_type__ $object __param_object_description__
+     */
     public function setObject($object)
     {
         $this->_object = $object;
     }
 
+    /**
+     * __method_getObject_description__
+     * @return __return_getObject_type__ __return_getObject_description__
+     */
     public function getObject()
     {
         return $this->_object;
     }
 
+    /**
+     * __method_getPreviousObject_description__
+     * @return __return_getPreviousObject_type__ __return_getPreviousObject_description__
+     */
     public function getPreviousObject()
     {
         return $this->_previousObject;

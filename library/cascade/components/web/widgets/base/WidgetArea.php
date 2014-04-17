@@ -18,8 +18,17 @@ use cascade\components\web\widgets\BaseWidget;
 **/
 abstract class WidgetArea extends BaseWidget
 {
+    /**
+     * @var __var_location_type__ __var_location_description__
+     */
     public $location = 'right';
+    /**
+     * @var __var_parentWidget_type__ __var_parentWidget_description__
+     */
     public $parentWidget;
+    /**
+     * @inheritdoc
+     */
     public $defaultDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\AreaDecorator';
 
     /**
@@ -37,11 +46,19 @@ abstract class WidgetArea extends BaseWidget
         return $result;
     }
 
+    /**
+     * __method_getCellContent_description__
+     * @return __return_getCellContent_type__ __return_getCellContent_description__
+     */
     public function getCellContent()
     {
         return $this->generate();
     }
 
+    /**
+     * __method_getIsReady_description__
+     * @return __return_getIsReady_type__ __return_getIsReady_description__
+     */
     public function getIsReady()
     {
         return true;

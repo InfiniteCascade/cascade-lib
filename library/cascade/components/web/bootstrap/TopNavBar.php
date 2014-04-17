@@ -45,24 +45,22 @@ class TopNavBar extends Widget
 {
     /**
      * @var array the HTML attributes for the widget container tag. The following special options are recognized:
-     *
-     * - tag: string, defaults to "nav", the name of the container tag
+
+- tag: string, defaults to "nav", the name of the container tag
      */
     public $options = [];
     /**
      * @var array the HTML attributes for the container tag. The following special options are recognized:
-     *
-     * - tag: string, defaults to "div", the name of the container tag
+
+- tag: string, defaults to "div", the name of the container tag
      */
     public $containerOptions = [];
     /**
      * @var string the text of the brand. Note that this is not HTML-encoded.
-     * @see http://getbootstrap.com/components/#navbar
      */
     public $brandLabel;
     /**
-     * @param array|string $url the URL for the brand's hyperlink tag. This parameter will be processed by [[Html::url()]]
-     *                          and will be used for the "href" attribute of the brand link. If not set, [[\yii\web\Application::homeUrl]] will be used.
+     * @var __var_brandUrl_type__ __var_brandUrl_description__
      */
     public $brandUrl;
     /**
@@ -75,7 +73,7 @@ class TopNavBar extends Widget
     public $screenReaderToggleText = 'Toggle navigation';
     /**
      * @var boolean whether the navbar content should be included in an inner div container which by default
-     * adds left and right padding. Set this to false for a 100% width navbar.
+adds left and right padding. Set this to false for a 100% width navbar.
      */
     public $renderInnerContainer = true;
     /**

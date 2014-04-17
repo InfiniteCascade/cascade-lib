@@ -47,29 +47,80 @@ use cascade\components\base\ModuleSetExtension;
  */
 class Generator extends \yii\gii\Generator
 {
+    /**
+     * @var __var_db_type__ __var_db_description__
+     */
     public $db = 'db';
+    /**
+     * @var __var_moduleSet_type__ __var_moduleSet_description__
+     */
     public $moduleSet = '';
 
     //public $moduleName;
+    /**
+     * @var __var_baseClass_type__ __var_baseClass_description__
+     */
     public $baseClass = 'cascade\components\types\ActiveRecord';
 
+    /**
+     * @var __var_title_type__ __var_title_description__
+     */
     public $title;
+    /**
+     * @var __var_uniparental_type__ __var_uniparental_description__
+     */
     public $uniparental = 0;
+    /**
+     * @var __var_hasDashboard_type__ __var_hasDashboard_description__
+     */
     public $hasDashboard = 1;
+    /**
+     * @var __var_priority_type__ __var_priority_description__
+     */
     public $priority = 1000;
+    /**
+     * @var __var_icon_type__ __var_icon_description__
+     */
     public $icon;
 
+    /**
+     * @var __var_widgets_type__ __var_widgets_description__
+     */
     public $widgets = [];
 
+    /**
+     * @var __var_migrationTimestamp_type__ __var_migrationTimestamp_description__
+     */
     public $migrationTimestamp;
 
+    /**
+     * @var __var_generateRelations_type__ __var_generateRelations_description__
+     */
     public $generateRelations = true;
+    /**
+     * @var __var_generateLabelsFromComments_type__ __var_generateLabelsFromComments_description__
+     */
     public $generateLabelsFromComments = false;
 
+    /**
+     * @var __var_tableName_type__ __var_tableName_description__
+     */
     public $tableName;
+    /**
+     * @var __var_descriptorField_type__ __var_descriptorField_description__
+     */
     public $descriptorField;
+    /**
+     * @var __var_children_type__ __var_children_description__
+     */
     public $children = '';
+    /**
+     * @var __var_parents_type__ __var_parents_description__
+     */
     public $parents = '';
+    /**
+     * @var __var_section_type__ __var_section_description__
+     */
     public $section;
 
     /**
@@ -84,6 +135,10 @@ class Generator extends \yii\gii\Generator
         return parent::__construct();
     }
 
+    /**
+     * __method_getBaseNamespace_description__
+     * @return __return_getBaseNamespace_type__ __return_getBaseNamespace_description__
+     */
     public function getBaseNamespace()
     {
         if (!empty($this->moduleSet) && isset(Yii::$app->extensions[$this->moduleSet])) {
@@ -96,37 +151,65 @@ class Generator extends \yii\gii\Generator
         return 'cascade\\modules';
     }
 
+    /**
+     * __method_getModelClass_description__
+     * @return __return_getModelClass_type__ __return_getModelClass_description__
+     */
     public function getModelClass()
     {
         return $this->generateClassName($this->tableName);
     }
 
+    /**
+     * __method_getModuleName_description__
+     * @return __return_getModuleName_type__ __return_getModuleName_description__
+     */
     public function getModuleName()
     {
         return preg_replace('/^Object/', 'Type', $this->modelClass);
     }
 
+    /**
+     * __method_getModuleNamespace_description__
+     * @return __return_getModuleNamespace_type__ __return_getModuleNamespace_description__
+     */
     public function getModuleNamespace()
     {
         return $this->baseNamespace . '\\' . $this->moduleName;
     }
 
+    /**
+     * __method_getModuleClass_description__
+     * @return __return_getModuleClass_type__ __return_getModuleClass_description__
+     */
     public function getModuleClass()
     {
         return $this->moduleNamespace  .'\\' . 'Module';
     }
 
+    /**
+     * __method_getModuleID_description__
+     * @return __return_getModuleID_type__ __return_getModuleID_description__
+     */
     public function getModuleID()
     {
         return $this->moduleName;
     }
 
+    /**
+     * __method_getModuleSystemID_description__
+     * @return __return_getModuleSystemID_type__ __return_getModuleSystemID_description__
+     */
     public function getModuleSystemID()
     {
         return preg_replace('/^Type/', '', $this->moduleName);
     }
 
     // model
+    /**
+     * __method_getNs_description__
+     * @return __return_getNs_type__ __return_getNs_description__
+     */
     public function getNs()
     {
         return $this->baseNamespace . '\\models';
@@ -406,6 +489,11 @@ EOD;
         }
     }
 
+    /**
+     * __method_generateDescriptorField_description__
+     * @param __param_table_type__ $table __param_table_description__
+     * @return __return_generateDescriptorField_type__ __return_generateDescriptorField_description__
+     */
     public function generateDescriptorField($table)
     {
         $field = '';
@@ -428,6 +516,10 @@ EOD;
         return $field;
     }
 
+    /**
+     * __method_possibleSections_description__
+     * @return __return_possibleSections_type__ __return_possibleSections_description__
+     */
     public function possibleSections()
     {
         $s = ['' => '(self)'];
@@ -438,6 +530,10 @@ EOD;
         return $s;
     }
 
+    /**
+     * __method_possibleModuleSets_description__
+     * @return __return_possibleModuleSets_type__ __return_possibleModuleSets_description__
+     */
     public function possibleModuleSets()
     {
         $s = ['' => '(core)'];
@@ -453,6 +549,10 @@ EOD;
         return $s;
     }
 
+    /**
+     * __method_possibleIcons_description__
+     * @return __return_possibleIcons_type__ __return_possibleIcons_description__
+     */
     public function possibleIcons()
     {
         $path = Yii::getAlias("@vendor/fortawesome/font-awesome/src/icons.yml");
@@ -470,6 +570,7 @@ EOD;
     }
 
     /**
+     * __method_getModulePath_description__
      * @return boolean the directory that contains the module class
      */
     public function getModulePath()
@@ -477,12 +578,17 @@ EOD;
         return Yii::getAlias('@' . str_replace('\\', '/', $this->moduleNamespace));
     }
 
+    /**
+     * __method_getModuleSetPath_description__
+     * @return __return_getModuleSetPath_type__ __return_getModuleSetPath_description__
+     */
     public function getModuleSetPath()
     {
         return Yii::getAlias('@' . str_replace('\\', '/', $this->baseNamespace));
     }
 
     /**
+     * __method_getWidgetNamespace_description__
      * @return string the widget namespace of the module.
      */
     public function getWidgetNamespace()
@@ -491,6 +597,7 @@ EOD;
     }
 
     /**
+     * __method_getModelNamespace_description__
      * @return string the model namespace of the module.
      */
     public function getModelNamespace()
@@ -499,6 +606,7 @@ EOD;
     }
 
     /**
+     * __method_getMigrationsNamespace_description__
      * @return string the model namespace of the module.
      */
     public function getMigrationsNamespace()
@@ -506,16 +614,25 @@ EOD;
         return $this->moduleNamespace . '\migrations';
     }
 
+    /**
+     * __method_getMigrationPath_description__
+     * @return __return_getMigrationPath_type__ __return_getMigrationPath_description__
+     */
     public function getMigrationPath()
     {
         return Yii::getAlias('@' . str_replace('\\', '/', $this->migrationsNamespace)) . '/' . $this->migrationClassName . '.php';
     }
 
+    /**
+     * __method_getMigrationDirectory_description__
+     * @return __return_getMigrationDirectory_type__ __return_getMigrationDirectory_description__
+     */
     public function getMigrationDirectory()
     {
         return Yii::getAlias('@' . str_replace('\\', '/', $this->migrationsNamespace));
     }
     /**
+     * __method_getMigrationsAlias_description__
      * @return string the model namespace of the module.
      */
     public function getMigrationsAlias()
@@ -524,6 +641,7 @@ EOD;
     }
 
     /**
+     * __method_getMigrationClassName_description__
      * @return string the model namespace of the module.
      */
     public function getMigrationClassName()
@@ -542,6 +660,7 @@ EOD;
     /**
      * Collects the foreign key column details for the given table.
      * @param TableSchema $table the table metadata
+     * @return __return_findTableKeys_type__ __return_findTableKeys_description__
      */
     protected function findTableKeys($table)
     {
@@ -594,6 +713,11 @@ EOD;
         return $r;
     }
 
+    /**
+     * __method_getPrimaryKeyLocation_description__
+     * @param __param_table_type__ $table __param_table_description__
+     * @return __return_getPrimaryKeyLocation_type__ __return_getPrimaryKeyLocation_description__
+     */
     public function getPrimaryKeyLocation($table)
     {
         // if multiple, put the primary key in the indicies section
@@ -606,6 +730,11 @@ EOD;
         return 'table_build';
     }
 
+    /**
+     * __method_generateTableIndices_description__
+     * @param __param_table_type__ $table __param_table_description__
+     * @return __return_generateTableIndices_type__ __return_generateTableIndices_description__
+     */
     public function generateTableIndices($table)
     {
         $tableName = $table->name;
@@ -637,6 +766,10 @@ EOD;
         return implode("\n\t\t", $i);
     }
 
+    /**
+     * __method_getModuleSetModules_description__
+     * @return __return_getModuleSetModules_type__ __return_getModuleSetModules_description__
+     */
     public function getModuleSetModules()
     {
         if (empty($this->moduleSet) || !isset(Yii::$app->extensions[$this->moduleSet])) { return ''; }
@@ -670,6 +803,13 @@ EOD;
         return implode("\n\t\t", $p);
     }
 
+    /**
+     * __method_fixIndexName_description__
+     * @param __param_name_type__ $name __param_name_description__
+     * @param __param_table_type__ $table __param_table_description__
+     * @param __param_keys_type__ $keys __param_keys_description__
+     * @return __return_fixIndexName_type__ __return_fixIndexName_description__
+     */
     public function fixIndexName($name, $table, $keys)
     {
         if (strpos($name, '_') === false) { return $name; }
@@ -685,7 +825,7 @@ EOD;
 
     /**
      * Generates Create table schema
-     * @param  \yii\db\TableSchema $table the table schema
+     * @param \yii\db\TableSchema $table the table schema
      * @return array               the generated validation rules
      */
     public function generateCreateTableColumns($table)
@@ -780,7 +920,7 @@ EOD;
 
     /**
      * Generates the attribute labels for the specified table.
-     * @param  \yii\db\TableSchema $table the table schema
+     * @param \yii\db\TableSchema $table the table schema
      * @return array               the generated attribute labels (name => label)
      */
     public function generateLabels($table)
@@ -803,6 +943,11 @@ EOD;
         return $labels;
     }
 
+    /**
+     * __method_generateColumnSettings_description__
+     * @param __param_table_type__ $table __param_table_description__
+     * @return __return_generateColumnSettings_type__ __return_generateColumnSettings_description__
+     */
     public function generateColumnSettings($table)
     {
         $types = [];
@@ -816,7 +961,7 @@ EOD;
 
     /**
      * Generates validation rules for the specified table.
-     * @param  \yii\db\TableSchema $table the table schema
+     * @param \yii\db\TableSchema $table the table schema
      * @return array               the generated validation rules
      */
     public function generateRules($table)
@@ -872,6 +1017,11 @@ EOD;
         return $rules;
     }
 
+    /**
+     * __method_generateRelationUses_description__
+     * @param __param_relations_type__ $relations __param_relations_description__
+     * @return __return_generateRelationUses_type__ __return_generateRelationUses_description__
+     */
     public function generateRelationUses($relations)
     {
         $uses = [];
@@ -885,6 +1035,7 @@ EOD;
     }
 
     /**
+     * __method_generateRelations_description__
      * @return array the generated relation declarations
      */
     protected function generateRelations()
@@ -972,7 +1123,7 @@ EOD;
 
     /**
      * Generates the link parameter to be used in generating the relation declaration.
-     * @param  array  $refs reference constraint
+     * @param array  $refs reference constraint
      * @return string the generated link parameter.
      */
     protected function generateRelationLink($refs)
@@ -989,9 +1140,11 @@ EOD;
      * Checks if the given table is a pivot table.
      * For simplicity, this method only deals with the case where the pivot contains two PK columns,
      * each referencing a column in a different table.
-     * @param \yii\db\TableSchema the table being checked
-     * @return array|boolean the relevant foreign key constraint information if the table is a pivot table,
      *                       or false if the table is not a pivot table.
+     *
+     * @param __param_table_type__ $table __param_table_description__
+     * @return array|boolean the relevant foreign key constraint information if the table is a pivot table,
+or false if the table is not a pivot table.
      */
     protected function checkPivotTable($table)
     {
@@ -1018,11 +1171,11 @@ EOD;
 
     /**
      * Generate a relation name for the specified table and a base name.
-     * @param  array               $relations the relations being generated currently.
-     * @param  string              $className the class name that will contain the relation declarations
-     * @param  \yii\db\TableSchema $table     the table schema
-     * @param  string              $key       a base name that the relation name may be generated from
-     * @param  boolean             $multiple  whether this is a has-many relation
+     * @param array               $relations the relations being generated currently.
+     * @param string              $className the class name that will contain the relation declarations
+     * @param \yii\db\TableSchema $table     the table schema
+     * @param string              $key       a base name that the relation name may be generated from
+     * @param boolean             $multiple  whether this is a has-many relation
      * @return string              the relation name
      */
     protected function generateRelationName($relations, $className, $table, $key, $multiple)
@@ -1084,6 +1237,7 @@ EOD;
 
     /**
      * Validates the [[tableName]] attribute.
+     * @return __return_validateTableName_type__ __return_validateTableName_description__
      */
     public function validateTableName()
     {
@@ -1106,10 +1260,17 @@ EOD;
         }
     }
 
+    /**
+     * @var __var__tableNames_type__ __var__tableNames_description__
+     */
     private $_tableNames;
+    /**
+     * @var __var__classNames_type__ __var__classNames_description__
+     */
     private $_classNames;
 
     /**
+     * __method_getTableNames_description__
      * @return array the table names that match the pattern specified by [[tableName]].
      */
     protected function getTableNames()
@@ -1146,7 +1307,7 @@ EOD;
 
     /**
      * Generates a class name from the specified table name.
-     * @param  string $tableName the table name (which may contain schema prefix)
+     * @param string $tableName the table name (which may contain schema prefix)
      * @return string the generated class name
      */
     protected function generateClassName($tableName)
@@ -1186,11 +1347,19 @@ EOD;
         return $this->_classNames[$tableName] = Inflector::id2camel($className, '_');
     }
 
+    /**
+     * __method_getSearchModels_description__
+     * @return __return_getSearchModels_type__ __return_getSearchModels_description__
+     */
     public function getSearchModels()
     {
         return ['@cascade/models' => 'cascade\models'];
     }
 
+    /**
+     * __method_getModelMap_description__
+     * @return __return_getModelMap_type__ __return_getModelMap_description__
+     */
     public function getModelMap()
     {
         $m = [];
@@ -1212,6 +1381,7 @@ EOD;
         return $m;
     }
     /**
+     * __method_getDbConnection_description__
      * @return Connection the DB connection as specified by [[db]].
      */
     protected function getDbConnection()

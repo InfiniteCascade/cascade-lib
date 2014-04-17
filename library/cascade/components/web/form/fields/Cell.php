@@ -14,12 +14,30 @@ namespace cascade\components\web\form\fields;
 **/
 class Cell extends \infinite\web\grid\Cell
 {
+    /**
+     * @inheritdoc
+     */
     public $baseSize = 'tablet';
 
+    /**
+     * @inheritdoc
+     */
     public $phoneSize = false;
+    /**
+     * @inheritdoc
+     */
     public $tabletSize = 'auto';
+    /**
+     * @inheritdoc
+     */
     public $mediumDesktopSize = false; // baseline
+    /**
+     * @inheritdoc
+     */
     public $largeDesktopSize = false;
 
+    /**
+     * @inheritdoc
+     */
     protected $_tabletColumns = 'auto';
 }

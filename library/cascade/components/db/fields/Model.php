@@ -14,6 +14,9 @@ namespace cascade\components\db\fields;
 **/
 class Model extends Base
 {
+    /**
+     * @inheritdoc
+     */
     public $formFieldClass = 'cascade\\components\\web\\form\\fields\\Model';
     /**
     * @inheritdoc

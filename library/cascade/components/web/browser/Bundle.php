@@ -14,6 +14,9 @@ namespace cascade\components\web\browser;
 **/
 class Bundle extends \infinite\web\browser\Bundle
 {
+    /**
+     * @inheritdoc
+     */
     public $itemClass = 'cascade\\components\\web\\browser\\Item';
     /**
     * @inheritdoc

@@ -14,7 +14,13 @@ namespace cascade\components\dataInterface;
 **/
 abstract class Module extends \cascade\components\base\CollectorModule
 {
+    /**
+     * @var __var_name_type__ __var_name_description__
+     */
     public $name;
+    /**
+     * @var __var_version_type__ __var_version_description__
+     */
     public $version = 1;
 
     /**
@@ -33,6 +39,13 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return 'Interface';
     }
 
+    /**
+     * __method_getSettings_description__
+     */
     abstract public function getSettings();
+    /**
+     * __method_run_description__
+     * @param cascade\components\dataInterface\Action $action __param_action_description__
+     */
     abstract public function run(Action $action);
 }

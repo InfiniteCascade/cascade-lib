@@ -29,40 +29,106 @@ use yii\base\Controller;
 **/
 abstract class Module extends \cascade\components\base\CollectorModule
 {
+    /**
+     * @var __var__title_type__ __var__title_description__
+     */
     protected $_title;
+    /**
+     * @var __var_version_type__ __var_version_description__
+     */
     public $version = 1;
 
+    /**
+     * @var __var_objectSubInfo_type__ __var_objectSubInfo_description__
+     */
     public $objectSubInfo = [];
+    /**
+     * @var __var_icon_type__ __var_icon_description__
+     */
     public $icon = 'ic-icon-info';
+    /**
+     * @var __var_priority_type__ __var_priority_description__
+     */
     public $priority = 1000; //lower is better
 
+    /**
+     * @var __var_hasDashboard_type__ __var_hasDashboard_description__
+     */
     public $hasDashboard = true;
+    /**
+     * @var __var_uniparental_type__ __var_uniparental_description__
+     */
     public $uniparental = false;
 
+    /**
+     * @var __var_searchWeight_type__ __var_searchWeight_description__
+     */
     public $searchWeight = 1; // overall weight of item in search results
+    /**
+     * @var __var_childSearchWeight_type__ __var_childSearchWeight_description__
+     */
     public $childSearchWeight = false; // weight when a child of a searchable object
+    /**
+     * @var __var_parentSearchWeight_type__ __var_parentSearchWeight_description__
+     */
     public $parentSearchWeight = false; // weight when a parent of a searchable object
 
+    /**
+     * @var __var_primaryAsChild_type__ __var_primaryAsChild_description__
+     */
     public $primaryAsChild = false;
+    /**
+     * @var __var_primaryAsParent_type__ __var_primaryAsParent_description__
+     */
     public $primaryAsParent = false;
 
+    /**
+     * @var __var_sectionName_type__ __var_sectionName_description__
+     */
     public $sectionName;
 
+    /**
+     * @var __var_widgetNamespace_type__ __var_widgetNamespace_description__
+     */
     public $widgetNamespace;
+    /**
+     * @var __var_modelNamespace_type__ __var_modelNamespace_description__
+     */
     public $modelNamespace;
 
+    /**
+     * @var __var_formGeneratorClass_type__ __var_formGeneratorClass_description__
+     */
     public $formGeneratorClass = 'cascade\\components\\web\\form\\Generator';
+    /**
+     * @var __var_sectionItemClass_type__ __var_sectionItemClass_description__
+     */
     public $sectionItemClass = 'cascade\\components\\section\\Item';
+    /**
+     * @var __var_sectionWidgetClass_type__ __var_sectionWidgetClass_description__
+     */
     public $sectionWidgetClass = 'cascade\\components\\web\\widgets\\section\\Section';
+    /**
+     * @var __var_sectionSingleWidgetClass_type__ __var_sectionSingleWidgetClass_description__
+     */
     public $sectionSingleWidgetClass = 'cascade\\components\\web\\widgets\\section\\SingleSection';
+    /**
+     * @var __var_fallbackDetailsWidgetClass_type__ __var_fallbackDetailsWidgetClass_description__
+     */
     public $fallbackDetailsWidgetClass = 'cascade\\components\\web\\widgets\\base\\Details';
 
+    /**
+     * @var __var__objectTypeModel_type__ __var__objectTypeModel_description__
+     */
     protected $_objectTypeModel;
 
     const EVENT_RELATION_CHANGE = 'onRelationChange';
     const EVENT_RELATION_DELETE = 'onRelationDelete';
     const EVENT_VIEW_OBJECT = 'onViewObject';
 
+    /**
+     * @var __var__disabledFields_type__ __var__disabledFields_description__
+     */
     protected $_disabledFields;
 
     /**
@@ -86,11 +152,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     *
-     *
-     * @param  unknown $controller
-     * @param  unknown $action
+     * __method_onBeforeControllerAction_description__
+     * @param unknown $controller
+     * @param unknown $action
      * @return unknown
+     * @throws HttpException __exception_HttpException_description__
      */
     public function onBeforeControllerAction($controller, $action)
     {
@@ -114,6 +180,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return parent::onAfterInit($event);
     }
 
+    /**
+     * __method_subactionHandle_description__
+     * @param cascade\components\web\ObjectViewEvent $event __param_event_description__
+     * @return __return_subactionHandle_type__ __return_subactionHandle_description__
+     */
     public function subactionHandle(ObjectViewEvent $event)
     {
         $subactions = $this->subactions();
@@ -131,11 +202,19 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return;
     }
 
+    /**
+     * __method_subactions_description__
+     * @return __return_subactions_type__ __return_subactions_description__
+     */
     public function subactions()
     {
         return [];
     }
 
+    /**
+     * __method_setup_description__
+     * @return __return_setup_type__ __return_setup_description__
+     */
     public function setup()
     {
         $results = [true];
@@ -153,11 +232,20 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return min($results);
     }
 
+    /**
+     * __method_getInheritParentAccess_description__
+     * @return __return_getInheritParentAccess_type__ __return_getInheritParentAccess_description__
+     */
     public function getInheritParentAccess()
     {
         return !$this->hasDashboard;
     }
 
+    /**
+     * __method_determineOwner_description__
+     * @param __param_object_type__ $object __param_object_description__
+     * @return __return_determineOwner_type__ __return_determineOwner_description__
+     */
     public function determineOwner($object)
     {
         if (isset(Yii::$app->user)
@@ -174,6 +262,12 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return false;
     }
 
+    /**
+     * __method_getRoleHelpText_description__
+     * @param __param_roleItem_type__ $roleItem __param_roleItem_description__
+     * @param __param_object_type__ $object __param_object_description__ [optional]
+     * @return __return_getRoleHelpText_type__ __return_getRoleHelpText_description__
+     */
     public function getRoleHelpText($roleItem, $object = null)
     {
         switch ($roleItem->systemId) {
@@ -197,6 +291,13 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return null;
     }
 
+    /**
+     * __method_determineAccessLevel_description__
+     * @param __param_object_type__ $object __param_object_description__
+     * @param __param_role_type__ $role __param_role_description__
+     * @param __param_aro_type__ $aro __param_aro_description__ [optional]
+     * @return __return_determineAccessLevel_type__ __return_determineAccessLevel_description__
+     */
     public function determineAccessLevel($object, $role, $aro = null)
     {
         switch ($role) {
@@ -220,11 +321,20 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return false;
     }
 
+    /**
+     * __method_getActionMap_description__
+     * @param __param_controlledObject_type__ $controlledObject __param_controlledObject_description__ [optional]
+     * @return __return_getActionMap_type__ __return_getActionMap_description__
+     */
     public function getActionMap($controlledObject = null)
     {
         return [];
     }
 
+    /**
+     * __method_getDisabledFields_description__
+     * @return __return_getDisabledFields_type__ __return_getDisabledFields_description__
+     */
     public function getDisabledFields()
     {
         if (is_null($this->_disabledFields)) {
@@ -234,11 +344,19 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $this->_disabledFields;
     }
 
+    /**
+     * __method_setDisabledFields_description__
+     * @param __param_fields_type__ $fields __param_fields_description__
+     */
     public function setDisabledFields($fields)
     {
         $this->_disabledFields = $fields;
     }
 
+    /**
+     * __method_getPrimaryModel_description__
+     * @return __return_getPrimaryModel_type__ __return_getPrimaryModel_description__
+     */
     public function getPrimaryModel()
     {
         return $this->modelNamespace .'\\'. 'Object'.$this->systemId;
@@ -252,16 +370,30 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return 'Type';
     }
 
+    /**
+     * __method_upgrade_description__
+     * @param __param_from_type__ $from __param_from_description__
+     * @return __return_upgrade_type__ __return_upgrade_description__
+     */
     public function upgrade($from)
     {
         return $this->setup();
     }
 
+    /**
+     * __method_getCreatorRole_description__
+     * @return __return_getCreatorRole_type__ __return_getCreatorRole_description__
+     */
     public function getCreatorRole()
     {
         return [];
     }
 
+    /**
+     * __method_getRoleValidationSettings_description__
+     * @param __param_object_type__ $object __param_object_description__ [optional]
+     * @return __return_getRoleValidationSettings_type__ __return_getRoleValidationSettings_description__
+     */
     public function getRoleValidationSettings($object = null)
     {
         $settings = [];
@@ -270,6 +402,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $settings;
     }
 
+    /**
+     * __method_getPossibleRoles_description__
+     * @return __return_getPossibleRoles_type__ __return_getPossibleRoles_description__
+     */
     public function getPossibleRoles()
     {
         $roles = [];
@@ -288,6 +424,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $roles;
     }
 
+    /**
+     * __method_getRequiredRoles_description__
+     * @return __return_getRequiredRoles_type__ __return_getRequiredRoles_description__
+     */
     public function getRequiredRoles()
     {
         $roles = [];
@@ -306,6 +446,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $roles;
     }
 
+    /**
+     * __method_getInitialRole_description__
+     * @return __return_getInitialRole_type__ __return_getInitialRole_description__
+     */
     public function getInitialRole()
     {
         $roles = [];
@@ -319,16 +463,28 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $roles;
     }
 
+    /**
+     * __method_getIsOwnable_description__
+     * @return __return_getIsOwnable_type__ __return_getIsOwnable_description__
+     */
     public function getIsOwnable()
     {
         return $this->dummyModel->getBehavior('Ownable') !== null && $this->dummyModel->getBehavior('Ownable')->isEnabled();
     }
 
+    /**
+     * __method_getOwnerObject_description__
+     * @return __return_getOwnerObject_type__ __return_getOwnerObject_description__
+     */
     public function getOwnerObject()
     {
         return null;
     }
 
+    /**
+     * __method_getOwner_description__
+     * @return __return_getOwner_type__ __return_getOwner_description__
+     */
     public function getOwner()
     {
         if (!$this->isOwnable) {
@@ -342,6 +498,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $ownerObject;
     }
 
+    /**
+     * __method_getObjectTypeModel_description__
+     * @return __return_getObjectTypeModel_type__ __return_getObjectTypeModel_description__
+     */
     public function getObjectTypeModel()
     {
         if (!isset($this->_objectTypeModel) && isset(Yii::$app->collectors['types']->tableRegistry[$this->systemId])) {
@@ -351,15 +511,18 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $this->_objectTypeModel;
     }
 
+    /**
+     * __method_setObjectTypeModel_description__
+     * @param __param_model_type__ $model __param_model_description__
+     */
     public function setObjectTypeModel($model)
     {
         $this->_objectTypeModel = $model;
     }
     /**
-     *
-     *
-     * @param  unknown $term
-     * @param  unknown $limit (optional)
+     * __method_search_description__
+     * @param unknown $term
+     * @param array $params __param_params_description__ [optional]
      * @return unknown
      */
     public function search($term, $params = [])
@@ -372,6 +535,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $modelClass::searchTerm($term, $params);
     }
 
+    /**
+     * __method_getObjectLevel_description__
+     * @return __return_getObjectLevel_type__ __return_getObjectLevel_description__
+     */
     public function getObjectLevel()
     {
         if ($this->isPrimaryType) {
@@ -394,10 +561,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return 1;
     }
     /**
-     *
-     *
-     * @param  unknown $parent   (optional)
-     * @param  unknown $settings (optional)
+     * __method_getSection_description__
+     * @param __param_parentWidget_type__ $parentWidget __param_parentWidget_description__ [optional]
+     * @param unknown $settings (optional)
      * @return unknown
      */
     public function getSection($parentWidget = null, $settings = [])
@@ -451,8 +617,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     *
-     *
+     * __method_getTitle_description__
      * @return unknown
      */
     public function getTitle()
@@ -464,11 +629,20 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $this->_title;
     }
 
+    /**
+     * __method_setTitle_description__
+     * @param __param_title_type__ $title __param_title_description__
+     */
     public function setTitle($title)
     {
         $this->_title = $title;
     }
 
+    /**
+     * __method_getDetailsWidget_description__
+     * @param __param_objectModel_type__ $objectModel __param_objectModel_description__ [optional]
+     * @return __return_getDetailsWidget_type__ __return_getDetailsWidget_description__
+     */
     public function getDetailsWidget($objectModel = null)
     {
         if (is_null($objectModel) && isset(Yii::$app->request->object)) {
@@ -498,11 +672,19 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $widgetItem;
     }
 
+    /**
+     * __method_getDetailsSection_description__
+     * @return __return_getDetailsSection_type__ __return_getDetailsSection_description__
+     */
     public function getDetailsSection()
     {
         return '_side';
     }
 
+    /**
+     * __method_widgets_description__
+     * @return __return_widgets_type__ __return_widgets_description__
+     */
     public function widgets()
     {
         $widgets = [];
@@ -578,6 +760,12 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $widgets;
     }
 
+    /**
+     * __method_loadFieldLink_description__
+     * @param __param_field_type__ $field __param_field_description__
+     * @param __param_object_type__ $object __param_object_description__
+     * @param boolean $typeMatch __param_typeMatch_description__ [optional]
+     */
     public function loadFieldLink($field, $object, $typeMatch = true)
     {
         if ($this->hasDashboard) {
@@ -591,8 +779,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     *
-     *
+     * __method_taxonomies_description__
      * @return unknown
      */
     public function taxonomies()
@@ -601,8 +788,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     *
-     *
+     * __method_roles_description__
      * @return unknown
      */
     public function roles()
@@ -611,8 +797,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     *
-     *
+     * __method_dependencies_description__
      * @return unknown
      */
     public function dependencies()
@@ -622,8 +807,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
 
     /**
-     *
-     *
+     * __method_parents_description__
      * @return unknown
      */
     public function parents()
@@ -634,7 +818,6 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Settings for
-     *
      * @return unknown
      */
     public function parentSettings()
@@ -648,8 +831,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
 
     /**
-     *
-     *
+     * __method_childrenSettings_description__
      * @return unknown
      */
     public function childrenSettings()
@@ -660,8 +842,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     *
-     *
+     * __method_children_description__
      * @return unknown
      */
     public function children()
@@ -671,6 +852,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
 
 
+    /**
+     * __method_getDummyModel_description__
+     * @return __return_getDummyModel_type__ __return_getDummyModel_description__
+     */
     public function getDummyModel()
     {
         if (!$this->primaryModel) { return false; }
@@ -679,6 +864,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return new $model;
     }
 
+    /**
+     * __method_getIsChildless_description__
+     * @return __return_getIsChildless_type__ __return_getIsChildless_description__
+     */
     public function getIsChildless()
     {
         if (empty($this->collectorItem) OR empty($this->collectorItem->children)) {
@@ -689,8 +878,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     *
-     *
+     * __method_getModel_description__
+     * @param __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
+     * @param array $input __param_input_description__ [optional]
      * @return unknown
      */
     public function getModel($primaryModel = null, $input = [])
@@ -712,6 +902,12 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $primaryModel;
     }
 
+    /**
+     * __method_getModels_description__
+     * @param __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
+     * @param array $models __param_models_description__ [optional]
+     * @return __return_getModels_type__ __return_getModels_description__
+     */
     public function getModels($primaryModel = null, $models = [])
     {
         $model = $this->getModel($primaryModel);
@@ -722,9 +918,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
 
     /**
-     *
-     *
-     * @param  unknown $models (optional)
+     * __method_handleSave_description__
+     * @param __param_model_type__ $model __param_model_description__
      * @return unknown
      */
     public function handleSave($model)
@@ -736,11 +931,22 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return false;
     }
 
+    /**
+     * __method_internalSave_description__
+     * @param __param_model_type__ $model __param_model_description__
+     * @return __return_internalSave_type__ __return_internalSave_description__
+     */
     protected function internalSave($model)
     {
         return $model->save();
     }
 
+    /**
+     * __method_handleSaveAll_description__
+     * @param __param_input_type__ $input __param_input_description__ [optional]
+     * @param array $settings __param_settings_description__ [optional]
+     * @return __return_handleSaveAll_type__ __return_handleSaveAll_description__
+     */
     public function handleSaveAll($input = null, $settings = [])
     {
         if (is_null($input)) {
@@ -835,6 +1041,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return [$error, $notice, $models, $input];
     }
 
+    /**
+     * __method__extractModels_description__
+     * @param __param_input_type__ $input __param_input_description__
+     * @return __return__extractModels_type__ __return__extractModels_description__
+     */
     protected function _extractModels($input)
     {
         if ($input === false) { return false; }
@@ -856,6 +1067,12 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $models;
     }
 
+    /**
+     * __method__handlePost_description__
+     * @param array $settings __param_settings_description__ [optional]
+     * @return __return__handlePost_type__ __return__handlePost_description__
+     * @throws HttpException __exception_HttpException_description__
+     */
     protected function _handlePost($settings = [])
     {
         $results = ['primary' => null, 'children' => [], 'parents' => []];
@@ -954,9 +1171,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
 
     /**
-     *
-     *
-     * @param  unknown $primaryModel (optional)
+     * __method_getForm_description__
+     * @param __param_models_type__ $models __param_models_description__ [optional]
+     * @param array $settings __param_settings_description__ [optional]
      * @return unknown
      */
     public function getForm($models = null, $settings = [])
@@ -970,6 +1187,12 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return Yii::createObject($config);
     }
 
+    /**
+     * __method_getFormSegment_description__
+     * @param __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
+     * @param array $settings __param_settings_description__ [optional]
+     * @return __return_getFormSegment_type__ __return_getFormSegment_description__
+     */
     public function getFormSegment($primaryModel = null, $settings = [])
     {
         if (empty($primaryModel)) {

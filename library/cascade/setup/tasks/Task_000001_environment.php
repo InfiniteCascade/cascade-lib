@@ -43,6 +43,11 @@ class Task_000001_environment extends \infinite\setup\Task
         return $this->setup->isEnvironmented && $this->setup->version <= $this->setup->instanceVersion;
     }
 
+    /**
+     * __method_generateSalt_description__
+     * @param integer $max __param_max_description__ [optional]
+     * @return __return_generateSalt_type__ __return_generateSalt_description__
+     */
     public function generateSalt($max = 120)
     {
         $characterList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*?";
@@ -135,6 +140,11 @@ class Task_000001_environment extends \infinite\setup\Task
         return true;
     }
 
+    /**
+     * __method_generateId_description__
+     * @param __param_name_type__ $name __param_name_description__
+     * @return __return_generateId_type__ __return_generateId_description__
+     */
     public static function generateId($name)
     {
         return strtolower(Inflector::slug($name));
@@ -162,6 +172,10 @@ class Task_000001_environment extends \infinite\setup\Task
         return true;
     }
 
+    /**
+     * __method_getEnvOptions_description__
+     * @return __return_getEnvOptions_type__ __return_getEnvOptions_description__
+     */
     public function getEnvOptions()
     {
         $envs = [];
@@ -176,6 +190,10 @@ class Task_000001_environment extends \infinite\setup\Task
         return $envs;
     }
 
+    /**
+     * __method_getEnvListOptions_description__
+     * @return __return_getEnvListOptions_type__ __return_getEnvListOptions_description__
+     */
     public function getEnvListOptions()
     {
         $options = $this->envOptions;

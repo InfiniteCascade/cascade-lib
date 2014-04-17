@@ -14,7 +14,13 @@ namespace cascade\components\web\themes;
 **/
 abstract class Module extends \cascade\components\base\CollectorModule
 {
+    /**
+     * @var __var_name_type__ __var_name_description__
+     */
     public $name;
+    /**
+     * @var __var_version_type__ __var_version_description__
+     */
     public $version = 1;
 
     /**
@@ -33,8 +39,15 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return 'Theme';
     }
 
+    /**
+     * __method_getIdentityAssetBundle_description__
+     */
     abstract public function getIdentityAssetBundle();
 
+    /**
+     * __method_getAssetBundles_description__
+     * @return __return_getAssetBundles_type__ __return_getAssetBundles_description__
+     */
     public function getAssetBundles()
     {
         return [$this->identityAssetBundle];

@@ -17,12 +17,24 @@ use yii\web\AssetBundle;
  */
 class ObjectViewAsset extends AssetBundle
 {
+    /**
+     * @inheritdoc
+     */
     public $sourcePath = '@cascade/assets/object/view';
+    /**
+     * @inheritdoc
+     */
     public $css = [];
+    /**
+     * @inheritdoc
+     */
     public $js = [
         'js/cascade.object.view.js',
         'js/cascade.object.access.js',
     ];
+    /**
+     * @inheritdoc
+     */
     public $depends = [
         'cascade\\components\\web\\assetBundles\\AppAsset'
     ];

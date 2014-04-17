@@ -19,8 +19,17 @@ use infinite\helpers\ArrayHelper;
 **/
 class HandlerTypes extends \infinite\web\browser\Handler
 {
+    /**
+     * @var __var_bundleClass_type__ __var_bundleClass_description__
+     */
     public $bundleClass = 'cascade\\components\\web\\browser\\Bundle';
 
+    /**
+     * __method_possibleTypes_description__
+     * @param __param_topType_type__ $topType __param_topType_description__
+     * @param __param_goodTypes_type__ $goodTypes __param_goodTypes_description__
+     * @return __return_possibleTypes_type__ __return_possibleTypes_description__
+     */
     public static function possibleTypes($topType, $goodTypes)
     {
         $possibleTypes = [];
@@ -36,6 +45,13 @@ class HandlerTypes extends \infinite\web\browser\Handler
         return $possibleTypes;
     }
 
+    /**
+     * __method_descendantHas_description__
+     * @param __param_topType_type__ $topType __param_topType_description__
+     * @param __param_goodTypes_type__ $goodTypes __param_goodTypes_description__
+     * @param integer $depth __param_depth_description__ [optional]
+     * @return __return_descendantHas_type__ __return_descendantHas_description__
+     */
     public static function descendantHas($topType, $goodTypes, $depth = 3)
     {
         $possibleTypes = [];

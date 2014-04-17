@@ -36,6 +36,10 @@ class ParentSection extends Section
         ];
     }
 
+    /**
+     * __method_isSingle_description__
+     * @return __return_isSingle_type__ __return_isSingle_description__
+     */
     public function isSingle()
     {
         return false;

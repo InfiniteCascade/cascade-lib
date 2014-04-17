@@ -16,8 +16,17 @@ use Yii;
 **/
 class Familiarity extends \infinite\db\behaviors\ActiveRecord
 {
+    /**
+     * @var __var_objectField_type__ __var_objectField_description__
+     */
     public $objectField = 'object_id';
+    /**
+     * @var __var_userField_type__ __var_userField_description__
+     */
     public $userField = 'user_id';
+    /**
+     * @var __var__familiarity_type__ __var__familiarity_description__
+     */
     protected $_familiarity = [];
 
     /**
@@ -31,6 +40,9 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
         ];
     }
 
+    /**
+     * __method_afterUpdate_description__
+     */
     public function afterUpdate()
     {
         if ($this->user) {
@@ -39,6 +51,9 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * __method_afterInsert_description__
+     */
     public function afterInsert()
     {
         if ($this->user) {
@@ -47,6 +62,11 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * __method_getUser_description__
+     * @param boolean $owner __param_owner_description__ [optional]
+     * @return __return_getUser_type__ __return_getUser_description__
+     */
     public function getUser($owner = true)
     {
         if ($owner && $this->owner->getBehavior('Ownable') !== null && isset($this->owner->objectOwner)) {
@@ -58,6 +78,12 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
         return false;
     }
 
+    /**
+     * __method_watch_description__
+     * @param boolean $doWatch __param_doWatch_description__ [optional]
+     * @param __param_user_type__ $user __param_user_description__ [optional]
+     * @return __return_watch_type__ __return_watch_description__
+     */
     public function watch($doWatch = true, $user = null)
     {
         $familiarity = $this->getFamiliarity($user);
@@ -73,6 +99,11 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
         return $familiarity->save();
     }
 
+    /**
+     * __method_getFamiliarity_description__
+     * @param __param_user_type__ $user __param_user_description__ [optional]
+     * @return __return_getFamiliarity_type__ __return_getFamiliarity_description__
+     */
     public function getFamiliarity($user = null)
     {
         if (is_null($user)) {

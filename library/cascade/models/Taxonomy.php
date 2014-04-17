@@ -84,6 +84,7 @@ class Taxonomy extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getRelationTaxonomies_description__
      * @return \yii\db\ActiveRelation
      */
     public function getRelationTaxonomies()
@@ -92,6 +93,7 @@ class Taxonomy extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getTaxonomyType_description__
      * @return \yii\db\ActiveRelation
      */
     public function getTaxonomyType()
@@ -100,6 +102,7 @@ class Taxonomy extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getId_description__
      * @return \yii\db\ActiveRelation
      */
     public function getId()

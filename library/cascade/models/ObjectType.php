@@ -47,6 +47,12 @@ class ObjectType extends \cascade\components\db\ActiveRecord
         ]);
     }
 
+    /**
+     * __method_determineAccessLevel_description__
+     * @param __param_role_type__ $role __param_role_description__
+     * @param __param_aro_type__ $aro __param_aro_description__ [optional]
+     * @return __return_determineAccessLevel_type__ __return_determineAccessLevel_description__
+     */
     public function determineAccessLevel($role, $aro = null)
     {
         $objectTypeItem = Yii::$app->collectors['types']->getOne($this->name);

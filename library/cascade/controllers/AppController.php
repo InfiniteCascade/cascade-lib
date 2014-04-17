@@ -74,11 +74,19 @@ class AppController extends Controller
         ];
     }
 
+    /**
+     * __method_actionIndex_description__
+     * @return __return_actionIndex_type__ __return_actionIndex_description__
+     */
     public function actionIndex()
     {
         return $this->render('index');
     }
 
+    /**
+     * __method_actionLogin_description__
+     * @return __return_actionLogin_type__ __return_actionLogin_description__
+     */
     public function actionLogin()
     {
         $this->params['model'] = $model = new LoginForm();
@@ -92,6 +100,10 @@ class AppController extends Controller
         }
     }
 
+    /**
+     * __method_actionLogout_description__
+     * @return __return_actionLogout_type__ __return_actionLogout_description__
+     */
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -99,6 +111,10 @@ class AppController extends Controller
         return $this->goHome();
     }
 
+    /**
+     * __method_actionRefresh_description__
+     * @return __return_actionRefresh_type__ __return_actionRefresh_description__
+     */
     public function actionRefresh()
     {
         $refreshed = [];

@@ -20,6 +20,21 @@ use cascade\models\StorageEngine;
 class Item extends \infinite\base\collector\Item
 {
     public $publicEngine = false;
+    /**
+     * @var __var_publicEngineGroup_type__ __var_publicEngineGroup_description__
+     */
+    /**
+     * @var __var_publicEngine_type__ __var_publicEngine_description__
+     */
+    /**
+     * @var __var_publicEngine_type__ __var_publicEngine_description__
+     */
+    /**
+     * @var __var_publicEngine_type__ __var_publicEngine_description__
+     */
+    /**
+     * @var __var_publicEngine_type__ __var_publicEngine_description__
+     */
     public $publicEngineGroup = 'top';
 
     /**
@@ -33,6 +48,10 @@ class Item extends \infinite\base\collector\Item
         }
     }
 
+    /**
+     * __method_ensurePublicEngine_description__
+     * @throws Exception __exception_Exception_description__
+     */
     public function ensurePublicEngine()
     {
         if ($this->publicEngine !== false) {

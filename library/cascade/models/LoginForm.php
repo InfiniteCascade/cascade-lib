@@ -17,11 +17,21 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
+    /**
+     * @var __var_username_type__ __var_username_description__
+     */
     public $username;
+    /**
+     * @var __var_password_type__ __var_password_description__
+     */
     public $password;
+    /**
+     * @var __var_rememberMe_type__ __var_rememberMe_description__
+     */
     public $rememberMe = true;
 
     /**
+     * __method_rules_description__
      * @return array the validation rules.
      */
     public function rules()

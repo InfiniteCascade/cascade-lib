@@ -17,10 +17,23 @@ use yii\bootstrap\Nav;
 **/
 class PanelDecorator extends Decorator
 {
+    /**
+     * @var __var_panelCssClass_type__ __var_panelCssClass_description__
+     */
     public $panelCssClass = 'panel';
+    /**
+     * @var __var_panelStateCssClass_type__ __var_panelStateCssClass_description__
+     */
     public $panelStateCssClass = 'panel-default';
+    /**
+     * @var __var_gridCellClass_type__ __var_gridCellClass_description__
+     */
     public $gridCellClass = 'infinite\web\grid\Cell';
 
+    /**
+     * __method_generatePanelTitle_description__
+     * @return __return_generatePanelTitle_type__ __return_generatePanelTitle_description__
+     */
     public function generatePanelTitle()
     {
         $parts = [];
@@ -53,6 +66,10 @@ class PanelDecorator extends Decorator
         return parent::generateStart();
     }
 
+    /**
+     * __method_generateHeader_description__
+     * @return __return_generateHeader_type__ __return_generateHeader_description__
+     */
     public function generateHeader()
     {
         $parts = [];
@@ -65,6 +82,10 @@ class PanelDecorator extends Decorator
         return implode("", $parts);
     }
 
+    /**
+     * __method_generateTitleMenu_description__
+     * @return __return_generateTitleMenu_type__ __return_generateTitleMenu_description__
+     */
     public function generateTitleMenu()
     {
         $menu = $this->owner->getHeaderMenu();
@@ -78,6 +99,11 @@ class PanelDecorator extends Decorator
         ]);
     }
 
+    /**
+     * __method_backgroundifyMenu_description__
+     * @param __param_items_type__ $items __param_items_description__
+     * @return __return_backgroundifyMenu_type__ __return_backgroundifyMenu_description__
+     */
     protected function backgroundifyMenu(&$items)
     {
         if (!is_array($items)) { return; }
@@ -92,6 +118,10 @@ class PanelDecorator extends Decorator
         }
     }
 
+    /**
+     * __method_generateFooter_description__
+     * @return __return_generateFooter_type__ __return_generateFooter_description__
+     */
     public function generateFooter()
     {
         $parts = [];
@@ -100,6 +130,10 @@ class PanelDecorator extends Decorator
         return implode("", $parts);
     }
 
+    /**
+     * __method_getPanelTitle_description__
+     * @return __return_getPanelTitle_type__ __return_getPanelTitle_description__
+     */
     public function getPanelTitle()
     {
         return $this->owner->parseText($this->owner->title);

@@ -67,6 +67,7 @@ class MetaKey extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getMetas_description__
      * @return \yii\db\ActiveRelation
      */
     public function getMetas()
@@ -75,6 +76,7 @@ class MetaKey extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getId_description__
      * @return \yii\db\ActiveRelation
      */
     public function getId()

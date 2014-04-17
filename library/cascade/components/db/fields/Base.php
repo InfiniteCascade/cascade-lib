@@ -18,23 +18,68 @@ use cascade\components\db\fields\formats\Base as BaseFormat;
 **/
 abstract class Base extends \infinite\base\Object
 {
+    /**
+     * @var __var_formFieldClass_type__ __var_formFieldClass_description__
+     */
     public $formFieldClass;
+    /**
+     * @var __var_default_type__ __var_default_description__
+     */
     public $default;
+    /**
+     * @var __var_required_type__ __var_required_description__
+     */
     public $required = false;
+    /**
+     * @var __var_fieldSchema_type__ __var_fieldSchema_description__
+     */
     public $fieldSchema;
+    /**
+     * @var __var_priority_type__ __var_priority_description__
+     */
     public $priority;
 
+    /**
+     * @var __var_url_type__ __var_url_description__
+     */
     public $url; // wrap formatted text in link
+    /**
+     * @var __var_linkOptions_type__ __var_linkOptions_description__
+     */
     public $linkOptions = [];
 
+    /**
+     * @var __var_possiblePrimaryKeys_type__ __var_possiblePrimaryKeys_description__
+     */
     public $possiblePrimaryKeys = ['id'];
 
+    /**
+     * @var __var__human_type__ __var__human_description__
+     */
     protected $_human;
+    /**
+     * @var __var__format_type__ __var__format_description__
+     */
     protected $_format;
+    /**
+     * @var __var__label_type__ __var__label_description__
+     */
     protected $_label;
+    /**
+     * @var __var__model_type__ __var__model_description__
+     */
     protected $_model;
+    /**
+     * @var __var__formField_type__ __var__formField_description__
+     */
     protected $_formField;
+    /**
+     * @var __var__multiline_type__ __var__multiline_description__
+     */
     protected $_multiline;
+    /**
+     * @var __var__locations_type__ __var__locations_description__
+     */
     protected $_locations;
 
     const LOCATION_HIDDEN = 0x00;
@@ -57,6 +102,10 @@ abstract class Base extends \infinite\base\Object
         }
     }
 
+    /**
+     * __method_determineFormatClass_description__
+     * @return __return_determineFormatClass_type__ __return_determineFormatClass_description__
+     */
     public function determineFormatClass()
     {
         if (isset($this->fieldSchema)) {
@@ -70,6 +119,10 @@ abstract class Base extends \infinite\base\Object
         return 'cascade\\components\\db\\fields\\formats\\Text';
     }
 
+    /**
+     * __method_getField_description__
+     * @return __return_getField_type__ __return_getField_description__
+     */
     public function getField()
     {
         if (isset($this->fieldSchema)) {
@@ -79,16 +132,28 @@ abstract class Base extends \infinite\base\Object
         return null;
     }
 
+    /**
+     * __method_hasFile_description__
+     * @return __return_hasFile_type__ __return_hasFile_description__
+     */
     public function hasFile()
     {
         return false;
     }
 
+    /**
+     * __method_setLocations_description__
+     * @param __param_value_type__ $value __param_value_description__
+     */
     public function setLocations($value)
     {
         $this->_locations = $value;
     }
 
+    /**
+     * __method_getLocations_description__
+     * @return __return_getLocations_type__ __return_getLocations_description__
+     */
     public function getLocations()
     {
         if (is_null($this->_locations)) {
@@ -98,6 +163,10 @@ abstract class Base extends \infinite\base\Object
         return $this->_locations;
     }
 
+    /**
+     * __method_determineLocations_description__
+     * @return __return_determineLocations_type__ __return_determineLocations_description__
+     */
     public function determineLocations()
     {
         if (!$this->human) {
@@ -107,6 +176,12 @@ abstract class Base extends \infinite\base\Object
         return [self::LOCATION_DETAILS];
     }
 
+    /**
+     * __method_setFormField_description__
+     * @param __param_value_type__ $value __param_value_description__
+     * @return __return_setFormField_type__ __return_setFormField_description__
+     * @throws Exception __exception_Exception_description__
+     */
     public function setFormField($value)
     {
         if (is_array($value)) {
@@ -125,9 +200,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     *
-     *
-     * @param  unknown $value
+     * __method_setHuman_description__
+     * @param unknown $value
      * @return unknown
      */
     public function setHuman($value)
@@ -138,8 +212,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     *
-     *
+     * __method_getHuman_description__
      * @return unknown
      */
     public function getHuman()
@@ -151,6 +224,10 @@ abstract class Base extends \infinite\base\Object
         return $this->_human;
     }
 
+    /**
+     * __method_getMultiline_description__
+     * @return __return_getMultiline_type__ __return_getMultiline_description__
+     */
     public function getMultiline()
     {
         if (is_null($this->_multiline)) {
@@ -160,14 +237,17 @@ abstract class Base extends \infinite\base\Object
         return $this->_multiline;
     }
 
+    /**
+     * __method_setMultiline_description__
+     * @param __param_value_type__ $value __param_value_description__
+     */
     public function setMultiline($value)
     {
         $this->_multiline = $value;
     }
 
     /**
-     *
-     *
+     * __method_getFormField_description__
      * @return unknown
      */
     public function getFormField()
@@ -180,8 +260,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     *
-     *
+     * __method_getModel_description__
      * @return unknown
      */
     public function getModel()
@@ -194,9 +273,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     *
-     *
-     * @param  unknown $value
+     * __method_setModel_description__
+     * @param unknown $value
      * @return unknown
      */
     public function setModel($value)
@@ -207,8 +285,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     *
-     *
+     * __method_getFormat_description__
      * @return unknown
      */
     public function getFormat()
@@ -221,9 +298,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     *
-     *
-     * @param  unknown $value
+     * __method_setFormat_description__
+     * @param unknown $value
      * @return unknown
      */
     public function setFormat($value)
@@ -238,6 +314,10 @@ abstract class Base extends \infinite\base\Object
         $this->_format = $value;
     }
 
+    /**
+     * __method_getFormattedValue_description__
+     * @return __return_getFormattedValue_type__ __return_getFormattedValue_description__
+     */
     public function getFormattedValue()
     {
         if ($this->format instanceof BaseFormat) {
@@ -251,6 +331,10 @@ abstract class Base extends \infinite\base\Object
         return $formattedValue;
     }
 
+    /**
+     * __method_getFormValue_description__
+     * @return __return_getFormValue_type__ __return_getFormValue_description__
+     */
     public function getFormValue()
     {
         if ($this->format instanceof BaseFormat) {
@@ -264,11 +348,19 @@ abstract class Base extends \infinite\base\Object
         return $formValue;
     }
 
+    /**
+     * __method_getValuePackage_description__
+     * @return __return_getValuePackage_type__ __return_getValuePackage_description__
+     */
     public function getValuePackage()
     {
         return ['plain' => $this->value, 'rich' => $this->formattedValue];
     }
 
+    /**
+     * __method_getValue_description__
+     * @return __return_getValue_type__ __return_getValue_description__
+     */
     public function getValue()
     {
         if (!isset($this->model->{$this->field})) {
@@ -279,8 +371,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     *
-     *
+     * __method_getLabel_description__
      * @return unknown
      */
     public function getLabel()
@@ -293,9 +384,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     *
-     *
-     * @param  unknown $value
+     * __method_setLabel_description__
+     * @param unknown $value
      * @return unknown
      */
     public function setLabel($value)

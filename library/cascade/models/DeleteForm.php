@@ -23,15 +23,37 @@ use yii\base\Model;
  */
 class DeleteForm extends Model
 {
+    /**
+     * @var __var_confirm_type__ __var_confirm_description__
+     */
     public $confirm = false;
+    /**
+     * @var __var__target_type__ __var__target_description__
+     */
     protected $_target;
+    /**
+     * @var __var_relationModel_type__ __var_relationModel_description__
+     */
     public $relationModel;
+    /**
+     * @var __var_relationshipWith_type__ __var_relationshipWith_description__
+     */
     public $relationshipWith;
+    /**
+     * @var __var_relationship_type__ __var_relationship_description__
+     */
     public $relationship;
+    /**
+     * @var __var_object_type__ __var_object_description__
+     */
     public $object;
+    /**
+     * @var __var__possibleTargets_type__ __var__possibleTargets_description__
+     */
     protected $_possibleTargets;
 
     /**
+     * __method_rules_description__
      * @return array the validation rules.
      */
     public function rules()
@@ -41,6 +63,10 @@ class DeleteForm extends Model
         ];
     }
 
+    /**
+     * __method_getLabels_description__
+     * @return __return_getLabels_type__ __return_getLabels_description__
+     */
     public function getLabels()
     {
         $labels = [];
@@ -80,6 +106,10 @@ class DeleteForm extends Model
         return $labels;
     }
 
+    /**
+     * __method_getTarget_description__
+     * @return __return_getTarget_type__ __return_getTarget_description__
+     */
     public function getTarget()
     {
         if (is_null($this->_target) && !empty($this->possibleTargets)) {
@@ -89,6 +119,10 @@ class DeleteForm extends Model
         return $this->_target;
     }
 
+    /**
+     * __method_canDeleteObject_description__
+     * @return __return_canDeleteObject_type__ __return_canDeleteObject_description__
+     */
     public function canDeleteObject()
     {
         if ($this->object->objectType->hasDashboard && isset($this->relationship) && !$this->relationship->isHasOne()) {
@@ -98,6 +132,10 @@ class DeleteForm extends Model
         return $this->object->can('delete');
     }
 
+    /**
+     * __method_canArchiveObject_description__
+     * @return __return_canArchiveObject_type__ __return_canArchiveObject_description__
+     */
     public function canArchiveObject()
     {
         if ($this->object->objectType->hasDashboard && isset($this->relationship) && !$this->relationship->isHasOne()) {
@@ -107,6 +145,10 @@ class DeleteForm extends Model
         return $this->object->can('archive');
     }
 
+    /**
+     * __method_canDeleteRelation_description__
+     * @return __return_canDeleteRelation_type__ __return_canDeleteRelation_description__
+     */
     public function canDeleteRelation()
     {
         if (isset($this->relationModel)) {
@@ -123,6 +165,10 @@ class DeleteForm extends Model
         return false;
     }
 
+    /**
+     * __method_canEndRelation_description__
+     * @return __return_canEndRelation_type__ __return_canEndRelation_description__
+     */
     public function canEndRelation()
     {
         if (!isset($this->relationModel) || !isset($this->relationship)) {
@@ -138,6 +184,10 @@ class DeleteForm extends Model
         return true;
     }
 
+    /**
+     * __method_hasObjectTargets_description__
+     * @return __return_hasObjectTargets_type__ __return_hasObjectTargets_description__
+     */
     public function hasObjectTargets()
     {
         foreach ($this->possibleTargets as $target) {
@@ -149,6 +199,10 @@ class DeleteForm extends Model
         return false;
     }
 
+    /**
+     * __method_hasRelationshipTargets_description__
+     * @return __return_hasRelationshipTargets_type__ __return_hasRelationshipTargets_description__
+     */
     public function hasRelationshipTargets()
     {
         foreach ($this->possibleTargets as $target) {
@@ -160,6 +214,10 @@ class DeleteForm extends Model
         return false;
     }
 
+    /**
+     * __method_getPossibleTargets_description__
+     * @return __return_getPossibleTargets_type__ __return_getPossibleTargets_description__
+     */
     public function getPossibleTargets()
     {
         if (is_null($this->_possibleTargets)) {
@@ -189,6 +247,11 @@ class DeleteForm extends Model
         return $this->_possibleTargets;
     }
 
+    /**
+     * __method_setTarget_description__
+     * @param __param_value_type__ $value __param_value_description__
+     * @throws Exception __exception_Exception_description__
+     */
     public function setTarget($value)
     {
         if (in_array($value, $this->possibleTargets)) {
@@ -198,6 +261,10 @@ class DeleteForm extends Model
         }
     }
 
+    /**
+     * __method_getTargetLabel_description__
+     * @return __return_getTargetLabel_type__ __return_getTargetLabel_description__
+     */
     public function getTargetLabel()
     {
         if (!isset($this->labels[$this->target])) {
@@ -207,6 +274,10 @@ class DeleteForm extends Model
         return $this->labels[$this->target];
     }
 
+    /**
+     * __method_getTargetDescriptor_description__
+     * @return __return_getTargetDescriptor_type__ __return_getTargetDescriptor_description__
+     */
     public function getTargetDescriptor()
     {
         if ($this->target === 'object') {
@@ -216,6 +287,10 @@ class DeleteForm extends Model
         }
     }
 
+    /**
+     * __method_handle_description__
+     * @return __return_handle_type__ __return_handle_description__
+     */
     public function handle()
     {
         $result = false;

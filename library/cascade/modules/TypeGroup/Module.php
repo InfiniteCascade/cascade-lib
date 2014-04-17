@@ -16,11 +16,26 @@ use Yii;
 **/
 class Module extends \cascade\components\types\Module
 {
+    /**
+     * @inheritdoc
+     */
     protected $_title = 'Group';
+    /**
+     * @inheritdoc
+     */
     public $icon = 'fa fa-users';
+    /**
+     * @inheritdoc
+     */
     public $hasDashboard = true;
 
+    /**
+     * @inheritdoc
+     */
     public $widgetNamespace = 'cascade\\modules\\Group\\widgets';
+    /**
+     * @inheritdoc
+     */
     public $modelNamespace = false;
 
     /**

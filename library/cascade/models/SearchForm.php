@@ -17,9 +17,13 @@ use yii\base\Model;
  */
 class SearchForm extends Model
 {
+    /**
+     * @var __var_query_type__ __var_query_description__
+     */
     public $query;
 
     /**
+     * __method_rules_description__
      * @return array the validation rules.
      */
     public function rules()

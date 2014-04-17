@@ -19,6 +19,9 @@ use infinite\helpers\ArrayHelper;
 **/
 class Collector extends \infinite\base\collector\Module
 {
+    /**
+     * @var __var__tableRegistry_type__ __var__tableRegistry_description__
+     */
     protected $_tableRegistry;
 
     /**
@@ -92,6 +95,11 @@ class Collector extends \infinite\base\collector\Module
         return true;
     }
 
+    /**
+     * __method_registerObjectType_description__
+     * @param __param_module_type__ $module __param_module_description__
+     * @return __return_registerObjectType_type__ __return_registerObjectType_description__
+     */
     public function registerObjectType($module)
     {
         if (!Yii::$app->isDbAvailable) { return false; }
@@ -123,6 +131,10 @@ class Collector extends \infinite\base\collector\Module
         return true;
     }
 
+    /**
+     * __method_getTableRegistry_description__
+     * @return __return_getTableRegistry_type__ __return_getTableRegistry_description__
+     */
     public function getTableRegistry()
     {
         if (is_null($this->_tableRegistry)) {
@@ -137,11 +149,10 @@ class Collector extends \infinite\base\collector\Module
         return $this->_tableRegistry;
     }
     /**
-     *
-     *
-     * @param  unknown $parent
-     * @param  unknown $child
-     * @param  unknown $options (optional)
+     * __method_addRelationship_description__
+     * @param unknown $parent
+     * @param unknown $child
+     * @param unknown $options (optional)
      * @return unknown
      */
     public function addRelationship($parent, $child, $options = [])
@@ -155,6 +166,10 @@ class Collector extends \infinite\base\collector\Module
         return true;
     }
 
+    /**
+     * __method_getAuthorities_description__
+     * @return __return_getAuthorities_type__ __return_getAuthorities_description__
+     */
     public function getAuthorities()
     {
         $authorities = [];

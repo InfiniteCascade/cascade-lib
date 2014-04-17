@@ -18,9 +18,19 @@ use infinite\helpers\Html;
 **/
 class SingleSection extends Section
 {
+    /**
+     * @inheritdoc
+     */
     public $section;
+    /**
+     * @var __var__singleWidget_type__ __var__singleWidget_description__
+     */
     protected $_singleWidget;
 
+    /**
+     * __method_getCell_description__
+     * @return __return_getCell_type__ __return_getCell_description__
+     */
     public function getCell()
     {
         $widgetCell = $this->singleWidget;
@@ -33,6 +43,10 @@ class SingleSection extends Section
         return false;
     }
 
+    /**
+     * __method_getSingleWidget_description__
+     * @return __return_getSingleWidget_type__ __return_getSingleWidget_description__
+     */
     public function getSingleWidget()
     {
         if (is_null($this->_singleWidget)) {

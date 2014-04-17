@@ -19,8 +19,15 @@ use infinite\helpers\Html;
 **/
 class SimpleLinkList extends BaseList
 {
+    /**
+     * @inheritdoc
+     */
     public $renderPager = false;
 
+    /**
+     * __method_getGridCellSettings_description__
+     * @return __return_getGridCellSettings_type__ __return_getGridCellSettings_description__
+     */
     public function getGridCellSettings()
     {
         return [

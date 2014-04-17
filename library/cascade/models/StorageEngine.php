@@ -73,6 +73,7 @@ class StorageEngine extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getRegistry_description__
      * @return \yii\db\ActiveRelation
      */
     public function getRegistry()
@@ -80,6 +81,10 @@ class StorageEngine extends \cascade\components\db\ActiveRecord
         return $this->hasOne(Registry::className(), ['id' => 'id']);
     }
 
+    /**
+     * __method_getStorageHandler_description__
+     * @return __return_getStorageHandler_type__ __return_getStorageHandler_description__
+     */
     public function getStorageHandler()
     {
         if (Yii::$app->collectors['storageHandlers']->has($this->handler)) {

@@ -17,10 +17,25 @@ use infinite\helpers\ArrayHelper;
 **/
 class Item extends \infinite\base\collector\Item
 {
+    /**
+     * @var __var__children_type__ __var__children_description__
+     */
     protected $_children = [];
+    /**
+     * @var __var__parents_type__ __var__parents_description__
+     */
     protected $_parents = [];
+    /**
+     * @var __var__sections_type__ __var__sections_description__
+     */
     protected $_sections;
+    /**
+     * @var __var__checked_type__ __var__checked_description__
+     */
     protected $_checked;
+    /**
+     * @var __var__init_type__ __var__init_description__
+     */
     protected $_init = false;
 
     /**
@@ -44,6 +59,10 @@ class Item extends \infinite\base\collector\Item
         return true;
     }
 
+    /**
+     * __method_distributeRelationships_description__
+     * @return __return_distributeRelationships_type__ __return_distributeRelationships_description__
+     */
     protected function distributeRelationships()
     {
         if (!$this->_init || is_null($this->object)) {
@@ -69,8 +88,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     *
-     *
+     * __method_getSections_description__
      * @return unknown
      */
     public function getSections()
@@ -129,6 +147,10 @@ class Item extends \infinite\base\collector\Item
         return $this->_sections;
     }
 
+    /**
+     * __method_getWidgets_description__
+     * @return __return_getWidgets_type__ __return_getWidgets_description__
+     */
     public function getWidgets()
     {
         $sections = $this->sections;
@@ -142,10 +164,9 @@ class Item extends \infinite\base\collector\Item
         return $widgets;
     }
     /**
-     *
-     *
-     * @param  unknown $name
-     * @param  unknown $relationship
+     * __method_addChild_description__
+     * @param unknown $name
+     * @param unknown $relationship
      * @return unknown
      */
     public function addChild($name, $relationship)
@@ -156,10 +177,9 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     *
-     *
-     * @param  unknown $name
-     * @param  unknown $relationship
+     * __method_addParent_description__
+     * @param unknown $name
+     * @param unknown $relationship
      * @return unknown
      */
     public function addParent($name, $relationship)
@@ -169,10 +189,9 @@ class Item extends \infinite\base\collector\Item
         return true;
     }
 
-        /**
-     *
-     *
-     * @param  unknown $type
+    /**
+     * __method_getChild_description__
+     * @param unknown $type
      * @return unknown
      */
     public function getChild($type)
@@ -185,9 +204,8 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     *
-     *
-     * @param  unknown $type
+     * __method_getParent_description__
+     * @param unknown $type
      * @return unknown
      */
     public function getParent($type)
@@ -200,8 +218,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     *
-     *
+     * __method_getChildren_description__
      * @return unknown
      */
     public function getChildren()
@@ -216,8 +233,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     *
-     *
+     * __method_getParents_description__
      * @return unknown
      */
     public function getParents()
@@ -232,8 +248,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     *
-     *
+     * __method_getActive_description__
      * @return unknown
      */
     public function getActive()
@@ -246,8 +261,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     *
-     *
+     * __method_getChecked_description__
      * @return unknown
      */
     public function getChecked()
@@ -265,6 +279,10 @@ class Item extends \infinite\base\collector\Item
         return $this->_checked;
     }
 
+    /**
+     * __method_getTaxonomies_description__
+     * @return __return_getTaxonomies_type__ __return_getTaxonomies_description__
+     */
     public function getTaxonomies()
     {
         $moduleClass = get_class($this->object);

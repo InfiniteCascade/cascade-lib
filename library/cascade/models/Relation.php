@@ -83,6 +83,13 @@ class Relation extends \infinite\db\models\Relation
         }
     }
 
+    /**
+     * __method_addFields_description__
+     * @param __param_caller_type__ $caller __param_caller_description__
+     * @param __param_fields_type__ $fields __param_fields_description__
+     * @param __param_relationship_type__ $relationship __param_relationship_description__
+     * @param __param_owner_type__ $owner __param_owner_description__
+     */
     public function addFields($caller, &$fields, $relationship, $owner)
     {
         $baseField = ['model' => $this];
@@ -100,6 +107,10 @@ class Relation extends \infinite\db\models\Relation
         }
     }
 
+    /**
+     * __method_getRelationship_description__
+     * @return __return_getRelationship_type__ __return_getRelationship_description__
+     */
     public function getRelationship()
     {
         if (!isset($this->parentObject) || !isset($this->parentObject->objectTypeItem)) { return false; }

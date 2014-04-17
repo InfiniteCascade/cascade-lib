@@ -18,6 +18,9 @@ use cascade\components\types\Relationship;
 **/
 class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 {
+    /**
+     * @var __var__relationship_type__ __var__relationship_description__
+     */
     protected $_relationship;
 
     /**
@@ -38,6 +41,10 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
         return $this->relationship->handlePrimary;
     }
 
+    /**
+     * __method_getRelationship_description__
+     * @return __return_getRelationship_type__ __return_getRelationship_description__
+     */
     public function getRelationship()
     {
         if (is_null($this->_relationship)) {
@@ -51,6 +58,10 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
         return $this->_relationship;
     }
 
+    /**
+     * __method_setRelationship_description__
+     * @param cascade\components\types\Relationship $value __param_value_description__
+     */
     public function setRelationship(Relationship $value)
     {
         $this->_relationship = $value;

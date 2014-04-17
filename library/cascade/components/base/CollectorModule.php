@@ -20,6 +20,9 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
 {
     use CollectedObjectTrait;
 
+    /**
+     * __method_getCollectorName_description__
+     */
     abstract public function getCollectorName();
 
     /**
@@ -43,6 +46,10 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
         parent::__construct($id, $parent, $config);
     }
 
+    /**
+     * __method_loadSubmodules_description__
+     * @return __return_loadSubmodules_type__ __return_loadSubmodules_description__
+     */
     public function loadSubmodules()
     {
         $this->modules = $this->submodules;
@@ -55,11 +62,20 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
         return true;
     }
 
+    /**
+     * __method_getSubmodules_description__
+     * @return __return_getSubmodules_type__ __return_getSubmodules_description__
+     */
     public function getSubmodules()
     {
         return [];
     }
 
+    /**
+     * __method_onAfterInit_description__
+     * @param __param_event_type__ $event __param_event_description__
+     * @return __return_onAfterInit_type__ __return_onAfterInit_description__
+     */
     public function onAfterInit($event)
     {
         return true;

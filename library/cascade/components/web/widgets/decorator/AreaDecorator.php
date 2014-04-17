@@ -16,8 +16,17 @@ use infinite\helpers\Html;
 **/
 class AreaDecorator extends Decorator
 {
+    /**
+     * @var __var_panelCssClass_type__ __var_panelCssClass_description__
+     */
     public $panelCssClass = 'panel';
+    /**
+     * @var __var_panelStateCssClass_type__ __var_panelStateCssClass_description__
+     */
     public $panelStateCssClass = 'panel-default';
+    /**
+     * @var __var_gridCellClass_type__ __var_gridCellClass_description__
+     */
     public $gridCellClass = 'infinite\web\grid\Cell';
 
     /**
@@ -31,6 +40,10 @@ class AreaDecorator extends Decorator
         return parent::generateStart();
     }
 
+    /**
+     * __method_generateHeader_description__
+     * @return __return_generateHeader_type__ __return_generateHeader_description__
+     */
     public function generateHeader()
     {
         $parts = [];
@@ -39,6 +52,10 @@ class AreaDecorator extends Decorator
         return implode("", $parts);
     }
 
+    /**
+     * __method_generateFooter_description__
+     * @return __return_generateFooter_type__ __return_generateFooter_description__
+     */
     public function generateFooter()
     {
         $parts = [];
@@ -47,6 +64,10 @@ class AreaDecorator extends Decorator
         return implode("", $parts);
     }
 
+    /**
+     * __method_getPanelTitle_description__
+     * @return __return_getPanelTitle_type__ __return_getPanelTitle_description__
+     */
     public function getPanelTitle()
     {
         return $this->owner->parseText($this->owner->title);

@@ -64,6 +64,11 @@ class Storage extends \cascade\components\db\ActiveRecord
         ];
     }
 
+    /**
+     * __method_fillKill_description__
+     * @param __param_attributes_type__ $attributes __param_attributes_description__
+     * @return __return_fillKill_type__ __return_fillKill_description__
+     */
     public function fillKill($attributes)
     {
         if ($attributes === false) {
@@ -85,6 +90,11 @@ class Storage extends \cascade\components\db\ActiveRecord
         }
     }
 
+    /**
+     * __method_startBlank_description__
+     * @param __param_engine_type__ $engine __param_engine_description__
+     * @return __return_startBlank_type__ __return_startBlank_description__
+     */
     public static function startBlank($engine)
     {
         $className = self::className();
@@ -115,6 +125,7 @@ class Storage extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getObjectFiles_description__
      * @return \yii\db\ActiveRelation
      */
     public function getObjectFiles()
@@ -123,6 +134,7 @@ class Storage extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getRegistry_description__
      * @return \yii\db\ActiveRelation
      */
     public function getRegistry()
@@ -131,6 +143,7 @@ class Storage extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * __method_getStorageEngine_description__
      * @return \yii\db\ActiveRelation
      */
     public function getStorageEngine()

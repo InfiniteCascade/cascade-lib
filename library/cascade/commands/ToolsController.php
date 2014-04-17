@@ -16,6 +16,10 @@ use infinite\caching\Cacher;
 **/
 class ToolsController extends \infinite\console\Controller
 {
+    /**
+     * __method_actionFlush_description__
+     * @param __param_category_type__ $category __param_category_description__ [optional]
+     */
     public function actionFlush($category = null)
     {
         if (is_null($category)) {

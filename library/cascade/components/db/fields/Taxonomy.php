@@ -14,13 +14,41 @@ namespace cascade\components\db\fields;
 **/
 class Taxonomy extends Base
 {
+    /**
+     * @inheritdoc
+     */
     public $formFieldClass = 'cascade\components\web\form\fields\Taxonomy';
+    /**
+     * @inheritdoc
+     */
     protected $_human = true;
     protected $_moduleHandler;
+    /**
+     * @var __var_taxonomy_type__ __var_taxonomy_description__
+     */
     public $taxonomy;
 
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
+    /**
+     * @var __var__moduleHandlers_type__ __var__moduleHandlers_description__
+     */
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
     protected static $_moduleHandlers = [];
 
+    /**
+     * __method_getModuleHandler_description__
+     * @return __return_getModuleHandler_type__ __return_getModuleHandler_description__
+     */
     public function getModuleHandler()
     {
         if (is_null($this->_moduleHandler)) {

@@ -14,13 +14,24 @@ namespace cascade\components\web\widgets\decorator;
 **/
 class BlankDecorator extends Decorator
 {
+    /**
+     * @var __var_gridCellClass_type__ __var_gridCellClass_description__
+     */
     public $gridCellClass = 'infinite\web\grid\Cell';
 
+    /**
+     * __method_generateHeader_description__
+     * @return __return_generateHeader_type__ __return_generateHeader_description__
+     */
     public function generateHeader()
     {
         return null;
     }
 
+    /**
+     * __method_generateFooter_description__
+     * @return __return_generateFooter_type__ __return_generateFooter_description__
+     */
     public function generateFooter()
     {
         return null;

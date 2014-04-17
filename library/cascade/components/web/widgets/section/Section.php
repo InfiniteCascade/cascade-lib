@@ -19,8 +19,17 @@ use infinite\helpers\Html;
 **/
 class Section extends \cascade\components\web\widgets\Widget
 {
+    /**
+     * @inheritdoc
+     */
     public $gridClass = 'infinite\\web\\grid\\Grid';
+    /**
+     * @var __var_defaultWidgetDecoratorClass_type__ __var_defaultWidgetDecoratorClass_description__
+     */
     public $defaultWidgetDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\PanelDecorator';
+    /**
+     * @inheritdoc
+     */
     public $section;
 
     /**
@@ -38,11 +47,19 @@ class Section extends \cascade\components\web\widgets\Widget
         }
     }
 
+    /**
+     * __method_getWidgetDecoratorClass_description__
+     * @return __return_getWidgetDecoratorClass_type__ __return_getWidgetDecoratorClass_description__
+     */
     public function getWidgetDecoratorClass()
     {
         return $this->defaultWidgetDecoratorClass;
     }
 
+    /**
+     * __method_generateStart_description__
+     * @return __return_generateStart_type__ __return_generateStart_description__
+     */
     public function generateStart()
     {
         $parts = [];
@@ -52,6 +69,10 @@ class Section extends \cascade\components\web\widgets\Widget
         return implode('', $parts);
     }
 
+    /**
+     * __method_widgetCellSettings_description__
+     * @return __return_widgetCellSettings_type__ __return_widgetCellSettings_description__
+     */
     public function widgetCellSettings()
     {
         return [
@@ -79,6 +100,10 @@ class Section extends \cascade\components\web\widgets\Widget
         return $grid->generate();
     }
 
+    /**
+     * __method_getWidgets_description__
+     * @return __return_getWidgets_type__ __return_getWidgets_description__
+     */
     public function getWidgets()
     {
         $widgets = $this->collectorItem->getAll();
@@ -87,6 +112,11 @@ class Section extends \cascade\components\web\widgets\Widget
         return $widgets;
     }
 
+    /**
+     * __method_defaultItems_description__
+     * @param __param_parent_type__ $parent __param_parent_description__ [optional]
+     * @return __return_defaultItems_type__ __return_defaultItems_description__
+     */
     public function defaultItems($parent = null)
     {
         return [];

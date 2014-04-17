@@ -16,8 +16,17 @@ use Yii;
 **/
 class Collector extends \infinite\base\collector\Module
 {
+    /**
+     * @var __var_initial_type__ __var_initial_description__
+     */
     public $initial = [];
+    /**
+     * @var __var__lastLoadedTheme_type__ __var__lastLoadedTheme_description__
+     */
     protected $_lastLoadedTheme;
+    /**
+     * @var __var__theme_type__ __var__theme_description__
+     */
     protected $_theme;
 
     /**
@@ -36,6 +45,11 @@ class Collector extends \infinite\base\collector\Module
         return 'Theme';
     }
 
+    /**
+     * __method_getTheme_description__
+     * @return __return_getTheme_type__ __return_getTheme_description__
+     * @throws Exception __exception_Exception_description__
+     */
     public function getTheme()
     {
         if (!isset($this->_theme)) {
@@ -48,6 +62,10 @@ class Collector extends \infinite\base\collector\Module
         return $this->_theme;
     }
 
+    /**
+     * __method_registerAssetBundles_description__
+     * @param __param_view_type__ $view __param_view_description__
+     */
     public function registerAssetBundles($view)
     {
         foreach ($this->theme->assetBundles as $bundle) {
@@ -55,6 +73,10 @@ class Collector extends \infinite\base\collector\Module
         }
     }
 
+    /**
+     * __method_getIdentityAssetBundle_description__
+     * @return __return_getIdentityAssetBundle_type__ __return_getIdentityAssetBundle_description__
+     */
     public function getIdentityAssetBundle()
     {
         return $this->theme->identityAssetBundle;
@@ -71,6 +93,11 @@ class Collector extends \infinite\base\collector\Module
         return $item;
     }
 
+    /**
+     * __method_getIdentity_description__
+     * @param __param_view_type__ $view __param_view_description__
+     * @return __return_getIdentity_type__ __return_getIdentity_description__
+     */
     public function getIdentity($view)
     {
         if (!$view->assetBundles[$this->identityAssetBundle]) {
