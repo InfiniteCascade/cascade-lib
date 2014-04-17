@@ -29,7 +29,7 @@ if (count($model->possibleTargets) === 1) {
             Html::addCssClass($labelOptions, 'active');
         }
         $labelOptions['title'] = ucfirst(strip_tags($label['long']));
-        echo Html::radio('target', $model->target === $target, array_merge($itemOptions, [
+        echo Html::activeRadio($model, 'target', array_merge($itemOptions, [
             'value' => $target,
             'label' => $label['short'],
             'labelOptions' => $labelOptions
