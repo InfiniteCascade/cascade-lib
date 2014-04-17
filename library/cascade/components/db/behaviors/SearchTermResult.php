@@ -20,6 +20,9 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
      * @var __var__icon_type__ __var__icon_description__
      */
     protected $_icon;
+    /**
+     * @var __var__objectType_type__ __var__objectType_description__
+     */
     protected $_objectType;
     /**
      * @var __var__objectTypeDescriptor_type__ __var__objectTypeDescriptor_description__
@@ -46,7 +49,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     protected $_url;
 
     /**
-     * __method_setUrl_description__
+     * Set url
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setUrl($value)
@@ -55,7 +58,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * __method_getUrl_description__
+     * Get url
      * @return __return_getUrl_type__ __return_getUrl_description__
      */
     public function getUrl()
@@ -68,7 +71,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * __method_getIcon_description__
+     * Get icon
      * @return __return_getIcon_type__ __return_getIcon_description__
      */
     public function getIcon()
@@ -81,7 +84,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * __method_setIcon_description__
+     * Set icon
      * @param __param_icon_type__ $icon __param_icon_description__
      */
     public function setIcon($icon)
@@ -93,7 +96,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * __method_getObjectTypeDescriptor_description__
+     * Get object type descriptor
      * @return __return_getObjectTypeDescriptor_type__ __return_getObjectTypeDescriptor_description__
      */
     public function getObjectTypeDescriptor()
@@ -106,7 +109,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * __method_setObjectTypeDescriptor_description__
+     * Set object type descriptor
      * @param __param_type_type__ $type __param_type_description__
      */
     public function setObjectTypeDescriptor($type)
@@ -115,7 +118,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * __method_getObjectType_description__
+     * Get object type
      * @return __return_getObjectType_type__ __return_getObjectType_description__
      */
     public function getObjectType()
@@ -128,7 +131,7 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * __method_setObjectType_description__
+     * Set object type
      * @param __param_type_type__ $type __param_type_description__
      */
     public function setObjectType($type)

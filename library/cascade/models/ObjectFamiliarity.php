@@ -92,7 +92,7 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getUser_description__
+     * Get user
      * @return \yii\db\ActiveRelation
      */
     public function getUser()
@@ -101,7 +101,7 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getObject_description__
+     * Get object
      * @return \yii\db\ActiveRelation
      */
     public function getObject()

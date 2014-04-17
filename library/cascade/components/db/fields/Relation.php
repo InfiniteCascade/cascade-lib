@@ -22,6 +22,9 @@ class Relation extends Base
      * @inheritdoc
      */
     protected $_human = true;
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
     protected $_moduleHandler;
     /**
      * @var __var_relationship_type__ __var_relationship_description__
@@ -56,7 +59,7 @@ class Relation extends Base
     static $_moduleHandlers = [];
 
     /**
-     * __method_getCompanion_description__
+     * Get companion
      * @return __return_getCompanion_type__ __return_getCompanion_description__
      */
     public function getCompanion()
@@ -68,7 +71,7 @@ class Relation extends Base
         }
     }
     /**
-     * __method_getModule_description__
+     * Get module
      * @return __return_getModule_type__ __return_getModule_description__
      */
     public function getModule()
@@ -81,7 +84,7 @@ class Relation extends Base
     }
 
     /**
-     * __method_getModuleHandler_description__
+     * Get module handler
      * @return __return_getModuleHandler_type__ __return_getModuleHandler_description__
      */
     public function getModuleHandler()
@@ -106,7 +109,7 @@ class Relation extends Base
     }
 
     /**
-     * __method_getCompanionField_description__
+     * Get companion field
      * @return __return_getCompanionField_type__ __return_getCompanionField_description__
      */
     public function getCompanionField()

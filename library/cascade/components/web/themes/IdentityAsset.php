@@ -15,12 +15,12 @@ namespace cascade\components\web\themes;
 abstract class IdentityAsset extends AssetBundle
 {
     /**
-     * __method_getLogoPath_description__
+     * Get logo path
      */
     abstract public function getLogoPath();
 
     /**
-     * __method_getLogo_description__
+     * Get logo
      * @param __param_size_type__     $size __param_size_description__ [optional]
      * @return __return_getLogo_type__ __return_getLogo_description__
      */

@@ -48,7 +48,7 @@ class Request extends \infinite\web\Request
     }
 
     /**
-     * __method_setObject_description__
+     * Set object
      * @param __param_object_type__ $object __param_object_description__
      */
     public function setObject($object)
@@ -57,7 +57,7 @@ class Request extends \infinite\web\Request
     }
 
     /**
-     * __method_getObject_description__
+     * Get object
      * @return __return_getObject_type__ __return_getObject_description__
      */
     public function getObject()
@@ -66,7 +66,7 @@ class Request extends \infinite\web\Request
     }
 
     /**
-     * __method_getPreviousObject_description__
+     * Get previous object
      * @return __return_getPreviousObject_type__ __return_getPreviousObject_description__
      */
     public function getPreviousObject()

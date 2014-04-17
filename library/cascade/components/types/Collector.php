@@ -132,7 +132,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_getTableRegistry_description__
+     * Get table registry
      * @return __return_getTableRegistry_type__ __return_getTableRegistry_description__
      */
     public function getTableRegistry()
@@ -167,7 +167,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_getAuthorities_description__
+     * Get authorities
      * @return __return_getAuthorities_type__ __return_getAuthorities_description__
      */
     public function getAuthorities()

@@ -96,7 +96,7 @@ class Relation extends Base
     }
 
     /**
-     * __method_getRelationModelField_description__
+     * Get relation model field
      * @return __return_getRelationModelField_type__ __return_getRelationModelField_description__
      */
     public function getRelationModelField()

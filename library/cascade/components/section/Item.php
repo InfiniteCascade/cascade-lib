@@ -25,7 +25,7 @@ class Item extends \infinite\base\collector\Item implements SectionInterface, Co
     protected $_priority = 0;
 
     /**
-     * __method_getPriority_description__
+     * Get priority
      * @return __return_getPriority_type__ __return_getPriority_description__
      */
     public function getPriority()
@@ -34,7 +34,7 @@ class Item extends \infinite\base\collector\Item implements SectionInterface, Co
     }
 
     /**
-     * __method_setPriority_description__
+     * Set priority
      * @param __param_priority_type__ $priority __param_priority_description__
      */
     public function setPriority($priority)

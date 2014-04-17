@@ -26,7 +26,7 @@ class HandlerObjects extends \infinite\web\browser\Handler
     protected $_dataSource;
 
     /**
-     * __method_getDataSource_description__
+     * Get data source
      * @return __return_getDataSource_type__ __return_getDataSource_description__
      */
     public function getDataSource()

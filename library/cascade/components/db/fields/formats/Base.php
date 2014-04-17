@@ -19,11 +19,11 @@ abstract class Base extends \infinite\base\Object
      */
     public $field;
     /**
-     * __method_get_description__
+     * Get
      */
     abstract public function get();
     /**
-     * __method_getFormValue_description__
+     * Get form value
      * @return __return_getFormValue_type__ __return_getFormValue_description__
      */
     public function getFormValue()

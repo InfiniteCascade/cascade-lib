@@ -77,7 +77,7 @@ class User extends \infinite\db\models\User
     }
 
     /**
-     * __method_getIndividual_description__
+     * Get individual
      * @return \yii\db\ActiveRelation
      */
     public function getIndividual()

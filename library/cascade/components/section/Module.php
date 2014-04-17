@@ -44,7 +44,7 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     }
 
     /**
-     * __method_setTitle_description__
+     * Set title
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setTitle($value)

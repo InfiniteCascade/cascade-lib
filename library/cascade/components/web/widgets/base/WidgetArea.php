@@ -47,7 +47,7 @@ abstract class WidgetArea extends BaseWidget
     }
 
     /**
-     * __method_getCellContent_description__
+     * Get cell content
      * @return __return_getCellContent_type__ __return_getCellContent_description__
      */
     public function getCellContent()
@@ -56,7 +56,7 @@ abstract class WidgetArea extends BaseWidget
     }
 
     /**
-     * __method_getIsReady_description__
+     * Get is ready
      * @return __return_getIsReady_type__ __return_getIsReady_description__
      */
     public function getIsReady()

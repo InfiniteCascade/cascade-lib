@@ -97,7 +97,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getId_description__
+     * Get id
      * @return __return_getId_type__ __return_getId_description__
      */
     public function getId()
@@ -170,7 +170,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getIgnoreForeignObject_description__
+     * Get ignore foreign object
      * @return __return_getIgnoreForeignObject_type__ __return_getIgnoreForeignObject_description__
      */
     public function getIgnoreForeignObject()
@@ -179,7 +179,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getIgnoreLocalObject_description__
+     * Get ignore local object
      * @return __return_getIgnoreLocalObject_type__ __return_getIgnoreLocalObject_description__
      */
     public function getIgnoreLocalObject()
@@ -243,7 +243,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getHandler_description__
+     * Get handler
      * @return __return_getHandler_type__ __return_getHandler_description__
      */
     public function getHandler()
@@ -260,7 +260,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getHandlingComparison_description__
+     * Get handling comparison
      * @return __return_getHandlingComparison_type__ __return_getHandlingComparison_description__
      */
     public function getHandlingComparison()
@@ -269,7 +269,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getHandlingObject_description__
+     * Get handling object
      * @param __param_a_type__                  $a __param_a_description__
      * @param __param_b_type__                  $b __param_b_description__
      * @return __return_getHandlingObject_type__ __return_getHandlingObject_description__
@@ -294,7 +294,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getPrimaryObject_description__
+     * Get primary object
      * @return __return_getPrimaryObject_type__ __return_getPrimaryObject_description__
      */
     public function getPrimaryObject()
@@ -307,7 +307,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getCompanionObject_description__
+     * Get companion object
      * @return __return_getCompanionObject_type__ __return_getCompanionObject_description__
      */
     public function getCompanionObject()
@@ -320,7 +320,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_setCompanionObject_description__
+     * Set companion object
      * @param __param_value_type__               $value __param_value_description__
      * @return __return_setCompanionObject_type__ __return_setCompanionObject_description__
      */
@@ -334,7 +334,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getCompanionId_description__
+     * Get companion
      * @return __return_getCompanionId_type__ __return_getCompanionId_description__
      */
     public function getCompanionId()
@@ -352,7 +352,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_setPairedDataItem_description__
+     * Set paired data item
      * @param cascade\components\dataInterface\DataItem $value __param_value_description__
      */
     public function setPairedDataItem(DataItem $value)
@@ -372,7 +372,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getPairedDataItem_description__
+     * Get paired data item
      * @return __return_getPairedDataItem_type__ __return_getPairedDataItem_description__
      */
     public function getPairedDataItem()
@@ -381,7 +381,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_setHandledDataItem_description__
+     * Set handled data item
      * @param __param_value_type__               $value __param_value_description__
      * @return __return_setHandledDataItem_type__ __return_setHandledDataItem_description__
      */
@@ -399,7 +399,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getHandledDataItem_description__
+     * Get handled data item
      * @return __return_getHandledDataItem_type__ __return_getHandledDataItem_description__
      */
     public function getHandledDataItem()
@@ -408,7 +408,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getForeignObject_description__
+     * Get foreign object
      * @return __return_getForeignObject_type__ __return_getForeignObject_description__
      */
     public function getForeignObject()
@@ -421,7 +421,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_setForeignObject_description__
+     * Set foreign object
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setForeignObject($value)
@@ -430,7 +430,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getLocalObject_description__
+     * Get local object
      * @return __return_getLocalObject_type__ __return_getLocalObject_description__
      */
     public function getLocalObject()
@@ -443,7 +443,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_setLocalObject_description__
+     * Set local object
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setLocalObject($value)
@@ -452,7 +452,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getAction_description__
+     * Get action
      * @return __return_getAction_type__ __return_getAction_description__
      */
     public function getAction()
@@ -461,7 +461,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_getModule_description__
+     * Get module
      * @return __return_getModule_type__ __return_getModule_description__
      */
     public function getModule()

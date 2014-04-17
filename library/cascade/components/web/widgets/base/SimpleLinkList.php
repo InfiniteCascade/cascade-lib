@@ -25,7 +25,7 @@ class SimpleLinkList extends BaseList
     public $renderPager = false;
 
     /**
-     * __method_getGridCellSettings_description__
+     * Get grid cell settings
      * @return __return_getGridCellSettings_type__ __return_getGridCellSettings_description__
      */
     public function getGridCellSettings()

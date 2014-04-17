@@ -62,7 +62,7 @@ class RelationTaxonomy extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getTaxonomy_description__
+     * Get taxonomy
      * @return \yii\db\ActiveRelation
      */
     public function getTaxonomy()

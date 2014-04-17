@@ -24,7 +24,7 @@ abstract class AclTask extends \infinite\setup\Task
         return 'ACL';
     }
     /**
-     * __method_getBaseAcas_description__
+     * Get base acas
      * @return __return_getBaseAcas_type__ __return_getBaseAcas_description__
      */
     public function getBaseAcas()
@@ -33,7 +33,7 @@ abstract class AclTask extends \infinite\setup\Task
     }
 
     /**
-     * __method_getBaseRules_description__
+     * Get base rules
      */
     abstract public function getBaseRules();
 

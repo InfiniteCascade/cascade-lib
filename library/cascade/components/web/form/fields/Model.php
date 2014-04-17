@@ -26,7 +26,7 @@ class Model extends Base
      */
     protected $_fieldConfig = [];
     /**
-     * __method_getFieldConfig_description__
+     * Get field config
      * @return __return_getFieldConfig_type__ __return_getFieldConfig_description__
      */
     public function getFieldConfig()
@@ -38,7 +38,7 @@ class Model extends Base
     }
 
     /**
-     * __method_setFieldConfig_description__
+     * Set field config
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setFieldConfig($value)

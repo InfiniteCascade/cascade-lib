@@ -26,7 +26,7 @@ class CellBehavior extends \yii\base\Behavior
     protected $_gridCell;
 
     /**
-     * __method_getGridCellSettings_description__
+     * Get grid cell settings
      * @return __return_getGridCellSettings_type__ __return_getGridCellSettings_description__
      */
     public function getGridCellSettings()
@@ -39,7 +39,7 @@ class CellBehavior extends \yii\base\Behavior
     }
 
     /**
-     * __method_getCell_description__
+     * Get cell
      * @return __return_getCell_type__ __return_getCell_description__
      */
     public function getCell()
@@ -56,7 +56,7 @@ class CellBehavior extends \yii\base\Behavior
     }
 
     /**
-     * __method_getCellContent_description__
+     * Get cell content
      * @return __return_getCellContent_type__ __return_getCellContent_description__
      */
     public function getCellContent()

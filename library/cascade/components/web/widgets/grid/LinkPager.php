@@ -22,7 +22,7 @@ class LinkPager extends \yii\widgets\LinkPager
     protected $_state;
 
     /**
-     * __method_getState_description__
+     * Get state
      * @return unknown
      */
     public function getState()
@@ -31,7 +31,7 @@ class LinkPager extends \yii\widgets\LinkPager
     }
 
     /**
-     * __method_setState_description__
+     * Set state
      * @param unknown $state
      */
     public function setState($state)

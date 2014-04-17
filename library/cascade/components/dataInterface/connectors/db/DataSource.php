@@ -46,7 +46,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_getForeignDataItem_description__
+     * Get foreign data item
      * @param __param_key_type__                 $key __param_key_description__
      * @return __return_getForeignDataItem_type__ __return_getForeignDataItem_description__
      */
@@ -63,7 +63,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_getForeignDataModel_description__
+     * Get foreign data model
      * @param __param_key_type__                  $key __param_key_description__
      * @return __return_getForeignDataModel_type__ __return_getForeignDataModel_description__
      */
@@ -267,7 +267,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_getUnmappedKeys_description__
+     * Get unmapped keys
      * @return __return_getUnmappedKeys_type__ __return_getUnmappedKeys_description__
      */
     public function getUnmappedKeys()
@@ -282,7 +282,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_getUnmappedLocalKeys_description__
+     * Get unmapped local keys
      * @return __return_getUnmappedLocalKeys_type__ __return_getUnmappedLocalKeys_description__
      */
     public function getUnmappedLocalKeys()
@@ -294,7 +294,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_getUnmappedForeignKeys_description__
+     * Get unmapped foreign keys
      * @return __return_getUnmappedForeignKeys_type__ __return_getUnmappedForeignKeys_description__
      */
     public function getUnmappedForeignKeys()
@@ -307,7 +307,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_getLocalPrimaryKeyName_description__
+     * Get local primary key name
      * @return __return_getLocalPrimaryKeyName_type__ __return_getLocalPrimaryKeyName_description__
      */
     public function getLocalPrimaryKeyName()
@@ -316,7 +316,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_getForeignPrimaryKeyName_description__
+     * Get foreign primary key name
      * @return __return_getForeignPrimaryKeyName_type__ __return_getForeignPrimaryKeyName_description__
      */
     public function getForeignPrimaryKeyName()
@@ -362,7 +362,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_getKeyTranslation_description__
+     * Get key translation
      * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
      * @return __return_getKeyTranslation_type__                    __return_getKeyTranslation_description__
      */
@@ -377,7 +377,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_getReverseKeyTranslation_description__
+     * Get reverse key translation
      * @param __param_localObject_type__               $localObject __param_localObject_description__
      * @return __return_getReverseKeyTranslation_type__ __return_getReverseKeyTranslation_description__
      */
@@ -490,7 +490,7 @@ class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_getModule_description__
+     * Get module
      * @return __return_getModule_type__ __return_getModule_description__
      */
     public function getModule()

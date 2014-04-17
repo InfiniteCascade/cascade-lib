@@ -75,7 +75,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_getLocation_description__
+     * Get location
      * @param unknown $location
      * @param unknown $owner    (optional)
      * @return unknown

@@ -73,7 +73,7 @@ class StorageEngine extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getRegistry_description__
+     * Get registry
      * @return \yii\db\ActiveRelation
      */
     public function getRegistry()
@@ -82,7 +82,7 @@ class StorageEngine extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getStorageHandler_description__
+     * Get storage handler
      * @return __return_getStorageHandler_type__ __return_getStorageHandler_description__
      */
     public function getStorageHandler()

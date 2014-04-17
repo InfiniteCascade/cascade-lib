@@ -121,7 +121,7 @@ class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_setTableName_description__
+     * Set table name
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setTableName($value)
@@ -130,7 +130,7 @@ class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_setInterface_description__
+     * Set interface
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setInterface($value)
@@ -147,7 +147,7 @@ class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_setAttributes_description__
+     * Set attributes
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setAttributes($value)
@@ -158,7 +158,7 @@ class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_getChildren_description__
+     * Get children
      * @return __return_getChildren_type__ __return_getChildren_description__
      */
     public function getChildren()
@@ -218,7 +218,7 @@ class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_getPrimaryKey_description__
+     * Get primary key
      * @return __return_getPrimaryKey_type__ __return_getPrimaryKey_description__
      */
     public function getPrimaryKey()
@@ -275,7 +275,7 @@ class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_getAttributes_description__
+     * Get attributes
      * @return __return_getAttributes_type__ __return_getAttributes_description__
      */
     public function getAttributes()
@@ -292,7 +292,7 @@ class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_getMeta_description__
+     * Get meta
      * @return __return_getMeta_type__ __return_getMeta_description__
      */
     public function getMeta()
@@ -301,7 +301,7 @@ class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_setMeta_description__
+     * Set meta
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setMeta($value)
@@ -310,7 +310,7 @@ class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_getInterface_description__
+     * Get interface
      * @return __return_getInterface_type__ __return_getInterface_description__
      */
     public function getInterface()
@@ -390,7 +390,7 @@ class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_getTableName_description__
+     * Get table name
      * @return __return_getTableName_type__ __return_getTableName_description__
      */
     public function getTableName()

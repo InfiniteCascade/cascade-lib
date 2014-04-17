@@ -64,7 +64,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_getLabels_description__
+     * Get labels
      * @return __return_getLabels_type__ __return_getLabels_description__
      */
     public function getLabels()
@@ -107,7 +107,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_getTarget_description__
+     * Get target
      * @return __return_getTarget_type__ __return_getTarget_description__
      */
     public function getTarget()
@@ -215,7 +215,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_getPossibleTargets_description__
+     * Get possible targets
      * @return __return_getPossibleTargets_type__ __return_getPossibleTargets_description__
      */
     public function getPossibleTargets()
@@ -248,7 +248,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_setTarget_description__
+     * Set target
      * @param __param_value_type__ $value __param_value_description__
      * @throws Exception __exception_Exception_description__
      */
@@ -262,7 +262,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_getTargetLabel_description__
+     * Get target label
      * @return __return_getTargetLabel_type__ __return_getTargetLabel_description__
      */
     public function getTargetLabel()
@@ -275,7 +275,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_getTargetDescriptor_description__
+     * Get target descriptor
      * @return __return_getTargetDescriptor_type__ __return_getTargetDescriptor_description__
      */
     public function getTargetDescriptor()

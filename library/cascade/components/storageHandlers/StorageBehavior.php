@@ -62,7 +62,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_setStorage_description__
+     * Set storage
      * @param __param_value_type__ $value __param_value_description__
      * @throws Exception __exception_Exception_description__
      */
@@ -77,7 +77,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_getStorage_description__
+     * Get storage
      * @return __return_getStorage_type__ __return_getStorage_description__
      */
     public function getStorage()
@@ -152,7 +152,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_getStorageObject_description__
+     * Get storage object
      * @return __return_getStorageObject_type__ __return_getStorageObject_description__
      */
     public function getStorageObject()
@@ -181,7 +181,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_getStorageEngine_description__
+     * Get storage engine
      * @return __return_getStorageEngine_type__ __return_getStorageEngine_description__
      */
     public function getStorageEngine()
@@ -195,7 +195,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_setStorageEngine_description__
+     * Set storage engine
      * @param __param_value_type__             $value __param_value_description__
      * @return __return_setStorageEngine_type__ __return_setStorageEngine_description__
      */

@@ -86,7 +86,7 @@ class TaxonomyType extends \cascade\components\db\ActiveRecord implements \infin
     }
 
     /**
-     * __method_getTaxonomies_description__
+     * Get taxonomies
      * @return \yii\db\ActiveRelation
      */
     public function getTaxonomies()
@@ -95,7 +95,7 @@ class TaxonomyType extends \cascade\components\db\ActiveRecord implements \infin
     }
 
     /**
-     * __method_getId_description__
+     * Get id
      * @return \yii\db\ActiveRelation
      */
     public function getId()

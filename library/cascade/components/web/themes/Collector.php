@@ -46,7 +46,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_getTheme_description__
+     * Get theme
      * @return __return_getTheme_type__ __return_getTheme_description__
      * @throws Exception __exception_Exception_description__
      */
@@ -74,7 +74,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_getIdentityAssetBundle_description__
+     * Get identity asset bundle
      * @return __return_getIdentityAssetBundle_type__ __return_getIdentityAssetBundle_description__
      */
     public function getIdentityAssetBundle()
@@ -94,7 +94,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_getIdentity_description__
+     * Get identity
      * @param __param_view_type__         $view __param_view_description__
      * @return __return_getIdentity_type__ __return_getIdentity_description__
      */

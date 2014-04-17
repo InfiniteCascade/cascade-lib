@@ -42,7 +42,7 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
     }
 
     /**
-     * __method_getRelationship_description__
+     * Get relationship
      * @return __return_getRelationship_type__ __return_getRelationship_description__
      */
     public function getRelationship()
@@ -59,7 +59,7 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
     }
 
     /**
-     * __method_setRelationship_description__
+     * Set relationship
      * @param cascade\components\types\Relationship $value __param_value_description__
      */
     public function setRelationship(Relationship $value)

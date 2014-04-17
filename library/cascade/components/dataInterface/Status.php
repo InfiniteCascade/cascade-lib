@@ -58,7 +58,7 @@ class Status extends \infinite\base\status\Status
     }
 
     /**
-     * __method_getError_description__
+     * Get error
      * @return __return_getError_type__ __return_getError_description__
      */
     public function getError()

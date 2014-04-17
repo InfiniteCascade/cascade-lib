@@ -131,7 +131,7 @@ class PanelDecorator extends Decorator
     }
 
     /**
-     * __method_getPanelTitle_description__
+     * Get panel title
      * @return __return_getPanelTitle_type__ __return_getPanelTitle_description__
      */
     public function getPanelTitle()

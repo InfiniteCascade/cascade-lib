@@ -74,7 +74,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * __method_getState_description__
+     * Get state
      * @param __param_key_type__       $key     __param_key_description__
      * @param __param_default_type__   $default __param_default_description__ [optional]
      * @return __return_getState_type__ __return_getState_description__
@@ -85,7 +85,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * __method_setState_description__
+     * Set state
      * @param __param_key_type__       $key   __param_key_description__
      * @param __param_value_type__     $value __param_value_description__
      * @return __return_setState_type__ __return_setState_description__
@@ -96,7 +96,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * __method_getHeaderMenu_description__
+     * Get header menu
      * @return __return_getHeaderMenu_type__ __return_getHeaderMenu_description__
      */
     public function getHeaderMenu()
@@ -105,7 +105,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * __method_getTitle_description__
+     * Get title
      * @return __return_getTitle_type__ __return_getTitle_description__
      */
     public function getTitle()
@@ -114,7 +114,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * __method_setTitle_description__
+     * Set title
      * @param __param_title_type__ $title __param_title_description__
      */
     public function setTitle($title)
@@ -176,7 +176,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * __method_getWidgetAreas_description__
+     * Get widget areas
      * @return __return_getWidgetAreas_type__ __return_getWidgetAreas_description__
      */
     public function getWidgetAreas()
@@ -186,7 +186,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * __method_getWidgetId_description__
+     * Get widget
      * @return unknown
      */
     public function getWidgetId()

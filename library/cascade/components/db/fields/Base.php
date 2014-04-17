@@ -120,7 +120,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getField_description__
+     * Get field
      * @return __return_getField_type__ __return_getField_description__
      */
     public function getField()
@@ -142,7 +142,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_setLocations_description__
+     * Set locations
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setLocations($value)
@@ -151,7 +151,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getLocations_description__
+     * Get locations
      * @return __return_getLocations_type__ __return_getLocations_description__
      */
     public function getLocations()
@@ -177,7 +177,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_setFormField_description__
+     * Set form field
      * @param __param_value_type__         $value __param_value_description__
      * @return __return_setFormField_type__ __return_setFormField_description__
      * @throws Exception __exception_Exception_description__
@@ -200,7 +200,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_setHuman_description__
+     * Set human
      * @param unknown $value
      * @return unknown
      */
@@ -212,7 +212,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getHuman_description__
+     * Get human
      * @return unknown
      */
     public function getHuman()
@@ -225,7 +225,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getMultiline_description__
+     * Get multiline
      * @return __return_getMultiline_type__ __return_getMultiline_description__
      */
     public function getMultiline()
@@ -238,7 +238,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_setMultiline_description__
+     * Set multiline
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setMultiline($value)
@@ -247,7 +247,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getFormField_description__
+     * Get form field
      * @return unknown
      */
     public function getFormField()
@@ -260,7 +260,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getModel_description__
+     * Get model
      * @return unknown
      */
     public function getModel()
@@ -273,7 +273,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_setModel_description__
+     * Set model
      * @param unknown $value
      * @return unknown
      */
@@ -285,7 +285,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getFormat_description__
+     * Get format
      * @return unknown
      */
     public function getFormat()
@@ -298,7 +298,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_setFormat_description__
+     * Set format
      * @param unknown $value
      * @return unknown
      */
@@ -315,7 +315,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getFormattedValue_description__
+     * Get formatted value
      * @return __return_getFormattedValue_type__ __return_getFormattedValue_description__
      */
     public function getFormattedValue()
@@ -332,7 +332,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getFormValue_description__
+     * Get form value
      * @return __return_getFormValue_type__ __return_getFormValue_description__
      */
     public function getFormValue()
@@ -349,7 +349,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getValuePackage_description__
+     * Get value package
      * @return __return_getValuePackage_type__ __return_getValuePackage_description__
      */
     public function getValuePackage()
@@ -358,7 +358,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getValue_description__
+     * Get value
      * @return __return_getValue_type__ __return_getValue_description__
      */
     public function getValue()
@@ -371,7 +371,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_getLabel_description__
+     * Get label
      * @return unknown
      */
     public function getLabel()
@@ -384,7 +384,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_setLabel_description__
+     * Set label
      * @param unknown $value
      * @return unknown
      */

@@ -15,7 +15,7 @@ namespace cascade\modules\ThemeCascade;
 class Module extends \cascade\components\web\themes\Module
 {
     /**
-     * __method_getComponentNamespace_description__
+     * Get component namespace
      * @return __return_getComponentNamespace_type__ __return_getComponentNamespace_description__
      */
     public function getComponentNamespace()

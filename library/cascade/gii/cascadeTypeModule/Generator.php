@@ -136,7 +136,7 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * __method_getBaseNamespace_description__
+     * Get base namespace
      * @return __return_getBaseNamespace_type__ __return_getBaseNamespace_description__
      */
     public function getBaseNamespace()
@@ -152,7 +152,7 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * __method_getModelClass_description__
+     * Get model class
      * @return __return_getModelClass_type__ __return_getModelClass_description__
      */
     public function getModelClass()
@@ -161,7 +161,7 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * __method_getModuleName_description__
+     * Get module name
      * @return __return_getModuleName_type__ __return_getModuleName_description__
      */
     public function getModuleName()
@@ -170,7 +170,7 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * __method_getModuleNamespace_description__
+     * Get module namespace
      * @return __return_getModuleNamespace_type__ __return_getModuleNamespace_description__
      */
     public function getModuleNamespace()
@@ -179,7 +179,7 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * __method_getModuleClass_description__
+     * Get module class
      * @return __return_getModuleClass_type__ __return_getModuleClass_description__
      */
     public function getModuleClass()
@@ -188,7 +188,7 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * __method_getModuleID_description__
+     * Get module i d
      * @return __return_getModuleID_type__ __return_getModuleID_description__
      */
     public function getModuleID()
@@ -197,7 +197,7 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * __method_getModuleSystemID_description__
+     * Get module system i d
      * @return __return_getModuleSystemID_type__ __return_getModuleSystemID_description__
      */
     public function getModuleSystemID()
@@ -207,7 +207,7 @@ class Generator extends \yii\gii\Generator
 
     // model
     /**
-     * __method_getNs_description__
+     * Get ns
      * @return __return_getNs_type__ __return_getNs_description__
      */
     public function getNs()
@@ -570,7 +570,7 @@ EOD;
     }
 
     /**
-     * __method_getModulePath_description__
+     * Get module path
      * @return boolean the directory that contains the module class
      */
     public function getModulePath()
@@ -579,7 +579,7 @@ EOD;
     }
 
     /**
-     * __method_getModuleSetPath_description__
+     * Get module set path
      * @return __return_getModuleSetPath_type__ __return_getModuleSetPath_description__
      */
     public function getModuleSetPath()
@@ -588,7 +588,7 @@ EOD;
     }
 
     /**
-     * __method_getWidgetNamespace_description__
+     * Get widget namespace
      * @return string the widget namespace of the module.
      */
     public function getWidgetNamespace()
@@ -597,7 +597,7 @@ EOD;
     }
 
     /**
-     * __method_getModelNamespace_description__
+     * Get model namespace
      * @return string the model namespace of the module.
      */
     public function getModelNamespace()
@@ -606,7 +606,7 @@ EOD;
     }
 
     /**
-     * __method_getMigrationsNamespace_description__
+     * Get migrations namespace
      * @return string the model namespace of the module.
      */
     public function getMigrationsNamespace()
@@ -615,7 +615,7 @@ EOD;
     }
 
     /**
-     * __method_getMigrationPath_description__
+     * Get migration path
      * @return __return_getMigrationPath_type__ __return_getMigrationPath_description__
      */
     public function getMigrationPath()
@@ -624,7 +624,7 @@ EOD;
     }
 
     /**
-     * __method_getMigrationDirectory_description__
+     * Get migration directory
      * @return __return_getMigrationDirectory_type__ __return_getMigrationDirectory_description__
      */
     public function getMigrationDirectory()
@@ -632,7 +632,7 @@ EOD;
         return Yii::getAlias('@' . str_replace('\\', '/', $this->migrationsNamespace));
     }
     /**
-     * __method_getMigrationsAlias_description__
+     * Get migrations alias
      * @return string the model namespace of the module.
      */
     public function getMigrationsAlias()
@@ -641,7 +641,7 @@ EOD;
     }
 
     /**
-     * __method_getMigrationClassName_description__
+     * Get migration class name
      * @return string the model namespace of the module.
      */
     public function getMigrationClassName()
@@ -714,7 +714,7 @@ EOD;
     }
 
     /**
-     * __method_getPrimaryKeyLocation_description__
+     * Get primary key location
      * @param __param_table_type__                  $table __param_table_description__
      * @return __return_getPrimaryKeyLocation_type__ __return_getPrimaryKeyLocation_description__
      */
@@ -767,7 +767,7 @@ EOD;
     }
 
     /**
-     * __method_getModuleSetModules_description__
+     * Get module set modules
      * @return __return_getModuleSetModules_type__ __return_getModuleSetModules_description__
      */
     public function getModuleSetModules()
@@ -1270,7 +1270,7 @@ or false if the table is not a pivot table.
     private $_classNames;
 
     /**
-     * __method_getTableNames_description__
+     * Get table names
      * @return array the table names that match the pattern specified by [[tableName]].
      */
     protected function getTableNames()
@@ -1348,7 +1348,7 @@ or false if the table is not a pivot table.
     }
 
     /**
-     * __method_getSearchModels_description__
+     * Get search models
      * @return __return_getSearchModels_type__ __return_getSearchModels_description__
      */
     public function getSearchModels()
@@ -1357,7 +1357,7 @@ or false if the table is not a pivot table.
     }
 
     /**
-     * __method_getModelMap_description__
+     * Get model map
      * @return __return_getModelMap_type__ __return_getModelMap_description__
      */
     public function getModelMap()
@@ -1381,7 +1381,7 @@ or false if the table is not a pivot table.
         return $m;
     }
     /**
-     * __method_getDbConnection_description__
+     * Get db connection
      * @return Connection the DB connection as specified by [[db]].
      */
     protected function getDbConnection()

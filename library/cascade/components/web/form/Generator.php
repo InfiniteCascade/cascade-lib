@@ -46,7 +46,7 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     public $ajax = false;
 
     /**
-     * __method_setItems_description__
+     * Set items
      * @param __param_items_type__ $items __param_items_description__
      */
     public function setItems($items)

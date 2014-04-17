@@ -21,7 +21,7 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     use CollectedObjectTrait;
 
     /**
-     * __method_getCollectorName_description__
+     * Get collector name
      */
     abstract public function getCollectorName();
 
@@ -63,7 +63,7 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     }
 
     /**
-     * __method_getSubmodules_description__
+     * Get submodules
      * @return __return_getSubmodules_type__ __return_getSubmodules_description__
      */
     public function getSubmodules()

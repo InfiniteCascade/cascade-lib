@@ -125,7 +125,7 @@ class Storage extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getObjectFiles_description__
+     * Get object files
      * @return \yii\db\ActiveRelation
      */
     public function getObjectFiles()
@@ -134,7 +134,7 @@ class Storage extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getRegistry_description__
+     * Get registry
      * @return \yii\db\ActiveRelation
      */
     public function getRegistry()
@@ -143,7 +143,7 @@ class Storage extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getStorageEngine_description__
+     * Get storage engine
      * @return \yii\db\ActiveRelation
      */
     public function getStorageEngine()

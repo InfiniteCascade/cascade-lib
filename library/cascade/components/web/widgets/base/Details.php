@@ -110,7 +110,7 @@ class Details extends Widget implements ListWidgetInterface
     }
 
     /**
-     * __method_getPaginationSettings_description__
+     * Get pagination settings
      * @return __return_getPaginationSettings_type__ __return_getPaginationSettings_description__
      */
     public function getPaginationSettings()

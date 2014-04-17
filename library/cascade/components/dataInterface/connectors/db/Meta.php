@@ -51,7 +51,7 @@ class Meta extends \infinite\base\Object
     static $_metas = [];
 
     /**
-     * __method_get_description__
+     * Get
      * @param __param_interface_type__    $interface    __param_interface_description__
      * @param __param_foreignTable_type__ $foreignTable __param_foreignTable_description__
      * @return __return_get_type__         __return_get_description__
@@ -80,7 +80,7 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * __method_setHasMany_description__
+     * Set has many
      * @param __param_config_type__ $config __param_config_description__
      */
     public function setHasMany($config)
@@ -110,7 +110,7 @@ class Meta extends \infinite\base\Object
     // }
 
     /**
-     * __method_getHasMany_description__
+     * Get has many
      * @return __return_getHasMany_type__ __return_getHasMany_description__
      */
     public function getHasMany()
@@ -119,7 +119,7 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * __method_getHasOne_description__
+     * Get has one
      * @return __return_getHasOne_type__ __return_getHasOne_description__
      */
     public function getHasOne()
@@ -128,7 +128,7 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * __method_getBelongsTo_description__
+     * Get belongs to
      * @return __return_getBelongsTo_type__ __return_getBelongsTo_description__
      */
     public function getBelongsTo()
@@ -147,7 +147,7 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * __method_getAttributeKeys_description__
+     * Get attribute keys
      * @return __return_getAttributeKeys_type__ __return_getAttributeKeys_description__
      */
     public function getAttributeKeys()
@@ -156,7 +156,7 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * __method_getSchema_description__
+     * Get schema
      * @return __return_getSchema_type__ __return_getSchema_description__
      */
     public function getSchema()
@@ -165,7 +165,7 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * __method_setInterface_description__
+     * Set interface
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setInterface($value)
@@ -174,7 +174,7 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * __method_getInterface_description__
+     * Get interface
      * @return __return_getInterface_type__ __return_getInterface_description__
      */
     public function getInterface()

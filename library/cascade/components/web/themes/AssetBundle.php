@@ -73,7 +73,7 @@ class AssetBundle extends \yii\web\AssetBundle
     }
 
     /**
-     * __method_getCachePath_description__
+     * Get cache path
      * @return __return_getCachePath_type__ __return_getCachePath_description__
      */
     public function getCachePath()
@@ -91,7 +91,7 @@ class AssetBundle extends \yii\web\AssetBundle
     }
 
     /**
-     * __method_getCacheUrl_description__
+     * Get cache url
      * @return __return_getCacheUrl_type__ __return_getCacheUrl_description__
      */
     public function getCacheUrl()
@@ -103,7 +103,7 @@ class AssetBundle extends \yii\web\AssetBundle
     }
 
     /**
-     * __method_getCacheAssetUrl_description__
+     * Get cache asset url
      * @param __param_path_type__              $path __param_path_description__
      * @return __return_getCacheAssetUrl_type__ __return_getCacheAssetUrl_description__
      */

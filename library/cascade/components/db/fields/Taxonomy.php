@@ -22,6 +22,9 @@ class Taxonomy extends Base
      * @inheritdoc
      */
     protected $_human = true;
+    /**
+     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
+     */
     protected $_moduleHandler;
     /**
      * @var __var_taxonomy_type__ __var_taxonomy_description__
@@ -49,7 +52,7 @@ class Taxonomy extends Base
     protected static $_moduleHandlers = [];
 
     /**
-     * __method_getModuleHandler_description__
+     * Get module handler
      * @return __return_getModuleHandler_type__ __return_getModuleHandler_description__
      */
     public function getModuleHandler()

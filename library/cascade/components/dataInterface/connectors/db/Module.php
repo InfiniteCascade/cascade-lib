@@ -86,7 +86,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getDataSource_description__
+     * Get data source
      * @param __param_tableName_type__      $tableName __param_tableName_description__
      * @return __return_getDataSource_type__ __return_getDataSource_description__
      */
@@ -106,7 +106,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getDataSources_description__
+     * Get data sources
      * @return __return_getDataSources_type__ __return_getDataSources_description__
      */
     public function getDataSources()
@@ -181,7 +181,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getLocalObject_description__
+     * Get local object
      * @param __param_localModelClass_type__   $localModelClass   __param_localModelClass_description__
      * @param __param_foreignPrimaryKey_type__ $foreignPrimaryKey __param_foreignPrimaryKey_description__
      * @return __return_getLocalObject_type__   __return_getLocalObject_description__
@@ -197,7 +197,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getForeignObject_description__
+     * Get foreign object
      * @param __param_foreignModelClass_type__ $foreignModelClass __param_foreignModelClass_description__
      * @param __param_foreignPrimaryKey_type__ $foreignPrimaryKey __param_foreignPrimaryKey_description__
      * @return __return_getForeignObject_type__ __return_getForeignObject_description__
@@ -213,7 +213,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getLocalDataSource_description__
+     * Get local data source
      * @param __param_localModelClass_type__     $localModelClass __param_localModelClass_description__
      * @return __return_getLocalDataSource_type__ __return_getLocalDataSource_description__
      */
@@ -229,7 +229,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getForeignDataSource_description__
+     * Get foreign data source
      * @param __param_foreignModelClass_type__     $foreignModelClass __param_foreignModelClass_description__
      * @return __return_getForeignDataSource_type__ __return_getForeignDataSource_description__
      */
@@ -245,7 +245,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getForeignModel_description__
+     * Get foreign model
      * @param __param_model_type__            $model __param_model_description__
      * @return __return_getForeignModel_type__ __return_getForeignModel_description__
      */
@@ -260,7 +260,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getForeignModelsConfig_description__
+     * Get foreign models config
      * @return __return_getForeignModelsConfig_type__ __return_getForeignModelsConfig_description__
      */
     public function getForeignModelsConfig()
@@ -269,7 +269,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getForeignModelConfig_description__
+     * Get foreign model config
      * @param __param_tableName_type__              $tableName __param_tableName_description__
      * @param __param_modelName_type__              $modelName __param_modelName_description__
      * @return __return_getForeignModelConfig_type__ __return_getForeignModelConfig_description__
@@ -288,7 +288,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getForeignModelName_description__
+     * Get foreign model name
      * @param __param_tableName_type__            $tableName __param_tableName_description__
      * @return __return_getForeignModelName_type__ __return_getForeignModelName_description__
      */
@@ -298,7 +298,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getForeignModels_description__
+     * Get foreign models
      * @return __return_getForeignModels_type__ __return_getForeignModels_description__
      */
     public function getForeignModels()
@@ -315,7 +315,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getDb_description__
+     * Get db
      * @return __return_getDb_type__ __return_getDb_description__
      * @throws Exception __exception_Exception_description__
      */
@@ -336,7 +336,7 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * __method_getAction_description__
+     * Get action
      * @return __return_getAction_type__ __return_getAction_description__
      */
     public function getAction()

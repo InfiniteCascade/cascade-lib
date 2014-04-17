@@ -90,7 +90,7 @@ abstract class Module extends \infinite\base\Module
     }
 
     /**
-     * __method_getShortName_description__
+     * Get short name
      * @return __return_getShortName_type__ __return_getShortName_description__
      * @throws Exception __exception_Exception_description__
      */

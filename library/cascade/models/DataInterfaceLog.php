@@ -73,7 +73,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getDataInterface_description__
+     * Get data interface
      * @return \yii\db\ActiveRelation
      */
     public function getDataInterface()

@@ -173,7 +173,7 @@ class Task_000001_environment extends \infinite\setup\Task
     }
 
     /**
-     * __method_getEnvOptions_description__
+     * Get env options
      * @return __return_getEnvOptions_type__ __return_getEnvOptions_description__
      */
     public function getEnvOptions()
@@ -191,7 +191,7 @@ class Task_000001_environment extends \infinite\setup\Task
     }
 
     /**
-     * __method_getEnvListOptions_description__
+     * Get env list options
      * @return __return_getEnvListOptions_type__ __return_getEnvListOptions_description__
      */
     public function getEnvListOptions()

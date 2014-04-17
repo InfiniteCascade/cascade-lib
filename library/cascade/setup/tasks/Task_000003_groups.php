@@ -25,7 +25,7 @@ class Task_000003_groups extends \infinite\setup\Task
         return 'Groups';
     }
     /**
-     * __method_getBaseGroups_description__
+     * Get base groups
      * @return __return_getBaseGroups_type__ __return_getBaseGroups_description__
      */
     public function getBaseGroups()
@@ -119,7 +119,7 @@ class Task_000003_groups extends \infinite\setup\Task
     }
 
     /**
-     * __method_getGroupLevel_description__
+     * Get group level
      * @param __param_k_type__              $k __param_k_description__
      * @return __return_getGroupLevel_type__ __return_getGroupLevel_description__
      */

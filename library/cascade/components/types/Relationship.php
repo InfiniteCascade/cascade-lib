@@ -70,7 +70,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getTaxonomyPackage_description__
+     * Get taxonomy package
      * @return __return_getTaxonomyPackage_type__ __return_getTaxonomyPackage_description__
      */
     public function getTaxonomyPackage()
@@ -91,7 +91,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getPrimaryChild_description__
+     * Get primary child
      * @param __param_parentObject_type__     $parentObject __param_parentObject_description__
      * @return __return_getPrimaryChild_type__ __return_getPrimaryChild_description__
      */
@@ -120,7 +120,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getPrimaryParent_description__
+     * Get primary parent
      * @param __param_childObject_type__       $childObject __param_childObject_description__
      * @return __return_getPrimaryParent_type__ __return_getPrimaryParent_description__
      */
@@ -190,7 +190,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getOne_description__
+     * Get one
      * @param object  $parent
      * @param object  $child
      * @param unknown $options (optional)
@@ -209,7 +209,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getById_description__
+     * Get by
      * @param __param_relationshipId_type__ $relationshipId __param_relationshipId_description__
      * @return __return_getById_type__       __return_getById_description__
      */
@@ -237,7 +237,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getHasFields_description__
+     * Get has fields
      * @return __return_getHasFields_type__ __return_getHasFields_description__
      */
     public function getHasFields()
@@ -345,7 +345,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getModel_description__
+     * Get model
      * @param __param_parentObjectId_type__ $parentObjectId __param_parentObjectId_description__
      * @param __param_childObjectId_type__  $childObjectId  __param_childObjectId_description__
      * @return __return_getModel_type__      __return_getModel_description__
@@ -397,7 +397,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_setDefaultOptions_description__
+     * Set default options
      * @return __return_setDefaultOptions_type__ __return_setDefaultOptions_description__
      */
     public function setDefaultOptions()
@@ -412,7 +412,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getParent_description__
+     * Get parent
      * @return unknown
      */
     public function getParent()
@@ -421,7 +421,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getChild_description__
+     * Get child
      * @return unknown
      */
     public function getChild()
@@ -430,7 +430,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getActive_description__
+     * Get active
      * @return unknown
      */
     public function getActive()
@@ -439,7 +439,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getOptions_description__
+     * Get options
      * @return __return_getOptions_type__ __return_getOptions_description__
      */
     public function getOptions()
@@ -448,7 +448,7 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
-     * __method_getSystemId_description__
+     * Get system
      * @return __return_getSystemId_type__ __return_getSystemId_description__
      */
     public function getSystemId()

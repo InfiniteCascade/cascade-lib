@@ -90,7 +90,7 @@ class Task_000002_db extends \infinite\setup\Task
     }
 
     /**
-     * __method_getMigrator_description__
+     * Get migrator
      * @return __return_getMigrator_type__ __return_getMigrator_description__
      * @throws Exception __exception_Exception_description__
      */

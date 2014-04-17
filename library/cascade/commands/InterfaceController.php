@@ -74,7 +74,7 @@ class InterfaceController extends \infinite\console\Controller
     }
 
     /**
-     * __method_getInterface_description__
+     * Get interface
      * @return __return_getInterface_type__ __return_getInterface_description__
      */
     public function getInterface()
@@ -88,7 +88,7 @@ class InterfaceController extends \infinite\console\Controller
     }
 
     /**
-     * __method_setInterface_description__
+     * Set interface
      * @param __param_value_type__ $value __param_value_description__
      * @throws Exception __exception_Exception_description__
      */

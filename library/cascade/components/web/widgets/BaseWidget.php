@@ -145,7 +145,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * __method_getVariables_description__
+     * Get variables
      * @return __return_getVariables_type__ __return_getVariables_description__
      */
     public function getVariables()
@@ -154,7 +154,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * __method_getSettings_description__
+     * Get settings
      * @return unknown
      */
     public function getSettings()
@@ -163,7 +163,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * __method_setSettings_description__
+     * Set settings
      * @param __param_settings_type__ $settings __param_settings_description__
      */
     public function setSettings($settings)
@@ -172,7 +172,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * __method_getWidgetId_description__
+     * Get widget
      * @return unknown
      */
     public function getWidgetId()
@@ -185,7 +185,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * __method_setWidgetId_description__
+     * Set widget
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setWidgetId($value)
@@ -194,7 +194,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * __method_getSystemId_description__
+     * Get system
      * @return unknown
      */
     public function getSystemId()
@@ -209,7 +209,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * __method_setSystemId_description__
+     * Set system
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setSystemId($value)

@@ -108,7 +108,7 @@ class Relation extends \infinite\db\models\Relation
     }
 
     /**
-     * __method_getRelationship_description__
+     * Get relationship
      * @return __return_getRelationship_type__ __return_getRelationship_description__
      */
     public function getRelationship()

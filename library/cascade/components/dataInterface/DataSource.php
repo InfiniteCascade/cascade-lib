@@ -153,7 +153,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getTotal_description__
+     * Get total
      * @return __return_getTotal_type__ __return_getTotal_description__
      */
     public function getTotal()
@@ -174,7 +174,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getDone_description__
+     * Get done
      * @return __return_getDone_type__ __return_getDone_description__
      */
     public function getDone()
@@ -183,7 +183,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getDummyLocalModel_description__
+     * Get dummy local model
      * @return __return_getDummyLocalModel_type__ __return_getDummyLocalModel_description__
      */
     public function getDummyLocalModel()
@@ -194,7 +194,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getRemaining_description__
+     * Get remaining
      * @return __return_getRemaining_type__ __return_getRemaining_description__
      */
     public function getRemaining()
@@ -228,7 +228,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getForeignDataItems_description__
+     * Get foreign data items
      * @return __return_getForeignDataItems_type__ __return_getForeignDataItems_description__
      */
     public function getForeignDataItems()
@@ -241,7 +241,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getLocalDataItems_description__
+     * Get local data items
      * @return __return_getLocalDataItems_type__ __return_getLocalDataItems_description__
      */
     public function getLocalDataItems()
@@ -254,7 +254,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getHandledLocalDataItems_description__
+     * Get handled local data items
      * @return __return_getHandledLocalDataItems_type__ __return_getHandledLocalDataItems_description__
      */
     public function getHandledLocalDataItems()
@@ -299,7 +299,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getDataInterface_description__
+     * Get data interface
      * @return __return_getDataInterface_type__ __return_getDataInterface_description__
      */
     public function getDataInterface()
@@ -308,7 +308,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_setSettings_description__
+     * Set settings
      * @param __param_settings_type__     $settings __param_settings_description__
      * @return __return_setSettings_type__ __return_setSettings_description__
      */
@@ -324,7 +324,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getSettings_description__
+     * Get settings
      * @return __return_getSettings_type__ __return_getSettings_description__
      */
     public function getSettings()
@@ -337,7 +337,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getSearch_description__
+     * Get search
      * @return __return_getSearch_type__ __return_getSearch_description__
      */
     public function getSearch()
@@ -346,7 +346,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_setSearch_description__
+     * Set search
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setSearch($value)
@@ -362,7 +362,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getLocalModel_description__
+     * Get local model
      * @return __return_getLocalModel_type__ __return_getLocalModel_description__
      */
     public function getLocalModel()
@@ -371,7 +371,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_setLocalModel_description__
+     * Set local model
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setLocalModel($value)
@@ -380,7 +380,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_setForeignModel_description__
+     * Set foreign model
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setForeignModel($value)
@@ -389,7 +389,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getForeignModel_description__
+     * Get foreign model
      * @return __return_getForeignModel_type__ __return_getForeignModel_description__
      */
     public function getForeignModel()
@@ -398,7 +398,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_setMap_description__
+     * Set map
      * @param __param_m_type__       $m __param_m_description__
      * @return __return_setMap_type__ __return_setMap_description__
      */
@@ -418,7 +418,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getMap_description__
+     * Get map
      * @return __return_getMap_type__ __return_getMap_description__
      */
     public function getMap()
@@ -427,7 +427,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_getAction_description__
+     * Get action
      * @return __return_getAction_type__ __return_getAction_description__
      */
     public function getAction()

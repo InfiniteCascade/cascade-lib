@@ -63,7 +63,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_getUser_description__
+     * Get user
      * @param boolean                 $owner __param_owner_description__ [optional]
      * @return __return_getUser_type__ __return_getUser_description__
      */
@@ -100,7 +100,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_getFamiliarity_description__
+     * Get familiarity
      * @param __param_user_type__            $user __param_user_description__ [optional]
      * @return __return_getFamiliarity_type__ __return_getFamiliarity_description__
      */

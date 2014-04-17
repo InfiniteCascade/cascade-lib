@@ -15,7 +15,7 @@ namespace cascade\components\dataInterface;
 class MissingItemException extends \infinite\base\exceptions\Exception
 {
     /**
-     * __method_getName_description__
+     * Get name
      * @return string the user-friendly name of this exception
      */
     public function getName()

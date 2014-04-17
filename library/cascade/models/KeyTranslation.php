@@ -71,10 +71,10 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getObject_description__
+     * Get object
      * @param boolean                   $checkAccess __param_checkAccess_description__ [optional]
      * @return __return_getObject_type__ __return_getObject_description__
-     * @throws \                         __exception_\_description__
+     * @throws \ __exception_\_description__
      * @throws \ __exception_\_description__
      */
     public function getObject($checkAccess = true)
@@ -93,7 +93,7 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getRegistry_description__
+     * Get registry
      * @return \yii\db\ActiveRelation
      */
     public function getRegistry()
@@ -102,7 +102,7 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getDataInterface_description__
+     * Get data interface
      * @return \yii\db\ActiveRelation
      */
     public function getDataInterface()

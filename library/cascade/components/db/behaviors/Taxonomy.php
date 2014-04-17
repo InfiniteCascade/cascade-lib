@@ -94,7 +94,7 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_setTaxonomy_id_description__
+     * Set taxonomy
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setTaxonomy_id($value)
@@ -126,7 +126,7 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_getTaxonomy_id_description__
+     * Get taxonomy
      * @return __return_getTaxonomy_id_type__ __return_getTaxonomy_id_description__
      */
     public function getTaxonomy_id()

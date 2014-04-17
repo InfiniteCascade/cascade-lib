@@ -19,6 +19,9 @@ use cascade\models\StorageEngine;
 **/
 class Item extends \infinite\base\collector\Item
 {
+    /**
+     * @var __var_publicEngine_type__ __var_publicEngine_description__
+     */
     public $publicEngine = false;
     /**
      * @var __var_publicEngineGroup_type__ __var_publicEngineGroup_description__

@@ -212,7 +212,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_setup_description__
+     * Set up
      * @return __return_setup_type__ __return_setup_description__
      */
     public function setup()
@@ -233,7 +233,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getInheritParentAccess_description__
+     * Get inherit parent access
      * @return __return_getInheritParentAccess_type__ __return_getInheritParentAccess_description__
      */
     public function getInheritParentAccess()
@@ -263,7 +263,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getRoleHelpText_description__
+     * Get role help text
      * @param __param_roleItem_type__         $roleItem __param_roleItem_description__
      * @param __param_object_type__           $object   __param_object_description__ [optional]
      * @return __return_getRoleHelpText_type__ __return_getRoleHelpText_description__
@@ -322,7 +322,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getActionMap_description__
+     * Get action map
      * @param __param_controlledObject_type__ $controlledObject __param_controlledObject_description__ [optional]
      * @return __return_getActionMap_type__    __return_getActionMap_description__
      */
@@ -332,7 +332,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getDisabledFields_description__
+     * Get disabled fields
      * @return __return_getDisabledFields_type__ __return_getDisabledFields_description__
      */
     public function getDisabledFields()
@@ -345,7 +345,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_setDisabledFields_description__
+     * Set disabled fields
      * @param __param_fields_type__ $fields __param_fields_description__
      */
     public function setDisabledFields($fields)
@@ -354,7 +354,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getPrimaryModel_description__
+     * Get primary model
      * @return __return_getPrimaryModel_type__ __return_getPrimaryModel_description__
      */
     public function getPrimaryModel()
@@ -381,7 +381,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getCreatorRole_description__
+     * Get creator role
      * @return __return_getCreatorRole_type__ __return_getCreatorRole_description__
      */
     public function getCreatorRole()
@@ -390,7 +390,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getRoleValidationSettings_description__
+     * Get role validation settings
      * @param __param_object_type__                     $object __param_object_description__ [optional]
      * @return __return_getRoleValidationSettings_type__ __return_getRoleValidationSettings_description__
      */
@@ -403,7 +403,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getPossibleRoles_description__
+     * Get possible roles
      * @return __return_getPossibleRoles_type__ __return_getPossibleRoles_description__
      */
     public function getPossibleRoles()
@@ -425,7 +425,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getRequiredRoles_description__
+     * Get required roles
      * @return __return_getRequiredRoles_type__ __return_getRequiredRoles_description__
      */
     public function getRequiredRoles()
@@ -447,7 +447,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getInitialRole_description__
+     * Get initial role
      * @return __return_getInitialRole_type__ __return_getInitialRole_description__
      */
     public function getInitialRole()
@@ -464,7 +464,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getIsOwnable_description__
+     * Get is ownable
      * @return __return_getIsOwnable_type__ __return_getIsOwnable_description__
      */
     public function getIsOwnable()
@@ -473,7 +473,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getOwnerObject_description__
+     * Get owner object
      * @return __return_getOwnerObject_type__ __return_getOwnerObject_description__
      */
     public function getOwnerObject()
@@ -482,7 +482,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getOwner_description__
+     * Get owner
      * @return __return_getOwner_type__ __return_getOwner_description__
      */
     public function getOwner()
@@ -499,7 +499,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getObjectTypeModel_description__
+     * Get object type model
      * @return __return_getObjectTypeModel_type__ __return_getObjectTypeModel_description__
      */
     public function getObjectTypeModel()
@@ -512,7 +512,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_setObjectTypeModel_description__
+     * Set object type model
      * @param __param_model_type__ $model __param_model_description__
      */
     public function setObjectTypeModel($model)
@@ -536,7 +536,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getObjectLevel_description__
+     * Get object level
      * @return __return_getObjectLevel_type__ __return_getObjectLevel_description__
      */
     public function getObjectLevel()
@@ -561,7 +561,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return 1;
     }
     /**
-     * __method_getSection_description__
+     * Get section
      * @param __param_parentWidget_type__ $parentWidget __param_parentWidget_description__ [optional]
      * @param unknown                     $settings     (optional)
      * @return unknown
@@ -617,7 +617,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getTitle_description__
+     * Get title
      * @return unknown
      */
     public function getTitle()
@@ -630,7 +630,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_setTitle_description__
+     * Set title
      * @param __param_title_type__ $title __param_title_description__
      */
     public function setTitle($title)
@@ -639,7 +639,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getDetailsWidget_description__
+     * Get details widget
      * @param __param_objectModel_type__       $objectModel __param_objectModel_description__ [optional]
      * @return __return_getDetailsWidget_type__ __return_getDetailsWidget_description__
      */
@@ -673,7 +673,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getDetailsSection_description__
+     * Get details section
      * @return __return_getDetailsSection_type__ __return_getDetailsSection_description__
      */
     public function getDetailsSection()
@@ -853,7 +853,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
 
     /**
-     * __method_getDummyModel_description__
+     * Get dummy model
      * @return __return_getDummyModel_type__ __return_getDummyModel_description__
      */
     public function getDummyModel()
@@ -865,7 +865,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getIsChildless_description__
+     * Get is childless
      * @return __return_getIsChildless_type__ __return_getIsChildless_description__
      */
     public function getIsChildless()
@@ -878,7 +878,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getModel_description__
+     * Get model
      * @param __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
      * @param array                       $input        __param_input_description__ [optional]
      * @return unknown
@@ -903,7 +903,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getModels_description__
+     * Get models
      * @param __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
      * @param array                       $models       __param_models_description__ [optional]
      * @return __return_getModels_type__   __return_getModels_description__
@@ -1171,7 +1171,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
 
     /**
-     * __method_getForm_description__
+     * Get form
      * @param __param_models_type__ $models   __param_models_description__ [optional]
      * @param array                 $settings __param_settings_description__ [optional]
      * @return unknown
@@ -1188,7 +1188,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getFormSegment_description__
+     * Get form segment
      * @param __param_primaryModel_type__    $primaryModel __param_primaryModel_description__ [optional]
      * @param array                          $settings     __param_settings_description__ [optional]
      * @return __return_getFormSegment_type__ __return_getFormSegment_description__

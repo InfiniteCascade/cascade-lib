@@ -40,12 +40,12 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getIdentityAssetBundle_description__
+     * Get identity asset bundle
      */
     abstract public function getIdentityAssetBundle();
 
     /**
-     * __method_getAssetBundles_description__
+     * Get asset bundles
      * @return __return_getAssetBundles_type__ __return_getAssetBundles_description__
      */
     public function getAssetBundles()

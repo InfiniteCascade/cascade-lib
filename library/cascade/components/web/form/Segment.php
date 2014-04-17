@@ -74,7 +74,7 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_setModel_description__
+     * Set model
      * @param __param_model_type__ $model __param_model_description__
      */
     public function setModel($model)
@@ -83,7 +83,7 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_setName_description__
+     * Set name
      * @param __param_name_type__ $name __param_name_description__
      */
     public function setName($name)
@@ -92,7 +92,7 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_setSettings_description__
+     * Set settings
      * @param __param_settings_type__ $settings __param_settings_description__
      * @throws Exception __exception_Exception_description__
      */
@@ -111,7 +111,7 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_getModel_description__
+     * Get model
      * @return unknown
      */
     public function getModel()
@@ -120,7 +120,7 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_getSettings_description__
+     * Get settings
      * @return unknown
      */
     public function getSettings()
@@ -133,7 +133,7 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_getName_description__
+     * Get name
      * @return unknown
      */
     public function getName()
@@ -189,7 +189,7 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_getFields_description__
+     * Get fields
      * @return unknown
      */
     protected function getFields()
@@ -325,7 +325,7 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_getGrid_description__
+     * Get grid
      * @return __return_getGrid_type__ __return_getGrid_description__
      */
     public function getGrid()

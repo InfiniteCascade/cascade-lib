@@ -24,7 +24,7 @@ class Content extends \cascade\components\web\widgets\Widget
     public $icon = 'fa-eye';
 
     /**
-     * __method_getGridCellSettings_description__
+     * Get grid cell settings
      * @return __return_getGridCellSettings_type__ __return_getGridCellSettings_description__
      */
     public function getGridCellSettings()

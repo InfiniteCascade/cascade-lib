@@ -90,6 +90,9 @@ class View extends \yii\base\Widget
      * @var __var__totalItems_type__ __var__totalItems_description__
      */
     protected $_totalItems;
+    /**
+     * @var __var__currentData_type__ __var__currentData_description__
+     */
     protected $_currentData;
     /**
      * @var __var__currentDataRaw_type__ __var__currentDataRaw_description__
@@ -177,7 +180,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     * __method_getColumnSettings_description__
+     * Get column settings
      * @return __return_getColumnSettings_type__ __return_getColumnSettings_description__
      */
     public function getColumnSettings()
@@ -201,7 +204,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     * __method_getData_description__
+     * Get data
      * @return __return_getData_type__ __return_getData_description__
      */
     public function getData()
@@ -233,7 +236,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     * __method_setColumns_description__
+     * Set columns
      * @param __param_columns_type__     $columns __param_columns_description__
      * @return __return_setColumns_type__ __return_setColumns_description__
      */
@@ -310,7 +313,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     * __method_getColumns_description__
+     * Get columns
      * @return __return_getColumns_type__ __return_getColumns_description__
      */
     public function getColumns()
@@ -323,7 +326,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     * __method_getDataKey_description__
+     * Get data key
      * @return __return_getDataKey_type__ __return_getDataKey_description__
      */
     public function getDataKey()
@@ -332,7 +335,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     * __method_getTotalItems_description__
+     * Get total items
      * @return __return_getTotalItems_type__ __return_getTotalItems_description__
      */
     public function getTotalItems()
@@ -357,7 +360,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     * __method_getFormatter_description__
+     * Get formatter
      * @return CFormatter the formatter instance. Defaults to the 'format' application component.
      */
     public function getFormatter()
@@ -369,7 +372,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     * __method_setFormatter_description__
+     * Set formatter
      * @param CFormatter $value the formatter instance
      */
     public function setFormatter($value)

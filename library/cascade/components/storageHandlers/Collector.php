@@ -44,7 +44,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_setInitialItems_description__
+     * Set initial items
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setInitialItems($value)

@@ -40,7 +40,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_getSettings_description__
+     * Get settings
      */
     abstract public function getSettings();
     /**

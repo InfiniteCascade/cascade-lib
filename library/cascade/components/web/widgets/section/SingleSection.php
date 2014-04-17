@@ -28,7 +28,7 @@ class SingleSection extends Section
     protected $_singleWidget;
 
     /**
-     * __method_getCell_description__
+     * Get cell
      * @return __return_getCell_type__ __return_getCell_description__
      */
     public function getCell()
@@ -44,7 +44,7 @@ class SingleSection extends Section
     }
 
     /**
-     * __method_getSingleWidget_description__
+     * Get single widget
      * @return __return_getSingleWidget_type__ __return_getSingleWidget_description__
      */
     public function getSingleWidget()

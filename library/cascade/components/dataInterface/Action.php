@@ -46,6 +46,9 @@ class Action extends \infinite\base\Object
      * @var __var_progressPrefix_type__ __var_progressPrefix_description__
      */
     public $progressPrefix = 'Loading';
+    /**
+     * @var __var__progress_type__ __var__progress_description__
+     */
     protected $_progress = false;
     /**
      * @var __var__progressTotal_type__ __var__progressTotal_description__
@@ -105,7 +108,7 @@ class Action extends \infinite\base\Object
     }
 
     /**
-     * __method_setProgressTotal_description__
+     * Set progress total
      * @param __param_total_type__ $total __param_total_description__
      */
     public function setProgressTotal($total)
@@ -115,7 +118,7 @@ class Action extends \infinite\base\Object
     }
 
     /**
-     * __method_getProgressTotal_description__
+     * Get progress total
      * @return __return_getProgressTotal_type__ __return_getProgressTotal_description__
      */
     public function getProgressTotal()
@@ -124,7 +127,7 @@ class Action extends \infinite\base\Object
     }
 
     /**
-     * __method_getProgressDone_description__
+     * Get progress done
      * @return __return_getProgressDone_type__ __return_getProgressDone_description__
      */
     public function getProgressDone()
@@ -133,7 +136,7 @@ class Action extends \infinite\base\Object
     }
 
     /**
-     * __method_getProgressRemaining_description__
+     * Get progress remaining
      * @return __return_getProgressRemaining_type__ __return_getProgressRemaining_description__
      */
     public function getProgressRemaining()
@@ -158,7 +161,7 @@ class Action extends \infinite\base\Object
     }
 
     /**
-     * __method_setSettings_description__
+     * Set settings
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setSettings($value)
@@ -167,7 +170,7 @@ class Action extends \infinite\base\Object
     }
 
     /**
-     * __method_getSettings_description__
+     * Get settings
      * @return __return_getSettings_type__ __return_getSettings_description__
      */
     public function getSettings()
@@ -230,7 +233,7 @@ class Action extends \infinite\base\Object
     }
 
     /**
-     * __method_getLog_description__
+     * Get log
      * @return __return_getLog_type__ __return_getLog_description__
      */
     public function getLog()
@@ -249,7 +252,7 @@ class Action extends \infinite\base\Object
     }
 
     /**
-     * __method_getStatus_description__
+     * Get status
      * @return __return_getStatus_type__ __return_getStatus_description__
      */
     public function getStatus()
@@ -262,7 +265,7 @@ class Action extends \infinite\base\Object
     }
 
     /**
-     * __method_getId_description__
+     * Get id
      * @return __return_getId_type__ __return_getId_description__
      */
     public function getId()
@@ -281,7 +284,7 @@ class Action extends \infinite\base\Object
     }
 
     /**
-     * __method_getRegistry_description__
+     * Get registry
      * @return __return_getRegistry_type__ __return_getRegistry_description__
      */
     public function getRegistry()

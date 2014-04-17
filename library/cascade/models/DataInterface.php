@@ -82,7 +82,7 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getId_description__
+     * Get id
      * @return \yii\db\ActiveRelation
      */
     public function getId()
@@ -91,7 +91,7 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getDataInterfaceLogs_description__
+     * Get data interface logs
      * @return \yii\db\ActiveRelation
      */
     public function getDataInterfaceLogs()
@@ -100,7 +100,7 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_getKeyTranslations_description__
+     * Get key translations
      * @return \yii\db\ActiveRelation
      */
     public function getKeyTranslations()

@@ -65,7 +65,7 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     }
 
     /**
-     * __method_getSection_description__
+     * Get section
      * @param __param_parent_type__      $parent   __param_parent_description__ [optional]
      * @param array                      $settings __param_settings_description__ [optional]
      * @return __return_getSection_type__ __return_getSection_description__
@@ -84,7 +84,7 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     }
 
     /**
-     * __method_setSection_description__
+     * Set section
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setSection($value)

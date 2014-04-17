@@ -48,7 +48,7 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
-     * __method_getWidgetDecoratorClass_description__
+     * Get widget decorator class
      * @return __return_getWidgetDecoratorClass_type__ __return_getWidgetDecoratorClass_description__
      */
     public function getWidgetDecoratorClass()
@@ -101,7 +101,7 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
-     * __method_getWidgets_description__
+     * Get widgets
      * @return __return_getWidgets_type__ __return_getWidgets_description__
      */
     public function getWidgets()

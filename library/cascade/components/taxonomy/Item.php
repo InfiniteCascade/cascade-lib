@@ -79,7 +79,7 @@ class Item extends \infinite\base\collector\Item
         ], $override);
     }
     /**
-     * __method_getTaxonomies_description__
+     * Get taxonomies
      * @return unknown
      */
     public function getTaxonomies()
@@ -91,7 +91,7 @@ class Item extends \infinite\base\collector\Item
         return $this->_taxonomies;
     }
     /**
-     * __method_getTaxonomyList_description__
+     * Get taxonomy list
      * @return unknown
      */
     public function getTaxonomyList()
@@ -100,7 +100,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_getTaxonomy_description__
+     * Get taxonomy
      * @param __param_system_id_type__ $system_id __param_system_id_description__
      * @return unknown
      */

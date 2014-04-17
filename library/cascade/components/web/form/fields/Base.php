@@ -74,7 +74,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     abstract public function generate();
 
     /**
-     * __method_getModelFieldName_description__
+     * Get model field name
      * @param unknown $formSettings (optional)
      * @return unknown
      */
@@ -99,7 +99,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     /**
-     * __method_getFieldId_description__
+     * Get field
      * @return __return_getFieldId_type__ __return_getFieldId_description__
      */
     public function getFieldId()
@@ -108,7 +108,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     /**
-     * __method_getType_description__
+     * Get type
      * @return unknown
      */
     public function getType()
@@ -122,7 +122,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     /**
-     * __method_setType_description__
+     * Set type
      * @param unknown $value
      * @return unknown
      */
@@ -134,7 +134,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     /**
-     * __method_getModel_description__
+     * Get model
      * @return unknown
      */
     public function getModel()
@@ -147,7 +147,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     /**
-     * __method_getField_description__
+     * Get field
      * @return unknown
      */
     public function getField()

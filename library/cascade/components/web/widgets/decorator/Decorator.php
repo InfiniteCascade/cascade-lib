@@ -44,7 +44,7 @@ abstract class Decorator extends \yii\base\Behavior implements DecoratorInterfac
     }
 
     /**
-     * __method_getWidgetClasses_description__
+     * Get widget classes
      * @return __return_getWidgetClasses_type__ __return_getWidgetClasses_description__
      */
     public function getWidgetClasses()

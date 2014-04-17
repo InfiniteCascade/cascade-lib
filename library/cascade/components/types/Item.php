@@ -88,7 +88,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_getSections_description__
+     * Get sections
      * @return unknown
      */
     public function getSections()
@@ -148,7 +148,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_getWidgets_description__
+     * Get widgets
      * @return __return_getWidgets_type__ __return_getWidgets_description__
      */
     public function getWidgets()
@@ -190,7 +190,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_getChild_description__
+     * Get child
      * @param unknown $type
      * @return unknown
      */
@@ -204,7 +204,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_getParent_description__
+     * Get parent
      * @param unknown $type
      * @return unknown
      */
@@ -218,7 +218,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_getChildren_description__
+     * Get children
      * @return unknown
      */
     public function getChildren()
@@ -233,7 +233,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_getParents_description__
+     * Get parents
      * @return unknown
      */
     public function getParents()
@@ -248,7 +248,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_getActive_description__
+     * Get active
      * @return unknown
      */
     public function getActive()
@@ -261,7 +261,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_getChecked_description__
+     * Get checked
      * @return unknown
      */
     public function getChecked()
@@ -280,7 +280,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_getTaxonomies_description__
+     * Get taxonomies
      * @return __return_getTaxonomies_type__ __return_getTaxonomies_description__
      */
     public function getTaxonomies()
