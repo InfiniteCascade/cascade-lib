@@ -64,7 +64,7 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * __method_package_description__
-     * @param array $override __param_override_description__ [optional]
+     * @param  array                   $override __param_override_description__ [optional]
      * @return __return_package_type__ __return_package_description__
      */
     public function package($override = [])
@@ -101,7 +101,7 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * __method_getTaxonomy_description__
-     * @param __param_system_id_type__ $system_id __param_system_id_description__
+     * @param  __param_system_id_type__ $system_id __param_system_id_description__
      * @return unknown
      */
     public function getTaxonomy($system_id)

@@ -21,7 +21,7 @@ abstract class IdentityAsset extends AssetBundle
 
     /**
      * __method_getLogo_description__
-     * @param __param_size_type__ $size __param_size_description__ [optional]
+     * @param  __param_size_type__     $size __param_size_description__ [optional]
      * @return __return_getLogo_type__ __return_getLogo_description__
      */
     public function getLogo($size = null)

@@ -48,7 +48,7 @@ class Collector extends \infinite\base\collector\Module
     /**
      * __method_getTheme_description__
      * @return __return_getTheme_type__ __return_getTheme_description__
-     * @throws Exception __exception_Exception_description__
+     * @throws Exception                __exception_Exception_description__
      */
     public function getTheme()
     {
@@ -95,7 +95,7 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * __method_getIdentity_description__
-     * @param __param_view_type__ $view __param_view_description__
+     * @param  __param_view_type__         $view __param_view_description__
      * @return __return_getIdentity_type__ __return_getIdentity_description__
      */
     public function getIdentity($view)

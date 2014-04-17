@@ -165,8 +165,8 @@ class Item extends \infinite\base\collector\Item
     }
     /**
      * __method_addChild_description__
-     * @param unknown $name
-     * @param unknown $relationship
+     * @param  unknown $name
+     * @param  unknown $relationship
      * @return unknown
      */
     public function addChild($name, $relationship)
@@ -178,8 +178,8 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * __method_addParent_description__
-     * @param unknown $name
-     * @param unknown $relationship
+     * @param  unknown $name
+     * @param  unknown $relationship
      * @return unknown
      */
     public function addParent($name, $relationship)
@@ -191,7 +191,7 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * __method_getChild_description__
-     * @param unknown $type
+     * @param  unknown $type
      * @return unknown
      */
     public function getChild($type)
@@ -205,7 +205,7 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * __method_getParent_description__
-     * @param unknown $type
+     * @param  unknown $type
      * @return unknown
      */
     public function getParent($type)

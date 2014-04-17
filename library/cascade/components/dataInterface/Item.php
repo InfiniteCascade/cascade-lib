@@ -87,7 +87,7 @@ class Item extends \infinite\base\collector\Item
     /**
      * __method_getInterfaceObject_description__
      * @return __return_getInterfaceObject_type__ __return_getInterfaceObject_description__
-     * @throws Exception __exception_Exception_description__
+     * @throws Exception                          __exception_Exception_description__
      */
     public function getInterfaceObject()
     {

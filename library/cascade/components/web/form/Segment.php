@@ -93,8 +93,8 @@ class Segment extends FormObject
 
     /**
      * __method_setSettings_description__
-     * @param __param_settings_type__ $settings __param_settings_description__
-     * @throws Exception __exception_Exception_description__
+     * @param  __param_settings_type__ $settings __param_settings_description__
+     * @throws Exception               __exception_Exception_description__
      */
     public function setSettings($settings)
     {

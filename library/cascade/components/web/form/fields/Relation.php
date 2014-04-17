@@ -113,7 +113,7 @@ class Relation extends Base
 
     /**
      * __method_generateRelationField_description__
-     * @param array $initialSettings __param_initialSettings_description__ [optional]
+     * @param  array                                 $initialSettings __param_initialSettings_description__ [optional]
      * @return __return_generateRelationField_type__ __return_generateRelationField_description__
      */
     protected function generateRelationField($initialSettings = [])
@@ -169,7 +169,7 @@ class Relation extends Base
 
     /**
      * Sets the value of linkExisting.
-     * @param mixed $linkExisting the link existing
+     * @param  mixed $linkExisting the link existing
      * @return self
      */
     public function setLinkExisting($linkExisting)
@@ -190,7 +190,7 @@ class Relation extends Base
 
     /**
      * Sets the value of linkMultiple.
-     * @param mixed $linkMultiple the link multiple
+     * @param  mixed $linkMultiple the link multiple
      * @return self
      */
     public function setLinkMultiple($linkMultiple)
@@ -211,7 +211,7 @@ class Relation extends Base
 
     /**
      * Sets the value of relatedObject.
-     * @param mixed $relatedObject the related object
+     * @param  mixed $relatedObject the related object
      * @return self
      */
     public function setRelatedObject($relatedObject)

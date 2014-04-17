@@ -42,9 +42,9 @@ class Search extends \infinite\base\Component
 
     /**
      * __method_searchLocal_description__
-     * @param cascade\components\dataInterface\DataItem $item __param_item_description__
-     * @param array $searchParams __param_searchParams_description__ [optional]
-     * @return __return_searchLocal_type__ __return_searchLocal_description__
+     * @param  cascade\components\dataInterface\DataItem $item         __param_item_description__
+     * @param  array                                     $searchParams __param_searchParams_description__ [optional]
+     * @return __return_searchLocal_type__               __return_searchLocal_description__
      */
     public function searchLocal(DataItem $item, $searchParams = [])
     {
@@ -93,8 +93,8 @@ class Search extends \infinite\base\Component
 
     /**
      * __method_searchForeign_description__
-     * @param cascade\components\dataInterface\DataItem $item __param_item_description__
-     * @return __return_searchForeign_type__ __return_searchForeign_description__
+     * @param  cascade\components\dataInterface\DataItem $item __param_item_description__
+     * @return __return_searchForeign_type__             __return_searchForeign_description__
      */
     public function searchForeign(DataItem $item)
     {

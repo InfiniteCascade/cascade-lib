@@ -32,7 +32,7 @@ class HumanFieldDetector extends \infinite\base\Object
 
     /**
      * __method_test_description__
-     * @param yii\db\ColumnSchema $column __param_column_description__
+     * @param  yii\db\ColumnSchema $column __param_column_description__
      * @return unknown
      */
     static function test(ColumnSchema $column)
@@ -49,7 +49,7 @@ class HumanFieldDetector extends \infinite\base\Object
 
     /**
      * __method_registerMachineTest_description__
-     * @param unknown $test
+     * @param  unknown $test
      * @return unknown
      */
     static function registerMachineTest($test)

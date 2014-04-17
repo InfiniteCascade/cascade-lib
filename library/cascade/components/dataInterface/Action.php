@@ -144,7 +144,7 @@ class Action extends \infinite\base\Object
 
     /**
      * __method_reduceRemaining_description__
-     * @param __param_n_type__ $n __param_n_description__
+     * @param  __param_n_type__                $n __param_n_description__
      * @return __return_reduceRemaining_type__ __return_reduceRemaining_description__
      */
     public function reduceRemaining($n)
@@ -183,7 +183,7 @@ class Action extends \infinite\base\Object
 
     /**
      * __method_end_description__
-     * @param boolean $endInterrupted __param_endInterrupted_description__ [optional]
+     * @param  boolean             $endInterrupted __param_endInterrupted_description__ [optional]
      * @return __return_end_type__ __return_end_description__
      */
     public function end($endInterrupted = false)
@@ -269,7 +269,7 @@ class Action extends \infinite\base\Object
 
     /**
      * __method_addRegistry_description__
-     * @param __param_key_type__ $key __param_key_description__
+     * @param __param_key_type__      $key      __param_key_description__
      * @param __param_objectId_type__ $objectId __param_objectId_description__
      */
     public function addRegistry($key, $objectId)
@@ -288,7 +288,7 @@ class Action extends \infinite\base\Object
 
     /**
      * __method_objectInRegistry_description__
-     * @param __param_objectId_type__ $objectId __param_objectId_description__
+     * @param  __param_objectId_type__          $objectId __param_objectId_description__
      * @return __return_objectInRegistry_type__ __return_objectInRegistry_description__
      */
     public function objectInRegistry($objectId)
@@ -298,7 +298,7 @@ class Action extends \infinite\base\Object
 
     /**
      * __method_keyInRegistry_description__
-     * @param __param_keyId_type__ $keyId __param_keyId_description__
+     * @param  __param_keyId_type__          $keyId __param_keyId_description__
      * @return __return_keyInRegistry_type__ __return_keyInRegistry_description__
      */
     public function keyInRegistry($keyId)

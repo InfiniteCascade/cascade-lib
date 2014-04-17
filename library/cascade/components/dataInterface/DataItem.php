@@ -66,7 +66,7 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * __method_searchLocalObject_description__
-     * @param __param_event_type__ $event __param_event_description__
+     * @param  __param_event_type__              $event __param_event_description__
      * @return __return_searchLocalObject_type__ __return_searchLocalObject_description__
      */
     protected function searchLocalObject($event)
@@ -120,8 +120,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * __method_handle_description__
-     * @param boolean $fromParent __param_fromParent_description__ [optional]
-     * @param array $baseAttributes __param_baseAttributes_description__ [optional]
+     * @param  boolean                $fromParent     __param_fromParent_description__ [optional]
+     * @param  array                  $baseAttributes __param_baseAttributes_description__ [optional]
      * @return __return_handle_type__ __return_handle_description__
      */
     public function handle($fromParent = false, $baseAttributes = [])
@@ -189,8 +189,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * __method_testIgnore_description__
-     * @param __param_object_type__ $object __param_object_description__
-     * @param __param_ignore_type__ $ignore __param_ignore_description__
+     * @param  __param_object_type__      $object __param_object_description__
+     * @param  __param_ignore_type__      $ignore __param_ignore_description__
      * @return __return_testIgnore_type__ __return_testIgnore_description__
      */
     protected function testIgnore($object, $ignore)
@@ -224,7 +224,7 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * __method_handleLocal_description__
-     * @param array $baseAttributes __param_baseAttributes_description__ [optional]
+     * @param  array                       $baseAttributes __param_baseAttributes_description__ [optional]
      * @return __return_handleLocal_type__ __return_handleLocal_description__
      */
     protected function handleLocal($baseAttributes = [])
@@ -234,7 +234,7 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * __method_handleForeign_description__
-     * @param array $baseAttributes __param_baseAttributes_description__ [optional]
+     * @param  array                         $baseAttributes __param_baseAttributes_description__ [optional]
      * @return __return_handleForeign_type__ __return_handleForeign_description__
      */
     protected function handleForeign($baseAttributes = [])
@@ -270,8 +270,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * __method_getHandlingObject_description__
-     * @param __param_a_type__ $a __param_a_description__
-     * @param __param_b_type__ $b __param_b_description__
+     * @param  __param_a_type__                  $a __param_a_description__
+     * @param  __param_b_type__                  $b __param_b_description__
      * @return __return_getHandlingObject_type__ __return_getHandlingObject_description__
      */
     public static function getHandlingObject($a, $b)
@@ -321,7 +321,7 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * __method_setCompanionObject_description__
-     * @param __param_value_type__ $value __param_value_description__
+     * @param  __param_value_type__               $value __param_value_description__
      * @return __return_setCompanionObject_type__ __return_setCompanionObject_description__
      */
     public function setCompanionObject($value)
@@ -382,7 +382,7 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * __method_setHandledDataItem_description__
-     * @param __param_value_type__ $value __param_value_description__
+     * @param  __param_value_type__               $value __param_value_description__
      * @return __return_setHandledDataItem_type__ __return_setHandledDataItem_description__
      */
     public function setHandledDataItem($value)

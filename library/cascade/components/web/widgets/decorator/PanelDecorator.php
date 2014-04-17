@@ -101,7 +101,7 @@ class PanelDecorator extends Decorator
 
     /**
      * __method_backgroundifyMenu_description__
-     * @param __param_items_type__ $items __param_items_description__
+     * @param  __param_items_type__              $items __param_items_description__
      * @return __return_backgroundifyMenu_type__ __return_backgroundifyMenu_description__
      */
     protected function backgroundifyMenu(&$items)

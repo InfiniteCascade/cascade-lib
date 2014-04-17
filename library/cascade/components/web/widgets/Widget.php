@@ -65,7 +65,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * __method_stateKeyName_description__
-     * @param __param_key_type__ $key __param_key_description__
+     * @param  __param_key_type__           $key __param_key_description__
      * @return __return_stateKeyName_type__ __return_stateKeyName_description__
      */
     public function stateKeyName($key)
@@ -75,8 +75,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * __method_getState_description__
-     * @param __param_key_type__ $key __param_key_description__
-     * @param __param_default_type__ $default __param_default_description__ [optional]
+     * @param  __param_key_type__       $key     __param_key_description__
+     * @param  __param_default_type__   $default __param_default_description__ [optional]
      * @return __return_getState_type__ __return_getState_description__
      */
     public function getState($key, $default = null)
@@ -86,8 +86,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * __method_setState_description__
-     * @param __param_key_type__ $key __param_key_description__
-     * @param __param_value_type__ $value __param_value_description__
+     * @param  __param_key_type__       $key   __param_key_description__
+     * @param  __param_value_type__     $value __param_value_description__
      * @return __return_setState_type__ __return_setState_description__
      */
     public function setState($key, $value)

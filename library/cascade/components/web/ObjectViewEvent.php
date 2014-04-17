@@ -42,8 +42,8 @@ class ObjectViewEvent extends \yii\base\Event
 
     /**
      * __method_handleWith_description__
-     * @param __param_callable_type__ $callable __param_callable_description__
-     * @param boolean $always __param_always_description__ [optional]
+     * @param  __param_callable_type__    $callable __param_callable_description__
+     * @param  boolean                    $always   __param_always_description__ [optional]
      * @return __return_handleWith_type__ __return_handleWith_description__
      */
     public function handleWith($callable, $always = false)

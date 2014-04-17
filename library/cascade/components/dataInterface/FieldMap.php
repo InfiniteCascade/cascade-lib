@@ -50,7 +50,7 @@ class FieldMap extends \infinite\base\Object
 
     /**
      * __method_extractValue_description__
-     * @param __param_foreignModel_type__ $foreignModel __param_foreignModel_description__ [optional]
+     * @param  __param_foreignModel_type__  $foreignModel __param_foreignModel_description__ [optional]
      * @return __return_extractValue_type__ __return_extractValue_description__
      */
     public function extractValue($foreignModel = null)

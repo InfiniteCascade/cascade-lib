@@ -18,8 +18,8 @@ class FieldTypeDetector extends \infinite\base\object
 {
     /**
      * __method_detect_description__
-     * @param cascade\components\db\fields\Base $field __param_field_description__
-     * @return __return_detect_type__ __return_detect_description__
+     * @param  cascade\components\db\fields\Base $field __param_field_description__
+     * @return __return_detect_type__            __return_detect_description__
      */
     static public function detect(DbBaseField $field)
     {

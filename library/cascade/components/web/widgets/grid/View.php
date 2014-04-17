@@ -231,7 +231,7 @@ class View extends \yii\base\Widget
 
     /**
      * __method_setColumns_description__
-     * @param __param_columns_type__ $columns __param_columns_description__
+     * @param  __param_columns_type__     $columns __param_columns_description__
      * @return __return_setColumns_type__ __return_setColumns_description__
      */
     public function setColumns($columns)
@@ -287,9 +287,9 @@ class View extends \yii\base\Widget
 
     /**
      * __method_createGridColumn_description__
-     * @param __param_text_type__ $text __param_text_description__
+     * @param  __param_text_type__              $text __param_text_description__
      * @return __return_createGridColumn_type__ __return_createGridColumn_description__
-     * @throws Exception __exception_Exception_description__
+     * @throws Exception                        __exception_Exception_description__
      */
     protected function createGridColumn($text)
     {

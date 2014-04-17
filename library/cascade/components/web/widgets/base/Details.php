@@ -101,7 +101,7 @@ class Details extends Widget implements ListWidgetInterface
 
     /**
      * __method_generateCell_description__
-     * @param __param_content_type__ $content __param_content_description__
+     * @param  __param_content_type__       $content __param_content_description__
      * @return __return_generateCell_type__ __return_generateCell_description__
      */
     protected function generateCell($content)

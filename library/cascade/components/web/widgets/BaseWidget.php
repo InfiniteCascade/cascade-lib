@@ -94,7 +94,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
 
     /**
      * __method_attachDecorator_description__
-     * @param __param_decorator_type__ $decorator __param_decorator_description__
+     * @param  __param_decorator_type__        $decorator __param_decorator_description__
      * @return __return_attachDecorator_type__ __return_attachDecorator_description__
      */
     public function attachDecorator($decorator)
@@ -136,7 +136,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
 
     /**
      * __method_parseText_description__
-     * @param __param_text_type__ $text __param_text_description__
+     * @param  __param_text_type__       $text __param_text_description__
      * @return __return_parseText_type__ __return_parseText_description__
      */
     public function parseText($text)
