@@ -61,21 +61,6 @@ class Action extends \infinite\base\Object
     /**
      * @var __var__progressPercentage_type__ __var__progressPercentage_description__
      */
-    /**
-     * @var __var__progress_type__ __var__progress_description__
-     */
-    /**
-     * @var __var__progress_type__ __var__progress_description__
-     */
-    /**
-     * @var __var__progress_type__ __var__progress_description__
-     */
-    /**
-     * @var __var__progress_type__ __var__progress_description__
-     */
-    /**
-     * @var __var__progress_type__ __var__progress_description__
-     */
     protected $_progressPercentage;
 
     /**

@@ -29,21 +29,6 @@ class ObjectViewEvent extends \yii\base\Event
     /**
      * @var __var__objectType_type__ __var__objectType_description__
      */
-    /**
-     * @var __var__object_type__ __var__object_description__
-     */
-    /**
-     * @var __var__object_type__ __var__object_description__
-     */
-    /**
-     * @var __var__object_type__ __var__object_description__
-     */
-    /**
-     * @var __var__object_type__ __var__object_description__
-     */
-    /**
-     * @var __var__object_type__ __var__object_description__
-     */
     protected $_objectType;
 
     /**

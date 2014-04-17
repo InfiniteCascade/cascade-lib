@@ -80,12 +80,10 @@ class View extends \yii\base\Widget
      * @var __var_specialItemClasses_type__ __var_specialItemClasses_description__
      */
     public $specialItemClasses = [];
-
     /**
      * @var __var_nullDisplay_type__ __var_nullDisplay_description__
      */
     public $nullDisplay = '';
-
     /**
      * @var __var__totalItems_type__ __var__totalItems_description__
      */
@@ -96,21 +94,6 @@ class View extends \yii\base\Widget
     protected $_currentData;
     /**
      * @var __var__currentDataRaw_type__ __var__currentDataRaw_description__
-     */
-    /**
-     * @var __var__currentData_type__ __var__currentData_description__
-     */
-    /**
-     * @var __var__currentData_type__ __var__currentData_description__
-     */
-    /**
-     * @var __var__currentData_type__ __var__currentData_description__
-     */
-    /**
-     * @var __var__currentData_type__ __var__currentData_description__
-     */
-    /**
-     * @var __var__currentData_type__ __var__currentData_description__
      */
     protected $_currentDataRaw;
     /**
