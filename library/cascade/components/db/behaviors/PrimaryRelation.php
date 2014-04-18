@@ -26,9 +26,9 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
     /**
     * @inheritdoc
      */
-    public function handlePrimary()
+    public function handlePrimary($role)
     {
-        if (!parent::handlePrimary()) {
+        if (!parent::handlePrimary($role)) {
             return false;
         }
         if (!isset(Yii::$app->collectors['types'])) {
@@ -37,8 +37,7 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
         if (empty($this->relationship)) {
             return false;
         }
-
-        return $this->relationship->handlePrimary;
+        return $this->relationship->handlePrimary !== false;
     }
 
     /**

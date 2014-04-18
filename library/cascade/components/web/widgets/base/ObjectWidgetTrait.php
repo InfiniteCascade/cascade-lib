@@ -232,11 +232,11 @@ trait ObjectWidgetTrait
 
         if ($queryRole === 'children') {
             $baseUrl['object_relation'] = 'child';
-            $primaryRelation = $relationship->getPrimaryChild(Yii::$app->request->object);
+            $primaryRelation = $relationship->getPrimaryObject(Yii::$app->request->object, $model, 'child');
             $key = 'child_object_id';
         } else {
             $baseUrl['object_relation'] = 'parent';
-            $primaryRelation = $relationship->getPrimaryParent($model);
+            $primaryRelation = $relationship->getPrimaryObject(Yii::$app->request->object, $model, 'parent');
             $key = 'parent_object_id';
         }
 
@@ -258,16 +258,20 @@ trait ObjectWidgetTrait
         // $relationModel = $this->getRelationModel($model);
         $baseUrl['related_object_id'] = Yii::$app->request->object->primaryKey;
         $baseUrl['relationship_id'] = $relationship->systemId;
-
         if ($queryRole === 'children') {
             $baseUrl['object_relation'] = 'child';
-            $primaryRelation = $relationship->getPrimaryChild(Yii::$app->request->object);
+            $primaryRelation = $relationship->getPrimaryObject(Yii::$app->request->object, $model, 'child');
+            $checkField = 'child_object_id';
         } else {
             $baseUrl['object_relation'] = 'parent';
-            $primaryRelation = $relationship->getPrimaryParent($model);
+            $primaryRelation = $relationship->getPrimaryObject(Yii::$app->request->object, $model, 'parent');
+            $checkField = 'parent_object_id';
         }
-        //\d($primaryRelation->isActive);
-        if (!$primaryRelation || ($primaryRelation && $primaryRelation->child_object_id !== $model->primaryKey)) {
+        if ($primaryRelation !== false
+             && (empty($primaryRelation) 
+                || ($primaryRelation 
+                    && $primaryRelation->{$checkField} !== $model->primaryKey)
+                )) {
             $menu['primary'] = [
                 'icon' => 'fa fa-star',
                 'label' => 'Set as primary',

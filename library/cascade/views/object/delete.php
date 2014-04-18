@@ -32,6 +32,7 @@ if (count($model->possibleTargets) === 1) {
         echo Html::activeRadio($model, 'target', array_merge($itemOptions, [
             'value' => $target,
             'label' => $label['short'],
+            'uncheck' => null,
             'labelOptions' => $labelOptions
         ]));
     }

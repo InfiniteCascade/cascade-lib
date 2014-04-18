@@ -282,8 +282,10 @@ class ObjectController extends Controller
             }
 
             if ($_GET['object_relation'] === 'child') {
+                $this->params['relationRole'] = 'child';
                 $this->params['relation'] = $this->params['relationship']->getModel($_GET['related_object_id'], $this->params['object']->primaryKey);
             } else {
+                $this->params['relationRole'] = 'parent';
                 $this->params['relation'] = $this->params['relationship']->getModel($this->params['object']->primaryKey, $_GET['related_object_id']);
             }
             if (empty($this->params['relation'])) {
@@ -467,7 +469,7 @@ class ObjectController extends Controller
                 throw new HttpException(404, "Invalid relationship!");
             }
             Yii::$app->response->task = 'status';
-            if ($relation->setPrimary()) {
+            if ($relation->setPrimary($relationRole)) {
                 Yii::$app->response->trigger = [
                     ['refresh', '.model-'. $primaryModel::baseClassName()]
                 ];

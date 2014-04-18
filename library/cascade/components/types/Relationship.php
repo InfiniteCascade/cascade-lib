@@ -20,6 +20,8 @@ class Relationship extends \infinite\base\Object
 {
     const HAS_MANY = 0x01;
     const HAS_ONE = 0x02;
+    const ROLE_PARENT = 0x03;
+    const ROLE_CHILD = 0x04;
 
     /**
      * @var __var__parent_type__ __var__parent_description__
@@ -33,7 +35,6 @@ class Relationship extends \infinite\base\Object
      * @var __var__cache_type__ __var__cache_description__
      */
     static $_cache = [];
-
     /**
      * @var __var__defaultOptions_type__ __var__defaultOptions_description__
      */
@@ -69,6 +70,25 @@ class Relationship extends \infinite\base\Object
         ];
     }
 
+    public function doHandlePrimary($role = null)
+    {
+        if (!$this->handlePrimary) {
+            return false;
+        }
+
+        if (in_array($role, ['child', self::ROLE_CHILD]) 
+            && $this->handlePrimary === self::ROLE_CHILD) {
+            return true;
+        }
+
+        if (in_array($role, ['parent', self::ROLE_PARENT]) 
+            && $this->handlePrimary === self::ROLE_PARENT) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Get taxonomy package
      * @return __return_getTaxonomyPackage_type__ __return_getTaxonomyPackage_description__
@@ -90,6 +110,46 @@ class Relationship extends \infinite\base\Object
         return $taxonomy->package($taxonomySettings);
     }
 
+    public function getPrimaryObject($primaryObject, $relatedObject, $role)
+    {
+        if (!$this->handlePrimary) { return false; }
+        if ($role === 'child') {
+            $primaryField = 'primary_child';
+            if (!$relatedObject->objectType->getPrimaryAsChild($this->parent)) {
+                // \d(['bad', $this->systemId, get_class($primaryObject), get_class($relatedObject), $role]);
+                return false;
+            }
+            $primaryParent = $primaryObject;
+        } else {
+            $primaryField = 'primary_parent';
+            if (!$relatedObject->objectType->getPrimaryAsParent($this->child)) {
+                // \d(['bad', $this->systemId, get_class($primaryObject), get_class($relatedObject), $role]);
+                return false;
+            }
+            $primaryParent = $relatedObject;
+        }
+
+        $key = json_encode([__FUNCTION__, $this->systemId, $primaryObject->primaryKey]);
+        if (!isset(self::$_cache[$key])) {
+            self::$_cache[$key] = null;
+            $relationClass = Yii::$app->classes['Relation'];
+            $childClass = $this->child->primaryModel;
+            $relation = $relationClass::find();
+            $alias = $relationClass::tableName();
+            $relation->andWhere(['`'. $alias.'`.`parent_object_id`' => $primaryParent->primaryKey, '`'. $alias.'`.`'.$primaryField.'`' => 1]);
+            $relation->andWhere(['or', '`'. $alias.'`.`child_object_id` LIKE :prefix']); //, '`'. $alias.'`.`child_object_id` LIKE \''.$childClass.'\''
+            $relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
+            $primaryObject->addActiveConditions($relation, $alias);
+            // \d([$this->systemId, $relation->createCommand()->rawSql, $primaryField, $role]);
+            $relation = $relation->one();
+            if (!empty($relation)) {
+                self::$_cache[$key] = $relation;
+            }
+        }
+
+        return self::$_cache[$key];
+    }
+
     /**
      * Get primary child
      * @param __param_parentObject_type__     $parentObject __param_parentObject_description__
@@ -98,15 +158,15 @@ class Relationship extends \infinite\base\Object
     public function getPrimaryChild($parentObject)
     {
         if (!$this->handlePrimary) { return false; }
-        if (!$this->child->primaryAsChild) { return false; }
+        if (!$this->child->getPrimaryAsChild($this->parent)) { return false; }
         $key = json_encode([__FUNCTION__, $this->systemId, $parentObject->primaryKey]);
         if (!isset(self::$_cache[$key])) {
-            self::$_cache[$key] = false;
+            self::$_cache[$key] = null;
             $relationClass = Yii::$app->classes['Relation'];
             $childClass = $this->child->primaryModel;
             $relation = $relationClass::find();
             $alias = $relationClass::tableName();
-            $relation->andWhere(['`'. $alias.'`.`parent_object_id`' => $parentObject->primaryKey, '`'. $alias.'`.`primary`' => 1]);
+            $relation->andWhere(['`'. $alias.'`.`parent_object_id`' => $parentObject->primaryKey, '`'. $alias.'`.`primary_child`' => 1]);
             $relation->andWhere(['or', '`'. $alias.'`.`child_object_id` LIKE :prefix']); //, '`'. $alias.'`.`child_object_id` LIKE \''.$childClass.'\''
             $relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
             $parentObject->addActiveConditions($relation, $alias);
@@ -124,21 +184,21 @@ class Relationship extends \infinite\base\Object
      * @param __param_childObject_type__       $childObject __param_childObject_description__
      * @return __return_getPrimaryParent_type__ __return_getPrimaryParent_description__
      */
-    public function getPrimaryParent($childObject)
+    public function getPrimaryParent($parentObject)
     {
         if (!$this->handlePrimary) { return false; }
-        if (!$this->parent->primaryAsChild) { return false; }
-        $key = json_encode([__FUNCTION__, $this->systemId, $childObject->primaryKey]);
+        if (!$this->parent->getPrimaryAsParent($this->child)) { return false; }
+        $key = json_encode([__FUNCTION__, $this->systemId, $parentObject->primaryKey]); 
         if (!isset(self::$_cache[$key])) {
-            self::$_cache[$key] = false;
+            self::$_cache[$key] = null;
             $relationClass = Yii::$app->classes['Relation'];
-            $parentClass = $this->parent->primaryModel;
+            $childClass = $this->child->primaryModel;
             $relation = $relationClass::find();
             $alias = $relationClass::tableName();
-            $relation->andWhere(['`'. $alias.'`.`child_object_id`' => $childObject->primaryKey, '`'. $alias.'`.`primary`' => 1]);
-            $relation->andWhere('`'. $alias.'`.`parent_object_id` LIKE :prefix');
-            $relation->params[':prefix'] = $parentClass::modelPrefix() . '-%';
-            $childObject->addActiveConditions($relation, $alias);
+            $relation->andWhere(['`'. $alias.'`.`parent_object_id`' => $parentObject->primaryKey, '`'. $alias.'`.`primary_parent`' => 1]);
+            $relation->andWhere('`'. $alias.'`.`child_object_id` LIKE :prefix');
+            $relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
+            $parentObject->addActiveConditions($relation, $alias);
             $relation = $relation->one();
             if (!empty($relation)) {
                 self::$_cache[$key] = $relation;

@@ -74,15 +74,6 @@ abstract class Module extends \cascade\components\base\CollectorModule
     public $parentSearchWeight = false; // weight when a parent of a searchable object
 
     /**
-     * @var __var_primaryAsChild_type__ __var_primaryAsChild_description__
-     */
-    public $primaryAsChild = false;
-    /**
-     * @var __var_primaryAsParent_type__ __var_primaryAsParent_description__
-     */
-    public $primaryAsParent = false;
-
-    /**
      * @var __var_sectionName_type__ __var_sectionName_description__
      */
     public $sectionName;
@@ -329,6 +320,16 @@ abstract class Module extends \cascade\components\base\CollectorModule
     public function getActionMap($controlledObject = null)
     {
         return [];
+    }
+
+    public function getPrimaryAsChild(Module $parent)
+    {
+        return false;
+    }
+
+    public function getPrimaryAsParent(Module $child)
+    {
+        return false;
     }
 
     /**
