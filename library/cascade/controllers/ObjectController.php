@@ -596,6 +596,7 @@ class ObjectController extends Controller
             $this->params['model']->relationship = $relationship;
             $this->params['model']->relationModel = $relation;
             $this->params['model']->relationshipWith = $object;
+            $this->params['model']->object->indirectObject = $object;
             $primaryObject = $relatedObject;
         } else {
             $primaryObject = $object;
@@ -618,7 +619,7 @@ class ObjectController extends Controller
                 Yii::$app->response->error =  'Could not '. $this->params['model']->targetLabel['long'];
             } else {
                 Yii::$app->response->success = ucfirst($this->params['model']->targetLabel['past']). '.';
-                if (isset($this->params['model']->targetLabel['response'])) {
+                if (isset($this->params['model']->targetLabel['response']) && empty($relation)) {
                     switch ($this->params['model']->targetLabel['response']) {
                         case 'home':
                             Yii::$app->response->redirect = '/';

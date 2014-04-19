@@ -19,4 +19,17 @@ class Auditable extends \infinite\db\behaviors\auditable\Auditable
      */
     public $deleteEventClass = 'cascade\\components\\db\\behaviors\\auditable\\DeleteEvent';
 
+    /**
+     * Get indirect object
+     * @return __return_getIndirectObject_type__ __return_getIndirectObject_description__
+     */
+    public function getIndirectObject()
+    {
+        if (is_null($this->_indirectObject)) {
+        	
+            // $this->indirectObject = $this->owner;
+        }
+        return $this->_indirectObject;
+    }
+
 }

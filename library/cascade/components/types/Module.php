@@ -987,6 +987,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
                         $relation->child_object_id = $primary['model']->primaryKey;
                         $parent['model']->registerRelationModel($relation, $parentKey);
+                        $parent['model']->indirectObject = $primary['model'];
                         if (isset($parent['handler'])) {
                             $descriptor = $parent['handler']->title->singular;
                             $result = $parent['handler']->handleSave($parent['model']);
@@ -1011,6 +1012,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
                         }
                         $relation->parent_object_id = $primary['model']->primaryKey;
                         $child['model']->registerRelationModel($relation, $childKey);
+                        $child['model']->indirectObject = $primary['model'];
                         if (isset($child['handler'])) {
                             $descriptor = $child['handler']->title->singular;
                             $result = $child['handler']->handleSave($child['model']);

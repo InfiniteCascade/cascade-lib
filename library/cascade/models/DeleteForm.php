@@ -298,7 +298,7 @@ class DeleteForm extends Model
             case 'delete_object':
                 $result = true;
                 if (!is_null($this->relationModel)) {
-                    $result = $this->relationModel->delete();
+                    $result = $this->relationModel->suppressAudit()->delete();
                 }
                 $result = $result && $this->object->delete();
             break;
