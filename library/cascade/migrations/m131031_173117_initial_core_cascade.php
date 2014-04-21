@@ -191,9 +191,9 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY',
             'storage_engine_id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
             'storage_key' => 'string(255) DEFAULT NULL',
-            'file_name' => 'string(255) NOT NULL',
-            'type' => 'string(100) NOT NULL',
-            'size' => 'integer(11) unsigned NOT NULL',
+            'file_name' => 'string(255) DEFAULT NULL',
+            'type' => 'string(100) DEFAULT NULL',
+            'size' => 'integer(11) unsigned DEFAULT NULL',
             'created' => 'datetime DEFAULT NULL',
             'modified' => 'datetime DEFAULT NULL'
         ]);
