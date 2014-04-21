@@ -351,6 +351,15 @@ class Relationship extends \infinite\base\Object
         return $this->child;
     }
 
+    public function role($queryRole)
+    {
+        if ($queryRole === 'children' || $queryRole === 'child') {
+            return 'child';
+        }
+
+        return 'parent';
+    }
+
     /**
      * __method_roleType_description__
      * @param __param_queryRole_type__ $queryRole __param_queryRole_description__

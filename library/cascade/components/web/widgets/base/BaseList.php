@@ -19,5 +19,7 @@ class BaseList extends Widget implements ObjectWidgetInterface, ListWidgetInterf
     use ListWidgetTrait, ObjectWidgetTrait {
         ObjectWidgetTrait::getListItemOptions insteadof ListWidgetTrait;
         ListWidgetTrait::getListItemOptions as getListItemOptionsBase;
+        ObjectWidgetTrait::buildContext insteadof ListWidgetTrait;
+        ListWidgetTrait::buildContext as buildContextBase;
     }
 }

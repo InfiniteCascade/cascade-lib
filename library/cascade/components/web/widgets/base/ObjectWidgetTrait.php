@@ -128,6 +128,31 @@ trait ObjectWidgetTrait
         return $this->getState('sortByDirection', ($this->currentSortBy === 'familiarity') ? 'desc' : 'asc');
     }
 
+    public function buildContext($object = null)
+    {
+        if (method_exists($this, 'buildContextBase')) {
+            $context = $this->buildContextBase($object);
+        } else {
+            $context = [];
+        }
+        $method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
+        $relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
+
+        if (isset($object)
+            && isset(Yii::$app->request->object)
+            && Yii::$app->request->object->primaryKey !== $object->primaryKey) {
+            $context['object'] = Yii::$app->request->object;
+        }
+
+        if ($relationship) {
+            $objectType = $relationship->companionRoleType($method);
+            $objectRole = $relationship->companionRole($method);
+            $relationName = $objectRole .':'. $objectType->systemId;
+            $context['relation'] = [$relationName];
+        }
+        return $context;
+    }
+
     public function getHeaderMenu()
     {
         $menu = [];

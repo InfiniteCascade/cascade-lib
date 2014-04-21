@@ -22,18 +22,79 @@ trait ListWidgetTrait
         'tag' => 'div'
     ];
     protected $_renderContentTemplate;
+    protected $_context;
 
     public function contentTemplate($model)
     {
         if ($model->objectType->hasDashboard && $model->can('read')) {
             return [
-                'viewLink' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
+                'viewLink' => ['class' => 'list-group-item-heading', 'tag' => 'h5'],
+                'subdescriptor' => ['class' => 'list-group-item-text ic-object-subheader']
             ];
         } else {
             return [
-                'descriptor' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
+                'descriptor' => ['class' => 'list-group-item-heading', 'tag' => 'h5'],
+                'subdescriptor' => ['class' => 'list-group-item-text ic-object-subheader']
             ];
         }
+    }
+
+    public function buildContext($object = null)
+    {
+        $context = [];
+        return $context;
+    }
+
+    public function getContext($object = null)
+    {
+        if (!isset($this->_context)) {
+            $this->_context = $this->buildContext($object);
+        }
+        return $this->_context;
+    }
+
+    public function getItemFieldValue($model, $fieldName, $settings = [])
+    {
+        if (is_array($fieldName)) {
+            foreach ($fieldName as $fName => $fSettings) {
+                if (is_numeric($fName)) {
+                    $fName = $fSettings;
+                    $fSettings = [];
+                }
+                $aSettings = array_merge($settings, $fSettings);
+                $value = $this->getItemFieldValue($model, $fName, $aSettings);
+                if (!empty($value)) {
+                    return $value;
+                }
+            }
+            return null;
+        }
+        $settings = array_merge($this->defaultContentRow, $settings);
+        $context = $this->getContext($model);
+
+        $fieldOptions = isset($settings['fieldOptions']) ? $settings['fieldOptions'] : [];
+        switch ($fieldName) {
+            case 'subdescriptor':
+                $functionName = 'get'.ucfirst($fieldName);
+                $value = $model->{$functionName}($context);
+            break;
+            default:
+                $value = $model->getFieldValue($fieldName, $fieldOptions, $context);
+            break;
+        }
+        $depth = 3;
+        while ($depth > 0 && is_array($value)) {
+            $depth--;
+            if (isset($value['rish'])) {
+                $value = $value['rich'];
+            } else {
+                $value = array_shift($value);
+            }
+        }
+        if (!empty($value)) {
+            return $value;
+        }
+        return null;
     }
 
     public function renderItemContent($model, $key, $index)
@@ -44,11 +105,11 @@ trait ListWidgetTrait
                 $fieldName = $settings;
                 $settings = [];
             }
-            $settings = array_merge($this->defaultContentRow, $settings);
-            $tag = $settings['tag'];
+            $tag = isset($settings['tag']) ? $settings['tag'] : 'div';
             unset($settings['tag']);
-            if (!empty($model->{$fieldName})) {
-                $parts[] = Html::tag($tag, $model->{$fieldName}, $settings);
+            $value = $this->getItemFieldValue($model, $fieldName, $settings);
+            if (!empty($value)) {
+                $parts[] = Html::tag($tag, $value, $settings);
             }
         }
 

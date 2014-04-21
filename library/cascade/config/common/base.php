@@ -31,8 +31,8 @@ $base = [
         ],
         'redis' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'redis.php'),
         'collectors' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'collectors.php'),
-        //'cache' => ['class' => 'yii\\redis\\Cache'],
-        'cache' => ['class' => 'yii\\caching\\DummyCache'],
+        'cache' => ['class' => 'yii\\redis\\Cache'],
+        //'cache' => ['class' => 'yii\\caching\\DummyCache'],
         'errorHandler' => [
             'discardExistingOutput' => false
         ],
@@ -42,9 +42,8 @@ $base = [
         'response' => [
             'class' => 'infinite\\web\\Response'
         ],
-
         'log' => [
-            'traceLevel' => YII_DEBUG ? 7 : 0,
+            'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
                     'class' => 'yii\\log\\FileTarget',
