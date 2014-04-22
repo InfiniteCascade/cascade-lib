@@ -175,6 +175,7 @@ class ObjectController extends Controller
         $params['action'] = 'read';
         $params['modules'] = $modules;
         $term = $searchParams['term'];
+        $params['limit'] = 8;
         $scores = [];
         foreach ($modules as $module) {
             $moduleItem = Yii::$app->collectors['types']->getOne($module);
@@ -184,10 +185,13 @@ class ObjectController extends Controller
             if (in_array('dashboard', $searchParams['typeFilters']) && !$moduleItem->object->hasDashboard) { continue; }
             $moduleResults = $moduleObject->search($term, $params);
             foreach ($moduleResults as $r) {
-                $package[] = $r->toArray();
+                $package[] = $r;
             }
         }
-        ArrayHelper::multisort($package, 'score', SORT_DESC);
+        ArrayHelper::multisort($package, 'scoreSort', SORT_DESC);
+        foreach (array_slice($package, 0, 30) as $key => $result) {
+            $package[$key] = $result->toArray();
+        }
         Yii::$app->response->data = $package;
     }
 
