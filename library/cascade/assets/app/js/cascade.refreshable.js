@@ -15,7 +15,7 @@ function handleRefresh(object, request) {
 				settings.data.requests[index] = requestObject.request;
 			});
 			settings.dataType = 'json';
-			settings.type = 'GET';
+			settings.type = 'POST';
 			settings.context = $(this);
 			settings.success = function(r, textStatus, jqXHR) {
 				if (r.requests !== undefined) {

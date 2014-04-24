@@ -56,7 +56,7 @@ class AppController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'refresh' => ['get'],
+                    'refresh' => ['post'],
                 ],
             ],
         ];
@@ -122,9 +122,9 @@ class AppController extends Controller
         Yii::$app->response->forceInstructions = true;
         Yii::$app->response->task = 'status';
 
-        if (empty($_GET['requests'])) { return; }
-        $baseInstrictions = (isset($_GET['baseInstructions']) ? $_GET['baseInstructions'] : []);
-        foreach ($_GET['requests'] AS $requestId => $request) {
+        if (empty($_POST['requests'])) { return; }
+        $baseInstrictions = (isset($_POST['baseInstructions']) ? $_POST['baseInstructions'] : []);
+        foreach ($_POST['requests'] AS $requestId => $request) {
             $refreshed[$requestId] = false;
             $instructions = $baseInstrictions;
             if (isset($request['instructions'])) {

@@ -6,7 +6,7 @@ use infinite\web\grid\Grid;
 $this->title = 'Dashboard';
 $refreshable = [
     'url' => Url::to('app/refresh'),
-    'data' => [Yii::$app->request->csrfParam => Yii::$app->request->csrfToken, 'baseInstructions' => []]
+    'data' => ['baseInstructions' => []]
 ];
 $this->bodyHtmlOptions['data-refreshable'] = json_encode($refreshable);
 

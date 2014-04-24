@@ -27,7 +27,10 @@ class AppAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $css = ['css/site.css'];
+    public $css = [
+        'css/site.css',
+        'css/cascade.editInPlace.css'
+    ];
     /**
      * @inheritdoc
      */
@@ -37,7 +40,8 @@ class AppAsset extends AssetBundle
         'js/cascade.objectSearch.js',
         'js/cascade.objectBrowse.js',
         'js/cascade.objectSelector.js',
-        'js/cascade.infiniteFilter.js'
+        'js/cascade.infiniteFilter.js',
+        'js/cascade.editInPlace.js' // maybe move this to object? not sure if it will be used outside object view
     ];
     /**
      * @inheritdoc

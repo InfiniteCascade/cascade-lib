@@ -62,6 +62,7 @@ class ObjectController extends Controller
                     'link' => ['get', 'post'],
                     'setPrimary' => ['get'],
                     'update' => ['get', 'post'],
+                    'updateField' => ['post'],
                     'delete' => ['get', 'post'],
                     'watch' => ['get'],
                     'unwatch' => ['get'],
@@ -455,6 +456,33 @@ class ObjectController extends Controller
             throw new HttpException(403, "There is nothing to {$action} for {$module->title->getPlural(true)}");
         }
         $this->params['form']->ajax = true;
+    }
+
+    public function actionUpdateField()
+    {
+        Yii::$app->response->task = 'status';
+        if (empty($_POST['attribute']) || empty($_POST['object']) || !($object = $this->params['object'] = Registry::getObject($_POST['object'], false)) || !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
+            throw new HttpException(404, "Unknown object.");
+        }
+        $relatedObject = false;
+        if (!empty($_POST['relatedObject']) && (!($relatedObject = $this->params['relatedObject'] = Registry::getObject($_POST['relatedObject'], false)) || !($relatedTypeItem = $this->params['typeItem'] = $relatedObject->objectTypeItem))) {
+            throw new HttpException(404, "Unknown related object.");
+        }
+        if (!$object->can('update')) {
+            throw new HttpException(403, "Unable to update object.");
+        }
+        if (in_array($_POST['attribute'], ['id', 'created', 'created_user_id', 'modified', 'modified_user_id', 'archived', 'archived_user_id'])) {
+            throw new HttpException(403, "Invalid attribute!");
+        }
+        $object->attributes = [$_POST['attribute'] => $_POST['value']];
+        if ($relatedObject) {
+            $object->indirectObject = $relatedObject;
+        }
+        if ($object->save()) {
+            Yii::$app->response->success = $object->descriptor .' was updated';
+        } else {
+            Yii::$app->response->error = 'Unable to update '. $object->descriptor;
+        }
     }
 
     /**

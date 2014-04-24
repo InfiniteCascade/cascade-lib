@@ -16,6 +16,9 @@ if (YII_ENV_DEV) {
     Html::addCssClass($this->bodyHtmlOptions, 'development');
 }
 
+$post = [Yii::$app->request->csrfParam => Yii::$app->request->csrfToken];
+$this->bodyHtmlOptions['data-post'] = json_encode($post);
+
 $itemTypes = [];
 foreach (Yii::$app->collectors['types']->getAll() as $type) {
     if (empty($type->object)) { continue; }

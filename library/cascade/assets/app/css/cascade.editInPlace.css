@@ -1,0 +1,8 @@
+/* edit in place */
+
+.ic-eip-thinking {
+	position: absolute;
+	z-index: 10000;
+	background: #fff url('../img/infinity-spinner.gif') 50% 50% no-repeat;
+	display: block;
+}
