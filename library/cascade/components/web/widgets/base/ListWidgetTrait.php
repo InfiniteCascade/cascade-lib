@@ -10,6 +10,8 @@ namespace cascade\components\web\widgets\base;
 use Yii;
 
 use infinite\helpers\Html;
+use infinite\web\grid\Row;
+use infinite\web\grid\Cell;
 use infinite\helpers\ArrayHelper;
 use yii\bootstrap\ButtonDropdown;
 
@@ -105,15 +107,48 @@ trait ListWidgetTrait
                 $fieldName = $settings;
                 $settings = [];
             }
-            $tag = isset($settings['tag']) ? $settings['tag'] : 'div';
-            unset($settings['tag']);
-            $value = $this->getItemFieldValue($model, $fieldName, $settings);
-            if (!empty($value)) {
-                $parts[] = Html::tag($tag, $value, $settings);
+            if (is_array($fieldName)) {
+                $subparts = [];
+                $subrowSettings = [];
+                if (isset($fieldName['settings'])) {
+                    $subrowSettings = $fieldName['settings'];
+                }
+                foreach ($fieldName as $subFieldName => $subSettings) {
+                    if ($fieldName === 'settings') { continue; }
+                    if (is_numeric($subFieldName)) {
+                        $subFieldName = $subSettings;
+                        $subSettings = [];
+                    }
+                    $this->renderItemContentRow($subparts, $subFieldName, $subSettings, $model, $key, $index);
+                }
+                $row = new Row;
+                $columnSize = floor(12 / count($subparts));
+                foreach ($subparts as $subpart) {
+                    $cell = new Cell(['content' => $subpart, 'phoneColumns' => $columnSize, 'phoneSize' => 'auto', 'tabletSize' => false, 'mediumDesktopSize' => false, 'largeDesktopSize' => false]);
+                    $row->addCell($cell);
+                }
+                Html::addCssClass($subrowSettings, 'list-group-item-split');
+                $parts[] = Html::tag('div', $row->generate(), $subrowSettings);
+            } else {
+                $this->renderItemContentRow($parts, $fieldName, $settings, $model, $key, $index);
             }
         }
 
         return implode("", $parts);
+    }
+
+    protected function renderItemContentRow (&$parts, $fieldName, $settings, $model, $key, $index)
+    {
+        $tag = isset($settings['tag']) ? $settings['tag'] : 'div';
+        unset($settings['tag']);
+        if (is_callable($fieldName)) {
+            $value = call_user_func_array($fieldName, [$this, $model, $settings]);
+        } else {
+            $value = $this->getItemFieldValue($model, $fieldName, $settings);
+        }
+        if (!empty($value)) {
+            $parts[] = Html::tag($tag, $value, $settings);
+        }
     }
 
     public function getListOptions()
