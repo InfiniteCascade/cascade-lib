@@ -105,6 +105,14 @@ class Taxonomy extends \infinite\db\behaviors\ActiveRecord
         foreach ($value as $k => $v) {
             if (is_object($v)) {
                 $value[$k] = $v->primaryKey;
+            } elseif (is_array($v)) {
+                unset($value[$k]);
+                if (isset($v['systemId']) && isset($v['taxonomyType'])) {
+                    $taxonomyType = Yii::$app->collectors['taxonomies']->getOne($v['taxonomyType']);
+                    if (isset($taxonomyType) && ($taxonomy = $taxonomyType->getTaxonomy($v['systemId']))) {
+                        $value[$k] = $taxonomy->primaryKey;
+                    }
+                }
             }
         }
         $this->_taxonomy_id = $value;

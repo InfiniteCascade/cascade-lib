@@ -506,7 +506,9 @@ trait ActiveRecordTrait
         $add = [];
         $af = $this->additionalFields();
         foreach (array_keys($af) as $field) {
-            $add[$field] = $this->{$field};
+            if (isset($this->{$field})) {
+                $add[$field] = $this->{$field};
+            }
         }
 
         return $add;
@@ -620,7 +622,7 @@ trait ActiveRecordTrait
             $modelName = self::className();
             $this->_fields = [];
             $fieldSettings = $this->fieldSettings();
-            foreach (array_merge($this->additionalFields(), self::getTableSchema()->columns) as  $name => $column) {
+            foreach (self::getTableSchema()->columns as  $name => $column) {
                 if (in_array($name, $disabledFields)) { continue; }
                 $settings = [];
                 if (isset($fieldSettings[$name])) {
@@ -631,6 +633,7 @@ trait ActiveRecordTrait
                 }
                 $this->_fields[$name] = $this->createField($column, $owner, $settings);
             }
+
             $objectTypeItem = $this->objectTypeItem;
             if ($objectTypeItem) {
                 $relationRelationship = null;
@@ -679,6 +682,22 @@ trait ActiveRecordTrait
                     $this->_fields[$fieldName] = $this->createTaxonomyField($fieldSchema, $taxonomy, $owner);
                 }
             }
+
+            foreach ($this->additionalFields() as $name => $column) {
+                if (in_array($name, $disabledFields)) { continue; }
+                $settings = [];
+                if (isset($fieldSettings[$name])) {
+                    $settings = array_merge_recursive($settings, $fieldSettings[$name]);
+                }
+                if (is_string($column) && isset($this->_fields[$column])) {
+                    $this->_fields[$name] = $this->duplicateField($name, $this->_fields[$column], $owner, $settings);
+                } elseif (is_array($column)) {
+                    $column = $this->createColumnSchema($name, $column);
+                    $this->_fields[$name] = $this->createField($column, $owner, $settings);
+                } else {
+                    $this->_fields[$name] = $this->createField($column, $owner, $settings);
+                }
+            }
             $currentKeys = array_keys($this->_fields);
             foreach ($this->_fields as $name => $field) {
                 if (!isset($field->priority)) {
@@ -688,8 +707,18 @@ trait ActiveRecordTrait
             }
             ArrayHelper::multisort($this->_fields, 'priority', SORT_ASC);
         }
-
         return $this->_fields;
+    }
+
+    public function duplicateField($name, $originalField, $owner, $settings = [])
+    {
+        $newField = clone $originalField;
+        $newField->fieldSchema->name = $name;
+        $newField->formField->owner = $owner;
+        $newField->model->tabularId = $name;
+        $newField->label = $this->getAttributeLabel($name);
+        Yii::configure($newField, $settings);
+        return $newField;
     }
 
     public function createField($fieldSchema, $owner, $settings = [])

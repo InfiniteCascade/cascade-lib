@@ -121,14 +121,16 @@ trait ListWidgetTrait
                     }
                     $this->renderItemContentRow($subparts, $subFieldName, $subSettings, $model, $key, $index);
                 }
-                $row = new Row;
-                $columnSize = floor(12 / count($subparts));
-                foreach ($subparts as $subpart) {
-                    $cell = new Cell(['content' => $subpart, 'phoneColumns' => $columnSize, 'phoneSize' => 'auto', 'tabletSize' => false, 'mediumDesktopSize' => false, 'largeDesktopSize' => false]);
-                    $row->addCell($cell);
+                if (!empty($subparts)) {
+                    $row = new Row;
+                    $columnSize = floor(12 / count($subparts));
+                    foreach ($subparts as $subpart) {
+                        $cell = new Cell(['content' => $subpart, 'phoneColumns' => $columnSize, 'phoneSize' => 'auto', 'tabletSize' => false, 'mediumDesktopSize' => false, 'largeDesktopSize' => false]);
+                        $row->addCell($cell);
+                    }
+                    Html::addCssClass($subrowSettings, 'list-group-item-split');
+                    $parts[] = Html::tag('div', $row->generate(), $subrowSettings);
                 }
-                Html::addCssClass($subrowSettings, 'list-group-item-split');
-                $parts[] = Html::tag('div', $row->generate(), $subrowSettings);
             } else {
                 $this->renderItemContentRow($parts, $fieldName, $settings, $model, $key, $index);
             }

@@ -43,6 +43,21 @@ class Relation extends Base
      */
     static $_moduleHandlers = [];
 
+
+    public function __clone()
+    {
+        parent::__clone();
+        $this->baseModel = clone $this->baseModel;
+    }
+
+    public function init()
+    {
+        parent::init();
+        if (isset($this->relationship)) {
+            $this->required = $this->relationship->required;
+        }
+    }
+
     /**
      * Get companion
      * @return __return_getCompanion_type__ __return_getCompanion_description__

@@ -50,7 +50,7 @@
       if ($this.options.canvasTarget === undefined) {
          $this.selectorElements.canvas = $("<div />").addClass('object-selector-canvas').insertAfter($this);
       } else {
-         $this.selectorElements.canvas = $("<div />").addClass('object-selector-canvas').appendTo($this.options.canvasTarget);
+         $this.selectorElements.canvas = $("<div />").addClass('object-selector-canvas').prependTo($this.options.canvasTarget);
       }
       $this.selectorElements.selector = $("<div />").addClass('object-selector').appendTo($this.selectorElements.canvas);
       $this.selectorElements.label = $("<label />", {'for': $this.searchInputId}).html($this.options.inputLabel).appendTo($this.selectorElements.selector);

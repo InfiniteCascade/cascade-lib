@@ -69,6 +69,7 @@ abstract class Base extends \infinite\base\Object
      * @var __var__model_type__ __var__model_description__
      */
     protected $_model;
+    protected $_attributes = false;
     /**
      * @var __var__formField_type__ __var__formField_description__
      */
@@ -87,6 +88,16 @@ abstract class Base extends \infinite\base\Object
     const LOCATION_HEADER = 0x02;
     const LOCATION_SUBHEADER = 0x03;
 
+
+    public function __clone()
+    {
+        $this->formField = clone $this->formField;
+        $this->formField->modelField = $this;
+        $this->format = clone $this->format;
+        $this->model = clone $this->model;
+        $this->fieldSchema = clone $this->fieldSchema;
+    }
+
     /**
     * @inheritdoc
      */
@@ -101,6 +112,7 @@ abstract class Base extends \infinite\base\Object
             $this->required = true;
         }
     }
+
 
     /**
      * __method_determineFormatClass_description__
@@ -188,10 +200,17 @@ abstract class Base extends \infinite\base\Object
             if (is_null($this->formFieldClass)) {
                 throw new Exception("DB Field incorrectly set up. What is the form class?");
             }
-            $config = $value;
-            $config['class'] = $this->formFieldClass;
-            $config['modelField'] = $this;
-            $value = Yii::createObject($config);
+            if (is_null($this->_formField)) {
+                $config = $value;
+                $config['class'] = $this->formFieldClass;
+                $config['modelField'] = $this;
+                $value = Yii::createObject($config);
+            } else {
+                $settings = $value;
+                $value = $this->_formField;
+                unset($settings['class']);
+                Yii::configure($value, $settings);
+            }
         }
 
         $this->_formField = $value;
@@ -280,8 +299,19 @@ abstract class Base extends \infinite\base\Object
     public function setModel($value)
     {
         $this->_model = $value;
-
+        if ($this->_attributes) {
+            $this->_model->attributes = $this->_attributes;
+        }
         return true;
+    }
+
+    public function setAttributes($value)
+    {
+        if ($this->model) {
+            $this->_model->attributes = $value;
+        } else {
+            $this->_attributes = $value;
+        }
     }
 
     /**

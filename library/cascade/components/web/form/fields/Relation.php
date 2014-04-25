@@ -25,6 +25,10 @@ class Relation extends Base
      */
     public $linkExisting = true;
     /**
+     * @var __var_linkExisting_type__ __var_linkExisting_description__
+     */
+    public $lockFields = [];
+    /**
      * @var __var_inlineRelation_type__ __var_inlineRelation_description__
      */
     public $inlineRelation = false;
@@ -36,6 +40,11 @@ class Relation extends Base
      * @var __var_relatedObject_type__ __var_relatedObject_description__
      */
     public $relatedObject;
+
+    public function __clone()
+    {
+        $this->relatedObject = clone $this->relatedObject;
+    }
 
     /**
     * @inheritdoc
@@ -90,7 +99,6 @@ class Relation extends Base
         } else {
             $formSegment = $this->relatedObject->objectType->getFormSegment($this->relatedObject, ['relationField' => $this->modelField]);
             $formSegment->owner = $this;
-
             return $formSegment->generate();
         }
     }
@@ -122,6 +130,7 @@ class Relation extends Base
         $field = $this->getRelationModelField();
         $parts = [];
         $r = $initialSettings;
+        $r['title'] = $this->modelField->label;
         $r['context'] = [];
         $r['selector'] = ['browse' => [], 'search' => ['data' => []]];
         if ($this->modelField->relationship->temporal && empty($this->model->start)) {
@@ -132,6 +141,8 @@ class Relation extends Base
             $r['context']['object'] = ['id' => $this->modelField->baseModel->primaryKey, 'descriptor' => $this->modelField->baseModel->descriptor];
         }
         $r['context']['role'] = $role = $this->modelField->relationship->companionRole($this->modelField->modelRole);
+        $companionType = $this->modelField->relationship->companionRoleType($this->modelField->modelRole);
+        $r['selector']['inputLabel'] = 'Select '. $companionType->title->upperSingular;
         //\d($r);exit;
 
         if (($modelTypeItem = $this->modelField->relationship->{$role}->collectorItem)) {
@@ -142,12 +153,14 @@ class Relation extends Base
             'prefix' => $this->model->formName() . $this->model->tabularPrefix,
             'attributes' => array_merge($this->model->attributes, ['taxonomy_id' => $this->model->taxonomy_id])
         ];
+
         if (!empty($r['model']['attributes']['start'])) {
             $r['model']['attributes']['start'] = Yii::$app->formatter->asDate($r['model']['attributes']['start']);
         }
         if (!empty($r['model']['attributes']['end'])) {
             $r['model']['attributes']['end'] = Yii::$app->formatter->asDate($r['model']['attributes']['end']);
         }
+        $r['lockFields'] = $this->lockFields;
         $r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
         $this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
         Html::addCssClass($this->htmlOptions, 'relationship');

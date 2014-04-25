@@ -30,15 +30,18 @@ class FieldTypeDetector extends \infinite\base\object
             $dbMap = ['date' => 'date'];
 
             $fieldSchema = $field->fieldSchema;
+            if ($fieldSchema->dbType === 'tinyint(1)') {
+                return 'boolean';
+            }
             if ($field->multiline) {
-                $type = 'textarea';
+                return 'textarea';
             } elseif ($fieldSchema->type === 'boolean') {
-                $type = 'boolean';
+                return 'boolean';
             } elseif (isset($dbMap[$fieldSchema->dbType])) {
-                $type = $dbMap[$fieldSchema->dbType];
+                return $dbMap[$fieldSchema->dbType];
             }
 
-            return $type;
+            return 'text';
         }
     }
 }

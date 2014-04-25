@@ -63,10 +63,6 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
      * @var __var__type_type__ __var__type_description__
      */
     protected $_type;
-    /**
-     * @var __var__model_type__ __var__model_description__
-     */
-    protected $_model;
 
     /**
      * __method_generate_description__

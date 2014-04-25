@@ -3,6 +3,9 @@
 .relationship-object-canvas {
   padding: 10px 5px;
 }
+.relationship-object-canvas .panel-body .relationship-object-selected {
+  text-align: center;
+}
 
 .relationship-object {
   border: 1px solid rgba(0, 0, 0, .15);
@@ -26,6 +29,10 @@
 
 .relationship-field {
   text-align: center;
+}
+
+.relationship-object-fields-alone {
+  padding: 5px 0;
 }
 
 .relationship-object-fields-alone .relationship-field {

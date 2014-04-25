@@ -28,6 +28,7 @@ class HumanFieldDetector extends \infinite\base\Object
         'created',
         'modified',
         'deleted',
+        'archived',
     ];
 
     /**
@@ -62,7 +63,6 @@ class HumanFieldDetector extends \infinite\base\Object
             return true;
         }
         self::$_machineTests[] = $test;
-
         return true;
     }
 

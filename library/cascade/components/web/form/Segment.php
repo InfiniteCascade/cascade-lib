@@ -10,6 +10,7 @@ namespace cascade\components\web\form;
 use Yii;
 
 use cascade\components\db\fields\Model as ModelField;
+use cascade\components\db\fields\Relation as RelationField;
 
 use infinite\web\grid\Grid;
 use infinite\helpers\Html;
@@ -219,20 +220,26 @@ class Segment extends FormObject
                 $modelClass = get_class($this->_model);
                 $this->_model->_moduleHandler = $modelClass::FORM_PRIMARY_MODEL;
             }
-
-            $requiredFields = $this->_model->getRequiredFields($this);
+            $requiredFields = true;
             $fieldsTemplate = false;
             if (!is_null($this->relationField)) {
-                // $this->relationField->model->addFields($this->_model, $fields, $this->relationField->relationship, $this);
-                // \d(get_class($this->relationField));
-                $fields['relation'] = $this->relationField;
-                $this->relationField->formField->inlineRelation = true;
-                if (!$this->relationField->model->isNewRecord && $this->relationField->companion->hasDashboard) {
-                    $fieldsTemplate = [['relation']];
-                    $requiredFields = [];
+                $fieldName = $this->relationField->modelRole .':'. $this->relationField->baseModel->objectType->systemId;
+                if (isset($fields[$fieldName])) {
+                    $fields[$fieldName]->baseModel = $this->relationField->baseModel;
+                    $fields[$fieldName]->model = $this->relationField->model;
+                    $fields[$fieldName]->formField = $this->relationField->formField;
+                    $fields[$fieldName]->required = true;
+                    $this->relationField->formField->inlineRelation = true;
+                    if (!$this->relationField->model->isNewRecord && $this->relationField->companion->hasDashboard) {
+                        $fieldsTemplate = [[$fieldName]];
+                        $requiredFields = false;
+                    }
                 }
-                //
-                $requiredFields['relation'] = $fields['relation'];
+            }
+            if ($requiredFields) {
+                $requiredFields = $this->_model->getRequiredFields($this);
+            } else {
+                $requiredFields = [$fieldName => $fields[$fieldName]];
             }
             if (!$fieldsTemplate) {
                 if (!empty($this->subform)) {
@@ -249,7 +256,6 @@ class Segment extends FormObject
                     $fieldsTemplate = $this->_settings['fields'];
                 }
             }
-
             if ($fieldsTemplate !== false) {
                 $this->_settings['fields'] = [];
                 foreach ($fields as $fieldKey => $field) {
@@ -303,7 +309,6 @@ class Segment extends FormObject
                         if (!isset($fields[$fieldKey])) { continue; }
 
                         $this->_fields[$fieldKey] = $fields[$fieldKey];
-
                         if ($fieldKey === false) {
                             $rowItems[] = false;
                         } else {
@@ -315,7 +320,6 @@ class Segment extends FormObject
                             $rowItems[] = Yii::createObject($cellOptions);
                         }
                     }
-
                     $this->grid->addRow($rowItems);
                 }
             }
