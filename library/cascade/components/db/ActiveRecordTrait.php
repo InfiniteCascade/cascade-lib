@@ -30,6 +30,7 @@ trait ActiveRecordTrait
     {
         if (is_null($this->_tabularId)) {
             if (is_null($this->_moduleHandler) || $this->_moduleHandler === self::FORM_PRIMARY_MODEL) {
+                //return false;
                 //$this->_moduleHandler = self::FORM_PRIMARY_MODEL;
                 $this->_tabularId = self::getPrimaryTabularId();
             } else {

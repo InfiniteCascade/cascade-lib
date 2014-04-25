@@ -171,6 +171,24 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return parent::onAfterInit($event);
     }
 
+    public function getRelationship($name)
+    {
+        $parts = explode(':', $name);
+        $item = $this->collectorItem;
+        if (count($parts) > 1) {
+            if (in_array($parts[0], ['child', 'children', 'descendents'])) {
+                if (isset($item->children[$parts[1]])) {
+                    return [$item->children[$parts[1]], 'child'];
+                }
+            } else {
+                if (isset($item->parents[$parts[1]])) {
+                    return [$item->parents[$parts[1]], 'parent'];
+                }
+            }
+        }
+        return [false, false];
+    }
+
     /**
      * __method_subactionHandle_description__
      * @param cascade\components\web\ObjectViewEvent $event __param_event_description__
@@ -903,12 +921,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $primaryModel;
     }
 
-    /**
-     * Get models
-     * @param __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
-     * @param array                       $models       __param_models_description__ [optional]
-     * @return __return_getModels_type__   __return_getModels_description__
-     */
+
     public function getModels($primaryModel = null, $models = [])
     {
         $model = $this->getModel($primaryModel);
@@ -1070,13 +1083,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $models;
     }
 
-    /**
-     * __method__handlePost_description__
-     * @param array                       $settings __param_settings_description__ [optional]
-     * @return __return__handlePost_type__ __return__handlePost_description__
-     * @throws HttpException __exception_HttpException_description__
-     */
-    protected function _handlePost($settings = [])
+    public function handlePost($settings = [])
     {
         $results = ['primary' => null, 'children' => [], 'parents' => []];
         if (empty($_POST)) { return false; }
@@ -1179,13 +1186,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
      * @param array                 $settings __param_settings_description__ [optional]
      * @return unknown
      */
-    public function getForm($models = null, $settings = [])
+    public function getForm($primaryModel = false, $settings = [])
     {
-        $primaryModelClass = $this->primaryModel;
-        $primaryModel = $primaryModelClass::getPrimaryModel($models);
         if (!$primaryModel) { return false; }
         $formSegments = [$this->getFormSegment($primaryModel, $settings)];
-        $config = ['class' => $this->formGeneratorClass, 'items' => $formSegments, 'models' => $models];
+        $config = ['class' => $this->formGeneratorClass, 'items' => $formSegments];
 
         return Yii::createObject($config);
     }

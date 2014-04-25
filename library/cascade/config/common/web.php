@@ -40,6 +40,7 @@ $config['components']['urlManager'] = [
         '<action:(view)>:<subaction:\S+>/<id:\S+>' => 'object/<action>',
         '<action:(update|delete|view|access)>/<id:\S+>' => 'object/<action>',
         '<action:(create)>/<type:\S+>/<object_id:\S+>' => 'object/<action>',
+        '<action:(create)>/<type:\S+>' => 'object/<action>',
         'tool/<tool:\S+>' => 'object/tool',
         'report/<report:\S+>' => 'object/report',
 

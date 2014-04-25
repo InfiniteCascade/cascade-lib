@@ -90,13 +90,18 @@ class Relation extends Base
      */
     public function generate()
     {
+        $this->relatedObject->setParentModel($this->modelField->baseModel);
         if ($this->linkExisting) {
+            $this->model->setParentModel($this->modelField->baseModel);
             // we are matching with an existing document
             return $this->generateRelationField();
         } elseif ($this->inlineRelation) {
+            //$this->model->setParentModel($this->modelField->baseModel, false);
+            $this->model->setParentModel($this->relatedObject);
             // we are matching with an existing document
             return $this->generateRelationField(['justFields' => true]);
         } else {
+            $this->model->setParentModel($this->relatedObject);
             $formSegment = $this->relatedObject->objectType->getFormSegment($this->relatedObject, ['relationField' => $this->modelField]);
             $formSegment->owner = $this;
             return $formSegment->generate();

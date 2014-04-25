@@ -45,6 +45,7 @@ trait ActiveRecordTrait
     ];
 
     protected $_fields;
+    protected $_parentModel;
 
     public function behaviors()
     {
@@ -73,8 +74,28 @@ trait ActiveRecordTrait
             'Auditable' => [
                 'class' => 'cascade\\components\\db\\behaviors\\auditable\\Auditable',
             ],
+            'RelatedObjects' => [
+                'class' => 'cascade\\components\\db\\behaviors\\RelatedObjects',
+            ],
         ];
     }
+
+
+    public function formName()
+    {
+        $parentFormName = parent::formName();
+        if (isset($this->_parentModel)) {
+            $parentModelClass = get_class($this->_parentModel);
+            return $this->_parentModel->formName() .$this->_parentModel->tabularPrefix . '[relatedObjects]['.$parentFormName.']';
+        }
+        return $parentFormName;
+    }
+
+    public function setParentModel($parentModel)
+    {
+        $this->_parentModel = $parentModel;
+    }
+
 
     public function isForeignField($field)
     {

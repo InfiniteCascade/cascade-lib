@@ -387,7 +387,7 @@ class ObjectController extends Controller
         $subform = $object = null;
         $action = 'create';
         $saveSettings = [];
-
+        $relations = [];
         $linkExisting = !empty($_GET['link']);
         if ($linkExisting) {
             $action = 'link';
@@ -401,19 +401,22 @@ class ObjectController extends Controller
             }
             $typeParsedParts = explode(':', $typeParsed);
             if (count($typeParsedParts) >= 2 && in_array($typeParsedParts[0], ['parent', 'child'])) {
-                $relationshipObjectField = $typeParsedParts[0] . '_object_id';
+                list($relationship, $relationshipRole) = $object->objectType->getRelationship($typeParsed);
+                if ($relationship) {
+                    $relationField = $relationship->companionRole($relationshipRole) .'_object_id';
+                    $relationId = $relationship->systemId . '.0';
+                    $relations[$relationId] = ['tabularId' => $relationId, $relationField => $object->primaryKey];
+                }
                 $typeParsed = $typeParsedParts[1];
             } else {
                 throw new HttpException(403, "Invalid request ");
             }
-            $subform = implode(':', $typeParsedParts);
-            $subformRelation = $originalTypeParsed;
-            $saveSettings['allowEmpty'] = true;
         }
 
         if (empty($typeParsed) || !($type = Yii::$app->collectors['types']->getOne($typeParsed)) || !isset($type->object)) {
             throw new HttpException(404, "Unknown object type ". $typeParsed);
         }
+
         $module = $type->object;
         if (!Yii::$app->gk->canGeneral('create', $module->primaryModel)) {
             throw new HttpException(403, "You do not have access to create {$module->title->getPlural(true)}");
@@ -423,12 +426,16 @@ class ObjectController extends Controller
         Yii::$app->response->task = 'dialog';
         Yii::$app->response->taskOptions = ['title' => ucfirst($action) . ' '.$module->title->getSingular(true) , 'width' => '800px'];
 
-        if (isset($object)) {
-            $module = $object->objectType;
-        }
+        $primaryModel = $module->getModel();
+        $primaryModel->setRelationModels($relations);
 
-        $models = false;
         if (!empty($_POST)) {
+            $primaryModel->load($_POST);
+            \d($_POST);
+            \d($primaryModel);exit;
+
+            $module->loadFromPost($modelsFlat);
+
             list($error, $notice, $models, $niceModels) = $module->handleSaveAll(null, $saveSettings);
             if ($error) {
                 Yii::$app->response->error = $error;
@@ -449,10 +456,7 @@ class ObjectController extends Controller
                 }
             }
         }
-        if ($models === false) {
-            $models = $module->getModels($object);
-        }
-        if (!($this->params['form'] = $module->getForm($models, ['subform' => $subform, 'linkExisting' => $linkExisting]))) {
+        if (!($this->params['form'] = $module->getForm($primaryModel, ['linkExisting' => $linkExisting]))) {
             throw new HttpException(403, "There is nothing to {$action} for {$module->title->getPlural(true)}");
         }
         $this->params['form']->ajax = true;
