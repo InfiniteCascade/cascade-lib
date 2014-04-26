@@ -267,28 +267,9 @@ class Segment extends FormObject
                     if (!$field->required) { continue; }
                     $this->grid->prepend($field->formField);
                 }
+                $fields['_moduleHandler']->formField->owner = $this;
                 $this->grid->prepend($fields['_moduleHandler']->formField);
                 $cellClass = $this->cellClass;
-
-                if (empty($this->subform)) {
-                    // make sure all required fields are part of the form
-                    if (!empty($requiredFields)) {
-                        foreach ($fieldsTemplate as $rowFields) {
-                            foreach ($rowFields as $fieldKey => $fieldSettings) {
-                                if (is_numeric($fieldKey)) {
-                                    $fieldKey = $fieldSettings;
-                                    $fieldSettings = [];
-                                }
-                                unset($requiredFields[$fieldKey]);
-                            }
-                        }
-                    }
-
-                    foreach ($requiredFields as $fieldName => $field) {
-                        if (in_array($fieldName, $this->_settings['ignoreFields'])) { continue; }
-                        $fieldsTemplate[] = [$fieldName];
-                    }
-                }
                 foreach ($fieldsTemplate as $rowFields) {
                     $rowItems = [];
                     foreach ($rowFields as $fieldKey => $fieldSettings) {
@@ -324,7 +305,7 @@ class Segment extends FormObject
                 }
             }
         }
-
+        //\d($this->_fields);exit;
         return $this->_fields;
     }
 

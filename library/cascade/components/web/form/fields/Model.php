@@ -57,6 +57,7 @@ class Model extends Base
             throw new Exception("Unable to find generator.");
         }
         if (!$this->generator->form) {
+            \d($this->generator);exit;
             throw new Exception("Unable to find generator form.");
         }
         $form = $this->generator->form;

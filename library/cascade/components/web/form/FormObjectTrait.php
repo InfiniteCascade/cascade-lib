@@ -28,7 +28,6 @@ trait FormObjectTrait
         if (isset($this->owner->generator)) {
             return $this->owner->generator;
         }
-
         return Yii::createObject(['class' => $this->generatorClass]);
     }
 

@@ -171,6 +171,15 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return parent::onAfterInit($event);
     }
 
+    public function getRelatedType($name)
+    {
+        list($relationship, $role) = $this->getRelationship($name);
+        if ($relationship) {
+            return $relationship->roleType($role);
+        }
+        return false;
+    }
+
     public function getRelationship($name)
     {
         $parts = explode(':', $name);
@@ -902,18 +911,25 @@ abstract class Module extends \cascade\components\base\CollectorModule
      * @param array                       $input        __param_input_description__ [optional]
      * @return unknown
      */
-    public function getModel($primaryModel = null, $input = [])
+    public function getModel($primaryModel = null, $input = false)
     {
         if (is_null($primaryModel)) {
-            $primaryModel = new $this->primaryModel;
+            $primaryModel = $this->primaryModel;
+            if (isset($input['id'])) {
+                $primaryModel = $primaryModel::get($input['id']);
+                if (empty($primaryModel)) {
+                    return false;
+                }
+            } else {
+                $primaryModel = new $primaryModel;
+            }
         }
 
-        $formName = $primaryModel->formName();
-        if (!empty($input) && isset($input[$formName]['_moduleHandler'])) {
-            $moduleHandler = $input[$formName]['_moduleHandler'];
+        if ($input && $input['_moduleHandler']) {
+            $moduleHandler = $input['_moduleHandler'];
             $primaryModel->_moduleHandler = $moduleHandler;
-            unset($input[$formName]['_moduleHandler']);
-            $primaryModel->load($input);
+            unset($input['_moduleHandler']);
+            $primaryModel->setAttributes($input);
         } else {
             $primaryModel->loadDefaultValues();
         }
@@ -930,158 +946,6 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $models;
     }
 
-
-    /**
-     * __method_handleSave_description__
-     * @param __param_model_type__ $model __param_model_description__
-     * @return unknown
-     */
-    public function handleSave($model)
-    {
-        if ($this->internalSave($model)) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * __method_internalSave_description__
-     * @param __param_model_type__         $model __param_model_description__
-     * @return __return_internalSave_type__ __return_internalSave_description__
-     */
-    protected function internalSave($model)
-    {
-        return $model->save();
-    }
-
-    /**
-     * __method_handleSaveAll_description__
-     * @param __param_input_type__          $input    __param_input_description__ [optional]
-     * @param array                         $settings __param_settings_description__ [optional]
-     * @return __return_handleSaveAll_type__ __return_handleSaveAll_description__
-     */
-    public function handleSaveAll($input = null, $settings = [])
-    {
-        if (is_null($input)) {
-            $input = $this->_handlePost($settings);
-        }
-        $error = false;
-        $notice = [];
-        $models = false;
-        if ($input) {
-            $models = $this->_extractModels($input);
-            unset($input['primary']['handler']);
-            $isValid = true;
-            foreach ($models as $model) {
-                if (!$model->validate()) {
-                    $isValid = false;
-                }
-            }
-            if ($isValid) {
-                // save primary
-                $primary = $input['primary'];
-                if (isset($primary['handler'])) {
-                    $result = $primary['handler']->handleSave($primary['model']);
-                } else {
-                    $result = $this->internalSave($primary['model']);
-                }
-                if (!$result || empty($primary['model']->primaryKey)) {
-                    $error = 'An error occurred while saving.';
-                } else {
-                    // loop through parents
-                    foreach ($input['parents'] as $parentKey => $parent) {
-                        $relation = false;
-                        if (isset($parent['relation'])) {
-                            $relation = $parent['relation'];
-                        } elseif ($parent['model']) {
-                            $relation = $parent['model']->getRelationModel($parentKey);
-                        }
-
-                        $relation->child_object_id = $primary['model']->primaryKey;
-                        $parent['model']->registerRelationModel($relation, $parentKey);
-                        $parent['model']->indirectObject = $primary['model'];
-                        if (isset($parent['handler'])) {
-                            $descriptor = $parent['handler']->title->singular;
-                            $result = $parent['handler']->handleSave($parent['model']);
-                        } else {
-                            $descriptor = 'part of the record';
-                            $result = $this->internalSave($parent['model']);
-                        }
-                        if (!$result) {
-                            $noticeMessage = 'Unable to save '. $descriptor;
-                            if (!in_array($noticeMessage, $notice)) {
-                                $notice[] = $noticeMessage;
-                            }
-                        }
-                    }
-
-                    // loop through children
-                    foreach ($input['children'] as $childKey => $child) {
-                        if (isset($child['relation'])) {
-                            $relation = $child['relation'];
-                        } else {
-                            $relation = $child['model']->getRelationModel($childKey);
-                        }
-                        $relation->parent_object_id = $primary['model']->primaryKey;
-                        $child['model']->registerRelationModel($relation, $childKey);
-                        $child['model']->indirectObject = $primary['model'];
-                        if (isset($child['handler'])) {
-                            $descriptor = $child['handler']->title->singular;
-                            $result = $child['handler']->handleSave($child['model']);
-                        } else {
-                            $descriptor = 'part of the record';
-                            $result = $this->internalSave($child['model']);
-                        }
-
-                        if (!$result) {
-                            $noticeMessage = 'Unable to save '. $descriptor .' '. print_r($child['model']->errors, true);
-                            if (!in_array($noticeMessage, $notice)) {
-                                $notice[] = $noticeMessage;
-                            }
-                        }
-                    }
-                }
-            } else {
-                $error = 'Please fix the entry errors.';
-            }
-        } else {
-            $error = 'Invalid input!';
-        }
-        if (empty($notice)) {
-            $notice = false;
-        } else {
-            $notice = implode('; ', $notice);
-        }
-
-        return [$error, $notice, $models, $input];
-    }
-
-    /**
-     * __method__extractModels_description__
-     * @param __param_input_type__           $input __param_input_description__
-     * @return __return__extractModels_type__ __return__extractModels_description__
-     */
-    protected function _extractModels($input)
-    {
-        if ($input === false) { return false; }
-        $models = [];
-        if (isset($input['primary'])) {
-            $models[$input['primary']['model']->tabularId] = $input['primary']['model'];
-        }
-        if (!empty($input['children'])) {
-            foreach ($input['children'] as $child) {
-                $models[$child['model']->tabularId] = $child['model'];
-            }
-        }
-        if (!empty($input['parents'])) {
-            foreach ($input['parents'] as $parent) {
-                $models[$parent['model']->tabularId] = $parent['model'];
-            }
-        }
-
-        return $models;
-    }
 
     public function handlePost($settings = [])
     {
@@ -1190,7 +1054,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     {
         if (!$primaryModel) { return false; }
         $formSegments = [$this->getFormSegment($primaryModel, $settings)];
-        $config = ['class' => $this->formGeneratorClass, 'items' => $formSegments];
+        $config = ['class' => $this->formGeneratorClass, 'models' => $primaryModel->collectModels(), 'items' => $formSegments];
 
         return Yii::createObject($config);
     }
@@ -1206,7 +1070,6 @@ abstract class Module extends \cascade\components\base\CollectorModule
         if (empty($primaryModel)) {
             return false;
         }
-
         return $primaryModel->form($settings);
     }
 }

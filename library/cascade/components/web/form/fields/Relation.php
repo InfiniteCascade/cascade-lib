@@ -55,13 +55,12 @@ class Relation extends Base
         $moduleHandler = implode(':', array_slice(explode(':', $this->modelField->moduleHandler), 0, 2));
         $model = $relationModel = null;
         $companion = $this->modelField->companion;
-        foreach ($this->generator->models as $key => $modelTest) {
-            if ($key === 'relations') {
-                continue;
-            }
-            if ($modelTest->_moduleHandler === $moduleHandler) {
-                $model = $modelTest;
-            }
+        $relationTabularId = RelationModel::generateTabularId($this->modelField->field);
+        // \d($relationTabularId);
+        // \d($this->modelField->field);
+        // \d(array_keys($this->generator->models));exit;
+        if (isset($this->generator->models[$relationTabularId])) {
+            $model = $this->generator->models[$relationTabularId];
         }
         if (is_null($model) || empty($model->primaryKey)) {
             $relationKey = $moduleHandler;
@@ -70,10 +69,9 @@ class Relation extends Base
                 $model = $companion->getModel();
             }
         } else {
-
             $relationKey = $model->primaryKey;
+            $relationTabularId = RelationModel::generateTabularId($relationKey);
         }
-        $relationTabularId = RelationModel::generateTabularId($relationKey);
         if (isset($this->generator->models['relations'][$relationTabularId])) {
             $relationModel = $this->generator->models['relations'][$relationTabularId];
         } else {

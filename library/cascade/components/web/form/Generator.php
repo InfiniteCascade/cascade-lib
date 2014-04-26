@@ -52,7 +52,7 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     public function setItems($items)
     {
         $this->_items = $items;
-        if (isset($this->_items[0]) and is_array($this->_items[0])) {
+        if (isset($this->_items[0]) && is_array($this->_items[0])) {
             $this->_items = $this->_items[0];
         }
         foreach ($this->_items as $item) {

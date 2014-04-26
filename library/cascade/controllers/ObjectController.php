@@ -384,9 +384,8 @@ class ObjectController extends Controller
     {
         if (!isset($_GET['type'])) { $_GET['type'] = ''; }
         $typeParsed = $originalTypeParsed= $_GET['type'];
-        $subform = $object = null;
+        $object = null;
         $action = 'create';
-        $saveSettings = [];
         $relations = [];
         $linkExisting = !empty($_GET['link']);
         if ($linkExisting) {
@@ -431,31 +430,23 @@ class ObjectController extends Controller
 
         if (!empty($_POST)) {
             $primaryModel->load($_POST);
-            \d($_POST);
-            \d($primaryModel);exit;
-
-            $module->loadFromPost($modelsFlat);
-
-            list($error, $notice, $models, $niceModels) = $module->handleSaveAll(null, $saveSettings);
-            if ($error) {
-                Yii::$app->response->error = $error;
+            if (!$primaryModel->save()) {
+                Yii::$app->response->error = 'Unable to create object!';
             } else {
                 Yii::$app->response->task = 'status';
-                $noticeExtra = '';
-                if (!empty($notice)) {
-                    $noticeExtra = ' However, there were notices: '. $notice;
-                }
-                Yii::$app->response->success = '<em>'. $niceModels['primary']['model']->descriptor .'</em> was saved successfully.'.$noticeExtra;
-                if (isset($subform)) {
-                    $primaryModel = $type->object->primaryModel;
+                Yii::$app->response->success = '<em>'. $primaryModel->descriptor .'</em> was saved successfully.';
+                if (isset($object)) {
+                    $primaryModelClass = $type->object->primaryModel;
                     Yii::$app->response->trigger = [
-                        ['refresh', '.model-'. $primaryModel::baseClassName()]
+                        ['refresh', '.model-'. $primaryModelClass::baseClassName()]
                     ];
                 } else {
-                    Yii::$app->response->redirect = $niceModels['primary']['model']->getUrl('view');
+                    Yii::$app->response->redirect = $primaryModel->getUrl('view');
                 }
             }
         }
+        //\d($primaryModel->relatedObjects);
+        //\d($primaryModel->collectModels());exit;
         if (!($this->params['form'] = $module->getForm($primaryModel, ['linkExisting' => $linkExisting]))) {
             throw new HttpException(403, "There is nothing to {$action} for {$module->title->getPlural(true)}");
         }

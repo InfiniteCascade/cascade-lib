@@ -391,6 +391,20 @@ trait ActiveRecordTrait
         return $result;
     }
 
+    public function isEmptyObject()
+    {
+        $default = $this->defaultValues;
+        foreach ($this->attributes as $key => $value) {
+            if ($this->isAttributeChanged($key)
+                && !empty($value)
+                && (!isset($default[$key]) || $value == $default[$key])
+            ) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function getDefaultValues()
     {
         return [];
@@ -782,7 +796,7 @@ trait ActiveRecordTrait
         }
         $settings['fieldSchema'] = $fieldSchema;
         $settings['required'] = $this->isAttributeRequired($fieldSchema->name);
-        $settings['baseModel'] = $this;
+        //$settings['baseModel'] = $this;
 
         if (!isset($settings['formField'])) { $settings['formField'] = []; }
         $settings['formField']['owner'] = $owner;
