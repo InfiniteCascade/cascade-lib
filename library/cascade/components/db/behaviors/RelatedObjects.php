@@ -48,27 +48,34 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
             $models = $related->collectModels($models);
         }
         foreach ($this->_relations as $key => $relation) {
-            if (!isset($relation['class'])) {
-                $relation['class'] = Yii::$app->classes['Relation'];
+            if (!is_object($relation)) {
+                if (!isset($relation['class'])) {
+                    $relation['class'] = Yii::$app->classes['Relation'];
+                }
+                $relation = Yii::createObject($relation);
             }
-            $models['relations'][$key] = Yii::createObject($relation);
+            $models['relations'][$key] = $relation;
         }
         return $models;
     }
 
     public function beforeSave($event)
     {
-        if (!empty($this->_relations) && (!$this->companionObject || empty($this->companionObject->primaryKey))) {
-            $event->isValid = false;
-            $this->owner->addError('_', 'Saving relations with no companion object! '. get_class($this->owner));
-            return false;
-        }
         foreach ($this->_relations as $key => $relation) {
             unset($relation['_moduleHandler']);
-            if ($this->companionRole === 'child') {
-                $relation['parent_object_id'] = $this->companionObject->primaryKey;
-            } else {
-                $relation['child_object_id'] = $this->companionObject->primaryKey;
+            if (!empty($this->companionObject)) {
+                if ($this->companionRole === 'child') {
+                    $relation['parent_object_id'] = $this->companionObject->primaryKey;
+                } else {
+                    $relation['child_object_id'] = $this->companionObject->primaryKey;
+                }
+            }
+            if (empty($relation['child_object_id']) && empty($relation['parent_object_id'])) {
+                if (!empty($this->_relations) && (!$this->companionObject || empty($this->companionObject->primaryKey))) {
+                    $event->isValid = false;
+                    $this->owner->addError('_', 'Saving relations with no companion object! '. get_class($this->owner));
+                    return false;
+                }
             }
             $this->owner->registerRelationModel($relation, $key);
         }
@@ -133,7 +140,28 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
 
     public function setRelations($value)
     {
-        $this->_relations = $value;
+        $fields = $this->owner->getFields();
+        foreach ($value as $tabId => $relation) {
+            if (!isset($relation['_moduleHandler'])) { continue; }
+            if (!isset($fields[$relation['_moduleHandler']])) {
+                continue;
+            }
+            $baseAttributes = [];
+            $model = $fields[$relation['_moduleHandler']]->model;
+            if (empty($model)) {
+                $model = $fields[$relation['_moduleHandler']]->resetModel();
+            }
+            $model->attributes = $relation;
+            list($relationship, $role) = $this->owner->objectType->getRelationship($model->_moduleHandler);
+            $relatedHandler = $this->owner->objectType->getRelatedType($model->_moduleHandler);
+            if (!$relatedHandler) { continue; }
+            if (!$this->owner->tabularId  // primary object
+                && empty($model->parent_object_id)
+                && empty($model->child_object_id)) {
+                continue;
+            }
+            $this->_relations[$tabId] = $model;
+        }
     }
 
     public function getRelations()

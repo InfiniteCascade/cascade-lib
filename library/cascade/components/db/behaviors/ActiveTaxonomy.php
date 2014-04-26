@@ -15,7 +15,7 @@ use infinite\helpers\ArrayHelper;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Taxonomy extends \infinite\db\behaviors\ActiveRecord
+class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
 {
     /**
      * @var __var_viaModelClass_type__ __var_viaModelClass_description__

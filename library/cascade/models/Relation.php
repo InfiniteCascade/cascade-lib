@@ -32,7 +32,7 @@ class Relation extends \infinite\db\models\Relation
     {
         return array_merge(parent::behaviors(), [
             'Taxonomy' => [
-                'class' => 'cascade\\components\\db\\behaviors\\Taxonomy',
+                'class' => 'cascade\\components\\db\\behaviors\\ActiveTaxonomy',
                 'viaModelClass' => 'RelationTaxonomy',
                 'relationKey' => 'relation_id'
             ],
@@ -40,6 +40,20 @@ class Relation extends \infinite\db\models\Relation
                 'class' => 'cascade\\components\\db\\behaviors\\PrimaryRelation'
             ]
         ]);
+    }
+
+
+    public static function queryBehaviors()
+    {
+        return array_merge(parent::queryBehaviors(), 
+            [
+                'Taxonomy' => [
+                    'class' => 'cascade\\components\\db\\behaviors\\QueryTaxonomy',
+                    'viaModelClass' => 'RelationTaxonomy',
+                    'relationKey' => 'relation_id'
+                ],
+            ]
+        );
     }
 
     /**

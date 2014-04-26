@@ -87,7 +87,7 @@ trait ListWidgetTrait
         $depth = 3;
         while ($depth > 0 && is_array($value)) {
             $depth--;
-            if (isset($value['rish'])) {
+            if (isset($value['rich'])) {
                 $value = $value['rich'];
             } else {
                 $value = array_shift($value);

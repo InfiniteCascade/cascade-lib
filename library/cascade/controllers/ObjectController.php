@@ -376,67 +376,145 @@ class ObjectController extends Controller
             Yii::$app->request->object = $this->params['object'];
         }
     }
+
+
+    /**
+     * __method_actionUpdate_description__
+     * @return __return_actionUpdate_type__ __return_actionUpdate_description__
+     * @throws HttpException __exception_HttpException_description__
+     */
+    public function actionUpdate()
+    {
+        $subform = null;
+        $this->_parseParams(['object', 'type'], 'update');
+        extract($this->params);
+        $primaryModel = $type->primaryModel;
+        if (isset($subaction) && $subaction === 'setPrimary') {
+            if (!isset($relation)) {
+                throw new HttpException(404, "Invalid relationship!");
+            }
+            Yii::$app->response->task = 'status';
+            if ($relation->setPrimary($relationRole)) {
+                Yii::$app->response->trigger = [
+                    ['refresh', '.model-'. $primaryModel::baseClassName()]
+                ];
+            } else {
+                Yii::$app->response->error = 'Unable to set primary object!';
+            }
+
+            return;
+        } else {
+            $refreshPrimary = isset($relatedObject);
+            $this->actionCreate($activeObject, 'update', $refreshPrimary);
+        }
+    }
+
     /**
      * __method_actionCreate_description__
      * @throws HttpException __exception_HttpException_description__
      */
-    public function actionCreate()
+    public function actionCreate($editObject = null, $action = 'create', $refreshPrimary = false)
     {
         if (!isset($_GET['type'])) { $_GET['type'] = ''; }
         $typeParsed = $originalTypeParsed= $_GET['type'];
-        $object = null;
+        $typeParsedParts = explode(':', $typeParsed);
+        $subform = $object = null;
         $action = 'create';
         $relations = [];
-        $linkExisting = !empty($_GET['link']);
-        if ($linkExisting) {
-            $action = 'link';
-        }
+        $reverseRelation = true;
+        $forceNewRelation = false;
+        $linkExisting = !empty($_GET['link']) ? 'hierarchy' : false;
 
         if (!empty($_GET['object_id']) && (!($object = $this->params['object'] = Registry::getObject($_GET['object_id'], false)) || !($typeItem = $this->params['typeItem'] = $object->objectTypeItem))) {
             throw new HttpException(404, "Unknown object.");
-        } elseif (isset($object)) {
+        }
+
+        if ($linkExisting) {
+            $editObject = $object;
+            $reverseRelation = false;
+            $forceNewRelation = true;
+        }
+
+        if ($editObject) {
+            $type = $editObject->objectType;
+        }
+        if (isset($typeParsedParts[1])) {
+            $typeName = $typeParsedParts[1];
+        } else {
+            $typeName = $typeParsedParts[0];
+        }
+
+        if (empty($type) && (empty($typeName) || !($type = Yii::$app->collectors['types']->getOne($typeName)) || !isset($type->object))) {
+            throw new HttpException(404, "Unknown object type ". $typeName);
+        }
+
+        if ($editObject) {
+            $type = $editObject->objectTypeItem;
+            $module = $editObject->objectType;
+            if (!$editObject->can('update')) {
+                throw new HttpException(403, "You do not have access to update {$module->title->getPlural(true)}");
+            }
+        } else {
+            $module = $type->object;
+            if (!Yii::$app->gk->canGeneral('create', $module->primaryModel)) {
+                throw new HttpException(403, "You do not have access to create {$module->title->getPlural(true)}");
+            }
+        }
+        $primaryModel = $module->getModel($editObject);
+        if (isset($object)) {
             if (!$object->can('update')) {
                 throw new HttpException(403, "Unable to update object.");
             }
-            $typeParsedParts = explode(':', $typeParsed);
+            $refreshPrimary = true;
+            $fields = $primaryModel->getFields();
             if (count($typeParsedParts) >= 2 && in_array($typeParsedParts[0], ['parent', 'child'])) {
                 list($relationship, $relationshipRole) = $object->objectType->getRelationship($typeParsed);
                 if ($relationship) {
-                    $relationField = $relationship->companionRole($relationshipRole) .'_object_id';
-                    $relationId = $relationship->systemId . '.0';
-                    $relations[$relationId] = ['tabularId' => $relationId, $relationField => $object->primaryKey];
+                    if ($reverseRelation) {
+                        $niceField = $relationship->getCompanionNiceId($relationshipRole);
+                        $relationField = $relationship->companionRole($relationshipRole) .'_object_id';
+                    } else {
+                        $relationField = $relationship->companionRole($relationshipRole) .'_object_id';
+                        $niceField = $relationship->getNiceId($relationshipRole);
+                    }
+                    $primaryModelClass = $relationship->roleType($relationshipRole)->primaryModel;
+                    if ($forceNewRelation) {
+                        $fields[$niceField]->resetModel();
+                    }
+                    $fields[$niceField]->model->{$relationField} = $object->primaryKey;
+                    $relations[$fields[$niceField]->model->tabularId] = $fields[$niceField]->model;
                 }
                 $typeParsed = $typeParsedParts[1];
+                if ($linkExisting) {
+                    $subform = implode(':', array_slice($typeParsedParts, 0, 2));
+                }
             } else {
                 throw new HttpException(403, "Invalid request ");
             }
         }
 
-        if (empty($typeParsed) || !($type = Yii::$app->collectors['types']->getOne($typeParsed)) || !isset($type->object)) {
-            throw new HttpException(404, "Unknown object type ". $typeParsed);
+        if ($linkExisting) {
+            $action = 'link';
+            $editObject = $object;
         }
 
-        $module = $type->object;
-        if (!Yii::$app->gk->canGeneral('create', $module->primaryModel)) {
-            throw new HttpException(403, "You do not have access to create {$module->title->getPlural(true)}");
-        }
 
         Yii::$app->response->view = 'create';
         Yii::$app->response->task = 'dialog';
         Yii::$app->response->taskOptions = ['title' => ucfirst($action) . ' '.$module->title->getSingular(true) , 'width' => '800px'];
 
-        $primaryModel = $module->getModel();
         $primaryModel->setRelationModels($relations);
-
         if (!empty($_POST)) {
             $primaryModel->load($_POST);
             if (!$primaryModel->save()) {
-                Yii::$app->response->error = 'Unable to create object!';
+                Yii::$app->response->error = 'Unable to '. $action .' object!';
             } else {
                 Yii::$app->response->task = 'status';
                 Yii::$app->response->success = '<em>'. $primaryModel->descriptor .'</em> was saved successfully.';
-                if (isset($object)) {
-                    $primaryModelClass = $type->object->primaryModel;
+                if ($refreshPrimary) {
+                    if (!isset($primaryModelClass)) {
+                        $primaryModelClass = $type->object->primaryModel;
+                    }
                     Yii::$app->response->trigger = [
                         ['refresh', '.model-'. $primaryModelClass::baseClassName()]
                     ];
@@ -445,9 +523,7 @@ class ObjectController extends Controller
                 }
             }
         }
-        //\d($primaryModel->relatedObjects);
-        //\d($primaryModel->collectModels());exit;
-        if (!($this->params['form'] = $module->getForm($primaryModel, ['linkExisting' => $linkExisting]))) {
+        if (!($this->params['form'] = $module->getForm($primaryModel, ['linkExisting' => $linkExisting, 'subform' => $subform]))) {
             throw new HttpException(403, "There is nothing to {$action} for {$module->title->getPlural(true)}");
         }
         $this->params['form']->ajax = true;
@@ -480,68 +556,6 @@ class ObjectController extends Controller
         }
     }
 
-    /**
-     * __method_actionUpdate_description__
-     * @return __return_actionUpdate_type__ __return_actionUpdate_description__
-     * @throws HttpException __exception_HttpException_description__
-     */
-    public function actionUpdate()
-    {
-        $subform = null;
-        $this->_parseParams(['object', 'type'], 'update');
-        extract($this->params);
-        $primaryModel = $type->primaryModel;
-        if (isset($subaction) && $subaction === 'setPrimary') {
-            if (!isset($relation)) {
-                throw new HttpException(404, "Invalid relationship!");
-            }
-            Yii::$app->response->task = 'status';
-            if ($relation->setPrimary($relationRole)) {
-                Yii::$app->response->trigger = [
-                    ['refresh', '.model-'. $primaryModel::baseClassName()]
-                ];
-            } else {
-                Yii::$app->response->error = 'Unable to set primary object!';
-            }
-
-            return;
-        } else {
-            Yii::$app->response->view = 'create';
-            Yii::$app->response->task = 'dialog';
-            Yii::$app->response->taskOptions = ['title' => 'Update '. $type->title->getSingular(true)];
-            $base = [];
-            if (isset($relatedObject)) {
-                $base[$relatedObject->tabularId] = $relatedObject;
-                $base['relations'] = [$relatedObject->tabularId => $relation];
-            }
-            $models = $originalModels = $type->getModels($object, $base);
-
-            if (!empty($_POST)) {
-                list($error, $notice, $models, $niceModels) = $handler->handleSaveAll(null, ['allowEmpty' => true]);
-                if ($error) {
-                    Yii::$app->response->error = $error;
-                } else {
-                    $noticeExtra = '';
-                    if (!empty($notice)) {
-                        $noticeExtra = ' However, there were notices: '. $notice;
-                    }
-                    Yii::$app->response->success = '<em>'. $activeObject->descriptor .'</em> was saved successfully.'.$noticeExtra;
-                    if (isset($relation)) {
-                        Yii::$app->response->trigger = [
-                            ['refresh', '.model-'. $primaryModel::baseClassName()]
-                        ];
-                        Yii::$app->response->task = 'status';
-                    } else {
-                        Yii::$app->response->redirect = $niceModels['primary']['model']->getUrl('view');
-                    }
-                }
-            }
-
-            if (!($this->params['form'] = $handler->getForm($models, ['subform' => $subform, 'linkExisting' => false]))) {
-                throw new HttpException(403, "There is nothing to update for {$type->title->getPlural(true)}");
-            }
-        }
-    }
 
 
     /**

@@ -57,7 +57,7 @@ trait ActiveRecordTrait
                 'class' => 'infinite\\db\\behaviors\\Relatable',
             ],
             'Taxonomy' => [
-                'class' => 'cascade\\components\\db\\behaviors\\Taxonomy',
+                'class' => 'cascade\\components\\db\\behaviors\\ActiveTaxonomy',
             ],
             'ActiveAccess' => [
                 'class' => 'cascade\\components\\db\\behaviors\\ActiveAccess',
@@ -80,6 +80,16 @@ trait ActiveRecordTrait
         ];
     }
 
+    public static function queryBehaviors()
+    {
+        return array_merge(parent::queryBehaviors(), 
+            [
+                'Taxonomy' => [
+                    'class' => 'cascade\\components\\db\\behaviors\\QueryTaxonomy',
+                ],
+            ]
+        );
+    }
 
     public function formName()
     {
@@ -175,6 +185,120 @@ trait ActiveRecordTrait
     }
 
     public function getForeignField($field, $options = [], $context = null)
+    {
+        $relationOptions = isset($options['relationOptions']) ? $options['relationOptions'] : [];
+        $objectOptions = isset($options['objectOptions']) ? $options['objectOptions'] : [];
+        $parts = explode(':', $field);
+        //if (!in_array(count($parts), [2, 3, 4])) { return null; }
+        $relationshipType = $parts[0];
+        if (!in_array($relationshipType, ['child', 'children', 'descendants', 'parent', 'parents', 'ancestors'])) {
+            return null;
+        }
+        $myTypeItem = $this->objectTypeItem;
+        $companionName = $parts[1];
+        if (!is_array($context)) {
+            $context = [];
+        }
+        if (!isset($context['relation'])) {
+            $context['relation'] = [];
+        }
+        
+        $fieldName = 'descriptor';
+        if (isset($parts[2])) {
+            $fieldName = $parts[2];
+            $parts[2] = '';
+        }
+        $fields = $this->getFields();
+        $fieldCheck = implode(':', $parts);
+
+        if (in_array($fieldCheck, $context['relation'])) {
+            return null;
+        }
+        if ($companionName === '_') {
+            if (in_array($parts[0], ['parent', 'parents', 'ancestors'])) {
+                $loopRelations = $myTypeItem->parents;
+                $loopRelations = ArrayHelper::getColumn($loopRelations, 'parent');
+            } else {
+                $loopRelations = $myTypeItem->children;
+                $loopRelations = ArrayHelper::getColumn($loopRelations, 'child');
+            }
+            ArrayHelper::multisort($loopRelations, 'priority', SORT_ASC);
+            foreach ($loopRelations as $relatedType) {
+                $fieldName = $relationshipType .':'. $relatedType->systemId;
+                if (isset($parts[2])) {
+                    $fieldName .= ':'. $parts[2];
+                }
+                $fieldValue = $this->getForeignField($fieldName, $options, $context);
+                if (!empty($fieldValue)) {
+                    return $fieldValue;
+                }
+            }
+            return null;
+        }
+        $companionTypeItem = Yii::$app->collectors['types']->getOne($companionName);
+        if (!$companionTypeItem || !$myTypeItem || !($companionType = $companionTypeItem->object) || !($myType = $myTypeItem->object)) { return null; }
+        if (in_array($relationshipType, ['child', 'children', 'descendants'])) {
+            // I'm the parent
+            $relationship = Relationship::has($myTypeItem, $companionTypeItem) ? Relationship::getOne($myTypeItem, $companionTypeItem) : false;
+        } else {
+            $relationship = Relationship::has($companionTypeItem, $myTypeItem) ? Relationship::getOne($companionTypeItem, $myTypeItem) : false;
+        }
+        if (!$relationship) {  return null; }
+        $cacheKey = [__FUNCTION__, $this->primaryKey, $relationshipType, $relationOptions, $objectOptions];
+        $result = Cacher::get($cacheKey);
+        if ($result === false) {
+            if (isset($fields[$fieldCheck])) {
+                $field = $fields[$fieldCheck];
+                if (isset($field->attributes['taxonomy_id'])) {
+                    $relationOptions['taxonomy'] = $field->attributes['taxonomy_id'];
+                }
+                $relationOptions['where'] = !empty($field->attributes) ? $field->attributes : null;
+                unset($relationOptions['where']['taxonomy_id']);
+                if (empty($relationOptions['where'])) {
+                    unset($relationOptions['where']);
+                }
+            }
+            $cacheDependencies = [];
+            $cacheDependencies[] = $this->getRelationCacheDependency($this->primaryKey);
+            $result = $this->{$relationshipType}($companionType->primaryModel, $relationOptions, $objectOptions);
+            if (empty($result)) {
+                $result = null;
+            } else {
+                $cacheDependencies[] = $result->getObjectCacheDependency();
+            }
+            Cacher::set($cacheKey, $result, 0, Cacher::chainedDependency($cacheDependencies));
+        }
+        if (empty($result)) {
+            return null;
+        }
+        if (is_array($result)) {
+            $fields = [];
+            foreach ($result as $object) {
+                if ($this->isForeignObjectInContext($object, $context)) { continue; }
+                $field = $object->getField($fieldName);
+                if (empty($field)) { continue; }
+                $companionType->loadFieldLink($field, $object);
+                $fields[] = $field;
+            }
+            if (empty($fields)) {
+                return null;
+            }
+            return $fields;
+        } else {
+            if ($this->isForeignObjectInContext($result, $context)) { return null; }
+            $field = $result->getField($fieldName);
+            if (empty($field)) { continue; }
+            $companionType->loadFieldLink($field, $result);
+
+            return $field;
+        }
+
+
+        return null;
+    }
+
+
+    public function getForeignFieldOld($field, $options = [], $context = null)
     {
         $relationOptions = isset($options['relationOptions']) ? $options['relationOptions'] : [];
         $objectOptions = isset($options['objectOptions']) ? $options['objectOptions'] : [];
@@ -279,9 +403,9 @@ trait ActiveRecordTrait
         return Cacher::groupDependency(['Object', $this->primaryKey], 'object');
     }
 
-    public function getForeignFieldValue($field, $options = [], $context = null)
+    public function getForeignFieldValue($fieldName, $options = [], $context = null)
     {
-        $field = $this->getForeignField($field, $options, $context);
+        $field = $this->getForeignField($fieldName, $options, $context);
         if (!empty($field)) {
             if (is_array($field)) {
                 $rich = [];
@@ -657,11 +781,16 @@ trait ActiveRecordTrait
             $modelName = self::className();
             $this->_fields = [];
             $fieldSettings = $this->fieldSettings();
+            $aliases = [];
             foreach (self::getTableSchema()->columns as  $name => $column) {
                 if (in_array($name, $disabledFields)) { continue; }
                 $settings = [];
                 if (isset($fieldSettings[$name])) {
                     $settings = array_merge_recursive($settings, $fieldSettings[$name]);
+                }
+                if (isset($settings['alias'])) {
+                    $aliases[$name] = $settings['alias'];
+                    unset($settings['alias']);
                 }
                 if (is_array($column)) {
                     $column = $this->createColumnSchema($name, $column);
@@ -682,6 +811,10 @@ trait ActiveRecordTrait
                     if (isset($fieldSettings[$fieldName])) {
                         $settings = array_merge_recursive($settings, $fieldSettings[$fieldName]);
                     }
+                    if (isset($settings['alias'])) {
+                        $aliases[$fieldName] = $settings['alias'];
+                        unset($settings['alias']);
+                    }
                     $settings['modelRole'] = 'child';
                     $settings['relationship'] = $relationship;
                     $this->_fields[$fieldName] = $this->createRelationField($fieldSchema, $owner, $settings);
@@ -694,6 +827,10 @@ trait ActiveRecordTrait
                     $settings = [];
                     if (isset($fieldSettings[$fieldName])) {
                         $settings = array_merge_recursive($settings, $fieldSettings[$fieldName]);
+                    }
+                    if (isset($settings['alias'])) {
+                        $aliases[$fieldName] = $settings['alias'];
+                        unset($settings['alias']);
                     }
                     $settings['modelRole'] = 'parent';
                     $settings['relationship'] = $relationship;
@@ -713,6 +850,10 @@ trait ActiveRecordTrait
                     if (isset($fieldSettings[$fieldName])) {
                         $settings = array_merge_recursive($settings, $fieldSettings[$fieldName]);
                     }
+                    if (isset($settings['alias'])) {
+                        $aliases[$fieldName] = $settings['alias'];
+                        unset($settings['alias']);
+                    }
                     $settings['model'] = $this;
                     $this->_fields[$fieldName] = $this->createTaxonomyField($fieldSchema, $taxonomy, $owner);
                 }
@@ -724,6 +865,10 @@ trait ActiveRecordTrait
                 if (isset($fieldSettings[$name])) {
                     $settings = array_merge_recursive($settings, $fieldSettings[$name]);
                 }
+                if (isset($settings['alias'])) {
+                    $aliases[$name] = $settings['alias'];
+                    unset($settings['alias']);
+                }
                 if (is_string($column) && isset($this->_fields[$column])) {
                     $this->_fields[$name] = $this->duplicateField($name, $this->_fields[$column], $owner, $settings);
                 } elseif (is_array($column)) {
@@ -731,6 +876,11 @@ trait ActiveRecordTrait
                     $this->_fields[$name] = $this->createField($column, $owner, $settings);
                 } else {
                     $this->_fields[$name] = $this->createField($column, $owner, $settings);
+                }
+            }
+            foreach ($aliases as $from => $to) {
+                if (isset($this->_fields[$to])) {
+                    $this->_fields[$from] = $this->_fields[$to];
                 }
             }
             $currentKeys = array_keys($this->_fields);
@@ -742,6 +892,9 @@ trait ActiveRecordTrait
             }
             ArrayHelper::multisort($this->_fields, 'priority', SORT_ASC);
         }
+        foreach ($this->_fields as $field) {
+            $field->formField->owner = $owner;
+        }
         return $this->_fields;
     }
 
@@ -750,7 +903,9 @@ trait ActiveRecordTrait
         $newField = clone $originalField;
         $newField->fieldSchema->name = $name;
         $newField->formField->owner = $owner;
-        $newField->model->tabularId = $name;
+        if ($newField->hasModel()) {
+            $newField->model->tabularId = $name;
+        }
         $newField->label = $this->getAttributeLabel($name);
         Yii::configure($newField, $settings);
         return $newField;

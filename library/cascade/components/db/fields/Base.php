@@ -94,7 +94,9 @@ abstract class Base extends \infinite\base\Object
         $this->formField = clone $this->formField;
         $this->formField->modelField = $this;
         $this->format = clone $this->format;
-        $this->model = clone $this->model;
+        if (isset($this->_model)) {
+            $this->_model = clone $this->_model;
+        }
         $this->fieldSchema = clone $this->fieldSchema;
     }
 
@@ -291,6 +293,16 @@ abstract class Base extends \infinite\base\Object
         return $this->_model;
     }
 
+    public function resetModel()
+    {
+        $this->_model = null;
+        return $this->_model;
+    }
+
+    public function hasModel()
+    {
+        return isset($this->_model);
+    }
     /**
      * Set model
      * @param unknown $value
@@ -299,7 +311,7 @@ abstract class Base extends \infinite\base\Object
     public function setModel($value)
     {
         $this->_model = $value;
-        if ($this->_attributes) {
+        if (is_object($value) && $this->_attributes) {
             $this->_model->attributes = $this->_attributes;
         }
         return true;
@@ -307,11 +319,15 @@ abstract class Base extends \infinite\base\Object
 
     public function setAttributes($value)
     {
+        $this->_attributes = $value;
         if ($this->model) {
             $this->_model->attributes = $value;
-        } else {
-            $this->_attributes = $value;
         }
+    }
+
+    public function getAttributes()
+    {
+        return $this->_attributes;
     }
 
     /**

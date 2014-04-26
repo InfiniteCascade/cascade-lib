@@ -337,6 +337,21 @@ class Relationship extends \infinite\base\Object
         return 'child';
     }
 
+
+    public function getNiceId($queryRole)
+    {
+        $roleType = $this->roleType($queryRole);
+        if (empty($roleType)) { return false; }
+        return implode(':', [$this->role($queryRole), $roleType->systemId]);
+    }
+
+    public function getCompanionNiceId($queryRole)
+    {
+        $companionRoleType = $this->companionRoleType($queryRole);
+        if (empty($companionRoleType)) { return false; }
+        return implode(':', [$this->companionRole($queryRole), $companionRoleType->systemId]);
+    }
+
     /**
      * __method_companionRoleType_description__
      * @param __param_queryRole_type__          $queryRole __param_queryRole_description__
@@ -496,6 +511,50 @@ class Relationship extends \infinite\base\Object
     public function getChild()
     {
         return $this->_child->object;
+    }
+
+    public function getRelatedObject($baseObject, $baseRole, $primaryRelation = null)
+    {
+        $companionRole = $this->companionRole($baseRole);
+        $companionType = $this->companionRoleType($baseRole);
+        $companionModel = $companionType->primaryModel;
+        if (!isset($primaryRelation) || is_array($primaryRelation)) {
+            if (!is_array($primaryRelation)) {
+                $primaryRelation = [];
+            }
+            $primaryRelation = $this->getPrimaryRelation($baseObject, $baseRole, $primaryRelation);
+        }
+        if (!empty($primaryRelation)) {
+            if ($companionRole === 'child') {
+                return $primaryRelation->childObject;
+            } else {
+                return $primaryRelation->parentObject;
+            }
+        }
+        return false;
+    }
+
+    public function getPrimaryRelation($baseObject, $baseRole, $relationOptions = [])
+    {
+        $companionRole = $this->companionRole($baseRole);
+        $companionType = $this->companionRoleType($baseRole);
+        $companionModel = $companionType->primaryModel;
+        if (!isset($relationOptions['order'])) {
+            $relationOptions['order'] = [];
+        }
+        if ($companionRole === 'child') {
+            array_unshift($relationOptions['order'], ['primary_child', SORT_DESC]);
+            $relation = $baseObject->queryParentRelations($companionModel, $relationOptions)->one();
+        } else {
+            array_unshift($relationOptions['order'], ['primary_parent', SORT_DESC]);
+            $relation = $baseObject->queryParentRelations($companionModel, $relationOptions)->one();
+        }
+        if (empty($relation)) {
+            return false;
+        } else {
+            return $relation;
+        }
+
     }
 
     /**

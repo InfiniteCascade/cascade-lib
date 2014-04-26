@@ -36,50 +36,10 @@ class Relation extends Base
      * @var __var_linkMultiple_type__ __var_linkMultiple_description__
      */
     public $linkMultiple = false;
-    /**
-     * @var __var_relatedObject_type__ __var_relatedObject_description__
-     */
-    public $relatedObject;
 
-    public function __clone()
+    public function getRelatedObject()
     {
-        $this->relatedObject = clone $this->relatedObject;
-    }
-
-    /**
-    * @inheritdoc
-     */
-    public function init()
-    {
-        parent::init();
-        $moduleHandler = implode(':', array_slice(explode(':', $this->modelField->moduleHandler), 0, 2));
-        $model = $relationModel = null;
-        $companion = $this->modelField->companion;
-        $relationTabularId = RelationModel::generateTabularId($this->modelField->field);
-        // \d($relationTabularId);
-        // \d($this->modelField->field);
-        // \d(array_keys($this->generator->models));exit;
-        if (isset($this->generator->models[$relationTabularId])) {
-            $model = $this->generator->models[$relationTabularId];
-        }
-        if (is_null($model) || empty($model->primaryKey)) {
-            $relationKey = $moduleHandler;
-
-            if (is_null($model)) {
-                $model = $companion->getModel();
-            }
-        } else {
-            $relationKey = $model->primaryKey;
-            $relationTabularId = RelationModel::generateTabularId($relationKey);
-        }
-        if (isset($this->generator->models['relations'][$relationTabularId])) {
-            $relationModel = $this->generator->models['relations'][$relationTabularId];
-        } else {
-            $relationModel = $model->getRelationModel($relationTabularId);
-        }
-        $model->_moduleHandler = $moduleHandler;
-        $this->modelField->model = $relationModel;
-        $this->relatedObject = $model;
+        return $this->modelField->value;
     }
 
     /**
@@ -88,16 +48,21 @@ class Relation extends Base
      */
     public function generate()
     {
-        $this->relatedObject->setParentModel($this->modelField->baseModel);
+        //$this->relatedObject->setParentModel($this->modelField->baseModel);
         if ($this->linkExisting) {
             $this->model->setParentModel($this->modelField->baseModel);
             // we are matching with an existing document
-            return $this->generateRelationField();
+            if ($this->linkExisting === true) {
+                $template = 'simple';
+            } else {
+                $template = 'hierarchy';
+            }
+            return $this->generateRelationField(['template' => $template]);
         } elseif ($this->inlineRelation) {
             //$this->model->setParentModel($this->modelField->baseModel, false);
             $this->model->setParentModel($this->relatedObject);
             // we are matching with an existing document
-            return $this->generateRelationField(['justFields' => true]);
+            return $this->generateRelationField(['template' => 'fields']);
         } else {
             $this->model->setParentModel($this->relatedObject);
             $formSegment = $this->relatedObject->objectType->getFormSegment($this->relatedObject, ['relationField' => $this->modelField]);
@@ -156,7 +121,13 @@ class Relation extends Base
             'prefix' => $this->model->formName() . $this->model->tabularPrefix,
             'attributes' => array_merge($this->model->attributes, ['taxonomy_id' => $this->model->taxonomy_id])
         ];
-
+        if (!empty($this->modelField->value->primaryKey)) {
+            $r['select'] = [
+                'id' => $this->modelField->value->primaryKey,
+                'descriptor' => $this->modelField->value->descriptor,
+                'subdescriptor' => $this->modelField->value->primarySubdescriptor
+            ];
+        }
         if (!empty($r['model']['attributes']['start'])) {
             $r['model']['attributes']['start'] = Yii::$app->formatter->asDate($r['model']['attributes']['start']);
         }
@@ -167,7 +138,7 @@ class Relation extends Base
         $r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
         $this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
         Html::addCssClass($this->htmlOptions, 'relationship');
-        $model->_moduleHandler = $this->modelField->relationship->companionRole($this->modelField->modelRole) .':'. $this->modelField->relationship->companionRoleType($this->modelField->modelRole)->systemId;
+        //$model->_moduleHandler = $this->modelField->relationship->companionRole($this->modelField->modelRole) .':'. $this->modelField->relationship->companionRoleType($this->modelField->modelRole)->systemId;
         $parts[] = Html::activeHiddenInput($model, $this->model->tabularPrefix . '_moduleHandler');
         $parts[] = Html::activeHiddenInput($model, $field, $this->htmlOptions);
 
@@ -216,24 +187,4 @@ class Relation extends Base
         return $this;
     }
 
-    /**
-     * Gets the value of relatedObject.
-     * @return mixed
-     */
-    public function getRelatedObject()
-    {
-        return $this->relatedObject;
-    }
-
-    /**
-     * Sets the value of relatedObject.
-     * @param mixed $relatedObject the related object
-     * @return self
-     */
-    public function setRelatedObject($relatedObject)
-    {
-        $this->relatedObject = $relatedObject;
-
-        return $this;
-    }
 }

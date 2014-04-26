@@ -924,6 +924,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
                 $primaryModel = new $primaryModel;
             }
         }
+        $primaryModel->tabularId = false;
 
         if ($input && $input['_moduleHandler']) {
             $moduleHandler = $input['_moduleHandler'];
