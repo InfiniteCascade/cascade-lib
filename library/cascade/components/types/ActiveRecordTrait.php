@@ -184,7 +184,7 @@ trait ActiveRecordTrait
         return false;
     }
 
-    public function getForeignField($field, $options = [], $context = null)
+    public function getForeignFieldNew($field, $options = [], $context = null)
     {
         $relationOptions = isset($options['relationOptions']) ? $options['relationOptions'] : [];
         $objectOptions = isset($options['objectOptions']) ? $options['objectOptions'] : [];
@@ -298,7 +298,7 @@ trait ActiveRecordTrait
     }
 
 
-    public function getForeignFieldOld($field, $options = [], $context = null)
+    public function getForeignField($field, $options = [], $context = null)
     {
         $relationOptions = isset($options['relationOptions']) ? $options['relationOptions'] : [];
         $objectOptions = isset($options['objectOptions']) ? $options['objectOptions'] : [];
@@ -359,9 +359,11 @@ trait ActiveRecordTrait
         if (!$relationship) { return null; }
         $cacheKey = [__FUNCTION__, $this->primaryKey, $relationshipType, $relationOptions, $objectOptions];
         $result = Cacher::get($cacheKey);
-        if ($result === false) {
+        if ($result === false || true) {
             $cacheDependencies = [];
             $cacheDependencies[] = $this->getRelationCacheDependency($this->primaryKey);
+            // @todo remove this next line
+            unset($relationOptions['taxonomy']);
             $result = $this->{$relationshipType}($companionType->primaryModel, $relationOptions, $objectOptions);
             if (empty($result)) {
                 $result = null;

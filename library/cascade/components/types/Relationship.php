@@ -337,6 +337,16 @@ class Relationship extends \infinite\base\Object
         return 'child';
     }
 
+    public function getLabel($role)
+    {
+        $role = $this->companionRole($role);
+        if ($role === 'child') {
+            return 'Child ' . $this->child->title->upperSingular;
+        } else {
+            return 'Parent ' . $this->parent->title->upperSingular;
+        }
+    }
+
 
     public function getNiceId($queryRole)
     {

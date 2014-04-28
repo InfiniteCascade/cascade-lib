@@ -63,11 +63,13 @@ class Relation extends Base
             $this->model->setParentModel($this->relatedObject);
             // we are matching with an existing document
             return $this->generateRelationField(['template' => 'fields']);
-        } else {
+        } elseif (!empty($this->relatedObject)) {
             $this->model->setParentModel($this->relatedObject);
             $formSegment = $this->relatedObject->objectType->getFormSegment($this->relatedObject, ['relationField' => $this->modelField]);
             $formSegment->owner = $this;
             return $formSegment->generate();
+        } else {
+            return null;
         }
     }
 

@@ -128,6 +128,11 @@ abstract class Base extends \infinite\base\Object
                     return 'cascade\\components\\db\\fields\\formats\\Date';
                 break;
             }
+            switch ($this->fieldSchema->dbType) {
+                case 'tinyint(1)':
+                    return 'cascade\\components\\db\\fields\\formats\\Binary';
+                break;
+            }
         }
 
         return 'cascade\\components\\db\\fields\\formats\\Text';
@@ -374,6 +379,9 @@ abstract class Base extends \infinite\base\Object
             $formattedValue = $this->value;
         }
 
+        if (is_object($formattedValue)) {
+            $formattedValue = $formattedValue->viewLink;
+        }
         return $formattedValue;
     }
 

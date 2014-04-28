@@ -214,4 +214,9 @@ class Relation extends Base
 
         return [self::LOCATION_HIDDEN];
     }
+
+    public function getLabel()
+    {
+        return $this->relationship->getLabel($this->modelRole);
+    }
 }

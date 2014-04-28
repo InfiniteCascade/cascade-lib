@@ -65,7 +65,6 @@ class SideSection extends Section
                 'widget' => ['class' => 'cascade\\components\\web\\widgets\\base\\Header'],
             ]
         ];
-
         return $default;
     }
 }

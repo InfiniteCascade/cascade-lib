@@ -405,7 +405,20 @@ class ObjectController extends Controller
             return;
         } else {
             $refreshPrimary = isset($relatedObject);
-            $this->actionCreate($activeObject, 'update', $refreshPrimary);
+            $updateRelationship = false;
+            if (isset($relation)) {
+                $updateRelationship = $relation;
+            }
+            $createPackage = [
+                'object' => $object,
+                'editObject' => $activeObject,
+                'action' => 'update',
+                'refreshPrimary' => $refreshPrimary,
+                'updateRelationship' => $updateRelationship,
+                'relationship' => isset($relationship) ? $relationship : null,
+                'relationRole' => isset($relationRole) ? $relationRole : null
+            ];
+            $this->actionCreate($createPackage);
         }
     }
 
@@ -413,28 +426,39 @@ class ObjectController extends Controller
      * __method_actionCreate_description__
      * @throws HttpException __exception_HttpException_description__
      */
-    public function actionCreate($editObject = null, $action = 'create', $refreshPrimary = false)
+    public function actionCreate($createPackage = [])
     {
+        $object = $editObject = null;
+        $action = 'create';
+        $refreshPrimary = false;
+        $updateRelationship = false;
+        extract($createPackage);
         if (!isset($_GET['type'])) { $_GET['type'] = ''; }
         $typeParsed = $originalTypeParsed= $_GET['type'];
         $typeParsedParts = explode(':', $typeParsed);
-        $subform = $object = null;
+        $subform = null;
         $action = 'create';
         $relations = [];
         $reverseRelation = true;
         $forceNewRelation = false;
-        $linkExisting = !empty($_GET['link']) ? 'hierarchy' : false;
+        $linkExisting = (!empty($_GET['link']) || $updateRelationship) ? 'hierarchy' : false;
 
-        if (!empty($_GET['object_id']) && (!($object = $this->params['object'] = Registry::getObject($_GET['object_id'], false)) || !($typeItem = $this->params['typeItem'] = $object->objectTypeItem))) {
-            throw new HttpException(404, "Unknown object.");
+        if (!isset($object)) {
+            if (!empty($_GET['object_id']) && (!($object = $this->params['object'] = Registry::getObject($_GET['object_id'], false)) || !($typeItem = $this->params['typeItem'] = $object->objectTypeItem))) {
+                throw new HttpException(404, "Unknown object.");
+            }
         }
+        $objectOriginal = $object;
 
-        if ($linkExisting) {
+        if ($updateRelationship) {
+            $editObject = $object;
+            $reverseRelation = false;
+        } elseif ($linkExisting) {
             $editObject = $object;
             $reverseRelation = false;
             $forceNewRelation = true;
         }
-
+        $checkType = true;
         if ($editObject) {
             $type = $editObject->objectType;
         }
@@ -442,6 +466,7 @@ class ObjectController extends Controller
             $typeName = $typeParsedParts[1];
         } else {
             $typeName = $typeParsedParts[0];
+            $checkType = false;
         }
 
         if (empty($type) && (empty($typeName) || !($type = Yii::$app->collectors['types']->getOne($typeName)) || !isset($type->object))) {
@@ -467,35 +492,43 @@ class ObjectController extends Controller
             }
             $refreshPrimary = true;
             $fields = $primaryModel->getFields();
-            if (count($typeParsedParts) >= 2 && in_array($typeParsedParts[0], ['parent', 'child'])) {
-                list($relationship, $relationshipRole) = $object->objectType->getRelationship($typeParsed);
-                if ($relationship) {
-                    if ($reverseRelation) {
-                        $niceField = $relationship->getCompanionNiceId($relationshipRole);
-                        $relationField = $relationship->companionRole($relationshipRole) .'_object_id';
+            if (empty($updateRelationship)) {
+                if ($checkType) {
+                    if (count($typeParsedParts) >= 2 && in_array($typeParsedParts[0], ['parent', 'child'])) {
+                        list($relationship, $relationshipRole) = $object->objectType->getRelationship($typeParsed);
+                        if ($relationship) {
+                            if ($reverseRelation) {
+                                $niceField = $relationship->getCompanionNiceId($relationshipRole);
+                                $relationField = $relationship->companionRole($relationshipRole) .'_object_id';
+                            } else {
+                                $relationField = $relationship->companionRole($relationshipRole) .'_object_id';
+                                $niceField = $relationship->getNiceId($relationshipRole);
+                            }
+                            $primaryModelClass = $relationship->roleType($relationshipRole)->primaryModel;
+                            if ($forceNewRelation) {
+                                $fields[$niceField]->resetModel();
+                            }
+                            $fields[$niceField]->model->{$relationField} = $object->primaryKey;
+                            $relations[$fields[$niceField]->model->tabularId] = $fields[$niceField]->model;
+                        }
+                        $typeParsed = $typeParsedParts[1];
+                        if ($linkExisting) {
+                            $subform = implode(':', array_slice($typeParsedParts, 0, 2));
+                        }
                     } else {
-                        $relationField = $relationship->companionRole($relationshipRole) .'_object_id';
-                        $niceField = $relationship->getNiceId($relationshipRole);
+                        throw new HttpException(403, "Invalid request ");
                     }
-                    $primaryModelClass = $relationship->roleType($relationshipRole)->primaryModel;
-                    if ($forceNewRelation) {
-                        $fields[$niceField]->resetModel();
-                    }
-                    $fields[$niceField]->model->{$relationField} = $object->primaryKey;
-                    $relations[$fields[$niceField]->model->tabularId] = $fields[$niceField]->model;
-                }
-                $typeParsed = $typeParsedParts[1];
-                if ($linkExisting) {
-                    $subform = implode(':', array_slice($typeParsedParts, 0, 2));
                 }
             } else {
-                throw new HttpException(403, "Invalid request ");
+                $niceField = $relationship->getNiceId($relationRole);
+                $fields[$niceField]->model = $updateRelationship;
+                $subform = $niceField;
             }
         }
 
         if ($linkExisting) {
             $action = 'link';
-            $editObject = $object;
+            $editObject = $objectOriginal;
         }
 
 
