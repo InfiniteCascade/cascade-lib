@@ -157,7 +157,7 @@ trait ObjectWidgetTrait
     {
         $menu = [];
 
-        $baseCreate = ['/object/create'];
+        $baseCreate = [];
         $typePrefix = null;
         $method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
         $relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
@@ -167,17 +167,18 @@ trait ObjectWidgetTrait
             if (empty(Yii::$app->request->object) || !$relationship) {
                 throw new Exception("Object widget requested when no object has been set!");
             }
-            $baseCreate['object_id'] = Yii::$app->request->object->primaryKey;
+            $baseCreate['related_object_id'] = Yii::$app->request->object->primaryKey;
             $objectRole = $relationship->companionRole($method);
             $companionRole = $relationship->companionRole($objectRole);
-            $typePrefix = $companionRole .':';
+            $relatedType = $companionRole .':' . $relationship->roleType($companionRole)->systemId;
+            $baseCreate['object_relation'] = $relatedType;
             $link = $link && $relationship->canLink($objectRole, Yii::$app->request->object);
             $create = $create && $relationship->canCreate($objectRole, Yii::$app->request->object);
         }
-        $baseCreate['type'] = $typePrefix . $this->owner->systemId;
-
+        $baseCreate['type'] = $this->owner->systemId; // $typePrefix . 
         if ($create && Yii::$app->gk->canGeneral('create', $this->owner->primaryModel)) {
             $createUrl = $baseCreate;
+            array_unshift($createUrl, '/object/create');
             $menu[] = [
                 'label' => '<i class="fa fa-plus"></i>',
                 'linkOptions' => ['title' => 'Create'],
@@ -186,7 +187,7 @@ trait ObjectWidgetTrait
         }
         if ($link) {
             $createUrl = $baseCreate;
-            $createUrl['link'] = 1;
+            array_unshift($createUrl, '/object/link');
             $menu[] = [
                 'label' => '<i class="fa fa-link"></i>',
                 'linkOptions' => ['title' => 'Link'],
@@ -282,14 +283,14 @@ trait ObjectWidgetTrait
         $relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
         // $relationModel = $this->getRelationModel($model);
         $baseUrl['related_object_id'] = Yii::$app->request->object->primaryKey;
-        $baseUrl['relationship_id'] = $relationship->systemId;
+        // $baseUrl['relationship_id'] = $relationship->systemId;
         if ($queryRole === 'children') {
-            $baseUrl['object_relation'] = 'child';
             $primaryRelation = $relationship->getPrimaryObject(Yii::$app->request->object, $model, 'child');
+            $baseUrl['object_relation'] = 'child:' . $model->objectType->systemId;
             $checkField = 'child_object_id';
         } else {
-            $baseUrl['object_relation'] = 'parent';
             $primaryRelation = $relationship->getPrimaryObject(Yii::$app->request->object, $model, 'parent');
+            $baseUrl['object_relation'] = 'parent:' . $model->objectType->systemId;
             $checkField = 'parent_object_id';
         }
         if ($primaryRelation !== false
@@ -300,7 +301,7 @@ trait ObjectWidgetTrait
             $menu['primary'] = [
                 'icon' => 'fa fa-star',
                 'label' => 'Set as primary',
-                'url' => ['/object/update', 'subaction' => 'setPrimary'] + $baseUrl,
+                'url' => ['/object/set-primary'] + $baseUrl,
                 'linkOptions' => ['data-handler' => 'background']
             ];
         }
@@ -309,14 +310,16 @@ trait ObjectWidgetTrait
         $updateLabel = false;
         if (!$objectType->hasDashboard && $model->can('update')) {
             $updateLabel = 'Update';
+            $updateUrl = ['/object/update'] + $baseUrl;
         } elseif ($model->canUpdateAssociation(Yii::$app->request->object) && $relationship->hasFields) {
             $updateLabel = 'Update Relationship';
+            $updateUrl = ['/object/link'] + $baseUrl;
         }
         if ($updateLabel) {
             $menu['update'] = [
                 'icon' => 'fa fa-wrench',
                 'label' => $updateLabel,
-                'url' => ['/object/update'] + $baseUrl,
+                'url' => $updateUrl,
                 'linkOptions' => ['data-handler' => 'background']
             ];
         }

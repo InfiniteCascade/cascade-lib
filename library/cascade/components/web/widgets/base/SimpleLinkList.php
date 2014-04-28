@@ -59,12 +59,29 @@ class SimpleLinkList extends BaseList
         return $options;
     }
 
+
+    public function getHeaderMenu()
+    {
+        $menu = [];
+        if (Yii::$app->gk->canGeneral('create', $this->owner->primaryModel)) {
+            $menu['create'] = [
+                'icon' => 'fa fa-plus',
+                //'label' => 'Create',
+                'label' => '<i class="fa fa-plus" title="Create"></i>',
+                'url' => ['object/create', 'type' => $this->owner->systemId],
+                'linkOptions' => ['data-handler' => 'background']
+            ];
+        }
+        return $menu;
+    }
+
     /**
     * @inheritdoc
      */
     public function getMenuItems($model, $key, $index)
     {
-        return [];
+        $menu = [];
+        return $menu;
     }
 
     /**

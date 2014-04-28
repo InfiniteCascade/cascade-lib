@@ -21,12 +21,9 @@ use cascade\components\web\browser\Response as BrowserResponse;
 class Relation extends Base
 {
     /**
-     * @var __var_linkExisting_type__ __var_linkExisting_description__
+     * @var __var_relationSettings_type__ __var_relationSettings_description__
      */
-    public $linkExisting = true;
-    /**
-     * @var __var_linkExisting_type__ __var_linkExisting_description__
-     */
+    public $relationSettings = true;
     public $lockFields = [];
     /**
      * @var __var_inlineRelation_type__ __var_inlineRelation_description__
@@ -49,15 +46,20 @@ class Relation extends Base
     public function generate()
     {
         //$this->relatedObject->setParentModel($this->modelField->baseModel);
-        if ($this->linkExisting) {
+        if ($this->relationSettings) {
             $this->model->setParentModel($this->modelField->baseModel);
             // we are matching with an existing document
-            if ($this->linkExisting === true) {
-                $template = 'simple';
-            } else {
-                $template = 'hierarchy';
+            $relationSettings = $this->relationSettings;
+            if ($relationSettings === true) {
+                $relationSettings = ['template' => 'simple'];
             }
-            return $this->generateRelationField(['template' => $template]);
+            if (!is_array($relationSettings)) {
+                $relationSettings = [];
+            }
+            if (!isset($relationSettings['template'])) {
+                $relationSettings['template'] = 'hierarchy';
+            }
+            return $this->generateRelationField($relationSettings);
         } elseif ($this->inlineRelation) {
             //$this->model->setParentModel($this->modelField->baseModel, false);
             $this->model->setParentModel($this->relatedObject);
@@ -148,22 +150,22 @@ class Relation extends Base
     }
 
     /**
-     * Gets the value of linkExisting.
+     * Gets the value of relationSettings.
      * @return mixed
      */
     public function getLinkExisting()
     {
-        return $this->linkExisting;
+        return $this->relationSettings;
     }
 
     /**
-     * Sets the value of linkExisting.
-     * @param mixed $linkExisting the link existing
+     * Sets the value of relationSettings.
+     * @param mixed $relationSettings the link existing
      * @return self
      */
-    public function setLinkExisting($linkExisting)
+    public function setLinkExisting($relationSettings)
     {
-        $this->linkExisting = $linkExisting;
+        $this->relationSettings = $relationSettings;
 
         return $this;
     }

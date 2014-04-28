@@ -55,7 +55,7 @@ $preparer.add(function(context) {
 				if ($this.relationshipOptions.model.attributes.start === undefined) {
 					$this.relationshipOptions.model.attributes.start = '';
 				}
-				if (jQuery.inArray('start', $this.relationshipOptions.lockFields)) {
+				if (jQuery.inArray('start', $this.relationshipOptions.lockFields) > -1) {
 					startDateInput.prop('disabled', true);
 				}
 				startDateInput.val($this.relationshipOptions.model.attributes.start);
@@ -66,7 +66,7 @@ $preparer.add(function(context) {
 				if ($this.relationshipOptions.model.attributes.end === undefined) {
 					$this.relationshipOptions.model.attributes.end = '';
 				}
-				if (jQuery.inArray('end', $this.relationshipOptions.lockFields)) {
+				if (jQuery.inArray('end', $this.relationshipOptions.lockFields) > -1) {
 					endDateInput.prop('disabled', true);
 				}
 				endDateInput.val($this.relationshipOptions.model.attributes.end);
@@ -182,7 +182,9 @@ $preparer.add(function(context) {
 				if (datum.subdescriptor !== undefined) {
 					$this.relationshipElements.relatedSelectedObjectTarget.append($('<div />', {'class': 'relationship-object-subdescriptor'}).html(datum.subdescriptor));
 				}
-				$this.relationshipElements.relatedSelectedObjectTarget.append($("<a />", {'href': '#', 'class': 'btn btn-primary'}).html('Reselect').click(function() { $this.resetRelationship(); return false; }));
+				if (jQuery.inArray('object_id', $this.relationshipOptions.lockFields) > -1) {
+					$this.relationshipElements.relatedSelectedObjectTarget.append($("<a />", {'href': '#', 'class': 'btn btn-primary'}).html('Reselect').click(function() { $this.resetRelationship(); return false; }));
+				}
 			};
 			$this.resetRelationship = function(datum) {
 				$this.val('');

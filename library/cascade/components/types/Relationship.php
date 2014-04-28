@@ -10,6 +10,7 @@ namespace cascade\components\types;
 use Yii;
 
 use infinite\base\exceptions\Exception;
+use infinite\db\behaviors\Relatable;
 
 /**
  * Relationship [@doctodo write class description for Relationship]
@@ -444,9 +445,15 @@ class Relationship extends \infinite\base\Object
      * @param __param_childObjectId_type__  $childObjectId  __param_childObjectId_description__
      * @return __return_getModel_type__      __return_getModel_description__
      */
-    public function getModel($parentObjectId, $childObjectId)
+    public function getModel($parentObjectId, $childObjectId, $activeOnly = true)
     {
-        $key = json_encode([__FUNCTION__, $this->systemId, $parentObjectId]);
+        if (is_object($parentObjectId)) {
+            $parentObjectId = $parentObjectId->primaryKey;
+        }
+        if (is_object($childObjectId)) {
+            $childObjectId = $childObjectId->primaryKey;
+        }
+        $key = json_encode([__FUNCTION__, $this->systemId, $parentObjectId, $activeOnly]);
         if (!isset(self::$_cache[$key])) {
             $relationClass = Yii::$app->classes['Relation'];
             $all = $relationClass::find();
@@ -455,9 +462,12 @@ class Relationship extends \infinite\base\Object
             );
             $all->params[':parentObjectId'] = $parentObjectId;
             $all->params[':childObjectId'] = $childObjectId;
+            if ($activeOnly) {
+                Relatable::doAddActiveConditions($all, false);
+            }
             $all = $all->all();
             foreach ($all as $relation) {
-                $subkey = json_encode([__FUNCTION__, $this->systemId, $relation->parent_object_id]);
+                $subkey = json_encode([__FUNCTION__, $this->systemId, $relation->parent_object_id, $activeOnly]);
                 if (!isset(self::$_cache[$subkey])) {
                     self::$_cache[$subkey] = [];
                 }

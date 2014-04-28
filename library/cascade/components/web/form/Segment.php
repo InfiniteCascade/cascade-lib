@@ -31,9 +31,9 @@ class Segment extends FormObject
      */
     public $subform;
     /**
-     * @var __var_linkExisting_type__ __var_linkExisting_description__
+     * @var __var_relationSettings_type__ __var_relationSettings_description__
      */
-    public $linkExisting = true;
+    public $relationSettings = true;
     /**
      * @var __var_relationField_type__ __var_relationField_description__
      */
@@ -243,7 +243,7 @@ class Segment extends FormObject
             }
             if (!$fieldsTemplate) {
                 if (!empty($this->subform)) {
-                    $fieldsTemplate = [[$this->subform => ['linkExisting' => $this->linkExisting]]];
+                    $fieldsTemplate = [[$this->subform => ['relationSettings' => $this->relationSettings]]];
                 } elseif (!isset($this->_settings['fields'])) {
                     $fieldsTemplate = [];
                     foreach ($fields as $fieldName => $field) {

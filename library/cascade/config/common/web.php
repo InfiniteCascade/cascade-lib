@@ -38,9 +38,10 @@ $config['components']['urlManager'] = [
         '<action:(browse)>/<type:\S+>' => 'object/<action>',
         '<action:(search|browse)>' => 'object/<action>',
         '<action:(view)>:<subaction:\S+>/<id:\S+>' => 'object/<action>',
-        '<action:(update|delete|view|access)>/<id:\S+>' => 'object/<action>',
-        '<action:(create)>/<type:\S+>/<object_id:\S+>' => 'object/<action>',
+        
+        '<action:(update|link|set-primary|delete|view|access)>/<id:\S+>' => 'object/<action>',
         '<action:(create)>/<type:\S+>' => 'object/<action>',
+        
         'tool/<tool:\S+>' => 'object/tool',
         'report/<report:\S+>' => 'object/report',
 

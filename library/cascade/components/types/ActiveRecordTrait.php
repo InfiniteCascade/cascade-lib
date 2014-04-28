@@ -359,11 +359,12 @@ trait ActiveRecordTrait
         if (!$relationship) { return null; }
         $cacheKey = [__FUNCTION__, $this->primaryKey, $relationshipType, $relationOptions, $objectOptions];
         $result = Cacher::get($cacheKey);
-        if ($result === false || true) {
+        if ($result === false) {
             $cacheDependencies = [];
             $cacheDependencies[] = $this->getRelationCacheDependency($this->primaryKey);
             // @todo remove this next line
-            unset($relationOptions['taxonomy']);
+            // unset($relationOptions['taxonomy']);
+            //\d($relationOptions['taxonomy']);
             $result = $this->{$relationshipType}($companionType->primaryModel, $relationOptions, $objectOptions);
             if (empty($result)) {
                 $result = null;
