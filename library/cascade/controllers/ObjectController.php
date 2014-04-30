@@ -363,6 +363,9 @@ class ObjectController extends Controller
         $p['primaryModel']->setRelationModels($relations);
         if (!empty($_POST)) {
             $p['primaryModel']->load($_POST);
+            if ($p['primaryModel']->getBehavior('Storage') !== null) {
+                $p['primaryModel']->loadPostFile();
+            }
             if (!$p['primaryModel']->save()) {
                 Yii::$app->response->error = 'Unable to create object!';
             } else {
@@ -409,6 +412,9 @@ class ObjectController extends Controller
         }
         if (!empty($_POST)) {
             $p['primaryModel']->load($_POST);
+            if ($p['primaryModel']->getBehavior('Storage') !== null) {
+                $p['primaryModel']->loadPostFile();
+            }
             if (!$p['primaryModel']->save()) {
                 // \d($p['primaryModel']->errors);
                 Yii::$app->response->error = 'Unable to update object!';

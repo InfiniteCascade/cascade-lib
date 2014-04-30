@@ -58,4 +58,9 @@ class Artificial extends Base
     {
         return false;
     }
+
+    public function determineFormatClass()
+    {
+        return 'cascade\\components\\db\\fields\\formats\\RawText';
+    }
 }

@@ -30,6 +30,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
      * @var __var__storageEngine_type__ __var__storageEngine_description__
      */
     protected $_storageEngine;
+    protected $_oldStorage;
 
     /**
      * Converts object to string.
@@ -48,6 +49,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         return [
             \infinite\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
             \infinite\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
+            \infinite\db\ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
+            \infinite\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
             \infinite\db\ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
             \infinite\db\ActiveRecord::EVENT_AFTER_DELETE => 'afterDelete',
         ];
@@ -93,13 +96,14 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
      * __method_loadPostFile_description__
      * @param string $tabId __param_tabId_description__ [optional]
      */
-    public function loadPostFile($tabId = '')
+    public function loadPostFile($tabId = null)
     {
         $attribute = $this->storageAttribute;
         if (isset($tabId)) {
             $attribute = "[{$tabId}]$attribute";
         }
         if (($fileField = UploadedFile::getInstance($this->owner, $attribute)) && !empty($fileField)) {
+            $this->_oldStorage = $this->owner->{$this->storageAttribute};
             $this->owner->{$this->storageAttribute} = $fileField;
         }
     }
@@ -111,12 +115,34 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
      */
     public function beforeSave($event)
     {
-        if (!$this->storageEngine->storageHandler->object->beforeSave($this->storageEngine, $this->owner, $this->storageAttribute)) {
+        if (is_object($this->owner->storage_id) && !$this->storageEngine->storageHandler->object->beforeSave($this->storageEngine, $this->owner, $this->storageAttribute)) {
             $event->isValid = false;
             $this->owner->addError($this->storageAttribute, 'Unable to save file in storage engine. Try again later. ('.$this->storageEngine->storageHandler->object->error . ')');
-
             return false;
         }
+    }
+
+    public function afterSave($event)
+    {
+        if (!empty($this->_oldStorage) && $this->_oldStorage !== $this->owner->{$this->storageAttribute}) {
+            $storageClass = Yii::$app->classes['Storage'];
+            $storageObject = $storageClass::get($this->_oldStorage, false);
+            if (!empty($storageObject)) {
+                $this->handleDelete($storageObject);
+            }
+        }
+    }
+
+    public function handleDelete($storageObject)
+    {
+        if (is_null($this->storageEngine)) {
+            $this->storageEngine = $this->storageObject->storageEngine;
+        }
+        if (!$this->storageEngine->storageHandler->object->afterDelete($this->storageEngine, $storageObject)) {
+            $event->isValid = false;
+            return false;
+        }
+        $storageObject->delete();
     }
 
     /**
@@ -126,15 +152,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
      */
     public function afterDelete($event)
     {
-        $storageObject = $this->storageObject;
-        if (is_null($this->storageEngine)) {
-            $this->storageEngine = $this->storageObject->storageEngine;
-        }
-        if (!$this->storageEngine->storageHandler->object->afterDelete($this->storageEngine, $storageObject)) {
-            $event->isValid = false;
-
-            return false;
-        }
+        $this->handleDelete($this->storageObject);
     }
 
     /**
@@ -158,7 +176,6 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     public function getStorageObject()
     {
         $registryClass = Yii::$app->classes['Registry'];
-
         return $registryClass::getObject($this->owner->{$this->storageAttribute});
     }
 
@@ -171,12 +188,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     {
         if (empty($this->storageEngine)) {
             $this->owner->addError($this->storageAttribute, 'Unknown storage engine!');
-
             return false;
         } elseif (!$this->storageEngine->storageHandler->object->validate($this->storageEngine, $this->owner, $this->storageAttribute)) {
             return false;
         }
-
         return true;
     }
 

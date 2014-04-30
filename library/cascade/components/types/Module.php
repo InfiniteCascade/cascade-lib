@@ -898,7 +898,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
      */
     public function getIsChildless()
     {
-        if (empty($this->collectorItem) OR empty($this->collectorItem->children)) {
+        if (empty($this->collectorItem) || empty($this->collectorItem->children)) {
             return true;
         }
 
@@ -936,112 +936,6 @@ abstract class Module extends \cascade\components\base\CollectorModule
         }
 
         return $primaryModel;
-    }
-
-
-    public function getModels($primaryModel = null, $models = [])
-    {
-        $model = $this->getModel($primaryModel);
-        $models[$model->tabularId] = $model;
-
-        return $models;
-    }
-
-
-    public function handlePost($settings = [])
-    {
-        $results = ['primary' => null, 'children' => [], 'parents' => []];
-        if (empty($_POST)) { return false; }
-        //\d($_POST);exit;
-        // \d($_FILES);
-        foreach ($_POST as $modelTop => $tabs) {
-            if (!is_array($tabs)) { continue; }
-            foreach ($tabs as $tabId => $tab) {
-                if (!isset($tab['_moduleHandler'])) { continue; }
-                $m = [$modelTop => $tab];
-                $object = null;
-                if (isset($tab['id'])) {
-                    $object = $this->params['object'] = Registry::getObject($tab['id']);
-                    if (!$object) {
-                        throw new HttpException(404, "Unknown object.");
-                    }
-                    if (!$object->can('update')) {
-                        throw new HttpException(403, "Unable to update object.");
-                    }
-                }
-
-                if ($tab['_moduleHandler'] === ActiveRecord::FORM_PRIMARY_MODEL) {
-                    if (isset($results['primary'])) {
-                        return false;
-                    }
-                    $results['primary'] = ['handler' => $this, 'model' => $this->getModel($object, $m)];
-
-                    if ($results['primary']['model']->getBehavior('Storage') !== null) {
-                        $results['primary']['model']->loadPostFile($tabId);
-                    }
-                    continue;
-                }
-                $handlerParts = explode(':', $tab['_moduleHandler']);
-                if (count($handlerParts) >= 2) {
-                    $resultsKey = null;
-                    if ($handlerParts[0] === 'child') {
-                        $rel = $this->collectorItem->getChild($handlerParts[1]);
-                        if (!$rel || !($handler = $rel->child)) { continue; }
-                        $resultsKey = 'children';
-                        $relationField = 'child_object_id';
-                    } elseif ($handlerParts[0] === 'parent') {
-                        $handler = $this->collectorItem->getParent($handlerParts[1]);
-                        $rel = $this->collectorItem->getParent($handlerParts[1]);
-                        if (!$rel || !($handler = $rel->parent)) { continue; }
-                        $resultsKey = 'parents';
-                        $relationField = 'parent_object_id';
-                    }
-                    $handleRelation = false;
-                    if (!empty($resultsKey)) {
-                        if ($modelTop === 'Relation') {
-                            $childFormName = $handler->dummyModel->formName();
-                            if (!isset($_POST[$childFormName][$tabId])) {
-                                $results['primary']['model']->registerRelationModel($tab, $tabId);
-                            }
-                            continue;
-                        } else {
-                            $model = $handler->getModel($object, $m);
-                            if ($model->getBehavior('Storage') !== null) {
-                                $model->loadPostFile($tabId);
-                            }
-                            $dirty = $model->getDirtyAttributes();
-                            if ($model->isNewRecord) {
-                                $formName = $model->formName();
-                                foreach ($m[$formName] as $k => $v) {
-                                    if (empty($v)) {
-                                        unset($dirty[$k]);
-                                    }
-                                }
-                            }
-                            $handleRelation = count($dirty) > 0;
-                            if (!empty($settings['allowEmpty']) || $handleRelation) {
-                                $relationKey = implode(':', array_slice($handlerParts, 0, 2));
-                                if (!empty($model->primaryKey)) {
-                                    $relationKey = $model->primaryKey;
-                                }
-                                $relationKey = Relation::generateTabularId($relationKey);
-                                $relation = $model->getRelationModel($relationKey);
-                                $relationFormClass = $relation->formName();
-                                $relationTabularId = $relation->tabularId;
-                                if (isset($_POST[$relationFormClass][$relationTabularId])) {
-                                    $relation->attributes = $_POST[$relationFormClass][$relationTabularId];
-                                }
-                                $results[$resultsKey][$tabId] = ['handler' => $handler, 'model' => $model, 'relation' => $relation];
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-        if (is_null($results['primary'])) { return false; }
-
-        return $results;
     }
 
 

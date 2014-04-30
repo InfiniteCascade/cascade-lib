@@ -19,6 +19,6 @@ class RawText extends Base
      */
     public function get()
     {
-        return $this->_field->value;
+        return $this->field->value;
     }
 }
