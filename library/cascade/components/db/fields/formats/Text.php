@@ -19,7 +19,8 @@ class Text extends Base
      */
     public function get()
     {
-        $result = $this->field->value;
+        $result = strip_tags($this->field->value);
+        $result = preg_replace("/\n+/", "\n", $result);
         if (empty($result)) {
             $result = '<span class="empty">(none)</span>';
         }

@@ -184,12 +184,27 @@ trait ActiveRecordTrait
         return false;
     }
 
-    public function getForeignFieldNew($field, $options = [], $context = null)
+    public function getLocalFieldValue($field, $options = [], $context = null, $formatted = true)
+    {
+        if (isset($this->{$field})) {
+            if ($formatted) {
+                $field = $this->getField($field);
+                if (!$field) {
+                    return null;
+                }
+                return $field->formattedValue;
+            }
+            return $this->{$field};
+        }
+
+        return null;
+    }
+
+    public function getForeignField($field, $options = [], $context = null)
     {
         $relationOptions = isset($options['relationOptions']) ? $options['relationOptions'] : [];
         $objectOptions = isset($options['objectOptions']) ? $options['objectOptions'] : [];
         $parts = explode(':', $field);
-        //if (!in_array(count($parts), [2, 3, 4])) { return null; }
         $relationshipType = $parts[0];
         if (!in_array($relationshipType, ['child', 'children', 'descendants', 'parent', 'parents', 'ancestors'])) {
             return null;
@@ -202,9 +217,8 @@ trait ActiveRecordTrait
         if (!isset($context['relation'])) {
             $context['relation'] = [];
         }
-        
         $fieldName = 'descriptor';
-        if (isset($parts[2])) {
+        if (!empty($parts[2])) {
             $fieldName = $parts[2];
             $parts[2] = '';
         }
@@ -244,7 +258,7 @@ trait ActiveRecordTrait
             $relationship = Relationship::has($companionTypeItem, $myTypeItem) ? Relationship::getOne($companionTypeItem, $myTypeItem) : false;
         }
         if (!$relationship) {  return null; }
-        $cacheKey = [__FUNCTION__, $this->primaryKey, $relationshipType, $relationOptions, $objectOptions];
+        $cacheKey = [__FUNCTION__, $this->primaryKey, $fieldCheck, $relationshipType, $relationOptions, $objectOptions];
         $result = Cacher::get($cacheKey);
         if ($result === false) {
             if (isset($fields[$fieldCheck])) {
@@ -287,7 +301,7 @@ trait ActiveRecordTrait
         } else {
             if ($this->isForeignObjectInContext($result, $context)) { return null; }
             $field = $result->getField($fieldName);
-            if (empty($field)) { continue; }
+            if (empty($field)) { return null; }
             $companionType->loadFieldLink($field, $result);
 
             return $field;
@@ -298,7 +312,7 @@ trait ActiveRecordTrait
     }
 
 
-    public function getForeignField($field, $options = [], $context = null)
+    public function getForeignFieldOld($field, $options = [], $context = null)
     {
         $relationOptions = isset($options['relationOptions']) ? $options['relationOptions'] : [];
         $objectOptions = isset($options['objectOptions']) ? $options['objectOptions'] : [];
@@ -406,7 +420,7 @@ trait ActiveRecordTrait
         return Cacher::groupDependency(['Object', $this->primaryKey], 'object');
     }
 
-    public function getForeignFieldValue($fieldName, $options = [], $context = null)
+    public function getForeignFieldValue($fieldName, $options = [], $context = null, $formatted = true)
     {
         $field = $this->getForeignField($fieldName, $options, $context);
         if (!empty($field)) {
@@ -539,10 +553,22 @@ trait ActiveRecordTrait
 
     public function loadDefaultValues($skipIfSet = true)
     {
+        $fields = $this->getFields();
         $defaultValues = $this->getDefaultValues();
         foreach ($defaultValues as $k => $v) {
-            if ($v !== null && (!$skipIfSet || $this->{$k} === null)) {
-                $this->{$k} = $v;
+            if ($this->isForeignField($k)) {
+                if (isset($fields[$k])) {
+                    $fieldParts = explode(':', $k);
+                    if (in_array($fieldParts[0], ['child', 'children', 'descendants'])) {
+                        $fields[$k]->model->child_object_id = $v;
+                    } else {
+                        $fields[$k]->model->parent_object_id = $v;
+                    }
+                }
+            } else {
+                if ($v !== null && (!$skipIfSet || $this->{$k} === null)) {
+                    $this->{$k} = $v;
+                }
             }
         }
         parent::loadDefaultValues($skipIfSet);
@@ -564,7 +590,11 @@ trait ActiveRecordTrait
 
     public function getViewLink()
     {
-        return Html::a($this->descriptor, $this->getUrl('view'));
+        if ($this->can('read')) {
+            return Html::a($this->descriptor, $this->getUrl('view'));
+        } else {
+            return $this->descriptor;
+        }
     }
 
     public function allowRogue(Relation $relation = null)

@@ -67,20 +67,28 @@ class Relation extends Base
      * Get value
      * @return __return_getValue_type__ __return_getValue_description__
      */
-    public function getValue()
+    public function getValue($createOnEmpty = true)
     {
         if (is_null($this->_value)) {
+            $models = $this->baseModel->collectModels();
             $relationTabularId = RelationModel::generateTabularId($this->field);
             $this->_value = false;
             $field = $this->field;
             $fieldParts = explode(':', $field);
             $primaryObject = $this->relationship->getRelatedObject($this->baseModel, $this->modelRole, $this->model);
-            // if (isset($this->generator->models[$relationTabularId])) {
-            //     $primaryObject->attributes = $this->generator->models[$relationTabularId]->attributes;
-            // }
-            if ($primaryObject) {
+            
+            if (isset($models[$relationTabularId])) {
+                $this->_value = $models[$relationTabularId];
+            }elseif ($primaryObject) {
                 $this->_value = $primaryObject;
+            } elseif($createOnEmpty) {
+                $modelClass = $this->relationship->companionRoleType($this->modelRole)->primaryModel;
+                $this->_value = new $modelClass;
+                $this->_value->tabularId = $this->field;
+                $this->_value->_moduleHandler = $this->field;
             }
+            $this->_value->setParentModel($this->baseModel);
+          //  exit;
         }
         return $this->_value;
     }
@@ -217,6 +225,12 @@ class Relation extends Base
 
     public function getLabel()
     {
+        if (isset($this->baseModel)) {
+            $labels = $this->baseModel->attributeLabels();
+            if (isset($labels[$this->field])) {
+                return ($labels[$this->field]);
+            }
+        }
         return $this->relationship->getLabel($this->modelRole);
     }
 }

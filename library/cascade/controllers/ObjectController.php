@@ -410,6 +410,7 @@ class ObjectController extends Controller
         if (!empty($_POST)) {
             $p['primaryModel']->load($_POST);
             if (!$p['primaryModel']->save()) {
+                // \d($p['primaryModel']->errors);
                 Yii::$app->response->error = 'Unable to update object!';
             } else {
                 Yii::$app->response->task = 'status';

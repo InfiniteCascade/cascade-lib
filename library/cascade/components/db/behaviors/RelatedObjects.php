@@ -115,7 +115,13 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
                 list($relationship, $role) = $this->owner->objectType->getRelationship($objectAttributes['_moduleHandler']);
                 $relatedHandler = $this->owner->objectType->getRelatedType($objectAttributes['_moduleHandler']);
                 if (!$relatedHandler) { continue; }
+                $objectAttributes = array_merge([
+                    'companionObject' => $this->owner,
+                    'companionRelationship' => $relationship,
+                    'companionRole' => $role
+                    ], $objectAttributes);
                 $object = $relatedHandler->getModel(null, $objectAttributes);
+                $object->tabularId = $objectAttributes['_moduleHandler'];
                 if ((!$object 
                     || $object->isEmptyObject())
                     && !($relationship->required)
@@ -140,10 +146,17 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
 
     public function setRelations($value)
     {
-        $fields = $this->owner->getFields();
+        if ($this->companionObject) {
+            $baseObject = $this->companionObject;
+        } else {
+            $baseObject = $this->owner;
+        }
+        $fields = $baseObject->getFields();
         foreach ($value as $tabId => $relation) {
-            if (!isset($relation['_moduleHandler'])) { continue; }
+            if (!isset($relation['_moduleHandler'])) { \d("boom");exit; continue; }
             if (!isset($fields[$relation['_moduleHandler']])) {
+                \d($relation['_moduleHandler']);
+                \d(array_keys($fields));exit;
                 continue;
             }
             $baseAttributes = [];
@@ -152,10 +165,13 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
                 $model = $fields[$relation['_moduleHandler']]->resetModel();
             }
             $model->attributes = $relation;
-            list($relationship, $role) = $this->owner->objectType->getRelationship($model->_moduleHandler);
-            $relatedHandler = $this->owner->objectType->getRelatedType($model->_moduleHandler);
+            $model->_moduleHandler = $relation['_moduleHandler'];
+            $model->tabularId = $relation['_moduleHandler'];
+            list($relationship, $role) = $baseObject->objectType->getRelationship($model->_moduleHandler);
+            $relatedHandler = $baseObject->objectType->getRelatedType($model->_moduleHandler);
             if (!$relatedHandler) { continue; }
             if (!$this->owner->tabularId  // primary object
+                && !$this->owner->isNewRecord
                 && empty($model->parent_object_id)
                 && empty($model->child_object_id)) {
                 continue;
@@ -171,6 +187,6 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
 
     public function safeAttributes()
     {
-        return ['relatedObjects', 'relations'];
+        return ['relatedObjects', 'relations', 'companionObject', 'companionRole', 'companionRelationship'];
     }
 }

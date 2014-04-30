@@ -182,7 +182,7 @@ $preparer.add(function(context) {
 				if (datum.subdescriptor !== undefined) {
 					$this.relationshipElements.relatedSelectedObjectTarget.append($('<div />', {'class': 'relationship-object-subdescriptor'}).html(datum.subdescriptor));
 				}
-				if (jQuery.inArray('object_id', $this.relationshipOptions.lockFields) > -1) {
+				if (jQuery.inArray('object_id', $this.relationshipOptions.lockFields) === -1) {
 					$this.relationshipElements.relatedSelectedObjectTarget.append($("<a />", {'href': '#', 'class': 'btn btn-primary'}).html('Reselect').click(function() { $this.resetRelationship(); return false; }));
 				}
 			};

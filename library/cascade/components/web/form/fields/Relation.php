@@ -68,7 +68,7 @@ class Relation extends Base
         } elseif (!empty($this->relatedObject)) {
             $this->model->setParentModel($this->relatedObject);
             $formSegment = $this->relatedObject->objectType->getFormSegment($this->relatedObject, ['relationField' => $this->modelField]);
-            $formSegment->owner = $this;
+            $formSegment->owner = $this->owner;
             return $formSegment->generate();
         } else {
             return null;
@@ -138,7 +138,7 @@ class Relation extends Base
         if (!empty($r['model']['attributes']['end'])) {
             $r['model']['attributes']['end'] = Yii::$app->formatter->asDate($r['model']['attributes']['end']);
         }
-        $r['lockFields'] = $this->lockFields;
+        $r['lockFields'] = isset($this->relationSettings['lockFields']) ? array_merge($this->relationSettings['lockFields'], $this->lockFields) : $this->lockFields;
         $r['multiple'] = $this->linkMultiple; // && $this->modelField->relationship->multiple;
         $this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
         Html::addCssClass($this->htmlOptions, 'relationship');
