@@ -35,7 +35,7 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     /**
      * @var __var_priority_type__ __var_priority_description__
      */
-    public $priority = 0;
+    public $_priority = 0;
     /**
      * @var __var_locations_type__ __var_locations_description__
      */
@@ -90,6 +90,16 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     public function setSection($value)
     {
         $this->_section = $value;
+    }
+
+    public function setPriority($priority) 
+    {
+        $this->_priority = $priority;
+    }
+
+    public function getPriority()
+    {
+        return $this->_priority;
     }
 
 }

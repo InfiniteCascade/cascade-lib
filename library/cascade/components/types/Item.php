@@ -143,7 +143,6 @@ class Item extends \infinite\base\collector\Item
         }
 
         ArrayHelper::multisort($this->_sections, ['priority', 'sectionTitle'], [SORT_ASC, SORT_ASC]);
-
         return $this->_sections;
     }
 

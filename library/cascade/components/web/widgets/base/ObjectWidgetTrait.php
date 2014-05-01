@@ -50,6 +50,16 @@ trait ObjectWidgetTrait
         return $classes;
     }
 
+    public function getPriorityAdjust()
+    {
+        if (isset($this->dataProvider->totalCount)) {
+            if (empty($this->dataProvider->totalCount)) {
+                return 1000;
+            }
+        }
+        return 0;
+    }
+
     public function getDataProvider()
     {
         if (is_null($this->_dataProvider)) {

@@ -25,7 +25,7 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     /**
      * @var __var_priority_type__ __var_priority_description__
      */
-    public $priority = 1000; //lower is better
+    protected $_priority = 1000; //lower is better
 
     /**
     * @inheritdoc
@@ -65,4 +65,21 @@ class Module extends \cascade\components\base\CollectorModule implements Section
         return $widget;
     }
 
+    /**
+     * Get priority
+     * @return __return_getPriority_type__ __return_getPriority_description__
+     */
+    public function getPriority()
+    {
+        return $this->_priority;
+    }
+
+    /**
+     * Set priority
+     * @param __param_priority_type__ $priority __param_priority_description__
+     */
+    public function setPriority($priority)
+    {
+        $this->_priority = $priority;
+    }
 }

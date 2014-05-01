@@ -219,4 +219,9 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
         $this->_widgetId = $value;
     }
 
+    public function getPriorityAdjust()
+    {
+        return 0;
+    }
+
 }
