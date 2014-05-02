@@ -209,7 +209,7 @@ trait ListWidgetTrait
             return str_repeat(Html::tag('div', '', ['class' => 'widget-lazy-placeholder']), min($this->dataProvider->totalCount, $this->dataProvider->pagination->pageSize));
         }
         $results = $this->dataProvider;
-        if (!empty($results->count)) {
+        if (!empty($results->totalCount) && !empty($results->count)) {
             $models = $this->dataProvider->getModels();
             $keys = $this->dataProvider->getKeys();
 
