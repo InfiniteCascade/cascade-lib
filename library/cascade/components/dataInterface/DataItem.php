@@ -86,6 +86,10 @@ abstract class DataItem extends \infinite\base\Component
     public function clean()
     {
         if (isset($this->foreignObject)) {
+            if (strlen($this->foreignObject->primaryKey) > 10) {
+                var_dump($this->foreignObject);
+                throw new \Exception("boo");
+            }
             $this->foreignPrimaryKey = $this->foreignObject->primaryKey;
             $this->foreignObject = null;
         }

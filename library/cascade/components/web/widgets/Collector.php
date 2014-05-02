@@ -26,6 +26,19 @@ class Collector extends \infinite\base\collector\Module
      */
     public $lastBuildId;
 
+    protected $_lazy  = false;
+
+
+    public function getLazy()
+    {
+        return $this->_lazy;
+    }
+
+    public function setLazy($lazy)
+    {
+        $this->_lazy = $lazy;
+    }
+    
     /**
     * @inheritdoc
      */

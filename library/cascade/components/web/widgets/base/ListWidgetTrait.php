@@ -205,6 +205,9 @@ trait ListWidgetTrait
 
     public function generateContent()
     {
+        if ($this->lazy) {
+            return Html::tag('div', '', ['class' => 'widget-lazy-placeholder']);
+        }
         $results = $this->dataProvider;
         if (!empty($results->count)) {
             $models = $this->dataProvider->getModels();

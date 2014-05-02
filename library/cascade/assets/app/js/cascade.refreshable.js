@@ -42,6 +42,9 @@ function handleRefresh(object, request) {
 	refreshableDeferred.requestCount++;
 	refreshableDeferred.requests[requestId] = {'object': object, 'request': request, 'result': false};
 	refreshableDeferred.done(function() {
+		if (refreshableDeferred.requests[requestId] === undefined){
+			return;
+		}
 		if (refreshableDeferred.requests[requestId].result) {
 			$replaceContent = $(refreshableDeferred.requests[requestId].result);
 			$(refreshableDeferred.requests[requestId].object).replaceWith($replaceContent);

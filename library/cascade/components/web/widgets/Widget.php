@@ -63,6 +63,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
      */
     protected $_title  = false;
 
+    protected $_lazy  = false;
+
     /**
      * __method_stateKeyName_description__
      * @param __param_key_type__           $key __param_key_description__
@@ -71,6 +73,19 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     public function stateKeyName($key)
     {
         return 'widget.'.$this->systemId . '.'. $key;
+    }
+
+    public function getLazy()
+    {
+        if (!Yii::$app->collectors['widgets']->lazy) {
+            return false;
+        }
+        return $this->_lazy;
+    }
+
+    public function setLazy($lazy)
+    {
+        $this->_lazy = $lazy;
     }
 
     /**

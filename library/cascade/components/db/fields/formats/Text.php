@@ -19,7 +19,15 @@ class Text extends Base
      */
     public function get()
     {
-        $result = strip_tags($this->field->value);
+        $result = $this->field->value;
+        if (is_object($result)) {
+            if (isset($result->descriptor)) {
+                $result = $result->viewLink;
+            } else {
+                $result = null;
+            }
+        }
+        $result = strip_tags($result);
         $result = preg_replace("/\n+/", "\n", $result);
         if (empty($result)) {
             $result = '<span class="empty">(none)</span>';

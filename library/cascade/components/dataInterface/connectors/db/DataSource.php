@@ -111,11 +111,22 @@ class DataSource extends \cascade\components\dataInterface\DataSource
                 // we're feeding the relations
                 $relationKeys = $value;
                 $value = false;
+                $fields = [];
+                if (!empty($localModel)) {
+                    $fields = $localModel->getFields();
+                }
                 if (!empty($relationKeys)) {
                     if (!is_array($relationKeys)) {
                         $relationKeys = [$relationKeys];
                     }
                     $fieldParts = explode(':', $fieldMap->localField);
+                    $checkField = $fieldParts;
+                    $checkField[2] = '';
+                    $checkField = implode(':', $checkField);
+                    if (isset($fields[$checkField]) && !empty($fields[$checkField]->model->taxonomy_id)) {
+                        $taxonomyId = $fields[$checkField]->model->taxonomy_id;
+                    }
+
                     if ($fieldParts[0] === 'child') {
                         $relationship = $this->dummyLocalModel->objectTypeItem->getChild($fieldParts[1]);
                         $relatedType = !empty($relationship) ? $relationship->child : false;

@@ -189,6 +189,10 @@ abstract class Module extends BaseModule
     public function getLocalObject($localModelClass, $foreignPrimaryKey)
     {
         $dataSource = $this->getLocalDataSource($localModelClass);
+        if (is_array($foreignPrimaryKey) && isset($foreignPrimaryKey['localId'])) {
+            $registryClass = Yii::$app->classes['Registry'];
+            return $registryClass::getObject($foreignPrimaryKey['localId'], false);
+        }
         if ($dataSource && ($foreignDataItem = $dataSource->getForeignDataItem($foreignPrimaryKey))) {
             return $foreignDataItem->handle(true);
         }

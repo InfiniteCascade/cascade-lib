@@ -19,12 +19,27 @@ trait ObjectWidgetTrait
 {
     protected $_dataProvider;
     public $pageSize = 5;
+    protected $_lazyObjectWidget;
 
     public function generateStart()
     {
         $this->htmlOptions['data-instructions'] = json_encode($this->refreshInstructions);
-
+        if ($this->lazy) {
+            Html::addCssClass($this->htmlOptions, 'widget-lazy');
+        }
         return parent::generateStart();
+    }
+
+    public function getLazy()
+    {
+        if (!Yii::$app->collectors['widgets']->lazy) {
+            return false;
+        }
+        if (!isset($this->_lazyObjectWidget)) {
+            return true;
+        }
+
+        return $this->_lazyObjectWidget;
     }
 
     public function getRefreshInstructions()
