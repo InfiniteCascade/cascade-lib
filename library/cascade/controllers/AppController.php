@@ -189,9 +189,10 @@ class AppController extends Controller
 
         Yii::$app->response->task = false;
         $refreshed = [];
-        if (empty($_POST['requests'])) { return; }
-        $baseInstrictions = (isset($_POST['baseInstructions']) ? $_POST['baseInstructions'] : []);
-        foreach ($_POST['requests'] AS $requestId => $request) {
+        $source = $_GET;
+        if (empty($source['requests'])) { return; }
+        $baseInstrictions = (isset($source['baseInstructions']) ? $source['baseInstructions'] : []);
+        foreach ($source['requests'] AS $requestId => $request) {
             $refreshed[$requestId] = false;
             $instructions = $baseInstrictions;
             if (isset($request['instructions'])) {
@@ -227,7 +228,6 @@ class AppController extends Controller
                     }
                     if (!$widget) {
                         $refreshed[$requestId] = ['error' => 'Unknown widget'];
-
                         return;
                     }
                     $widgetObject = $widget->object;

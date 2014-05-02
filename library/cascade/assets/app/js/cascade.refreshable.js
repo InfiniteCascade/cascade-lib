@@ -7,6 +7,7 @@ function startRefreshableDeferred(options) {
 	if (refreshableDeferred  && refreshableDeferred.state() === 'pending' && refreshableDeferred.state() !== 'handling') {
 		refreshableDeferred.handle();
 	}
+	delete refreshableDeferred;
 	if (options === undefined || typeof options !== 'object') {
 		options = {};
 	}
@@ -18,42 +19,57 @@ function startRefreshableDeferred(options) {
 	refreshableDeferred.timer = options.timer;
 	refreshableDeferred.requests = {};
 	refreshableDeferred.handle = function() {
-		if (this.substate === 'handling') { return false; }
-		this.substate = 'handling';
+		if (refreshableDeferred.substate === 'handling') { 
+			return false;
+		}
+		refreshableDeferred.substate = 'handling';
 		var settings = {'data': {}, 'stream': false};
 		settings = jQuery.extend(true, settings, $('body').data('refreshable'));
 		var stream = settings.stream;
 		delete settings['stream'];
 
 		settings.data.requests = {};
-		jQuery.each(this.requests, function(index, requestObject) {
+		if (_.isEmpty(refreshableDeferred.requests)) { 
+			refreshableDeferred.resolve();
+			return true;
+		}
+
+		jQuery.each(refreshableDeferred.requests, function(index, requestObject) {
 			if (requestObject.result) { return true; }
 			settings.data.requests[index] = requestObject.request;
 		});
+
 		if (_.isEmpty(settings.data.requests)) {
-			this.resolve();
+			refreshableDeferred.resolve();
 			return;
 		}
 		settings.dataType = 'json';
 		settings.type = 'POST';
 		settings.context = $(this);
-
-
 		if (stream) {
-			var socket = io(settings.url);
-			socket.emit('POST', settings.data);
-			socket.on('connect', function(){
-				$.debug("connected!");
-				socket.on('event', function(data){
-					$.debug("fired event");
-				});
-				socket.on('handleRequests', function(data) {
-					$.debug("fired handleRequest");
-				}),
-				socket.on('disconnect', function(){
-					$.debug("done!");
-				});
+			portal.open(settings.url, {
+				transports: ['stream'],
+				params: {open: settings.data},
+				reconnect: function(lastDelay, attempts) {
+			    	return false;
+			    }
+			}).on({
+			    handleRequests: function(data) {
+			    	if (_.isEmpty(data)) { return; }
+			    	jQuery.each(data, function(index, requestObject) {
+						if (requestObject.content !== undefined && refreshableRequests[index] !== undefined) {
+							refreshableRequests[index].result = requestObject.content;
+							$replaceContent = $(refreshableRequests[index].result);
+							$(refreshableRequests[index].object).replaceWith($replaceContent);
+							$preparer.fire($replaceContent);
+							delete refreshableRequests[index];
+						}
+					});
+			    },
+			    close: function(reason) {
+			    }
 			});
+			refreshableDeferred.resolve();
 		} else {
 			settings.success = function(r, textStatus, jqXHR) {
 				if (r.requests !== undefined) {
@@ -90,21 +106,14 @@ function handleRefresh(object, request) {
 	var requestId = 'request-' + refreshableCount;
 	refreshableCount++;
 	refreshableDeferred.requests[requestId] = refreshableRequests[requestId] = {'object': object, 'request': request, 'result': false};
-	// refreshableDeferred.done(function() {
-	// 	if (refreshableRequests[requestId].result) {
-	// 		$replaceContent = $(refreshableRequests[requestId].result);
-	// 		$(refreshableRequests[requestId].object).replaceWith($replaceContent);
-	// 		$preparer.fire($replaceContent);
-	// 		delete refreshableRequests[requestId];
-	// 	}
-	// });
 	if (refreshableDeferred.timer) {
-		refreshableDeferred.timer = setTimeout(refreshableDeferred.handle, 3000);
+		refreshableDeferred.timer = setTimeout(refreshableDeferred.handle, 200);
 	}
 }
 
 jQuery.fn.extend({
   refreshable: function() {
+  	if (this.length === 0) { return; }
   	startRefreshableDeferred({'timer': false});
     this.trigger('refresh');
     return refreshableDeferred.handle();

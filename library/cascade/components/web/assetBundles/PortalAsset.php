@@ -14,12 +14,12 @@ use yii\web\AssetBundle;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class SocketIoAsset extends AssetBundle
+class PortalAsset extends AssetBundle
 {
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/LearnBoost/socket.io-client';
+    public $sourcePath = '@vendor/flowersinthesand/portal';
     /**
      * @inheritdoc
      */
@@ -28,7 +28,7 @@ class SocketIoAsset extends AssetBundle
      * @inheritdoc
      */
     public $js = [
-        'socket.io.js'
+        'portal.min.js'
     ];
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class SocketIoAsset extends AssetBundle
     public function init()
     {
         $this->publishOptions['beforeCopy'] = function ($from, $to) {
-            $acceptable = ['socket.io.js'];
+            $acceptable = ['portal.min.js'];
 
             return in_array(basename($from), $acceptable) || in_array(basename(dirname($from)), $acceptable);
         };
