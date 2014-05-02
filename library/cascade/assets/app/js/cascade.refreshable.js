@@ -3,22 +3,28 @@ var refreshableRequests = {};
 var refreshableCount = 0;
 
 
-function startRefreshableDeferred(timer) {
+function startRefreshableDeferred(options) {
 	if (refreshableDeferred  && refreshableDeferred.state() === 'pending' && refreshableDeferred.state() !== 'handling') {
 		refreshableDeferred.handle();
 	}
-	if (timer === undefined) {
-		timer = true;
+	if (options === undefined || typeof options !== 'object') {
+		options = {};
+	}
+	if (options.timer === undefined) {
+		options.timer = true;
 	}
 	refreshableDeferred = jQuery.Deferred();
 	refreshableDeferred.substate = 'building';
-	refreshableDeferred.timer = timer;
+	refreshableDeferred.timer = options.timer;
 	refreshableDeferred.requests = {};
 	refreshableDeferred.handle = function() {
 		if (this.substate === 'handling') { return false; }
 		this.substate = 'handling';
-		var settings = {'data': {}};
+		var settings = {'data': {}, 'stream': false};
 		settings = jQuery.extend(true, settings, $('body').data('refreshable'));
+		var stream = settings.stream;
+		delete settings['stream'];
+
 		settings.data.requests = {};
 		jQuery.each(this.requests, function(index, requestObject) {
 			if (requestObject.result) { return true; }
@@ -31,28 +37,51 @@ function startRefreshableDeferred(timer) {
 		settings.dataType = 'json';
 		settings.type = 'POST';
 		settings.context = $(this);
-		settings.success = function(r, textStatus, jqXHR) {
-			if (r.requests !== undefined) {
-				jQuery.each(r.requests, function(index, requestObject) {
-					if (requestObject.content !== undefined) {
-						refreshableRequests[index].result = requestObject.content;
-					}
+
+
+		if (stream) {
+			var socket = io(settings.url);
+			socket.emit('POST', settings.data);
+			socket.on('connect', function(){
+				$.debug("connected!");
+				socket.on('event', function(data){
+					$.debug("fired event");
 				});
-				jqXHR.refreshableDeferred.resolve();
-			} else {
+				socket.on('handleRequests', function(data) {
+					$.debug("fired handleRequest");
+				}),
+				socket.on('disconnect', function(){
+					$.debug("done!");
+				});
+			});
+		} else {
+			settings.success = function(r, textStatus, jqXHR) {
+				if (r.requests !== undefined) {
+					jQuery.each(r.requests, function(index, requestObject) {
+						if (requestObject.content !== undefined && refreshableRequests[index] !== undefined) {
+							refreshableRequests[index].result = requestObject.content;
+							$replaceContent = $(refreshableRequests[index].result);
+							$(refreshableRequests[index].object).replaceWith($replaceContent);
+							$preparer.fire($replaceContent);
+							delete refreshableRequests[index];
+						}
+					});
+					jqXHR.refreshableDeferred.resolve();
+				} else {
+					jqXHR.refreshableDeferred.reject();
+				}
+			};
+			settings.error = function (jqXHR) {
 				jqXHR.refreshableDeferred.reject();
-			}
-		};
-		settings.error = function (jqXHR) {
-			jqXHR.refreshableDeferred.reject();
-		};
-		var request = jQuery.ajax(settings);
-		request.refreshableDeferred = refreshableDeferred;
+			};
+			var request = jQuery.ajax(settings);
+			request.refreshableDeferred = refreshableDeferred;
+		}
 	};
 }
 function handleRefresh(object, request) {
 	if (!refreshableDeferred || (refreshableDeferred.state !== undefined) && refreshableDeferred.state() !== 'pending') {
-		startRefreshableDeferred(true);
+		startRefreshableDeferred({'timer': true});
 	}
 	if (refreshableDeferred.timer) {
 		clearTimeout(refreshableDeferred.timer);
@@ -61,18 +90,14 @@ function handleRefresh(object, request) {
 	var requestId = 'request-' + refreshableCount;
 	refreshableCount++;
 	refreshableDeferred.requests[requestId] = refreshableRequests[requestId] = {'object': object, 'request': request, 'result': false};
-	refreshableDeferred.done(function() {
-		if (refreshableRequests[requestId] === undefined){
-			$.debug([requestId, refreshableRequests]);
-			return;
-		}
-		if (refreshableRequests[requestId].result) {
-			$replaceContent = $(refreshableRequests[requestId].result);
-			$(refreshableRequests[requestId].object).replaceWith($replaceContent);
-			$preparer.fire($replaceContent);
-			delete refreshableRequests[requestId];
-		}
-	});
+	// refreshableDeferred.done(function() {
+	// 	if (refreshableRequests[requestId].result) {
+	// 		$replaceContent = $(refreshableRequests[requestId].result);
+	// 		$(refreshableRequests[requestId].object).replaceWith($replaceContent);
+	// 		$preparer.fire($replaceContent);
+	// 		delete refreshableRequests[requestId];
+	// 	}
+	// });
 	if (refreshableDeferred.timer) {
 		refreshableDeferred.timer = setTimeout(refreshableDeferred.handle, 3000);
 	}
@@ -80,7 +105,7 @@ function handleRefresh(object, request) {
 
 jQuery.fn.extend({
   refreshable: function() {
-  	startRefreshableDeferred(false);
+  	startRefreshableDeferred({'timer': false});
     this.trigger('refresh');
     return refreshableDeferred.handle();
   }

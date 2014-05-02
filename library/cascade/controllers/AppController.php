@@ -242,7 +242,7 @@ class AppController extends Controller
                 break;
             }
             if ($refreshed[$requestId]) {
-                echo "data: ".json_encode([$requestId => $refreshed[$requestId]]) ."\n";
+                echo "data: ".json_encode(['type' => 'handleRequests', 'data' => [$requestId => $refreshed[$requestId]], 'id' => round(microtime(true) * 100)]) ."\n";
                 echo str_repeat("\n",1024*4);
             }
         }
