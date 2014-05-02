@@ -205,8 +205,8 @@ trait ListWidgetTrait
 
     public function generateContent()
     {
-        if ($this->lazy) {
-            return Html::tag('div', '', ['class' => 'widget-lazy-placeholder']);
+        if ($this->lazy && !empty($this->dataProvider->totalCount)) {
+            return str_repeat(Html::tag('div', '', ['class' => 'widget-lazy-placeholder']), min($this->dataProvider->totalCount, $this->dataProvider->pagination->pageSize));
         }
         $results = $this->dataProvider;
         if (!empty($results->count)) {

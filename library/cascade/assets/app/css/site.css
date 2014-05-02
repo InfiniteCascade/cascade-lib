@@ -346,3 +346,46 @@ footer {
   font-size: 1.1em;
   margin-right: 5px;
 }
+
+
+/* lazy widget */
+
+@-webkit-keyframes widget-lazy-placeholder-animation {
+  0%   { background-position: 0 0; }
+  50% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+@-moz-keyframes widget-lazy-placeholder-animation {
+  0%   { background-position: 0 0; }
+  50% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+@-o-keyframes widget-lazy-placeholder-animation {
+  0%   { background-position: 0 0; }
+  50% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+@keyframes widget-lazy-placeholder-animation {
+  0%   { background-position: 0 0; }
+  50% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+
+.widget-lazy-placeholder {
+  opacity: .5;
+  border-radius: 4px;
+  height: 35px;
+  margin-bottom: 5px;
+  display: block;
+  background-color: #f7f7f7;
+  background-image: linear-gradient(to right, #f7f7f7, #3278B3, #f7f7f7);
+  background-size: 200% auto;
+  background-position: 100% 0;
+  transition: background-position 1.5s;
+
+  -webkit-animation: widget-lazy-placeholder-animation 4.5s infinite; /* Safari 4+ */
+  -moz-animation:    widget-lazy-placeholder-animation 4.5s infinite; /* Fx 5+ */
+  -o-animation:      widget-lazy-placeholder-animation 4.5s infinite; /* Opera 12+ */
+  animation:         widget-lazy-placeholder-animation 4.5s infinite; /* IE 10+ */
+}
+

@@ -5,7 +5,8 @@ use infinite\helpers\ArrayHelper;
 use infinite\web\grid\Grid;
 $this->title = 'Dashboard';
 $refreshable = [
-    'url' => Url::to('app/refresh'),
+    'url' => Url::to('app/stream'),
+    'stream' => true,
     'data' => ['baseInstructions' => []]
 ];
 $this->bodyHtmlOptions['data-refreshable'] = json_encode($refreshable);

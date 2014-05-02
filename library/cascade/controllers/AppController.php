@@ -43,7 +43,7 @@ class AppController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['refresh', 'index'],
+                        'actions' => ['refresh', 'stream', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -175,5 +175,80 @@ class AppController extends Controller
                 break;
             }
         }
+    }
+
+    /**
+     * __method_actionRefresh_description__
+     * @return __return_actionRefresh_type__ __return_actionRefresh_description__
+     */
+    public function actionStream()
+    {
+        header("Content-type: text/plain");
+        header("Access-Control-Allow-Origin: *");
+        ob_implicit_flush(1);
+
+        Yii::$app->response->task = false;
+        $refreshed = [];
+        if (empty($_POST['requests'])) { return; }
+        $baseInstrictions = (isset($_POST['baseInstructions']) ? $_POST['baseInstructions'] : []);
+        foreach ($_POST['requests'] AS $requestId => $request) {
+            $refreshed[$requestId] = false;
+            $instructions = $baseInstrictions;
+            if (isset($request['instructions'])) {
+                $instructions = array_merge($instructions, $request['instructions']);
+            }
+            if (empty($instructions['type']) || empty($instructions['type'])) { continue; }
+            if (isset($request['state'])) {
+                foreach ($request['state'] as $key => $value) {
+                    Yii::$app->webState->set($key, $value);
+                }
+            }
+
+            if (isset($instructions['objectId'])) {
+                $object = Yii::$app->request->object = Registry::getObject($instructions['objectId']);
+                if (!$object) {
+                    $refreshed[$requestId] = ['error' => 'Invalid object '. $instructions['objectId'] .''];
+                    continue;
+                }
+                $type = $object->objectType;
+            }
+
+            $settings = (isset($instructions['settings'])) ? $instructions['settings'] : [];
+            switch ($instructions['type']) {
+                case 'widget':
+                    $widget = false;
+                    if (isset($object)) {
+                        $widgets = $object->objectTypeItem->widgets;
+                        if (isset($widgets[$instructions['systemId']])) {
+                            $widget = $widgets[$instructions['systemId']]->object;
+                        }
+                    } else {
+                        $widget = Yii::$app->collectors['widgets']->getOne($instructions['systemId']);
+                    }
+                    if (!$widget) {
+                        $refreshed[$requestId] = ['error' => 'Unknown widget'];
+
+                        return;
+                    }
+                    $widgetObject = $widget->object;
+                    if (isset($instructions['section'])
+                        && ($sectionItem = Yii::$app->collectors['sections']->getOne($instructions['section']))
+                        && ($section = $sectionItem->object)) {
+                        $widgetObject->attachDecorator($section->widgetDecoratorClass);
+                        $widgetObject->section = $section;
+                    }
+                    $widgetObject->owner = $widget->owner;
+                    $refreshed[$requestId] = ['content' => $widgetObject->generate()];
+                break;
+            }
+            if ($refreshed[$requestId]) {
+                echo "data: ".json_encode([$requestId => $refreshed[$requestId]]) ."\n";
+                echo str_repeat("\n",1024*4);
+            }
+        }
+        ob_implicit_flush(0);
+        ob_start();
+        Yii::app()->end();
+        ob_end_clean();
     }
 }

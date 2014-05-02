@@ -10,9 +10,9 @@ function prepareCascadeFormFields(context) {
 
 $preparer.add(function(context) {
 	prepareCascadeFormFields(context);
-	$(".refreshable.widget-lazy").trigger('refresh');
+	$(".refreshable.widget-lazy", context).refreshable();
 
-	$('#searchform-query').objectSearch({
+	$('#searchform-query', context).objectSearch({
 		'data': {
 			'typeFilters': ['dashboard']
 		},

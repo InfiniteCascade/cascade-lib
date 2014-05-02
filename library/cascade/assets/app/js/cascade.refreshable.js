@@ -1,62 +1,92 @@
 var refreshableDeferred;
+var refreshableRequests = {};
+var refreshableCount = 0;
 
+
+function startRefreshableDeferred(timer) {
+	if (refreshableDeferred  && refreshableDeferred.state() === 'pending' && refreshableDeferred.state() !== 'handling') {
+		refreshableDeferred.handle();
+	}
+	if (timer === undefined) {
+		timer = true;
+	}
+	refreshableDeferred = jQuery.Deferred();
+	refreshableDeferred.substate = 'building';
+	refreshableDeferred.timer = timer;
+	refreshableDeferred.requests = {};
+	refreshableDeferred.handle = function() {
+		if (this.substate === 'handling') { return false; }
+		this.substate = 'handling';
+		var settings = {'data': {}};
+		settings = jQuery.extend(true, settings, $('body').data('refreshable'));
+		settings.data.requests = {};
+		jQuery.each(this.requests, function(index, requestObject) {
+			if (requestObject.result) { return true; }
+			settings.data.requests[index] = requestObject.request;
+		});
+		if (_.isEmpty(settings.data.requests)) {
+			this.resolve();
+			return;
+		}
+		settings.dataType = 'json';
+		settings.type = 'POST';
+		settings.context = $(this);
+		settings.success = function(r, textStatus, jqXHR) {
+			if (r.requests !== undefined) {
+				jQuery.each(r.requests, function(index, requestObject) {
+					if (requestObject.content !== undefined) {
+						refreshableRequests[index].result = requestObject.content;
+					}
+				});
+				jqXHR.refreshableDeferred.resolve();
+			} else {
+				jqXHR.refreshableDeferred.reject();
+			}
+		};
+		settings.error = function (jqXHR) {
+			jqXHR.refreshableDeferred.reject();
+		};
+		var request = jQuery.ajax(settings);
+		request.refreshableDeferred = refreshableDeferred;
+	};
+}
 function handleRefresh(object, request) {
 	if (!refreshableDeferred || (refreshableDeferred.state !== undefined) && refreshableDeferred.state() !== 'pending') {
-		refreshableDeferred = jQuery.Deferred();
-		refreshableDeferred.timer = false;
-		refreshableDeferred.requests = {};
-		refreshableDeferred.requestCount = 0;
-		refreshableDeferred.handle = function() {
-			var settings = {'data': {}};
-			settings = jQuery.extend(true, settings, $('body').data('refreshable'));
-			settings.data.requests = {};
-			jQuery.each(refreshableDeferred.requests, function(index, requestObject) {
-				if (requestObject.result) { return true; }
-				settings.data.requests[index] = requestObject.request;
-			});
-			settings.dataType = 'json';
-			settings.type = 'POST';
-			settings.context = $(this);
-			settings.success = function(r, textStatus, jqXHR) {
-				if (r.requests !== undefined) {
-					jQuery.each(r.requests, function(index, requestObject) {
-						if (requestObject.content !== undefined) {
-							refreshableDeferred.requests[index].result = requestObject.content;
-						}
-					});
-					refreshableDeferred.resolve();
-				} else {
-					refreshableDeferred.reject();
-				}
-			};
-			settings.error = function () {
-				refreshableDeferred.reject();
-			};
-			var request = jQuery.ajax(settings);
-		};
+		startRefreshableDeferred(true);
 	}
 	if (refreshableDeferred.timer) {
 		clearTimeout(refreshableDeferred.timer);
+		refreshableDeferred.timer = true;
 	}
-	var requestId = 'request-' + refreshableDeferred.requestCount;
-	refreshableDeferred.requestCount++;
-	refreshableDeferred.requests[requestId] = {'object': object, 'request': request, 'result': false};
+	var requestId = 'request-' + refreshableCount;
+	refreshableCount++;
+	refreshableDeferred.requests[requestId] = refreshableRequests[requestId] = {'object': object, 'request': request, 'result': false};
 	refreshableDeferred.done(function() {
-		if (refreshableDeferred.requests[requestId] === undefined){
+		if (refreshableRequests[requestId] === undefined){
+			$.debug([requestId, refreshableRequests]);
 			return;
 		}
-		if (refreshableDeferred.requests[requestId].result) {
-			$replaceContent = $(refreshableDeferred.requests[requestId].result);
-			$(refreshableDeferred.requests[requestId].object).replaceWith($replaceContent);
+		if (refreshableRequests[requestId].result) {
+			$replaceContent = $(refreshableRequests[requestId].result);
+			$(refreshableRequests[requestId].object).replaceWith($replaceContent);
 			$preparer.fire($replaceContent);
-			delete refreshableDeferred.requests[requestId];
+			delete refreshableRequests[requestId];
 		}
 	});
-	refreshableDeferred.timer = setTimeout(refreshableDeferred.handle, 200);
+	if (refreshableDeferred.timer) {
+		refreshableDeferred.timer = setTimeout(refreshableDeferred.handle, 3000);
+	}
 }
 
+jQuery.fn.extend({
+  refreshable: function() {
+  	startRefreshableDeferred(false);
+    this.trigger('refresh');
+    return refreshableDeferred.handle();
+  }
+});
+
 $(document).on('refresh.cascade-api', '.refreshable', function(e, data) {
-	
 	var instructions = {};
     if (typeof data !== 'object') {
     	data = {};
@@ -66,19 +96,6 @@ $(document).on('refresh.cascade-api', '.refreshable', function(e, data) {
 	}
 	data.instructions = instructions;
 	handleRefresh(this, data);
-
-/*	settings.dataType = 'json';
-	settings.type = 'GET';
-	settings.context = $(this);
-	settings.success = function(r, textStatus, jqXHR) {
-		if (r.content) {
-			$(this).replaceWith(r.content);
-		} else {
-			$.debug("failed to refresh");
-		}
-	};
-	settings.data.instructions = instructions;
-	var request = jQuery.ajax(settings);*/
 });
 
 
