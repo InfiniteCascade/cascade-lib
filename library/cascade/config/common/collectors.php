@@ -5,6 +5,7 @@ return [
     'class' => 'infinite\\base\\collector\\Component',
     'collectors' => [
         'roles' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'roles.php'),
+        'identityProviders' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'identityProviders.php'),
         'types' => [
             'class' => 'cascade\\components\\types\\Collector',
         ],

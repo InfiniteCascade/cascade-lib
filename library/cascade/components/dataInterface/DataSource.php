@@ -234,6 +234,7 @@ abstract class DataSource extends \infinite\base\Component
     public function getForeignDataItems()
     {
         if (!isset($this->_foreignDataItems)) {
+            $this->_foreignDataItems = [];
             $this->trigger(self::EVENT_LOAD_FOREIGN_DATA_ITEMS);
         }
 

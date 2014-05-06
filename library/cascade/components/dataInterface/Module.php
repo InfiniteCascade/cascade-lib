@@ -40,10 +40,6 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get settings
-     */
-    abstract public function getSettings();
-    /**
      * __method_run_description__
      * @param cascade\components\dataInterface\Action $action __param_action_description__
      */

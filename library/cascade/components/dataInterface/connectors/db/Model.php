@@ -15,16 +15,8 @@ use yii\db\Query;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Model extends \infinite\base\Object
+class Model extends \cascade\components\dataInterface\connectors\generic\Model
 {
-    /**
-     * @var __var_modelName_type__ __var_modelName_description__
-     */
-    public $modelName;
-    /**
-     * @var __var__interface_type__ __var__interface_description__
-     */
-    protected $_interface;
     /**
      * @var __var__tableName_type__ __var__tableName_description__
      */
@@ -33,10 +25,6 @@ class Model extends \infinite\base\Object
      * @var __var__meta_type__ __var__meta_description__
      */
     protected $_meta;
-    /**
-     * @var __var__attributes_type__ __var__attributes_description__
-     */
-    protected $_attributes;
     /**
      * @var __var__keys_type__ __var__keys_description__
      */
@@ -60,66 +48,11 @@ class Model extends \infinite\base\Object
         Yii::configure($this->_meta, $metaConfig);
     }
 
-    /**
-     * __method___clone_description__
-     */
-    public function __clone()
+
+    public function hasAttribute($attribute)
     {
-        $this->reset();
+        return isset($this->meta) && is_object($this->meta) && $this->meta->hasAttribute($attribute);
     }
-
-    /**
-    * @inheritdoc
-     */
-    public function __get($name)
-    {
-        if (isset($this->_attributes[$name])) {
-            return $this->_attributes[$name];
-        }
-
-        return parent::__get($name);
-    }
-
-    /**
-    * @inheritdoc
-     */
-    public function __set($name, $value)
-    {
-        if (isset($this->meta) && is_object($this->meta) && $this->meta->hasAttribute($name)) {
-            $this->_attributes[$name] = $value;
-
-            return true;
-        }
-
-        return parent::__set($name, $value);
-    }
-
-    /**
-    * @inheritdoc
-     */
-    public function __isset($name)
-    {
-        if (isset($this->meta) && $this->meta->hasAttribute($name) && isset($this->_attributes[$name])) {
-            return true;
-        }
-
-        return parent::__isset($name);
-    }
-
-    /**
-    * @inheritdoc
-     */
-    public function __unset($name)
-    {
-        if (isset($this->meta) && $this->meta->hasAttribute($name)) {
-            unset($this->_attributes[$name]);
-
-            return true;
-        }
-
-        return parent::__unset($name);
-    }
-
     /**
      * Set table name
      * @param __param_value_type__ $value __param_value_description__
@@ -127,34 +60,6 @@ class Model extends \infinite\base\Object
     public function setTableName($value)
     {
         $this->_tableName = $value;
-    }
-
-    /**
-     * Set interface
-     * @param __param_value_type__ $value __param_value_description__
-     */
-    public function setInterface($value)
-    {
-        $this->_interface = $value;
-    }
-
-    /**
-     * __method_reset_description__
-     */
-    public function reset()
-    {
-        $this->_attributes = [];
-    }
-
-    /**
-     * Set attributes
-     * @param __param_value_type__ $value __param_value_description__
-     */
-    public function setAttributes($value)
-    {
-        foreach ($value as $key => $val) {
-            $this->{$key} = $val;
-        }
     }
 
     /**
@@ -243,36 +148,7 @@ class Model extends \infinite\base\Object
         return $this->attributes[$pk];
     }
 
-    /**
-     * __method_populateRecord_description__
-     * @param __param_attributes_type__      $attributes __param_attributes_description__
-     * @return __return_populateRecord_type__ __return_populateRecord_description__
-     */
-    public function populateRecord($attributes)
-    {
-        if ($attributes === false) {
-            return false;
-        }
-        $clone = clone $this;
-        $clone->attributes = $attributes;
 
-        return $clone;
-    }
-
-    /**
-     * __method_populateRecords_description__
-     * @param __param_results_type__          $results __param_results_description__
-     * @return __return_populateRecords_type__ __return_populateRecords_description__
-     */
-    public function populateRecords($results)
-    {
-        $r = [];
-        foreach ($results as $o) {
-            $r[] = $this->populateRecord($o);
-        }
-
-        return $r;
-    }
 
     /**
      * Get attributes
@@ -309,14 +185,6 @@ class Model extends \infinite\base\Object
         $this->_meta = $value;
     }
 
-    /**
-     * Get interface
-     * @return __return_getInterface_type__ __return_getInterface_description__
-     */
-    public function getInterface()
-    {
-        return $this->_interface;
-    }
 
     /**
      * __method_find_description__

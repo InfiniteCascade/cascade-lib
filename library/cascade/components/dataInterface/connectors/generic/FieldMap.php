@@ -5,13 +5,13 @@
  * @license http://www.infinitecascade.com/license/
  */
 
-namespace cascade\components\dataInterface\connectors\db;
+namespace cascade\components\dataInterface\connectors\generic;
 
 /**
- * Search [@doctodo write class description for Search]
+ * FieldMap [@doctodo write class description for FieldMap]
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Search extends \cascade\components\dataInterface\connectors\generic\Search
+class FieldMap extends \cascade\components\dataInterface\FieldMap
 {
 }

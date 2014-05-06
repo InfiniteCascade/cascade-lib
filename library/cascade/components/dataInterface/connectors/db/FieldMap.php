@@ -12,6 +12,6 @@ namespace cascade\components\dataInterface\connectors\db;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class FieldMap extends \cascade\components\dataInterface\FieldMap
+class FieldMap extends \cascade\components\dataInterface\connectors\generic\FieldMap
 {
 }

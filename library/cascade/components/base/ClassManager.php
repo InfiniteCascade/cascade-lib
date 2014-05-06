@@ -28,6 +28,8 @@ class ClassManager extends \infinite\base\ClassManager
             'Registry' => 'cascade\\models\\Registry',
             'Relation' => 'cascade\\models\\Relation',
             'User' => 'cascade\\models\\User',
+            'IdentityProvider' => 'cascade\\models\\IdentityProvider',
+            'Identity' => 'cascade\\models\\Identity',
             'Storage' => 'cascade\\models\\Storage',
             'StorageEngine' => 'cascade\\models\\StorageEngine',
             'ObjectTypeRegistry' => 'cascade\\models\\ObjectType',
