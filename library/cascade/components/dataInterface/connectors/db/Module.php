@@ -29,15 +29,7 @@ abstract class Module extends BaseModule
      * @var __var_dbConfig_type__ __var_dbConfig_description__
      */
     public $dbConfig = [];
-    /**
-     * @var __var__action_type__ __var__action_description__
-     */
-    protected $_action;
 
-    /**
-     * @var __var__models_type__ __var__models_description__
-     */
-    protected $_models;
     /**
      * @var __var__db_type__ __var__db_description__
      */
@@ -108,7 +100,6 @@ abstract class Module extends BaseModule
         if (isset($models[$model])) {
             return $models[$model];
         }
-
         return false;
     }
 

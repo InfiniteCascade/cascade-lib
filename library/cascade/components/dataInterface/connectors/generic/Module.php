@@ -25,7 +25,20 @@ abstract class Module extends BaseModule
      */
     public $dataSourceClass = 'cascade\\components\\dataInterface\\connectors\\generic\\DataSource';
 
+    /**
+     * @var __var__models_type__ __var__models_description__
+     */
+    protected $_models;
+
+
     protected $_dataSources;
+    /**
+     * @var __var__action_type__ __var__action_description__
+     */
+    protected $_action;
+
+    abstract public function getForeignObject($foreignModelClass, $foreignPrimaryKey);
+    abstract public function getForeignModel($model);
 
     /**
     * @inheritdoc
@@ -125,8 +138,6 @@ abstract class Module extends BaseModule
 
         return false;
     }
-
-    abstract public function getForeignObject($foreignModelClass, $foreignPrimaryKey);
 
 
     /**
