@@ -109,10 +109,14 @@ abstract class DataItem extends \infinite\base\Component
         if ($this->isForeign) {
             if (isset($this->foreignPrimaryKey)) {
                 return $this->foreignPrimaryKey;
+            } elseif (isset($this->foreignObject)) {
+                return $this->foreignObject->primaryKey;
             }
         } else {
             if (isset($this->localPrimaryKey)) {
                 return $this->localPrimaryKey;
+            } elseif (isset($this->localObject)) {
+                return $this->localObject->primaryKey;
             }
         }
         if (isset($this->primaryObject)) {

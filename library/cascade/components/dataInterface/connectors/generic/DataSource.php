@@ -324,8 +324,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
         $config['isForeign'] = true;
         $config['foreignObject'] = $model;
         $object = $this->createDataItem($config);
-
-        return $this->_foreignDataItems[$object->id] = $this->createDataItem($config);
+        return $this->_foreignDataItems[$object->id] = $object;
     }
 
     /**

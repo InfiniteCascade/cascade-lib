@@ -248,7 +248,7 @@ class AppController extends Controller
         }
         ob_implicit_flush(0);
         ob_start();
-        Yii::app()->end();
+        Yii::$app->end();
         ob_end_clean();
     }
 }
