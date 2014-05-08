@@ -82,7 +82,7 @@ abstract class Model extends \infinite\base\Object
      */
     public function __unset($name)
     {
-        if (isset($this->meta) && $this->hasAttribute($name)) {
+        if ($this->hasAttribute($name)) {
             unset($this->_attributes[$name]);
 
             return true;
@@ -91,9 +91,14 @@ abstract class Model extends \infinite\base\Object
         return parent::__unset($name);
     }
 
+    public function getTableName()
+    {
+        return static::baseClassName();
+    }
+
     public function hasAttribute($attribute)
     {
-        return true;
+        return !$this->hasProperty($attribute, true);
     }
 
 
