@@ -270,6 +270,11 @@ abstract class DataSource extends \infinite\base\Component
         return $handled;
     }
 
+    public function universalFilter($value)
+    {
+        return $value;
+    }
+    
     /**
      * __method_run_description__
      * @return __return_run_type__ __return_run_description__

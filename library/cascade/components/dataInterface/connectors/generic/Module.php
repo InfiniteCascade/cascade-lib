@@ -63,6 +63,12 @@ abstract class Module extends BaseModule
             $action->progressPrefix = "{$prefix} {$source->name}...";
             $source->run();
         }
+        $this->afterRun();
+    }
+
+    public function afterRun()
+    {
+
     }
 
     /**
@@ -139,6 +145,13 @@ abstract class Module extends BaseModule
         return false;
     }
 
+    public function getDataSource($dataSourceName)
+    {
+        if (isset($this->dataSources[$dataSourceName])) {
+            return $this->dataSources[$dataSourceName];
+        }
+        return false;
+    }
 
     /**
      * Get data sources

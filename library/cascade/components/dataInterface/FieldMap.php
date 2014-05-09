@@ -77,6 +77,8 @@ class FieldMap extends \infinite\base\Object
             $value = call_user_func($this->filter, $value);
         }
 
+        $value = $this->dataSource->universalFilter($value);
+
         return $value;
     }
 }
