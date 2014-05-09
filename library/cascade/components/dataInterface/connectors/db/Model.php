@@ -29,10 +29,6 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
      * @var __var__keys_type__ __var__keys_description__
      */
     protected $_keys;
-    /**
-     * @var __var__children_type__ __var__children_description__
-     */
-    protected $_children;
 
     /**
     * @inheritdoc

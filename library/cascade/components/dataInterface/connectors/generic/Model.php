@@ -29,7 +29,10 @@ abstract class Model extends \infinite\base\Object
      * @var __var__attributes_type__ __var__attributes_description__
      */
     protected $_attributes;
-
+    /**
+     * @var __var__children_type__ __var__children_description__
+     */
+    protected $_children;
 
     /**
      * __method___clone_description__

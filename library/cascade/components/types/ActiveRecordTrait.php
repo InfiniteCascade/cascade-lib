@@ -54,7 +54,7 @@ trait ActiveRecordTrait
                 'class' => 'infinite\\db\\behaviors\\Registry',
             ],
             'Relatable' => [
-                'class' => 'infinite\\db\\behaviors\\Relatable',
+                'class' => 'cascade\\components\\db\\behaviors\\Relatable',
             ],
             'Taxonomy' => [
                 'class' => 'cascade\\components\\db\\behaviors\\ActiveTaxonomy',

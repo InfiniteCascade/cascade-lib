@@ -10,7 +10,7 @@ namespace cascade\components\types;
 use Yii;
 
 use infinite\base\exceptions\Exception;
-use infinite\db\behaviors\Relatable;
+use cascade\components\db\behaviors\Relatable;
 
 /**
  * Relationship [@doctodo write class description for Relationship]
@@ -45,7 +45,8 @@ class Relationship extends \infinite\base\Object
         'taxonomy' => null,
         'temporal' => false,
         'activeAble' => false,
-        'type' => self::HAS_MANY
+        'type' => self::HAS_MANY,
+        'parentInherit' => false
     ];
     /**
      * @var __var__options_type__ __var__options_description__
