@@ -129,7 +129,6 @@ class Relation extends \infinite\db\models\Relation
     {
         if (!isset($this->parentObject) || !isset($this->parentObject->objectTypeItem)) { return false; }
         if (!isset($this->childObject) || !isset($this->childObject->objectTypeItem)) { return false; }
-
         return Relationship::getOne($this->parentObject->objectTypeItem, $this->childObject->objectTypeItem);
     }
 }

@@ -27,6 +27,7 @@ class ClassManager extends \infinite\base\ClassManager
             'Group' => 'cascade\\models\\Group',
             'Registry' => 'cascade\\models\\Registry',
             'Relation' => 'cascade\\models\\Relation',
+            'RelationDependency' => 'cascade\\models\\RelationDependency',
             'User' => 'cascade\\models\\User',
             'IdentityProvider' => 'cascade\\models\\IdentityProvider',
             'Identity' => 'cascade\\models\\Identity',
