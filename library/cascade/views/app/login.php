@@ -25,7 +25,7 @@ $form = ActiveForm::begin([
     ],
 ]);
 
-echo $form->field($model, 'username');
+echo $form->field($model, 'email');
 echo $form->field($model, 'password')->passwordInput();
 echo $form->field($model, 'rememberMe', [
     'template' => "<div class=\"col-md-offset-1 col-lg-9 \">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",

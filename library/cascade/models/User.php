@@ -22,6 +22,7 @@ use infinite\base\exceptions\Exception;
  */
 class User extends \infinite\db\models\User
 {
+    const SYSTEM_EMAIL = 'system@system.local';
     /**
      * @var __var__individual_type__ __var__individual_description__
      */
@@ -55,7 +56,7 @@ class User extends \infinite\db\models\User
      */
     public static function systemUser()
     {
-        $user = self::findOne([self::tableName() .'.'. 'username' => 'system'], false);
+        $user = self::findOne([self::tableName() .'.'. 'email' => self::SYSTEM_EMAIL], false);
         if (empty($user)) {
             $superGroup = Group::find()->disableAccessCheck()->where(['system' => 'super_administrators'])->one();
             if (!$superGroup) { return false; }
@@ -64,11 +65,13 @@ class User extends \infinite\db\models\User
             $user->scenario = 'creation';
             $user->first_name = 'System';
             $user->last_name = 'User';
-            $user->username = 'system';
+            $user->email = self::SYSTEM_EMAIL;
             $user->status = static::STATUS_INACTIVE;
             $user->password =  Security::generateRandomKey();
             $user->relationModels = [['parent_object_id' => $superGroup->primaryKey]];
             if (!$user->save()) {
+                \d($user->email);
+                \d($user->errors);
                 throw new Exception("Unable to save system user!");
             }
         }

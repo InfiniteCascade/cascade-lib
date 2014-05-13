@@ -73,6 +73,16 @@ class FieldMap extends \infinite\base\Object
                 $value = call_user_func($this->foreignField, $foreignModel);
             }
         }
+
+        if (is_object($value) && $value instanceof DataItem) {
+            $object = $value->handle();
+            if ($object) {
+                $value = $object->primaryKey;
+            } else {
+                $value = null;
+            }
+        }
+
         if (isset($this->filter)) {
             $value = call_user_func($this->filter, $value);
         }

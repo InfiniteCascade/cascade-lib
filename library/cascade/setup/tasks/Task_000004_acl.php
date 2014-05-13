@@ -37,7 +37,7 @@ class Task_000004_acl extends AclTask
      */
     public function test()
     {
-        $run = User::find()->disableAccessCheck()->andWhere(['and', ['username' => 'system']])->count() > 0;
+        $run = false; // User::find()->disableAccessCheck()->andWhere(['and', ['email' => 'ema']])->count() > 0;
 
         return $run && parent::test();
     }

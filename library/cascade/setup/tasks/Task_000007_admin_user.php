@@ -31,7 +31,7 @@ class Task_000007_admin_user extends \infinite\setup\Task
      */
     public function test()
     {
-        return User::find()->disableAccessCheck()->andWhere(['not', ['username' => 'system']])->count() > 0;
+        return User::find()->disableAccessCheck()->andWhere(['not', ['email' => User::SYSTEM_EMAIL]])->count() > 0;
     }
 
     /**
@@ -68,7 +68,7 @@ class Task_000007_admin_user extends \infinite\setup\Task
         $fields['admin'] = ['label' => 'First Admin User', 'fields' => []];
         $fields['admin']['fields']['first_name'] = ['type' => 'text', 'label' => 'First Name', 'required' => true, 'value' => function () { return 'Super'; }];
         $fields['admin']['fields']['last_name'] = ['type' => 'text', 'label' => 'Last Name', 'required' => true, 'value' => function () { return 'Admin'; }];
-        $fields['admin']['fields']['username'] = ['type' => 'text', 'label' => 'Username', 'required' => true, 'value' => function () { return 'admin'; }];
+        $fields['admin']['fields']['email'] = ['type' => 'text', 'label' => 'E-mail', 'required' => true, 'value' => function () { return 'admin@system.local'; }];
         $fields['admin']['fields']['password'] = ['type' => 'text', 'label' => 'Password', 'required' => true, 'value' => function () { return 'adminadmin'; }];
 
         return $fields;
