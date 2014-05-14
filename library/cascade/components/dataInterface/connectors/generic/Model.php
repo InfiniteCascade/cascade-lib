@@ -34,7 +34,6 @@ abstract class Model extends \infinite\base\Object
      */
     protected $_children;
 
-    public $additionalKeys = [];
     /**
      * __method___clone_description__
      */

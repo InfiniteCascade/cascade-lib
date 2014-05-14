@@ -72,6 +72,7 @@ abstract class DataSource extends \infinite\base\Component
      */
     public $baseAttributes = [];
 
+    
     /**
      * @var __var__localModel_type__ __var__localModel_description__
      */

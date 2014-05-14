@@ -46,6 +46,10 @@ abstract class Module extends BaseModule
     public function run(Action $action)
     {
         $this->_action = $action;
+        if (!$this->beforeRun()) {
+            // @todo add something to action log
+            return false;
+        }
         $total = 0;
         foreach ($this->dataSources as $source) {
             $total += $source->total;
@@ -63,12 +67,21 @@ abstract class Module extends BaseModule
             $action->progressPrefix = "{$prefix} {$source->name}...";
             $source->run();
         }
-        $this->afterRun();
+        if (!$this->afterRun()) {
+            // @todo add action log
+            return false;
+        }
+        return true;
+    }
+
+    public function beforeRun()
+    {
+        return true;
     }
 
     public function afterRun()
     {
-
+        return true;
     }
 
     /**

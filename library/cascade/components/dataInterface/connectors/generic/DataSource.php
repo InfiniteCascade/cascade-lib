@@ -34,6 +34,9 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      * @inheritdoc
      */
     public $searchClass = 'cascade\\components\\dataInterface\\connectors\\generic\\Search';
+
+    public $keys = [];
+
     /**
     * @inheritdoc
      */
@@ -248,29 +251,16 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
      * @return __return_generateKey_type__                          __return_generateKey_description__
      */
-    /**
-     * __method_generateKey_description__
-     * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
-     * @return __return_generateKey_type__                          __return_generateKey_description__
-     */
-    public function generateKey(GenericModel $foreignObject, $additional = null)
+    public function generateKey(GenericModel $foreignObject, $keyName, $keyValue)
     {
         if (is_null($this->keyGenerator)) {
             $self = $this;
-            $this->keyGenerator = function ($foreignModel, $additional = null) use ($self) {
-                if (empty($additional)) {
-                    return [$self->module->systemId, $foreignModel->tableName, $foreignModel->primaryKey];
-                } else {
-                    if (substr($additional[0], 0, 1) === '.') {
-                        return [$self->module->systemId, $foreignModel->tableName, substr($additional[0], 1), $additional[1]];
-                    } else {
-                        return $additional;
-                    }
-                }
+            $this->keyGenerator = function ($foreignModel, $keyName, $keyValue) use ($self) {
+                return [$self->module->systemId, $foreignModel->tableName, $keyName, $keyValue];
             };
         }
         $keyGen = $this->keyGenerator;
-        $return = $keyGen($foreignObject, $additional);
+        $return = $keyGen($foreignObject, $keyName, $keyValue);
 
         if (isset($return)) {
             if (!is_array($return)) {
@@ -292,20 +282,17 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
         if (isset($key)) {
             return $this->internalGetKeyTranslation($foreignObject, $key);
         }
-        $key = $this->generateKey($foreignObject);
-        $result = $this->internalGetKeyTranslation($foreignObject, $key);
-        if (!empty($result)) {
-            return $result;
-        }
-        if (!empty($foreignObject->additionalKeys)) {
-            foreach ($foreignObject->additionalKeys as $additional => $value) {
-                $key = $this->generateKey($foreignObject, [$additional, $value]);
+
+        foreach ($this->keys as $keyName => $keyField) {
+            if (!empty($foreignObject->{$keyField})) {
+                $key = $this->generateKey($foreignObject, $keyName, $foreignObject->{$keyField});
                 $result = $this->internalGetKeyTranslation($foreignObject, $key);
                 if (!empty($result)) {
                     return $result;
                 }
             }
         }
+        
         return false;
     }
 
@@ -340,14 +327,18 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      */
     public function saveKeyTranslation(Model $foreignObject, $localObject)
     {
-        $key = $this->internalSaveKeyTranslation($foreignObject, $localObject, $this->generateKey($foreignObject));
-        if (!empty($foreignObject->additionalKeys)) {
-            foreach ($foreignObject->additionalKeys as $additional => $value) {
-                $this->internalSaveKeyTranslation($foreignObject, $localObject, $this->generateKey($foreignObject, [$additional, $value]));
+        $firstKey = null;
+        foreach ($this->keys as $keyName => $keyField) {
+            if (!empty($foreignObject->{$keyField})) {
+                $key = $this->generateKey($foreignObject, $keyName, $foreignObject->{$keyField});
+                $keySaved = $this->internalSaveKeyTranslation($foreignObject, $localObject, $key);
+                if (!isset($firstKey)) {
+                    $firstKey = $keySaved;
+                }
             }
         }
 
-        return $key;
+        return $firstKey;
     }
 
     public function internalSaveKeyTranslation(Model $foreignModel, $localObject, $key)

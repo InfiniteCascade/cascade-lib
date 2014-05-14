@@ -5,7 +5,7 @@
  * @license http://www.infinitecascade.com/license/
  */
 
-namespace cascade\components\dataInterface\connectors\db;
+namespace cascade\components\dataInterface\connectors\file;
 
 use Yii;
 
@@ -25,19 +25,32 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     /**
      * @inheritdoc
      */
-    public $fieldMapClass = 'cascade\\components\\dataInterface\\connectors\\db\\FieldMap';
+    public $fieldMapClass = 'cascade\\components\\dataInterface\\connectors\\file\\FieldMap';
     /**
      * @inheritdoc
      */
-    public $dataItemClass = 'cascade\\components\\dataInterface\\connectors\\db\\DataItem';
+    public $dataItemClass = 'cascade\\components\\dataInterface\\connectors\\file\\DataItem';
     /**
      * @inheritdoc
      */
-    public $searchClass = 'cascade\\components\\dataInterface\\connectors\\db\\Search';
+    public $searchClass = 'cascade\\components\\dataInterface\\connectors\\file\\Search';
+
+    protected $_fileSource;
 
 
-    public $keys = ['id' => 'primaryKey'];
+    public function setFileSource($value)
+    {
+        if (isset($this->module->sourceFiles[$value])) {
+            $this->_fileSource = $this->module->sourceFiles[$value];
+        } else {
+            $this->_fileSource = false;
+        }
+    }
 
+    public function getFileSource()
+    {
+        return $this->_fileSource;
+    }
     /**
      * Get foreign data model
      * @param __param_key_type__                  $key __param_key_description__

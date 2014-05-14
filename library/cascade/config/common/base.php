@@ -22,6 +22,9 @@ $base = [
         'classes' => [
             'class' => 'cascade\\components\\base\\ClassManager',
         ],
+        'fileStorage' => [
+            'class' => 'infinite\\base\\FileStorage'
+        ],
         'db' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . "database.php"),
         'gk' => [
             'class' => 'cascade\\components\\security\\Gatekeeper',
@@ -32,7 +35,7 @@ $base = [
         'redis' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'redis.php'),
         'collectors' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'collectors.php'),
         'cache' => ['class' => 'yii\\redis\\Cache'],
-        //'cache' => ['class' => 'yii\\caching\\DummyCache'],
+        'fileCache' => ['class' => 'yii\\caching\\FileCache'],
         'errorHandler' => [
             'discardExistingOutput' => false
         ],
