@@ -52,6 +52,7 @@ abstract class DataItem extends \infinite\base\Component
      */
     public $localPrimaryKey;
 
+
     const EVENT_LOAD_FOREIGN_OBJECT = 0x01;
     const EVENT_LOAD_LOCAL_OBJECT = 0x02;
 

@@ -71,32 +71,7 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
         return $u;
     }
 
-    /**
-     * __method_generateKey_description__
-     * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
-     * @return __return_generateKey_type__                          __return_generateKey_description__
-     */
-    public function generateKey(GenericModel $foreignObject)
-    {
-        if (is_null($this->keyGenerator)) {
-            $self = $this;
-            $this->keyGenerator = function ($foreignModel) use ($self) {
-                return [$self->module->systemId, $foreignModel->tableName, $foreignModel->primaryKey];
-            };
-        }
-        $keyGen = $this->keyGenerator;
-        $return = $keyGen($foreignObject);
-
-        if (isset($return)) {
-            if (is_array($return)) {
-                $return = implode('.', $return);
-            }
-
-            return $return;
-        }
-
-        return null;
-    }
+    
 
     
     /**

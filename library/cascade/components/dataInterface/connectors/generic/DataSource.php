@@ -13,6 +13,7 @@ use cascade\models\Relation;
 use cascade\models\KeyTranslation;
 
 use infinite\helpers\ArrayHelper;
+use cascade\components\dataInterface\connectors\generic\Model as GenericModel;
 
 /**
  * DataSource [@doctodo write class description for DataSource]
@@ -247,16 +248,68 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
      * @return __return_generateKey_type__                          __return_generateKey_description__
      */
-    abstract public function generateKey(Model $foreignObject);
+    /**
+     * __method_generateKey_description__
+     * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
+     * @return __return_generateKey_type__                          __return_generateKey_description__
+     */
+    public function generateKey(GenericModel $foreignObject, $additional = null)
+    {
+        if (is_null($this->keyGenerator)) {
+            $self = $this;
+            $this->keyGenerator = function ($foreignModel, $additional = null) use ($self) {
+                if (empty($additional)) {
+                    return [$self->module->systemId, $foreignModel->tableName, $foreignModel->primaryKey];
+                } else {
+                    if (substr($additional[0], 0, 1) === '.') {
+                        return [$self->module->systemId, $foreignModel->tableName, substr($additional[0], 1), $additional[1]];
+                    } else {
+                        return $additional;
+                    }
+                }
+            };
+        }
+        $keyGen = $this->keyGenerator;
+        $return = $keyGen($foreignObject, $additional);
 
+        if (isset($return)) {
+            if (!is_array($return)) {
+                $return = [$return];
+            }
+            $return = implode('.', $return);
+            return $return;
+        }
+
+        return null;
+    }
     /**
      * Get key translation
      * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
      * @return __return_getKeyTranslation_type__                    __return_getKeyTranslation_description__
      */
-    public function getKeyTranslation(Model $foreignObject)
+    public function getKeyTranslation(Model $foreignObject, $key = null)
     {
+        if (isset($key)) {
+            return $this->internalGetKeyTranslation($foreignObject, $key);
+        }
         $key = $this->generateKey($foreignObject);
+        $result = $this->internalGetKeyTranslation($foreignObject, $key);
+        if (!empty($result)) {
+            return $result;
+        }
+        if (!empty($foreignObject->additionalKeys)) {
+            foreach ($foreignObject->additionalKeys as $additional => $value) {
+                $key = $this->generateKey($foreignObject, [$additional, $value]);
+                $result = $this->internalGetKeyTranslation($foreignObject, $key);
+                if (!empty($result)) {
+                    return $result;
+                }
+            }
+        }
+        return false;
+    }
+
+    protected function internalGetKeyTranslation(Model $foreignObject, $key) {
         if ($this->settings['universalKey']) {
             return KeyTranslation::findOne(['key' => $key]);
         } else {
@@ -287,24 +340,34 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      */
     public function saveKeyTranslation(Model $foreignObject, $localObject)
     {
-        $key = $this->getKeyTranslation($foreignObject);
-        if (!$key) {
-            $key = new KeyTranslation;
-            $key->data_interface_id = $this->module->collectorItem->interfaceObject->primaryKey;
-            $key->registry_id = $localObject->primaryKey;
-            $key->key = $this->generateKey($foreignObject);
-            if (!$key->save()) {
-                \d($key->attributes);
-                \d($key->errors);
-                exit;
-
-                return false;
+        $key = $this->internalSaveKeyTranslation($foreignObject, $localObject, $this->generateKey($foreignObject));
+        if (!empty($foreignObject->additionalKeys)) {
+            foreach ($foreignObject->additionalKeys as $additional => $value) {
+                $this->internalSaveKeyTranslation($foreignObject, $localObject, $this->generateKey($foreignObject, [$additional, $value]));
             }
         }
 
         return $key;
     }
 
+    public function internalSaveKeyTranslation(Model $foreignModel, $localObject, $key)
+    {
+        $keyTranslation = $this->getKeyTranslation($foreignModel, $key);
+        if (!$keyTranslation) {
+            $keyTranslation = new KeyTranslation;
+            $keyTranslation->data_interface_id = $this->module->collectorItem->interfaceObject->primaryKey;
+            $keyTranslation->registry_id = $localObject->primaryKey;
+            $keyTranslation->key = $key;
+            if (!$keyTranslation->save()) {
+                \d($keyTranslation->attributes);
+                \d($keyTranslation->errors);
+                exit;
+
+                return false;
+            }
+        }
+        return $keyTranslation;
+    }
     /**
      * __method_loadForeignDataItems_description__
      */
