@@ -18,68 +18,6 @@ use cascade\components\dataInterface\MissingItemException;
 class DataItem extends \cascade\components\dataInterface\connectors\generic\DataItem
 {
 
-
-    /**
-    * @inheritdoc
-     */
-    protected function handleForeign($baseAttributes = [])
-    {
-        if ($this->ignoreForeignObject) {
-            return null;
-        }
-
-        // foreign to local
-
-        // find or start up local object
-        $localModel = $this->dataSource->localModel;
-
-        if (!isset($this->localObject)) {
-            $this->localObject = new $localModel;
-        }
-
-        $this->localObject->auditAgent = $this->module->collectorItem->interfaceObject->primaryKey;
-
-        $attributes = $this->dataSource->buildLocalAttributes($this->foreignObject, $this->localObject);
-        if (empty($attributes)) {
-            return false;
-        }
-
-        $relations = [];
-        // load local object
-        foreach ($attributes as $key => $value) {
-            $this->localObject->{$key} = $value;
-        }
-
-        foreach (array_merge($this->dataSource->baseAttributes, $baseAttributes) as $key => $value) {
-            $this->localObject->{$key} = $value;
-        }
-
-        // save local object
-        if (!$this->localObject->save()) {
-            return false;
-        }
-
-        // save foreign key map
-        if (!$this->dataSource->saveKeyTranslation($this->foreignObject, $this->localObject)) {
-            throw new \Exception("Unable to save key translation!");
-        }
-
-        // loop through children
-        foreach ($this->foreignObject->children as $table => $children) {
-            $dataSource = $this->module->getDataSource($table);
-            if (empty($dataSource) || !$dataSource->isReady()) { continue; }
-            foreach ($children as $childId) {
-                // let the handler figure it out
-                if (!($dataItem = $dataSource->getForeignDataItem($childId))) {
-                    continue;
-                }
-                $childLocalObject = $dataItem->handle(true, ['indirectObject' => $this->localObject, 'relationModels' => [['parent_object_id' => $this->localObject->primaryKey]]]);
-            }
-        }
-
-        return $this->localObject;
-    }
-
     /**
      * __method_fillRelationConfig_description__
      * @param __param_config_type__      $config      __param_config_description__

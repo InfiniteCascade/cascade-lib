@@ -216,7 +216,7 @@ class ObjectController extends Controller
         $type = $this->params['type'] = $object->objectType;
         $viewEvent = new ObjectViewEvent(['object' => $object, 'action' => $action]);
         $type->trigger(TypeModule::EVENT_VIEW_OBJECT, $viewEvent);
-        Yii::$app->collectors['widgets']->lazy = true;
+        Yii::$app->collectors['widgets']->lazy = false;
         
         if ($viewEvent->handled) {
             if ($viewEvent->accessed) {

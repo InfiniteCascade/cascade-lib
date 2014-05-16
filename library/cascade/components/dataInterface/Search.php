@@ -7,6 +7,8 @@
 
 namespace cascade\components\dataInterface;
 
+use infinite\helpers\Console;
+
 /**
  * Search [@doctodo write class description for Search]
  *
@@ -21,7 +23,7 @@ class Search extends \infinite\base\Component
     /**
      * @var __var_threshold_type__ __var_threshold_description__
      */
-    public $threshold = 9;
+    public $threshold = 80;
     /**
      * @var __var_autoadjust_type__ __var_autoadjust_description__
      */
@@ -30,6 +32,8 @@ class Search extends \infinite\base\Component
      * @var __var_dataSource_type__ __var_dataSource_description__
      */
     public $dataSource;
+
+    public $foreignFilter;
 
     /**
      * @var __var__localFields_type__ __var__localFields_description__
@@ -54,10 +58,15 @@ class Search extends \infinite\base\Component
         if (!isset($searchParams['limit'])) {
             $searchParams['limit'] = 5;
         }
+        $searchParams['skipForeign'] = true;
         $query = [];
         foreach ($this->foreignFields as $field) {
             if (!empty($item->foreignObject->{$field})) {
-                $query[] = $item->foreignObject->{$field};
+                $value = $item->foreignObject->{$field};
+                if (isset($this->foreignFilter)) {
+                    $value = call_user_func($this->foreignFilter, $value);
+                }
+                $query[] = $value;
             }
         }
 
@@ -83,11 +92,26 @@ class Search extends \infinite\base\Component
             return false;
         } elseif (count($searchResults) === 1
             || !self::$interactive
-            || $searchResults[0]->score > ($this->threshold * $this->autoadjust)) {
+            || $searchResults[0]->score > ($this->threshold * $this->autoadjust)
+            || $searchResults[0]->descriptor === $query[0]) {
             return $searchResults[0]->object;
         } else {
-            \d($query);
-            \d($searchResults);exit;
+            Console::output("Multiple results found for: ". implode('; ', $query));
+            $options = ['' => 'New Object'];
+            $resultsNice = [];
+            $optionNumber = 1;
+            foreach ($searchResults as $result) {
+                $resultsNice[$optionNumber] = $result;
+                $options[$optionNumber] = $result->descriptor .' ('. $result->score .')';
+                Console::output($optionNumber .') '. $result->descriptor .' ('. $result->score .')');
+                $optionNumber++;
+            }
+            $select = Console::select("Choose:", $options);
+            if ($select === '') {
+                return false;
+            } else {
+                return $resultNice[$select];
+            }
         }
     }
 

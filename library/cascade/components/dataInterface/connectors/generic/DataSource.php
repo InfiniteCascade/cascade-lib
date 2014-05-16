@@ -37,6 +37,9 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     public $keys = [];
 
+    public $foreignParentKeys = [];
+    public $foreignChildKeys = [];
+
     /**
     * @inheritdoc
      */
@@ -72,18 +75,84 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      */
     abstract public function getForeignDataModel($key);
 
+
+    /**
+     * __method_updateLocalObject_description__
+     * @param __param_relatedType_type__        $relatedType       __param_relatedType_description__
+     * @param __param_foreignPrimaryKey_type__  $foreignPrimaryKey __param_foreignPrimaryKey_description__
+     * @param __param_valueMap_type__           $valueMap          __param_valueMap_description__
+     * @param __param_fieldMap_type__           $fieldMap          __param_fieldMap_description__
+     * @param __param_localModel_type__         $localModel        __param_localModel_description__
+     * @return __return_updateLocalObject_type__ __return_updateLocalObject_description__
+     */
+    public function updateLocalObject($relatedType, $valueMap, $fieldMap, $localModel)
+    {
+        $localModelClass = $relatedType->primaryModel;
+        // @todo eventually we'll probably take some keys out of this
+        $searchMap = $valueMap;
+        if (isset($searchMap[0])) {
+            throw new \Exception("boo");
+        }
+        if (isset($fieldMap->searchFields) && is_array($fieldMap->searchFields)) {
+            foreach ($searchMap as $field => $value) {
+                if (!in_array($field, $fieldMap->searchFields)) {
+                    unset($searchMap[$field]);
+                }
+            }
+        }
+        $fieldParts = explode(':', $fieldMap->localField);
+        if ($fieldParts[0] === 'child') {
+            $currentRelationsFunction = 'child';
+        } else {
+            $currentRelationsFunction = 'parent';
+        }
+        // first, lets see if it exists
+        $relatedObject = null;
+        $currentRelation = false;
+        if (!empty($localModel) && !$localModel->isNewRecord) {
+            $test = $localModel->{$currentRelationsFunction}($relatedType->primaryModel, [], ['where' => $searchMap, 'disableAccessCheck' => 1]);
+            if ($test) {
+                $relatedObject = $test;
+                $currentRelation = true;
+            }
+        }
+
+        if (empty($relatedObject)) {
+            $relatedClass = $relatedType->primaryModel;
+            $relatedObject = new $relatedClass;
+        }
+        $relatedObject->attributes = $valueMap;
+        if ($relatedObject->save()) {
+            return $relatedObject;
+        } else {
+            $errors = $relatedObject->errors;
+            foreach ($fieldMap->mute as $mute) {
+                unset($errors[$mute]);
+            }
+            if (!empty($errors)) {
+                \d($relatedObject->attributes);
+                \d($errors); exit;
+            }
+            return false;
+        }
+    }
+
     /**
      * __method_buildLocalAttributes_description__
      * @param cascade\components\dataInterface\connectors\db\Model $foreignModel __param_foreignModel_description__
      * @param __param_localModel_type__                            $localModel   __param_localModel_description__ [optional]
      * @return __return_buildLocalAttributes_type__                 __return_buildLocalAttributes_description__
      */
-    public function buildLocalAttributes(Model $foreignModel, $localModel = null)
+    public function buildLocalAttributes(Model $foreignModel, $localModel = null, $fieldsMap = null)
     {
         $a = [];
-        foreach ($this->map as $localKey => $fieldMap) {
+        if (is_null($fieldsMap)) {
+            $fieldsMap = $this->map;
+        }
+        foreach ($fieldsMap as $localKey => $fieldMap) {
             if ($localKey === $this->localPrimaryKeyName) { continue; }
-            $value = $fieldMap->extractValue($foreignModel);
+            $value = $fieldMap->extractValue($this, $foreignModel);
+            if ($fieldMap->testIgnore($value)) { continue; }
             $taxonomyId = null;
             if (isset($fieldMap->taxonomy) && isset($fieldMap->taxonomy['taxonomy_type'])) {
                 $taxonomyTypeItem = Yii::$app->collectors['taxonomies']->getOne($fieldMap->taxonomy['taxonomy_type']);
@@ -99,16 +168,13 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
             if (strpos($fieldMap->localField, ':') !== false) {
                 // we're feeding the relations
-                $relationKeys = $value;
+                $relationKey = $value;
                 $value = false;
                 $fields = [];
                 if (!empty($localModel)) {
                     $fields = $localModel->getFields();
                 }
-                if (!empty($relationKeys)) {
-                    if (!is_array($relationKeys)) {
-                        $relationKeys = [$relationKeys];
-                    }
+                if (!empty($relationKey)) {
                     $fieldParts = explode(':', $fieldMap->localField);
                     $checkField = $fieldParts;
                     $checkField[2] = '';
@@ -133,10 +199,13 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
                         $a['relationModels'] = [];
                     }
                     $fieldKey = $fieldParts[0] .'_object_id';
-                    foreach ($relationKeys as $relationKey) {
-                        if (empty($fieldParts[2])) {
+                    if (empty($fieldParts[2]) && (!is_array($relationKey) || isset($relationKey[0]))) {
+                        if (!is_array($relationKey)) {
+                            $relationKey = [$relationKey];
+                        }
+                        foreach ($relationKey as $subkey) {
                             // we're just matching to an existing object's primary key
-                            if (($relatedObject = $this->module->getLocalObject($relatedType->primaryModel, $relationKey)) && is_object($relatedObject)) {
+                            if (($relatedObject = $this->module->getLocalObject($relatedType->primaryModel, $subkey)) && is_object($relatedObject)) {
                                 $relation = [$fieldKey => $relatedObject->primaryKey];
                                 if (isset($taxonomyId)) {
                                     $relation['taxonomy_id'] = $taxonomyId;
@@ -144,23 +213,24 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
                                 }
                                 $a['relationModels'][] = $relation;
                             }
-                        } else {
-                            // we're creating or updating an existing related object's field
+                        }
+                    } else {
+                        $valueMap = [];
+                        // we're creating or updating an existing related object's field
+                        if (is_array($relationKey)) {
+                            // the localRelatedField is a dummy; build/search for object using this hash
+                            $valueMap = $relationKey;
+                        } elseif (isset($fieldParts[2])) {
                             $localRelatedField = $fieldParts[2];
-                            if (is_array($relationKey)) {
-                                // the localRelatedField is a dummy; build/search for object using this hash
-                                $valueMap = $relationKey;
-                            } else {
-                                $valueMap = [$localRelatedField => $relationKey];
+                            $valueMap = [$localRelatedField => $relationKey];
+                        }
+                        if (($relatedObject = $this->updateLocalObject($relatedType, $valueMap, $fieldMap, $localModel)) && is_object($relatedObject)) {
+                            $relation = [$fieldKey => $relatedObject->primaryKey];
+                            if (isset($taxonomyId)) {
+                                $relation['taxonomy_id'] = $taxonomyId;
+                                $taxonomyId = null;
                             }
-                            if (($relatedObject = $this->module->updateLocalObject($relatedType, $relationKey, $valueMap, $fieldMap, $localModel)) && is_object($relatedObject)) {
-                                $relation = [$fieldKey => $relatedObject->primaryKey];
-                                if (isset($taxonomyId)) {
-                                    $relation['taxonomy_id'] = $taxonomyId;
-                                    $taxonomyId = null;
-                                }
-                                $a['relationModels'][] = $relation;
-                            }
+                            $a['relationModels'][] = $relation;
                         }
                     }
                 }
@@ -377,6 +447,9 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     {
         $config['isForeign'] = true;
         $config['foreignObject'] = $model;
+        if (isset($model)) {
+            $model->interface = $this->module;
+        }
         $object = $this->createDataItem($config);
         return $this->_foreignDataItems[$object->id] = $object;
     }

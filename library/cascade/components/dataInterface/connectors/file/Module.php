@@ -45,6 +45,7 @@ abstract class Module extends BaseModule
             if (!isset($settings['class'])) {
                 $settings['class'] = $this->sourceFileClass;
             }
+            $settings['id'] = $key;
             $this->_sourceFiles[$key] = Yii::createObject($settings);
         }
     }

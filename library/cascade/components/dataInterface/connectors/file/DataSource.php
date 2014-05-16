@@ -22,6 +22,7 @@ use cascade\components\dataInterface\connectors\generic\Model as GenericModel;
  */
 class DataSource extends \cascade\components\dataInterface\connectors\generic\DataSource
 {
+    public $lazyForeign = false;
     /**
      * @inheritdoc
      */
@@ -34,6 +35,8 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
      * @inheritdoc
      */
     public $searchClass = 'cascade\\components\\dataInterface\\connectors\\file\\Search';
+
+    public $foreignModelClass = 'cascade\\components\\dataInterface\\connectors\\file\\Model';
 
     protected $_fileSource;
 
@@ -58,17 +61,7 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
      */
     public function getForeignDataModel($key)
     {
-        $config = $this->settings['foreignPullParams'];
-        if (!isset($config['where'])) {
-            $config['where'] = [];
-        }
-        if (!empty($config['where'])) {
-            $config['where'] = ['and', $config['where'], [$this->foreignModel->primaryKey() => $key]];
-        } else {
-            $config['where'][$this->foreignModel->primaryKey()] = $key;
-        }
-        //var_dump($this->foreignModel->find($config)->count('*', $this->module->db));
-        return $this->foreignModel->findOne($config);
+        return false;
     }
 
 
@@ -94,18 +87,22 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
      */
     protected function loadForeignDataItems()
     {
-        $this->_foreignDataItems = [];
-        if ($this->lazyForeign) {
-            $primaryKeys = $this->foreignModel->findPrimaryKeys($this->settings['foreignPullParams']);
-            foreach ($primaryKeys as $primaryKey) {
-                $this->createForeignDataItem(null, ['foreignPrimaryKey' => $primaryKey]);
-            }
-        } else {
-            $foreignModels= $this->foreignModel->findAll($this->settings['foreignPullParams']);
-            foreach ($foreignModels as $key => $model) {
-                $this->createForeignDataItem($model, []);
+        if (!$this->fileSource) { \d("boom"); return false; }
+        $lines = $this->fileSource->getLines($this->lazyForeign);
+        echo "Processing {$this->fileSource->id}...";
+        foreach ($lines as $id => $line) {
+            if ($this->lazyForeign) {
+                $this->createForeignDataItem(null, ['deferredModel' => $line]);
+            } else {
+                $model = $this->createModel($line->id, $line->attributes);
+                $this->createForeignDataItem($model, ['deferredModel' => $line]);
             }
         }
+        echo "Done!\n";
+    }
 
+    public function createModel($id, $attributes)
+    {
+        return Yii::createObject(['class' => $this->foreignModelClass, 'tableName' => $this->fileSource->id, 'interface' => $this->module, 'id' => $id, 'attributes' => $attributes]);
     }
 }

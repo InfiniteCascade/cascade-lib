@@ -129,7 +129,7 @@ abstract class DataItem extends \infinite\base\Component
      * @param array                  $baseAttributes __param_baseAttributes_description__ [optional]
      * @return __return_handle_type__ __return_handle_description__
      */
-    public function handle($fromParent = false, $baseAttributes = [])
+    public function handle($fromRelative = false, $baseAttributes = [])
     {
         if ($this->handledDataItem) {
             if ($this->isForeign) {
@@ -148,7 +148,7 @@ abstract class DataItem extends \infinite\base\Component
 
             return $object;
         }
-        if ($fromParent || !$this->dataSource->childOnly) {
+        if ($fromRelative || !$this->dataSource->childOnly) {
             if ($this->isForeign) {
                 // handle local to foreign
                 $result = $this->handler->handleForeign($baseAttributes);

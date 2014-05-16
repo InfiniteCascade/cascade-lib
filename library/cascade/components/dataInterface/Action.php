@@ -80,15 +80,16 @@ class Action extends \infinite\base\Object
      */
     public function progress()
     {
+        return;
         if (!$this->_progress) {
             $this->_progress = true;
             Console::startProgress($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
         }
         $currentPercentage = (int) floor(($this->progressDone / $this->progressTotal) * 100);
-        if ($this->_progressPercentage !== $currentPercentage) {
+        //if ($this->_progressPercentage !== $currentPercentage) {
             $this->_progressPercentage = $currentPercentage;
             Console::updateProgress($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
-        }
+        //}
     }
 
     /**

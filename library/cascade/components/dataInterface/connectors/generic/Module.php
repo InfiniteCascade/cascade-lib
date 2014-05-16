@@ -84,58 +84,6 @@ abstract class Module extends BaseModule
         return true;
     }
 
-    /**
-     * __method_updateLocalObject_description__
-     * @param __param_relatedType_type__        $relatedType       __param_relatedType_description__
-     * @param __param_foreignPrimaryKey_type__  $foreignPrimaryKey __param_foreignPrimaryKey_description__
-     * @param __param_valueMap_type__           $valueMap          __param_valueMap_description__
-     * @param __param_fieldMap_type__           $fieldMap          __param_fieldMap_description__
-     * @param __param_localModel_type__         $localModel        __param_localModel_description__
-     * @return __return_updateLocalObject_type__ __return_updateLocalObject_description__
-     */
-    public function updateLocalObject($relatedType, $foreignPrimaryKey, $valueMap, $fieldMap, $localModel)
-    {
-        $localModelClass = $relatedType->primaryModel;
-        // @todo eventually we'll probably take some keys out of this
-        $searchMap = $valueMap;
-        if (isset($fieldMap->searchFields) && is_array($fieldMap->searchFields)) {
-            foreach ($searchMap as $field => $value) {
-                if (!in_array($field, $fieldMap->searchFields)) {
-                    unset($searchMap[$field]);
-                }
-            }
-        }
-
-        $fieldParts = explode(':', $fieldMap->localField);
-        if ($fieldParts[0] === 'child') {
-            $currentRelationsFunction = 'child';
-        } else {
-            $currentRelationsFunction = 'parent';
-        }
-        // first, lets see if it exists
-        $relatedObject = null;
-        $currentRelation = false;
-        if (!empty($localModel) && !$localModel->isNewRecord) {
-            $test = $localModel->{$currentRelationsFunction}($relatedType->primaryModel, [], ['where' => $searchMap, 'disableAccessCheck' => 1]);
-            if ($test) {
-                $relatedObject = $test;
-                $currentRelation = true;
-            }
-        }
-
-        if (empty($relatedObject)) {
-            $relatedClass = $relatedType->primaryModel;
-            $relatedObject = new $relatedClass;
-        }
-        $relatedObject->attributes = $valueMap;
-        if ($relatedObject->save()) {
-            return $relatedObject;
-        } else {
-            \d($relatedObject); exit;
-
-            return false;
-        }
-    }
 
 
     /**
@@ -180,8 +128,7 @@ abstract class Module extends BaseModule
                 }
                 $dataSource['name'] = $foreignModel;
                 $dataSource['foreignModel'] = $this->getForeignModel($foreignModel);
-                $dataSource['module'] = $this;
-                $this->_dataSources[$foreignModel] = Yii::createObject($dataSource);
+                $this->_dataSources[$foreignModel] = Yii::createObject(array_merge(['module' => $this], $dataSource));
             }
         }
 

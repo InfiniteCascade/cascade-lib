@@ -7,6 +7,7 @@
 
 namespace cascade\components\dataInterface\connectors\file;
 
+use Yii;
 use cascade\components\dataInterface\RecursionException;
 use cascade\components\dataInterface\MissingItemException;
 
@@ -17,67 +18,27 @@ use cascade\components\dataInterface\MissingItemException;
  */
 class DataItem extends \cascade\components\dataInterface\connectors\generic\DataItem
 {
-
-
-    /**
-    * @inheritdoc
-     */
-    protected function handleForeign($baseAttributes = [])
+    public $deferredModel;
+    public function getId()
     {
-        if ($this->ignoreForeignObject) {
-            return null;
-        }
-
-        // foreign to local
-
-        // find or start up local object
-        $localModel = $this->dataSource->localModel;
-
-        if (!isset($this->localObject)) {
-            $this->localObject = new $localModel;
-        }
-
-        $this->localObject->auditAgent = $this->module->collectorItem->interfaceObject->primaryKey;
-
-        $attributes = $this->dataSource->buildLocalAttributes($this->foreignObject, $this->localObject);
-        if (empty($attributes)) {
-            return false;
-        }
-
-        $relations = [];
-        // load local object
-        foreach ($attributes as $key => $value) {
-            $this->localObject->{$key} = $value;
-        }
-
-        foreach (array_merge($this->dataSource->baseAttributes, $baseAttributes) as $key => $value) {
-            $this->localObject->{$key} = $value;
-        }
-
-        // save local object
-        if (!$this->localObject->save()) {
-            return false;
-        }
-
-        // save foreign key map
-        if (!$this->dataSource->saveKeyTranslation($this->foreignObject, $this->localObject)) {
-            throw new \Exception("Unable to save key translation!");
-        }
-
-        // loop through children
-        foreach ($this->foreignObject->children as $table => $children) {
-            $dataSource = $this->module->getDataSource($table);
-            if (empty($dataSource) || !$dataSource->isReady()) { continue; }
-            foreach ($children as $childId) {
-                // let the handler figure it out
-                if (!($dataItem = $dataSource->getForeignDataItem($childId))) {
-                    continue;
-                }
-                $childLocalObject = $dataItem->handle(true, ['indirectObject' => $this->localObject, 'relationModels' => [['parent_object_id' => $this->localObject->primaryKey]]]);
+        if ($this->isForeign) {
+            if (isset($this->deferredModel)) {
+                return $this->deferredModel->id;
+            } elseif (isset($this->foreignObject)) {
+                return $this->foreignObject->primaryKey;
+            }
+        } else {
+            if (isset($this->localPrimaryKey)) {
+                return $this->localPrimaryKey;
+            } elseif (isset($this->localObject)) {
+                return $this->localObject->primaryKey;
             }
         }
+        if (isset($this->primaryObject)) {
+            return $this->primaryObject->primaryKey;
+        }
 
-        return $this->localObject;
+        return null;
     }
 
     /**
@@ -119,16 +80,8 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
             throw new RecursionException('Ran into recursion while loading foreign object');
         }
         $this->_isLoadingForeignObject = true;
-        if (isset($this->foreignPrimaryKey)) {
-            $foreignObject = $this->dataSource->getForeignDataModel($this->foreignPrimaryKey);
-            if ($foreignObject) {
-                $this->foreignObject = $foreignObject;
-            }
-        }
-        if (empty($this->_foreignObject)) {
-            \d($this->foreignPrimaryKey);
-            \d($this->dataSource->name);
-            throw new MissingItemException('Foreign item could not be found: '. $this->foreignPrimaryKey);
+        if (isset($this->deferredModel) && ($attributes = $this->deferredModel->attributes)) {
+            $this->foreignObject = $this->dataSource->createModel($this->deferredModel->id, $this->deferredModel->attributes);
         }
         $this->_isLoadingForeignObject = false;
     }

@@ -78,6 +78,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
      */
     public function getAttributes()
     {
+        \d("boom!");exit;
         $a = [];
         foreach ($this->meta->attributeKeys as $k) {
             $a[$k] = null;
@@ -89,4 +90,16 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
         return $a;
     }
 
+    public function setTableName($value)
+    {
+        $this->_tableName = $value;
+    }
+
+    public function getTableName()
+    {
+        if (isset($this->_tableName)) {
+            return $this->_tableName;
+        }
+        return static::baseClassName();
+    }
 }

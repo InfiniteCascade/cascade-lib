@@ -14,6 +14,7 @@ namespace cascade\components\db\fields\formats;
  */
 class Text extends Base
 {
+    public $showEmptyString = true;
     /**
     * @inheritdoc
      */
@@ -27,10 +28,12 @@ class Text extends Base
                 $result = null;
             }
         }
-        $result = strip_tags($result);
+        $result = preg_replace("/\<br ?\\?\>/", "\n", $result);
         $result = preg_replace("/\n+/", "\n", $result);
-        if (empty($result)) {
+        if (empty($result) && $this->showEmptyString) {
             $result = '<span class="empty">(none)</span>';
+        } elseif (empty($result)) {
+            $result = null;
         }
 
         return $result;

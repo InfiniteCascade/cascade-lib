@@ -411,6 +411,13 @@ abstract class DataSource extends \infinite\base\Component
      */
     public function setMap($m)
     {
+        $this->_map = $this->buildMap($m);
+        return true;
+    }
+
+    public function buildMap($m)
+    {
+        $map = [];
         foreach ($m as $k => $v) {
             $fieldMap = $v;
             if (!isset($fieldMap['class'])) {
@@ -418,10 +425,9 @@ abstract class DataSource extends \infinite\base\Component
             }
             $fieldMap['dataSource'] = $this;
             $fieldMap = Yii::createObject($fieldMap);
-            $this->_map[] = $fieldMap;
+            $map[] = $fieldMap;
         }
-
-        return true;
+        return $map;
     }
 
     /**
