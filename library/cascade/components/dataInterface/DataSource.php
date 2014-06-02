@@ -151,6 +151,8 @@ abstract class DataSource extends \infinite\base\Component
     public function clearCaches()
     {
         ActiveRecord::clearCache();
+        \yii\caching\Dependency::resetReusableData();
+        \cascade\components\types\Relationship::clearCache();
     }
 
     /**

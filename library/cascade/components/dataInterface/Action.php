@@ -7,8 +7,9 @@
 
 namespace cascade\components\dataInterface;
 
+use Yii;
 use cascade\models\DataInterfaceLog;
-use yii\helpers\Console;
+use infinite\helpers\Console;
 
 /**
  * Action [@doctodo write class description for Action]
@@ -80,16 +81,22 @@ class Action extends \infinite\base\Object
      */
     public function progress()
     {
-        return;
+        // return;
         if (!$this->_progress) {
             $this->_progress = true;
-            Console::startProgress($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
+            Console::startProgressSpecial($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
         }
         $currentPercentage = (int) floor(($this->progressDone / $this->progressTotal) * 100);
-        //if ($this->_progressPercentage !== $currentPercentage) {
+        if ($this->_progressPercentage !== $currentPercentage) {
+            if ($currentPercentage % 5 === 0) {
+                $interface = $this->_interface;
+                $app = Yii::$app;
+                $logger = Yii::getLogger();
+                xdebug_break();
+            }
             $this->_progressPercentage = $currentPercentage;
-            Console::updateProgress($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
-        //}
+            Console::updateProgressSpecial($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
+        }
     }
 
     /**
@@ -180,7 +187,7 @@ class Action extends \infinite\base\Object
     public function end($endInterrupted = false)
     {
         if (!is_null($this->log->ended)) { return true; }
-        Console::endProgress(true);
+        Console::endProgressSpecial(true);
         Console::stdout("Done! ". PHP_EOL);
         if ($endInterrupted) {
             $lerror = error_get_last();

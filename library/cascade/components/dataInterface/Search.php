@@ -23,7 +23,7 @@ class Search extends \infinite\base\Component
     /**
      * @var __var_threshold_type__ __var_threshold_description__
      */
-    public $threshold = 80;
+    public $threshold = 20;
     /**
      * @var __var_autoadjust_type__ __var_autoadjust_description__
      */
@@ -55,6 +55,9 @@ class Search extends \infinite\base\Component
         if (!isset($searchParams['searchFields'])) {
             $searchParams['searchFields'] = $this->localFields;
         }
+        if (empty($searchParams['searchFields'])) {
+            return false;
+        }
         if (!isset($searchParams['limit'])) {
             $searchParams['limit'] = 5;
         }
@@ -77,6 +80,7 @@ class Search extends \infinite\base\Component
         $localClass = $this->dataSource->localModel;
         $searchResults = $localClass::searchTerm(implode(' ', $query), $searchParams);
         foreach ($searchResults as $k => $r) {
+            if ($r->descriptor === $query[0]) { continue; }
             if ($r->score < $this->threshold) {
                 unset($searchResults[$k]);
             } else {
@@ -108,8 +112,10 @@ class Search extends \infinite\base\Component
             }
             $select = Console::select("Choose:", $options);
             if ($select === '') {
+                Console::output("Creating new object!");
                 return false;
             } else {
+                Console::output("Selected " . $resultNice[$select]->descriptor);
                 return $resultNice[$select];
             }
         }

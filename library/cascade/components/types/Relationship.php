@@ -35,7 +35,7 @@ class Relationship extends \infinite\base\Object
     /**
      * @var __var__cache_type__ __var__cache_description__
      */
-    static $_cache = [];
+    protected static $_cache = [];
     /**
      * @var __var__defaultOptions_type__ __var__defaultOptions_description__
      */
@@ -55,8 +55,13 @@ class Relationship extends \infinite\base\Object
     /**
      * @var __var__relationships_type__ __var__relationships_description__
      */
-    static $_relationships = [];
+    protected static $_relationships = [];
 
+    public static function clearCache()
+    {
+        self::$_cache = [];
+        self::$_relationships = [];
+    }
     /**
      * __method_package_description__
      * @return __return_package_type__ __return_package_description__

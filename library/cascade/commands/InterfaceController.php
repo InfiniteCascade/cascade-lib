@@ -9,7 +9,7 @@ namespace cascade\commands;
 
 use Yii;
 
-use yii\helpers\Console;
+use infinite\helpers\Console;
 use yii\console\Exception;
 
 use infinite\helpers\ArrayHelper;
