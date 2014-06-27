@@ -925,8 +925,10 @@ trait ActiveRecordTrait
             }
             ArrayHelper::multisort($this->_fields, 'priority', SORT_ASC);
         }
-        foreach ($this->_fields as $field) {
-            $field->formField->owner = $owner;
+        if (!empty($owner)) {
+            foreach ($this->_fields as $field) {
+                $field->formField->owner = $owner;
+            }
         }
         return $this->_fields;
     }

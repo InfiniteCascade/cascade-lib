@@ -36,23 +36,14 @@ class InterfaceController extends \infinite\console\Controller
      */
     protected $_started = false;
 
-    /**
-     * __method_events_description__
-     * @return __return_events_type__ __return_events_description__
-     */
-    public function events()
-    {
-        return [
-            self::EVENT_BEFORE_ACTION => [$this, 'start']
-        ];
-    }
 
     /**
      * __method_start_description__
      */
-    public function start()
+    public function runAction($id, $params = [])
     {
         $this->_started = true;
+        return parent::runAction($id, $params);
     }
 
     /**
@@ -83,7 +74,6 @@ class InterfaceController extends \infinite\console\Controller
             $interfaces = ArrayHelper::map(Yii::$app->collectors['dataInterfaces']->getAll(), 'systemId', 'object.name');
             $this->interface = $this->select("Choose interface", $interfaces);
         }
-
         return $this->_interface;
     }
 
