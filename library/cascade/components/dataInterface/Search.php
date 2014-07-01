@@ -8,6 +8,7 @@
 namespace cascade\components\dataInterface;
 
 use infinite\helpers\Console;
+use cascade\components\helpers\StringHelper;
 
 /**
  * Search [@doctodo write class description for Search]
@@ -23,7 +24,7 @@ class Search extends \infinite\base\Component
     /**
      * @var __var_threshold_type__ __var_threshold_description__
      */
-    public $threshold = 20;
+    public $threshold = 80;
     /**
      * @var __var_autoadjust_type__ __var_autoadjust_description__
      */
@@ -81,9 +82,15 @@ class Search extends \infinite\base\Component
         $searchResults = $localClass::searchTerm(implode(' ', $query), $searchParams);
         foreach ($searchResults as $k => $r) {
             if ($r->descriptor === $query[0]) { continue; }
-            if ($r->score < $this->threshold) {
+            $score = (
+                ($r->score * .2)
+                + (StringHelper::compareStrings($r->descriptor, $query[0]) * .8)
+                );
+            $r->score = $score;
+            if ($score < $this->threshold) {
                 unset($searchResults[$k]);
             } else {
+            //} elseif ($score < ($this->threshold * $this->autoadjust)) {
                 $reverseKey = $this->dataSource->getReverseKeyTranslation($r->id);
                 if (!empty($reverseKey)) {
                     unset($searchResults[$k]);

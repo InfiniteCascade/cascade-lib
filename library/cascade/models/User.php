@@ -12,7 +12,6 @@ use Yii;
 use cascade\components\db\ActiveRecordTrait as BaseActiveRecordTrait;
 use cascade\components\types\ActiveRecordTrait as TypesActiveRecordTrait;
 
-use yii\helpers\Security;
 use infinite\base\exceptions\Exception;
 
 /**
@@ -67,7 +66,7 @@ class User extends \infinite\db\models\User
             $user->last_name = 'User';
             $user->email = self::SYSTEM_EMAIL;
             $user->status = static::STATUS_INACTIVE;
-            $user->password =  Security::generateRandomKey();
+            $user->password =  Yii::$app->security->generateRandomKey();
             $user->relationModels = [['parent_object_id' => $superGroup->primaryKey]];
             if (!$user->save()) {
                 \d($user->email);
