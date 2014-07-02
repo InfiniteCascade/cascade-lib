@@ -383,9 +383,11 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     {
         $key = is_object($localObject) ? $localObject->primaryKey : $localObject;
         if ($this->settings['universalKey']) {
-            return KeyTranslation::findOne(['registry_id' => $key]);
+            //return KeyTranslation::findOne(['registry_id' => $key]);
+            return KeyTranslation::find()->where(['registry_id' => $key])->one();
         } else {
-            return KeyTranslation::findOne(['registry_id' => $key, 'data_interface_id' => $this->module->collectorItem->interfaceObject->primaryKey]);
+            //return KeyTranslation::findOne(['registry_id' => $key, 'data_interface_id' => $this->module->collectorItem->interfaceObject->primaryKey]);
+            return KeyTranslation::find()->where(['registry_id' => $key, 'data_interface_id' => $this->module->collectorItem->interfaceObject->primaryKey])->one();
         }
     }
 

@@ -81,7 +81,7 @@ class Search extends \infinite\base\Component
         $localClass = $this->dataSource->localModel;
         $searchResults = $localClass::searchTerm(implode(' ', $query), $searchParams);
         foreach ($searchResults as $k => $r) {
-            if ($r->descriptor === $query[0]) { continue; }
+            // if ($r->descriptor === $query[0]) { continue; }
             $score = (
                 ($r->score * .2)
                 + (StringHelper::compareStrings($r->descriptor, $query[0]) * .8)
@@ -90,7 +90,6 @@ class Search extends \infinite\base\Component
             if ($score < $this->threshold) {
                 unset($searchResults[$k]);
             } else {
-            //} elseif ($score < ($this->threshold * $this->autoadjust)) {
                 $reverseKey = $this->dataSource->getReverseKeyTranslation($r->id);
                 if (!empty($reverseKey)) {
                     unset($searchResults[$k]);

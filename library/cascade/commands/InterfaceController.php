@@ -32,21 +32,6 @@ class InterfaceController extends \infinite\console\Controller
      */
     public $verbose;
     /**
-     * @var __var__started_type__ __var__started_description__
-     */
-    protected $_started = false;
-
-
-    /**
-     * __method_start_description__
-     */
-    public function runAction($id, $params = [])
-    {
-        $this->_started = true;
-        return parent::runAction($id, $params);
-    }
-
-    /**
      * __method_actionIndex_description__
      */
     public function actionIndex()
@@ -59,20 +44,20 @@ class InterfaceController extends \infinite\console\Controller
      */
     public function actionRunOne()
     {
-        $this->out("Run Interface ". $this->interface->object->name, Console::UNDERLINE, Console::FG_GREEN);
+        $this->out("Run Interface ". $this->dataInterface->object->name, Console::UNDERLINE, Console::FG_GREEN);
         $this->hr();
-        $this->interface->run();
+        $this->dataInterface->run();
     }
 
     /**
      * Get interface
      * @return __return_getInterface_type__ __return_getInterface_description__
      */
-    public function getInterface()
+    public function getDataInterface()
     {
-        if ($this->_started && is_null($this->_interface)) {
+        if (is_null($this->_interface)) {
             $interfaces = ArrayHelper::map(Yii::$app->collectors['dataInterfaces']->getAll(), 'systemId', 'object.name');
-            $this->interface = $this->select("Choose interface", $interfaces);
+            $this->dataInterface = $this->select("Choose interface", $interfaces);
         }
         return $this->_interface;
     }
@@ -82,7 +67,7 @@ class InterfaceController extends \infinite\console\Controller
      * @param __param_value_type__ $value __param_value_description__
      * @throws Exception __exception_Exception_description__
      */
-    public function setInterface($value)
+    public function setDataInterface($value)
     {
         if (($interfaceItem = Yii::$app->collectors['dataInterfaces']->getOne($value)) && ($interface = $interfaceItem->object)) {
             $this->_interface = $interfaceItem;
@@ -96,6 +81,6 @@ class InterfaceController extends \infinite\console\Controller
      */
     public function options($id)
     {
-        return array_merge(parent::options($id), ['interface', 'verbose']);
+        return array_merge(parent::options($id), ['dataInterface', 'verbose']);
     }
 }

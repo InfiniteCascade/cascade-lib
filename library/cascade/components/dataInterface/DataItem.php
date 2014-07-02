@@ -52,6 +52,8 @@ abstract class DataItem extends \infinite\base\Component
      */
     public $localPrimaryKey;
 
+    public $baseAttributes = [];
+
 
     const EVENT_LOAD_FOREIGN_OBJECT = 0x01;
     const EVENT_LOAD_LOCAL_OBJECT = 0x02;
@@ -131,6 +133,7 @@ abstract class DataItem extends \infinite\base\Component
      */
     public function handle($fromRelative = false, $baseAttributes = [])
     {
+        $this->baseAttributes = $baseAttributes;
         if ($this->handledDataItem) {
             if ($this->isForeign) {
                 $object = $this->localObject;
