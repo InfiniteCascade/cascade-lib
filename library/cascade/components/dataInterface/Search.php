@@ -84,7 +84,7 @@ class Search extends \infinite\base\Component
             // if ($r->descriptor === $query[0]) { continue; }
             $score = (
                 ($r->score * .2)
-                + (StringHelper::compareStrings($r->descriptor, $query[0]) * .8)
+                + (StringHelper::compareStrings($r->descriptor, implode(' ', $query)) * .8)
                 );
             $r->score = $score;
             if ($score < $this->threshold) {
@@ -96,14 +96,13 @@ class Search extends \infinite\base\Component
                 }
             }
         }
-
         $searchResults = array_values($searchResults);
         if (empty($searchResults)) {
             return false;
         } elseif (count($searchResults) === 1
             || !self::$interactive
             || $searchResults[0]->score > ($this->threshold * $this->autoadjust)
-            || $searchResults[0]->descriptor === $query[0]) {
+            || $searchResults[0]->descriptor === implode(' ', $query)) {
             return $searchResults[0]->object;
         } else {
             Console::output("Multiple results found for: ". implode('; ', $query));
