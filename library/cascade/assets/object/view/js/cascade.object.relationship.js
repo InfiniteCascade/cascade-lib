@@ -24,8 +24,6 @@ $preparer.add(function(context) {
 		if (!_.isArray($this.relationshipOptions.lockFields)) {
 			$this.relationshipOptions.lockFields = _.values($this.relationshipOptions.lockFields);
 		}
-		$.debug($this.relationshipOptions);
-
 		$this.hasFields = function() {
 			if ($this.relationshipOptions.context.relationship.temporal) {
 				if (!(jQuery.inArray('start', $this.relationshipOptions.lockFields) > -1 && jQuery.inArray('end', $this.relationshipOptions.lockFields) > -1)) {
@@ -33,9 +31,10 @@ $preparer.add(function(context) {
 				}
 			}
 			if ($this.relationshipOptions.context.relationship.taxonomy) {
-				if (jQuery.inArray('taxonomy_id', $this.relationshipOptions.lockFields) === -1) {
-					return true;
-				}
+				return true;
+				// if (jQuery.inArray('taxonomy_id', $this.relationshipOptions.lockFields) === -1) {
+				// 	return true;
+				// }
 			}
 			if ($this.relationshipOptions.context.relationship.activeAble) {
 				if (jQuery.inArray('active', $this.relationshipOptions.lockFields) === -1) {
@@ -71,21 +70,37 @@ $preparer.add(function(context) {
 				}
 				endDateInput.val($this.relationshipOptions.model.attributes.end);
 			}
-			if ($this.relationshipOptions.context.relationship.taxonomy && jQuery.inArray('taxonomy_id', $this.relationshipOptions.lockFields) === -1) {
-				$.debug($this.relationshipOptions.lockFields);
+			if ($this.relationshipOptions.context.relationship.taxonomy) {
+				if (typeof $this.relationshipOptions.model.attributes.taxonomy_id === 'object') {
+					$this.relationshipOptions.model.attributes.taxonomy_id = _.values($this.relationshipOptions.model.attributes.taxonomy_id);
+				}
 				var taxonomy = $this.relationshipOptions.context.relationship.taxonomy;
 				var taxonomyCanvas = $('<div />', {'class': 'relationship-field relationship-field-taxonomy'}).appendTo($target);
 				var taxonomySelectGroup = $('<div />', {'class': 'form-group'}).appendTo(taxonomyCanvas);
 				var taxonomySelectLabel = $('<label />', {'class': ''}).html(taxonomy.name).appendTo(taxonomySelectGroup);
-				var taxonomySelectInput = $('<select />', {'class': 'form-control ignore-focus', 'name': $this.relationshipOptions.model.prefix + '[taxonomy_id][]'}).appendTo(taxonomySelectGroup);
-				if ($this.relationshipOptions.model.attributes.taxonomy_id === undefined) {
-					$this.relationshipOptions.model.attributes.taxonomy_id = [];
+				if (jQuery.inArray('taxonomy_id', $this.relationshipOptions.lockFields) === -1) {
+					var taxonomySelectInput = $('<select />', {'class': 'form-control ignore-focus', 'name': $this.relationshipOptions.model.prefix + '[taxonomy_id][]'}).appendTo(taxonomySelectGroup);
+					if ($this.relationshipOptions.model.attributes.taxonomy_id === undefined) {
+						$this.relationshipOptions.model.attributes.taxonomy_id = [];
+					}
+					if (taxonomy.multiple) {
+						taxonomySelectInput.attr("multiple", true);
+					}
+					taxonomySelectInput.renderSelect(taxonomy.taxonomies, this.required, $this.relationshipOptions.model.attributes.taxonomy_id);
+				} else {
+					var taxonomyStatic = $("<p />", {'class': 'form-control-static'}).appendTo(taxonomySelectGroup);
+					var taxonomyValues = [];
+					jQuery.each($this.relationshipOptions.model.attributes.taxonomy_id, function(index, value) {
+						if (taxonomy.taxonomies[value] !== undefined) {
+							taxonomyValues.push(taxonomy.taxonomies[value]);
+						} else {
+							taxonomyValues.push('Unknown');
+						}
+					});
+					taxonomyStatic.html(taxonomyValues.join(', '));
 				}
-				if (taxonomy.multiple) {
-					taxonomySelectInput.attr("multiple", true);
-				}
-				taxonomySelectInput.renderSelect(taxonomy.taxonomies, this.required, $this.relationshipOptions.model.attributes.taxonomy_id);
 			}
+
 			if ($this.relationshipOptions.context.relationship.activeAble && jQuery.inArray('active', $this.relationshipOptions.lockFields) === -1) {
 				var activeCanvas = $('<div />', {'class': 'relationship-field relationship-field-active'}).appendTo($target);
 				var activeGroup = $('<div />', {'class': 'checkbox'}).appendTo(activeCanvas);

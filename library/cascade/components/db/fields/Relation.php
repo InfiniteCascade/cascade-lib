@@ -136,7 +136,7 @@ class Relation extends Base
             $relationOptions = ['where' => $attributes, 'taxonomy' => $taxonomy];
             $this->model = $this->relationship->getPrimaryRelation($this->baseModel, $this->modelRole, $relationOptions);
             if (empty($this->_model)) {
-                $this->model = $this->baseModel->getRelationModel($this->field);
+                $this->model = $this->baseModel->getObjectRelationModel($this->field);
             }
             $this->_model->_moduleHandler = $this->field;
             if (empty($this->_model)) {

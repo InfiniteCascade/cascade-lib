@@ -306,7 +306,7 @@ trait ObjectWidgetTrait
         $baseUrl = ['id' => $model->primaryKey];
         $queryRole = ArrayHelper::getValue($this->settings, 'queryRole', false);
         $relationship = ArrayHelper::getValue($this->settings, 'relationship', false);
-        // $relationModel = $this->getRelationModel($model);
+        // $relationModel = $this->getObjectRelationModel($model);
         $baseUrl['related_object_id'] = Yii::$app->request->object->primaryKey;
         // $baseUrl['relationship_id'] = $relationship->systemId;
         if ($queryRole === 'children') {

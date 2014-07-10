@@ -28,6 +28,7 @@ trait ActiveRecordTrait
     public $artificialFieldClass = 'cascade\\components\\db\\fields\\Artificial';
     public $modelFieldClass = 'cascade\\components\\db\\fields\\Model';
     public $relationFieldClass = 'cascade\\components\\db\\fields\\Relation';
+    public $relationTaxonomyFieldClass = 'cascade\\components\\db\\fields\\RelationTaxonomy';
     public $taxonomyFieldClass = 'cascade\\components\\db\\fields\\Taxonomy';
     public $formSegmentClass = 'cascade\\components\\web\\form\\Segment';
     public $columnSchemaClass = 'yii\\db\\ColumnSchema';
@@ -202,13 +203,19 @@ trait ActiveRecordTrait
 
     public function getForeignField($field, $options = [], $context = null)
     {
+        $origFieldName = $field;
         $relationOptions = isset($options['relationOptions']) ? $options['relationOptions'] : [];
         $objectOptions = isset($options['objectOptions']) ? $options['objectOptions'] : [];
         $parts = explode(':', $field);
         $relationshipType = $parts[0];
         if (!in_array($relationshipType, ['child', 'children', 'descendants', 'parent', 'parents', 'ancestors'])) {
+            if ($field === 'parent:Account') {
+                \d(['hmmm']);exit;
+            }
             return null;
         }
+
+
         $myTypeItem = $this->objectTypeItem;
         $companionName = $parts[1];
         if (!is_array($context)) {
@@ -225,7 +232,7 @@ trait ActiveRecordTrait
         $fields = $this->getFields();
         $fieldCheck = implode(':', $parts);
 
-        if (in_array($fieldCheck, $context['relation'])) {
+        if (in_array($fieldCheck, $context['relation']) && empty($options['relationOptions']['taxonomy'])) {
             return null;
         }
         if ($companionName === '_') {
@@ -259,7 +266,7 @@ trait ActiveRecordTrait
         }
         if (!$relationship) {  return null; }
         $cacheKey = [__FUNCTION__, $this->primaryKey, $fieldCheck, $relationshipType, $relationOptions, $objectOptions];
-        $result = Cacher::get($cacheKey);
+        $result = false; // Cacher::get($cacheKey);
         if ($result === false) {
             if (isset($fields[$fieldCheck])) {
                 $field = $fields[$fieldCheck];
@@ -800,6 +807,27 @@ trait ActiveRecordTrait
         return null;
     }
 
+    public function getRelationTaxonomies()
+    {
+        if (isset($this->relationModel) && isset($this->relationModel['id'])) {
+            $parts = [];
+            $relationClass = Yii::$app->classes['Relation'];
+            $taxonomyClass = Yii::$app->classes['Taxonomy'];
+            $relationModel = $relationClass::getRegisterModel($this->relationModel);
+            foreach ($relationModel->taxonomy_id as $taxonomy) {
+                $taxonomyModel = $taxonomyClass::get($taxonomy, false);
+                if ($taxonomyModel) {
+                    $parts[] = $taxonomyModel->descriptor;
+                }
+            }
+            if (empty($parts)) {
+                return null;
+            }
+            return implode(', ', $parts);
+        }
+        return null;
+    }
+
     /**
      *
      *
@@ -923,10 +951,12 @@ trait ActiveRecordTrait
                     $field->priority = ($field->priority * 100);
                 }
             }
+            $this->_fields['relationTaxonomies'] = $this->createRelationTaxonomyField($owner, []);
             ArrayHelper::multisort($this->_fields, 'priority', SORT_ASC);
         }
         if (!empty($owner)) {
             foreach ($this->_fields as $field) {
+                if (!$field->formField) { continue; }
                 $field->formField->owner = $owner;
             }
         }
@@ -974,6 +1004,19 @@ trait ActiveRecordTrait
         $settings['fieldValue'] = $fieldValue;
         $settings['required'] = false;
         $settings['formField'] = false;;
+
+        return Yii::createObject($settings);
+    }
+
+    public function createRelationTaxonomyField($owner, $settings = [])
+    {
+        $settings['class'] = $this->relationTaxonomyFieldClass;
+        if (!isset($settings['model'])) {
+            $settings['model'] = $this;
+        }
+        $settings['fieldName'] = 'relationTaxonomies';
+        $settings['required'] = false;
+        $settings['formField'] = false;
 
         return Yii::createObject($settings);
     }
