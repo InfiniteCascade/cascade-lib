@@ -165,7 +165,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     {
         if (!isset(Yii::$app->collectors['taxonomies']) || !Yii::$app->collectors['taxonomies']->registerMultiple($this, $this->taxonomies())) { throw new Exception('Could not register taxonmies for '. $this->systemId .'!'); }
         if (!isset(Yii::$app->collectors['widgets']) || !Yii::$app->collectors['widgets']->registerMultiple($this, $this->widgets())) { throw new Exception('Could not register widgets for '. $this->systemId .'!'); }
-        //if (!isset(Yii::$app->collectors['roles']) || !Yii::$app->collectors['roles']->registerMultiple($this, $this->roles())) { throw new Exception('Could not register roles for '. $this->systemId .'!'); }
+        // if (!isset(Yii::$app->collectors['roles']) || !Yii::$app->collectors['roles']->registerMultiple($this, $this->roles())) { throw new Exception('Could not register roles for '. $this->systemId .'!'); }
         // if (!isset(Yii::$app->collectors['tools']) || !Yii::$app->collectors['tools']->registerMultiple($this, $this->tools())) { throw new Exception('Could not register tools for '. $this->systemId .'!'); }
         // if (!isset(Yii::$app->collectors['reports']) || !Yii::$app->collectors['reports']->registerMultiple($this, $this->reports())) { throw new Exception('Could not register reports for '. $this->systemId .'!'); }
         return parent::onAfterInit($event);
@@ -784,7 +784,6 @@ abstract class Module extends \cascade\components\base\CollectorModule
         } else {
             Yii::trace("Warning: There is no browse class for the parent objects of {$this->systemId}");
         }
-
         return $widgets;
     }
 

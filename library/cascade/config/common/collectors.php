@@ -15,6 +15,10 @@ return [
         'themes' => [
             'class' => 'cascade\\components\\web\\themes\\Collector',
         ],
+        'widgets' => [
+            'class' => 'cascade\\components\\web\\widgets\\Collector',
+            'lazyLoad' => false
+        ],
         'storageHandlers' => [
             'class' => 'cascade\\components\\storageHandlers\\Collector',
             'initialItems' => [
@@ -27,10 +31,6 @@ return [
                     'publicEngine' => true
                 ]
             ]
-        ],
-        'widgets' => [
-            'class' => 'cascade\\components\\web\\widgets\\Collector',
-            'lazyLoad' => $lazyLoad
         ],
         'sections' => [
             'class' => 'cascade\\components\\section\\Collector',

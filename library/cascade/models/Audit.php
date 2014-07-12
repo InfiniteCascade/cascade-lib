@@ -7,6 +7,7 @@
 
 namespace cascade\models;
 
+use Yii;
 use cascade\components\db\ActiveRecordTrait;
 
 /**
@@ -17,4 +18,18 @@ use cascade\components\db\ActiveRecordTrait;
 class Audit extends \infinite\db\models\Audit
 {
     use ActiveRecordTrait;
+
+
+    public static function activityDataProvider($dataProvider = [])
+    {
+    	$default = [
+    	];
+    	$dataProvider = array_merge_recursive($default, $dataProvider);
+    	if (!isset($dataProvider['class'])) {
+        	$dataProvider['class'] = 'cascade\\components\\db\\AuditDataProvider';
+        }
+
+        $dataProvider['query'] = static::find();
+        return Yii::createObject($dataProvider);
+    }
 }

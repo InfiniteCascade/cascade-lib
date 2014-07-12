@@ -43,7 +43,7 @@ class AppController extends Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['refresh', 'stream', 'index'],
+                        'actions' => ['refresh', 'stream', 'index', 'activity'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -109,6 +109,20 @@ class AppController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionActivity()
+    {
+        $activity = [];
+        Yii::$app->response->baseInstructions['timestamp'] = time();
+        Yii::$app->response->baseInstructions['activity'] = &$activity;
+        Yii::$app->response->forceInstructions = true;
+        Yii::$app->response->task = 'status';
+
+        $auditClass = Yii::$app->classes['Audit'];
+        $provider = $auditClass::activityDataProvider();
+        $provider->handleInstructions($_POST);
+        \d($provider);
     }
 
     /**

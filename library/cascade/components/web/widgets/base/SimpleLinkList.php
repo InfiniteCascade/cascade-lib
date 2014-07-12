@@ -32,7 +32,7 @@ class SimpleLinkList extends BaseList
     {
         return [
             'columns' => 3,
-            'maxColumns' => 3,
+            'maxColumns' => 6,
             'tabletSize' => false
         ];
     }

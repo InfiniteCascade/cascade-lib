@@ -191,6 +191,7 @@ footer {
 }
 
 .ic-sidenav.affix,
+.ic-front-side.affix,
 .ic-sidebar.affix {
     position: fixed;
 }
@@ -201,7 +202,8 @@ footer {
 }
 
 .ic-sidebar.affix-bottom,
-.ic-sidenav.affix-bottom {
+.ic-sidenav.affix-bottom,
+.ic-front-side.affix-bottom, {
     position: absolute;
 }
 
@@ -217,12 +219,22 @@ footer {
     padding: 0;
 }
 
+.ic-front-side {
+	width: 583px;
+}
+
 
 @media (max-width: 992px) {
     .ic-sidebar,
     .ic-sidebar.affix,
     .ic-sidebar.affix-bottom,
-    .ic-sidebar.affix-top {
+    .ic-sidebar.affix-top,
+
+    .ic-front-side,
+    .ic-front-side.affix,
+    .ic-front-side.affix-bottom,
+    .ic-front-side.affix-top
+ {
       position: relative;
       width: 100%;
       margin-bottom: 20px;
@@ -237,12 +249,15 @@ footer {
     }
 }
 @media (max-width: 1200px) {
-  .ic-sidenav {
-      width: 132px;
-  }
-  .ic-sidebar {
-      width: 291px;
-  }
+	.ic-sidenav {
+		width: 132px;
+	}
+	.ic-sidebar {
+		width: 291px;
+	}
+	.ic-front-side {
+		width: 463px;
+	}
 
 }
 
@@ -388,4 +403,5 @@ footer {
   -o-animation:      widget-lazy-placeholder-animation 3s infinite; /* Opera 12+ */
   animation:         widget-lazy-placeholder-animation 3s infinite; /* IE 10+ */
 }
+
 

@@ -75,6 +75,20 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
         return 'widget.'.$this->systemId . '.'. $key;
     }
 
+
+    public function getRefreshInstructions()
+    {
+        $i = [];
+        $i['type'] = 'widget';
+        $i['systemId'] = $this->collectorItem->systemId;
+        $i['recreateParams'] = $this->recreateParams;
+        if ($this->section) {
+            $i['section'] = $this->section->systemId;
+        }
+
+        return $i;
+    }
+    
     public function getLazy()
     {
         if (!Yii::$app->collectors['widgets']->lazy) {

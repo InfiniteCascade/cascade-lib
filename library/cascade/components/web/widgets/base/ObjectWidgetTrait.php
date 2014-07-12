@@ -42,18 +42,6 @@ trait ObjectWidgetTrait
         return $this->_lazyObjectWidget;
     }
 
-    public function getRefreshInstructions()
-    {
-        $i = [];
-        $i['type'] = 'widget';
-        $i['systemId'] = $this->collectorItem->systemId;
-        $i['recreateParams'] = $this->recreateParams;
-        if ($this->section) {
-            $i['section'] = $this->section->systemId;
-        }
-
-        return $i;
-    }
 
     public function getWidgetClasses()
     {

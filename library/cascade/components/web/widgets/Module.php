@@ -16,7 +16,7 @@ use infinite\base\exceptions\Exception;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class Module extends \infinite\base\Module
+abstract class Module extends \cascade\components\base\CollectorModule
 {
     /**
      * @var __var_title_type__ __var_title_description__
@@ -31,19 +31,17 @@ abstract class Module extends \infinite\base\Module
      */
     public $priority = 1000; //lower is better
 
+    public $locations = []; //lower is better
+
     /**
      * @var __var_widgetNamespace_type__ __var_widgetNamespace_description__
      */
     public $widgetNamespace;
 
-    /**
-     * @inheritdoc
-     */
-    public function __construct($id, $parent, $config=null)
-    {
-        Yii::$app->collectors->onAfterInit([$this, 'onAfterInit']);
 
-        parent::__construct($id, $parent, $config);
+    public function getCollectorName()
+    {
+        return false;
     }
 
     /**
@@ -62,6 +60,7 @@ abstract class Module extends \infinite\base\Module
     public function onAfterInit($event)
     {
         if (isset(Yii::$app->collectors['widgets']) and !Yii::$app->collectors['widgets']->registerMultiple($this, $this->widgets())) { throw new Exception('Could not register widgets for '. $this->systemId .'!'); }
+        return parent::onAfterInit($event);
     }
 
     /**
@@ -79,13 +78,13 @@ abstract class Module extends \infinite\base\Module
             $summaryWidget['widget'] = [
                 'class' => $className,
                 'icon' => $this->icon,
-                // 'title' => '%%type.'. $this->systemId .'.title.upperPlural%%'
+                'owner' => $this
             ];
-            $summaryWidget['locations'] = ['front'];
+            $summaryWidget['locations'] = $this->locations;
             $summaryWidget['priority'] = $this->priority;
             $widgets[$id] = $summaryWidget;
         }
-        //var_dump($widgets);exit;
+        //\d($widgets);exit;
         return $widgets;
     }
 
