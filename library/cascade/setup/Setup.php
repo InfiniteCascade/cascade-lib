@@ -23,7 +23,6 @@ class Setup extends \infinite\setup\Setup
             $className = __CLASS__;
             self::$_instance = new $className($config);
         }
-
         return parent::createSetupApplication($config);
     }
 
