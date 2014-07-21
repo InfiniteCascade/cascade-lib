@@ -126,8 +126,8 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
     {
         if (is_null($this->_current_taxonomy_id)) {
             $taxonomyClass = Yii::$app->classes[$this->viaModelClass];
-            $taxonomies = $taxonomyClass::find()->where([$this->relationKey => $this->owner->primaryKey])->all();
-            $this->_current_taxonomy_id = ArrayHelper::map($taxonomies, 'taxonomy_id', 'taxonomy_id');
+            $taxonomies = $taxonomyClass::find()->where([$this->relationKey => $this->owner->primaryKey])->select('taxonomy_id')->column();
+            $this->_current_taxonomy_id = array_combine($taxonomies, $taxonomies);
         }
 
         return $this->_current_taxonomy_id;
