@@ -171,6 +171,17 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return parent::onAfterInit($event);
     }
 
+
+    public function getPageMeta()
+    {
+        $m = [];
+        $m['id'] = $this->systemId;
+        $m['icon'] = $this->icon;
+        $m['hasDashboard'] = $this->hasDashboard;
+        $m['title'] = $this->getTitle()->package;
+        return $m;
+    }
+
     public function getRelatedType($name)
     {
         list($relationship, $role) = $this->getRelationship($name);

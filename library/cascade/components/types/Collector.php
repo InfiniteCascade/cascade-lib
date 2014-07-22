@@ -182,4 +182,14 @@ class Collector extends \infinite\base\collector\Module
         return $authorities;
     }
 
+    public function getPageMeta()
+    {
+        $m = [];
+        foreach ($this->getAll() as $typeItem) {
+        if (empty($typeItem->object)) { continue; }
+            $m[$typeItem->systemId] = $typeItem->object->pageMeta;
+        }
+        return $m;
+    }
+
 }

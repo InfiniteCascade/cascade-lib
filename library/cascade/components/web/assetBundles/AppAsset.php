@@ -43,7 +43,8 @@ class AppAsset extends AssetBundle
         'js/cascade.objectSelector.js',
         'js/cascade.infiniteFilter.js',
         'js/cascade.editInPlace.js', // maybe move this to object? not sure if it will be used outside object view,
-        'js/cascade.activityFeed.js'
+        'js/cascade.activityFeed.js',
+        'js/cascade.types.js'
     ];
     /**
      * @inheritdoc

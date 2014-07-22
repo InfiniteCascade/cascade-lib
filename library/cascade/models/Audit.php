@@ -26,7 +26,7 @@ class Audit extends \infinite\db\models\Audit
     	];
     	$dataProvider = array_merge_recursive($default, $dataProvider);
     	if (!isset($dataProvider['class'])) {
-        	$dataProvider['class'] = 'cascade\\components\\db\\AuditDataProvider';
+        	$dataProvider['class'] = 'cascade\\components\\db\\behaviors\\auditable\\AuditDataProvider';
         }
 
         $dataProvider['query'] = static::find();

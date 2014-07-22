@@ -5,7 +5,7 @@
  * @license http://www.infinitecascade.com/license/
  */
 
-namespace cascade\components\db;
+namespace cascade\components\db\behaviors\auditable;
 
 use Yii;
 use infinite\helpers\ArrayHelper;
@@ -31,15 +31,9 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 		}
 	}
 
-	public function package()
+	public function getPackage()
 	{
-		$package = [];
-		foreach ($this->models as $item) {
-			$eventObject = $item->eventObject;
-			if (emptY($eventObject)) { continue; }
-			$package[$item->primaryKey] = $eventObject->package;
-		}
-		return $package;
+		return new AuditPackage($this);
 	}
 
 	public function handleInstructions($params)

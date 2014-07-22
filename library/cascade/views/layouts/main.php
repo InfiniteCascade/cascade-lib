@@ -18,6 +18,7 @@ if (YII_ENV_DEV) {
 
 $post = [Yii::$app->request->csrfParam => Yii::$app->request->csrfToken];
 $this->bodyHtmlOptions['data-post'] = json_encode($post);
+$this->bodyHtmlOptions['data-cascade-types'] = json_encode(Yii::$app->collectors['types']->pageMeta);
 
 $itemTypes = [];
 foreach (Yii::$app->collectors['types']->getAll() as $type) {

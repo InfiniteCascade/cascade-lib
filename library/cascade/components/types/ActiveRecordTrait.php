@@ -581,6 +581,13 @@ trait ActiveRecordTrait
         parent::loadDefaultValues($skipIfSet);
     }
 
+    public function getPackage($urlAction = 'view')
+    {
+        $p = parent::getPackage($urlAction);
+        $p['type'] = $this->objectTypeItem->systemId;
+        return $p;
+    }
+
     public function getUrl($action = 'view', $base = [], $pathLink = true)
     {
         $url = ['/object/'. $action, 'id' => $this->primaryKey];

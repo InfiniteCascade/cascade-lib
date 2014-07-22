@@ -113,14 +113,14 @@ class AppController extends Controller
 
     public function actionActivity()
     {
-        Yii::$app->response->baseInstructions['timestamp'] = time();
+        // Yii::$app->response->baseInstructions['timestamp'] = time();
         Yii::$app->response->forceInstructions = true;
         Yii::$app->response->task = 'status';
 
         $auditClass = Yii::$app->classes['Audit'];
         $provider = $auditClass::activityDataProvider();
         $provider->handleInstructions($_POST);
-        Yii::$app->response->baseInstructions['activity'] = $provider->package();
+        Yii::$app->response->baseInstructions = $provider->package->toArray();
     }
 
     /**

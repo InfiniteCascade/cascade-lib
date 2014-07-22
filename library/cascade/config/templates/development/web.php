@@ -13,5 +13,6 @@ $config = array_merge($config, [
         'name' => '%%general.application_name%%',
 ]);
 $config['components']['assetManager']['linkAssets'] = true;
+$config['components']['request']['cookieValidationKey'] = '%%_.cookie_salt%%';
 $config['bootstrap'][] = 'debug';
 return $config;

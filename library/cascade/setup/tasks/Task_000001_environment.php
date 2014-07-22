@@ -93,9 +93,13 @@ class Task_000001_environment extends \infinite\setup\Task
         $input['_']['envPathFriendly'] = '__DIR__ . DIRECTORY_SEPARATOR . \''.$input['general']['template'] .'\'';
         if ($this->setup->app()) {
             $input['_']['salt'] = $this->setup->app()->params['salt'];
+            $input['_']['cookie_salt'] = $this->setup->app()->request['cookieValidationKey'];
         }
         if (empty($input['_']['salt'])) {
             $input['_']['salt'] = $this->generateSalt();
+        }
+        if (empty($input['_']['cookie_salt'])) {
+            $input['_']['cookie_salt'] = $this->generateSalt(60);
         }
 
         if (!is_dir($input['_']['envPath'])) {
