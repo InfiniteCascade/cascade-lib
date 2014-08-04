@@ -5,12 +5,24 @@ function ActivityFeedItem(feed, item) {
 	this.$element.data('item', this);
 	feed.add(this);
 }
+ActivityFeedItem.prototype.process = function(template) {
+	var self = this;
+	// var renderedObjects = this.feed.getRenderedObjects();
+    return template.replace(/\{\{([\w\-\:]+)\}\}/g,
+	    function(match, p1) {
+	    	var renderedVariable = self.feed.getObject(this.item, p1);
+	    	if (renderedVariable !== undefined && renderedVariable) {
+	    		return renderedVariable; //renderedObjects[p1].outerHTML();
+	    	}
+	    	return null;
+		}
+	);
+};
+
 
 ActivityFeedItem.prototype.getStory = function() {
 	if (this.story === undefined) {
-		// @todo FIND ALL MATCHES FOR THE OBJECTS
-		var objects = this.item.story.match(/\{\{(.+?)\}\}/);
-		console.log(objects);
+		this.story = this.process(this.item.story);
 	}
 	return this.story;
 };
@@ -24,17 +36,18 @@ function ActivityFeedObject(feed, object) {
 	this.object = object;
 }
 
-ActivityFeedObject.prototype.getRenderedObject = function() {
+
+ActivityFeedObject.prototype.getRenderedObject = function(urlQuery) {
 	if (this.$rendered === undefined) {
 		if (this.feed.options.rich) {
 			if (this.object.url !== undefined && this.object.url) {
-				this.$rendered = $("<a />", {'href': this.getUrl()});
+				this.$rendered = $("<a />", {'href': this.getUrl(urlQuery)});
 			} else {
 				this.$rendered = $("<strong />");
 			}
 			this.$rendered.html(this.getNiceDescriptor());
 		} else {
-			this.$rendered = this.getNiceDescriptor();
+			this.$rendered = $("<span />").html(this.getNiceDescriptor());
 		}
 	}
 	return this.$rendered;
@@ -44,8 +57,11 @@ ActivityFeedObject.prototype.getNiceDescriptor = function() {
 	return this.object.descriptor;
 }
 
-ActivityFeedObject.prototype.getUrl = function() {
-	return this.object.url;
+ActivityFeedObject.prototype.getUrl = function(urlQuery) {
+	if (urlQuery === {}) {
+		return this.object.url;
+	}
+	return this.object.url +"?" + jQuery.param(urlQuery);
 }
 
 function ActivityFeed($element, options) {
@@ -62,6 +78,18 @@ function ActivityFeed($element, options) {
 	this.init();
 }
 
+ActivityFeed.prototype.getObject = function(item, variable) {
+	var parts = variable.split(':');
+	var urlQuery = {};
+	if (parts[1] !== undefined && this.objects[parts[1]] !== undefined) {
+		urlQuery['r'] = parts[1];	
+	}
+	if (this.objects[parts[0]] !== undefined) {
+		var object = this.objects[parts[0]].getRenderedObject(urlQuery);
+		return object.outerHTML();
+	}
+	return false;
+};
 ActivityFeed.prototype.defaultOptions = {
 	'ajax': {
 		'url': '/app/activity'

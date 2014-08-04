@@ -226,9 +226,40 @@ class ObjectController extends Controller
             return;
         }
 
+
+        if (empty($_GET['r']) or !($relatedObject = Registry::getObject($_GET['r'], false)) or !($relatedTypeItem = $this->params['relatedTypeItem'] = $relatedObject->objectTypeItem)) {
+            $relatedObject = null;
+        } elseif (!$object->can('read')) {
+            $relatedObject = null;
+        }
+
         if (!$type->hasDashboard) {
+            $relatedObjectOptions = [];
+            $relatedObjects = $object->queryRelations(false)->all();
+            foreach ($relatedObjects as $relation) {
+                if ($relation->child_object_id === $object->primaryKey) {
+                    $relatedTest = Registry::getObject($relation->parent_object_id, false);
+                } else {
+                    $relatedTest = Registry::getObject($relation->child_object_id, false);
+                }
+                if (!$relatedTest || !$relatedTest->objectType->hasDashboard || !$relatedTest->can('read')) { continue; }
+                $relatedObjectOptions[$relatedTest->primaryKey] = ['descriptor' => $relatedTest->descriptor, 'url' => $relatedTest->getUrl('view', ['p' => $object->primaryKey], false)];
+            }
+            if (isset($relatedObject) && isset($relatedObjectOptions[$relatedObject->primaryKey])) {
+                $this->redirect($relatedObjectOptions[$relatedObject->primaryKey]['url']);
+                return;
+            } elseif (sizeof($relatedObjectOptions) === 1) {
+                $relatedObject = array_pop($relatedObjectOptions);
+                $this->redirect($relatedObject['url']);
+                return;
+            } else {
+                $this->params['options'] = $relatedObjectOptions;
+                Yii::$app->response->view = 'viewOptions';
+                return;
+            }
             throw new HttpException(400, "Bad request");
         }
+        $this->params['highlight'] = $relatedObject;
 
         ObjectFamiliarity::accessed($object);
         Yii::$app->response->view = 'view';
