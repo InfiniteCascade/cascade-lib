@@ -409,6 +409,20 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return 'Type';
     }
 
+    public function getInsertVerb($object)
+    {
+        return null;
+    }
+
+    public function getUpdateVerb($object)
+    {
+        return null;
+    }
+    public function getDeleteVerb($object)
+    {
+        return null;
+    }
+
     /**
      * __method_upgrade_description__
      * @param __param_from_type__     $from __param_from_description__

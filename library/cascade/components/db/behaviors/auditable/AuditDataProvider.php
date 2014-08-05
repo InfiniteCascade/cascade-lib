@@ -56,7 +56,7 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 			if (!empty($lastItem)) {
 				$this->query->andWhere(['not', [$this->query->primaryAlias . '.' . $this->query->primaryTablePk => $lastItem]]);
 			}
-			$this->query->orderBy([$this->query->primaryAlias . '.created' => SORT_ASC]);
+			$this->query->orderBy([$this->query->primaryAlias . '.created' => SORT_DESC]); //SORT_ASC
 		}
 
 		if ($this->scope !== 'all' && !empty(Yii::$app->user->id)) {

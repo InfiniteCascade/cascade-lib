@@ -7,7 +7,7 @@
 
 namespace cascade\models;
 
-use cascade\components\types\ActiveRecordTrait;
+use cascade\components\db\ActiveRecordTrait;
 
 /**
  * Aca is the model class for table "aca".

@@ -1,7 +1,11 @@
 function ActivityFeedItem(feed, item) {
 	this.feed = feed;
 	this.item = item;
-	this.$element = $("<li />").html(this.getStory());
+	this.$element = $("<li />", {'class': 'activity-item'});
+	this.date = new Date(item.timestamp*1000);
+	var dateTitle = this.date.toLocaleString();
+	this.$timeElement = $("<time />", {'class': 'relative-time', 'datetime': this.date.toISOString(), 'title': dateTitle}).appendTo(this.$element);
+	this.$storyElement = $("<div />", {'class': 'activity-story'}).appendTo(this.$element).html(this.getStory());
 	this.$element.data('item', this);
 	feed.add(this);
 }
@@ -82,7 +86,7 @@ ActivityFeed.prototype.getObject = function(item, variable) {
 	var parts = variable.split(':');
 	var urlQuery = {};
 	if (parts[1] !== undefined && this.objects[parts[1]] !== undefined) {
-		urlQuery['r'] = parts[1];	
+		urlQuery['h'] = parts[1];	
 	}
 	if (this.objects[parts[0]] !== undefined) {
 		var object = this.objects[parts[0]].getRenderedObject(urlQuery);

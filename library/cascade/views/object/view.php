@@ -10,7 +10,9 @@ if (!empty(Yii::$app->request->previousObject)) {
     $this->params['breadcrumbs'][] = ['label' => Yii::$app->request->previousObject->descriptor, 'url' => Yii::$app->request->previousObject->getUrl('view', [], false)];
 }
 $this->params['breadcrumbs'][] = $this->title;
-
+if (isset($relatedObject)) {
+    $this->bodyHtmlOptions['data-highlight'] = $relatedObject->primaryKey;
+}
 Html::addCssClass($this->bodyHtmlOptions, 'double-top-nav');
 $baseInstructions = [];
 $baseInstructions['objectId'] = $object->primaryKey;

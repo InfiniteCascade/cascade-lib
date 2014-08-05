@@ -92,6 +92,14 @@ trait ActiveRecordTrait
         );
     }
 
+    public function getHumanType()
+    {
+        if (isset($this->objectType) && $this->objectType->title) {
+            return $this->objectType->title->singular;
+        }
+        return null;
+    }
+
     public function formName()
     {
         $parentFormName = parent::formName();

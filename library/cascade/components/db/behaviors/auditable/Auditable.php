@@ -18,6 +18,8 @@ class Auditable extends \infinite\db\behaviors\auditable\Auditable
      * @inheritdoc
      */
     public $deleteEventClass = 'cascade\\components\\db\\behaviors\\auditable\\DeleteEvent';
+    public $insertEventClass = 'cascade\\components\\db\\behaviors\\auditable\\InsertEvent';
+    public $updateEventClass = 'cascade\\components\\db\\behaviors\\auditable\\UpdateEvent';
 
     /**
      * Get indirect object

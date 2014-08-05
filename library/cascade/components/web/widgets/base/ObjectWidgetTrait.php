@@ -282,7 +282,7 @@ trait ObjectWidgetTrait
         if ($primaryRelation && $primaryRelation->{$key} === $model->primaryKey) {
             Html::addCssClass($options, 'active');
         }
-
+        $options['data-object-id'] = $model->primaryKey;
         return $options;
     }
 

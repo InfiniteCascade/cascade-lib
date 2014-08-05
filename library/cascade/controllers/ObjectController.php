@@ -227,7 +227,7 @@ class ObjectController extends Controller
         }
 
 
-        if (empty($_GET['r']) or !($relatedObject = Registry::getObject($_GET['r'], false)) or !($relatedTypeItem = $this->params['relatedTypeItem'] = $relatedObject->objectTypeItem)) {
+        if (empty($_GET['h']) or !($relatedObject = $this->params['relatedObject'] = Registry::getObject($_GET['h'], false)) or !($relatedTypeItem = $this->params['relatedTypeItem'] = $relatedObject->objectTypeItem)) {
             $relatedObject = null;
         } elseif (!$object->can('read')) {
             $relatedObject = null;
@@ -243,7 +243,7 @@ class ObjectController extends Controller
                     $relatedTest = Registry::getObject($relation->child_object_id, false);
                 }
                 if (!$relatedTest || !$relatedTest->objectType->hasDashboard || !$relatedTest->can('read')) { continue; }
-                $relatedObjectOptions[$relatedTest->primaryKey] = ['descriptor' => $relatedTest->descriptor, 'url' => $relatedTest->getUrl('view', ['p' => $object->primaryKey], false)];
+                $relatedObjectOptions[$relatedTest->primaryKey] = ['descriptor' => $relatedTest->descriptor, 'url' => $relatedTest->getUrl('view', ['h' => $object->primaryKey], false)];
             }
             if (isset($relatedObject) && isset($relatedObjectOptions[$relatedObject->primaryKey])) {
                 $this->redirect($relatedObjectOptions[$relatedObject->primaryKey]['url']);

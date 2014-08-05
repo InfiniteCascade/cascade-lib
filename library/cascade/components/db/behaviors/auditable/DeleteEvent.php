@@ -29,4 +29,13 @@ class DeleteEvent extends \infinite\db\behaviors\auditable\DeleteEvent
             $this->objectType = $object->objectType->systemId;
         }
     }
+
+
+    public function getVerb()
+    {
+        if (isset($this->directObject->objectType) && $this->directObject->objectType->getDeleteVerb($this->directObject) !== null) {
+            return $this->directObject->objectType->getDeleteVerb($this->directObject);
+        }
+        return parent::getVerb();
+    }
 }
