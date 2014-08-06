@@ -19,6 +19,7 @@ use cascade\models\ObjectFamiliarity;
  */
 class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, \ArrayAccess, \Countable
 {
+    public $similarThreshold = 21600;
 	protected $_items = [];
 
 	public function __construct($dataSource)
@@ -109,17 +110,39 @@ class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, 
      */
     public function toArray()
     {
+        $threads = [];
     	$p = [];
     	$p['timestamp'] = time();
     	$p['activity'] = [];
     	$p['objects'] = [];
+        $lastKey = null;
+        $lastTimestamp = null;
     	foreach ($this as $item) {
     		$eventObject = $item->eventObject;
     		$package = $eventObject->package;
-    		$p['activity'][$item->primaryKey] = [];
-    		$p['activity'][$item->primaryKey]['primaryObject'] = $package['primaryObject'];
-    		$p['activity'][$item->primaryKey]['story'] = $package['story'];
-    		$p['activity'][$item->primaryKey]['timestamp'] = $package['timestamp'];
+            if (!isset($threads[$package['key']])) {
+                $threads[$package['key']] = 0;
+            }
+            if ($package['key'] !== $lastKey
+                || (abs($package['timestamp'] - $lastTimestamp) > ($this->similarThreshold))) {
+                if (isset($threads[$lastKey])) {
+                    $threads[$lastKey]++;
+                }
+                $lastKey = $package['key'];
+                $lastTimestamp = $package['timestamp'];
+            }
+            $key = $package['key'] .'-'. $threads[$lastKey];
+            if (isset($p['activity'][$key])) {
+                $p['activity'][$key]['details'][$item->primaryKey] = $package['details'];
+                continue;
+            }
+    		$p['activity'][$key] = [];
+            $p['activity'][$key]['id'] = $item->primaryKey;
+            $p['activity'][$key]['primaryObject'] = $package['primaryObject'];
+            $p['activity'][$key]['agent'] = $package['agent'];
+    		$p['activity'][$key]['story'] = $package['story'];
+    		$p['activity'][$key]['timestamp'] = $package['timestamp'];
+            $p['activity'][$key]['details'] = [$item->primaryKey => $package['details']];
 
     		foreach ($package['objects'] as $object) {
     			if (isset($p['objects'][$object->primaryKey])) {

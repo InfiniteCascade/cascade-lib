@@ -17,7 +17,7 @@ Html::addCssClass($this->bodyHtmlOptions, 'double-top-nav');
 $baseInstructions = [];
 $baseInstructions['objectId'] = $object->primaryKey;
 $refreshable = [
-    'url' => Url::to('app/stream'),
+    'url' => Url::to(['/app/stream']),
     'stream' => true,
     'data' => ['baseInstructions' => $baseInstructions]
 ];

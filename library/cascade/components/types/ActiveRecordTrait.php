@@ -92,6 +92,22 @@ trait ActiveRecordTrait
         );
     }
 
+
+    public function hasIcon()
+    {
+        return false;
+    }
+    
+    public function getIcon()
+    {
+        if (!$this->objectType) {
+            return null;
+        }
+        return [
+            'class' => $this->objectType->icon
+        ];
+    }
+
     public function getHumanType()
     {
         if (isset($this->objectType) && $this->objectType->title) {
@@ -593,6 +609,9 @@ trait ActiveRecordTrait
     {
         $p = parent::getPackage($urlAction);
         $p['type'] = $this->objectTypeItem->systemId;
+        if ($this->hasIcon()) {
+            $p['icon'] = $this->getIcon();
+        }
         return $p;
     }
 

@@ -33,7 +33,7 @@ $config['components']['urlManager'] = [
         // a standard rule mapping '/' to 'site/index' action
         '' => 'app/index',
 
-        '<action:(login|logout)>' => 'app/<action>',
+        '<action:(login|logout|stream)>' => 'app/<action>',
 
         '<action:(browse)>/<type:\S+>' => 'object/<action>',
         '<action:(search|browse)>' => 'object/<action>',

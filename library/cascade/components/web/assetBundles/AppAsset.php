@@ -54,6 +54,7 @@ class AppAsset extends AssetBundle
         'infinite\\web\\assetBundles\\InfiniteBrowserAsset',
         'infinite\\web\\assetBundles\\BootstrapSelectAsset',
         'infinite\\web\\assetBundles\\BootstrapDatepickerAsset',
+        'infinite\\web\\assetBundles\\TimeAgoAsset',
         'cascade\\components\\web\\assetBundles\\BootstrapTypeaheadAsset',
         'cascade\\components\\web\\assetBundles\\PortalAsset'
     ];

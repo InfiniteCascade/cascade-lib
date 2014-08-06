@@ -4,17 +4,52 @@ function ActivityFeedItem(feed, item) {
 	this.$element = $("<li />", {'class': 'activity-item'});
 	this.date = new Date(item.timestamp*1000);
 	var dateTitle = this.date.toLocaleString();
+	this.$icons = $("<div />", {'class': 'activity-icons'}).appendTo(this.$element);
+	this.$agentIcon = this.getAgentIcon().appendTo(this.$icons);
+	this.$objectIcon = this.getObjectIcon().appendTo(this.$icons);
 	this.$timeElement = $("<time />", {'class': 'relative-time', 'datetime': this.date.toISOString(), 'title': dateTitle}).appendTo(this.$element);
 	this.$storyElement = $("<div />", {'class': 'activity-story'}).appendTo(this.$element).html(this.getStory());
 	this.$element.data('item', this);
+	$preparer.fire(this.$element);
 	feed.add(this);
 }
+
+ActivityFeedItem.prototype.getObjectIcon = function() {
+	var icon = false;
+	if (this.item.primaryObject) {
+		var object = this.feed.getObject(this.item.primaryObject);
+		if (object) {
+			icon = object.getIcon(this.item.primaryObject);
+		}
+	}
+	if (!icon) {
+		icon = $("<div />", {'class': 'fa fa-question'});
+	}
+	icon.addClass('activity-icon');
+	return icon;
+}
+
+ActivityFeedItem.prototype.getAgentIcon = function() {
+	var icon = false;
+	if (this.item.agent) {
+		var agent = this.feed.getObject(this.item.agent);
+		if (agent) {
+			icon = agent.getIcon(this.item.agent);
+		}
+	}
+	if (!icon) {
+		icon = $("<div />", {'class': 'fa fa-user'});
+	}
+	icon.addClass('activity-icon');
+	return icon;
+}
+
 ActivityFeedItem.prototype.process = function(template) {
 	var self = this;
 	// var renderedObjects = this.feed.getRenderedObjects();
     return template.replace(/\{\{([\w\-\:]+)\}\}/g,
 	    function(match, p1) {
-	    	var renderedVariable = self.feed.getObject(this.item, p1);
+	    	var renderedVariable = self.feed.getRenderedObject(this.item, p1);
 	    	if (renderedVariable !== undefined && renderedVariable) {
 	    		return renderedVariable; //renderedObjects[p1].outerHTML();
 	    	}
@@ -40,6 +75,38 @@ function ActivityFeedObject(feed, object) {
 	this.object = object;
 }
 
+ActivityFeedObject.prototype.getIcon = function(variable) {
+	if (this.$icon === undefined) {
+		var parts = variable.split(':');
+		var urlQuery = {};
+		if (parts[1] !== undefined && this.objects[parts[1]] !== undefined) {
+			urlQuery['h'] = parts[1];	
+		}
+		if (this.object.url !== undefined && this.object.url) {
+			this.$icon = $("<a />", {'href': this.getUrl(urlQuery)});
+		} else {
+			this.$icon = $("<div />");
+		}
+		this.$icon.attr('title', this.object.descriptor);
+		var iconAttributes = {};
+		if (this.object.icon !== undefined && this.object.icon) {
+			iconAttributes = this.object.icon
+		} else if (this.object.type 
+			&& jQuery.cascadeTypes.types[this.object.type] !== undefined) {
+			iconAttributes = {'class': jQuery.cascadeTypes.types[this.object.type].icon};
+		}
+
+		if (iconAttributes.class !== undefined) {
+			this.$icon.addClass(iconAttributes.class);
+		} else if(iconAttributes.img !== undefined) {
+			this.$icon.addClass('ic-icon-image');
+			this.$icon.css('background-image', 'url('+iconAttributes.img+')');
+		} else {
+			this.$icon.addClass('fa fa-question');
+		}
+	}
+	return this.$icon.clone();
+};
 
 ActivityFeedObject.prototype.getRenderedObject = function(urlQuery) {
 	if (this.$rendered === undefined) {
@@ -75,25 +142,39 @@ function ActivityFeed($element, options) {
 	this.components = {};
 	this.objects = {};
 	this.items = {};
+	this.loading = false;
 	this.loadTimestamp = null;
 	this.lastItem = null;
 	this.lastItemTimestamp = null;
+	this.lastLoadMore = 0;
 	this.options = jQuery.extend(true, {}, this.defaultOptions, options);
 	this.init();
 }
 
-ActivityFeed.prototype.getObject = function(item, variable) {
+ActivityFeed.prototype.getObject = function(variable) {
+	var parts = variable.split(':');
+	if (this.objects[parts[0]] !== undefined) {
+		return this.objects[parts[0]];
+	}
+	return false;
+};
+
+ActivityFeed.prototype.getRenderedObject = function(item, variable) {
 	var parts = variable.split(':');
 	var urlQuery = {};
 	if (parts[1] !== undefined && this.objects[parts[1]] !== undefined) {
 		urlQuery['h'] = parts[1];	
 	}
-	if (this.objects[parts[0]] !== undefined) {
-		var object = this.objects[parts[0]].getRenderedObject(urlQuery);
-		return object.outerHTML();
+
+	var object = this.getObject(variable);
+
+	if (object) {
+		var renderedObject = object.getRenderedObject(urlQuery);
+		return renderedObject.outerHTML();
 	}
 	return false;
 };
+
 ActivityFeed.prototype.defaultOptions = {
 	'ajax': {
 		'url': '/app/activity'
@@ -109,10 +190,43 @@ ActivityFeed.prototype.init = function() {
 	var self = this;
 	this.$element.hide();
 	this.components.list = $("<ul />", {'class': 'ic-activity-feed'}).appendTo(this.$element);
+	this.components.loadMore = $("<div />", {'class': 'ic-activity-load-more'}).appendTo(this.$element);
 	this.load(ActivityFeed.prototype.DIRECTION_OLDER, function() {
 		self.$thinking.remove();
 		self.$element.show();
 	});
+	//this.startCheckNewerTimer();
+	this.startLoadMoreTimer();
+};
+
+
+ActivityFeed.prototype.startCheckNewerTimer = function() {
+	this.stopCheckNewerTimer();
+	var self = this;
+	this.checkNewerTimer = setInterval(function() {
+		self.load(ActivityFeed.prototype.DIRECTION_NEWER);
+	}, 10000);
+};
+
+ActivityFeed.prototype.stopCheckNewerTimer = function() {
+	clearInterval(this.checkNewerTimer);
+};
+
+ActivityFeed.prototype.startLoadMoreTimer = function() {
+	this.stopLoadMoreTimer();
+	var self = this;
+	this.loadMoreTimer = setInterval(function() {
+		if (self.components.loadMore.isElementInViewport() 
+			&& !self.loading
+			&& (((new Date().getTime())/1000) - self.lastLoadMore) > 2) {
+				self.lastLoadMore = (new Date().getTime())/1000
+			self.load(ActivityFeed.prototype.DIRECTION_OLDER);
+		}
+	}, 1000);
+};
+
+ActivityFeed.prototype.stopLoadMoreTimer = function() {
+	clearInterval(this.loadMoreTimer);
 };
 
 ActivityFeed.prototype.registerObject = function(id, object) {
@@ -136,6 +250,11 @@ ActivityFeed.prototype.getRenderedObjects = function() {
 };
 
 ActivityFeed.prototype.add = function(item) {
+	if (!this.lastItemTimestamp 
+		|| this.lastItemTimestamp > item.item.timestamp) {
+		this.lastItem = item.item.id;
+		this.lastItemTimestamp = item.item.timestamp;
+	}
 	var items = $(this.components.list).find('li');
 	if (items.length === 0) {
 		// first item
@@ -158,11 +277,18 @@ ActivityFeed.prototype.add = function(item) {
 ActivityFeed.prototype.load = function(direction, callback) {
 	var self = this;
 	var ajaxSettings = this.options.ajax;
+	if (this.loading) {
+		if (callback !== undefined) {
+			self.loading.on('complete', callback);
+		}
+		return;
+	}
 
 	ajaxSettings.complete = function() {
 		if (callback !== undefined) {
 			callback();
 		}
+		self.loading = false;
 	};
 	ajaxSettings.success = function (response) {
 		self.loadTimestamp = response.timestamp;
@@ -184,7 +310,7 @@ ActivityFeed.prototype.load = function(direction, callback) {
 	};
 	ajaxSettings.dataType = 'json';
 	ajaxSettings.type = 'POST';
-	jQuery.ajax(ajaxSettings);
+	this.loading = jQuery.ajax(ajaxSettings);
 };
 
 

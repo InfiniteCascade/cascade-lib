@@ -8,7 +8,7 @@ use infinite\web\grid\Cell;
 $js = [];
 $this->title = 'Dashboard';
 $refreshable = [
-    'url' => Url::to('app/stream'),
+    'url' => Url::to(['/app/stream']),
     'stream' => true,
     'data' => ['baseInstructions' => []]
 ];

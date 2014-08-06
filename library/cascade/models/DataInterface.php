@@ -107,4 +107,26 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     {
         return $this->hasMany(DataInterface::className(), ['data_interface_id' => 'id']);
     }
+
+    public function getPackage($urlAction = 'view')
+    {
+        $p = parent::getPackage($urlAction);
+        $p['type'] = 'Interface';
+        if ($this->hasIcon()) {
+            $p['icon'] = $this->getIcon();
+        }
+        return $p;
+    }
+
+    public function hasIcon()
+    {
+        return true;
+    }
+    
+    public function getIcon()
+    {
+        return [
+            'class' => 'fa fa-arrows-h'
+        ];
+    }
 }

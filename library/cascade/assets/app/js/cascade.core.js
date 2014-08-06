@@ -9,6 +9,7 @@ function prepareCascadeFormFields(context) {
 }
 
 $preparer.add(function(context) {
+	$(context).timeago({selector: 'time.relative-time'});
 	prepareCascadeFormFields(context);
 	$(".refreshable.widget-lazy", context).refreshable();
 
