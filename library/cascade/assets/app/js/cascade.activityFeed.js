@@ -1,17 +1,17 @@
 function ActivityFeedItem(feed, item) {
 	this.feed = feed;
 	this.item = item;
-	this.$element = $("<li />", {'class': 'activity-item'});
+	this.$element = $("<li />", {'class': 'activity-item expandable expandable-delayed'});
 	this.date = new Date(item.timestamp*1000);
 	var dateTitle = this.date.toLocaleString();
 	this.$icons = $("<div />", {'class': 'activity-icons'}).appendTo(this.$element);
 	this.$agentIcon = this.getAgentIcon().appendTo(this.$icons);
 	this.$objectIcon = this.getObjectIcon().appendTo(this.$icons);
 	this.$timeElement = $("<time />", {'class': 'relative-time', 'datetime': this.date.toISOString(), 'title': dateTitle}).appendTo(this.$element);
-	this.$storyElement = $("<div />", {'class': 'activity-story'}).appendTo(this.$element).html(this.getStory());
+	this.$storyElement = $("<div />", {'class': 'activity-story smart-line'}).appendTo(this.$element).html(this.getStory()).data('smart-line', {'selector': 'a'});
 	this.$element.data('item', this);
-	$preparer.fire(this.$element);
 	feed.add(this);
+	$preparer.fire(this.$element);
 }
 
 ActivityFeedItem.prototype.getObjectIcon = function() {
@@ -192,7 +192,7 @@ ActivityFeed.prototype.init = function() {
 	this.components.list = $("<ul />", {'class': 'ic-activity-feed'}).appendTo(this.$element);
 	this.components.loadMore = $("<div />", {'class': 'ic-activity-load-more'}).appendTo(this.$element);
 	this.load(ActivityFeed.prototype.DIRECTION_OLDER, function() {
-		self.$thinking.remove();
+		self.$thinking.hide();
 		self.$element.show();
 	});
 	//this.startCheckNewerTimer();
@@ -219,8 +219,11 @@ ActivityFeed.prototype.startLoadMoreTimer = function() {
 		if (self.components.loadMore.isElementInViewport() 
 			&& !self.loading
 			&& (((new Date().getTime())/1000) - self.lastLoadMore) > 2) {
-				self.lastLoadMore = (new Date().getTime())/1000
-			self.load(ActivityFeed.prototype.DIRECTION_OLDER);
+				self.lastLoadMore = (new Date().getTime())/1000;
+				self.$thinking.show();
+				self.load(ActivityFeed.prototype.DIRECTION_OLDER, function() {
+					self.$thinking.hide();	
+				});
 		}
 	}, 1000);
 };
