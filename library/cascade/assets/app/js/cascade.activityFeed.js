@@ -195,7 +195,7 @@ ActivityFeed.prototype.init = function() {
 		self.$thinking.hide();
 		self.$element.show();
 	});
-	//this.startCheckNewerTimer();
+	this.startCheckNewerTimer();
 	this.startLoadMoreTimer();
 };
 

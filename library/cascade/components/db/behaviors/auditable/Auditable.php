@@ -14,12 +14,35 @@ namespace cascade\components\db\behaviors\auditable;
  */
 class Auditable extends \infinite\db\behaviors\auditable\Auditable
 {
+    protected $_auditDataInterface;
     /**
      * @inheritdoc
      */
     public $deleteEventClass = 'cascade\\components\\db\\behaviors\\auditable\\DeleteEvent';
     public $insertEventClass = 'cascade\\components\\db\\behaviors\\auditable\\InsertEvent';
     public $updateEventClass = 'cascade\\components\\db\\behaviors\\auditable\\UpdateEvent';
+
+
+    public function safeAttributes()
+    {
+        return array_merge(parent::safeAttributes(), ['auditDataInterface']);
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'cascade\\components\\db\\behaviors\\auditable\\DataInterfaceEventBehavior'
+            ]
+        ];
+    }
+
+    public function prepareEventObject($event)
+    {
+        parent::prepareEventObject($event);
+        $event->dataInterface = $this->auditDataInterface;
+        return $event;
+    }
 
     /**
      * Get indirect object
@@ -34,4 +57,13 @@ class Auditable extends \infinite\db\behaviors\auditable\Auditable
         return $this->_indirectObject;
     }
 
+    public function setAuditDataInterface($object)
+    {
+        $this->_auditDataInterface = $object;
+    }
+
+    public function getAuditDataInterface()
+    {
+        return $this->_auditDataInterface;
+    }
 }

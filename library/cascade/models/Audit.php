@@ -32,4 +32,25 @@ class Audit extends \infinite\db\models\Audit
         $dataProvider['query'] = static::find();
         return Yii::createObject($dataProvider);
     }
+
+    public function rules()
+    {
+        return array_merge(parent::rules(), [
+            [['data_interface_id'], 'string', 'max' => 36]
+        ]);
+    }
+
+
+    public function attributeLabels()
+    {
+        return array_merge(parent::attributeLabels(), [
+            'data_interface_id' => 'Data Interface'
+        ]);
+    }
+
+
+    public function getDataInterface()
+    {
+        return $this->hasOne(Yii::$app->classes['DataInterface'], ['id' => 'data_interface_id']);
+    }
 }

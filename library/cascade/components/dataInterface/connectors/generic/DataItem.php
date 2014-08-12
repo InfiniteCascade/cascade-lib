@@ -55,7 +55,8 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
             $this->localObject = new $localModel;
         }
 
-        $this->localObject->auditAgent = $this->module->collectorItem->interfaceObject->primaryKey;
+        // $this->localObject->auditAgent = $this->module->collectorItem->interfaceObject->primaryKey;
+        $this->localObject->auditDataInterface = $this->module->collectorItem->interfaceObject->primaryKey;
 
         $attributes = $this->dataSource->buildLocalAttributes($this->foreignObject, $this->localObject);
         if (empty($attributes)) {
