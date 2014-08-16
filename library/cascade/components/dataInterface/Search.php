@@ -120,8 +120,8 @@ class Search extends \infinite\base\Component
                 Console::output("Creating new object!");
                 return false;
             } else {
-                Console::output("Selected " . $resultNice[$select]->descriptor);
-                return $resultNice[$select];
+                Console::output("Selected " . $resultsNice[$select]->descriptor);
+                return $resultsNice[$select];
             }
         }
     }

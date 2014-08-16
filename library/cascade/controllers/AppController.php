@@ -92,11 +92,13 @@ class AppController extends Controller
         $this->params['model'] = $model = new LoginForm();
         if ($model->load($_POST) && $model->login()) {
             //Yii::$app->response->redirect = Yii::$app->getUser()->getReturnUrl();
+            Yii::$app->session->setFlash('delayed-instructions', json_encode(['pauseTimer' => false]));
             return $this->goBack();
         } else {
             Yii::$app->response->task = 'dialog';
             Yii::$app->response->taskOptions = ['title' => 'Log In'];
             Yii::$app->response->view = 'login';
+            Yii::$app->response->baseInstructions['pauseTimer'] = true;
         }
     }
 
@@ -120,6 +122,9 @@ class AppController extends Controller
         $auditClass = Yii::$app->classes['Audit'];
         $provider = $auditClass::activityDataProvider();
         $provider->handleInstructions($_POST);
+        if (Yii::$app->request->object) {
+            $provider->context = Yii::$app->request->object->primaryKey;
+        }
         Yii::$app->response->baseInstructions = $provider->package->toArray();
     }
 

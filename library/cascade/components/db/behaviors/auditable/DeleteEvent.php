@@ -7,6 +7,8 @@
 
 namespace cascade\components\db\behaviors\auditable;
 
+use Yii;
+
 /**
  * DeleteEvent [@doctodo write class description for DeleteEvent]
  *
@@ -37,5 +39,12 @@ class DeleteEvent extends \infinite\db\behaviors\auditable\DeleteEvent
             return $this->directObject->objectType->getDeleteVerb($this->directObject);
         }
         return parent::getVerb();
+    }
+
+    public function getStory()
+    {
+        $objectType = Yii::$app->collectors['types']->getOne($this->objectType);
+
+        return '{{agent}} '. $this->verb->past . ' '. $objectType->object->title->getSingular(false) .' [['. $this->descriptor .']]' . $this->indirectStory;
     }
 }

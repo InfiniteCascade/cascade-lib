@@ -128,6 +128,11 @@ class Header extends Widget
                 'options' => ['title' => $label, 'data-handler' => 'background']
             ];
         }
+        $menu[] = [
+            'label' => Html::tag('span', '', ['class' => 'fa fa-history']) .' Activity',
+            'url' => $object->getUrl('activity'),
+            'options' => ['title' => 'View Activity', 'data-handler' => 'background']
+        ];
 
         if (!empty($menu)) {
             $content[] = Html::beginTag('div', ['class' => 'ic-object-menu columns-'. count($menu)]);

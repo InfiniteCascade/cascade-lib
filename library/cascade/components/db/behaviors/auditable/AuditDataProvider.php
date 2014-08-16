@@ -19,6 +19,8 @@ use cascade\models\ObjectFamiliarity;
 class AuditDataProvider extends \infinite\data\ActiveDataProvider
 {
 	public $scope = 'all';
+	public $direction = '_older';
+	public $context = false;
 
 	protected function clearParams(&$params)
 	{
@@ -33,7 +35,7 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 
 	public function getPackage()
 	{
-		return new AuditPackage($this);
+		return new AuditPackage($this, $this->context);
 	}
 
 	public function handleInstructions($params)
@@ -41,8 +43,9 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 		$this->clearParams($params);
 		//\d($params);
 		$this->scope = ArrayHelper::getValue($params, 'scope', 'watching');
-		$direction = ArrayHelper::getValue($params, 'direction', '_older');
-		$limit = ArrayHelper::getValue($params, 'limit', 50);
+		$direction = $this->direction = ArrayHelper::getValue($params, 'direction', '_older');
+		$limit = ArrayHelper::getValue($params, 'limit', 25);
+		$object = $this->context = ArrayHelper::getValue($params, 'object', false);
 		if ($direction === '_newer') {
 			$lastTime = ArrayHelper::getValue($params, 'loadTimestamp', strtotime("1 year ago"));
 			$this->query->andWhere($this->query->primaryAlias . '.created >= \'' . date("Y-m-d G:i:s", $lastTime) .'\'');
@@ -51,9 +54,11 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 			//\d(["newer", $this->query->createCommand()->rawSql]);exit;
 		} else { // _older
 			$this->pagination->pageSize = $limit;
-			$lastTime = ArrayHelper::getValue($params, 'lastItemTimestamp', time());
+			$lastTime = ArrayHelper::getValue($params, 'lastItemTimestamp', false);
 			$lastItem = ArrayHelper::getValue($params, 'lastItem', false);
-			$this->query->andWhere($this->query->primaryAlias . '.created <= \'' . date("Y-m-d G:i:s", $lastTime) .'\'');
+			if ($lastTime) {
+				$this->query->andWhere($this->query->primaryAlias . '.created <= \'' . date("Y-m-d G:i:s", $lastTime) .'\'');
+			}
 			if (!empty($lastItem)) {
 				$this->query->andWhere(['not', [$this->query->primaryAlias . '.' . $this->query->primaryTablePk => $lastItem]]);
 			}
@@ -62,7 +67,11 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 			//echo $this->query->createCommand()->rawSql;exit;
 		}
 
-		if ($this->scope !== 'all' && !empty(Yii::$app->user->id)) {
+		if ($this->scope === 'object' && $object) {
+			$this->query->andWhere(['or', 
+				[$this->query->primaryAlias . '.direct_object_id' => $object], 
+				[$this->query->primaryAlias . '.indirect_object_id' => $object]]);
+		} elseif ($this->scope !== 'all' && !empty(Yii::$app->user->id)) {
 			$subquery = ObjectFamiliarity::find();
 			$subquery->andWhere([$subquery->primaryAlias .'.user_id' => Yii::$app->user->id]);
 			if ($this->scope === 'watching') {

@@ -19,7 +19,7 @@ $preparer.add(function(context) {
 		checkHighlight();
 	}
 	if (highlightObjectId) {
-		$("[data-object-id="+highlightObjectId+"]").each(function() {
+		$("[data-object-id="+highlightObjectId+"]", context).each(function() {
 			highlightObject(this);
 		});
 	}

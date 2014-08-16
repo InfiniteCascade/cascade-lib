@@ -68,6 +68,11 @@ footer {
   margin: -15px -15px 10px -15px;
 }
 
+.ic-object-activity-viewport {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
 .ic-object-previous {
   font-size: .9em;
   margin: -19px -19px 15px -19px;
@@ -127,16 +132,30 @@ footer {
 .ic-object-menu.columns-5 li {
   width: 33%;
 }
+
+.ic-object-menu.columns-5 li.item-4,
+.ic-object-menu.columns-5 li.item-5 {
+  width: 50%;
+}
 .ic-object-menu.columns-4 li.item-1,
 .ic-object-menu.columns-4 li.item-2 {
   border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
 
+.ic-object-menu.columns-5 li.item-1,
+.ic-object-menu.columns-5 li.item-2,
+.ic-object-menu.columns-5 li.item-3 {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
 .ic-object-menu.columns-1 li.item-1,
 .ic-object-menu.columns-2 li.item-2,
 .ic-object-menu.columns-3 li.item-3,
 .ic-object-menu.columns-4 li.item-2,
-.ic-object-menu.columns-4 li.item-4 {
+.ic-object-menu.columns-4 li.item-4,
+.ic-object-menu.columns-5 li.item-3,
+.ic-object-menu.columns-5 li.item-5,
+.ic-object-menu.columns-6 li.item-3,
+.ic-object-menu.columns-6 li.item-6 {
   border-right: none;
 }
 

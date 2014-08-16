@@ -21,12 +21,16 @@ class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, 
 {
     public $similarThreshold = 21600;
 	protected $_items = [];
+    public $direction = '_older';
+    public $context = false;
 
-	public function __construct($dataSource)
+	public function __construct($dataSource, $context = false)
 	{
 		foreach ($dataSource->models as $item) {
 			$this->add($item);
 		}
+        $this->direction = $dataSource->direction;
+        $this->context = $context;
 		parent::__construct();
 	}
 
@@ -112,13 +116,15 @@ class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, 
     {
         $threads = [];
     	$p = [];
-    	$p['timestamp'] = time();
+        $p['timestamp'] = time();
+        $p['direction'] = $this->direction;
     	$p['activity'] = [];
-    	$p['objects'] = [];
+        $p['objects'] = [];
         $lastKey = null;
         $lastTimestamp = null;
     	foreach ($this as $item) {
     		$eventObject = $item->eventObject;
+            $eventObject->context = $this->context;
     		$package = $eventObject->package;
             if (!isset($threads[$package['key']])) {
                 $threads[$package['key']] = 0;

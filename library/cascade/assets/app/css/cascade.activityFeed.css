@@ -39,3 +39,10 @@ ul.ic-activity-feed .activity-icon {
 	color: #bbb;
 	text-decoration: none;
 }
+.ic-activity-load-more {
+}
+.ic-activity-empty {
+	text-align: center;
+	font-size: 24px;
+	color: #bbb;
+}

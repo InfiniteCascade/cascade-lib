@@ -123,6 +123,13 @@ abstract class Module extends BaseModule
         if (is_null($this->_dataSources)) {
             $this->_dataSources = [];
             foreach ($this->dataSources() as $foreignModel => $dataSource) {
+                if (is_numeric($foreignModel) || isset($dataSources['foreignModel'])) {
+                    if (!isset($dataSources['foreignModel'])) {
+                        continue;
+                    }
+                    $foreignModel = $dataSources['foreignModel'];
+                    unset($dataSources['foreignModel']);
+                }
                 if (!isset($dataSource['class'])) {
                     $dataSource['class'] = $this->dataSourceClass;
                 }

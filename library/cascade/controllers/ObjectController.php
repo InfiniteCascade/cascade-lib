@@ -70,6 +70,7 @@ class ObjectController extends Controller
                     'unwatch' => ['get'],
                     'search' => ['get'],
                     'browse' => ['get'],
+                    'activity' => ['get'],
                 ],
             ],
         ];
@@ -216,7 +217,7 @@ class ObjectController extends Controller
         $type = $this->params['type'] = $object->objectType;
         $viewEvent = new ObjectViewEvent(['object' => $object, 'action' => $action]);
         $type->trigger(TypeModule::EVENT_VIEW_OBJECT, $viewEvent);
-        Yii::$app->collectors['widgets']->lazy = false;
+        Yii::$app->collectors['widgets']->lazy = true;
         
         if ($viewEvent->handled) {
             if ($viewEvent->accessed) {
@@ -275,6 +276,25 @@ class ObjectController extends Controller
         if (!empty($_GET['section'])) {
             $this->params['active'] = $_GET['section'];
         }
+    }
+
+    /**
+     * __method_actionView_description__
+     * @return __return_actionView_type__ __return_actionView_description__
+     * @throws HttpException __exception_HttpException_description__
+     */
+    public function actionActivity()
+    {
+        if (empty($_GET['id']) or !($object = $this->params['object'] = Registry::getObject($_GET['id'], false)) or !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
+            throw new HttpException(404, "Unknown object.");
+        }
+        if (!$object->can('read')) {
+            throw new HttpException(403, "Unable to access object.");
+        }
+        Yii::$app->response->task = 'dialog';
+        Yii::$app->response->taskOptions = ['title' => 'Activity for ' . $object->descriptor , 'width' => '100%', 'isForm' => false];
+        Yii::$app->response->view = 'activity';
+        Yii::$app->request->object = $object;
     }
 
     public function _checkParams($params, $required = [])
@@ -383,6 +403,7 @@ class ObjectController extends Controller
                 } else {
                     $relationField = 'child_object_id';
                 }
+                $p['primaryModel']->setIndirectObject($p['relatedObject']);
                 $fields[$companionNiceId]->model->{$relationField} = $p['relatedObject']->primaryKey;
                 $relations[$fields[$companionNiceId]->model->tabularId] = $fields[$companionNiceId]->model;
             } else {
@@ -439,8 +460,8 @@ class ObjectController extends Controller
         Yii::$app->response->taskOptions = ['title' => 'Update ' . $p['type']->title->getSingular(true) , 'width' => '800px'];
         
         $p['primaryModel'] = $p['type']->getModel($p['object']);
-        if (isset($relatedObject)) {
-            $p['primaryModel']->indirectObject = $relatedObject;
+        if (isset($p['relatedObject'])) {
+            $p['primaryModel']->setIndirectObject($p['relatedObject']);
         }
         if (!empty($_POST)) {
             $p['primaryModel']->load($_POST);

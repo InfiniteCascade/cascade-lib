@@ -55,6 +55,9 @@ class InterfaceController extends \infinite\console\Controller
      */
     public function getDataInterface()
     {
+        if (!$this->started) {
+            return $this->_interface;
+        }
         if (is_null($this->_interface)) {
             $interfaces = ArrayHelper::map(Yii::$app->collectors['dataInterfaces']->getAll(), 'systemId', 'object.name');
             $this->dataInterface = $this->select("Choose interface", $interfaces);

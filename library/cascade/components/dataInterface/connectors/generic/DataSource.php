@@ -121,6 +121,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
             $relatedClass = $relatedType->primaryModel;
             $relatedObject = new $relatedClass;
         }
+        $relatedObject->auditDataInterface = $this->module->collectorItem->interfaceObject->primaryKey;
         $relatedObject->attributes = $valueMap;
         if ($relatedObject->save()) {
             return $relatedObject;

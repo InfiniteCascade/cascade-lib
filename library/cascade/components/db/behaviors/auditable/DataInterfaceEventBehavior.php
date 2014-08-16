@@ -28,7 +28,11 @@ class DataInterfaceEventBehavior extends \infinite\db\behaviors\ActiveRecord
     public function beforeModelSave($event)
     {
         if (isset($this->dataInterface)) {
-            $event->model->data_interface_id = $this->dataInterface->primaryKey;
+            $dataInterface = $this->dataInterface;
+            if (is_object($dataInterface)) {
+                $dataInterface = $dataInterface->primaryKey;
+            }
+            $event->model->data_interface_id = $dataInterface;
         }
     }
 

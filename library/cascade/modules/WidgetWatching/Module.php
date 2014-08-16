@@ -21,7 +21,7 @@ class Module extends \cascade\components\web\widgets\Module
     /**
      * @inheritdoc
      */
-    public $icon = 'fa fa-eye';
+    public $icon = 'fa fa-history';
     /**
      * @inheritdoc
      */

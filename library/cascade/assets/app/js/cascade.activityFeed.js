@@ -47,7 +47,7 @@ ActivityFeedItem.prototype.getAgentIcon = function() {
 ActivityFeedItem.prototype.process = function(template) {
 	var self = this;
 	// var renderedObjects = this.feed.getRenderedObjects();
-    return template.replace(/\{\{([\w\-\:]+)\}\}/g,
+    template = template.replace(/\{\{([\w\-\:]+)\}\}/g,
 	    function(match, p1) {
 	    	var renderedVariable = self.feed.getRenderedObject(this.item, p1);
 	    	if (renderedVariable !== undefined && renderedVariable) {
@@ -56,6 +56,14 @@ ActivityFeedItem.prototype.process = function(template) {
 	    	return null;
 		}
 	);
+
+	template = template.replace(/\[\[([^\]]+)\]\]/g,
+	    function(match, p1) {
+	    	return $("<em />").html(p1).outerHTML();
+		}
+	);
+
+	return template;
 };
 
 
@@ -150,6 +158,41 @@ function ActivityFeed($element, options) {
 	this.options = jQuery.extend(true, {}, this.defaultOptions, options);
 	this.init();
 }
+ActivityFeed.prototype.DIRECTION_NEWER = '_newer';
+ActivityFeed.prototype.DIRECTION_OLDER = '_older';
+
+ActivityFeed.prototype.defaultOptions = {
+	'ajax': {
+		'url': '/app/activity'
+	},
+	'object': null,
+	'scope': null,
+	'limit': null,
+	'rich': true,
+	'emptyMessage': 'There has been no activity.'
+};
+
+ActivityFeed.prototype.init = function() {
+	var self = this;
+	this.$element.hide();
+	this.components.list = $("<ul />", {'class': 'ic-activity-feed'}).appendTo(this.$element);
+	this.components.loadMore = $("<div />", {'class': 'ic-activity-load-more'}).appendTo(this.$element);
+	this.load(ActivityFeed.prototype.DIRECTION_OLDER, function() {
+		self.$thinking.hide();
+		self.$element.show();
+	});
+	this.startCheckNewerTimer();
+	this.startLoadMoreTimer();
+	this.$element.on('remove', function() {
+		self.stopCheckNewerTimer();
+		self.stopLoadMoreTimer();
+		self.items = {};
+		self.object = {};
+		self.components = {};
+		delete self;
+	});
+};
+
 
 ActivityFeed.prototype.getObject = function(variable) {
 	var parts = variable.split(':');
@@ -175,53 +218,30 @@ ActivityFeed.prototype.getRenderedObject = function(item, variable) {
 	return false;
 };
 
-ActivityFeed.prototype.defaultOptions = {
-	'ajax': {
-		'url': '/app/activity'
-	},
-	'scope': null,
-	'rich': true
-};
-
-ActivityFeed.prototype.DIRECTION_NEWER = '_newer';
-ActivityFeed.prototype.DIRECTION_OLDER = '_older';
-
-ActivityFeed.prototype.init = function() {
-	var self = this;
-	this.$element.hide();
-	this.components.list = $("<ul />", {'class': 'ic-activity-feed'}).appendTo(this.$element);
-	this.components.loadMore = $("<div />", {'class': 'ic-activity-load-more'}).appendTo(this.$element);
-	this.load(ActivityFeed.prototype.DIRECTION_OLDER, function() {
-		self.$thinking.hide();
-		self.$element.show();
-	});
-	this.startCheckNewerTimer();
-	this.startLoadMoreTimer();
-};
 
 
 ActivityFeed.prototype.startCheckNewerTimer = function() {
 	this.stopCheckNewerTimer();
 	var self = this;
-	this.checkNewerTimer = setInterval(function() {
+	timer.setInterval('activity-check-new', function() {
 		self.load(ActivityFeed.prototype.DIRECTION_NEWER);
 	}, 10000);
 };
 
 ActivityFeed.prototype.stopCheckNewerTimer = function() {
-	clearInterval(this.checkNewerTimer);
+	timer.clear('activity-check-new');
 };
 
 ActivityFeed.prototype.startLoadMoreTimer = function() {
 	this.stopLoadMoreTimer();
 	var self = this;
-	this.loadMoreTimer = setInterval(function() {
+	timer.setInterval('activity-load-more', function() {
 		if (self.components.loadMore.isElementInViewport() 
 			&& !self.loading
 			&& (((new Date().getTime())/1000) - self.lastLoadMore) > 2) {
 				self.lastLoadMore = (new Date().getTime())/1000;
 				self.$thinking.show();
-				self.load(ActivityFeed.prototype.DIRECTION_OLDER, function() {
+				self.load(ActivityFeed.prototype.DIRECTION_OLDER, function(result) {
 					self.$thinking.hide();	
 				});
 		}
@@ -229,8 +249,19 @@ ActivityFeed.prototype.startLoadMoreTimer = function() {
 };
 
 ActivityFeed.prototype.stopLoadMoreTimer = function() {
-	clearInterval(this.loadMoreTimer);
+	timer.clear('activity-load-more');
 };
+
+ActivityFeed.prototype.updateEmptyActivity = function() {
+	if (this.$emptyNotice === undefined) {
+		this.$emptyNotice = $("<div />", {'class': 'ic-activity-empty'}).hide().html(this.options.emptyMessage).insertAfter(this.$element);
+	}
+	if (_.values(this.objects).length === 0) {
+		this.$emptyNotice.show();
+	} else {
+		this.$emptyNotice.hide();
+	}
+}
 
 ActivityFeed.prototype.registerObject = function(id, object) {
 	if (this.objects[id] === undefined) {
@@ -294,22 +325,32 @@ ActivityFeed.prototype.load = function(direction, callback) {
 		self.loading = false;
 	};
 	ajaxSettings.success = function (response) {
+		if (response.objects === undefined) {
+			return true;
+		}
 		self.loadTimestamp = response.timestamp;
 		jQuery.each(response.objects, function(id, object) {
 			self.registerObject(id, object);
 		});
+		var found = false;
 		jQuery.each(response.activity, function(id, activity) {
 			self.registerActivity(id, activity);
+			found = true;
 		});
-		console.log(self);
+		if (!found && response.direction === '_older') {
+			self.stopLoadMoreTimer();
+		}
+		self.updateEmptyActivity();
 	};
 
 	ajaxSettings.data = {
 		'scope': self.options.scope,
+		'object': self.options.object,
 		'direction': direction,
 		'lastItem': self.lastItem,
 		'lastItemTimestamp': self.lastItemTimestamp,
-		'loadTimestamp': self.loadTimestamp
+		'loadTimestamp': self.loadTimestamp,
+		'limit': self.options.limit
 	};
 	ajaxSettings.dataType = 'json';
 	ajaxSettings.type = 'POST';

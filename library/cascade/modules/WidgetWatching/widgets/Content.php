@@ -79,7 +79,7 @@ class Content extends \cascade\components\web\widgets\Widget
     {
     	$parts = [];
     	$instructions = [];
-    	$instructions['ajax']  = ['url' => Url::to('app/activity')];
+    	$instructions['ajax']  = ['url' => Url::to(['/app/activity'])];
     	$instructions['scope'] = $this->currentScope;
     	$parts[] = Html::tag('div', '', ['data-activity-feed' => json_encode($instructions)]);
     	$parts[] = Html::tag('div', str_repeat(Html::tag('div', '', ['class' => 'widget-lazy-placeholder']), 30), ['class' => 'activity-feed-thinking']);
