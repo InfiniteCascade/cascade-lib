@@ -260,7 +260,7 @@ class AppController extends Controller
             }
             if ($refreshed[$requestId]) {
                 echo "data: ".json_encode(['type' => 'handleRequests', 'data' => [$requestId => $refreshed[$requestId]], 'id' => round(microtime(true) * 100)]) ."\n";
-                echo str_repeat("\n",1024*4);
+                echo str_repeat("\n",1024*3);
             }
         }
         ob_implicit_flush(0);

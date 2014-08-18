@@ -242,7 +242,8 @@ ActivityFeed.prototype.startLoadMoreTimer = function() {
 				self.lastLoadMore = (new Date().getTime())/1000;
 				self.$thinking.show();
 				self.load(ActivityFeed.prototype.DIRECTION_OLDER, function(result) {
-					self.$thinking.hide();	
+					self.$thinking.hide();
+					console.log(result);	
 				});
 		}
 	}, 1000);
@@ -264,15 +265,18 @@ ActivityFeed.prototype.updateEmptyActivity = function() {
 }
 
 ActivityFeed.prototype.registerObject = function(id, object) {
-	if (this.objects[id] === undefined) {
-		this.objects[id] = new ActivityFeedObject(this, object);
+	if (this.objects[id] !== undefined) {
+		delete this.objects[id];
 	}
+	this.objects[id] = new ActivityFeedObject(this, object);
 };
 
 ActivityFeed.prototype.registerActivity = function(id, activity) {
 	if (this.items[id] === undefined) {
 		this.items[id] = new ActivityFeedItem(this, activity);
+		return true;
 	}
+	return false;
 };
 
 ActivityFeed.prototype.getRenderedObjects = function() {
@@ -318,9 +322,9 @@ ActivityFeed.prototype.load = function(direction, callback) {
 		return;
 	}
 
-	ajaxSettings.complete = function() {
+	ajaxSettings.complete = function(response) {
 		if (callback !== undefined) {
-			callback();
+			callback(response);
 		}
 		self.loading = false;
 	};
@@ -334,8 +338,9 @@ ActivityFeed.prototype.load = function(direction, callback) {
 		});
 		var found = false;
 		jQuery.each(response.activity, function(id, activity) {
-			self.registerActivity(id, activity);
-			found = true;
+			if (self.registerActivity(id, activity)) {
+				found = true;
+			}
 		});
 		if (!found && response.direction === '_older') {
 			self.stopLoadMoreTimer();

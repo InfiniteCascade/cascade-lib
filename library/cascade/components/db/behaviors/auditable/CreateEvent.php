@@ -12,7 +12,7 @@ namespace cascade\components\db\behaviors\auditable;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class InsertEvent extends \infinite\db\behaviors\auditable\InsertEvent
+class CreateEvent extends \infinite\db\behaviors\auditable\CreateEvent
 {
     public function getVerb()
     {

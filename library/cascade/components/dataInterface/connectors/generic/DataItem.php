@@ -96,7 +96,6 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
                 $childLocalObject = $dataItem->handle(true, ['indirectObject' => $this->localObject, 'relationModels' => [['parent_object_id' => $this->localObject->primaryKey]]]);
             }
         }
-
         foreach ($this->foreignChildren as $modelName => $children) {
             $dataSource = $this->module->getDataSource($modelName);
             if (empty($dataSource) || !$dataSource->isReady()) { continue; }
@@ -110,7 +109,6 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
                 $childLocalObject = $dataItem->handle(true, ['indirectObject' => $this->localObject, 'relationModels' => [$relationSet]]);
             }
         }
-
         foreach ($this->foreignParents as $modelName => $parents) {
             $dataSource = $this->module->getDataSource($modelName);
             if (empty($dataSource) || !$dataSource->isReady()) { \d("$modelName isn't ready"); exit; continue; }
