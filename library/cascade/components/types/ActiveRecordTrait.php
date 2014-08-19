@@ -848,6 +848,7 @@ trait ActiveRecordTrait
             $relationClass = Yii::$app->classes['Relation'];
             $taxonomyClass = Yii::$app->classes['Taxonomy'];
             $relationModel = $relationClass::getRegisterModel($this->relationModel);
+            //\d($relationModel->taxonomy_id);
             foreach ($relationModel->taxonomy_id as $taxonomy) {
                 $taxonomyModel = $taxonomyClass::get($taxonomy, false);
                 if ($taxonomyModel) {

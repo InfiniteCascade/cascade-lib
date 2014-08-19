@@ -109,6 +109,7 @@ trait ListWidgetTrait
                     'relationTaxonomies' => ['class' => 'list-group-item-pre', 'tag' => 'div']
                 ], $template);
         }
+
         foreach ($template as $fieldName => $settings) {
             if (is_numeric($fieldName)) {
                 $fieldName = $settings;

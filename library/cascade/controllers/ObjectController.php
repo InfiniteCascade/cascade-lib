@@ -223,7 +223,6 @@ class ObjectController extends Controller
             if ($viewEvent->accessed) {
                 ObjectFamiliarity::accessed($object);
             }
-
             return;
         }
 
