@@ -39,6 +39,25 @@ ul.ic-activity-feed .activity-icon {
 	color: #bbb;
 	text-decoration: none;
 }
+.activity-story.smart-line {
+    white-space: normal;
+    overflow: hidden;
+    max-height: 2.8em;
+}
+
+
+@media (max-width: 400px) {
+    .activity-story.smart-line {
+        max-height: 6em;
+    }
+}
+
+.expanded .activity-story.smart-line {
+	overflow: visible;
+    white-space: normal;
+    max-height: none;
+}
+
 .ic-activity-load-more {
 }
 .ic-activity-empty {

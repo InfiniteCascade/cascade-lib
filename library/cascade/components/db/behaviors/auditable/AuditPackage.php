@@ -155,6 +155,7 @@ class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, 
     				continue;
     			}
     			$p['objects'][$object->primaryKey] = $object->package;
+                $p['objects'][$object->primaryKey]['descriptor'] = htmlspecialchars(strip_tags($p['objects'][$object->primaryKey]['descriptor']));
     			unset($p['objects'][$object->primaryKey]['id']);
     		}
     	}

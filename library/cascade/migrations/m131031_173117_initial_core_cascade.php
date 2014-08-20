@@ -24,6 +24,16 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->createIndex('auditDataInterface', 'audit', 'data_interface_id', false);
         $this->addForeignKey('auditDataInterface', 'audit', 'data_interface_id', 'data_interface', 'id', 'CASCADE', 'CASCADE');
 
+
+        // user addition
+        $this->addColumn('user', 'object_individual_id', 'char(36) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL AFTER id');
+        $this->addColumn('user', 'photo_storage_id', 'char(36) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL AFTER object_individual_id');
+        
+        $this->createIndex('userIndividual', 'user', 'object_individual_id', false);
+        $this->createIndex('userPhotoStorage', 'user', 'photo_storage_id', false);
+        $this->addForeignKey('userPhotoStorage', 'user', 'photo_storage_id', 'storage', 'id', 'SET NULL', 'CASCADE');
+        $this->addForeignKey('userIndividual', 'user', 'object_individual_id', 'object_individual', 'id', 'SET NULL', 'CASCADE');
+
         // data_interface_log
         $this->dropExistingTable('data_interface_log');
         $this->createTable('data_interface_log', [

@@ -40,7 +40,7 @@ $itemTypes = array_values($itemTypes);
 </head>
 <?= Html::beginTag('body', $this->bodyHtmlOptions); ?>
 <?php
-echo Html::beginTag('div', ['class' => 'main-container container']);
+echo Html::beginTag('div', ['class' => 'main-container container-fluid']);
 $this->beginBody(); ?>
     <?php
         $themeEngine = Yii::$app->collectors['themes'];
@@ -139,12 +139,12 @@ $this->beginBody(); ?>
         TopNavBar::end();
     ?>
 
-    <div class="inner-container container">
+    <div class="inner-container container-fluid">
         <?=$content; ?>
     </div>
 
     <footer class="footer">
-        <div class="container">
+        <div class="container-fluid">
 <!-- 			<p class="pull-left">&copy; <?=Yii::$app->name?> <?=date('Y'); ?></p>
             <p class="pull-right"><?=Yii::powered(); ?></p> -->
         </div>
