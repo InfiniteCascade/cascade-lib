@@ -8,43 +8,52 @@
 namespace cascade\components\db\behaviors;
 
 use Yii;
+use infinite\base\FileInterface;
+use infinite\base\File;
+use infinite\base\RawFile;
 
 /**
  * Roleable [@doctodo write class description for Roleable]
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Photo extends \infinite\db\behaviors\ActiveRecord
+class Photo extends \cascade\components\storageHandlers\StorageBehavior
 {
-    public $photoStorageField = 'photo_storage_id';
-    
-    public function events()
+    public $storageAttribute = 'photo_storage_id';
+
+    public function safeAttributes()
     {
-        return [
-            \infinite\db\ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
-            \infinite\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
-            \infinite\db\ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
-            \infinite\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
-            \infinite\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
-        ];
-    }
-    public function beforeSave($event)
-    {
-        
+        return ['rawPhoto', 'photo'];
     }
 
-    public function afterSave($event)
+    public function setPhoto($photo)
     {
-        
+        return $this->setStorage($photo);
+    }
+
+    public function setRawPhoto($photo)
+    {
+        if (!($photo instanceof FileInterface)) {
+            $photo = RawFile::createRawInstance($photo);
+        }
+        return $this->setStorage($photo);
+    }
+
+    public function getRawPhoto()
+    {
+        return $this->getStorage();
+    }
+
+    public function getPhoto()
+    {
+        return $this->getStorage();
     }
 
     public function beforeValidate($event)
     {
-        
-    }
-
-    public function safeAttributes()
-    {
-        return ['photo'];
+        if (!parent::beforeValidate($event)) {
+            return false;
+        }
+        return true;
     }
 }

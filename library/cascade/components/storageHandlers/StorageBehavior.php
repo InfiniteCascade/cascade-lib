@@ -115,7 +115,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
      */
     public function beforeSave($event)
     {
-        if (is_object($this->owner->storage_id) && !$this->storageEngine->storageHandler->object->beforeSave($this->storageEngine, $this->owner, $this->storageAttribute)) {
+        if (is_object($this->owner->{$this->storageAttribute}) && !$this->storageEngine->storageHandler->object->beforeSave($this->storageEngine, $this->owner, $this->storageAttribute)) {
             $event->isValid = false;
             $this->owner->addError($this->storageAttribute, 'Unable to save file in storage engine. Try again later. ('.$this->storageEngine->storageHandler->object->error . ')');
             return false;
