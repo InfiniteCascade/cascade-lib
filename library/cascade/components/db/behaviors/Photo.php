@@ -20,6 +20,7 @@ use infinite\base\RawFile;
 class Photo extends \cascade\components\storageHandlers\StorageBehavior
 {
     public $storageAttribute = 'photo_storage_id';
+    public $required = false;
 
     public function safeAttributes()
     {

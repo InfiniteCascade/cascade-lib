@@ -53,7 +53,7 @@ class User extends \infinite\db\models\User
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['photo_storage_id'], 'string', 'max' => 36],
+            [['photo_storage_id'], 'safe'],
             [['object_individual_id'], 'string', 'max' => 36],
         ]);
     }

@@ -32,6 +32,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     protected $_storageEngine;
     protected $_oldStorage;
 
+    public $required = true;
+
     /**
      * Converts object to string.
      * @return __return___toString_type__ __return___toString_description__
@@ -115,6 +117,9 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
      */
     public function beforeSave($event)
     {
+        if (!$this->required && empty($this->owner->{$this->storageAttribute})) {
+            return true;
+        }
         if (is_object($this->owner->{$this->storageAttribute}) && !$this->storageEngine->storageHandler->object->beforeSave($this->storageEngine, $this->owner, $this->storageAttribute)) {
             $event->isValid = false;
             $this->owner->addError($this->storageAttribute, 'Unable to save file in storage engine. Try again later. ('.$this->storageEngine->storageHandler->object->error . ')');
@@ -186,6 +191,9 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
      */
     public function beforeValidate($event)
     {
+        if (!$this->required && empty($this->owner->{$this->storageAttribute})) {
+            return true;
+        }
         if (empty($this->storageEngine)) {
             $this->owner->addError($this->storageAttribute, 'Unknown storage engine!');
             return false;
