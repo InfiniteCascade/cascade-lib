@@ -216,8 +216,21 @@ class ObjectController extends Controller
         if ($object->getBehavior('Photo') === null) {
             throw new HttpException(404, "No profile photo available (A)");
         }
-
-        if (!$object->serve()) {
+        $options = [];
+        if (isset($_GET['size'])) {
+            $options['width'] = $_GET['size'];
+            $options['height'] = $_GET['size'];
+        }
+        if (isset($_GET['width'])) {
+            $options['width'] = $_GET['width'];
+        }
+        if (isset($_GET['height'])) {
+            $options['height'] = $_GET['height'];
+        }
+        if (isset($_GET['rotate'])) {
+            $options['rotate'] = $_GET['rotate'];
+        }
+        if (!$object->serve($options)) {
             throw new HttpException(404, "No profile photo available (B)");
         }
     }

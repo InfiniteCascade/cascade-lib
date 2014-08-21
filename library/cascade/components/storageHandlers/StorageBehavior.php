@@ -174,6 +174,15 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         return true;
     }
 
+    public function getStoragePath()
+    {
+         if (!$this->storageEngine || !$this->storageEngine->storageHandler) { return false; }
+        $storageObject = $this->storageObject;
+        if (!$storageObject) { return false; }
+        if (!method_exists($this->storageEngine->storageHandler->object, 'getPath')) { return false; }
+        
+        return $this->storageEngine->storageHandler->object->getPath($storageObject);
+    }
     /**
      * Get storage object
      * @return __return_getStorageObject_type__ __return_getStorageObject_description__
