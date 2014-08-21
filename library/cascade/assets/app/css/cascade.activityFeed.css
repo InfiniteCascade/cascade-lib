@@ -27,6 +27,10 @@ ul.ic-activity-feed .activity-icons {
 	margin-right: 5px;
 }
 
+ul.ic-activity-feed .ic-icon-image {
+	background-size: cover;
+}
+
 ul.ic-activity-feed .activity-icon {
 	height: 40px;
 	width: 40px;
@@ -38,7 +42,10 @@ ul.ic-activity-feed .activity-icon {
 	margin: 2px;
 	color: #bbb;
 	text-decoration: none;
+	display: inline-block;
+	float: left;
 }
+
 .activity-story.smart-line {
     white-space: normal;
     overflow: hidden;

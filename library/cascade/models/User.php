@@ -21,6 +21,9 @@ use infinite\base\exceptions\Exception;
  */
 class User extends \infinite\db\models\User
 {
+    protected $_icon;
+    protected $_profilePhoto;
+
     const SYSTEM_EMAIL = 'system@system.local';
     /**
      * @var __var__individual_type__ __var__individual_description__
@@ -56,6 +59,24 @@ class User extends \infinite\db\models\User
             [['photo_storage_id'], 'safe'],
             [['object_individual_id'], 'string', 'max' => 36],
         ]);
+    }
+
+    public function hasIcon()
+    {
+        return isset($this->icon) && $this->icon;
+    }
+    
+    public function getIcon($size = 40)
+    {
+        if (is_null($this->_icon)) {
+            $profilePhoto = $this->getPhotoUrl($size);
+            if ($profilePhoto) {
+                return [
+                    'img' => $profilePhoto
+                ];
+            }
+        }
+        return $this->_icon;
     }
 
     /**
@@ -104,6 +125,29 @@ class User extends \infinite\db\models\User
         }
 
         return $this->_individual;
+    }
+
+    public function getPhotoUrl($size = 200)
+    {
+        if (!empty($this->individual) 
+            && $this->individual->getBehavior('Photo') !== null) {
+            $indPhoto = $this->individual->getPhotoUrl($size);
+            if ($indPhoto) {
+                return $indPhoto;
+            }
+        }
+        if ($this->getBehavior('Photo') !== null) {
+            return $this->getBehavior('Photo')->getPhotoUrl($size);
+        }
+        return false;
+    }
+
+    public function getPhotoEmail()
+    {
+        if (!empty($this->email) && substr($this->email, -6) !== ".local") {
+            return $this->email;
+        }
+        return false;
     }
     
     /**

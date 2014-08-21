@@ -103,11 +103,12 @@ ActivityFeedObject.prototype.getIcon = function(variable) {
 			&& jQuery.cascadeTypes.types[this.object.type] !== undefined) {
 			iconAttributes = {'class': jQuery.cascadeTypes.types[this.object.type].icon};
 		}
+		console.log(iconAttributes);
 
 		if (iconAttributes.class !== undefined) {
 			this.$icon.addClass(iconAttributes.class);
 		} else if(iconAttributes.img !== undefined) {
-			this.$icon.addClass('ic-icon-image');
+			this.$icon.addClass('fa ic-icon-image');
 			this.$icon.css('background-image', 'url('+iconAttributes.img+')');
 		} else {
 			this.$icon.addClass('fa fa-question');

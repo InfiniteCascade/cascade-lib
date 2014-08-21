@@ -68,6 +68,23 @@ footer {
   margin: -15px -15px 10px -15px;
 }
 
+.ic-object-photo {
+  margin: 0px auto 5px auto;
+  width: 200px;
+  height: 200px;
+  line-height: 200px;
+  font-size: 150px;
+  display: block;
+  border-radius: 10px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-size: cover;
+}
+
+.ic-object-photo-icon {
+  border: 1px solid #e0e0e0;
+}
+
 .ic-object-activity-viewport {
   max-height: 350px;
   overflow-y: auto;

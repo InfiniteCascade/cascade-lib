@@ -69,6 +69,7 @@ class ObjectController extends Controller
                     'widget' => ['get', 'post'],
                     'unwatch' => ['get'],
                     'search' => ['get'],
+                    'profile' => ['get'],
                     'browse' => ['get'],
                     'activity' => ['get'],
                 ],
@@ -195,6 +196,30 @@ class ObjectController extends Controller
             $package[$key] = $result->toArray();
         }
         Yii::$app->response->data = $package;
+    }
+
+    /**
+     * __method_actionView_description__
+     * @return __return_actionView_type__ __return_actionView_description__
+     * @throws HttpException __exception_HttpException_description__
+     */
+    public function actionPhoto()
+    {
+        if (empty($_GET['id']) or !($object = $this->params['object'] = Registry::getObject($_GET['id'], false)) or !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
+            throw new HttpException(404, "Unknown object.");
+        }
+        if (!$object->can('read')) {
+            throw new HttpException(403, "Unable to access object.");
+        }
+        Yii::$app->request->object = $object;
+        
+        if ($object->getBehavior('Photo') === null) {
+            throw new HttpException(404, "No profile photo available (A)");
+        }
+
+        if (!$object->serve()) {
+            throw new HttpException(404, "No profile photo available (B)");
+        }
     }
 
 
@@ -763,6 +788,7 @@ class ObjectController extends Controller
             Yii::$app->response->error = 'Unable update the watching status of this object.';
         }
     }
+
 
     /**
      * __method_actionWidget_description__

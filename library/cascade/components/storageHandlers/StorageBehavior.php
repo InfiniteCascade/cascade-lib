@@ -170,7 +170,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         $storageObject = $this->storageObject;
         if (!$storageObject) { return false; }
         if (!$this->storageEngine->storageHandler->object->serve($storageObject)) { return false; }
-
+        
         return true;
     }
 
@@ -180,6 +180,9 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
      */
     public function getStorageObject()
     {
+        if (empty($this->owner->{$this->storageAttribute})) {
+            return false;
+        }
         $registryClass = Yii::$app->classes['Registry'];
         return $registryClass::getObject($this->owner->{$this->storageAttribute});
     }

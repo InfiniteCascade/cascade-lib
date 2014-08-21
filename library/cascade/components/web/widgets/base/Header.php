@@ -33,6 +33,18 @@ class Header extends Widget
             $content[] = Html::tag('span', '', ['class' => 'fa fa-reply']) .'&nbsp; '. Html::a('Go back to <em>' . Yii::$app->request->previousObject->descriptor .'</em>', Yii::$app->request->previousObject->getUrl('view', [], false));
             $content[] = Html::endTag('div');
         }
+        if ($object->getBehavior('Photo')) {
+            $photoHtmlOptions = [];
+            $img = $object->getPhotoUrl(200);
+            if ($img) {
+                Html::addCssClass($photoHtmlOptions, 'ic-object-photo ic-object-photo-image');
+                $photoHtmlOptions['style'] = 'background-image: url("'.$img.'");';
+            } else {
+                Html::addCssClass($photoHtmlOptions, 'ic-object-photo ic-object-photo-icon '. $object->objectType->icon);
+            }
+            $photoContent = '';
+            $content[] = Html::tag('div', $photoContent, $photoHtmlOptions);
+        }
         $content[] = Html::beginTag('div', ['class' => 'ic-object-header']);
         $content[] = $object->descriptor;
         $objectAccess = $object->objectAccess;

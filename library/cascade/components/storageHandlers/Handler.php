@@ -46,6 +46,8 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
      */
     abstract public function handleSave(Storage $storage, $model, $attribute);
 
+    abstract public function serve(Storage $storage);
+
     /**
      * __method_generate_description__
      * @param __param_item_type__      $item __param_item_description__
