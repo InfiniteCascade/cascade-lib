@@ -85,6 +85,32 @@ class Header extends Widget
         } else {
             $menu[] = $stopWatchingItem;
         }
+
+        if ($object->can('update')) {
+            $menu[] = [
+                'label' => Html::tag('span', '', ['class' => 'fa fa-wrench']) .' Update',
+                'url' => $object->getUrl('update'),
+                'options' => ['title' => 'Update', 'data-handler' => 'background']
+            ];
+        }
+        if ($object->can('delete') || $object->can('archive')) {
+            $label = 'Delete';
+            $icon = 'fa-trash-o';
+            if ($object->can('archive')) {
+                $icon = 'fa-archive';
+                if ($object->archived) {
+                    $label = 'Unarchive';
+                } else {
+                    $label = 'Archive';
+                }
+            }
+            $menu[] = [
+                'label' => Html::tag('span', '', ['class' => 'fa '. $icon]) .' '. $label,
+                'url' => $object->getUrl('delete'),
+                'options' => ['title' => $label, 'data-handler' => 'background']
+            ];
+        }
+        
         if ($objectVisibility === 'public') {
             $accessIcon = 'fa fa-globe';
             $accessTitle = $object->objectType->title->upperSingular . ' is public';
@@ -116,30 +142,6 @@ class Header extends Widget
             'url' => $accessManageUrl,
             'options' => ['title' => $accessTitle, 'data-handler' => 'background']
         ];
-        if ($object->can('update')) {
-            $menu[] = [
-                'label' => Html::tag('span', '', ['class' => 'fa fa-wrench']) .' Update',
-                'url' => $object->getUrl('update'),
-                'options' => ['title' => 'Update', 'data-handler' => 'background']
-            ];
-        }
-        if ($object->can('delete') || $object->can('archive')) {
-            $label = 'Delete';
-            $icon = 'fa-trash-o';
-            if ($object->can('archive')) {
-                $icon = 'fa-archive';
-                if ($object->archived) {
-                    $label = 'Unarchive';
-                } else {
-                    $label = 'Archive';
-                }
-            }
-            $menu[] = [
-                'label' => Html::tag('span', '', ['class' => 'fa '. $icon]) .' '. $label,
-                'url' => $object->getUrl('delete'),
-                'options' => ['title' => $label, 'data-handler' => 'background']
-            ];
-        }
         $menu[] = [
             'label' => Html::tag('span', '', ['class' => 'fa fa-history']) .' Activity',
             'url' => $object->getUrl('activity'),
