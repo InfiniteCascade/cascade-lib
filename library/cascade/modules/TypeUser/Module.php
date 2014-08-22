@@ -39,6 +39,8 @@ class Module extends \cascade\components\types\Module
      */
     public $modelNamespace = false;
 
+    public $searchWeight = 0;
+
     /**
      * @inheritdoc
      */

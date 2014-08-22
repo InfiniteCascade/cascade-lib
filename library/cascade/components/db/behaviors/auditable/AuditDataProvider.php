@@ -49,7 +49,7 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 		if ($direction === '_newer') {
 			$lastTime = ArrayHelper::getValue($params, 'loadTimestamp', strtotime("1 year ago"));
 			$this->query->andWhere($this->query->primaryAlias . '.created >= \'' . date("Y-m-d G:i:s", $lastTime) .'\'');
-			$this->query->orderBy([$this->query->primaryAlias . '.created' => SORT_DESC]);
+			$this->query->orderBy([$this->query->primaryAlias . '.created' => SORT_DESC, $this->query->primaryAlias . '.id' => SORT_DESC]);
 			$this->pagination->pageSize = false;
 			//\d(["newer", $this->query->createCommand()->rawSql]);exit;
 		} else { // _older
@@ -62,7 +62,7 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 			if (!empty($lastItem)) {
 				$this->query->andWhere(['not', [$this->query->primaryAlias . '.' . $this->query->primaryTablePk => $lastItem]]);
 			}
-			$this->query->orderBy([$this->query->primaryAlias . '.created' => SORT_DESC]); //SORT_ASC
+			$this->query->orderBy([$this->query->primaryAlias . '.created' => SORT_DESC, $this->query->primaryAlias . '.id' => SORT_DESC]); //SORT_ASC
 			//\d($lastTime);
 			//echo $this->query->createCommand()->rawSql;exit;
 		}

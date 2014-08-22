@@ -64,6 +64,11 @@ footer {
   }
 }
 
+
+.modal-dialog .submit-group {
+	display: none;
+}
+
 .ic-masthead {
   margin: -15px -15px 10px -15px;
 }

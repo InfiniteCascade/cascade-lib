@@ -103,7 +103,6 @@ ActivityFeedObject.prototype.getIcon = function(variable) {
 			&& jQuery.cascadeTypes.types[this.object.type] !== undefined) {
 			iconAttributes = {'class': jQuery.cascadeTypes.types[this.object.type].icon};
 		}
-		console.log(iconAttributes);
 
 		if (iconAttributes.class !== undefined) {
 			this.$icon.addClass(iconAttributes.class);
@@ -244,7 +243,6 @@ ActivityFeed.prototype.startLoadMoreTimer = function() {
 				self.$thinking.show();
 				self.load(ActivityFeed.prototype.DIRECTION_OLDER, function(result) {
 					self.$thinking.hide();
-					console.log(result);	
 				});
 		}
 	}, 1000);
