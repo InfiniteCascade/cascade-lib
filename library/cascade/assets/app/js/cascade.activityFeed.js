@@ -153,7 +153,7 @@ function ActivityFeed($element, options) {
 	this.loading = false;
 	this.loadTimestamp = null;
 	this.lastItem = null;
-	this.lastItemTimestamp = null;
+	this.mostRecentItem = null;
 	this.lastLoadMore = 0;
 	this.options = jQuery.extend(true, {}, this.defaultOptions, options);
 	this.init();
@@ -287,11 +287,6 @@ ActivityFeed.prototype.getRenderedObjects = function() {
 };
 
 ActivityFeed.prototype.add = function(item) {
-	if (!this.lastItemTimestamp 
-		|| this.lastItemTimestamp > item.item.timestamp) {
-		this.lastItem = item.item.id;
-		this.lastItemTimestamp = item.item.timestamp;
-	}
 	var items = $(this.components.list).find('li');
 	if (items.length === 0) {
 		// first item
@@ -332,6 +327,17 @@ ActivityFeed.prototype.load = function(direction, callback) {
 			return true;
 		}
 		self.loadTimestamp = response.timestamp;
+
+		if (response.lastItem
+			&& (!self.lastItem 
+			|| self.lastItem > response.lastItem)) {
+			self.lastItem = response.lastItem;
+		}
+		if (response.mostRecentItem
+			&& (!self.mostRecentItem 
+			|| self.mostRecentItem < response.mostRecentItem)) {
+			self.mostRecentItem = response.mostRecentItem;
+		}
 		jQuery.each(response.objects, function(id, object) {
 			self.registerObject(id, object);
 		});
@@ -352,7 +358,7 @@ ActivityFeed.prototype.load = function(direction, callback) {
 		'object': self.options.object,
 		'direction': direction,
 		'lastItem': self.lastItem,
-		'lastItemTimestamp': self.lastItemTimestamp,
+		'mostRecentItem': self.mostRecentItem,
 		'loadTimestamp': self.loadTimestamp,
 		'limit': self.options.limit
 	};

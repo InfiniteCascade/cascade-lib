@@ -8,7 +8,7 @@ class Gravatar extends \emberlabs\gravatarlib\Gravatar
 	{
 		$original = $this->getDefaultImage();
 		$this->setDefaultImage(404);
-		$url = $this->get($email, $hash_email);
+		$url = htmlspecialchars_decode($this->get($email, $hash_email));
 		$this->setDefaultImage($original);
 		$cacheKey = ['testGravatar', $url];
 		$cache = Cacher::get($cacheKey);

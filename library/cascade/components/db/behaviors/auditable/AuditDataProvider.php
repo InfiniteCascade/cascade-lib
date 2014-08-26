@@ -47,22 +47,21 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 		$limit = ArrayHelper::getValue($params, 'limit', 25);
 		$object = $this->context = ArrayHelper::getValue($params, 'object', false);
 		if ($direction === '_newer') {
-			$lastTime = ArrayHelper::getValue($params, 'loadTimestamp', strtotime("1 year ago"));
-			$this->query->andWhere($this->query->primaryAlias . '.created >= \'' . date("Y-m-d G:i:s", $lastTime) .'\'');
-			$this->query->orderBy([$this->query->primaryAlias . '.created' => SORT_DESC, $this->query->primaryAlias . '.id' => SORT_DESC]);
+			$mostRecentItem = ArrayHelper::getValue($params, 'mostRecentItem', false);
+			$this->query->params[':mostRecentItem'] = (int) $mostRecentItem;
+			$this->query->andWhere($this->query->primaryAlias . '.id > :mostRecentItem');
+			$this->query->orderBy([$this->query->primaryAlias . '.id' => SORT_DESC]);
 			$this->pagination->pageSize = false;
 			//\d(["newer", $this->query->createCommand()->rawSql]);exit;
 		} else { // _older
 			$this->pagination->pageSize = $limit;
 			$lastTime = ArrayHelper::getValue($params, 'lastItemTimestamp', false);
 			$lastItem = ArrayHelper::getValue($params, 'lastItem', false);
-			if ($lastTime) {
-				$this->query->andWhere($this->query->primaryAlias . '.created <= \'' . date("Y-m-d G:i:s", $lastTime) .'\'');
+			if ($lastItem) {
+				$this->query->params[':lastItem'] = (int) $lastItem;
+				$this->query->andWhere($this->query->primaryAlias . '.id < :lastItem');
 			}
-			if (!empty($lastItem)) {
-				$this->query->andWhere(['not', [$this->query->primaryAlias . '.' . $this->query->primaryTablePk => $lastItem]]);
-			}
-			$this->query->orderBy([$this->query->primaryAlias . '.created' => SORT_DESC, $this->query->primaryAlias . '.id' => SORT_DESC]); //SORT_ASC
+			$this->query->orderBy([$this->query->primaryAlias . '.id' => SORT_DESC]); //SORT_ASC
 			//\d($lastTime);
 			//echo $this->query->createCommand()->rawSql;exit;
 		}

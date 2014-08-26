@@ -25,6 +25,11 @@ class Photo extends \cascade\components\storageHandlers\StorageBehavior
     public $storageAttribute = 'photo_storage_id';
     public $required = false;
 
+    public function badFields()
+    {
+    	return [$this->storageAttribute];
+    }
+
     public function safeAttributes()
     {
         return ['rawPhoto', 'photo'];
@@ -75,8 +80,8 @@ class Photo extends \cascade\components\storageHandlers\StorageBehavior
             $gravatar = new Gravatar;
             if ($gravatar->test($this->owner->photoEmail)) {
                 $gravatar->setAvatarSize($size);
+                return $gravatar->get($this->owner->photoEmail);
             }
-            return $gravatar->get($this->owner->photoEmail);
         }
         return false;
     }

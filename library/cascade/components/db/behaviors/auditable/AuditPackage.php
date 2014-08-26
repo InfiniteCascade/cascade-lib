@@ -120,9 +120,17 @@ class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, 
         $p['direction'] = $this->direction;
     	$p['activity'] = [];
         $p['objects'] = [];
+    	$p['lastItem'] = null;
+        $p['mostRecentItem'] = null;
         $lastKey = null;
         $lastTimestamp = null;
     	foreach ($this as $item) {
+    		if (empty($p['lastItem']) || $item->id < $p['lastItem']) {
+    			$p['lastItem'] = $item->id;
+    		}
+    		if (empty($p['mostRecentItem']) || $item->id > $p['mostRecentItem']) {
+    			$p['mostRecentItem'] = $item->id;
+    		}
     		$eventObject = $item->eventObject;
             $eventObject->context = $this->context;
     		$package = $eventObject->package;
@@ -159,6 +167,7 @@ class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, 
     			unset($p['objects'][$object->primaryKey]['id']);
     		}
     	}
+    	//\d($p);exit;
         return $p;
     }
 

@@ -73,6 +73,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
      */
     public $parentSearchWeight = false; // weight when a parent of a searchable object
 
+    public $enableApiAccess = true;
+
     /**
      * @var __var_sectionName_type__ __var_sectionName_description__
      */

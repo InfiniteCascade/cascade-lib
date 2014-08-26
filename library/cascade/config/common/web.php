@@ -29,6 +29,7 @@ $config['components']['session'] = [
 $config['components']['urlManager'] = [
     'enablePrettyUrl' => true,
     'showScriptName' => false,
+    'cache' => null, // disable in production
     'rules' => [
         // a standard rule mapping '/' to 'site/index' action
         '' => 'app/index',
@@ -44,6 +45,7 @@ $config['components']['urlManager'] = [
         
         'tool/<tool:\S+>' => 'object/tool',
         'report/<report:\S+>' => 'object/report',
+        ['class' => 'cascade\components\rest\UrlRule'],
 
         // a standard rule to handle 'post/update' and so on
         '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
