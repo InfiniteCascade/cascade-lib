@@ -70,7 +70,7 @@ class ObjectController extends Controller
                     'unwatch' => ['get'],
                     'search' => ['get'],
                     'profile' => ['get'],
-                    'browse' => ['get'],
+                    'browseHierarchy' => ['get'],
                     'activity' => ['get'],
                 ],
             ],
@@ -93,15 +93,17 @@ class ObjectController extends Controller
      * __method_actionBrowse_description__
      * @return __return_actionBrowse_type__ __return_actionBrowse_description__
      */
-    public function actionBrowse()
+    public function actionBrowseHierarchy()
     {
+        if (!Yii::$app->request->isAjax) {
+            throw new HttpException(400, "Bad Request");
+        }
         $package = [];
         $defaultParams = [];
         $requestParams = array_merge($defaultParams, $_GET);
 
         if (empty($requestParams['requests'])) {
             Yii::$app->response->data = $package;
-
             return;
         }
 
