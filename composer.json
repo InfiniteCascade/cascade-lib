@@ -15,7 +15,7 @@
 		"twitter/typeahead.js": "*",
 		"phpoffice/phpexcel": "*",
 		"emberlabs/gravatarlib": "*",
-		"mistic100/jquery-querybuilder": "*"
+		"mistic100/jquery-querybuilder": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "3.7.*",
