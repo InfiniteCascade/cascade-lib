@@ -30,10 +30,8 @@ echo $form->field($model, 'password')->passwordInput();
 echo $form->field($model, 'rememberMe', [
     'template' => "<div class=\"col-md-offset-1 col-lg-9 \">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
 ])->checkbox();
-if (!Yii::$app->request->isAjax) {
-    echo '<div class="col-md-offset-1 col-lg-9 ">';
-    echo Html::submitButton('Login', ['class' => 'btn btn-primary']);
-    echo '</div>';
-    echo '</div>';
-}
+echo '<div class="submit-group col-md-offset-1 col-lg-9 ">';
+echo Html::submitButton('Login', ['class' => 'btn btn-primary']);
+echo '</div>';
+echo '</div>';
 ActiveForm::end();

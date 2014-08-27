@@ -121,7 +121,7 @@ class Search extends \infinite\base\Component
                 return false;
             } else {
                 Console::output("Selected " . $resultsNice[$select]->descriptor);
-                return $resultsNice[$select];
+                return $resultsNice[$select]->object;
             }
         }
     }
