@@ -55,4 +55,8 @@ class RelationTaxonomy extends Base
         return 'cascade\\components\\db\\fields\\formats\\RawText';
     }
 
+    public function getFilterSettings()
+    {
+        return false;
+    }
 }

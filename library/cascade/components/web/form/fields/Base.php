@@ -155,4 +155,50 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
         return $this->modelField->field;
     }
 
+    public function getFilterSettings()
+    {
+        $s = [];
+        $s['type'] = $this->filterType;
+        $s['input'] = $this->filterInputType;
+        $selectValues = $this->filterValues;
+        if ($selectValues) {
+            $s['values'] = $selectValues;
+        }
+        return $s;
+    }
+
+    public function getFilterType()
+    {
+        switch ($this->type) {
+            case 'date':
+            case 'time':
+            case 'datetime':
+                return $this->type;
+            break;
+            default:
+                return 'string';
+            break;
+        }
+    }
+
+    public function getFilterValues()
+    {   
+        if ($this->type === 'boolean') {
+            return [0 => 'No', 1 => 'Yes'];
+        }
+        return false;
+    }
+
+    public function getFilterInputType()
+    {
+        switch ($this->type) {
+            case 'boolean':
+                return 'select';
+            break;
+            default:
+                return 'text';
+            break;
+        }
+    }
+
 }

@@ -41,6 +41,7 @@ class Module extends \cascade\components\types\Module
 
     public $searchWeight = 0;
 
+    public $enableApiAccess = false;
     /**
      * @inheritdoc
      */

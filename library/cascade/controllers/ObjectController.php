@@ -92,7 +92,8 @@ class ObjectController extends Controller
     public function actionBrowse()
     {
         if (!isset($_GET['type'])
-            || !($this->params['type'] = $type = Yii::$app->collectors['types']->getOne($_GET['type']))) {
+            || !($this->params['typeItem'] = $typeItem = Yii::$app->collectors['types']->getOne($_GET['type']))
+            || !($this->params['type'] = $typeItem->object)) {
             throw new HttpException(400, "Invalid object type");
         }
         Yii::$app->response->view = 'browse';

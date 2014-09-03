@@ -52,4 +52,8 @@ class Taxonomy extends Base
 
         return $this->_moduleHandler;
     }
+    public function getFilterSettings()
+    {
+        return false;
+    }
 }

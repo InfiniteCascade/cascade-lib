@@ -233,4 +233,9 @@ class Relation extends Base
         }
         return $this->relationship->getLabel($this->modelRole);
     }
+    
+    public function getFilterSettings()
+    {
+        return false;
+    }
 }

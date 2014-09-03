@@ -445,7 +445,16 @@ abstract class Base extends \infinite\base\Object
     public function setLabel($value)
     {
         $this->_label = $value;
-
         return true;
+    }
+
+    public function getFilterSettings()
+    {
+        if (!$this->human) { return false; }
+        $settings = [];
+        $settings['id'] = null;
+        $settings['label'] = $this->label;
+        $settings = array_merge($settings, $this->formField->filterSettings);
+        return $settings;
     }
 }

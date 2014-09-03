@@ -33,4 +33,11 @@ class SearchForm extends Model
             [['query'], 'required'],
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'query' => 'Search Query',
+        ];
+    }
 }

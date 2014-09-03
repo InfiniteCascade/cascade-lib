@@ -863,6 +863,18 @@ trait ActiveRecordTrait
         return null;
     }
     
+    public function getFilterFields()
+    {
+        $filters = [];
+        foreach ($this->getFields() as $id => $field) {
+            $filter = $field->filterSettings;
+            if (!$filter) { continue; }
+            $filter['id'] = $id;
+            $filters[] = $filter;
+        }
+        return $filters;
+    }
+
     /**
      *
      *
