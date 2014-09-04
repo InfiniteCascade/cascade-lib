@@ -47,6 +47,7 @@ trait ActiveRecordTrait
 
     protected $_fields;
     protected $_parentModel;
+    protected $_defaultOrder;
 
     public function behaviors()
     {
@@ -708,13 +709,31 @@ trait ActiveRecordTrait
         return $options;
     }
 
+    public function getDescriptorDefaultOrder($alias = '{alias}', $order = SORT_ASC)
+    {
+        $descriptorField = $this->descriptorField;
+        if (!is_array($descriptorField)) {
+            $descriptorField = [$descriptorField];
+        }
+        $descriptorField = array_reverse($descriptorField);
+        $sortBy = [];
+        foreach ($descriptorField as $field) {
+            if (!$this->hasAttribute($field)) { continue; }
+            $sortBy[$alias . '.'. $field] = $order;
+        }
+        return $sortBy;
+    }
+
     public function getDefaultOrder($alias = 't')
     {
-        if (is_string($this->_defaultOrder)) {
-            return strtr($this->_defaultOrder, ['{alias}' => $alias]);
-        } else {
-            return $this->_defaultOrder;
+        if (is_null($this->_defaultOrder)) {
+            $this->_defaultOrder = $this->getDescriptorDefaultOrder('{alias}');
         }
+        $sortBy = [];
+        foreach ($this->_defaultOrder as $key => $value) {
+            $sortBy[strtr($key, ['{alias}' => $alias])] = $value;
+        }
+        return $sortBy;
     }
 
     /**

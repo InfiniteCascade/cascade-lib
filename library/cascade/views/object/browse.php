@@ -5,12 +5,16 @@ use yii\widgets\ActiveForm;
 
 cascade\components\web\assetBundles\QueryBuilderAsset::register($this);
 cascade\components\web\assetBundles\BrowseFilterAsset::register($this);
+infinite\web\assetBundles\InfiniteRestDrawAsset::register($this);
 
+$this->title = 'Browse '. $type->title->upperPlural;
 $js = [];
 $searchModel = new SearchForm;
 $searchForm = ActiveForm::begin([
     'id' => 'filter-form',
     'enableClientValidation' => false,
+    'action' => ['/api/' . $type->systemId]
+
 ]);
 echo Html::beginTag('ul', ['class' => 'nav nav-tabs', 'role' => 'tablist']);
 $simpleOptions = [];

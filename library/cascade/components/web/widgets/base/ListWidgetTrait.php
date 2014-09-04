@@ -12,8 +12,8 @@ use Yii;
 use infinite\helpers\Html;
 use infinite\web\grid\Row;
 use infinite\web\grid\Cell;
+use infinite\web\bootstrap\ButtonDropdown;
 use infinite\helpers\ArrayHelper;
-use yii\bootstrap\ButtonDropdown;
 
 trait ListWidgetTrait
 {
@@ -197,7 +197,7 @@ trait ListWidgetTrait
 
             return ButtonDropdown::widget([
                     'label' => '',
-                    'options' => ['class' => 'pull-right'],
+                    'containerOptions' => ['class' => 'pull-right'],
                     'encodeLabel' => false,
                     'dropdown' => [
                         'options' => ['class' => 'pull-right'],

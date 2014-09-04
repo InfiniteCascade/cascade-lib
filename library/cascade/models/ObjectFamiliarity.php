@@ -234,15 +234,15 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
                 ],
                 'state' => $state,
                 'sort' => [
-                    'defaultOrder' => 'familiarity.familiarity DESC, familiarity.last_accessed DESC',
+                    'defaultOrder' => array_merge(['familiarity.familiarity' => SORT_DESC, 'familiarity.last_accessed' => SORT_DESC], $queryModel->defaultOrder),
                     'attributes' => [
                         'familiarity' => [
-                            'asc' => 'familiarity.familiarity ASC, '. $queryModel->defaultOrder,
-                            'desc' => 'familiarity.familiarity DESC, '. $queryModel->defaultOrder,
+                            'asc' => array_merge(['familiarity.familiarity' => SORT_ASC], $queryModel->defaultOrder),
+                            'desc' => array_merge(['familiarity.familiarity' => SORT_DESC], $queryModel->defaultOrder),
                         ],
                         'last_accessed' => [
-                            'asc' => 'familiarity.last_accessed ASC, '. $queryModel->defaultOrder,
-                            'desc' => 'familiarity.last_accessed DESC, '. $queryModel->defaultOrder,
+                            'asc' => array_merge(['familiarity.last_accessed' => SORT_ASC], $queryModel->defaultOrder),
+                            'desc' => array_merge(['familiarity.last_accessed' => SORT_DESC], $queryModel->defaultOrder),
                         ],
                         '*',
                     ],

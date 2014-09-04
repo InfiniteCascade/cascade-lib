@@ -35,9 +35,17 @@ class IndexAction extends \yii\rest\IndexAction
 	protected function prepareDataProvider()
     {
     	if (!isset($this->_dataProvider)) {
-    		$this->_dataProvider = $dataProvider = parent::prepareDataProvider();
 	    	$modelClass = $this->modelClass;
-	    	$objectType = (new $modelClass)->objectType;
+	    	$dummyModel = new $modelClass;
+    		$this->_dataProvider = $dataProvider = parent::prepareDataProvider();
+    		$this->_dataProvider->sort->attributes['descriptor'] = [
+    			'label' => 'Descriptor',
+    			'asc' => $dummyModel->getDescriptorDefaultOrder($dummyModel->tableName(), SORT_ASC),
+    			'desc' => $dummyModel->getDescriptorDefaultOrder($dummyModel->tableName(), SORT_DESC),
+    		];
+    		$this->_dataProvider->sort->defaultOrder = ['descriptor' => SORT_ASC];
+	    	$objectType = $dummyModel->objectType;
+	        
 	    	if (empty($objectType)) {
 	            throw new InvalidParamException($modelClass .' does not have a corresponding object type');
 	    	}
@@ -55,6 +63,7 @@ class IndexAction extends \yii\rest\IndexAction
 	    		$newQuery = $parentObject->queryChildObjects($this->modelClass);
 	    		$this->_dataProvider->query = $newQuery;
 	    	}
+
 	    }
     	return $this->_dataProvider;
     }

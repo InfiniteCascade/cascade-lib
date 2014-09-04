@@ -114,18 +114,25 @@ trait ObjectWidgetTrait
         $descriptorField = $dummyModel->descriptorField;
         if (is_array($descriptorField)) {
             $descriptorLabel = $dummyModel->getAttributeLabel('descriptor');
-            $descriptorField = implode(',', array_reverse($descriptorField));
         } else {
             $descriptorLabel = $dummyModel->getAttributeLabel($descriptorField);
         }
+        $alias = $dummyModel->tableName();
+        $defaultOrder = $dummyModel->getDefaultOrder($alias);
         $sortBy['familiarity'] = [
-            'label' => 'Familiarity'
+            'label' => 'Familiarity',
+            'asc' => array_merge(['ft.familiarity' => SORT_ASC], $defaultOrder),
+            'desc' => array_merge(['ft.familiarity' => SORT_DESC], $defaultOrder),
         ];
         $sortBy['last_accessed'] = [
-            'label' => 'Last Accessed'
+            'label' => 'Last Accessed',
+            'asc' => array_merge(['ft.last_accessed' => SORT_ASC], $defaultOrder),
+            'desc' => array_merge(['ft.last_accessed' => SORT_DESC], $defaultOrder),
         ];
-        $sortBy[$descriptorField] = [
-            'label' => $descriptorLabel
+        $sortBy['descriptor'] = [
+            'label' => $descriptorLabel,
+            'asc' => $dummyModel->getDescriptorDefaultOrder($alias, SORT_ASC),
+            'desc' => $dummyModel->getDescriptorDefaultOrder($alias, SORT_DESC)
         ];
 
         return $sortBy;
@@ -404,6 +411,7 @@ trait ObjectWidgetTrait
             'sortOrders' => [
                 $this->currentSortBy => $this->currentSortByDirection === 'asc' ? SORT_ASC : SORT_DESC
             ],
+
             'attributes' => $this->getSortBy()
         ];
     }

@@ -2,7 +2,7 @@ $(function() {
 	var $advancedFilter = $("#advanced-filter-builder");
 	var $simpleFilter = $("#simple-filter-input");
 	var $filterForm = $("#filter-form");
-	console.log($filterForm);
+	var currentRestDraw;
 	$filterForm.submit(function() {
 		var data = {};
 		if ($("#simple-filter").hasClass('active')) {
@@ -11,7 +11,15 @@ $(function() {
 			var rules = $advancedFilter.queryBuilder('getRules');
 			data.advancedQuery = JSON.stringify(rules);
 		}
-		console.log(data);
+		if (currentRestDraw) {
+			currentRestDraw.destroy();
+		}
+		request = {
+			'url': $(this).attr('action'),
+			'data': data
+		};
+		currentRestDraw = new RestDraw($("#filter-results"), request);
 		return false;
 	});
+	$filterForm.submit();
 });

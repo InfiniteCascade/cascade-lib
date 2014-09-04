@@ -14,8 +14,6 @@ trait ActiveRecordTrait
 {
     public $_moduleHandler;
 
-    protected $_defaultOrder = '{alias}.name ASC';
-
     public static function getRegistryClass()
     {
         return Registry::className();
