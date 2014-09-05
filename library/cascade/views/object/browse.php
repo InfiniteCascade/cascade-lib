@@ -9,6 +9,11 @@ infinite\web\assetBundles\InfiniteRestDrawAsset::register($this);
 
 $this->title = 'Browse '. $type->title->upperPlural;
 $js = [];
+
+
+echo Html::beginTag('div', ['class' => 'panel panel-default']);
+echo Html::tag('div', Html::tag('div', 'Filter', ['class' => 'panel-title']), ['class' => 'panel-heading']);
+echo Html::beginTag('div', ['class' => 'panel-body', 'id' => 'filter']);
 $searchModel = new SearchForm;
 $searchForm = ActiveForm::begin([
     'id' => 'filter-form',
@@ -58,12 +63,13 @@ echo Html::submitButton('Search', ['class' => 'btn btn-default']);
 
 echo Html::endTag('div');
 ActiveForm::end();
+echo Html::endTag('div'); // filter body
+echo Html::endTag('div'); // filter section
 
 echo Html::beginTag('div', ['class' => 'panel panel-default']);
 echo Html::tag('div', Html::tag('div', 'Results', ['class' => 'panel-title']), ['class' => 'panel-heading']);
 
 echo Html::beginTag('div', ['class' => 'panel-body', 'id' => 'filter-results']);
-echo 'YEAH';
 echo Html::endTag('div');
 echo Html::endTag('div');
 

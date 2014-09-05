@@ -45,7 +45,13 @@ class IndexAction extends \yii\rest\IndexAction
     		];
     		$this->_dataProvider->sort->defaultOrder = ['descriptor' => SORT_ASC];
 	    	$objectType = $dummyModel->objectType;
-	        
+	    	$query = false;
+	    	if (!empty(Yii::$app->request->queryParams['query'])) {
+	    		$query = $dataProvider->query->buildContainsQuery(Yii::$app->request->queryParams['query']);
+	    	} elseif (!empty(Yii::$app->request->queryParams['advancedQuery'])) {
+	    		$query = json_decode(Yii::$app->request->queryParams['advancedQuery'], true);
+	    	}
+	    	$whereConditions = $dataProvider->query->andWhereFromQuery($query);
 	    	if (empty($objectType)) {
 	            throw new InvalidParamException($modelClass .' does not have a corresponding object type');
 	    	}
