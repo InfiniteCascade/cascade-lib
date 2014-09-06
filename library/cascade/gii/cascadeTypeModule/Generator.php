@@ -859,7 +859,7 @@ EOD;
                     $size = '\'' . implode('\',\'', $column->enumValues) . '\'';
             }
 
-            $stringValue = $column->typecast($column->defaultValue);
+            $stringValue = $column->dbTypecast($column->defaultValue);
             if (is_null($stringValue)) {
                 if ($column->allowNull) {
                     $stringValue = 'NULL';

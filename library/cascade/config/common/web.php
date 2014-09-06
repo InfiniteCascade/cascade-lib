@@ -43,11 +43,8 @@ $config['components']['urlManager'] = [
         '<action:(update|link|set-primary|delete|view|access|photo)>/<id:\S+>' => 'object/<action>',
         '<action:(create)>/<type:\S+>' => 'object/<action>',
         
-        'tool/<tool:\S+>' => 'object/tool',
-        'report/<report:\S+>' => 'object/report',
         ['class' => 'cascade\components\rest\UrlRule'],
 
-        // a standard rule to handle 'post/update' and so on
         '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
     ]
 ];

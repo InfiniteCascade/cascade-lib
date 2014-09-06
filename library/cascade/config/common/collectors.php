@@ -39,6 +39,14 @@ return [
         'dataInterfaces' => [
             'class' => 'cascade\\components\\dataInterface\\Collector',
             'lazyLoad' => $lazyLoad
+        ],
+        'tools' => [
+            'class' => 'cascade\\components\\tools\\Collector',
+            'lazyLoad' => $lazyLoad
+        ],
+        'reports' => [
+            'class' => 'cascade\\components\\reports\\Collector',
+            'lazyLoad' => $lazyLoad
         ]
     ]
 ];

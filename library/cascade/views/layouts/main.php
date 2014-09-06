@@ -59,11 +59,11 @@ $this->beginBody(); ?>
             }
             $topMenu = [];
             $topMenu[] = [
-                'label' =>  '<span class="glyphicon glyphicon-home"></span> <span class="hidden-xs hidden-sm">Dashboard</span>',
+                'label' =>  '<span class="fa fa-home"></span> <span class="hidden-xs hidden-sm">Dashboard</span>',
                 'url' => ['/app/index']
             ];
             $topMenu[] = [
-                'label' =>  '<span class="glyphicon glyphicon-th"></span> <span class="hidden-xs hidden-sm">'.$browseLabel.'</span>',
+                'label' =>  '<span class="fa fa-th"></span> <span class="hidden-xs hidden-sm">'.$browseLabel.'</span>',
                 'url' => ['/object/index'],
                 'items' => $itemTypes,
                 'active' => function ($nav, $item) {
@@ -78,10 +78,20 @@ $this->beginBody(); ?>
                     return false;
                 }
             ];
-            $topMenu[] = [
-                'label' =>  '<span class="glyphicon glyphicon-filter"></span> <span class="hidden-xs hidden-sm">Reports</span>',
-                'url' => ['/reports/index']
-            ];
+            $reports = Yii::$app->collectors['reports']->getAllActive();
+            if (!empty($reports)) {
+                $topMenu[] = [
+                    'label' =>  '<span class="fa fa-filter"></span> <span class="hidden-xs hidden-sm">Reports</span>',
+                    'url' => ['/report']
+                ];
+            }
+            $tools = Yii::$app->collectors['tools']->getAllActive();
+            if (!empty($tools)) {
+                $topMenu[] = [
+                    'label' =>  '<span class="fa fa-wrench"></span> <span class="hidden-xs hidden-sm">Tools</span>',
+                    'url' => ['/tool']
+                ];
+            }
             //$topMenu[] = ['label' =>  '<span class="glyphicon glyphicon-home"></span> <span class="hidden-xs hidden-sm">Dashboard</span>', 'url' => ['/']];
 
             echo Nav::widget([
