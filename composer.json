@@ -15,7 +15,6 @@
 		"phpoffice/phpexcel": "*",
 		"emberlabs/gravatarlib": "*",
 		"mistic100/jquery-querybuilder": "dev-master",
-		"flowersinthesand/portal": "*",
 		"pragmaticly/smart-time-ago": "*",
 		"bower-asset/vibe": "*"
 	},
