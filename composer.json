@@ -15,7 +15,7 @@
 		"phpoffice/phpexcel": "*",
 		"emberlabs/gravatarlib": "*",
 		"mistic100/jquery-querybuilder": "dev-master",
-		"pragmaticly/smart-time-ago": "*",
+		"bower-asset/smart-time-ago": "*",
 		"bower-asset/vibe": "*"
 	},
 	"require-dev": {
