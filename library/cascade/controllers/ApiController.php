@@ -33,7 +33,7 @@ class ApiController extends Controller
             && $type->enableApiAccess) {
             $this->modelClass = $type->primaryModel;
         }
-        
+
         if ($this->modelClass === null) {
             throw new ForbiddenHttpException('Unable to access the object type \''. (isset($_GET['type']) ? $_GET['type'] : 'unknown') .'\'.');
         }

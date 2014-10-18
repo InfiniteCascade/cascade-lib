@@ -14,12 +14,12 @@ use yii\web\AssetBundle;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class PortalAsset extends AssetBundle
+class VibeAsset extends AssetBundle
 {
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/flowersinthesand/portal';
+    public $sourcePath = '@bower/vibe';
     /**
      * @inheritdoc
      */
@@ -28,7 +28,7 @@ class PortalAsset extends AssetBundle
      * @inheritdoc
      */
     public $js = [
-        'portal.min.js'
+        'vibe.js'
     ];
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class PortalAsset extends AssetBundle
     public function init()
     {
         $this->publishOptions['beforeCopy'] = function ($from, $to) {
-            $acceptable = ['portal.min.js'];
+            $acceptable = ['vibe.js'];
 
             return in_array(basename($from), $acceptable) || in_array(basename(dirname($from)), $acceptable);
         };

@@ -47,28 +47,26 @@ function startRefreshableDeferred(options) {
 		settings.type = 'POST';
 		settings.context = $(this);
 		if (stream) {
-			portal.open(settings.url, {
-				transports: ['stream'],
+			vibe.open(settings.url, {
+				transports: ['streamxhr'],
 				params: {open: settings.data},
 				reconnect: function(lastDelay, attempts) {
 			    	return false;
 			    }
-			}).on({
-			    handleRequests: function(data) {
-			    	if (_.isEmpty(data)) { return; }
-			    	jQuery.each(data, function(index, requestObject) {
-						if (requestObject.content !== undefined && refreshableRequests[index] !== undefined) {
-							refreshableRequests[index].result = requestObject.content;
-							$replaceContent = $(refreshableRequests[index].result);
-							$(refreshableRequests[index].object).replaceWith($replaceContent);
-							$preparer.fire($replaceContent);
-							delete refreshableRequests[index];
-						}
-					});
-			    },
-			    close: function(reason) {
-			    }
-			});
+			}).on('handleRequests',
+					function(data) {
+				    	if (_.isEmpty(data)) { return; }
+				    	jQuery.each(data, function(index, requestObject) {
+							if (requestObject.content !== undefined && refreshableRequests[index] !== undefined) {
+								refreshableRequests[index].result = requestObject.content;
+								$replaceContent = $(refreshableRequests[index].result);
+								$(refreshableRequests[index].object).replaceWith($replaceContent);
+								$preparer.fire($replaceContent);
+								delete refreshableRequests[index];
+							}
+						});
+				    }
+				);
 			refreshableDeferred.resolve();
 		} else {
 			settings.success = function(r, textStatus, jqXHR) {

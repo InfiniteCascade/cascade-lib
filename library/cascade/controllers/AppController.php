@@ -207,7 +207,14 @@ class AppController extends Controller
         Yii::$app->response->task = false;
         $refreshed = [];
         $source = $_GET;
-        if (empty($source['requests'])) { return; }
+        if (isset($source['when']) && $source['when'] === 'handshake') {
+            echo json_encode(['id' => md5(microtime(true)), 'transports' => ['stream']]);
+            return;
+        }
+        if (empty($source['requests'])) { 
+            echo json_encode([]);
+            return;
+        }
         $baseInstrictions = (isset($source['baseInstructions']) ? $source['baseInstructions'] : []);
         foreach ($source['requests'] AS $requestId => $request) {
             $refreshed[$requestId] = false;
