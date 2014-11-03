@@ -19,7 +19,7 @@ function startRefreshableDeferred(options) {
 	refreshableDeferred.timer = options.timer;
 	refreshableDeferred.requests = {};
 	refreshableDeferred.handle = function() {
-		if (refreshableDeferred.substate === 'handling') { 
+		if (refreshableDeferred.substate === 'handling') {
 			return false;
 		}
 		refreshableDeferred.substate = 'handling';
@@ -29,7 +29,7 @@ function startRefreshableDeferred(options) {
 		delete settings['stream'];
 
 		settings.data.requests = {};
-		if (_.isEmpty(refreshableDeferred.requests)) { 
+		if (_.isEmpty(refreshableDeferred.requests)) {
 			refreshableDeferred.resolve();
 			return true;
 		}
@@ -46,8 +46,10 @@ function startRefreshableDeferred(options) {
 		settings.dataType = 'json';
 		settings.type = 'POST';
 		settings.context = $(this);
+		var url = settings.url;
+
 		if (stream) {
-			vibe.open(settings.url, {
+			vibe.open(url, {
 				transports: ['streamxhr'],
 				params: {open: settings.data},
 				reconnect: function(lastDelay, attempts) {

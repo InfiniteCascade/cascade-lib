@@ -16,7 +16,8 @@
 		"emberlabs/gravatarlib": "*",
 		"mistic100/jquery-querybuilder": "dev-master",
 		"bower-asset/smart-time-ago": "*",
-		"bower-asset/vibe": "*"
+		"bower-asset/vibe": "*",
+		"bower-asset/purl": "*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "3.7.*",
