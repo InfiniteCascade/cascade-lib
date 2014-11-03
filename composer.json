@@ -14,7 +14,7 @@
 		"twitter/typeahead.js": "*",
 		"phpoffice/phpexcel": "*",
 		"emberlabs/gravatarlib": "*",
-		"bower-asset/jquery-querybuilder": "1.2.0",
+		"mistic100/jquery-querybuilder": "*",
 		"bower-asset/smart-time-ago": "*",
 		"bower-asset/vibe": "*",
 		"bower-asset/purl": "*"
