@@ -56,6 +56,7 @@ class AppAsset extends AssetBundle
         'infinite\\web\\assetBundles\\BootstrapDatepickerAsset',
         'infinite\\web\\assetBundles\\TimeAgoAsset',
         'cascade\\components\\web\\assetBundles\\BootstrapTypeaheadAsset',
+        'cascade\\components\\web\\assetBundles\\PurlAsset',
         'cascade\\components\\web\\assetBundles\\VibeAsset'
     ];
 }

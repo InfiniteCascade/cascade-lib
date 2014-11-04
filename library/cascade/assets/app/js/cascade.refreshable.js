@@ -46,8 +46,10 @@ function startRefreshableDeferred(options) {
 		settings.dataType = 'json';
 		settings.type = 'POST';
 		settings.context = $(this);
-		var url = settings.url;
-
+		var urlObject = new jQuery.url(settings.url);
+		var urlParams = urlObject.param();
+		var jqueryParams = jQuery.param(jQuery.extend(true, {}, urlParams, settings.data));
+		var url = urlObject.attr('path') + "?" + jqueryParams;
 		if (stream) {
 			vibe.open(url, {
 				transports: ['streamxhr'],
