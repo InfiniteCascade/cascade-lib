@@ -81,7 +81,7 @@ class Content extends \cascade\components\web\widgets\Widget
     	$instructions = [];
     	$instructions['ajax']  = ['url' => Url::to(['/app/activity'])];
     	$instructions['scope'] = $this->currentScope;
-    	$parts[] = Html::tag('div', '', ['data-activity-feed' => json_encode($instructions)]);
+    	$parts[] = Html::tag('div', '', ['data-activity-feed' => json_encode($instructions), 'data-height' => json_encode(['min' => 500, 'max' => 'body'])]);
     	$parts[] = Html::tag('div', str_repeat(Html::tag('div', '', ['class' => 'widget-lazy-placeholder']), 30), ['class' => 'activity-feed-thinking']);
     	return implode($parts);
     }

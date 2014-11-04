@@ -39,10 +39,10 @@ $config['components']['urlManager'] = [
         '<action:(browse)>/<type:\S+>' => 'object/<action>',
         '<action:(search|browse-hierarchy)>' => 'object/<action>',
         '<action:(view)>:<subaction:\S+>/<id:\S+>' => 'object/<action>',
-        
+
         '<action:(update|link|set-primary|delete|view|access|photo)>/<id:\S+>' => 'object/<action>',
         '<action:(create)>/<type:\S+>' => 'object/<action>',
-        
+
         ['class' => 'cascade\components\rest\UrlRule'],
 
         '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
