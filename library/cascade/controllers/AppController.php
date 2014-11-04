@@ -211,7 +211,7 @@ class AppController extends Controller
             echo json_encode(['id' => md5(microtime(true)), 'transports' => ['stream']]);
             return;
         }
-        if (empty($source['requests'])) { 
+        if (empty($source['requests'])) {
             echo json_encode([]);
             return;
         }
@@ -266,8 +266,9 @@ class AppController extends Controller
                 break;
             }
             if ($refreshed[$requestId]) {
-                echo "data: ".json_encode(['type' => 'handleRequests', 'data' => [$requestId => $refreshed[$requestId]], 'id' => round(microtime(true) * 100)]) ."\n";
-                echo str_repeat("\n",1024*3);
+                echo "data: ". json_encode(['type' => 'handleRequests', 'data' => [$requestId => $refreshed[$requestId]], 'id' => round(microtime(true) * 100)]);
+                echo "\n\n";
+                //echo str_repeat("\n\n",1024*4);
             }
         }
         ob_implicit_flush(0);
