@@ -4,7 +4,7 @@ function CascadeTypes() {
 
 CascadeTypes.prototype.load = function(types) {
 	this.types = types;
-	console.log(types);
+	//console.log(types);
 };
 
 jQuery.cascadeTypes = new CascadeTypes();

@@ -372,37 +372,6 @@ footer {
   border-bottom: none;
 }
 
-/* Search */
-.ic-search-result, 
-.ic-search-result:hover {
-  text-decoration: none;
-  display: block;
-  padding: 10px;
-}
-
-.tt-cursor .ic-search-result {
-  background-color: rgba(0, 0, 0, .1);
-}
-
-.ic-search-empty {
-  padding: 5px;
-}
-
-.ic-search-result .ic-search-header {
-  font-size: 1.1em;
-  font-weight: 600;
-  margin: 1px;
-}
-.ic-search-result .ic-search-sub {
-  font-size: .9em;
-}
-
-.ic-search-result .ic-search-icon {
-  float: left;
-  font-size: 1.1em;
-  margin-right: 5px;
-}
-
 
 /* lazy widget */
 

@@ -7,10 +7,10 @@ ObjectBrowser.prototype = Object.create(InfiniteBrowser.prototype);
 (function ($) { 
    $.fn.objectBrowse = function (options) {
    		var $this = this;
-      	if ($this.objectBrowser === undefined) {
-      		$this.objectBrowser = new ObjectBrowser($this, options);
+      	if ($this.objectBrowseObject === undefined) {
+      		$this.objectBrowseObject = new ObjectBrowser($this, options);
       	}
 
-         return $this.objectBrowser;
+         return $this.objectBrowseObject;
    };
 }(jQuery));
