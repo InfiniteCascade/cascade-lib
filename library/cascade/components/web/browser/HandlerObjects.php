@@ -77,6 +77,8 @@ class HandlerObjects extends \infinite\web\browser\Handler
             return false;
         }
         $dataSource = clone $this->dataSource;
+        $dataSourceClass = $dataSource->modelClass;
+        $dataSource->attachBehaviors($dataSourceClass::queryBehaviors());
         if (!$this->filterQuery) {
             $dataSource->limit($this->bundle->limit);
             $dataSource->offset($this->bundle->offset);
