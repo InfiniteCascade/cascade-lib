@@ -12,6 +12,7 @@
 		"yiisoft/yii2-imagine": "2.0.*",
 		"InfiniteCascade/yii2-infinite-core": "*",
 		"InfiniteCascade/yii2-deferred-action": "*",
+		"InfiniteCascade/yii2-notification-engine": "*",
 		"phpoffice/phpexcel": "*",
 		"emberlabs/gravatarlib": "*",
 		"mistic100/jquery-querybuilder": "*",

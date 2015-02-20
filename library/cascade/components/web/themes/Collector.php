@@ -100,7 +100,7 @@ class Collector extends \infinite\base\collector\Module
      */
     public function getIdentity($view)
     {
-        if (!$view->assetBundles[$this->identityAssetBundle]) {
+        if (!isset($view->assetBundles[$this->identityAssetBundle])) {
             return false;
         }
 

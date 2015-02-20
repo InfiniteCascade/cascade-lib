@@ -254,7 +254,7 @@ ActivityFeed.prototype.stopLoadMoreTimer = function() {
 
 ActivityFeed.prototype.updateEmptyActivity = function() {
 	if (this.$emptyNotice === undefined) {
-		this.$emptyNotice = $("<div />", {'class': 'ic-activity-empty'}).hide().html(this.options.emptyMessage).insertAfter(this.$element);
+		this.$emptyNotice = $("<div />", {'class': 'ic-activity-empty'}).hide().html(this.options.emptyMessage).insertBefore(this.$element);
 	}
 	if (_.values(this.objects).length === 0) {
 		this.$emptyNotice.show();

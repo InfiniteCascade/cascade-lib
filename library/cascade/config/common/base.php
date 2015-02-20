@@ -1,4 +1,16 @@
 <?php
+use cascade\components\base\Bootstrap;
+use cascade\components\base\ClassManager;
+use cascade\components\security\Gatekeeper;
+use infinite\base\FileStorage;
+use yii\redis\Cache;
+use cascade\components\web\View;
+use yii\caching\FileCache;
+use infinite\web\Response;
+use yii\log\FileTarget;
+use yii\base\Formatter as BaseFormatter;
+use yii\i18n\Formatter as I18nFormatter;
+
 defined('INFINITE_ROLE_LEVEL_OWNER') || define('INFINITE_ROLE_LEVEL_OWNER', 600); // owner levels: 501-600
 defined('INFINITE_ROLE_LEVEL_MANAGER') || define('INFINITE_ROLE_LEVEL_MANAGER', 500); // manager levels: 401-500
 defined('INFINITE_ROLE_LEVEL_EDITOR') || define('INFINITE_ROLE_LEVEL_EDITOR', 400); // editor levels: 301-400
@@ -12,7 +24,7 @@ $base = [
     'basePath' => INFINITE_APP_PATH,
     'vendorPath' => INFINITE_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'vendor',
     'runtimePath' => INFINITE_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'runtime',
-    'bootstrap' => ['collectors'],
+    'bootstrap' => ['collectors', Bootstrap::className()],
     'language' => 'en',
     'modules' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'modules.php'),
     'extensions' => include(INFINITE_APP_VENDOR_PATH . DIRECTORY_SEPARATOR . 'yiisoft'. DIRECTORY_SEPARATOR . 'extensions.php'),
@@ -20,36 +32,36 @@ $base = [
     // application components
     'components' => [
         'classes' => [
-            'class' => 'cascade\\components\\base\\ClassManager',
+            'class' => ClassManager::className(),
         ],
         'fileStorage' => [
-            'class' => 'infinite\\base\\FileStorage'
+            'class' => FileStorage::className()
         ],
         'db' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . "database.php"),
         'gk' => [
-            'class' => 'cascade\\components\\security\\Gatekeeper',
+            'class' => Gatekeeper::className(),
             'authority' => [
                 'type' => 'Individual',
             ]
         ],
         'redis' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'redis.php'),
         'collectors' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'collectors.php'),
-        'cache' => ['class' => 'yii\\redis\\Cache'],
-        'fileCache' => ['class' => 'yii\\caching\\FileCache'],
+        'cache' => ['class' => Cache::className()],
+        'fileCache' => ['class' => FileCache::className()],
         'errorHandler' => [
             'discardExistingOutput' => false
         ],
         'view' => [
-            'class' => 'cascade\\components\\web\\View',
+            'class' => View::className(),
         ],
         'response' => [
-            'class' => 'infinite\\web\\Response'
+            'class' => Response::className()
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\\log\\FileTarget',
+                    'class' => FileTarget::className(),
                     'levels' => ['error', 'warning'],
                 ],
             ],
@@ -59,11 +71,11 @@ $base = [
 ];
 if (!extension_loaded('intl')) {
     $base['components']['formatter'] = [
-        'class' => 'yii\\base\\Formatter'
+        'class' => BaseFormatter::className()
     ];
 } else {
     $base['components']['formatter'] = [
-        'class' => 'yii\\i18n\\Formatter',
+        'class' => I18nFormatter::className(),
         'dateFormat' => 'MM/dd/yyyy'
     ];
 }

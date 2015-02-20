@@ -48,7 +48,7 @@ class Task_000002_db extends \infinite\setup\Task
     {
         if ($this->isNewInstall()) { return false; }
         $request = $this->migrator->getRequest();
-        $request->setParams(['migrate/new', '--interactive=0', 1000]);
+        $request->setParams(['migrate/new-plain', '--interactive=0', 1000]);
         list($route, $params) = $request->resolve();
         ob_start();
         $this->migrator->run();
@@ -81,7 +81,7 @@ class Task_000002_db extends \infinite\setup\Task
     public function run()
     {
         $request = $this->migrator->getRequest();
-        $request->setParams(['migrate', '--interactive=0']);
+        $request->setParams(['migrate/up-plain', '--interactive=0']);
         ob_start();
         $this->migrator->run();
         $result = ob_get_clean();
