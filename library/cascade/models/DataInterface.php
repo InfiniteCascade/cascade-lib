@@ -7,6 +7,8 @@
 
 namespace cascade\models;
 
+use Yii;
+
 /**
  * DataInterface is the model class for table "data_interface".
  *
@@ -121,6 +123,11 @@ class DataInterface extends \cascade\components\db\ActiveRecord
             $p['icon'] = $this->getIcon();
         }
         return $p;
+    }
+
+    public function getDataInterfaceItem()
+    {
+        return Yii::$app->collectors['dataInterfaces']->getByPk($this->primaryKey);
     }
 
     public function hasIcon()

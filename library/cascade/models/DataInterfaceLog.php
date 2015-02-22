@@ -43,10 +43,6 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'updateLastUpdated']);
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'updatePeakMemory']);
         $this->on(self::EVENT_BEFORE_VALIDATE, [$this, 'serializeStatusLog']);
-        // $this->on(self::EVENT_AFTER_SAVE_FAIL, [$this, 'messageToObject']);
-        $this->on(self::EVENT_AFTER_DELETE, [$this, 'clearLogData']);
-        // $this->on(self::EVENT_AFTER_INSERT, [$this, 'messageToObject']);
-        // $this->on(self::EVENT_AFTER_FIND, [$this, 'messageToObject']);
     }
 
     /**
@@ -103,6 +99,14 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
     public function getDataInterface()
     {
         return $this->hasOne(DataInterface::className(), ['id' => 'data_interface_id']);
+    }
+
+    public function run()
+    {
+        if (empty($this->dataInterface) || !($dataInterfaceItem = $this->dataInterface->dataInterfaceItem)) {
+            return false;
+        }
+        return $dataInterfaceItem->run($this);
     }
 
     public function getStatusLog($checkRecent = false)

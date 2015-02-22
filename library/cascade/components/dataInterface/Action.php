@@ -44,27 +44,6 @@ class Action extends \infinite\base\Object
     protected $_registry = [];
 
     /**
-     * @var __var_progressPrefix_type__ __var_progressPrefix_description__
-     */
-    public $progressPrefix = 'Loading';
-    /**
-     * @var __var__progress_type__ __var__progress_description__
-     */
-    protected $_progress = false;
-    /**
-     * @var __var__progressTotal_type__ __var__progressTotal_description__
-     */
-    protected $_progressTotal = 1;
-    /**
-     * @var __var__progressRemaining_type__ __var__progressRemaining_description__
-     */
-    protected $_progressRemaining;
-    /**
-     * @var __var__progressPercentage_type__ __var__progressPercentage_description__
-     */
-    protected $_progressPercentage;
-
-    /**
     * @inheritdoc
      */
     public function __construct(Item $interface = null, $resumeLog = null)
@@ -73,83 +52,6 @@ class Action extends \infinite\base\Object
         if (!is_null($resumeLog)) {
             $this->_log = $resumeLog;
         }
-    }
-
-    /**
-     * __method_progress_description__
-     * @return __return_progress_type__ __return_progress_description__
-     */
-    public function progress()
-    {
-        // return;
-        if (!$this->_progress) {
-            $this->_progress = true;
-            Console::startProgressSpecial($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
-        }
-        $currentPercentage = (int) floor(($this->progressDone / $this->progressTotal) * 100);
-        if ($this->_progressPercentage !== $currentPercentage) {
-            if ($currentPercentage % 5 === 0) {
-                $interface = $this->_interface;
-                $app = Yii::$app;
-                $logger = Yii::getLogger();
-                xdebug_break();
-            }
-            $this->_progressPercentage = $currentPercentage;
-            Console::updateProgressSpecial($this->progressDone, $this->progressTotal, $this->progressPrefix . ' ');
-        }
-    }
-
-    /**
-     * Set progress total
-     * @param __param_total_type__ $total __param_total_description__
-     */
-    public function setProgressTotal($total)
-    {
-        $this->_progressTotal = $total;
-        $this->progress();
-    }
-
-    /**
-     * Get progress total
-     * @return __return_getProgressTotal_type__ __return_getProgressTotal_description__
-     */
-    public function getProgressTotal()
-    {
-        return $this->_progressTotal;
-    }
-
-    /**
-     * Get progress done
-     * @return __return_getProgressDone_type__ __return_getProgressDone_description__
-     */
-    public function getProgressDone()
-    {
-        return $this->progressTotal - $this->progressRemaining;
-    }
-
-    /**
-     * Get progress remaining
-     * @return __return_getProgressRemaining_type__ __return_getProgressRemaining_description__
-     */
-    public function getProgressRemaining()
-    {
-        if (is_null($this->_progressRemaining)) {
-            $this->_progressRemaining = $this->progressTotal;
-        }
-
-        return $this->_progressRemaining;
-    }
-
-    /**
-     * __method_reduceRemaining_description__
-     * @param __param_n_type__                $n __param_n_description__
-     * @return __return_reduceRemaining_type__ __return_reduceRemaining_description__
-     */
-    public function reduceRemaining($n)
-    {
-        $this->_progressRemaining = $this->progressRemaining - $n;
-
-        return $this->progress();
     }
 
     /**

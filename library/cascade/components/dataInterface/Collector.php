@@ -29,4 +29,17 @@ class Collector extends \infinite\base\collector\Module
     {
         return 'Interface';
     }
+
+    
+
+    public function getByPk($pk)
+    {
+        foreach ($this->getAll() as $interface) {
+            if ($interface->interfaceObject->primaryKey === $pk) {
+                return $interface;
+            }
+        }
+
+        return false;
+    }
 }

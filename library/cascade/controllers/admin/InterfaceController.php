@@ -9,6 +9,7 @@ use infinite\caching\Cacher;
 use infinite\base\exceptions\HttpException;
 use cascade\models\DataInterface;
 use cascade\models\DataInterfaceLog;
+use cascade\components\dataInterface\DeferredAction;
 
 class InterfaceController extends Controller
 {
@@ -61,13 +62,19 @@ class InterfaceController extends Controller
 
         $log = new DataInterfaceLog;
         $log->data_interface_id = $dataInterface->primaryKey;
-        if ($log->save()) {
-            Yii::$app->response->success = 'Data interface action has been started';
-            Yii::$app->response->redirect = ['/admin/interface/view-log', 'id' => $log->primaryKey];
+        if (!$log->save()) {
+            Yii::$app->response->error = 'An error occurred while starting the data interface log.';
+            Yii::$app->response->refresh = true;
             return;
         }
-        Yii::$app->response->error = 'An error occurred while starting the data interface action.';
-        Yii::$app->response->refresh = true;
+
+        $deferredAction = DeferredAction::setup(['logModel' => $log->primaryKey]);
+        if (!$deferredAction) {
+            throw new NotFoundHttpException("Deferred action could not be started!");
+        }
+        Yii::$app->response->task = 'client';
+        Yii::$app->response->clientTask = 'deferredAction';
+        Yii::$app->response->taskOptions = $deferredAction->package();
     }
 
 
@@ -86,6 +93,10 @@ class InterfaceController extends Controller
             throw new HttpException(404, 'Data interface log could not be found');
         }
         $this->params['dataInterfaceLog'] = $dataInterfaceLog;
+        if (Yii::$app->request->isAjax && !empty($_GET['package'])) {
+            Yii::$app->response->data = $dataInterfaceLog->dataPackage;
+            return;
+        }
         if ($dataInterfaceLog->status === 'queued') {
             Yii::$app->response->view = 'view_log_queued';
         } else {

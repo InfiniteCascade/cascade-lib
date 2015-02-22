@@ -51,12 +51,9 @@ abstract class Module extends BaseModule
             return false;
         }
         $total = 0;
+        $taskSets = [];
         foreach ($this->dataSources as $source) {
-            $total += $source->total;
-        }
-
-        $action->progressTotal = $total;
-        foreach ($this->dataSources as $source) {
+            $id = md5(uniqid(rand(), true));
             if ($source->settings['direction'] === 'to_local') {
                 $prefix = 'Importing';
             } elseif ($source->settings['direction'] === 'to_foreign') {
@@ -64,8 +61,20 @@ abstract class Module extends BaseModule
             } else {
                 $prefix = 'Syncing';
             }
-            $action->progressPrefix = "{$prefix} {$source->name}...";
-            $source->run();
+            
+            $task = $action->status->addTask($id, $prefix .' '. $source->name);
+            $source->task = $task;
+            $source->prepareTask();
+            $taskSets[] = [
+                'task' => $task,
+                'dataSource' => $source
+            ];
+        }
+
+        foreach ($taskSets as $taskSet) {
+            $task = $taskSet['task'];
+            $dataSource = $taskSet['dataSource'];
+            $dataSource->run();
         }
         if (!$this->afterRun()) {
             // @todo add action log
@@ -135,6 +144,7 @@ abstract class Module extends BaseModule
                 }
                 $dataSource['name'] = $foreignModel;
                 $dataSource['foreignModel'] = $this->getForeignModel($foreignModel);
+                if (empty($dataSource['foreignModel'])) { continue; }
                 $this->_dataSources[$foreignModel] = Yii::createObject(array_merge(['module' => $this], $dataSource));
             }
         }

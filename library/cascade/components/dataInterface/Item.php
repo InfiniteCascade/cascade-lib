@@ -47,11 +47,11 @@ class Item extends \infinite\base\collector\Item
      * __method_run_description__
      * @return __return_run_type__ __return_run_description__
      */
-    public function run()
+    public function run($resumeLog = null)
     {
         register_shutdown_function([$this, 'saveLog']);
 
-        $this->_currentInterfaceAction = new Action($this);
+        $this->_currentInterfaceAction = new Action($this, $resumeLog);
         if (!$this->_currentInterfaceAction->start()) {
             $this->error = 'Could not start interface action!';
 
@@ -68,7 +68,7 @@ class Item extends \infinite\base\collector\Item
         }
         $this->_currentInterfaceAction->end();
 
-        return !$this->_currentInterfaceAction->status->error;
+        return !$this->_currentInterfaceAction->status->hasError;
     }
 
     /**

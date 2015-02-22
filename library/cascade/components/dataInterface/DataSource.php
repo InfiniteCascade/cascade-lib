@@ -19,6 +19,8 @@ abstract class DataSource extends \infinite\base\Component
 {
     const EVENT_LOAD_FOREIGN_DATA_ITEMS = 0x01;
     const EVENT_LOAD_LOCAL_DATA_ITEMS = 0x02;
+    
+    public $task;
 
     /**
      * @var __var_fieldMapClass_type__ __var_fieldMapClass_description__
@@ -225,9 +227,7 @@ abstract class DataSource extends \infinite\base\Component
         if (!$dataItem->isForeign && in_array($this->settings['direction'], ['to_foreign', 'both'])) {
             $n++;
         }
-
-        $this->_countRemaining = $this->remaining - $n;
-        $this->action->reduceRemaining($n);
+        $this->task->reduceRemaining($n);
     }
 
     /**
@@ -277,6 +277,18 @@ abstract class DataSource extends \infinite\base\Component
     {
         return $value;
     }
+
+    public function prepareTask()
+    {
+        $total = 0;
+        if (in_array($this->settings['direction'], ['to_local', 'both'])) {
+            $total += count($this->foreignDataItems);
+        }
+        if (in_array($this->settings['direction'], ['to_foreign', 'both'])) {
+            $total += count($this->localDataItems);
+        }
+        $this->task->setProgressTotal($total);
+    }
     
     /**
      * __method_run_description__
@@ -284,14 +296,16 @@ abstract class DataSource extends \infinite\base\Component
      */
     public function run()
     {
-        if (!$this->isReady()) { return false; }
+        $task = $this->task;
+        $task->start();
+        if (!$this->isReady()) { $task->end(); return false; }
         $action = $this->action;
         $this->settings = $action->settings;
 
         if (in_array($this->settings['direction'], ['to_local', 'both'])) {
             // start foreign
             foreach ($this->foreignDataItems as $dataItem) {
-                $dataItem->handler->handle();
+                $dataItem->handler->handle($task);
                 $this->clearCaches();
             }
         }
@@ -299,11 +313,11 @@ abstract class DataSource extends \infinite\base\Component
         if (in_array($this->settings['direction'], ['to_foreign', 'both'])) {
             // start local
             foreach ($this->localDataItems as $dataItem) {
-                $dataItem->handler->handle();
+                $dataItem->handler->handle($task);
                 $this->clearCaches();
             }
         }
-
+        $task->end();
         return true;
     }
 
