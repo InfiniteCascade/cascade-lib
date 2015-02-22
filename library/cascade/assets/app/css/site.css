@@ -11,20 +11,18 @@ html,body,.container,.overall-container
   height: auto;
 }
 
-.container {
-  padding: 0;
+.inner-container {
+    margin-top: 65px;
+    padding-bottom: 20px;
 }
 
-.inner-container {
-    padding-top: 70px;
-}
 
 .dashboard, .row, .ic-column, body, .container,.overall-container,.container-fluid {
     position: relative;
 }
 
 body.double-top-nav .overall-container {
-    padding-top: 120px;
+   /* padding-top: 120px;*/
 }
 
 footer {
@@ -34,6 +32,10 @@ footer {
 
 .ic-navbar-top .object-type {
   color: #48cbeb;
+}
+
+.ic-navbar-top .nav-label {
+  margin-left: 3px;
 }
 
 .ic-navbar-top .nav > li {
@@ -225,81 +227,6 @@ footer {
   line-height: 20px;
   padding: 15px;
   margin: 0;
-}
-
-.ic-sidenav {
-    width: 165px;
-}
-
-.ic-sidenav.affix,
-.ic-front-side.affix,
-.ic-sidebar.affix {
-    position: fixed;
-}
-
-.ic-sidebar .ic-column,
-.ic-sidenav .ic-column {
-  float: none;
-}
-
-.ic-sidebar.affix-bottom,
-.ic-sidenav.affix-bottom,
-.ic-front-side.affix-bottom, {
-    position: absolute;
-}
-
-.ic-sidenav .nav {
-    display: block;
-}
-
-
-/* Affixed Sidebar */
-.ic-sidebar {
-    width: 358px;
-    margin: 0;
-    padding: 0;
-}
-
-.ic-front-side {
-	width: 583px;
-}
-
-
-@media (max-width: 992px) {
-    .ic-sidebar,
-    .ic-sidebar.affix,
-    .ic-sidebar.affix-bottom,
-    .ic-sidebar.affix-top,
-
-    .ic-front-side,
-    .ic-front-side.affix,
-    .ic-front-side.affix-bottom,
-    .ic-front-side.affix-top
- {
-      position: relative;
-      width: 100%;
-      margin-bottom: 20px;
-      top: auto;
-      left: auto;
-    }
-}
-
-@media (min-width: 992px) {
-    .ic-sidebar .nav > .active > ul {
-        display: block;
-    }
-}
-@media (max-width: 1200px) {
-	.ic-sidenav {
-		width: 132px;
-	}
-	.ic-sidebar {
-		width: 291px;
-	}
-	.ic-front-side {
-		width: 463px;
-	}
-
 }
 
 /* access management */

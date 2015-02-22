@@ -7,13 +7,11 @@
 
 namespace cascade\components\dataInterface;
 
-use Yii;
-
 /**
  * Status [@doctodo write class description for Status]
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Status extends \infinite\dataInterface\Status
+class Task extends \infinite\dataInterface\Task
 {
 }

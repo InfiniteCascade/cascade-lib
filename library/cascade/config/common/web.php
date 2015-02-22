@@ -8,6 +8,10 @@
 
 $config = include(__DIR__ . DIRECTORY_SEPARATOR . 'base.php');
 $config['controllerNamespace'] = 'cascade\\controllers';
+$config['controllerMap'] = [
+    // 'admin' => \cascade\controllers\admin\DefaultController::className(),
+    // 'admin/interface' => \cascade\controllers\admin\InterfaceController::className(),
+];
 $config['components']['request'] = [
     'class' => 'cascade\components\web\Request',
     'enableCsrfValidation' => true,

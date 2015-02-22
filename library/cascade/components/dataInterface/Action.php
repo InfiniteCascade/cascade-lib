@@ -186,24 +186,7 @@ class Action extends \infinite\base\Object
      */
     public function end($endInterrupted = false)
     {
-        if (!is_null($this->log->ended)) { return true; }
-        Console::endProgressSpecial(true);
-        Console::stdout("Done! ". PHP_EOL);
-        if ($endInterrupted) {
-            $lerror = error_get_last();
-            if (!empty($lerror)) {
-                $this->status->addError("{$lerror['file']}:{$lerror['line']} {$lerror['message']}");
-                Console::stdout(PHP_EOL . PHP_EOL . "{$lerror['file']}:{$lerror['line']} {$lerror['message']}" . PHP_EOL);
-            }
-            $this->log->status = 'interrupted';
-        } elseif ($this->status->error) {
-            $this->log->status = 'failed';
-        } else {
-            $this->log->status = 'success';
-        }
-        $this->log->ended = date("Y-m-d G:i:s");
-
-        return $this->save();
+        return $this->log->end($endInterrupted);
     }
 
     /**
@@ -230,7 +213,7 @@ class Action extends \infinite\base\Object
      */
     public function getLog()
     {
-        if (is_null($this->_log)) {
+        if (!isset($this->_log)) {
             $this->_log = new DataInterfaceLog;
             if (!empty($this->_interface)) {
                 $this->_log->data_interface_id = $this->_interface->interfaceObject->id;
@@ -249,9 +232,12 @@ class Action extends \infinite\base\Object
      */
     public function getStatus()
     {
-        if (!isset($this->_status)) {
-            $this->_status = new Status($this);
+        if (isset($this->_log)) {
+            $this->_status = $this->log->statusLog;
+        } elseif (!isset($this->_status)) {
+            $this->_status = new Status($this->log);
         }
+
 
         return $this->_status;
     }

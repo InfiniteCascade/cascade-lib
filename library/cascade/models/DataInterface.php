@@ -99,6 +99,11 @@ class DataInterface extends \cascade\components\db\ActiveRecord
         return $this->hasMany(DataInterface::className(), ['data_interface_id' => 'id']);
     }
 
+    public function getLastDataInterfaceLog()
+    {
+        return DataInterfaceLog::find()->where(['data_interface_id' => $this->primaryKey])->orderBy(['created' => SORT_DESC])->one();
+    }
+
     /**
      * Get key translations
      * @return \yii\db\ActiveRelation
@@ -128,5 +133,34 @@ class DataInterface extends \cascade\components\db\ActiveRecord
         return [
             'class' => 'fa fa-arrows-h'
         ];
+    }
+
+
+    public function estimateDuration()
+    {
+        $durations = [];
+        $logs = DataInterfaceLog::find()->where(['data_interface_id' => $this->primaryKey, 'status' => 'success'])->all();
+        foreach ($logs as $log) {
+            if (empty($log->ended) || empty($log->started)) {
+                continue;
+            }
+            $durations[] = strtotime($log->ended) - strtotime($log->started);
+        }
+        if (empty($durations)) {
+            return false;
+        }
+        $average = array_sum($durations) / count($durations);
+        $max = max($durations);
+
+        return $average;
+
+        return ($average + $max) / 2;
+    }
+
+
+
+    public function getRelatedLogQuery()
+    {
+        return DataInterfaceLog::find()->where(['data_interface_id' => $this->primaryKey]);
     }
 }

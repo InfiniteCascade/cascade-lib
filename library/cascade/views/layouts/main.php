@@ -4,6 +4,7 @@ use cascade\components\web\bootstrap\TopNavBar;
 use cascade\components\web\bootstrap\Nav;
 use cascade\models\SearchForm;
 use yii\widgets\ActiveForm;
+use yii\widgets\Breadcrumbs;
 use infinite\deferred\widgets\NavItem as DeferredNavItem;
 
 cascade\components\web\assetBundles\AppAsset::register($this);
@@ -34,40 +35,42 @@ if (!Yii::$app->user->isGuest) {
     }
     $topMenu = [];
     $topMenu[] = [
-        'label' =>  '<span class="fa fa-home"></span> <span class="hidden-xs hidden-sm">Dashboard</span>',
+        'label' =>  '<span class="icon fa fa-home"></span> <span class="nav-label hidden-xs hidden-sm">Dashboard</span>',
         'url' => ['/app/index']
     ];
     $topMenu[] = [
-        'label' =>  '<span class="fa fa-th"></span> <span class="hidden-xs hidden-sm">'.$browseLabel.'</span>',
+        'label' =>  '<span class="icon fa fa-th"></span> <span class="nav-label hidden-xs hidden-sm">'.$browseLabel.'</span>',
         'url' => ['/object/index'],
         'items' => $itemTypes,
         'active' => function ($nav, $item) {
             $check = ['/^\/object\//']; // , '/^object\/view/', '/^object\/index/', '/^object\/browse/'
-
             foreach ($check as $c) {
                 if (preg_match($c, $nav->route) === 1) {
                     return true;
                 }
             }
-
             return false;
         }
     ];
     $reports = Yii::$app->collectors['reports']->getAllActive();
     if (!empty($reports)) {
         $topMenu[] = [
-            'label' =>  '<span class="fa fa-filter"></span> <span class="hidden-xs hidden-sm">Reports</span>',
+            'label' =>  '<span class="icon fa fa-filter"></span> <span class="nav-label hidden-xs hidden-sm">Reports</span>',
             'url' => ['/report']
         ];
     }
     $tools = Yii::$app->collectors['tools']->getAllActive();
     if (!empty($tools)) {
         $topMenu[] = [
-            'label' =>  '<span class="fa fa-wrench"></span> <span class="hidden-xs hidden-sm">Tools</span>',
+            'label' =>  '<span class="icon fa fa-wrench"></span> <span class="nav-label hidden-xs hidden-sm">Tools</span>',
             'url' => ['/tool']
         ];
     }
-    //$topMenu[] = ['label' =>  '<span class="glyphicon glyphicon-home"></span> <span class="hidden-xs hidden-sm">Dashboard</span>', 'url' => ['/']];
+
+    if (Yii::$app->gk->is('administrators')) {
+        $topMenu[] = ['label' => '<span class="icon fa fa-cogs"></span> <span class="nav-label hidden-xs hidden-sm">Administration</span>', 'activeChildren' => '/admin', 'url' => ['/admin/dashboard']];
+    }
+    //$topMenu[] = ['label' =>  '<span class="glyphicon glyphicon-home"></span> <span class="nav-label hidden-xs hidden-sm">Dashboard</span>', 'url' => ['/']];
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav pull-left'],
@@ -85,7 +88,7 @@ if (Yii::$app->user->isGuest) {
                     'linkOptions' => ['data-method' => 'post']];
 } else {
     $userMenuItem = [
-        'label' =>  '<span class="glyphicon glyphicon-user"></span> <span class="hidden-xs hidden-sm">' . Yii::$app->user->identity->first_name .'</span>',
+        'label' =>  '<span class="glyphicon glyphicon-user"></span> <span class="nav-label hidden-xs hidden-sm">' . Yii::$app->user->identity->first_name .'</span>',
         'url' => '#',
         'linkOptions' => [],
         'items' => []
@@ -126,7 +129,19 @@ TopNavBar::end();
 ?>
 
 <div class="inner-container container-fluid">
-<?=$content; ?>
+<?=Breadcrumbs::widget([
+    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    'encodeLabels' => false
+]); ?>
+<?php
+    if (($success = Yii::$app->session->getFlash('success', false, true))) {
+        echo Html::tag('div', $success, ['class' => 'alert alert-success']);
+    }
+    if (($error = Yii::$app->session->getFlash('error', false, true))) {
+        echo Html::tag('div', $error, ['class' => 'alert alert-danger']);
+    }
+?>
+<?= $content; ?>
 </div>
 
 <footer class="footer">

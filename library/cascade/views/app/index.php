@@ -26,7 +26,7 @@ $topGrid->currentRow->addCell($watchingCell);
 $itemsCell = $topGrid->currentRow->addCell(new Cell(['columns' => 6]));
 $widgetGrid = new Grid;
 Html::addCssClass($widgetGrid->htmlOptions, 'ic-front-side');
-$js[] = '$("#'. $widgetGrid->id .'").cascadeAffix();';
+$js[] = '$("#'. $widgetGrid->id .'").infiniteAffix();';
 
 $widgetGrid->baseRow = ['trueWidth' => 6];
 $cells = [];
