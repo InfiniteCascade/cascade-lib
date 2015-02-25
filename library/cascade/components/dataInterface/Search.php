@@ -105,20 +105,32 @@ class Search extends \infinite\base\Component
             || $searchResults[0]->descriptor === implode(' ', $query)) {
             return $searchResults[0]->object;
         } else {
-            Console::output("Multiple results found for: ". implode('; ', $query));
-            $options = ['' => 'New Object'];
+            $options = ['_new' => 'New Object'];
             $resultsNice = [];
             $optionNumber = 1;
             foreach ($searchResults as $result) {
                 $resultsNice[$optionNumber] = $result;
                 $options[$optionNumber] = $result->descriptor .' ('. $result->score .')';
-                Console::output($optionNumber .') '. $result->descriptor .' ('. $result->score .')');
                 $optionNumber++;
             }
-            $select = Console::select("Choose:", $options);
-            if ($select === '') {
-                Console::output("Creating new object!");
+            $select = false;
+            $options = ['inputType' => 'select', 'options' => $options];
+            $options['details'] = ['query' => $query];
+            $callback = [
+                'callback' => function($response) use (&$select) {
+                    if (empty($response)) { return false; }
+                    $select = $response;
+                    return true;
+                }
+            ];
+            Console::output("Waiting for interaction...");
+            if (!$this->dataSource->action->createInteraction('Match Object', $options, $callback)) {
                 return false;
+            }
+
+            if ($select === '_new') {
+                Console::output("Selected CREATE NEW");
+                return null;
             } else {
                 Console::output("Selected " . $resultsNice[$select]->descriptor);
                 return $resultsNice[$select]->object;

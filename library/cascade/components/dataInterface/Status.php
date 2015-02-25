@@ -14,6 +14,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Status extends \infinite\dataInterface\Status
+class Status extends \infinite\action\Status
 {
+  public $linearTasks = false;
 }

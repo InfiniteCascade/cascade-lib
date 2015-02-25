@@ -16,7 +16,7 @@ use infinite\helpers\Console;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Action extends \infinite\base\Object
+trait ActionTrait
 {
     /**
      * @var __var__interface_type__ __var__interface_description__
@@ -31,46 +31,26 @@ class Action extends \infinite\base\Object
      */
     protected $_log;
     /**
-     * @var __var__id_type__ __var__id_description__
-     */
-    protected $_id;
-    /**
-     * @var __var__settings_type__ __var__settings_description__
-     */
-    protected $_settings = [];
-    /**
      * @var __var__registry_type__ __var__registry_description__
      */
     protected $_registry = [];
 
-    /**
-    * @inheritdoc
-     */
-    public function __construct(Item $interface = null, $resumeLog = null)
+
+    public function setInterface($interface)
     {
         $this->_interface = $interface;
-        if (!is_null($resumeLog)) {
-            $this->_log = $resumeLog;
-        }
     }
 
-    /**
-     * Set settings
-     * @param __param_value_type__ $value __param_value_description__
-     */
-    public function setSettings($value)
+    public function resumeLog($log)
     {
-        $this->_settings = $value;
+
+        $this->_log = $resumeLog;
+        $this->_log->status = 'running';
+        $this->_log->started = date("Y-m-d G:i:s");
+        $this->_log->peak_memory = memory_get_usage();
+        $this->_log->save();
     }
 
-    /**
-     * Get settings
-     * @return __return_getSettings_type__ __return_getSettings_description__
-     */
-    public function getSettings()
-    {
-        return $this->_settings;
-    }
 
     /**
      * __method_start_description__

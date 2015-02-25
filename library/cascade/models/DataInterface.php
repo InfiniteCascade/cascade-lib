@@ -98,7 +98,7 @@ class DataInterface extends \cascade\components\db\ActiveRecord
      */
     public function getDataInterfaceLogs()
     {
-        return $this->hasMany(DataInterface::className(), ['data_interface_id' => 'id']);
+        return $this->hasMany(DataInterfaceLog::className(), ['data_interface_id' => 'id']);
     }
 
     public function getLastDataInterfaceLog()
@@ -134,7 +134,7 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     {
         return true;
     }
-    
+
     public function getIcon()
     {
         return [
@@ -170,4 +170,5 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     {
         return DataInterfaceLog::find()->where(['data_interface_id' => $this->primaryKey]);
     }
+
 }

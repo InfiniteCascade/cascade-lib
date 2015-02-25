@@ -96,6 +96,9 @@ class InterfaceController extends Controller
         if (Yii::$app->request->isAjax && !empty($_GET['package'])) {
             Yii::$app->response->data = $dataInterfaceLog->dataPackage;
             return;
+        } elseif (Yii::$app->request->isAjax) {
+          Yii::$app->response->taskOptions = ['title' => 'View Log', 'modalClass' => 'modal-xl'];
+          Yii::$app->response->task = 'dialog';
         }
         if ($dataInterfaceLog->status === 'queued') {
             Yii::$app->response->view = 'view_log_queued';
@@ -103,4 +106,6 @@ class InterfaceController extends Controller
             Yii::$app->response->view = 'view_log';
         }
     }
+
+
 }

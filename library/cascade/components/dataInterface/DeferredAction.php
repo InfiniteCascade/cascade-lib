@@ -17,6 +17,7 @@ use cascade\models\DataInterfaceLog;
  */
 class DeferredAction extends \infinite\deferred\components\Action
 {
+	use ActionTrait;
 
 	public function run()
 	{
@@ -27,7 +28,7 @@ class DeferredAction extends \infinite\deferred\components\Action
 			return false;
 		}
 
-		if (!$logModel->run()) {
+		if (!$logModel->run($this)) {
 			$this->result->isSuccess = false;
 			$this->result->message = 'Interface failed to run';
 			return false;

@@ -12,6 +12,7 @@ use yii\helpers\Inflector;
 use infinite\base\exceptions\Exception;
 use cascade\components\dataInterface\Action;
 use cascade\components\dataInterface\Module as BaseModule;
+use infinite\action\Action as BaseAction;
 
 /**
  * Module [@doctodo write class description for Module]
@@ -43,7 +44,7 @@ abstract class Module extends BaseModule
     /**
     * @inheritdoc
      */
-    public function run(Action $action)
+    public function run(BaseAction $action)
     {
         $this->_action = $action;
         if (!$this->beforeRun()) {
@@ -61,8 +62,8 @@ abstract class Module extends BaseModule
             } else {
                 $prefix = 'Syncing';
             }
-            
-            $task = $action->status->addTask($id, $prefix .' '. $source->name);
+
+            $task = $action->status->addTask($id, $prefix .' '. $source->descriptor);
             $source->task = $task;
             $source->prepareTask();
             $taskSets[] = [
@@ -151,7 +152,7 @@ abstract class Module extends BaseModule
 
         return $this->_dataSources;
     }
-    
+
     /**
      * Get local data source
      * @param __param_localModelClass_type__     $localModelClass __param_localModelClass_description__

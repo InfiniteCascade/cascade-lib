@@ -7,6 +7,7 @@
 
 namespace cascade\components\dataInterface;
 
+use infinite\action\Action as BaseAction;
 /**
  * Module [@doctodo write class description for Module]
  *
@@ -43,5 +44,5 @@ abstract class Module extends \cascade\components\base\CollectorModule
      * __method_run_description__
      * @param cascade\components\dataInterface\Action $action __param_action_description__
      */
-    abstract public function run(Action $action);
+    abstract public function run(BaseAction $action);
 }

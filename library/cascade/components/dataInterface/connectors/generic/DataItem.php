@@ -9,6 +9,7 @@ namespace cascade\components\dataInterface\connectors\generic;
 
 use cascade\components\dataInterface\RecursionException;
 use cascade\components\dataInterface\MissingItemException;
+use infinite\base\language\Verb;
 
 /**
  * DataItem [@doctodo write class description for DataItem]
@@ -50,16 +51,24 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
 
         // find or start up local object
         $localModel = $this->dataSource->localModel;
-
         if (!isset($this->localObject)) {
             $this->localObject = new $localModel;
         }
-
+        $isNewRecord = $this->localObject->isNewRecord;
+        $actionVerb = new Verb('create');
+        if (!$isNewRecord) {
+            $actionVerb = new Verb('update');
+        }
         // $this->localObject->auditAgent = $this->module->collectorItem->interfaceObject->primaryKey;
         $this->localObject->auditDataInterface = $this->module->collectorItem->interfaceObject->primaryKey;
 
         $attributes = $this->dataSource->buildLocalAttributes($this->foreignObject, $this->localObject);
         if (empty($attributes)) {
+            return false;
+        }
+
+        if ($this->localModelError) {
+            $this->dataSource->task->addError('Unable to match local '. $this->dataSource->descriptor .' object', ['attributes' => $attributes]);
             return false;
         }
 
@@ -75,7 +84,43 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
 
         // save local object
         if (!$this->localObject->save()) {
+            $this->dataSource->task->addError('Unable to '. $actionVerb->getSimplePresent(false) .' local '. $this->dataSource->descriptor .' object: ' . $this->localObject->descriptor, ['errors' => $this->localObject->errors, 'attributes' => $this->localObject->attributes]);
             return false;
+        }
+        $dirtyAttributes = $this->localObject->getDirtyAttributes();
+        $oldAttributes = $this->localObject->getOldAttributes();
+
+        if ($this->localObject->getBehavior('Auditable') !== null) {
+            foreach ($this->localObject->getBehavior('Auditable')->ignoreAttributes as $ignore) {
+                unset($dirtyAttributes[$ignore]);
+            }
+        }
+
+        if ($this->localObject->getBehavior('Date') !== null) {
+            $oldAttributes = $this->localObject->getBehavior('Date')->convertToDatabaseDate($oldAttributes);
+            $dirtyAttributes = $this->localObject->getBehavior('Date')->convertToDatabaseDate($dirtyAttributes);
+            foreach ($dirtyAttributes as $key => $value) {
+                if (isset($oldAttributes[$key]) && $value === $oldAttributes[$key]) {
+                    unset($dirtyAttributes[$key]);
+                }
+            }
+        }
+
+        if ($isNewRecord || !empty($dirtyAttributes)) {
+            $data = [];
+            if (!$isNewRecord) {
+                // @todo use auditable to ignore certain fields
+                $infoData = ['newValues' => $dirtyAttributes, 'oldValues' => []];
+
+                foreach ($dirtyAttributes as $key => $newValue) {
+                    $oldValue = null;
+                    if (isset($oldAttributes[$key])) {
+                        $oldValue = $oldAttributes[$key];
+                    }
+                    $infoData['oldValues'][$key] = $oldValue;
+                }
+            }
+            $this->dataSource->task->addInfo($actionVerb->getPast(true) .' local '. $this->dataSource->descriptor .' object: ' . $this->localObject->descriptor, $infoData);
         }
 
         // save foreign key map

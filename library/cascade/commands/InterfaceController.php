@@ -11,7 +11,7 @@ use Yii;
 
 use infinite\helpers\Console;
 use yii\console\Exception;
-
+use cascade\components\dataInterface\ConsoleAction;
 use infinite\helpers\ArrayHelper;
 
 ini_set('memory_limit', -1);
@@ -46,7 +46,7 @@ class InterfaceController extends \infinite\console\Controller
     {
         $this->out("Run Interface ". $this->dataInterface->object->name, Console::UNDERLINE, Console::FG_GREEN);
         $this->hr();
-        $this->dataInterface->run();
+        $this->dataInterface->run(null, new ConsoleAction);
     }
 
     /**

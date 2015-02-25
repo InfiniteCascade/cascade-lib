@@ -26,6 +26,9 @@ abstract class DataItem extends \infinite\base\Component
      */
     public $isForeign = true;
 
+        public $localModelError = false;
+        public $foreignModelError = false;
+
     /**
      * @var __var__pairedDataItem_type__ __var__pairedDataItem_description__
      */
@@ -77,6 +80,9 @@ abstract class DataItem extends \infinite\base\Component
         if (isset($this->foreignObject) && !isset($this->_localObject) && isset($this->dataSource->search)) {
             if (($localObject = $this->dataSource->search->searchLocal($this)) && !empty($localObject)) {
                 $this->localObject = $localObject;
+            }
+            if ($localObject === false) {
+                $this->localModelError = true;
             }
         }
 

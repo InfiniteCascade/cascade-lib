@@ -101,12 +101,12 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return $this->hasOne(DataInterface::className(), ['id' => 'data_interface_id']);
     }
 
-    public function run()
+    public function run($interactiveAction = null)
     {
         if (empty($this->dataInterface) || !($dataInterfaceItem = $this->dataInterface->dataInterfaceItem)) {
             return false;
         }
-        return $dataInterfaceItem->run($this);
+        return $dataInterfaceItem->run($this, $interactiveAction);
     }
 
     public function getStatusLog($checkRecent = false)
@@ -317,5 +317,23 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
     public function getIsActive()
     {
         return in_array($this->status, ['queued', 'running']);
+    }
+
+    public function getBootstrapState()
+    {
+        switch ($this->status) {
+          case 'success':
+            return 'success';
+          break;
+          case 'queued':
+          case 'running':
+            return 'info';
+          break;
+          case 'error':
+          case 'interrupted':
+            return 'danger';
+          break;
+        }
+        return 'warning';
     }
 }

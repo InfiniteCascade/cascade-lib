@@ -9,6 +9,7 @@ namespace cascade\components\dataInterface;
 
 use Yii;
 use cascade\components\db\ActiveRecord;
+use yii\helpers\Inflector;
 
 /**
  * DataSource [@doctodo write class description for DataSource]
@@ -19,8 +20,9 @@ abstract class DataSource extends \infinite\base\Component
 {
     const EVENT_LOAD_FOREIGN_DATA_ITEMS = 0x01;
     const EVENT_LOAD_LOCAL_DATA_ITEMS = 0x02;
-    
+
     public $task;
+    public $taskWeight = 1;
 
     /**
      * @var __var_fieldMapClass_type__ __var_fieldMapClass_description__
@@ -74,7 +76,7 @@ abstract class DataSource extends \infinite\base\Component
      */
     public $baseAttributes = [];
 
-    
+
     /**
      * @var __var__localModel_type__ __var__localModel_description__
      */
@@ -155,6 +157,11 @@ abstract class DataSource extends \infinite\base\Component
         ActiveRecord::clearCache();
         \yii\caching\Dependency::resetReusableData();
         \cascade\components\types\Relationship::clearCache();
+    }
+
+    public function getDescriptor()
+    {
+        return Inflector::titleize($this->name, true);
     }
 
     /**
@@ -287,9 +294,11 @@ abstract class DataSource extends \infinite\base\Component
         if (in_array($this->settings['direction'], ['to_foreign', 'both'])) {
             $total += count($this->localDataItems);
         }
+
+        $this->task->setWeight($total*$this->taskWeight);
         $this->task->setProgressTotal($total);
     }
-    
+
     /**
      * __method_run_description__
      * @return __return_run_type__ __return_run_description__
@@ -300,7 +309,7 @@ abstract class DataSource extends \infinite\base\Component
         $task->start();
         if (!$this->isReady()) { $task->end(); return false; }
         $action = $this->action;
-        $this->settings = $action->settings;
+        $this->settings = $action->config;
 
         if (in_array($this->settings['direction'], ['to_local', 'both'])) {
             // start foreign

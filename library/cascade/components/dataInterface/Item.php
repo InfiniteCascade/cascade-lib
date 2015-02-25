@@ -47,14 +47,21 @@ class Item extends \infinite\base\collector\Item
      * __method_run_description__
      * @return __return_run_type__ __return_run_description__
      */
-    public function run($resumeLog = null)
+    public function run($resumeLog = null, $action = null)
     {
         register_shutdown_function([$this, 'saveLog']);
+        if ($action === null) {
+            $action = new NonInteractiveAction();
+        }
 
-        $this->_currentInterfaceAction = new Action($this, $resumeLog);
+        $action->interface = $this;
+        if (!empty($resumeLog)) {
+            $action->resumeLog($resumeLog);
+        }
+
+        $this->_currentInterfaceAction = $action;
         if (!$this->_currentInterfaceAction->start()) {
             $this->error = 'Could not start interface action!';
-
             return false;
         }
         try {
@@ -80,7 +87,6 @@ class Item extends \infinite\base\collector\Item
         if (isset($this->_currentInterfaceAction)) {
             $this->_currentInterfaceAction->end(true);
         }
-
         return true;
     }
 
@@ -103,7 +109,6 @@ class Item extends \infinite\base\collector\Item
                 }
             }
         }
-
         return $this->_interfaceObject;
     }
 

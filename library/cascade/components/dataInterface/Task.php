@@ -12,6 +12,6 @@ namespace cascade\components\dataInterface;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task extends \infinite\dataInterface\Task
+class Task extends \infinite\action\Task
 {
 }

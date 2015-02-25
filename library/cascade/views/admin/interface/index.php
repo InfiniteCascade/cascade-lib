@@ -19,7 +19,13 @@ foreach (Yii::$app->collectors['dataInterfaces']->getAll() as $interfaceItem) {
 	} else {
 		$items[] = ['label' => 'View Active Log', 'url' => ['/admin/interface/view-log', 'id' => $lastLog->primaryKey]];
 	}
-	echo Html::tag('h4', $interface->name . Html::buttonGroup($items, ['class' => 'pull-right btn-group-sm']));
+	if (!empty($lastLog)) {
+		$lastRanHtmlOptions = ['class' => 'label label-' . $lastLog->bootstrapState];
+		$lastRan = Html::a(date("F d, Y h:ia", strtotime($lastLog->created)), ['/admin/interface/view-log', 'id' => $lastLog->primaryKey], $lastRanHtmlOptions);
+	} else {
+		$lastRan = Html::tag('span', 'Never Ran', ['class' => 'label label-warning']);
+	}
+	echo Html::tag('h4', $interface->name .' '. $lastRan . Html::buttonGroup($items, ['class' => 'pull-right btn-group-sm']));
 	echo Html::endTag('div');
 }
 echo Html::endTag('div');

@@ -24,7 +24,7 @@ class DeferredResult extends \infinite\deferred\components\Result
         $package = parent::package($details);
         $logModel = $this->action->logModel;
         if ($logModel->status !== 'queued') {
-        	$package['actions'][] = ['label' => 'View Log', 'url' => Url::to(['/admin/interface/view-log', 'id' => $logModel->id]), 'data-handler' => 'background'];
+        	$package['actions'][] = ['label' => 'View Log', 'url' => Url::to(['/admin/interface/view-log', 'id' => $logModel->id])];
     	}
         return $package;
     }
