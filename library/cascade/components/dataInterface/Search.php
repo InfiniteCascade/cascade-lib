@@ -9,6 +9,7 @@ namespace cascade\components\dataInterface;
 
 use infinite\helpers\Console;
 use cascade\components\helpers\StringHelper;
+use infinite\helpers\ArrayHelper;
 
 /**
  * Search [@doctodo write class description for Search]
@@ -24,7 +25,7 @@ class Search extends \infinite\base\Component
     /**
      * @var __var_threshold_type__ __var_threshold_description__
      */
-    public $threshold = 80;
+    public $threshold = 50;
     /**
      * @var __var_autoadjust_type__ __var_autoadjust_description__
      */
@@ -53,11 +54,11 @@ class Search extends \infinite\base\Component
      */
     public function searchLocal(DataItem $item, $searchParams = [])
     {
-        if (!isset($searchParams['searchFields'])) {
+        if (empty($searchParams['searchFields'])) {
             $searchParams['searchFields'] = $this->localFields;
         }
         if (empty($searchParams['searchFields'])) {
-            return false;
+            return null;
         }
         if (!isset($searchParams['limit'])) {
             $searchParams['limit'] = 5;
@@ -73,9 +74,8 @@ class Search extends \infinite\base\Component
                 $query[] = $value;
             }
         }
-
         if (empty($query)) {
-            return false;
+            return null;
         }
 
         $localClass = $this->dataSource->localModel;
@@ -83,7 +83,7 @@ class Search extends \infinite\base\Component
         foreach ($searchResults as $k => $r) {
             // if ($r->descriptor === $query[0]) { continue; }
             $score = (
-                ($r->score * .2)
+                (($r->score * 100) * .2)
                 + (StringHelper::compareStrings($r->descriptor, implode(' ', $query)) * .8)
                 );
             $r->score = $score;
@@ -96,39 +96,62 @@ class Search extends \infinite\base\Component
                 }
             }
         }
+        ArrayHelper::multisort($searchResults, 'scoreSort', SORT_DESC);
         $searchResults = array_values($searchResults);
+
         if (empty($searchResults)) {
-            return false;
-        } elseif (count($searchResults) === 1
+            return null;
+        } elseif (
+            count($searchResults) === 1
             || !self::$interactive
-            || $searchResults[0]->score > ($this->threshold * $this->autoadjust)
-            || $searchResults[0]->descriptor === implode(' ', $query)) {
+            ||  (
+                    $searchResults[0]->score > ($this->threshold * $this->autoadjust)
+                    && (!isset($searchResults[1]) || $searchResults[0]->score !== $searchResults[1]->score)
+                )
+            || (
+                    $searchResults[0]->descriptor === implode(' ', $query)
+                    && (!isset($searchResults[1]) || $searchResults[1]->descriptor !== implode(' ', $query))
+                )
+        ) {
+            // if (!$item->ignoreForeignObject) {
+            //     \d(count($searchResults), $searchResults[1]->descriptor);exit;
+            // }
             return $searchResults[0]->object;
         } else {
-            $options = ['_new' => 'New Object'];
+            $options = [];
             $resultsNice = [];
             $optionNumber = 1;
             foreach ($searchResults as $result) {
-                $resultsNice[$optionNumber] = $result;
-                $options[$optionNumber] = $result->descriptor .' ('. $result->score .')';
+                $resultsNice['_o' . $optionNumber] = $result;
+                $options['_o' . $optionNumber] = $result->descriptor .' ('. $result->score .'%)';
                 $optionNumber++;
             }
+            $options['new'] = 'Create New Object';
             $select = false;
-            $options = ['inputType' => 'select', 'options' => $options];
-            $options['details'] = ['query' => $query];
+            $interactionOptions = ['inputType' => 'select', 'options' => $options];
+            $interactionOptions['details'] = ['query' => $query];
             $callback = [
-                'callback' => function($response) use (&$select) {
-                    if (empty($response)) { return false; }
+                'callback' => function($response) use (&$select, $options) {
+                    if (empty($response)) { 
+                        // throw new \Exception("Response was empty");
+                        return false;
+                    }
+                    if (!isset($options[$response])) {
+                        // \d($options);
+                        // \d($response);
+                        // throw new \Exception("Response was not valid: $response");
+                        return false;
+                    }
                     $select = $response;
                     return true;
                 }
             ];
             Console::output("Waiting for interaction...");
-            if (!$this->dataSource->action->createInteraction('Match Object', $options, $callback)) {
+            if (!$this->dataSource->action->createInteraction('Match Object', $interactionOptions, $callback)) {
                 return false;
             }
 
-            if ($select === '_new') {
+            if ($select === 'new') {
                 Console::output("Selected CREATE NEW");
                 return null;
             } else {

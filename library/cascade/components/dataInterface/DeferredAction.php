@@ -31,6 +31,7 @@ class DeferredAction extends \infinite\deferred\components\Action
 		if (!$logModel->run($this)) {
 			$this->result->isSuccess = false;
 			$this->result->message = 'Interface failed to run';
+			$this->cancelLog();
 			return false;
 		}
 
@@ -39,12 +40,28 @@ class DeferredAction extends \infinite\deferred\components\Action
 		return true;
 	}
 
+
+    public function pauseAction()
+    {
+    	return $this->log->statusLog->pause();
+    }
+
+    public function resumeAction()
+    {
+    	return $this->log->statusLog->resume();
+    }
+
 	public function getDescriptor()
 	{
 		return 'Interface Action';
 	}
-
+	
 	public function cancel()
+	{
+		return $this->cancelLog();
+	}
+	
+	public function cancelLog()
 	{
 		$logModel = $this->getLogModel(true);
 		if (empty($logModel)) {

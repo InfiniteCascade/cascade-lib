@@ -262,6 +262,9 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         $p['_']['ended'] = isset($this->ended) ? date("F d, Y g:i:sa", strtotime($this->ended)) : false;
         $p['_']['duration'] = $this->duration;
         $p['_']['status'] = $this->status;
+        if ($this->status === 'running' && $this->statusLog->paused) {
+            $p['_']['status'] = 'paused';
+        }
         $p['_']['estimatedTimeRemaining'] = Date::niceDuration($this->estimateTimeRemaining);
         $p['_']['log_status'] = 'fine';
 
