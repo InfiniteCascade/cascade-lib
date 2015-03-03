@@ -29,7 +29,7 @@ class Collector extends \infinite\base\collector\Module
      */
     public function getCollectorItemClass()
     {
-        return 'cascade\\components\\types\\Item';
+        return Item::className();
     }
 
     /**
@@ -69,6 +69,7 @@ class Collector extends \infinite\base\collector\Module
      */
     public function initialize()
     {
+        Yii::beginProfile('Component:::types::initialize');
         foreach ($this->bucket as $type) {
             if (is_null($type->object) || !$type->object) {
                 // module isn't in our installation
@@ -91,6 +92,7 @@ class Collector extends \infinite\base\collector\Module
                 }
             }
         }
+        Yii::endProfile('Component:::types::initialize');
 
         return true;
     }

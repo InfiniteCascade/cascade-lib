@@ -24,7 +24,7 @@ class Collector extends \infinite\base\collector\Module
      */
     public function getCollectorItemClass()
     {
-        return 'cascade\\components\\storageHandlers\\Item';
+        return Item::className();
     }
 
     /**

@@ -197,8 +197,6 @@ footer {
 }
 
 .scroll-mark {
-	padding-top: 70px;
-	margin-top: -70px;
   height: 0px;
   visibility: hidden;
 }

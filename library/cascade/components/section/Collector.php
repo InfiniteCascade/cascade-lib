@@ -6,7 +6,8 @@
  */
 
 namespace cascade\components\section;
-
+use cascade\components\web\widgets\section\SideSection;
+use cascade\components\web\widgets\section\ParentSection;
 /**
  * Collector [@doctodo write class description for Collector]
  *
@@ -19,7 +20,7 @@ class Collector extends \infinite\base\collector\Module
      */
     public function getCollectorItemClass()
     {
-        return '\cascade\components\section\Item';
+        return Item::className();
     }
 
     /**
@@ -36,8 +37,8 @@ class Collector extends \infinite\base\collector\Module
     public function getInitialItems()
     {
         return [
-            '_side' => ['object' => ['class' => 'cascade\\components\\web\\widgets\\section\\SideSection'], 'priority' => false],
-            '_parents' => ['object' => ['class' => 'cascade\\components\\web\\widgets\\section\\ParentSection'], 'priority' => 1000000, 'title' => 'Related']
+            '_side' => ['object' => ['class' => SideSection::className()], 'priority' => false],
+            '_parents' => ['object' => ['class' => ParentSection::className()], 'priority' => 1000000, 'title' => 'Related']
         ];
     }
 }

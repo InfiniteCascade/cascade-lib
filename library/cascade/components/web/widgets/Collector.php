@@ -44,7 +44,7 @@ class Collector extends \infinite\base\collector\Module
      */
     public function getCollectorItemClass()
     {
-        return '\cascade\components\web\widgets\Item';
+        return Item::className();
     }
 
     /**

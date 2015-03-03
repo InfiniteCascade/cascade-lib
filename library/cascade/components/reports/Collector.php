@@ -19,7 +19,7 @@ class Collector extends \infinite\base\collector\Module
      */
     public function getCollectorItemClass()
     {
-        return 'cascade\\components\\reports\\Item';
+        return Item::className();
     }
 
     /**

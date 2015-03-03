@@ -25,7 +25,7 @@ class Collector extends \infinite\base\collector\Module
      */
     public function getCollectorItemClass()
     {
-        return 'cascade\\components\\taxonomy\\Item';
+        return Item::className();
     }
 
     /**
@@ -74,6 +74,7 @@ class Collector extends \infinite\base\collector\Module
     {
         if (!Yii::$app->isDbAvailable) { return $component; }
 
+        Yii::beginProfile('Component:::taxonomy::prepare');
         $taxonomyTypeClass = Yii::$app->classes['TaxonomyType'];
         $component['object'] = $taxonomyTypeClass::findOne(['system_id' => $component['systemId']]);
         if (empty($component['object'])) {
@@ -100,6 +101,7 @@ class Collector extends \infinite\base\collector\Module
                 throw new Exception("Couldn't upgrade taxonomy type {$component['systemId']} to version {$component['systemVersion']}");
             }
         }
+        Yii::endProfile('Component:::taxonomy::prepare');
 
         return $component;
     }
