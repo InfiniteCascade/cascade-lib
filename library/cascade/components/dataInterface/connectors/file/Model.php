@@ -17,10 +17,12 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
      * @var __var__keys_type__ __var__keys_description__
      */
     protected $_keys;
+    protected $_meta;
     /**
      * @var __var__children_type__ __var__children_description__
      */
     protected $_children = [];
+
 
     // public $attributeNames = [];
 
@@ -36,6 +38,12 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     public function setId($id)
     {
         return $this->_id = $id;
+    }
+
+    public function setSourceFile($sourceFile)
+    {
+        $this->_meta = Meta::get($this->interface, $sourceFile);
+        return $this;
     }
 
     /**
@@ -71,14 +79,12 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
 
-
     /**
      * Get attributes
      * @return __return_getAttributes_type__ __return_getAttributes_description__
      */
     public function getAttributes()
     {
-        \d("boom!");exit;
         $a = [];
         foreach ($this->meta->attributeKeys as $k) {
             $a[$k] = null;
@@ -101,5 +107,16 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
             return $this->_tableName;
         }
         return static::baseClassName();
+    }
+
+    public static function fetchAll($lazy = false)
+    {
+        $models = [];
+        $baseModel = new static;
+        foreach ($baseModel->meta->sourceFile->getLines($lazy, true) as $line) {
+            $model = $this->populateRecord($line->attributes);
+            $models[] = $model;
+        }
+        return $models;
     }
 }

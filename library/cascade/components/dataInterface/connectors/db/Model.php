@@ -187,7 +187,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
      * @param __param_params_type__ $params __param_params_description__
      * @return __return_find_type__  __return_find_description__
      */
-    public function find($params)
+    protected function find($params)
     {
         $debug = false;
         $q = new Query;

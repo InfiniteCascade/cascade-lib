@@ -120,7 +120,7 @@ abstract class Module extends BaseModule
      */
     public function getForeignModelConfig($tableName, $modelName)
     {
-        $config = ['class' => 'cascade\\components\\dataInterface\\connectors\\db\\Model'];
+        $config = ['class' => Model::className()];
         if (isset($this->foreignModelsConfig[$modelName])) {
             $config = array_merge($config, $this->foreignModelsConfig[$modelName]);
         }

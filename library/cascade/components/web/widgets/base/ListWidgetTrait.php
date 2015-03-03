@@ -197,7 +197,7 @@ trait ListWidgetTrait
 
             return ButtonDropdown::widget([
                     'label' => '',
-                    'containerOptions' => ['class' => 'pull-right'],
+                    'containerOptions' => ['class' => 'pull-right condensed-menu'],
                     'encodeLabel' => false,
                     'dropdown' => [
                         'options' => ['class' => 'pull-right'],

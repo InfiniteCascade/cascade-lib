@@ -33,7 +33,7 @@ class ObjectAccess extends \infinite\security\ObjectAccess
         $actions = Yii::$app->gk->actionsByName;
         $readAction = $actions['read'];
         $publicAro = isset($this->requestors[$publicGroup->primaryKey]) ? $this->requestors[$publicGroup->primaryKey] : false;
-        $primaryAccountAro = isset($this->requestors[$primaryAccount->primaryKey]) ? $this->requestors[$primaryAccount->primaryKey] : false;
+        $primaryAccountAro = ($primaryAccount && isset($this->requestors[$primaryAccount->primaryKey])) ? $this->requestors[$primaryAccount->primaryKey] : false;
 
         if ($publicAro && $publicAro[$readAction->primaryKey]->can($publicAro)) {
             return 'public';

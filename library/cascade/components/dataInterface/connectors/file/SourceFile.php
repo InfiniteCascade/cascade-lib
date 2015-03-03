@@ -43,7 +43,7 @@ class SourceFile extends \infinite\base\Object
         $this->_lines = null;
     }
 
-    public function getLines($lazy = true)
+    public function getLines($lazy = true, $raw = false)
     {
         if (is_null($this->_lines)) {
             $file = $this->filePointer;

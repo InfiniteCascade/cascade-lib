@@ -156,7 +156,7 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         }
         foreach ($this->foreignParents as $modelName => $parents) {
             $dataSource = $this->module->getDataSource($modelName);
-            if (empty($dataSource) || !$dataSource->isReady()) { \d("$modelName isn't ready"); exit; continue; }
+            if (empty($dataSource) || !$dataSource->isReady()) { \d($dataSource); \d("$modelName isn't ready"); exit; continue; }
             foreach ($parents as $relationSet) {
                 // let the handler figure it out
                 if (!($dataItem = $dataSource->getForeignDataItem($relationSet['foreignId']))) {

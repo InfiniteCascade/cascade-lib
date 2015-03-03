@@ -54,6 +54,7 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     {
         return $this->_fileSource;
     }
+
     /**
      * Get foreign data model
      * @param __param_key_type__                  $key __param_key_description__
@@ -63,8 +64,6 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     {
         return false;
     }
-
-
 
     /**
      * Get unmapped foreign keys
@@ -78,9 +77,6 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
 
         return $u;
     }
-
-    
-
     
     /**
      * __method_loadForeignDataItems_description__
@@ -88,8 +84,10 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     protected function loadForeignDataItems()
     {
         if (!$this->fileSource) { \d("boom"); return false; }
+        $foreignModelClass = $this->foreignModelClass;
+
         $lines = $this->fileSource->getLines($this->lazyForeign);
-        echo "Processing {$this->fileSource->id}...";
+        $lineCount = 0;
         foreach ($lines as $id => $line) {
             if ($this->lazyForeign) {
                 $this->createForeignDataItem(null, ['deferredModel' => $line]);
@@ -97,8 +95,9 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
                 $model = $this->createModel($line->id, $line->attributes);
                 $this->createForeignDataItem($model, ['deferredModel' => $line]);
             }
+            $lineCount++;
         }
-        echo "Done!\n";
+        $this->task->addInfo("Processed {$lineCount} lines from {$this->fileSource->id}");
     }
 
     public function createModel($id, $attributes)

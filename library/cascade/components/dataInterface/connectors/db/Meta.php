@@ -59,7 +59,7 @@ class Meta extends \infinite\base\Object
     public static function get($interface, $foreignTable)
     {
         if (!isset(self::$_metas[$foreignTable])) {
-            self::$_metas[$foreignTable] = new Meta($interface, $foreignTable);
+            self::$_metas[$foreignTable] = new static($interface, $foreignTable);
         }
 
         return self::$_metas[$foreignTable];

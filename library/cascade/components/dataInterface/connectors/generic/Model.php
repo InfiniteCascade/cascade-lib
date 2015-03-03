@@ -133,6 +133,7 @@ abstract class Model extends \infinite\base\Object
         }
     }
 
+
     abstract public function primaryKey();
     /**
      * Get primary key

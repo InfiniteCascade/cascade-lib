@@ -33,6 +33,11 @@ abstract class Module extends BaseModule
      */
     protected $_dataSources;
 
+    public function beforeRun()
+    {
+        //\d($this->dataSources);exit;
+        return true;
+    }
 
     public function setSourceFiles($value)
     {
@@ -103,15 +108,15 @@ abstract class Module extends BaseModule
      * @param __param_modelName_type__              $modelName __param_modelName_description__
      * @return __return_getForeignModelConfig_type__ __return_getForeignModelConfig_description__
      */
-    public function getForeignModelConfig($tableName, $modelName)
+    public function getForeignModelConfig($sourceFile, $modelName)
     {
-        $config = ['class' => 'psesd\\cascade\\InterfaceActiveDirectory\\models\\'. $modelName];
+        $config = ['class' => Model::className()];
         if (isset($this->foreignModelsConfig[$modelName])) {
             $config = array_merge($config, $this->foreignModelsConfig[$modelName]);
         }
         $config['modelName'] = $modelName;
+        $config['sourceFile'] = $sourceFile;
         $config['interface'] = $this;
-
         return $config;
     }
 
@@ -147,9 +152,9 @@ abstract class Module extends BaseModule
     {
         if (is_null($this->_models)) {
             $this->_models = [];
-            foreach (['Department', 'Account', 'Program', 'Individual', 'User'] as $tableName) {
-                $modelName = $this->getForeignModelName($tableName);
-                $this->_models[$modelName] = Yii::createObject($this->getForeignModelConfig($tableName, $modelName));
+            foreach ($this->sourceFiles as $sourceFile) {
+                $modelName = $this->getForeignModelName($sourceFile->id);
+                $this->_models[$modelName] = Yii::createObject($this->getForeignModelConfig($sourceFile, $modelName));
             }
         }
 
@@ -158,7 +163,6 @@ abstract class Module extends BaseModule
 
     public function getForeignObject($foreignModelClass, $foreignPrimaryKey)
     {
-        \d($foreignPrimaryKey);
         \d($foreignPrimaryKey);
 
         return false;
