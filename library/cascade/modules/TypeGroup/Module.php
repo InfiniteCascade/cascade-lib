@@ -8,6 +8,7 @@
 namespace cascade\modules\TypeGroup;
 
 use Yii;
+use cascade\models\Group;
 
 /**
  * Module [@doctodo write class description for Module]
@@ -54,7 +55,7 @@ class Module extends \cascade\components\types\Module
      */
     public function getPrimaryModel()
     {
-        return 'cascade\\models\\Group';
+        return Group::className();
     }
 
     /**

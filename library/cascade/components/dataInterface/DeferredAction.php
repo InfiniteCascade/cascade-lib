@@ -43,17 +43,23 @@ class DeferredAction extends \infinite\deferred\components\Action
 
     public function pauseAction()
     {
-    	return $this->log->statusLog->pause();
+		$logModel = $this->getLogModel(true);
+    	return $logModel->statusLog->pause();
     }
 
     public function resumeAction()
     {
-    	return $this->log->statusLog->resume();
+		$logModel = $this->getLogModel(true);
+    	return $logModel->statusLog->resume();
     }
 
 	public function getDescriptor()
 	{
-		return 'Interface Action';
+		$logModel = $this->getLogModel(true);
+		if (empty($logModel) || !isset($logModel->dataInterface)) {
+			return 'Unknown Data Interface';
+		}
+		return 'Interface: ' . $logModel->dataInterface->name;
 	}
 	
 	public function cancel()

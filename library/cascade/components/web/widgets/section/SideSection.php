@@ -6,6 +6,9 @@
  */
 
 namespace cascade\components\web\widgets\section;
+use cascade\components\web\widgets\decorator\EmbeddedDecorator;
+use cascade\components\web\widgets\Item as WidgetItem;
+use cascade\components\web\widgets\base\Header as WidgetHeader;
 
 /**
  * SideSection [@doctodo write class description for SideSection]
@@ -29,7 +32,7 @@ class SideSection extends Section
      */
     public function getWidgetDecoratorClass()
     {
-        return 'cascade\\components\\web\\widgets\\decorator\\EmbeddedDecorator';
+        return EmbeddedDecorator::className();
     }
 
     /**
@@ -61,8 +64,8 @@ class SideSection extends Section
         $default = [];
         $default['_header'] = [
             'object' => [
-                'class' => 'cascade\\components\\web\\widgets\\Item',
-                'widget' => ['class' => 'cascade\\components\\web\\widgets\\base\\Header'],
+                'class' => WidgetItem::className(),
+                'widget' => ['class' => WidgetHeader::className()],
             ]
         ];
         return $default;

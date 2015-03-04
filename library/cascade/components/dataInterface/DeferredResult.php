@@ -17,7 +17,7 @@ use yii\helpers\Url;
  */
 class DeferredResult extends \infinite\deferred\components\Result
 {
-    public $logModel;
+    //public $logModel;
 
     public function package($details = false)
     {
@@ -27,5 +27,14 @@ class DeferredResult extends \infinite\deferred\components\Result
         	$package['actions'][] = ['label' => 'View Log', 'url' => Url::to(['/admin/interface/view-log', 'id' => $logModel->id])];
     	}
         return $package;
+    }
+
+    public function handleException(\Exception $e)
+    {
+        $message = [$e->getFile() .':'. $e->getLine().' '. $e->getMessage()];
+        $message[] = $e->getTraceAsString();
+        $logModel = $this->action->logModel;
+        $logModel->getStatusLog(true)->setCommandOutput(implode(PHP_EOL, $message))->save();
+        return $e;
     }
 }

@@ -8,6 +8,7 @@
 namespace cascade\modules\TypeUser;
 
 use Yii;
+use cascade\models\User;
 
 /**
  * Module [@doctodo write class description for Module]
@@ -59,7 +60,7 @@ class Module extends \cascade\components\types\Module
      */
     public function getPrimaryModel()
     {
-        return 'cascade\\models\\User';
+        return User::className();
     }
 
     /**

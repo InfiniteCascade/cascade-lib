@@ -3,6 +3,7 @@ $lazyLoad = !(defined('IS_CONSOLE') && IS_CONSOLE);
 
 return [
     'class' => 'infinite\\base\\collector\\Component',
+    'cacheTime' => 120,
     'collectors' => [
         'roles' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'roles.php'),
         'identityProviders' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'identityProviders.php'),

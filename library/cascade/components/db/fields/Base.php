@@ -10,6 +10,9 @@ namespace cascade\components\db\fields;
 use Yii;
 use infinite\base\exceptions\Exception;
 use cascade\components\db\fields\formats\Base as BaseFormat;
+use cascade\components\db\fields\formats\Date as DateType;
+use cascade\components\db\fields\formats\Binary as BinaryType;
+use cascade\components\db\fields\formats\Text as TextType;
 
 /**
  * Base [@doctodo write class description for Base]
@@ -125,17 +128,17 @@ abstract class Base extends \infinite\base\Object
         if (isset($this->fieldSchema)) {
             switch ($this->fieldSchema->type) {
                 case 'date':
-                    return 'cascade\\components\\db\\fields\\formats\\Date';
+                    return DateType::className();
                 break;
             }
             switch ($this->fieldSchema->dbType) {
                 case 'tinyint(1)':
-                    return 'cascade\\components\\db\\fields\\formats\\Binary';
+                    return BinaryType::className();
                 break;
             }
         }
 
-        return 'cascade\\components\\db\\fields\\formats\\Text';
+        return TextType::className();
     }
 
     /**

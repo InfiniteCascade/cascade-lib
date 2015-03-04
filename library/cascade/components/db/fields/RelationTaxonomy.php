@@ -7,6 +7,8 @@
 
 namespace cascade\components\db\fields;
 
+use cascade\components\db\fields\formats\RawText;
+
 /**
  * Taxonomy [@doctodo write class description for Taxonomy]
  *
@@ -52,7 +54,7 @@ class RelationTaxonomy extends Base
 
     public function determineFormatClass()
     {
-        return 'cascade\\components\\db\\fields\\formats\\RawText';
+        return RawText::className();
     }
 
     public function getFilterSettings()

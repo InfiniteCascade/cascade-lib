@@ -85,7 +85,7 @@ class Search extends \infinite\base\Component
             $score = (
                 (($r->score * 100) * .2)
                 + (StringHelper::compareStrings($r->descriptor, implode(' ', $query)) * .8)
-                );
+            );
             $r->score = $score;
             if ($score < $this->threshold) {
                 unset($searchResults[$k]);
@@ -98,7 +98,6 @@ class Search extends \infinite\base\Component
         }
         ArrayHelper::multisort($searchResults, 'scoreSort', SORT_DESC);
         $searchResults = array_values($searchResults);
-
         if (empty($searchResults)) {
             return null;
         } elseif (
@@ -129,7 +128,7 @@ class Search extends \infinite\base\Component
             $options['new'] = 'Create New Object';
             $select = false;
             $interactionOptions = ['inputType' => 'select', 'options' => $options];
-            $interactionOptions['details'] = ['query' => $query];
+            $interactionOptions['details'] = $item->foreignObject->attributes;
             $callback = [
                 'callback' => function($response) use (&$select, $options) {
                     if (empty($response)) { 
@@ -147,7 +146,7 @@ class Search extends \infinite\base\Component
                 }
             ];
             Console::output("Waiting for interaction...");
-            if (!$this->dataSource->action->createInteraction('Match Object', $interactionOptions, $callback)) {
+            if (!$this->dataSource->action->createInteraction('Match Object ('. implode(' ', $query) .')', $interactionOptions, $callback)) {
                 return false;
             }
 

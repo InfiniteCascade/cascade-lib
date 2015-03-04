@@ -20,6 +20,26 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
 {
     use CollectedObjectTrait;
 
+    public function __sleep()
+    {
+        $keys = array_keys((array) $this);
+        if ($this->module !== Yii::$app) {
+            throw new \Exception(get_class($this->module));
+        }
+        $this->module = null;
+        return $keys;
+    }
+
+    public function __wakeup()
+    {
+        $this->module = Yii::$app;
+        $this->always();
+    }
+
+    public function always()
+    {
+        return true;
+    }
     /**
      * Get collector name
      */

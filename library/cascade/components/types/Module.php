@@ -129,11 +129,17 @@ abstract class Module extends \cascade\components\base\CollectorModule
      */
     public function init()
     {
+        $this->always();
+        $this->on(self::EVENT_VIEW_OBJECT, [$this, 'subactionHandle']);
+        parent::init();
+    }
+
+    public function always()
+    {
+        parent::always();
         if (isset($this->modelNamespace)) {
             Yii::$app->registerModelAlias(':'. $this->systemId, $this->modelNamespace);
         }
-        $this->on(self::EVENT_VIEW_OBJECT, [$this, 'subactionHandle']);
-        parent::init();
     }
 
     /**
