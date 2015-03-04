@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -9,12 +10,10 @@ namespace cascade\components\dataInterface\connectors\file;
 
 use Yii;
 use yii\helpers\Inflector;
-use infinite\base\exceptions\Exception;
-use cascade\components\dataInterface\Action;
 use cascade\components\dataInterface\connectors\generic\Module as BaseModule;
 
 /**
- * Module [@doctodo write class description for Module]
+ * Module [@doctodo write class description for Module].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -26,7 +25,6 @@ abstract class Module extends BaseModule
      */
     public $dataSourceClass = 'cascade\components\dataInterface\connectors\file\DataSource';
     public $sourceFileClass = 'cascade\components\dataInterface\connectors\file\SourceFile';
-    
 
     /**
      * @var __var__dataSources_type__ __var__dataSources_description__
@@ -41,8 +39,7 @@ abstract class Module extends BaseModule
 
     public function setSourceFiles($value)
     {
-        foreach ($value as $key => $settings)
-        {
+        foreach ($value as $key => $settings) {
             if ($settings === false) {
                 $this->_sourceFiles[$key] = false;
                 continue;
@@ -62,7 +59,6 @@ abstract class Module extends BaseModule
 
     public function loadForeignModels()
     {
-        
     }
 
     public function packageNode($ous, $node)
@@ -77,8 +73,10 @@ abstract class Module extends BaseModule
         $object['email'] = isset($attributes['mail']) ? strtolower(implode(' ', $attributes['mail']->getValues())) : null;
         $object['phone_number'] = isset($attributes['telephoneNumber']) ? strtolower(implode(' ', $attributes['telephoneNumber']->getValues())) : null;
         $object['username'] = isset($attributes['sAMAccountName']) ? strtolower(implode(' ', $attributes['sAMAccountName']->getValues())) : null;
-       
-        if (empty($object['id'])) { return false; }
+
+        if (empty($object['id'])) {
+            return false;
+        }
         $dataSources = $this->dataSources;
         $model = $dataSources['Individual']->registerReturnForeignModel($object);
         if (!$model) {
@@ -93,9 +91,9 @@ abstract class Module extends BaseModule
         foreach ($p['parents'] as $parent) {
             $parent->foreignObject->addChild($model);
         }
+
         return $p;
     }
-
 
     public function getForeignModelsConfig()
     {
@@ -103,9 +101,11 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * Get foreign model config
-     * @param __param_tableName_type__              $tableName __param_tableName_description__
-     * @param __param_modelName_type__              $modelName __param_modelName_description__
+     * Get foreign model config.
+     *
+     * @param __param_tableName_type__ $tableName __param_tableName_description__
+     * @param __param_modelName_type__ $modelName __param_modelName_description__
+     *
      * @return __return_getForeignModelConfig_type__ __return_getForeignModelConfig_description__
      */
     public function getForeignModelConfig($sourceFile, $modelName)
@@ -117,22 +117,27 @@ abstract class Module extends BaseModule
         $config['modelName'] = $modelName;
         $config['sourceFile'] = $sourceFile;
         $config['interface'] = $this;
+
         return $config;
     }
 
     /**
-     * Get foreign model name
-     * @param __param_tableName_type__            $tableName __param_tableName_description__
+     * Get foreign model name.
+     *
+     * @param __param_tableName_type__ $tableName __param_tableName_description__
+     *
      * @return __return_getForeignModelName_type__ __return_getForeignModelName_description__
      */
     public function getForeignModelName($tableName)
     {
         return Inflector::singularize(Inflector::id2camel($tableName, '_'));
     }
-    
+
     /**
-     * Get foreign model
-     * @param __param_model_type__            $model __param_model_description__
+     * Get foreign model.
+     *
+     * @param __param_model_type__ $model __param_model_description__
+     *
      * @return __return_getForeignModel_type__ __return_getForeignModel_description__
      */
     public function getForeignModel($model)
@@ -141,11 +146,13 @@ abstract class Module extends BaseModule
         if (isset($models[$model])) {
             return $models[$model];
         }
+
         return false;
     }
 
     /**
-     * Get foreign models
+     * Get foreign models.
+     *
      * @return __return_getForeignModels_type__ __return_getForeignModels_description__
      */
     public function getForeignModels()

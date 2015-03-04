@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\db\behaviors;
 use yii\helpers\Url;
 
 /**
- * SearchTermResult [@doctodo write class description for SearchTermResult]
+ * SearchTermResult [@doctodo write class description for SearchTermResult].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -34,7 +35,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     protected $_url;
 
     /**
-     * Set url
+     * Set url.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setUrl($value)
@@ -43,7 +45,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * Get url
+     * Get url.
+     *
      * @return __return_getUrl_type__ __return_getUrl_description__
      */
     public function getUrl()
@@ -56,7 +59,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * Get icon
+     * Get icon.
+     *
      * @return __return_getIcon_type__ __return_getIcon_description__
      */
     public function getIcon()
@@ -69,7 +73,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * Set icon
+     * Set icon.
+     *
      * @param __param_icon_type__ $icon __param_icon_description__
      */
     public function setIcon($icon)
@@ -81,7 +86,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * Get object type descriptor
+     * Get object type descriptor.
+     *
      * @return __return_getObjectTypeDescriptor_type__ __return_getObjectTypeDescriptor_description__
      */
     public function getObjectTypeDescriptor()
@@ -94,7 +100,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * Set object type descriptor
+     * Set object type descriptor.
+     *
      * @param __param_type_type__ $type __param_type_description__
      */
     public function setObjectTypeDescriptor($type)
@@ -103,7 +110,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * Get object type
+     * Get object type.
+     *
      * @return __return_getObjectType_type__ __return_getObjectType_description__
      */
     public function getObjectType()
@@ -116,7 +124,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-     * Set object type
+     * Set object type.
+     *
      * @param __param_type_type__ $type __param_type_description__
      */
     public function setObjectType($type)
@@ -125,19 +134,19 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function toArray()
     {
         return array_merge(parent::toArray(), [
             'icon' => $this->icon,
             'url' => $this->url,
-            'objectType' => $this->objectType
+            'objectType' => $this->objectType,
         ]);
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getScore()
     {

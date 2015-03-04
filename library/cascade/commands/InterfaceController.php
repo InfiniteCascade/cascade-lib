@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,6 @@
 namespace cascade\commands;
 
 use Yii;
-
 use infinite\helpers\Console;
 use yii\console\Exception;
 use cascade\components\dataInterface\ConsoleAction;
@@ -17,7 +17,7 @@ use infinite\helpers\ArrayHelper;
 ini_set('memory_limit', -1);
 
 /**
- * InterfaceController [@doctodo write class description for InterfaceController]
+ * InterfaceController [@doctodo write class description for InterfaceController].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -32,7 +32,7 @@ class InterfaceController extends \infinite\console\Controller
      */
     public $verbose;
     /**
-     * __method_actionIndex_description__
+     * __method_actionIndex_description__.
      */
     public function actionIndex()
     {
@@ -40,17 +40,18 @@ class InterfaceController extends \infinite\console\Controller
     }
 
     /**
-     * __method_actionRunOne_description__
+     * __method_actionRunOne_description__.
      */
     public function actionRunOne()
     {
-        $this->out("Run Interface ". $this->dataInterface->object->name, Console::UNDERLINE, Console::FG_GREEN);
+        $this->out("Run Interface ".$this->dataInterface->object->name, Console::UNDERLINE, Console::FG_GREEN);
         $this->hr();
-        $this->dataInterface->run(null, new ConsoleAction);
+        $this->dataInterface->run(null, new ConsoleAction());
     }
 
     /**
-     * Get interface
+     * Get interface.
+     *
      * @return __return_getInterface_type__ __return_getInterface_description__
      */
     public function getDataInterface()
@@ -62,12 +63,15 @@ class InterfaceController extends \infinite\console\Controller
             $interfaces = ArrayHelper::map(Yii::$app->collectors['dataInterfaces']->getAll(), 'systemId', 'object.name');
             $this->dataInterface = $this->select("Choose interface", $interfaces);
         }
+
         return $this->_interface;
     }
 
     /**
-     * Set interface
+     * Set interface.
+     *
      * @param __param_value_type__ $value __param_value_description__
+     *
      * @throws Exception __exception_Exception_description__
      */
     public function setDataInterface($value)
@@ -80,7 +84,7 @@ class InterfaceController extends \infinite\console\Controller
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function options($id)
     {

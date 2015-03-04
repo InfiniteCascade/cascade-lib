@@ -5,5 +5,5 @@ use Yii;
 
 class CreateAction extends \yii\rest\CreateAction
 {
-	use ActionTrait;
+    use ActionTrait;
 }

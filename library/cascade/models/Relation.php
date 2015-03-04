@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,9 +9,7 @@
 namespace cascade\models;
 
 use Yii;
-
 use cascade\components\db\ActiveRecordTrait;
-
 use cascade\components\types\Module as TypeModule;
 use cascade\components\types\Relationship;
 use cascade\components\types\RelationshipEvent;
@@ -26,7 +25,7 @@ class Relation extends \infinite\db\models\Relation
     use ActiveRecordTrait;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -34,30 +33,29 @@ class Relation extends \infinite\db\models\Relation
             'Taxonomy' => [
                 'class' => 'cascade\components\db\behaviors\ActiveTaxonomy',
                 'viaModelClass' => 'RelationTaxonomy',
-                'relationKey' => 'relation_id'
+                'relationKey' => 'relation_id',
             ],
             'PrimaryRelation' => [
-                'class' => 'cascade\components\db\behaviors\PrimaryRelation'
-            ]
+                'class' => 'cascade\components\db\behaviors\PrimaryRelation',
+            ],
         ]);
     }
 
-
     public static function queryBehaviors()
     {
-        return array_merge(parent::queryBehaviors(), 
+        return array_merge(parent::queryBehaviors(),
             [
                 'Taxonomy' => [
                     'class' => 'cascade\components\db\behaviors\QueryTaxonomy',
                     'viaModelClass' => 'RelationTaxonomy',
-                    'relationKey' => 'relation_id'
+                    'relationKey' => 'relation_id',
                 ],
             ]
         );
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function afterSaveRelation($event)
     {
@@ -78,7 +76,7 @@ class Relation extends \infinite\db\models\Relation
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function afterDeleteRelation($event)
     {
@@ -98,7 +96,8 @@ class Relation extends \infinite\db\models\Relation
     }
 
     /**
-     * __method_addFields_description__
+     * __method_addFields_description__.
+     *
      * @param __param_caller_type__       $caller       __param_caller_description__
      * @param __param_fields_type__       $fields       __param_fields_description__
      * @param __param_relationship_type__ $relationship __param_relationship_description__
@@ -122,13 +121,19 @@ class Relation extends \infinite\db\models\Relation
     }
 
     /**
-     * Get relationship
+     * Get relationship.
+     *
      * @return __return_getRelationship_type__ __return_getRelationship_description__
      */
     public function getRelationship()
     {
-        if (!isset($this->parentObject) || !isset($this->parentObject->objectTypeItem)) { return false; }
-        if (!isset($this->childObject) || !isset($this->childObject->objectTypeItem)) { return false; }
+        if (!isset($this->parentObject) || !isset($this->parentObject->objectTypeItem)) {
+            return false;
+        }
+        if (!isset($this->childObject) || !isset($this->childObject->objectTypeItem)) {
+            return false;
+        }
+
         return Relationship::getOne($this->parentObject->objectTypeItem, $this->childObject->objectTypeItem);
     }
 }

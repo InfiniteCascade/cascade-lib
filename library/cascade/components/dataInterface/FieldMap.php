@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,7 @@
 namespace cascade\components\dataInterface;
 
 /**
- * FieldMap [@doctodo write class description for FieldMap]
+ * FieldMap [@doctodo write class description for FieldMap].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -86,13 +87,15 @@ class FieldMap extends \infinite\base\Object
                 }
             }
         }
+
         return false;
     }
 
-
     /**
-     * __method_extractValue_description__
-     * @param __param_foreignModel_type__  $foreignModel __param_foreignModel_description__ [optional]
+     * __method_extractValue_description__.
+     *
+     * @param __param_foreignModel_type__ $foreignModel __param_foreignModel_description__ [optional]
+     *
      * @return __return_extractValue_type__ __return_extractValue_description__
      */
     public function extractValue($caller, $foreignModel = null, $localModel = null)

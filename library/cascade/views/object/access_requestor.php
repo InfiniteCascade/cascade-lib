@@ -29,7 +29,7 @@ echo $this->renderFile('@cascade/views/object/access_role.php', [
     'role' => $roleObject,
     'objectAccess' => $objectAccess,
     'disableFields' => $disableFields,
-    'editable' => $requestorOptions['editable']
+    'editable' => $requestorOptions['editable'],
 ], $this);
 echo Html::tag('h4', $requestorObject->descriptor, ['class' => 'list-group-item-heading']);
 if (!isset($helpText)) {

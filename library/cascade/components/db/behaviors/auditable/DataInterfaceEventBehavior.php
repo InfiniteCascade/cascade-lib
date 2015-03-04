@@ -1,13 +1,12 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
 
 namespace cascade\components\db\behaviors\auditable;
-
-use Yii;
 
 /**
  * ActiveRecord is the model class for table "{{%active_record}}".
@@ -21,7 +20,7 @@ class DataInterfaceEventBehavior extends \infinite\db\behaviors\ActiveRecord
     public function events()
     {
         return [
-            \infinite\db\behaviors\auditable\Event::EVENT_BEFORE_MODEL_SAVE => 'beforeModelSave'
+            \infinite\db\behaviors\auditable\Event::EVENT_BEFORE_MODEL_SAVE => 'beforeModelSave',
         ];
     }
 

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -13,7 +14,7 @@ use cascade\models\Storage;
 use cascade\models\StorageEngine;
 
 /**
- * Handler [@doctodo write class description for Handler]
+ * Handler [@doctodo write class description for Handler].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -27,19 +28,22 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
     public $error;
 
     /**
-     * __method_generateInternal_description__
+     * __method_generateInternal_description__.
+     *
      * @param __param_item_type__ $item __param_item_description__
      */
     abstract public function generateInternal($item);
     /**
-     * __method_validate_description__
+     * __method_validate_description__.
+     *
      * @param cascade\models\StorageEngine $engine    __param_engine_description__
      * @param __param_model_type__         $model     __param_model_description__
      * @param __param_attribute_type__     $attribute __param_attribute_description__
      */
     abstract public function validate(StorageEngine $engine, $model, $attribute);
     /**
-     * __method_handleSave_description__
+     * __method_handleSave_description__.
+     *
      * @param cascade\models\Storage   $storage   __param_storage_description__
      * @param __param_model_type__     $model     __param_model_description__
      * @param __param_attribute_type__ $attribute __param_attribute_description__
@@ -49,8 +53,10 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
     abstract public function serve(Storage $storage);
 
     /**
-     * __method_generate_description__
-     * @param __param_item_type__      $item __param_item_description__
+     * __method_generate_description__.
+     *
+     * @param __param_item_type__ $item __param_item_description__
+     *
      * @return __return_generate_type__ __return_generate_description__
      */
     public function generate($item)
@@ -64,7 +70,8 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
     }
 
     /**
-     * __method_prepareRendered_description__
+     * __method_prepareRendered_description__.
+     *
      * @param __param_rendered_type__ $rendered __param_rendered_description__
      * @param __param_item_type__     $item     __param_item_description__
      */
@@ -73,7 +80,8 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
     }
 
     /**
-     * __method_hasFile_description__
+     * __method_hasFile_description__.
+     *
      * @return __return_hasFile_type__ __return_hasFile_description__
      */
     public function hasFile()
@@ -82,8 +90,10 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
     }
 
     /**
-     * __method_prepareStorage_description__
-     * @param cascade\models\StorageEngine   $engine __param_engine_description__
+     * __method_prepareStorage_description__.
+     *
+     * @param cascade\models\StorageEngine $engine __param_engine_description__
+     *
      * @return __return_prepareStorage_type__ __return_prepareStorage_description__
      */
     protected function prepareStorage(StorageEngine $engine)
@@ -94,10 +104,12 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
     }
 
     /**
-     * __method_afterDelete_description__
+     * __method_afterDelete_description__.
+     *
      * @param cascade\models\StorageEngine $engine __param_engine_description__
      * @param cascade\models\Storage       $model  __param_model_description__
-     * @return __return_afterDelete_type__  __return_afterDelete_description__
+     *
+     * @return __return_afterDelete_type__ __return_afterDelete_description__
      */
     public function afterDelete(StorageEngine $engine, Storage $model)
     {
@@ -105,11 +117,13 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
     }
 
     /**
-     * __method_beforeSave_description__
+     * __method_beforeSave_description__.
+     *
      * @param cascade\models\StorageEngine $engine    __param_engine_description__
      * @param __param_model_type__         $model     __param_model_description__
      * @param __param_attribute_type__     $attribute __param_attribute_description__
-     * @return __return_beforeSave_type__   __return_beforeSave_description__
+     *
+     * @return __return_beforeSave_type__ __return_beforeSave_description__
      */
     public function beforeSave(StorageEngine $engine, $model, $attribute)
     {
@@ -126,8 +140,10 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
     }
 
     /**
-     * __method_beforeSetStorage_description__
-     * @param __param_value_type__             $value __param_value_description__
+     * __method_beforeSetStorage_description__.
+     *
+     * @param __param_value_type__ $value __param_value_description__
+     *
      * @return __return_beforeSetStorage_type__ __return_beforeSetStorage_description__
      */
     public function beforeSetStorage($value)

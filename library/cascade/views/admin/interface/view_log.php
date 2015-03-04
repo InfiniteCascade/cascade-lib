@@ -1,5 +1,6 @@
 <?php
 use infinite\helpers\Html;
+
 \infinite\web\assetBundles\LogAsset::register($this);
 $interfaceModel = $dataInterfaceLog->dataInterface;
 $this->title = "View Data Interface Log";
@@ -9,8 +10,6 @@ $this->params['breadcrumbs'][] = ['label' => $interfaceModel->name, 'url' => ['a
 
 $this->params['breadcrumbs'][] = $this->title;
 
-
 echo Html::tag('div', '', [
     'data-log' => json_encode($dataInterfaceLog->dataPackage),
 ]);
-

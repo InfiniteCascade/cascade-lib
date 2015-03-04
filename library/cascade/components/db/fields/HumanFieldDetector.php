@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,13 +12,13 @@ use infinite\helpers\Match;
 use yii\db\ColumnSchema;
 
 /**
- * HumanFieldDetector [@doctodo write class description for HumanFieldDetector]
+ * HumanFieldDetector [@doctodo write class description for HumanFieldDetector].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class HumanFieldDetector extends \infinite\base\Object
 {
-    /**
+    /*
      * @var __var__machineTests_type__ __var__machineTests_description__
      */
     static $_machineTests = [
@@ -31,12 +32,12 @@ class HumanFieldDetector extends \infinite\base\Object
         'archived',
     ];
 
-    /**
+    /*
      * __method_test_description__
      * @param yii\db\ColumnSchema $column __param_column_description__
      * @return unknown
      */
-    static function test(ColumnSchema $column)
+    public static function test(ColumnSchema $column)
     {
         foreach (static::$_machineTests as $test) {
             $t = new Match($test);
@@ -48,12 +49,12 @@ class HumanFieldDetector extends \infinite\base\Object
         return true;
     }
 
-    /**
+    /*
      * __method_registerMachineTest_description__
      * @param unknown $test
      * @return unknown
      */
-    static function registerMachineTest($test)
+    public static function registerMachineTest($test)
     {
         if (is_array($test)) {
             foreach ($test as $t) {
@@ -63,7 +64,7 @@ class HumanFieldDetector extends \infinite\base\Object
             return true;
         }
         self::$_machineTests[] = $test;
+
         return true;
     }
-
 }

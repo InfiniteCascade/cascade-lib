@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,9 +11,10 @@ namespace cascade\components\web\assetBundles;
 use yii\web\AssetBundle;
 
 /**
- * AppAsset [@doctodo write class description for AppAsset]
+ * AppAsset [@doctodo write class description for AppAsset].
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
+ *
  * @since 2.0
  */
 class AppAsset extends AssetBundle
@@ -30,7 +32,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/cascade.editInPlace.css',
-        'css/cascade.activityFeed.css'
+        'css/cascade.activityFeed.css',
     ];
     /**
      * @inheritdoc
@@ -44,7 +46,7 @@ class AppAsset extends AssetBundle
         'js/cascade.infiniteFilter.js',
         'js/cascade.editInPlace.js', // maybe move this to object? not sure if it will be used outside object view,
         'js/cascade.activityFeed.js',
-        'js/cascade.types.js'
+        'js/cascade.types.js',
     ];
     /**
      * @inheritdoc
@@ -57,6 +59,6 @@ class AppAsset extends AssetBundle
         'infinite\web\assetBundles\TimeAgoAsset',
         'infinite\web\assetBundles\BootstrapTypeaheadAsset',
         'cascade\components\web\assetBundles\PurlAsset',
-        'cascade\components\web\assetBundles\VibeAsset'
+        'cascade\components\web\assetBundles\VibeAsset',
     ];
 }

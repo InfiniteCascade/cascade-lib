@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,15 +9,13 @@
 namespace cascade\components\web\form;
 
 use Yii;
-
 use cascade\components\db\fields\Model as ModelField;
 use cascade\components\db\fields\Relation as RelationField;
-
 use infinite\web\grid\Grid;
 use infinite\helpers\Html;
 
 /**
- * Segment [@doctodo write class description for Segment]
+ * Segment [@doctodo write class description for Segment].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -61,7 +60,7 @@ class Segment extends FormObject
     protected $_fields;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {
@@ -75,7 +74,8 @@ class Segment extends FormObject
     }
 
     /**
-     * Set model
+     * Set model.
+     *
      * @param __param_model_type__ $model __param_model_description__
      */
     public function setModel($model)
@@ -84,7 +84,8 @@ class Segment extends FormObject
     }
 
     /**
-     * Set name
+     * Set name.
+     *
      * @param __param_name_type__ $name __param_name_description__
      */
     public function setName($name)
@@ -93,8 +94,10 @@ class Segment extends FormObject
     }
 
     /**
-     * Set settings
+     * Set settings.
+     *
      * @param __param_settings_type__ $settings __param_settings_description__
+     *
      * @throws Exception __exception_Exception_description__
      */
     public function setSettings($settings)
@@ -112,7 +115,8 @@ class Segment extends FormObject
     }
 
     /**
-     * Get model
+     * Get model.
+     *
      * @return unknown
      */
     public function getModel()
@@ -121,7 +125,8 @@ class Segment extends FormObject
     }
 
     /**
-     * Get settings
+     * Get settings.
+     *
      * @return unknown
      */
     public function getSettings()
@@ -134,7 +139,8 @@ class Segment extends FormObject
     }
 
     /**
-     * Get name
+     * Get name.
+     *
      * @return unknown
      */
     public function getName()
@@ -143,7 +149,7 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_output_description__
+     * __method_output_description__.
      */
     public function output()
     {
@@ -151,7 +157,8 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_hasFile_description__
+     * __method_hasFile_description__.
+     *
      * @return __return_hasFile_type__ __return_hasFile_description__
      */
     public function hasFile()
@@ -170,7 +177,8 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_generate_description__
+     * __method_generate_description__.
+     *
      * @return unknown
      */
     public function generate()
@@ -190,7 +198,8 @@ class Segment extends FormObject
     }
 
     /**
-     * Get fields
+     * Get fields.
+     *
      * @return unknown
      */
     protected function getFields()
@@ -223,7 +232,7 @@ class Segment extends FormObject
             $requiredFields = true;
             $fieldsTemplate = false;
             if (!is_null($this->relationField)) {
-                $fieldName = $this->relationField->modelRole .':'. $this->relationField->baseModel->objectType->systemId;
+                $fieldName = $this->relationField->modelRole.':'.$this->relationField->baseModel->objectType->systemId;
                 if (isset($fields[$fieldName])) {
                     $fields[$fieldName]->baseModel = $this->relationField->baseModel;
                     $fields[$fieldName]->model = $this->relationField->model;
@@ -247,9 +256,13 @@ class Segment extends FormObject
                 } elseif (!isset($this->_settings['fields'])) {
                     $fieldsTemplate = [];
                     foreach ($fields as $fieldName => $field) {
-                        if (!$field->human) { continue; }
+                        if (!$field->human) {
+                            continue;
+                        }
                         //if (!$field->required) { continue; }
-                        if (!($field instanceof ModelField)) { continue; }
+                        if (!($field instanceof ModelField)) {
+                            continue;
+                        }
                         $fieldsTemplate[] = [$fieldName];
                     }
                 } else {
@@ -260,11 +273,18 @@ class Segment extends FormObject
                 $this->_settings['fields'] = [];
                 foreach ($fields as $fieldKey => $field) {
                     if (!is_object($field->model)) {
-                        \d($field);exit;
+                        \d($field);
+                        exit;
                     }
-                    if ($field->model->isNewRecord) { continue; }
-                    if ($field->human) { continue; }
-                    if (!$field->required) { continue; }
+                    if ($field->model->isNewRecord) {
+                        continue;
+                    }
+                    if ($field->human) {
+                        continue;
+                    }
+                    if (!$field->required) {
+                        continue;
+                    }
                     $this->grid->prepend($field->formField);
                 }
                 $fields['_moduleHandler']->formField->owner = $this;
@@ -286,7 +306,9 @@ class Segment extends FormObject
                     }
 
                     foreach ($requiredFields as $fieldName => $field) {
-                        if (in_array($fieldName, $this->_settings['ignoreFields'])) { continue; }
+                        if (in_array($fieldName, $this->_settings['ignoreFields'])) {
+                            continue;
+                        }
                         $fieldsTemplate[] = [$fieldName];
                     }
                 }
@@ -308,7 +330,10 @@ class Segment extends FormObject
                             continue;
                         }
 
-                        if (!isset($fields[$fieldKey])) { \d([$fieldKey, array_keys($fields)]); continue; }
+                        if (!isset($fields[$fieldKey])) {
+                            \d([$fieldKey, array_keys($fields)]);
+                            continue;
+                        }
 
                         $this->_fields[$fieldKey] = $fields[$fieldKey];
                         if ($fieldKey === false) {
@@ -331,16 +356,16 @@ class Segment extends FormObject
     }
 
     /**
-     * Get grid
+     * Get grid.
+     *
      * @return __return_getGrid_type__ __return_getGrid_description__
      */
     public function getGrid()
     {
         if (is_null($this->_grid)) {
-            $this->_grid = new Grid;
+            $this->_grid = new Grid();
         }
 
         return $this->_grid;
     }
-
 }

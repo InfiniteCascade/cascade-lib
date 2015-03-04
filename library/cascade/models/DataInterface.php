@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -18,7 +19,6 @@ use Yii;
  * @property string $last_sync
  * @property string $created
  * @property string $modified
- *
  * @property Registry $id
  * @property DataInterfaceLog[] $dataInterfaceLogs
  * @property KeyTranslation[] $keyTranslations
@@ -44,13 +44,13 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
             'Registry' => [
-                'class' => 'infinite\db\behaviors\Registry'
+                'class' => 'infinite\db\behaviors\Registry',
             ],
         ]);
     }
@@ -64,7 +64,7 @@ class DataInterface extends \cascade\components\db\ActiveRecord
             [['system_id'], 'required'],
             [['last_sync', 'created', 'modified'], 'safe'],
             [['id'], 'string', 'max' => 36],
-            [['name', 'system_id'], 'string', 'max' => 255]
+            [['name', 'system_id'], 'string', 'max' => 255],
         ];
     }
 
@@ -84,7 +84,8 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get id
+     * Get id.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getId()
@@ -93,7 +94,8 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get data interface logs
+     * Get data interface logs.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getDataInterfaceLogs()
@@ -107,7 +109,8 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get key translations
+     * Get key translations.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getKeyTranslations()
@@ -122,6 +125,7 @@ class DataInterface extends \cascade\components\db\ActiveRecord
         if ($this->hasIcon()) {
             $p['icon'] = $this->getIcon();
         }
+
         return $p;
     }
 
@@ -138,10 +142,9 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     public function getIcon()
     {
         return [
-            'class' => 'fa fa-arrows-h'
+            'class' => 'fa fa-arrows-h',
         ];
     }
-
 
     public function estimateDuration()
     {
@@ -164,11 +167,8 @@ class DataInterface extends \cascade\components\db\ActiveRecord
         return ($average + $max) / 2;
     }
 
-
-
     public function getRelatedLogQuery()
     {
         return DataInterfaceLog::find()->where(['data_interface_id' => $this->primaryKey]);
     }
-
 }

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,7 @@
 namespace cascade\components\storageHandlers;
 
 /**
- * Collector [@doctodo write class description for Collector]
+ * Collector [@doctodo write class description for Collector].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -20,7 +21,7 @@ class Collector extends \infinite\base\collector\Module
     protected $_initialItems = [];
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getCollectorItemClass()
     {
@@ -28,7 +29,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getModulePrefix()
     {
@@ -36,7 +37,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getInitialItems()
     {
@@ -44,7 +45,8 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * Set initial items
+     * Set initial items.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setInitialItems($value)

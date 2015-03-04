@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -12,7 +13,7 @@ use cascade\components\db\ActiveRecord;
 use yii\helpers\Inflector;
 
 /**
- * DataSource [@doctodo write class description for DataSource]
+ * DataSource [@doctodo write class description for DataSource].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -76,7 +77,6 @@ abstract class DataSource extends \infinite\base\Component
      */
     public $baseAttributes = [];
 
-
     /**
      * @var __var__localModel_type__ __var__localModel_description__
      */
@@ -125,7 +125,7 @@ abstract class DataSource extends \infinite\base\Component
      */
     protected $_countRemaining;
 
-    /**
+    /*
      * @var __var_defaultSettings_type__ __var_defaultSettings_description__
      */
     static $defaultSettings = [
@@ -135,13 +135,14 @@ abstract class DataSource extends \infinite\base\Component
         'deleteLocal' => false,
         'deleteForeign' => false,
         'foreignPullParams' => [],
-        'universalKey' => false
+        'universalKey' => false,
     ];
 
     // abstract public function handleLocal($action, DataItem $dataItem, DataItem $parent = null);
 
     /**
-     * __method_isReady_description__
+     * __method_isReady_description__.
+     *
      * @return __return_isReady_type__ __return_isReady_description__
      */
     public function isReady()
@@ -150,7 +151,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_clearCaches_description__
+     * __method_clearCaches_description__.
      */
     public function clearCaches()
     {
@@ -165,12 +166,15 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Get total
+     * Get total.
+     *
      * @return __return_getTotal_type__ __return_getTotal_description__
      */
     public function getTotal()
     {
-        if (!$this->isReady()) { return 0; }
+        if (!$this->isReady()) {
+            return 0;
+        }
         if (is_null($this->_countTotal)) {
             $this->_countTotal = 0;
             if (in_array($this->settings['direction'], ['to_local', 'both'])) {
@@ -186,7 +190,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Get done
+     * Get done.
+     *
      * @return __return_getDone_type__ __return_getDone_description__
      */
     public function getDone()
@@ -195,18 +200,20 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Get dummy local model
+     * Get dummy local model.
+     *
      * @return __return_getDummyLocalModel_type__ __return_getDummyLocalModel_description__
      */
     public function getDummyLocalModel()
     {
         $localModelClass = $this->localModel;
 
-        return new $localModelClass;
+        return new $localModelClass();
     }
 
     /**
-     * Get remaining
+     * Get remaining.
+     *
      * @return __return_getRemaining_type__ __return_getRemaining_description__
      */
     public function getRemaining()
@@ -219,7 +226,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_reduceRemaining_description__
+     * __method_reduceRemaining_description__.
+     *
      * @param cascade\components\dataInterface\DataItem $dataItem __param_dataItem_description__
      */
     public function reduceRemaining(DataItem $dataItem)
@@ -238,7 +246,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Get foreign data items
+     * Get foreign data items.
+     *
      * @return __return_getForeignDataItems_type__ __return_getForeignDataItems_description__
      */
     public function getForeignDataItems()
@@ -252,7 +261,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Get local data items
+     * Get local data items.
+     *
      * @return __return_getLocalDataItems_type__ __return_getLocalDataItems_description__
      */
     public function getLocalDataItems()
@@ -265,7 +275,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Get handled local data items
+     * Get handled local data items.
+     *
      * @return __return_getHandledLocalDataItems_type__ __return_getHandledLocalDataItems_description__
      */
     public function getHandledLocalDataItems()
@@ -300,14 +311,19 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_run_description__
+     * __method_run_description__.
+     *
      * @return __return_run_type__ __return_run_description__
      */
     public function run()
     {
         $task = $this->task;
         $task->start();
-        if (!$this->isReady()) { $task->end(); return false; }
+        if (!$this->isReady()) {
+            $task->end();
+
+            return false;
+        }
         $action = $this->action;
         $this->settings = $action->config;
 
@@ -327,11 +343,13 @@ abstract class DataSource extends \infinite\base\Component
             }
         }
         $task->end();
+
         return true;
     }
 
     /**
-     * Get data interface
+     * Get data interface.
+     *
      * @return __return_getDataInterface_type__ __return_getDataInterface_description__
      */
     public function getDataInterface()
@@ -340,8 +358,10 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Set settings
-     * @param __param_settings_type__     $settings __param_settings_description__
+     * Set settings.
+     *
+     * @param __param_settings_type__ $settings __param_settings_description__
+     *
      * @return __return_setSettings_type__ __return_setSettings_description__
      */
     public function setSettings($settings)
@@ -349,14 +369,17 @@ abstract class DataSource extends \infinite\base\Component
         if (is_null($this->_settings)) {
             $this->_settings = self::$defaultSettings;
         }
-        if (!is_array($settings)) { return true; }
+        if (!is_array($settings)) {
+            return true;
+        }
         $this->_settings = array_merge($this->_settings, $settings);
 
         return true;
     }
 
     /**
-     * Get settings
+     * Get settings.
+     *
      * @return __return_getSettings_type__ __return_getSettings_description__
      */
     public function getSettings()
@@ -369,7 +392,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Get search
+     * Get search.
+     *
      * @return __return_getSearch_type__ __return_getSearch_description__
      */
     public function getSearch()
@@ -378,7 +402,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Set search
+     * Set search.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setSearch($value)
@@ -394,7 +419,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Get local model
+     * Get local model.
+     *
      * @return __return_getLocalModel_type__ __return_getLocalModel_description__
      */
     public function getLocalModel()
@@ -403,7 +429,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Set local model
+     * Set local model.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setLocalModel($value)
@@ -412,7 +439,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Set foreign model
+     * Set foreign model.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setForeignModel($value)
@@ -421,7 +449,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Get foreign model
+     * Get foreign model.
+     *
      * @return __return_getForeignModel_type__ __return_getForeignModel_description__
      */
     public function getForeignModel()
@@ -430,13 +459,16 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Set map
-     * @param __param_m_type__       $m __param_m_description__
+     * Set map.
+     *
+     * @param __param_m_type__ $m __param_m_description__
+     *
      * @return __return_setMap_type__ __return_setMap_description__
      */
     public function setMap($m)
     {
         $this->_map = $this->buildMap($m);
+
         return true;
     }
 
@@ -452,11 +484,13 @@ abstract class DataSource extends \infinite\base\Component
             $fieldMap = Yii::createObject($fieldMap);
             $map[] = $fieldMap;
         }
+
         return $map;
     }
 
     /**
-     * Get map
+     * Get map.
+     *
      * @return __return_getMap_type__ __return_getMap_description__
      */
     public function getMap()
@@ -465,7 +499,8 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * Get action
+     * Get action.
+     *
      * @return __return_getAction_type__ __return_getAction_description__
      */
     public function getAction()

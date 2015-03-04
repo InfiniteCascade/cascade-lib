@@ -1,13 +1,12 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
 
 namespace cascade\components\section;
-
-use Yii;
 
 use yii\helpers\Inflector;
 use cascade\components\helpers\StringHelper;
@@ -33,7 +32,8 @@ trait SectionTrait
     protected $_priority = 0;
 
     /**
-     * Get priority
+     * Get priority.
+     *
      * @return __return_getPriority_type__ __return_getPriority_description__
      */
     public function getPriority()
@@ -44,11 +44,13 @@ trait SectionTrait
                 return $this->_priority + $this->object->singleWidget->content->priorityAdjust;
             }
         }
+
         return $this->_priority;
     }
 
     /**
-     * Set priority
+     * Set priority.
+     *
      * @param __param_priority_type__ $priority __param_priority_description__
      */
     public function setPriority($priority)
@@ -75,8 +77,6 @@ trait SectionTrait
     }
 
     /**
-     *
-     *
      * @return unknown
      */
     public function getTitle()
@@ -94,14 +94,12 @@ trait SectionTrait
     }
 
     /**
+     * @param unknown $parent (optional)
      *
-     *
-     * @param  unknown $parent (optional)
      * @return unknown
      */
     protected function defaultItems($parent = null)
     {
         return [];
     }
-
 }

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,10 +9,8 @@
 namespace cascade\models;
 
 use Yii;
-
 use cascade\components\db\ActiveRecordTrait as BaseActiveRecordTrait;
 use cascade\components\types\ActiveRecordTrait as TypesActiveRecordTrait;
-
 use infinite\base\exceptions\Exception;
 
 /**
@@ -65,33 +64,38 @@ class User extends \infinite\db\models\User
     {
         return isset($this->icon) && $this->icon;
     }
-    
+
     public function getIcon($size = 40)
     {
         if (is_null($this->_icon)) {
             $profilePhoto = $this->getPhotoUrl($size);
             if ($profilePhoto) {
                 return [
-                    'img' => $profilePhoto
+                    'img' => $profilePhoto,
                 ];
             }
         }
+
         return $this->_icon;
     }
 
     /**
-     * __method_systemUser_description__
+     * __method_systemUser_description__.
+     *
      * @return __return_systemUser_type__ __return_systemUser_description__
+     *
      * @throws Exception __exception_Exception_description__
      */
     public static function systemUser()
     {
-        $user = self::findOne([self::tableName() .'.'. 'email' => self::SYSTEM_EMAIL], false);
+        $user = self::findOne([self::tableName().'.'.'email' => self::SYSTEM_EMAIL], false);
         if (empty($user)) {
             $superGroup = Group::find()->disableAccessCheck()->where(['system' => 'super_administrators'])->one();
-            if (!$superGroup) { return false; }
+            if (!$superGroup) {
+                return false;
+            }
             $userClass = self::className();
-            $user = new $userClass;
+            $user = new $userClass();
             $user->scenario = 'creation';
             $user->first_name = 'System';
             $user->last_name = 'User';
@@ -110,7 +114,8 @@ class User extends \infinite\db\models\User
     }
 
     /**
-     * Get individual
+     * Get individual.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getIndividual()
@@ -129,7 +134,7 @@ class User extends \infinite\db\models\User
 
     public function getPhotoUrl($size = 200)
     {
-        if (!empty($this->individual) 
+        if (!empty($this->individual)
             && $this->individual->getBehavior('Photo') !== null) {
             $indPhoto = $this->individual->getPhotoUrl($size);
             if ($indPhoto) {
@@ -139,6 +144,7 @@ class User extends \infinite\db\models\User
         if ($this->getBehavior('Photo') !== null) {
             return $this->getBehavior('Photo')->getPhotoUrl($size);
         }
+
         return false;
     }
 
@@ -147,11 +153,13 @@ class User extends \infinite\db\models\User
         if (!empty($this->email) && substr($this->email, -6) !== ".local") {
             return $this->email;
         }
+
         return false;
     }
-    
+
     /**
-     * __method_guessIndividual_description__
+     * __method_guessIndividual_description__.
+     *
      * @return __return_guessIndividual_type__ __return_guessIndividual_description__
      */
     public function guessIndividual()

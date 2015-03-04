@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,7 +12,7 @@ use Yii;
 use yii\db\Query;
 
 /**
- * Model [@doctodo write class description for Model]
+ * Model [@doctodo write class description for Model].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -31,7 +32,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     protected $_keys;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {
@@ -44,13 +45,13 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
         Yii::configure($this->_meta, $metaConfig);
     }
 
-
     public function hasAttribute($attribute)
     {
         return isset($this->meta) && is_object($this->meta) && $this->meta->hasAttribute($attribute);
     }
     /**
-     * Set table name
+     * Set table name.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setTableName($value)
@@ -59,7 +60,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * Get children
+     * Get children.
+     *
      * @return __return_getChildren_type__ __return_getChildren_description__
      */
     public function getChildren()
@@ -69,7 +71,11 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
             // for this application, there is no distinction between hasOne and hasMany on the database level
             $hasMany = array_merge($this->meta->hasMany, $this->meta->hasOne);
             foreach ($hasMany as $r) {
-                if (!isset($r['foreignModel'])) { var_dump($r);exit; continue; }
+                if (!isset($r['foreignModel'])) {
+                    var_dump($r);
+                    exit;
+                    continue;
+                }
                 if (is_string($r['foreignModel'])
                     && (!isset($this->interface->foreignModels[$r['foreignModel']])
                     || !($r['foreignModel'] = $this->interface->foreignModels[$r['foreignModel']]))) {
@@ -80,13 +86,13 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
                 $where = isset($r['where']) ? $r['where'] : [];
                 if (!empty($where)) {
-                    $where = ['and', $where, $r['foreignKey'] .'=:foreignKeyId'];
+                    $where = ['and', $where, $r['foreignKey'].'=:foreignKeyId'];
                 } else {
-                    $where = $r['foreignKey'] .'=:foreignKeyId';
+                    $where = $r['foreignKey'].'=:foreignKeyId';
                 }
                 $query = [
                     'where' => $where,
-                    'params' => $params
+                    'params' => $params,
                 ];
                 if (isset($r['join'])) {
                     $query['join'] = $r['join'];
@@ -100,7 +106,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
         return $this->_children;
     }
     /**
-     * __method_primaryKey_description__
+     * __method_primaryKey_description__.
+     *
      * @return __return_primaryKey_type__ __return_primaryKey_description__
      */
     public function primaryKey()
@@ -119,7 +126,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * Get primary key
+     * Get primary key.
+     *
      * @return __return_getPrimaryKey_type__ __return_getPrimaryKey_description__
      */
     public function getPrimaryKey()
@@ -138,16 +146,15 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
             return implode('.', $ppk);
         }
         if (!isset($this->attributes[$pk])) {
-            return null;
+            return;
         }
 
         return $this->attributes[$pk];
     }
 
-
-
     /**
-     * Get attributes
+     * Get attributes.
+     *
      * @return __return_getAttributes_type__ __return_getAttributes_description__
      */
     public function getAttributes()
@@ -164,7 +171,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * Get meta
+     * Get meta.
+     *
      * @return __return_getMeta_type__ __return_getMeta_description__
      */
     public function getMeta()
@@ -173,7 +181,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * Set meta
+     * Set meta.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setMeta($value)
@@ -181,16 +190,17 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
         $this->_meta = $value;
     }
 
-
     /**
-     * __method_find_description__
+     * __method_find_description__.
+     *
      * @param __param_params_type__ $params __param_params_description__
-     * @return __return_find_type__  __return_find_description__
+     *
+     * @return __return_find_type__ __return_find_description__
      */
     protected function find($params)
     {
         $debug = false;
-        $q = new Query;
+        $q = new Query();
         $q->select('*');
         $q->from($this->_tableName);
         foreach ($params as $k => $v) {
@@ -219,8 +229,10 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * __method_findAll_description__
-     * @param array                   $params __param_params_description__ [optional]
+     * __method_findAll_description__.
+     *
+     * @param array $params __param_params_description__ [optional]
+     *
      * @return __return_findAll_type__ __return_findAll_description__
      */
     public function findAll($params = [])
@@ -231,8 +243,10 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * __method_findOne_description__
-     * @param array                   $params __param_params_description__ [optional]
+     * __method_findOne_description__.
+     *
+     * @param array $params __param_params_description__ [optional]
+     *
      * @return __return_findOne_type__ __return_findOne_description__
      */
     public function findOne($params = [])
@@ -241,25 +255,27 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * __method_findPrimaryKeys_description__
-     * @param array                           $params __param_params_description__ [optional]
+     * __method_findPrimaryKeys_description__.
+     *
+     * @param array $params __param_params_description__ [optional]
+     *
      * @return __return_findPrimaryKeys_type__ __return_findPrimaryKeys_description__
      */
     public function findPrimaryKeys($params = [])
     {
         $q = $this->find($params);
-        $q->select($this->_tableName .'.'. $this->meta->schema->primaryKey[0]);
+        $q->select($this->_tableName.'.'.$this->meta->schema->primaryKey[0]);
 
         return $q->column($this->interface->db);
     }
 
     /**
-     * Get table name
+     * Get table name.
+     *
      * @return __return_getTableName_type__ __return_getTableName_description__
      */
     public function getTableName()
     {
         return $this->_tableName;
     }
-
 }

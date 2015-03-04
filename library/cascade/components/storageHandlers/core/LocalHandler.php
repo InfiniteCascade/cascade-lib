@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,6 @@
 namespace cascade\components\storageHandlers\core;
 
 use Yii;
-
 use infinite\base\FileInterface;
 use yii\helpers\FileHelper;
 use infinite\base\exceptions\Exception;
@@ -17,7 +17,8 @@ use cascade\models\Storage;
 use cascade\models\StorageEngine;
 
 class LocalHandler extends \cascade\components\storageHandlers\Handler
-    implements \cascade\components\storageHandlers\UploadInterface {
+    implements \cascade\components\storageHandlers\UploadInterface
+{
     public $localFileClass = 'infinite\base\File';
     public $bucketFormat = '{year}.{month}';
     protected $_baseDir;
@@ -70,8 +71,11 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
     public function serve(Storage $storage)
     {
         $path = $this->getPath($storage);
-        if (!file_exists($path)) { return false; }
+        if (!file_exists($path)) {
+            return false;
+        }
         Yii::$app->response->sendFile($path, trim($storage->file_name), $storage->type);
+
         return true;
     }
 
@@ -93,7 +97,7 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
     public function getPath(Storage $model)
     {
         $baseKey = explode('.', $model->storage_key);
-        $dirPath = $this->baseDir . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $baseKey);
+        $dirPath = $this->baseDir.DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, $baseKey);
         if (!is_dir($dirPath)) {
             @mkdir($dirPath, 0755, true);
         }
@@ -103,7 +107,7 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
             return false;
         }
 
-        return $dirPath . DIRECTORY_SEPARATOR . $model->primaryKey;
+        return $dirPath.DIRECTORY_SEPARATOR.$model->primaryKey;
     }
 
     public function handleUpload(Storage $storage, $model, $attribute)
@@ -114,7 +118,7 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         $package = [];
         $baseKey = $this->buildKey();
         $package['storage_key'] = implode('.', $baseKey);
-        $dirPath = $this->baseDir . DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $baseKey);
+        $dirPath = $this->baseDir.DIRECTORY_SEPARATOR.implode(DIRECTORY_SEPARATOR, $baseKey);
         if (!is_dir($dirPath)) {
             @mkdir($dirPath, 0755, true);
         }
@@ -123,7 +127,7 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
 
             return false;
         }
-        $path = $dirPath . DIRECTORY_SEPARATOR . $storage->primaryKey;
+        $path = $dirPath.DIRECTORY_SEPARATOR.$storage->primaryKey;
         $file = $model->{$attribute};
         if ($file->saveAs($path) && file_exists($path)) {
             $package['file_name'] = $file->name;

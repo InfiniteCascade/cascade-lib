@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\web\themes;
 use Yii;
 
 /**
- * Collector [@doctodo write class description for Collector]
+ * Collector [@doctodo write class description for Collector].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -30,7 +31,7 @@ class Collector extends \infinite\base\collector\Module
     protected $_theme;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getCollectorItemClass()
     {
@@ -38,7 +39,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getModulePrefix()
     {
@@ -46,8 +47,10 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * Get theme
+     * Get theme.
+     *
      * @return __return_getTheme_type__ __return_getTheme_description__
+     *
      * @throws Exception __exception_Exception_description__
      */
     public function getTheme()
@@ -63,7 +66,8 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_registerAssetBundles_description__
+     * __method_registerAssetBundles_description__.
+     *
      * @param __param_view_type__ $view __param_view_description__
      */
     public function registerAssetBundles($view)
@@ -74,7 +78,8 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * Get identity asset bundle
+     * Get identity asset bundle.
+     *
      * @return __return_getIdentityAssetBundle_type__ __return_getIdentityAssetBundle_description__
      */
     public function getIdentityAssetBundle()
@@ -83,7 +88,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function register($owner, $itemComponent, $systemId = null)
     {
@@ -94,8 +99,10 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * Get identity
-     * @param __param_view_type__         $view __param_view_description__
+     * Get identity.
+     *
+     * @param __param_view_type__ $view __param_view_description__
+     *
      * @return __return_getIdentity_type__ __return_getIdentity_description__
      */
     public function getIdentity($view)

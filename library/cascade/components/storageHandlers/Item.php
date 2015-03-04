@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -13,7 +14,7 @@ use cascade\models\Storage;
 use cascade\models\StorageEngine;
 
 /**
- * Item [@doctodo write class description for Item]
+ * Item [@doctodo write class description for Item].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -29,7 +30,7 @@ class Item extends \infinite\base\collector\Item
     public $publicEngineGroup = 'top';
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {
@@ -40,7 +41,8 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_ensurePublicEngine_description__
+     * __method_ensurePublicEngine_description__.
+     *
      * @throws Exception __exception_Exception_description__
      */
     public function ensurePublicEngine()
@@ -49,7 +51,7 @@ class Item extends \infinite\base\collector\Item
             // @todo cache this
             $publicEngine = StorageEngine::find()->disableAccessCheck()->where(['handler' => $this->systemId])->one();
             if (empty($publicEngine)) {
-                $publicEngine = new StorageEngine;
+                $publicEngine = new StorageEngine();
                 $publicEngine->asGroup($this->publicEngineGroup);
                 if (is_array($this->publicEngine)) {
                     $publicEngine->data = serialize($this->publicEngine);

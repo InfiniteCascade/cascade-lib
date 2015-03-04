@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\web\browser;
 use Yii;
 
 /**
- * HandlerObjects [@doctodo write class description for HandlerObjects]
+ * HandlerObjects [@doctodo write class description for HandlerObjects].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -26,24 +27,29 @@ class HandlerObjects extends \infinite\web\browser\Handler
     protected $_dataSource;
 
     /**
-     * Get data source
+     * Get data source.
+     *
      * @return __return_getDataSource_type__ __return_getDataSource_description__
      */
     public function getDataSource()
     {
         if (is_null($this->_dataSource)) {
             $typeItem = Yii::$app->collectors['types']->getOne($this->instructions['type']);
-            if (!$typeItem || !($type = $typeItem->object)) { return $this->_dataSource = false; }
+            if (!$typeItem || !($type = $typeItem->object)) {
+                return $this->_dataSource = false;
+            }
             $primaryModel = $type->primaryModel;
             if (isset($this->instructions['parent'])) {
                 $registryClass = Yii::$app->classes['Registry'];
                 $object = $registryClass::getObject($this->instructions['parent']);
-                if (!$object) { return $this->_dataSource = false; }
+                if (!$object) {
+                    return $this->_dataSource = false;
+                }
                 $this->_dataSource = $object->queryChildObjects($primaryModel, [], []);
             } else {
                 $this->_dataSource = $primaryModel::find();
             }
-            $dummyModel = new $primaryModel;
+            $dummyModel = new $primaryModel();
             $sortOptions = array_values($dummyModel->sortOptions);
             if ($this->filterQuery) {
                 $primaryModel::simpleSearchTermQuery($this->_dataSource, $this->filterQuery);
@@ -56,7 +62,7 @@ class HandlerObjects extends \infinite\web\browser\Handler
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getTotal()
     {
@@ -68,7 +74,7 @@ class HandlerObjects extends \infinite\web\browser\Handler
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getItems()
     {
@@ -92,7 +98,7 @@ class HandlerObjects extends \infinite\web\browser\Handler
                 'descriptor' => $object->descriptor,
                 'subdescriptor' => $object->primarySubdescriptor,
                 'hasChildren' => !empty($object->objectTypeItem->children),
-                'isSelectable' => $instructions['modules'] === false || in_array($object->objectType->systemId, $instructions['modules'])
+                'isSelectable' => $instructions['modules'] === false || in_array($object->objectType->systemId, $instructions['modules']),
             ];
         }
 

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,21 +12,22 @@ use cascade\models\Group;
 use cascade\models\Relation;
 
 /**
- * Task_000003_groups [@doctodo write class description for Task_000003_groups]
+ * Task_000003_groups [@doctodo write class description for Task_000003_groups].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Task_000003_groups extends \infinite\setup\Task
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getTitle()
     {
         return 'Groups';
     }
     /**
-     * Get base groups
+     * Get base groups.
+     *
      * @return __return_getBaseGroups_type__ __return_getBaseGroups_description__
      */
     public function getBaseGroups()
@@ -34,7 +36,7 @@ class Task_000003_groups extends \infinite\setup\Task
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function test()
     {
@@ -42,7 +44,7 @@ class Task_000003_groups extends \infinite\setup\Task
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function run()
     {
@@ -53,10 +55,12 @@ class Task_000003_groups extends \infinite\setup\Task
     }
 
     /**
-     * __method_groupWalker_description__
-     * @param __param_item_type__         $item    __param_item_description__
-     * @param __param_key_type__          $key     __param_key_description__
-     * @param __param_mparent_type__      $mparent __param_mparent_description__ [optional]
+     * __method_groupWalker_description__.
+     *
+     * @param __param_item_type__    $item    __param_item_description__
+     * @param __param_key_type__     $key     __param_key_description__
+     * @param __param_mparent_type__ $mparent __param_mparent_description__ [optional]
+     *
      * @return __return_groupWalker_type__ __return_groupWalker_description__
      */
     public function groupWalker(&$item, $key, $mparent = null)
@@ -64,7 +68,7 @@ class Task_000003_groups extends \infinite\setup\Task
         if (is_array($item)) {
             $parent  = Group::find()->disableAccessCheck()->where(['name' => $key])->one();
             if (empty($parent)) {
-                $parent = new Group;
+                $parent = new Group();
                 //$parent->disableAcl();
                 $parent->name = $key;
                 $parent->system = preg_replace('/ /', '_', strtolower($parent->name));
@@ -76,7 +80,7 @@ class Task_000003_groups extends \infinite\setup\Task
                     return false;
                 }
                 if (!empty($mparent)) {
-                    $r = new Relation;
+                    $r = new Relation();
                     $r->parent_object_id = $mparent;
                     $r->child_object_id = $parent->id;
                     $r->active = 1;
@@ -91,7 +95,7 @@ class Task_000003_groups extends \infinite\setup\Task
         } else {
             $sitem = Group::find()->disableAccessCheck()->where(['name' => $item])->one();
             if (empty($sitem)) {
-                $sitem = new Group;
+                $sitem = new Group();
                 //$sitem->disableAcl();
                 $sitem->name = $item;
                 $sitem->system = preg_replace('/ /', '_', strtolower($sitem->name));
@@ -103,7 +107,7 @@ class Task_000003_groups extends \infinite\setup\Task
                     return false;
                 }
                 if (!empty($mparent)) {
-                    $r = new Relation;
+                    $r = new Relation();
                     $r->parent_object_id = $mparent;
                     $r->child_object_id = $sitem->id;
                     $r->active = 1;
@@ -119,8 +123,10 @@ class Task_000003_groups extends \infinite\setup\Task
     }
 
     /**
-     * Get group level
-     * @param __param_k_type__              $k __param_k_description__
+     * Get group level.
+     *
+     * @param __param_k_type__ $k __param_k_description__
+     *
      * @return __return_getGroupLevel_type__ __return_getGroupLevel_description__
      */
     public function getGroupLevel($k)

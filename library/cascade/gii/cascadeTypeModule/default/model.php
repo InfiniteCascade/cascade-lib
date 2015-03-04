@@ -2,16 +2,15 @@
 /**
  * This is the template for generating the model class of a specified table.
  *
- * @var yii\base\View $this
- * @var yii\gii\generators\model\Generator $generator
- * @var string $tableName full table name
- * @var string $className class name
- * @var yii\db\TableSchema $tableSchema
- * @var string[] $labels list of attribute labels (name=>label)
- * @var string[] $rules list of validation rules
- * @var array $relations list of relations (name=>relation declaration)
+ * @var yii\base\View
+ * @var yii\gii\generators\model\Generator
+ * @var string full table name
+ * @var string class name
+ * @var yii\db\TableSchema
+ * @var string[] list of attribute labels (name=>label)
+ * @var string[] list of validation rules
+ * @var array list of relations (name=>relation declaration)
  */
-
 echo "<?php\n";
 ?>
 namespace <?= $generator->getModelNamespace() ?>;
@@ -27,11 +26,11 @@ namespace <?= $generator->getModelNamespace() ?>;
 <?php if (!empty($relations)): ?>
  *
 <?php foreach ($relations as $name => $relation): ?>
- * @property <?= $relation[1] . ($relation[2] ? '[]' : '') . ' $' . lcfirst($name) . "\n" ?>
+ * @property <?= $relation[1].($relation[2] ? '[]' : '').' $'.lcfirst($name)."\n" ?>
 <?php endforeach; ?>
 <?php endif; ?>
  */
-class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . "\n" ?>
+class <?= $className ?> extends <?= '\\'.ltrim($generator->baseClass, '\\')."\n" ?>
 {
 <?= $descriptorField ?>
 
@@ -56,7 +55,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
      */
     public function rules()
     {
-        return [<?= "\n\t\t\t" . implode(",\n\t\t\t", $rules) . "\n\t\t" ?>];
+        return [<?= "\n\t\t\t".implode(",\n\t\t\t", $rules)."\n\t\t" ?>];
     }
 
     /**
@@ -64,7 +63,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
      */
     public function fieldSettings()
     {
-        return [<?= "\n\t\t\t" . implode(",\n\t\t\t", $columnSettingSkel) . "\n\t\t" ?>];
+        return [<?= "\n\t\t\t".implode(",\n\t\t\t", $columnSettingSkel)."\n\t\t" ?>];
     }
 
     /**
@@ -82,7 +81,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
     {
         return [
 <?php foreach ($labels as $name => $label): ?>
-            <?= "'$name' => '" . addslashes($label) . "',\n" ?>
+            <?= "'$name' => '".addslashes($label)."',\n" ?>
 <?php endforeach; ?>
         ];
     }
@@ -93,7 +92,7 @@ class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . 
      */
     public function get<?= $name ?>()
     {
-        <?= $relation[0] . "\n" ?>
+        <?= $relation[0]."\n" ?>
     }
 <?php endforeach; ?>
 }

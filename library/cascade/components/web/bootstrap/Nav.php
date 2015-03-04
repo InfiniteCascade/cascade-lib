@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,15 +9,16 @@
 namespace cascade\components\web\bootstrap;
 
 use Yii;
+
 /**
- * Nav [@doctodo write class description for Nav]
+ * Nav [@doctodo write class description for Nav].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Nav extends \yii\bootstrap\Nav
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function renderItem($item)
     {

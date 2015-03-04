@@ -1,17 +1,15 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
 
 namespace cascade\components\dataInterface\connectors\generic;
 
-use Yii;
-use yii\db\Query;
-
 /**
- * Model [@doctodo write class description for Model]
+ * Model [@doctodo write class description for Model].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -35,7 +33,7 @@ abstract class Model extends \infinite\base\Object
     protected $_children;
 
     /**
-     * __method___clone_description__
+     * __method___clone_description__.
      */
     public function __clone()
     {
@@ -43,7 +41,7 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function __get($name)
     {
@@ -55,7 +53,7 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function __set($name, $value)
     {
@@ -69,7 +67,7 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function __isset($name)
     {
@@ -81,7 +79,7 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function __unset($name)
     {
@@ -104,9 +102,9 @@ abstract class Model extends \infinite\base\Object
         return !$this->hasProperty($attribute, true);
     }
 
-
     /**
-     * Set interface
+     * Set interface.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setInterface($value)
@@ -115,7 +113,7 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_reset_description__
+     * __method_reset_description__.
      */
     public function reset()
     {
@@ -123,7 +121,8 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-     * Set attributes
+     * Set attributes.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setAttributes($value)
@@ -133,17 +132,19 @@ abstract class Model extends \infinite\base\Object
         }
     }
 
-
     abstract public function primaryKey();
     /**
-     * Get primary key
+     * Get primary key.
+     *
      * @return __return_getPrimaryKey_type__ __return_getPrimaryKey_description__
      */
     abstract public function getPrimaryKey();
 
     /**
-     * __method_populateRecord_description__
-     * @param __param_attributes_type__      $attributes __param_attributes_description__
+     * __method_populateRecord_description__.
+     *
+     * @param __param_attributes_type__ $attributes __param_attributes_description__
+     *
      * @return __return_populateRecord_type__ __return_populateRecord_description__
      */
     public function populateRecord($attributes)
@@ -158,8 +159,10 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_populateRecords_description__
-     * @param __param_results_type__          $results __param_results_description__
+     * __method_populateRecords_description__.
+     *
+     * @param __param_results_type__ $results __param_results_description__
+     *
      * @return __return_populateRecords_type__ __return_populateRecords_description__
      */
     public function populateRecords($results)
@@ -173,7 +176,8 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-     * Get attributes
+     * Get attributes.
+     *
      * @return __return_getAttributes_type__ __return_getAttributes_description__
      */
     public function getAttributes()
@@ -182,7 +186,8 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-     * Get interface
+     * Get interface.
+     *
      * @return __return_getInterface_type__ __return_getInterface_description__
      */
     public function getInterface()

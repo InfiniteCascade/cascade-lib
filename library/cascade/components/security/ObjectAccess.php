@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\security;
 use Yii;
 
 /**
- * ObjectAccess [@doctodo write class description for ObjectAccess]
+ * ObjectAccess [@doctodo write class description for ObjectAccess].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -22,7 +23,7 @@ class ObjectAccess extends \infinite\security\ObjectAccess
     public $specialAuthorities = ['Group'];
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function determineVisibility()
     {
@@ -45,10 +46,17 @@ class ObjectAccess extends \infinite\security\ObjectAccess
         $foundOwner = false;
 
         foreach ($this->roles as $role) {
-            if (empty($role['role_id'])) { continue; }
+            if (empty($role['role_id'])) {
+                continue;
+            }
             $roleItem = Yii::$app->collectors['roles']->getById($role['role_id']);
-            if (empty($roleItem) || empty($roleItem->object)) { continue; }
-            if ($roleItem->levelSection === 'owner') { $foundOwner = true; continue; }
+            if (empty($roleItem) || empty($roleItem->object)) {
+                continue;
+            }
+            if ($roleItem->levelSection === 'owner') {
+                $foundOwner = true;
+                continue;
+            }
 
             return 'shared';
         }
@@ -60,7 +68,7 @@ class ObjectAccess extends \infinite\security\ObjectAccess
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getRoleHelpText($roleItem)
     {
@@ -68,34 +76,34 @@ class ObjectAccess extends \infinite\security\ObjectAccess
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getSpecialRequestors()
     {
         return array_merge(parent::getSpecialRequestors(), [
             'primaryAccount' => [
-                'object' =>	Yii::$app->gk->primaryAccount,
-                'maxRoleLevel' => Yii::$app->params['maxRoleLevels']['primaryAccount']
-            ]
+                'object' =>    Yii::$app->gk->primaryAccount,
+                'maxRoleLevel' => Yii::$app->params['maxRoleLevels']['primaryAccount'],
+            ],
         ]);
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     protected function validateRole($role, $validationSettings)
     {
         $results = parent::validateRole($role, $validationSettings);
         $objectType = $validationSettings['object']->objectType;
         if (!empty($role) && $role !== 'none' && !in_array($objectType->systemId, $this->specialAuthorities) && $objectType->getBehavior('Authority') === null) {
-            $results['errors'][] = $validationSettings['object']->descriptor . ' can not be shared with.';
+            $results['errors'][] = $validationSettings['object']->descriptor.' can not be shared with.';
         }
 
         return $results;
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     protected function fillValidationSettings($validationSettings)
     {

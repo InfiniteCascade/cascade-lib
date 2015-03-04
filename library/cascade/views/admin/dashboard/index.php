@@ -1,8 +1,9 @@
 <?php
 /**
- * @var yii\base\View $this
+ * @var yii\base\View
  */
 use infinite\helpers\Html;
+
 $this->title = 'Administration';
 $this->params['breadcrumbs'][] = ['label' => $this->title];
 echo Html::beginTag('div', ['class' => 'list-group']);

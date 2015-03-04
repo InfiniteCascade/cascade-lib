@@ -1,5 +1,6 @@
 <?php
 use infinite\helpers\Html;
+
 $this->registerMetaTag(['http-equiv' => 'refresh', 'content' => '5']);
 
 $interfaceModel = $dataInterfaceLog->dataInterface;

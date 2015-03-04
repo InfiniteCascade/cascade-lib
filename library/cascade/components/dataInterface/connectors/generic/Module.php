@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,14 +9,12 @@
 namespace cascade\components\dataInterface\connectors\generic;
 
 use Yii;
-use yii\helpers\Inflector;
-use infinite\base\exceptions\Exception;
 use cascade\components\dataInterface\Action;
 use cascade\components\dataInterface\Module as BaseModule;
 use infinite\action\Action as BaseAction;
 
 /**
- * Module [@doctodo write class description for Module]
+ * Module [@doctodo write class description for Module].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -31,7 +30,6 @@ abstract class Module extends BaseModule
      */
     protected $_models;
 
-
     protected $_dataSources;
     /**
      * @var __var__action_type__ __var__action_description__
@@ -42,7 +40,7 @@ abstract class Module extends BaseModule
     abstract public function getForeignModel($model);
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function run(BaseAction $action)
     {
@@ -63,12 +61,12 @@ abstract class Module extends BaseModule
                 $prefix = 'Syncing';
             }
 
-            $task = $action->status->addTask($id, $prefix .' '. $source->descriptor);
+            $task = $action->status->addTask($id, $prefix.' '.$source->descriptor);
             $source->task = $task;
             $source->prepareTask();
             $taskSets[] = [
                 'task' => $task,
-                'dataSource' => $source
+                'dataSource' => $source,
             ];
         }
 
@@ -81,6 +79,7 @@ abstract class Module extends BaseModule
             // @todo add action log
             return false;
         }
+
         return true;
     }
 
@@ -94,19 +93,20 @@ abstract class Module extends BaseModule
         return true;
     }
 
-
-
     /**
-     * Get local object
+     * Get local object.
+     *
      * @param __param_localModelClass_type__   $localModelClass   __param_localModelClass_description__
      * @param __param_foreignPrimaryKey_type__ $foreignPrimaryKey __param_foreignPrimaryKey_description__
-     * @return __return_getLocalObject_type__   __return_getLocalObject_description__
+     *
+     * @return __return_getLocalObject_type__ __return_getLocalObject_description__
      */
     public function getLocalObject($localModelClass, $foreignPrimaryKey)
     {
         $dataSource = $this->getLocalDataSource($localModelClass);
         if (is_array($foreignPrimaryKey) && isset($foreignPrimaryKey['localId'])) {
             $registryClass = Yii::$app->classes['Registry'];
+
             return $registryClass::getObject($foreignPrimaryKey['localId'], false);
         }
         if ($dataSource && ($foreignDataItem = $dataSource->getForeignDataItem($foreignPrimaryKey))) {
@@ -121,11 +121,13 @@ abstract class Module extends BaseModule
         if (isset($this->dataSources[$dataSourceName])) {
             return $this->dataSources[$dataSourceName];
         }
+
         return false;
     }
 
     /**
-     * Get data sources
+     * Get data sources.
+     *
      * @return __return_getDataSources_type__ __return_getDataSources_description__
      */
     public function getDataSources()
@@ -145,7 +147,9 @@ abstract class Module extends BaseModule
                 }
                 $dataSource['name'] = $foreignModel;
                 $dataSource['foreignModel'] = $this->getForeignModel($foreignModel);
-                if (empty($dataSource['foreignModel'])) { continue; }
+                if (empty($dataSource['foreignModel'])) {
+                    continue;
+                }
                 $this->_dataSources[$foreignModel] = Yii::createObject(array_merge(['module' => $this], $dataSource));
             }
         }
@@ -154,8 +158,10 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * Get local data source
-     * @param __param_localModelClass_type__     $localModelClass __param_localModelClass_description__
+     * Get local data source.
+     *
+     * @param __param_localModelClass_type__ $localModelClass __param_localModelClass_description__
+     *
      * @return __return_getLocalDataSource_type__ __return_getLocalDataSource_description__
      */
     public function getLocalDataSource($localModelClass)
@@ -169,10 +175,11 @@ abstract class Module extends BaseModule
         return false;
     }
 
-
     /**
-     * Get foreign data source
-     * @param __param_foreignModelClass_type__     $foreignModelClass __param_foreignModelClass_description__
+     * Get foreign data source.
+     *
+     * @param __param_foreignModelClass_type__ $foreignModelClass __param_foreignModelClass_description__
+     *
      * @return __return_getForeignDataSource_type__ __return_getForeignDataSource_description__
      */
     public function getForeignDataSource($foreignModelClass)
@@ -187,13 +194,14 @@ abstract class Module extends BaseModule
     }
 
     /**
-     * Get action
+     * Get action.
+     *
      * @return __return_getAction_type__ __return_getAction_description__
      */
     public function getAction()
     {
         if (is_null($this->_action)) {
-            $this->_action = new Action;
+            $this->_action = new Action();
         }
 
         return $this->_action;

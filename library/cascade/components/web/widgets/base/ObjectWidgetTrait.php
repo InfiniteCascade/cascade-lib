@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,11 +9,9 @@
 namespace cascade\components\web\widgets\base;
 
 use Yii;
-
 use infinite\base\exceptions\Exception;
 use infinite\helpers\ArrayHelper;
 use infinite\helpers\Html;
-
 use cascade\components\types\Relationship;
 
 trait ObjectWidgetTrait
@@ -27,6 +26,7 @@ trait ObjectWidgetTrait
         if ($this->lazy) {
             Html::addCssClass($this->htmlOptions, 'widget-lazy');
         }
+
         return parent::generateStart();
     }
 
@@ -42,13 +42,12 @@ trait ObjectWidgetTrait
         return $this->_lazyObjectWidget;
     }
 
-
     public function getWidgetClasses()
     {
         $classes = parent::getWidgetClasses();
         $classes[] = 'refreshable';
         $queryModelClass = $this->owner->primaryModel;
-        $classes[] = 'model-'. $queryModelClass::baseClassName();
+        $classes[] = 'model-'.$queryModelClass::baseClassName();
 
         return $classes;
     }
@@ -60,6 +59,7 @@ trait ObjectWidgetTrait
                 return 1000;
             }
         }
+
         return 0;
     }
 
@@ -87,7 +87,7 @@ trait ObjectWidgetTrait
                 break;
             }
             $dataProvider['query']->action = 'list';
-            $dummyModel = new $queryModelClass;
+            $dummyModel = new $queryModelClass();
             if (in_array($this->currentSortBy, ['familiarity', 'last_accessed'])) {
                 if ($dataProvider['query']->getBehavior('FamiliarityQuery') === null) {
                     $dataProvider['query']->attachBehavior('FamiliarityQuery', ['class' => 'cascade\components\db\behaviors\QueryFamiliarity']);
@@ -132,7 +132,7 @@ trait ObjectWidgetTrait
         $sortBy['descriptor'] = [
             'label' => $descriptorLabel,
             'asc' => $dummyModel->getDescriptorDefaultOrder($alias, SORT_ASC),
-            'desc' => $dummyModel->getDescriptorDefaultOrder($alias, SORT_DESC)
+            'desc' => $dummyModel->getDescriptorDefaultOrder($alias, SORT_DESC),
         ];
 
         return $sortBy;
@@ -167,9 +167,10 @@ trait ObjectWidgetTrait
         if ($relationship) {
             $objectType = $relationship->companionRoleType($method);
             $objectRole = $relationship->companionRole($method);
-            $relationName = $objectRole .':'. $objectType->systemId;
+            $relationName = $objectRole.':'.$objectType->systemId;
             $context['relation'] = [$relationName];
         }
+
         return $context;
     }
 
@@ -190,19 +191,19 @@ trait ObjectWidgetTrait
             $baseCreate['related_object_id'] = Yii::$app->request->object->primaryKey;
             $objectRole = $relationship->companionRole($method);
             $companionRole = $relationship->companionRole($objectRole);
-            $relatedType = $companionRole .':' . $relationship->roleType($companionRole)->systemId;
+            $relatedType = $companionRole.':'.$relationship->roleType($companionRole)->systemId;
             $baseCreate['object_relation'] = $relatedType;
             $link = $link && $relationship->canLink($objectRole, Yii::$app->request->object);
             $create = $create && $relationship->canCreate($objectRole, Yii::$app->request->object);
         }
-        $baseCreate['type'] = $this->owner->systemId; // $typePrefix . 
+        $baseCreate['type'] = $this->owner->systemId; // $typePrefix .
         if ($create && Yii::$app->gk->canGeneral('create', $this->owner->primaryModel)) {
             $createUrl = $baseCreate;
             array_unshift($createUrl, '/object/create');
             $menu[] = [
                 'label' => '<i class="fa fa-plus"></i>',
                 'linkOptions' => ['title' => 'Create'],
-                'url' => $createUrl
+                'url' => $createUrl,
             ];
         }
         if ($link) {
@@ -211,7 +212,7 @@ trait ObjectWidgetTrait
             $menu[] = [
                 'label' => '<i class="fa fa-link"></i>',
                 'linkOptions' => ['title' => 'Link'],
-                'url' => $createUrl
+                'url' => $createUrl,
             ];
         }
 
@@ -227,7 +228,7 @@ trait ObjectWidgetTrait
                 'linkOptions' => ['title' => 'Sort by'],
                 'url' => '#',
                 'items' => [],
-                'options' => ['class' => 'dropleft']
+                'options' => ['class' => 'dropleft'],
             ];
 
             foreach ($sortBy as $sortKey => $sortItem) {
@@ -241,20 +242,20 @@ trait ObjectWidgetTrait
 
                 $stateChange = [
                     $this->stateKeyName('sortBy') => $sortKey,
-                    $this->stateKeyName('sortByDirection') => $newSortByDirection
+                    $this->stateKeyName('sortByDirection') => $newSortByDirection,
                 ];
 
                 $item['items'][] = [
-                    'label' => $extra . $sortItem['label'],
+                    'label' => $extra.$sortItem['label'],
                     'linkOptions' => [
-                        'title' => 'Sort by '. $sortItem['label'],
-                        'data-state-change' => json_encode($stateChange)
+                        'title' => 'Sort by '.$sortItem['label'],
+                        'data-state-change' => json_encode($stateChange),
                     ],
                     'options' => [
-                        'class' => $isActive ? 'active' : ''
+                        'class' => $isActive ? 'active' : '',
                     ],
                     'url' => '#',
-                    'active' => $isActive
+                    'active' => $isActive,
                 ];
             }
             $menu[] = $item;
@@ -290,6 +291,7 @@ trait ObjectWidgetTrait
             Html::addCssClass($options, 'active');
         }
         $options['data-object-id'] = $model->primaryKey;
+
         return $options;
     }
 
@@ -306,23 +308,23 @@ trait ObjectWidgetTrait
         // $baseUrl['relationship_id'] = $relationship->systemId;
         if ($queryRole === 'children') {
             $primaryRelation = $relationship->getPrimaryObject(Yii::$app->request->object, $model, 'child');
-            $baseUrl['object_relation'] = 'child:' . $model->objectType->systemId;
+            $baseUrl['object_relation'] = 'child:'.$model->objectType->systemId;
             $checkField = 'child_object_id';
         } else {
             $primaryRelation = $relationship->getPrimaryObject(Yii::$app->request->object, $model, 'parent');
-            $baseUrl['object_relation'] = 'parent:' . $model->objectType->systemId;
+            $baseUrl['object_relation'] = 'parent:'.$model->objectType->systemId;
             $checkField = 'parent_object_id';
         }
         if ($primaryRelation !== false
-             && (empty($primaryRelation) 
-                || ($primaryRelation 
+             && (empty($primaryRelation)
+                || ($primaryRelation
                     && $primaryRelation->{$checkField} !== $model->primaryKey)
                 )) {
             $menu['primary'] = [
                 'icon' => 'fa fa-star',
                 'label' => 'Set as primary',
                 'url' => ['/object/set-primary'] + $baseUrl,
-                'linkOptions' => ['data-handler' => 'background']
+                'linkOptions' => ['data-handler' => 'background'],
             ];
         }
 
@@ -340,7 +342,7 @@ trait ObjectWidgetTrait
                 'icon' => 'fa fa-wrench',
                 'label' => $updateLabel,
                 'url' => $updateUrl,
-                'linkOptions' => ['data-handler' => 'background']
+                'linkOptions' => ['data-handler' => 'background'],
             ];
         }
         if (!$objectType->hasDashboard && $model->can('manageAccess')) {
@@ -348,7 +350,7 @@ trait ObjectWidgetTrait
                 'icon' => 'fa fa-key',
                 'label' => 'Manage Access',
                 'url' => ['/object/access'] + $baseUrl,
-                'linkOptions' => ['data-handler' => 'background']
+                'linkOptions' => ['data-handler' => 'background'],
             ];
         }
 
@@ -361,7 +363,7 @@ trait ObjectWidgetTrait
                 'icon' => 'fa fa-trash-o',
                 'label' => 'Delete',
                 'url' => ['/object/delete'] + $baseUrl,
-                'linkOptions' => ['data-handler' => 'background']
+                'linkOptions' => ['data-handler' => 'background'],
             ];
         }
 
@@ -383,7 +385,6 @@ trait ObjectWidgetTrait
             && isset($this->settings['queryRole'])
             && $this->settings['relationship']->child === $this->settings['relationship']->parent
             ) {
-
             if ($this->settings['queryRole'] === 'parents') {
                 $vars['relationship'] = 'Parent';
             } elseif ($this->settings['queryRole'] === 'children') {
@@ -409,10 +410,10 @@ trait ObjectWidgetTrait
         return [
             'class' => 'infinite\data\Sort',
             'sortOrders' => [
-                $this->currentSortBy => $this->currentSortByDirection === 'asc' ? SORT_ASC : SORT_DESC
+                $this->currentSortBy => $this->currentSortByDirection === 'asc' ? SORT_ASC : SORT_DESC,
             ],
 
-            'attributes' => $this->getSortBy()
+            'attributes' => $this->getSortBy(),
         ];
     }
 
@@ -427,7 +428,7 @@ trait ObjectWidgetTrait
     public function getDataProviderSettings()
     {
         return [
-            'class' => 'infinite\data\ActiveDataProvider'
+            'class' => 'infinite\data\ActiveDataProvider',
         ];
     }
 }

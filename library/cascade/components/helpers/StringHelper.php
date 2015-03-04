@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,16 +11,16 @@ namespace cascade\components\helpers;
 use Yii;
 
 /**
- * StringHelper [@doctodo write class description for StringHelper]
+ * StringHelper [@doctodo write class description for StringHelper].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class StringHelper extends \infinite\helpers\StringHelper
 {
-    /**
+    /*
     * @inheritdoc
      */
-    static public function parseInstructions()
+    public static function parseInstructions()
     {
         $instructions = parent::parseInstructions();
         $instructions['type'] = function ($instructions) {
@@ -37,7 +38,9 @@ class StringHelper extends \infinite\helpers\StringHelper
                         $placementItem = null;
                     }
                 }
-                if (is_null($placementItem)) { return null; }
+                if (is_null($placementItem)) {
+                    return;
+                }
 
                 return (string) $placementItem;
             }

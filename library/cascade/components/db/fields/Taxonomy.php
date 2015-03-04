@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,7 @@
 namespace cascade\components\db\fields;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy]
+ * Taxonomy [@doctodo write class description for Taxonomy].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -37,16 +38,19 @@ class Taxonomy extends Base
     protected static $_moduleHandlers = [];
 
     /**
-     * Get module handler
+     * Get module handler.
+     *
      * @return __return_getModuleHandler_type__ __return_getModuleHandler_description__
      */
     public function getModuleHandler()
     {
         if (is_null($this->_moduleHandler)) {
             $stem = $this->field;
-            if (!isset(self::$_moduleHandlers[$stem])) { self::$_moduleHandlers[$stem] = []; }
+            if (!isset(self::$_moduleHandlers[$stem])) {
+                self::$_moduleHandlers[$stem] = [];
+            }
             $n = count(self::$_moduleHandlers[$stem]);
-            $this->_moduleHandler = $this->field .':_'. $n;
+            $this->_moduleHandler = $this->field.':_'.$n;
             self::$_moduleHandlers[$stem][] = $this->_moduleHandler;
         }
 

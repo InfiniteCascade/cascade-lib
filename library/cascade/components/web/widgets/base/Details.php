@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,12 +9,11 @@
 namespace cascade\components\web\widgets\base;
 
 use Yii;
-
 use infinite\helpers\Html;
 use cascade\components\web\widgets\Widget;
 
 /**
- * Details [@doctodo write class description for Details]
+ * Details [@doctodo write class description for Details].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -37,7 +37,7 @@ class Details extends Widget implements ListWidgetInterface
     /**
      * @var __var_labelHtmlOptions_type__ __var_labelHtmlOptions_description__
      */
-    public $labelHtmlOptions = ['class' => 'control-label', ];
+    public $labelHtmlOptions = ['class' => 'control-label'];
     /**
      * @var __var_valueHtmlOptions_type__ __var_valueHtmlOptions_description__
      */
@@ -57,7 +57,7 @@ class Details extends Widget implements ListWidgetInterface
     protected $_title = 'Details';
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getHeaderMenu()
     {
@@ -67,12 +67,16 @@ class Details extends Widget implements ListWidgetInterface
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function generateContent()
     {
-        if (empty(Yii::$app->request->object)) { return false; }
-        if (!($detailFields = Yii::$app->request->object->getDetailFields()) || empty($detailFields)) { return false; }
+        if (empty(Yii::$app->request->object)) {
+            return false;
+        }
+        if (!($detailFields = Yii::$app->request->object->getDetailFields()) || empty($detailFields)) {
+            return false;
+        }
         $parts = [];
         $parts[] = Html::beginTag('div', $this->contentHtmlOptions);
 
@@ -102,8 +106,10 @@ class Details extends Widget implements ListWidgetInterface
     }
 
     /**
-     * __method_generateCell_description__
-     * @param __param_content_type__       $content __param_content_description__
+     * __method_generateCell_description__.
+     *
+     * @param __param_content_type__ $content __param_content_description__
+     *
      * @return __return_generateCell_type__ __return_generateCell_description__
      */
     protected function generateCell($content)
@@ -112,7 +118,8 @@ class Details extends Widget implements ListWidgetInterface
     }
 
     /**
-     * Get pagination settings
+     * Get pagination settings.
+     *
      * @return __return_getPaginationSettings_type__ __return_getPaginationSettings_description__
      */
     public function getPaginationSettings()

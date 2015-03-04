@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -13,7 +14,6 @@ namespace cascade\models;
  * @property string $id
  * @property string $relation_id
  * @property string $taxonomy_id
- *
  * @property Taxonomy $taxonomy
  * @property Relation $relation
  *
@@ -45,7 +45,7 @@ class RelationTaxonomy extends \cascade\components\db\ActiveRecord
         return [
             [['relation_id', 'taxonomy_id'], 'required'],
             [['relation_id'], 'integer'],
-            [['taxonomy_id'], 'string', 'max' => 36]
+            [['taxonomy_id'], 'string', 'max' => 36],
         ];
     }
 
@@ -62,7 +62,8 @@ class RelationTaxonomy extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get taxonomy
+     * Get taxonomy.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getTaxonomy()
@@ -70,7 +71,7 @@ class RelationTaxonomy extends \cascade\components\db\ActiveRecord
         return $this->hasOne(Taxonomy::className(), ['id' => 'taxonomy_id']);
     }
 
-    /**
+    /*
      * @return \yii\db\ActiveRelation
      */
     // public function getRelation()

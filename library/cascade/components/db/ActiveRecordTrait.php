@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -23,24 +24,25 @@ trait ActiveRecordTrait
     {
         return Relation::className();
     }
-    
+
     public function badFields()
     {
-    	$badFields = parent::badFields();
-    	$badFields[] = 'archived';
-    	foreach ($this->getBehaviors() as $behavior) {
-    		if (method_exists($behavior, 'badFields')) {
-    			$badFields = array_merge($badFields, $behavior->badFields());
-    		}
-    	}
-    	foreach ($this->attributes() as $attr) {
-    		if (preg_match('/\_user\_id$/', $attr) === 1) {
-    			$badFields[] = $attr;
-    		}
-    	}
-    	return array_unique($badFields);
+        $badFields = parent::badFields();
+        $badFields[] = 'archived';
+        foreach ($this->getBehaviors() as $behavior) {
+            if (method_exists($behavior, 'badFields')) {
+                $badFields = array_merge($badFields, $behavior->badFields());
+            }
+        }
+        foreach ($this->attributes() as $attr) {
+            if (preg_match('/\_user\_id$/', $attr) === 1) {
+                $badFields[] = $attr;
+            }
+        }
+
+        return array_unique($badFields);
     }
-    
+
     public function getTabularId()
     {
         if (is_null($this->_tabularId)) {

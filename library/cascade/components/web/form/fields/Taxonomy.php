@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,14 +11,14 @@ namespace cascade\components\web\form\fields;
 use infinite\helpers\ArrayHelper;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy]
+ * Taxonomy [@doctodo write class description for Taxonomy].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Taxonomy extends Model
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getFieldConfig()
     {
@@ -28,7 +29,7 @@ class Taxonomy extends Model
     }
 
     /**
-     * {@inheritdocs}
+     * {@inheritdocs}.
      */
     public function generate()
     {

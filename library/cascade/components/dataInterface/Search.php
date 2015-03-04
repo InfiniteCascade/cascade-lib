@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -12,7 +13,7 @@ use cascade\components\helpers\StringHelper;
 use infinite\helpers\ArrayHelper;
 
 /**
- * Search [@doctodo write class description for Search]
+ * Search [@doctodo write class description for Search].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -47,10 +48,12 @@ class Search extends \infinite\base\Component
     protected $_foreignFields = [];
 
     /**
-     * __method_searchLocal_description__
+     * __method_searchLocal_description__.
+     *
      * @param cascade\components\dataInterface\DataItem $item         __param_item_description__
      * @param array                                     $searchParams __param_searchParams_description__ [optional]
-     * @return __return_searchLocal_type__               __return_searchLocal_description__
+     *
+     * @return __return_searchLocal_type__ __return_searchLocal_description__
      */
     public function searchLocal(DataItem $item, $searchParams = [])
     {
@@ -58,7 +61,7 @@ class Search extends \infinite\base\Component
             $searchParams['searchFields'] = $this->localFields;
         }
         if (empty($searchParams['searchFields'])) {
-            return null;
+            return;
         }
         if (!isset($searchParams['limit'])) {
             $searchParams['limit'] = 5;
@@ -75,7 +78,7 @@ class Search extends \infinite\base\Component
             }
         }
         if (empty($query)) {
-            return null;
+            return;
         }
 
         $localClass = $this->dataSource->localModel;
@@ -99,7 +102,7 @@ class Search extends \infinite\base\Component
         ArrayHelper::multisort($searchResults, 'scoreSort', SORT_DESC);
         $searchResults = array_values($searchResults);
         if (empty($searchResults)) {
-            return null;
+            return;
         } elseif (
             count($searchResults) === 1
             || !self::$interactive
@@ -121,8 +124,8 @@ class Search extends \infinite\base\Component
             $resultsNice = [];
             $optionNumber = 1;
             foreach ($searchResults as $result) {
-                $resultsNice['_o' . $optionNumber] = $result;
-                $options['_o' . $optionNumber] = $result->descriptor .' ('. $result->score .'%)';
+                $resultsNice['_o'.$optionNumber] = $result;
+                $options['_o'.$optionNumber] = $result->descriptor.' ('.$result->score.'%)';
                 $optionNumber++;
             }
             $options['new'] = 'Create New Object';
@@ -130,8 +133,8 @@ class Search extends \infinite\base\Component
             $interactionOptions = ['inputType' => 'select', 'options' => $options];
             $interactionOptions['details'] = $item->foreignObject->attributes;
             $callback = [
-                'callback' => function($response) use (&$select, $options) {
-                    if (empty($response)) { 
+                'callback' => function ($response) use (&$select, $options) {
+                    if (empty($response)) {
                         // throw new \Exception("Response was empty");
                         return false;
                     }
@@ -142,28 +145,33 @@ class Search extends \infinite\base\Component
                         return false;
                     }
                     $select = $response;
+
                     return true;
-                }
+                },
             ];
             Console::output("Waiting for interaction...");
-            if (!$this->dataSource->action->createInteraction('Match Object ('. implode(' ', $query) .')', $interactionOptions, $callback)) {
+            if (!$this->dataSource->action->createInteraction('Match Object ('.implode(' ', $query).')', $interactionOptions, $callback)) {
                 return false;
             }
 
             if ($select === 'new') {
                 Console::output("Selected CREATE NEW");
-                return null;
+
+                return;
             } else {
-                Console::output("Selected " . $resultsNice[$select]->descriptor);
+                Console::output("Selected ".$resultsNice[$select]->descriptor);
+
                 return $resultsNice[$select]->object;
             }
         }
     }
 
     /**
-     * __method_searchForeign_description__
+     * __method_searchForeign_description__.
+     *
      * @param cascade\components\dataInterface\DataItem $item __param_item_description__
-     * @return __return_searchForeign_type__             __return_searchForeign_description__
+     *
+     * @return __return_searchForeign_type__ __return_searchForeign_description__
      */
     public function searchForeign(DataItem $item)
     {
@@ -171,7 +179,8 @@ class Search extends \infinite\base\Component
     }
 
     /**
-     * Set local fields
+     * Set local fields.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setLocalFields($value)
@@ -180,7 +189,8 @@ class Search extends \infinite\base\Component
     }
 
     /**
-     * Get local fields
+     * Get local fields.
+     *
      * @return __return_getLocalFields_type__ __return_getLocalFields_description__
      */
     public function getLocalFields()
@@ -189,7 +199,8 @@ class Search extends \infinite\base\Component
     }
 
     /**
-     * Set foreign fields
+     * Set foreign fields.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setForeignFields($value)
@@ -198,7 +209,8 @@ class Search extends \infinite\base\Component
     }
 
     /**
-     * Get foreign fields
+     * Get foreign fields.
+     *
      * @return __return_getForeignFields_type__ __return_getForeignFields_description__
      */
     public function getForeignFields()
@@ -207,7 +219,8 @@ class Search extends \infinite\base\Component
     }
 
     /**
-     * Get module
+     * Get module.
+     *
      * @return __return_getModule_type__ __return_getModule_description__
      */
     public function getModule()

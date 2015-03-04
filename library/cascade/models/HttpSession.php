@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -43,7 +44,7 @@ class HttpSession extends \cascade\components\db\ActiveRecord
             [['id'], 'required'],
             [['expire'], 'integer'],
             [['data'], 'string'],
-            [['id'], 'string', 'max' => 255]
+            [['id'], 'string', 'max' => 255],
         ];
     }
 

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\db\fields;
 use cascade\components\db\fields\formats\RawText;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy]
+ * Taxonomy [@doctodo write class description for Taxonomy].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -29,7 +30,7 @@ class RelationTaxonomy extends Base
     public $multiline = false;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getField()
     {
@@ -37,7 +38,7 @@ class RelationTaxonomy extends Base
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function setFormField($value)
     {
@@ -45,7 +46,7 @@ class RelationTaxonomy extends Base
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getFormField()
     {

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -13,7 +14,7 @@ use cascade\components\types\Relationship;
 use infinite\helpers\ArrayHelper;
 
 /**
- * HandlerTypes [@doctodo write class description for HandlerTypes]
+ * HandlerTypes [@doctodo write class description for HandlerTypes].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -25,9 +26,11 @@ class HandlerTypes extends \infinite\web\browser\Handler
     public $bundleClass = 'cascade\components\web\browser\Bundle';
 
     /**
-     * __method_possibleTypes_description__
-     * @param __param_topType_type__        $topType   __param_topType_description__
-     * @param __param_goodTypes_type__      $goodTypes __param_goodTypes_description__
+     * __method_possibleTypes_description__.
+     *
+     * @param __param_topType_type__   $topType   __param_topType_description__
+     * @param __param_goodTypes_type__ $goodTypes __param_goodTypes_description__
+     *
      * @return __return_possibleTypes_type__ __return_possibleTypes_description__
      */
     public static function possibleTypes($topType, $goodTypes)
@@ -46,10 +49,12 @@ class HandlerTypes extends \infinite\web\browser\Handler
     }
 
     /**
-     * __method_descendantHas_description__
-     * @param __param_topType_type__        $topType   __param_topType_description__
-     * @param __param_goodTypes_type__      $goodTypes __param_goodTypes_description__
-     * @param integer                       $depth     __param_depth_description__ [optional]
+     * __method_descendantHas_description__.
+     *
+     * @param __param_topType_type__   $topType   __param_topType_description__
+     * @param __param_goodTypes_type__ $goodTypes __param_goodTypes_description__
+     * @param integer                  $depth     __param_depth_description__ [optional]
+     *
      * @return __return_descendantHas_type__ __return_descendantHas_description__
      */
     public static function descendantHas($topType, $goodTypes, $depth = 3)
@@ -68,7 +73,7 @@ class HandlerTypes extends \infinite\web\browser\Handler
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getTotal()
     {
@@ -76,7 +81,7 @@ class HandlerTypes extends \infinite\web\browser\Handler
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getItems()
     {
@@ -125,9 +130,9 @@ class HandlerTypes extends \infinite\web\browser\Handler
                 'type' => 'type',
                 'id' => $type->systemId,
                 'descriptor' => $type->title->upperPlural,
-                'hasChildren' => !empty($type->collectorItem->children) || ($instructions['modules'] !== false && in_array($type->systemId, $instructions['modules']))
+                'hasChildren' => !empty($type->collectorItem->children) || ($instructions['modules'] !== false && in_array($type->systemId, $instructions['modules'])),
             ];
-            if ($item['hasChildren'] && (!$this->filterQuery || preg_match('/'. preg_quote($this->filterQuery) .'/i', $item['descriptor']) === 1)) {
+            if ($item['hasChildren'] && (!$this->filterQuery || preg_match('/'.preg_quote($this->filterQuery).'/i', $item['descriptor']) === 1)) {
                 $items[] = $item;
             }
         }

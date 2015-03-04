@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,7 +12,7 @@ use infinite\base\exceptions\Exception;
 use cascade\models\DataInterface;
 
 /**
- * Item [@doctodo write class description for Item]
+ * Item [@doctodo write class description for Item].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -44,7 +45,8 @@ class Item extends \infinite\base\collector\Item
     protected $_currentInterfaceAction;
 
     /**
-     * __method_run_description__
+     * __method_run_description__.
+     *
      * @return __return_run_type__ __return_run_description__
      */
     public function run($resumeLog = null, $action = null)
@@ -62,14 +64,15 @@ class Item extends \infinite\base\collector\Item
         $this->_currentInterfaceAction = $action;
         if (!$this->_currentInterfaceAction->start()) {
             $this->error = 'Could not start interface action!';
+
             return false;
         }
         try {
             $this->object->run($this->_currentInterfaceAction);
         } catch (Exception $e) {
-            $this->_currentInterfaceAction->status->addError('Exception raised: '. $e->getMessage());
+            $this->_currentInterfaceAction->status->addError('Exception raised: '.$e->getMessage());
             $this->_currentInterfaceAction->end(true);
-            $this->error = 'Exception raised while running action ('. $e->getMessage() .').';
+            $this->error = 'Exception raised while running action ('.$e->getMessage().').';
 
             return false;
         }
@@ -79,7 +82,8 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_saveLog_description__
+     * __method_saveLog_description__.
+     *
      * @return __return_saveLog_type__ __return_saveLog_description__
      */
     public function saveLog()
@@ -87,12 +91,15 @@ class Item extends \infinite\base\collector\Item
         if (isset($this->_currentInterfaceAction)) {
             $this->_currentInterfaceAction->end(true);
         }
+
         return true;
     }
 
     /**
-     * Get interface object
+     * Get interface object.
+     *
      * @return __return_getInterfaceObject_type__ __return_getInterfaceObject_description__
+     *
      * @throws Exception __exception_Exception_description__
      */
     public function getInterfaceObject()
@@ -100,7 +107,7 @@ class Item extends \infinite\base\collector\Item
         if (is_null($this->_interfaceObject)) {
             $this->_interfaceObject = DataInterface::find()->where(['system_id' => $this->object->systemId])->one();
             if (empty($this->_interfaceObject)) {
-                $this->_interfaceObject = new DataInterface;
+                $this->_interfaceObject = new DataInterface();
                 $this->_interfaceObject->name = $this->object->name;
                 $this->_interfaceObject->system_id = $this->object->systemId;
                 if (!$this->_interfaceObject->save()) {
@@ -109,7 +116,7 @@ class Item extends \infinite\base\collector\Item
                 }
             }
         }
+
         return $this->_interfaceObject;
     }
-
 }

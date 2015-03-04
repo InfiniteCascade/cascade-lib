@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -30,13 +31,13 @@ class ObjectType extends \cascade\components\db\ActiveRecord
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [
             'Registry' => [
-                'class' => 'infinite\db\behaviors\Registry'
+                'class' => 'infinite\db\behaviors\Registry',
             ],
             'Roleable' => [
                 'class' => 'cascade\components\db\behaviors\Roleable',
@@ -48,9 +49,11 @@ class ObjectType extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_determineAccessLevel_description__
-     * @param __param_role_type__                  $role __param_role_description__
-     * @param __param_aro_type__                   $aro  __param_aro_description__ [optional]
+     * __method_determineAccessLevel_description__.
+     *
+     * @param __param_role_type__ $role __param_role_description__
+     * @param __param_aro_type__  $aro  __param_aro_description__ [optional]
+     *
      * @return __return_determineAccessLevel_type__ __return_determineAccessLevel_description__
      */
     public function determineAccessLevel($role, $aro = null)
@@ -81,7 +84,7 @@ class ObjectType extends \cascade\components\db\ActiveRecord
             [['name'], 'required'],
             [['system_version'], 'number'],
             [['created', 'modified'], 'safe'],
-            [['name'], 'string', 'max' => 255]
+            [['name'], 'string', 'max' => 255],
         ];
     }
 

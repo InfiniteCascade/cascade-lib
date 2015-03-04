@@ -5,5 +5,5 @@ use Yii;
 
 class DeleteAction extends \yii\rest\DeleteAction
 {
-	use ActionTrait;
+    use ActionTrait;
 }

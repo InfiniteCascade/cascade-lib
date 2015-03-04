@@ -1,10 +1,9 @@
 <?php
 /**
- * @var yii\base\View $this
- * @var yii\widgets\ActiveForm $form
- * @var yii\gii\generators\module\Generator $generator
+ * @var yii\base\View
+ * @var yii\widgets\ActiveForm
+ * @var yii\gii\generators\module\Generator
  */
-
 use infinite\helpers\Html;
 
 infinite\web\assetBundles\FontAwesomeAsset::register($this);

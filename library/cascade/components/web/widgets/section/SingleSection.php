@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,11 +9,10 @@
 namespace cascade\components\web\widgets\section;
 
 use Yii;
-
 use infinite\helpers\Html;
 
 /**
- * SingleSection [@doctodo write class description for SingleSection]
+ * SingleSection [@doctodo write class description for SingleSection].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -28,7 +28,8 @@ class SingleSection extends Section
     protected $_singleWidget;
 
     /**
-     * Get cell
+     * Get cell.
+     *
      * @return __return_getCell_type__ __return_getCell_description__
      */
     public function getCell()
@@ -44,7 +45,8 @@ class SingleSection extends Section
     }
 
     /**
-     * Get single widget
+     * Get single widget.
+     *
      * @return __return_getSingleWidget_type__ __return_getSingleWidget_description__
      */
     public function getSingleWidget()
@@ -62,7 +64,7 @@ class SingleSection extends Section
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getTitle()
     {

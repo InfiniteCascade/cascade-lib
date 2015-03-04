@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,7 +12,7 @@ use infinite\base\exceptions\Exception;
 use infinite\helpers\Html;
 
 /**
- * Model [@doctodo write class description for Model]
+ * Model [@doctodo write class description for Model].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -26,7 +27,8 @@ class Model extends Base
      */
     protected $_fieldConfig = [];
     /**
-     * Get field config
+     * Get field config.
+     *
      * @return __return_getFieldConfig_type__ __return_getFieldConfig_description__
      */
     public function getFieldConfig()
@@ -38,7 +40,8 @@ class Model extends Base
     }
 
     /**
-     * Set field config
+     * Set field config.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setFieldConfig($value)
@@ -46,8 +49,10 @@ class Model extends Base
         $this->_fieldConfig = $value;
     }
     /**
-     * __method_generate_description__
+     * __method_generate_description__.
+     *
      * @return unknown
+     *
      * @throws Exception __exception_Exception_description__
      */
     public function generate()
@@ -69,7 +74,7 @@ class Model extends Base
             $fieldConfig['template'] = $templatePrefix.$fieldConfig['template'];
         }
         $item = $form->field($model, $field, $fieldConfig);
-        $item->inputOptions =& $this->htmlOptions;
+        $item->inputOptions = & $this->htmlOptions;
         $item->inputOptions['value'] = $fieldConfig['value'] = $this->modelField->format->formValue;
 
         Html::addCssClass($this->htmlOptions, 'form-control');
@@ -80,7 +85,7 @@ class Model extends Base
                 if (!$watchFieldId) {
                     unset($this->smartOptions['watchField']);
                 } else {
-                    $this->smartOptions['watchField'] = '#' . $watchFieldId;
+                    $this->smartOptions['watchField'] = '#'.$watchFieldId;
                 }
             }
             $this->htmlOptions['data-value'] = $fieldConfig['value']; //Html::getAttributeValue($model, $field)

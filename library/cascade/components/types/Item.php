@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,7 +12,7 @@ use Yii;
 use infinite\helpers\ArrayHelper;
 
 /**
- * Item [@doctodo write class description for Item]
+ * Item [@doctodo write class description for Item].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -39,7 +40,7 @@ class Item extends \infinite\base\collector\Item
     protected $_init = false;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {
@@ -49,7 +50,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function setObject($object)
     {
@@ -60,7 +61,8 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_distributeRelationships_description__
+     * __method_distributeRelationships_description__.
+     *
      * @return __return_distributeRelationships_type__ __return_distributeRelationships_description__
      */
     protected function distributeRelationships()
@@ -88,7 +90,8 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * Get sections
+     * Get sections.
+     *
      * @return unknown
      */
     public function getSections()
@@ -98,7 +101,9 @@ class Item extends \infinite\base\collector\Item
         }
         $this->_sections = [];
         foreach ($this->_children as $rel) {
-            if (!$rel->active) { continue; }
+            if (!$rel->active) {
+                continue;
+            }
             // if ($rel->isHasOne()) { continue; }
             $child = $rel->child;
             $instanceSettings = ['relationship' => $rel, 'queryRole' => 'children'];
@@ -107,7 +112,9 @@ class Item extends \infinite\base\collector\Item
                 $widgetObject = $item->object;
                 $item->settings = $instanceSettings;
                 $section = $item->getSection($widgetObject, $instanceSettings);
-                if (empty($section)) { continue; }
+                if (empty($section)) {
+                    continue;
+                }
                 if (!isset($this->_sections[$item->section->systemId])) {
                     $this->_sections[$section->systemId] = $section;
                 }
@@ -116,15 +123,21 @@ class Item extends \infinite\base\collector\Item
         }
 
         foreach ($this->_parents as $rel) {
-            if (!$rel->active) { continue; }
-            if ($rel->isHasOne()) { continue; }
+            if (!$rel->active) {
+                continue;
+            }
+            if ($rel->isHasOne()) {
+                continue;
+            }
             $parent = $rel->parent;
             $instanceSettings = ['relationship' => $rel, 'queryRole' => 'parents'];
             $items = Yii::$app->collectors['widgets']->getLocation('child_objects', $parent);
             foreach ($items as $item) {
                 $item->settings = $instanceSettings;
                 $section = $item->getSection($this->object);
-                if (empty($section)) { continue; }
+                if (empty($section)) {
+                    continue;
+                }
                 if (!isset($this->_sections[$item->section->systemId])) {
                     $this->_sections[$section->systemId] = $section;
                 }
@@ -135,7 +148,9 @@ class Item extends \infinite\base\collector\Item
         foreach ($items as $item) {
             $item->settings = $instanceSettings;
             $section = $item->getSection($this->object);
-            if (empty($section)) { continue; }
+            if (empty($section)) {
+                continue;
+            }
             if (!isset($this->_sections[$item->section->systemId])) {
                 $this->_sections[$section->systemId] = $section;
             }
@@ -143,11 +158,13 @@ class Item extends \infinite\base\collector\Item
         }
 
         ArrayHelper::multisort($this->_sections, ['priority', 'sectionTitle'], [SORT_ASC, SORT_ASC]);
+
         return $this->_sections;
     }
 
     /**
-     * Get widgets
+     * Get widgets.
+     *
      * @return __return_getWidgets_type__ __return_getWidgets_description__
      */
     public function getWidgets()
@@ -163,9 +180,11 @@ class Item extends \infinite\base\collector\Item
         return $widgets;
     }
     /**
-     * __method_addChild_description__
+     * __method_addChild_description__.
+     *
      * @param unknown $name
      * @param unknown $relationship
+     *
      * @return unknown
      */
     public function addChild($name, $relationship)
@@ -176,9 +195,11 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_addParent_description__
+     * __method_addParent_description__.
+     *
      * @param unknown $name
      * @param unknown $relationship
+     *
      * @return unknown
      */
     public function addParent($name, $relationship)
@@ -189,8 +210,10 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * Get child
+     * Get child.
+     *
      * @param unknown $type
+     *
      * @return unknown
      */
     public function getChild($type)
@@ -203,8 +226,10 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * Get parent
+     * Get parent.
+     *
      * @param unknown $type
+     *
      * @return unknown
      */
     public function getParent($type)
@@ -217,14 +242,17 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * Get children
+     * Get children.
+     *
      * @return unknown
      */
     public function getChildren()
     {
         $children = [];
         foreach ($this->_children as $key => $child) {
-            if (!$child->active) { continue; }
+            if (!$child->active) {
+                continue;
+            }
             $children[$key] = $child;
         }
 
@@ -232,14 +260,17 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * Get parents
+     * Get parents.
+     *
      * @return unknown
      */
     public function getParents()
     {
         $parents = [];
         foreach ($this->_parents as $key => $parent) {
-            if (!$parent->active) { continue; }
+            if (!$parent->active) {
+                continue;
+            }
             $parents[$key] = $parent;
         }
 
@@ -247,7 +278,8 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * Get active
+     * Get active.
+     *
      * @return unknown
      */
     public function getActive()
@@ -260,12 +292,15 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * Get checked
+     * Get checked.
+     *
      * @return unknown
      */
     public function getChecked()
     {
-        if (is_null($this->object) || !$this->object) { return false; }
+        if (is_null($this->object) || !$this->object) {
+            return false;
+        }
         if (is_null($this->_checked)) {
             $this->_checked = true;
             foreach ($this->object->dependencies() as $dep) {
@@ -279,13 +314,14 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * Get taxonomies
+     * Get taxonomies.
+     *
      * @return __return_getTaxonomies_type__ __return_getTaxonomies_description__
      */
     public function getTaxonomies()
     {
         $moduleClass = get_class($this->object);
 
-        return Yii::$app->collectors['taxonomies']->getBucket('modules:'. $moduleClass::className())->toArray();
+        return Yii::$app->collectors['taxonomies']->getBucket('modules:'.$moduleClass::className())->toArray();
     }
 }

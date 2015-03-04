@@ -1,12 +1,10 @@
 <?php
 /**
- * ./app/config/environments/common/main.php
+ * ./app/config/environments/common/main.php.
  *
  * @author Jacob Morrison <jacob@infinitecascade.com>
- * @package cascade
  */
-
-$config = include(__DIR__ . DIRECTORY_SEPARATOR . 'base.php');
+$config = include __DIR__.DIRECTORY_SEPARATOR.'base.php';
 $config['controllerNamespace'] = 'cascade\controllers';
 $config['controllerMap'] = [
     // 'admin' => \cascade\controllers\admin\DefaultController::className(),
@@ -24,11 +22,11 @@ $config['components']['user'] = [
     'loginUrl' => ['/app/login'],
 ];
 $config['components']['webState'] = [
-    'class' => 'infinite\web\State'
+    'class' => 'infinite\web\State',
 ];
 $config['components']['session'] = [
     'class' => 'yii\redis\Session',
-    'timeout' => '4000' // be sure to change yiic.php too
+    'timeout' => '4000', // be sure to change yiic.php too
 ];
 $config['components']['urlManager'] = [
     'enablePrettyUrl' => true,
@@ -50,9 +48,10 @@ $config['components']['urlManager'] = [
         ['class' => 'cascade\components\rest\UrlRule'],
 
         '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-    ]
+    ],
 ];
 $config['components']['assetManager'] = [
-    'linkAssets' => false
+    'linkAssets' => false,
 ];
+
 return $config;

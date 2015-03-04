@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,11 +9,10 @@
 namespace cascade\components\web\form;
 
 use Yii;
-
 use infinite\helpers\Html;
 
 /**
- * Generator [@doctodo write class description for Generator]
+ * Generator [@doctodo write class description for Generator].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -46,7 +46,8 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     public $ajax = false;
 
     /**
-     * Set items
+     * Set items.
+     *
      * @param __param_items_type__ $items __param_items_description__
      */
     public function setItems($items)
@@ -64,7 +65,8 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     }
 
     /**
-     * __method_generate_description__
+     * __method_generate_description__.
+     *
      * @return unknown
      */
     public function generate()
@@ -75,7 +77,7 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
         $result = [];
         $formOptions = [
             'options' => ['class' => ''], //form-horizontal
-            'enableClientValidation' => false
+            'enableClientValidation' => false,
         ];
         if (Yii::$app->request->isAjax) {
             Html::addCssClass($formOptions['options'], 'ajax');
@@ -94,10 +96,10 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
         }
         //if (!Yii::$app->request->isAjax) {
             $result[] = Html::beginTag('div', ['class' => 'row form-group submit-group']);
-            $result[] = Html::beginTag('div', ['class' => 'col-sm-12']);
-            $result[] = Html::submitButton('Save', ['class' => 'btn btn-primary']);;
-            $result[] = Html::endTag('div');
-            $result[] = Html::endTag('div');
+        $result[] = Html::beginTag('div', ['class' => 'col-sm-12']);
+        $result[] = Html::submitButton('Save', ['class' => 'btn btn-primary']);
+        $result[] = Html::endTag('div');
+        $result[] = Html::endTag('div');
         //}
         $result[] = Html::endTag('div');
         $result[] = ActiveForm::end(false);
@@ -106,7 +108,8 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     }
 
     /**
-     * __method_hasFile_description__
+     * __method_hasFile_description__.
+     *
      * @return __return_hasFile_type__ __return_hasFile_description__
      */
     public function hasFile()
@@ -121,7 +124,7 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     }
 
     /**
-     * __method_output_description__
+     * __method_output_description__.
      */
     public function output()
     {

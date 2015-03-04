@@ -26,12 +26,14 @@ $htmlOptions = ['class' => 'list-group ic-access-list'];
 if (!$disableFields) {
     $types = [];
     foreach (Yii::$app->collectors['types']->getAll() as $typeItem) {
-        if (!$typeItem->active) { continue; }
+        if (!$typeItem->active) {
+            continue;
+        }
         $types[$typeItem->systemId] = [
             'label' => $typeItem->object->title->upperSingular,
             'possibleRoles' => $typeItem->object->possibleRoles,
             'initialRole' => $typeItem->object->initialRole,
-            'requiredRoles' => $typeItem->object->requiredRoles
+            'requiredRoles' => $typeItem->object->requiredRoles,
         ];
     }
     $dataAccess = ['selector' => ['browse' => ['data' => []], 'search' => []]];
@@ -52,7 +54,7 @@ if ($publicGroup) {
         'requestorObject' => $publicGroup['object'],
         'helpText' => 'Access level for the public',
         'maxRoleLevel' => $publicGroup['maxRoleLevel'],
-        'htmlOptions' => ['class' => 'list-group-item-warning']
+        'htmlOptions' => ['class' => 'list-group-item-warning'],
     ];
     echo $this->renderFile('@cascade/views/object/access_requestor.php', array_merge($baseRequestorParams, $requestorParams), $this);
     unset($objectRoles[$publicGroup['object']->primaryKey]);
@@ -63,7 +65,7 @@ if ($primaryAccount) {
         'requestorObject' => $primaryAccount['object'],
         'helpText' => 'Access level for internal staff',
         'maxRoleLevel' => $primaryAccount['maxRoleLevel'],
-        'htmlOptions' => ['class' => 'list-group-item-info']
+        'htmlOptions' => ['class' => 'list-group-item-info'],
     ];
     echo $this->renderFile('@cascade/views/object/access_requestor.php', array_merge($baseRequestorParams, $requestorParams), $this);
     unset($objectRoles[$primaryAccount['object']->primaryKey]);

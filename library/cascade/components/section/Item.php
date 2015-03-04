@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,7 +12,7 @@ use infinite\base\collector\CollectedObjectInterface;
 use infinite\base\collector\CollectedObjectTrait;
 
 /**
- * Item [@doctodo write class description for Item]
+ * Item [@doctodo write class description for Item].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

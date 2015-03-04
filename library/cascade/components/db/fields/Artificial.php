@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,7 @@
 namespace cascade\components\db\fields;
 
 /**
- * Artificial [@doctodo write class description for Artificial]
+ * Artificial [@doctodo write class description for Artificial].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -36,7 +37,7 @@ class Artificial extends Base
     public $multiline = false;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getField()
     {
@@ -44,7 +45,7 @@ class Artificial extends Base
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function setFormField($value)
     {
@@ -52,7 +53,7 @@ class Artificial extends Base
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getFormField()
     {

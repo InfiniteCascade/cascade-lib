@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -19,7 +20,6 @@ use infinite\base\collector\CollectedObjectTrait;
  * @property double $system_version
  * @property string $created
  * @property string $modified
- *
  * @property Taxonomy[] $taxonomies
  * @property Registry $id
  *
@@ -66,7 +66,7 @@ class TaxonomyType extends \cascade\components\db\ActiveRecord implements \infin
             [['system_version'], 'number'],
             [['created', 'modified'], 'safe'],
             [['id'], 'string', 'max' => 36],
-            [['name', 'system_id'], 'string', 'max' => 255]
+            [['name', 'system_id'], 'string', 'max' => 255],
         ];
     }
 
@@ -86,7 +86,8 @@ class TaxonomyType extends \cascade\components\db\ActiveRecord implements \infin
     }
 
     /**
-     * Get taxonomies
+     * Get taxonomies.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getTaxonomies()
@@ -95,7 +96,8 @@ class TaxonomyType extends \cascade\components\db\ActiveRecord implements \infin
     }
 
     /**
-     * Get id
+     * Get id.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getId()

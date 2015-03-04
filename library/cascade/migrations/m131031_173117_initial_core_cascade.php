@@ -14,7 +14,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'system_id' => 'string NOT NULL',
             'last_sync' => 'datetime DEFAULT NULL',
             'created' => 'datetime DEFAULT NULL',
-            'modified' => 'datetime DEFAULT NULL'
+            'modified' => 'datetime DEFAULT NULL',
         ]);
         // $this->addPrimaryKey('dataInterfacePk', 'data_interface', 'id');
         $this->addForeignKey('dataInterfaceRegistry', 'data_interface', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
@@ -24,11 +24,10 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->createIndex('auditDataInterface', 'audit', 'data_interface_id', false);
         $this->addForeignKey('auditDataInterface', 'audit', 'data_interface_id', 'data_interface', 'id', 'CASCADE', 'CASCADE');
 
-
         // user addition
         $this->addColumn('user', 'object_individual_id', 'char(36) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL AFTER id');
         $this->addColumn('user', 'photo_storage_id', 'char(36) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL AFTER object_individual_id');
-        
+
         $this->createIndex('userIndividual', 'user', 'object_individual_id', false);
         $this->createIndex('userPhotoStorage', 'user', 'photo_storage_id', false);
         $this->addForeignKey('userPhotoStorage', 'user', 'photo_storage_id', 'storage', 'id', 'SET NULL', 'CASCADE');
@@ -57,7 +56,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'registry_id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL DEFAULT \'\'',
             'key' => 'string NOT NULL',
             'created' => 'datetime DEFAULT NULL',
-            'modified' => 'datetime DEFAULT NULL'
+            'modified' => 'datetime DEFAULT NULL',
         ]);
         // $this->addPrimaryKey('keyTranslationPk', 'key_translation', 'id');
         $this->createIndex('keyTranslationInterface', 'key_translation', 'data_interface_id', false);
@@ -80,7 +79,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'session' => 'char(32) DEFAULT NULL',
             'last_modified' => 'datetime DEFAULT NULL',
             'last_accessed' => 'datetime DEFAULT NULL',
-            'first_accessed' => 'datetime DEFAULT NULL'
+            'first_accessed' => 'datetime DEFAULT NULL',
         ]);
         $this->addPrimaryKey('objectFamiliarityPk', 'object_familiarity', 'object_id,user_id');
         $this->createIndex('objectFamiliarityUser', 'object_familiarity', 'user_id', false);
@@ -96,7 +95,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'name' => 'string DEFAULT NULL',
             'value_type' => 'string NOT NULL',
             'created' => 'datetime DEFAULT NULL',
-            'modified' => 'datetime DEFAULT NULL'
+            'modified' => 'datetime DEFAULT NULL',
         ]);
         // $this->addPrimaryKey('metaKeyPk', 'meta_key', 'id');
         $this->addForeignKey('metaKeyRegistry', 'meta_key', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
@@ -112,7 +111,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'value_float' => 'float DEFAULT NULL',
             'value_datetime' => 'datetime DEFAULT NULL',
             'created' => 'datetime DEFAULT NULL',
-            'modified' => 'datetime DEFAULT NULL'
+            'modified' => 'datetime DEFAULT NULL',
         ]);
 
         // $this->addPrimaryKey('metaPk', 'meta', 'id');
@@ -129,7 +128,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'name' => 'string NOT NULL',
             'system_version' => 'float DEFAULT NULL',
             'created' => 'datetime DEFAULT NULL',
-            'modified' => 'datetime DEFAULT NULL'
+            'modified' => 'datetime DEFAULT NULL',
         ]);
         $this->createIndex('objectTypeName', 'object_type', 'name', true);
         $this->addForeignKey('objectTypeRegistry', 'object_type', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
@@ -139,7 +138,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->createTable('relation_taxonomy', [
             'id' => 'bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'relation_id' => 'bigint unsigned NOT NULL',
-            'taxonomy_id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL'
+            'taxonomy_id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
         ]);
         // $this->addPrimaryKey('primary0', 'relation_taxonomy', 'id');
         $this->createIndex('rtRelation', 'relation_taxonomy', 'relation_id', false);
@@ -152,7 +151,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
         $this->createTable('object_taxonomy', [
             'id' => 'bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'object_id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
-            'taxonomy_id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL'
+            'taxonomy_id' => 'char(36) CHARACTER SET ascii COLLATE ascii_bin NOT NULL',
         ]);
         // $this->addPrimaryKey('primary0', 'object_taxonomy', 'id');
         $this->createIndex('otRelation', 'object_taxonomy', 'object_id', false);
@@ -168,7 +167,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'name' => 'string NOT NULL',
             'system_id' => 'string DEFAULT NULL',
             'created' => 'datetime DEFAULT NULL',
-            'modified' => 'datetime DEFAULT NULL'
+            'modified' => 'datetime DEFAULT NULL',
         ]);
         // $this->addPrimaryKey('taxonomyPk', 'taxonomy', 'id');
         $this->createIndex('taxonomyType', 'taxonomy', 'taxonomy_type_id', false);
@@ -183,7 +182,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'system_id' => 'string DEFAULT NULL',
             'system_version' => 'float unsigned DEFAULT NULL',
             'created' => 'datetime DEFAULT NULL',
-            'modified' => 'datetime DEFAULT NULL'
+            'modified' => 'datetime DEFAULT NULL',
         ]);
         // $this->addPrimaryKey('taxonomyTypePk', 'taxonomy_type', 'id');
         $this->addForeignKey('taxonomyTypeRegistry', 'taxonomy_type', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
@@ -195,7 +194,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'handler' => 'string(255) DEFAULT NULL',
             'data' => 'blob DEFAULT NULL',
             'created' => 'datetime DEFAULT NULL',
-            'modified' => 'datetime DEFAULT NULL'
+            'modified' => 'datetime DEFAULT NULL',
         ]);
 
         $this->addForeignKey('storageEngineRegistry', 'storage_engine', 'id', 'registry', 'id', 'CASCADE', 'CASCADE');
@@ -210,7 +209,7 @@ class m131031_173117_initial_core_cascade extends \infinite\db\Migration
             'type' => 'string(100) DEFAULT NULL',
             'size' => 'integer(11) unsigned DEFAULT NULL',
             'created' => 'datetime DEFAULT NULL',
-            'modified' => 'datetime DEFAULT NULL'
+            'modified' => 'datetime DEFAULT NULL',
         ]);
 
         $this->createIndex('storageStorageEngine', 'storage', 'storage_engine_id', false);

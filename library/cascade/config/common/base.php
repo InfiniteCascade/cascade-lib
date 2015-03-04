@@ -22,12 +22,12 @@ $base = [
     'id' => 'cascade',
     'name' => 'Cascade',
     'basePath' => INFINITE_APP_PATH,
-    'vendorPath' => INFINITE_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'vendor',
-    'runtimePath' => INFINITE_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'runtime',
+    'vendorPath' => INFINITE_APP_INSTALL_PATH.DIRECTORY_SEPARATOR.'vendor',
+    'runtimePath' => INFINITE_APP_INSTALL_PATH.DIRECTORY_SEPARATOR.'runtime',
     'bootstrap' => ['collectors', Bootstrap::className()],
     'language' => 'en',
-    'modules' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'modules.php'),
-    'extensions' => include(INFINITE_APP_VENDOR_PATH . DIRECTORY_SEPARATOR . 'yiisoft'. DIRECTORY_SEPARATOR . 'extensions.php'),
+    'modules' => include(INFINITE_APP_ENVIRONMENT_PATH.DIRECTORY_SEPARATOR.'modules.php'),
+    'extensions' => include(INFINITE_APP_VENDOR_PATH.DIRECTORY_SEPARATOR.'yiisoft'.DIRECTORY_SEPARATOR.'extensions.php'),
 
     // application components
     'components' => [
@@ -35,27 +35,27 @@ $base = [
             'class' => ClassManager::className(),
         ],
         'fileStorage' => [
-            'class' => FileStorage::className()
+            'class' => FileStorage::className(),
         ],
-        'db' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . "database.php"),
+        'db' => include(INFINITE_APP_ENVIRONMENT_PATH.DIRECTORY_SEPARATOR."database.php"),
         'gk' => [
             'class' => Gatekeeper::className(),
             'authority' => [
                 'type' => 'Individual',
-            ]
+            ],
         ],
-        'redis' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'redis.php'),
-        'collectors' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'collectors.php'),
+        'redis' => include(INFINITE_APP_ENVIRONMENT_PATH.DIRECTORY_SEPARATOR.'redis.php'),
+        'collectors' => include(INFINITE_APP_ENVIRONMENT_PATH.DIRECTORY_SEPARATOR.'collectors.php'),
         'cache' => ['class' => Cache::className()],
         'fileCache' => ['class' => FileCache::className()],
         'errorHandler' => [
-            'discardExistingOutput' => false
+            'discardExistingOutput' => false,
         ],
         'view' => [
             'class' => View::className(),
         ],
         'response' => [
-            'class' => Response::className()
+            'class' => Response::className(),
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -67,16 +67,17 @@ $base = [
             ],
         ],
     ],
-    'params' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . "params.php"),
+    'params' => include(INFINITE_APP_ENVIRONMENT_PATH.DIRECTORY_SEPARATOR."params.php"),
 ];
 if (!extension_loaded('intl')) {
     $base['components']['formatter'] = [
-        'class' => BaseFormatter::className()
+        'class' => BaseFormatter::className(),
     ];
 } else {
     $base['components']['formatter'] = [
         'class' => I18nFormatter::className(),
-        'dateFormat' => 'MM/dd/yyyy'
+        'dateFormat' => 'MM/dd/yyyy',
     ];
 }
+
 return $base;

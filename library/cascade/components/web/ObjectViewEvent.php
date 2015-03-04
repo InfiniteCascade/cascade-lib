@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,7 @@
 namespace cascade\components\web;
 
 /**
- * ObjectViewEvent [@doctodo write class description for ObjectViewEvent]
+ * ObjectViewEvent [@doctodo write class description for ObjectViewEvent].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -32,22 +33,29 @@ class ObjectViewEvent extends \yii\base\Event
     protected $_objectType;
 
     /**
-     * __method_handleWith_description__
-     * @param __param_callable_type__    $callable __param_callable_description__
-     * @param boolean                    $always   __param_always_description__ [optional]
+     * __method_handleWith_description__.
+     *
+     * @param __param_callable_type__ $callable __param_callable_description__
+     * @param boolean                 $always   __param_always_description__ [optional]
+     *
      * @return __return_handleWith_type__ __return_handleWith_description__
      */
     public function handleWith($callable, $always = false)
     {
-        if ($this->handled && !$always) { return false; }
-        if (!is_callable($callable)) { return false; }
+        if ($this->handled && !$always) {
+            return false;
+        }
+        if (!is_callable($callable)) {
+            return false;
+        }
         call_user_func($callable, $this);
 
         return false;
     }
 
     /**
-     * Set object
+     * Set object.
+     *
      * @param __param_object_type__ $object __param_object_description__
      */
     public function setObject($object)
@@ -59,7 +67,8 @@ class ObjectViewEvent extends \yii\base\Event
     }
 
     /**
-     * Get object
+     * Get object.
+     *
      * @return __return_getObject_type__ __return_getObject_description__
      */
     public function getObject()
@@ -68,7 +77,8 @@ class ObjectViewEvent extends \yii\base\Event
     }
 
     /**
-     * Set object type
+     * Set object type.
+     *
      * @param __param_type_type__ $type __param_type_description__
      */
     public function setObjectType($type)
@@ -84,7 +94,8 @@ class ObjectViewEvent extends \yii\base\Event
     }
 
     /**
-     * Get object type
+     * Get object type.
+     *
      * @return __return_getObjectType_type__ __return_getObjectType_description__
      */
     public function getObjectType()

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -18,7 +19,6 @@ use Yii;
  * @property string $key
  * @property string $created
  * @property string $modified
- *
  * @property Registry $registry
  * @property DataInterface $dataInterface
  *
@@ -51,7 +51,7 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
             [['key'], 'required'],
             [['created', 'modified'], 'safe'],
             [['data_interface_id', 'registry_id'], 'string', 'max' => 36],
-            [['key'], 'string', 'max' => 255]
+            [['key'], 'string', 'max' => 255],
         ];
     }
 
@@ -71,9 +71,12 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get object
-     * @param boolean                   $checkAccess __param_checkAccess_description__ [optional]
+     * Get object.
+     *
+     * @param boolean $checkAccess __param_checkAccess_description__ [optional]
+     *
      * @return __return_getObject_type__ __return_getObject_description__
+     *
      * @throws \ __exception_\_description__
      * @throws \ __exception_\_description__
      */
@@ -83,17 +86,18 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
 
         $return = $registryClass::getObject($this->registry_id, $checkAccess);
 
-            if (get_class($return) === 'cascade\models\Registry') {
-                \d($this->registry_id);
-                throw new \Exception("TRANSLATION WHATTTT AGAIN?!");
-                exit;
-            }
+        if (get_class($return) === 'cascade\models\Registry') {
+            \d($this->registry_id);
+            throw new \Exception("TRANSLATION WHATTTT AGAIN?!");
+            exit;
+        }
 
         return $return;
     }
 
     /**
-     * Get registry
+     * Get registry.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getRegistry()
@@ -102,7 +106,8 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get data interface
+     * Get data interface.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getDataInterface()

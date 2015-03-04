@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,13 +9,12 @@
 namespace cascade\components\security;
 
 use Yii;
-
 use infinite\base\exceptions\Exception;
 use cascade\modules\core\TypeAccount\models\ObjectAccount;
 use infinite\db\Query;
 
 /**
- * Gatekeeper [@doctodo write class description for Gatekeeper]
+ * Gatekeeper [@doctodo write class description for Gatekeeper].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -26,7 +26,8 @@ class Gatekeeper extends \infinite\security\Gatekeeper
     public $objectAccessClass = 'cascade\components\security\ObjectAccess';
 
     /**
-     * Get primary account
+     * Get primary account.
+     *
      * @return __return_getPrimaryAccount_type__ __return_getPrimaryAccount_description__
      */
     public function getPrimaryAccount()
@@ -35,15 +36,14 @@ class Gatekeeper extends \infinite\security\Gatekeeper
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function setAuthority($authority)
     {
         if (!isset($authority['type'])
             || !($authorityTypeItem = Yii::$app->collectors['types']->getOne($authority['type']))
-            || !($authorityType = $authorityTypeItem->object))
-        {
-            throw new Exception("Access Control Authority is not set up correctly!" . print_r($authority, true));
+            || !($authorityType = $authorityTypeItem->object)) {
+            throw new Exception("Access Control Authority is not set up correctly!".print_r($authority, true));
         }
         unset($authority['type']);
         $authority['handler'] = $authorityType;
@@ -52,7 +52,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getAuthority()
     {
@@ -64,13 +64,13 @@ class Gatekeeper extends \infinite\security\Gatekeeper
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getControlledObject($object, $modelClass = null, $params = [])
     {
         $defaultParams = [
             'followParents' => true,
-            'doNotFollow' => []
+            'doNotFollow' => [],
         ];
         $params = array_merge($defaultParams, $params);
         $objects = [];
@@ -86,7 +86,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
             }
         }
         if (!empty($modelClass)) {
-            $dummyModel = new $modelClass;
+            $dummyModel = new $modelClass();
             if (isset($dummyModel->objectType) && ($objectType = $dummyModel->objectType) && $objectType && isset($objectType->objectTypeModel)) {
                 $objects[] = $objectType->objectTypeModel->primaryKey;
 
@@ -117,7 +117,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function buildInnerRoleCheckConditions(&$innerOnConditions, $innerAlias, $query)
     {
@@ -131,10 +131,10 @@ class Gatekeeper extends \infinite\security\Gatekeeper
             if (isset($subquery->where[1])) {
                 $firstKey = array_keys($subquery->where[1])[0];
                 unset($subquery->where[1][$firstKey]);
-                $subquery->where[1] = $firstKey .' = {{' .$query->primaryAlias .'}}.[['. $query->primaryTablePk .']]';
+                $subquery->where[1] = $firstKey.' = {{'.$query->primaryAlias.'}}.[['.$query->primaryTablePk.']]';
             }
-            $subquery->select(['{{'. $superInnerAlias .'}}.[[parent_object_id]]']);
-            $innerOnConditions[] = '{{'. $innerAlias .'}}.[[controlled_object_id]] IN ('.$subquery->createCommand()->rawSql.')';
+            $subquery->select(['{{'.$superInnerAlias.'}}.[[parent_object_id]]']);
+            $innerOnConditions[] = '{{'.$innerAlias.'}}.[[controlled_object_id]] IN ('.$subquery->createCommand()->rawSql.')';
             //echo $subquery->createCommand()->rawSql;exit;
         }
 
@@ -142,7 +142,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     protected function getActionMap($controlledObject = null)
     {

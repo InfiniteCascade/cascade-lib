@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -19,7 +20,6 @@ namespace cascade\models;
  * @property string $value_datetime
  * @property string $created
  * @property string $modified
- *
  * @property MetaKey $metaKey
  * @property Registry $registry
  *
@@ -54,7 +54,7 @@ class Meta extends \cascade\components\db\ActiveRecord
             [['value_int'], 'integer'],
             [['value_float'], 'number'],
             [['value_datetime', 'created', 'modified'], 'safe'],
-            [['registry_id', 'meta_key_id'], 'string', 'max' => 36]
+            [['registry_id', 'meta_key_id'], 'string', 'max' => 36],
         ];
     }
 
@@ -77,7 +77,8 @@ class Meta extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get meta key
+     * Get meta key.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getMetaKey()
@@ -86,7 +87,8 @@ class Meta extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get registry
+     * Get registry.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getRegistry()

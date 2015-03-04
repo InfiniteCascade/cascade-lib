@@ -2,7 +2,7 @@
 use infinite\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/**
+/*
  * @var yii\base\View $this
  * @var yii\widgets\ActiveForm $form
  * @var cascade\models\LoginForm $model

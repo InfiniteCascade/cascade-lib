@@ -5,8 +5,8 @@ return [
     'class' => 'infinite\base\collector\Component',
     'cacheTime' => 120,
     'collectors' => [
-        'roles' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'roles.php'),
-        'identityProviders' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'identityProviders.php'),
+        'roles' => include(INFINITE_APP_ENVIRONMENT_PATH.DIRECTORY_SEPARATOR.'roles.php'),
+        'identityProviders' => include(INFINITE_APP_ENVIRONMENT_PATH.DIRECTORY_SEPARATOR.'identityProviders.php'),
         'types' => [
             'class' => 'cascade\components\types\Collector',
         ],
@@ -18,7 +18,7 @@ return [
         ],
         'widgets' => [
             'class' => 'cascade\components\web\widgets\Collector',
-            'lazyLoad' => false
+            'lazyLoad' => false,
         ],
         'storageHandlers' => [
             'class' => 'cascade\components\storageHandlers\Collector',
@@ -27,27 +27,27 @@ return [
                     'object' => [
                         'class' => 'cascade\components\storageHandlers\core\LocalHandler',
                         'bucketFormat' => '{year}.{month}',
-                        'baseDir' => INFINITE_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'storage'
+                        'baseDir' => INFINITE_APP_INSTALL_PATH.DIRECTORY_SEPARATOR.'storage',
                     ],
-                    'publicEngine' => true
-                ]
-            ]
+                    'publicEngine' => true,
+                ],
+            ],
         ],
         'sections' => [
             'class' => 'cascade\components\section\Collector',
-            'lazyLoad' => $lazyLoad
+            'lazyLoad' => $lazyLoad,
         ],
         'dataInterfaces' => [
             'class' => 'cascade\components\dataInterface\Collector',
-            'lazyLoad' => $lazyLoad
+            'lazyLoad' => $lazyLoad,
         ],
         'tools' => [
             'class' => 'cascade\components\tools\Collector',
-            'lazyLoad' => $lazyLoad
+            'lazyLoad' => $lazyLoad,
         ],
         'reports' => [
             'class' => 'cascade\components\reports\Collector',
-            'lazyLoad' => $lazyLoad
-        ]
-    ]
+            'lazyLoad' => $lazyLoad,
+        ],
+    ],
 ];

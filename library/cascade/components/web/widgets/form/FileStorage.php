@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -13,7 +14,7 @@ use cascade\components\web\widgets\Widget;
 use cascade\models\StorageEngine;
 
 /**
- * FileStorage [@doctodo write class description for FileStorage]
+ * FileStorage [@doctodo write class description for FileStorage].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -25,7 +26,7 @@ class FileStorage extends Widget
     public $item;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function generateContent()
     {
@@ -55,8 +56,10 @@ class FileStorage extends Widget
     }
 
     /**
-     * __method_prepareItem_description__
-     * @param __param_engine_type__       $engine __param_engine_description__
+     * __method_prepareItem_description__.
+     *
+     * @param __param_engine_type__ $engine __param_engine_description__
+     *
      * @return __return_prepareItem_type__ __return_prepareItem_description__
      */
     public function prepareItem($engine)
@@ -69,15 +72,19 @@ class FileStorage extends Widget
     }
 
     /**
-     * __method_renderItem_description__
+     * __method_renderItem_description__.
+     *
      * @param __param_storageEngine_type__ $storageEngine __param_storageEngine_description__
-     * @return __return_renderItem_type__   __return_renderItem_description__
+     *
+     * @return __return_renderItem_type__ __return_renderItem_description__
      */
     public function renderItem($storageEngine)
     {
         $item = $this->prepareItem($storageEngine);
         $rendered = $storageEngine->storageHandler->object->generate($item);
-        if (!$rendered) { return false; }
+        if (!$rendered) {
+            return false;
+        }
         $hiddenItem = clone $item;
         $hiddenItem->attribute = Html::changeAttribute($hiddenItem->attribute, 'storageEngine');
         $item->model->storageEngine = $storageEngine->primaryKey;

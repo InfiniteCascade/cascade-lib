@@ -4,7 +4,7 @@ return [
     'initialItems' => [],
     'handlers' => [
         'Ldap' => [
-            'class' => 'infinite\security\identity\providers\Ldap'
-        ]
-    ]
+            'class' => 'infinite\security\identity\providers\Ldap',
+        ],
+    ],
 ];

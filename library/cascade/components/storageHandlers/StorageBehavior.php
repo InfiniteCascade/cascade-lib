@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,14 +9,13 @@
 namespace cascade\components\storageHandlers;
 
 use Yii;
-
 use yii\base\Event;
 use infinite\web\UploadedFile;
 use infinite\base\FileInterface;
 use infinite\base\exceptions\Exception;
 
 /**
- * StorageBehavior [@doctodo write class description for StorageBehavior]
+ * StorageBehavior [@doctodo write class description for StorageBehavior].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -36,6 +36,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Converts object to string.
+     *
      * @return __return___toString_type__ __return___toString_description__
      */
     public function __toString()
@@ -44,7 +45,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function events()
     {
@@ -59,7 +60,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function safeAttributes()
     {
@@ -67,8 +68,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * Set storage
+     * Set storage.
+     *
      * @param __param_value_type__ $value __param_value_description__
+     *
      * @throws Exception __exception_Exception_description__
      */
     public function setStorage($value)
@@ -82,7 +85,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * Get storage
+     * Get storage.
+     *
      * @return __return_getStorage_type__ __return_getStorage_description__
      */
     public function getStorage()
@@ -91,11 +95,12 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
             return $this->owner->{$this->storageAttribute};
         }
 
-        return null;
+        return;
     }
 
     /**
-     * __method_loadPostFile_description__
+     * __method_loadPostFile_description__.
+     *
      * @param string $tabId __param_tabId_description__ [optional]
      */
     public function loadPostFile($tabId = null)
@@ -111,8 +116,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_beforeSave_description__
-     * @param __param_event_type__       $event __param_event_description__
+     * __method_beforeSave_description__.
+     *
+     * @param __param_event_type__ $event __param_event_description__
+     *
      * @return __return_beforeSave_type__ __return_beforeSave_description__
      */
     public function beforeSave($event)
@@ -122,7 +129,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         }
         if (is_object($this->owner->{$this->storageAttribute}) && !$this->storageEngine->storageHandler->object->beforeSave($this->storageEngine, $this->owner, $this->storageAttribute)) {
             $event->isValid = false;
-            $this->owner->addError($this->storageAttribute, 'Unable to save file in storage engine. Try again later. ('.$this->storageEngine->storageHandler->object->error . ')');
+            $this->owner->addError($this->storageAttribute, 'Unable to save file in storage engine. Try again later. ('.$this->storageEngine->storageHandler->object->error.')');
+
             return false;
         }
     }
@@ -145,14 +153,17 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         }
         if (!$this->storageEngine->storageHandler->object->afterDelete($this->storageEngine, $storageObject)) {
             $event->isValid = false;
+
             return false;
         }
         $storageObject->delete();
     }
 
     /**
-     * __method_afterDelete_description__
-     * @param __param_event_type__        $event __param_event_description__
+     * __method_afterDelete_description__.
+     *
+     * @param __param_event_type__ $event __param_event_description__
+     *
      * @return __return_afterDelete_type__ __return_afterDelete_description__
      */
     public function afterDelete($event)
@@ -161,30 +172,44 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_serve_description__
+     * __method_serve_description__.
+     *
      * @return __return_serve_type__ __return_serve_description__
      */
     public function serve()
     {
-        if (!$this->storageEngine || !$this->storageEngine->storageHandler) { return false; }
+        if (!$this->storageEngine || !$this->storageEngine->storageHandler) {
+            return false;
+        }
         $storageObject = $this->storageObject;
-        if (!$storageObject) { return false; }
-        if (!$this->storageEngine->storageHandler->object->serve($storageObject)) { return false; }
-        
+        if (!$storageObject) {
+            return false;
+        }
+        if (!$this->storageEngine->storageHandler->object->serve($storageObject)) {
+            return false;
+        }
+
         return true;
     }
 
     public function getStoragePath()
     {
-         if (!$this->storageEngine || !$this->storageEngine->storageHandler) { return false; }
+        if (!$this->storageEngine || !$this->storageEngine->storageHandler) {
+            return false;
+        }
         $storageObject = $this->storageObject;
-        if (!$storageObject) { return false; }
-        if (!method_exists($this->storageEngine->storageHandler->object, 'getPath')) { return false; }
-        
+        if (!$storageObject) {
+            return false;
+        }
+        if (!method_exists($this->storageEngine->storageHandler->object, 'getPath')) {
+            return false;
+        }
+
         return $this->storageEngine->storageHandler->object->getPath($storageObject);
     }
     /**
-     * Get storage object
+     * Get storage object.
+     *
      * @return __return_getStorageObject_type__ __return_getStorageObject_description__
      */
     public function getStorageObject()
@@ -193,12 +218,15 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
             return false;
         }
         $registryClass = Yii::$app->classes['Registry'];
+
         return $registryClass::getObject($this->owner->{$this->storageAttribute});
     }
 
     /**
-     * __method_beforeValidate_description__
-     * @param __param_event_type__           $event __param_event_description__
+     * __method_beforeValidate_description__.
+     *
+     * @param __param_event_type__ $event __param_event_description__
+     *
      * @return __return_beforeValidate_type__ __return_beforeValidate_description__
      */
     public function beforeValidate($event)
@@ -208,15 +236,18 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         }
         if (empty($this->storageEngine)) {
             $this->owner->addError($this->storageAttribute, 'Unknown storage engine!');
+
             return false;
         } elseif (!$this->storageEngine->storageHandler->object->validate($this->storageEngine, $this->owner, $this->storageAttribute)) {
             return false;
         }
+
         return true;
     }
 
     /**
-     * Get storage engine
+     * Get storage engine.
+     *
      * @return __return_getStorageEngine_type__ __return_getStorageEngine_description__
      */
     public function getStorageEngine()
@@ -230,8 +261,10 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * Set storage engine
-     * @param __param_value_type__             $value __param_value_description__
+     * Set storage engine.
+     *
+     * @param __param_value_type__ $value __param_value_description__
+     *
      * @return __return_setStorageEngine_type__ __return_setStorageEngine_description__
      */
     public function setStorageEngine($value)

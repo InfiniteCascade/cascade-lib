@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -15,7 +16,7 @@ use cascade\components\db\fields\formats\Binary as BinaryType;
 use cascade\components\db\fields\formats\Text as TextType;
 
 /**
- * Base [@doctodo write class description for Base]
+ * Base [@doctodo write class description for Base].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -91,7 +92,6 @@ abstract class Base extends \infinite\base\Object
     const LOCATION_HEADER = 0x02;
     const LOCATION_SUBHEADER = 0x03;
 
-
     public function __clone()
     {
         $this->formField = clone $this->formField;
@@ -104,7 +104,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {
@@ -118,9 +118,9 @@ abstract class Base extends \infinite\base\Object
         }
     }
 
-
     /**
-     * __method_determineFormatClass_description__
+     * __method_determineFormatClass_description__.
+     *
      * @return __return_determineFormatClass_type__ __return_determineFormatClass_description__
      */
     public function determineFormatClass()
@@ -142,7 +142,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Get field
+     * Get field.
+     *
      * @return __return_getField_type__ __return_getField_description__
      */
     public function getField()
@@ -151,11 +152,12 @@ abstract class Base extends \infinite\base\Object
             return $this->fieldSchema->name;
         }
 
-        return null;
+        return;
     }
 
     /**
-     * __method_hasFile_description__
+     * __method_hasFile_description__.
+     *
      * @return __return_hasFile_type__ __return_hasFile_description__
      */
     public function hasFile()
@@ -164,7 +166,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Set locations
+     * Set locations.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setLocations($value)
@@ -173,7 +176,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Get locations
+     * Get locations.
+     *
      * @return __return_getLocations_type__ __return_getLocations_description__
      */
     public function getLocations()
@@ -186,7 +190,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_determineLocations_description__
+     * __method_determineLocations_description__.
+     *
      * @return __return_determineLocations_type__ __return_determineLocations_description__
      */
     public function determineLocations()
@@ -199,9 +204,12 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Set form field
-     * @param __param_value_type__         $value __param_value_description__
+     * Set form field.
+     *
+     * @param __param_value_type__ $value __param_value_description__
+     *
      * @return __return_setFormField_type__ __return_setFormField_description__
+     *
      * @throws Exception __exception_Exception_description__
      */
     public function setFormField($value)
@@ -229,8 +237,10 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Set human
+     * Set human.
+     *
      * @param unknown $value
+     *
      * @return unknown
      */
     public function setHuman($value)
@@ -241,7 +251,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Get human
+     * Get human.
+     *
      * @return unknown
      */
     public function getHuman()
@@ -254,7 +265,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Get multiline
+     * Get multiline.
+     *
      * @return __return_getMultiline_type__ __return_getMultiline_description__
      */
     public function getMultiline()
@@ -267,7 +279,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Set multiline
+     * Set multiline.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setMultiline($value)
@@ -276,7 +289,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Get form field
+     * Get form field.
+     *
      * @return unknown
      */
     public function getFormField()
@@ -289,7 +303,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Get model
+     * Get model.
+     *
      * @return unknown
      */
     public function getModel()
@@ -304,6 +319,7 @@ abstract class Base extends \infinite\base\Object
     public function resetModel()
     {
         $this->_model = null;
+
         return $this->_model;
     }
 
@@ -312,8 +328,10 @@ abstract class Base extends \infinite\base\Object
         return isset($this->_model);
     }
     /**
-     * Set model
+     * Set model.
+     *
      * @param unknown $value
+     *
      * @return unknown
      */
     public function setModel($value)
@@ -322,6 +340,7 @@ abstract class Base extends \infinite\base\Object
         if (is_object($value) && $this->_attributes) {
             $this->_model->attributes = $this->_attributes;
         }
+
         return true;
     }
 
@@ -339,7 +358,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Get format
+     * Get format.
+     *
      * @return unknown
      */
     public function getFormat()
@@ -352,8 +372,10 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Set format
+     * Set format.
+     *
      * @param unknown $value
+     *
      * @return unknown
      */
     public function setFormat($value)
@@ -369,7 +391,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Get formatted value
+     * Get formatted value.
+     *
      * @return __return_getFormattedValue_type__ __return_getFormattedValue_description__
      */
     public function getFormattedValue()
@@ -385,11 +408,13 @@ abstract class Base extends \infinite\base\Object
         if (is_object($formattedValue)) {
             $formattedValue = $formattedValue->viewLink;
         }
+
         return $formattedValue;
     }
 
     /**
-     * Get form value
+     * Get form value.
+     *
      * @return __return_getFormValue_type__ __return_getFormValue_description__
      */
     public function getFormValue()
@@ -406,7 +431,8 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Get value package
+     * Get value package.
+     *
      * @return __return_getValuePackage_type__ __return_getValuePackage_description__
      */
     public function getValuePackage()
@@ -415,20 +441,22 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Get value
+     * Get value.
+     *
      * @return __return_getValue_type__ __return_getValue_description__
      */
     public function getValue()
     {
         if (!isset($this->model->{$this->field})) {
-            return null;
+            return;
         }
 
         return $this->model->{$this->field};
     }
 
     /**
-     * Get label
+     * Get label.
+     *
      * @return unknown
      */
     public function getLabel()
@@ -441,23 +469,29 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * Set label
+     * Set label.
+     *
      * @param unknown $value
+     *
      * @return unknown
      */
     public function setLabel($value)
     {
         $this->_label = $value;
+
         return true;
     }
 
     public function getFilterSettings()
     {
-        if (!$this->human) { return false; }
+        if (!$this->human) {
+            return false;
+        }
         $settings = [];
         $settings['id'] = null;
         $settings['label'] = $this->label;
         $settings = array_merge($settings, $this->formField->filterSettings);
+
         return $settings;
     }
 }

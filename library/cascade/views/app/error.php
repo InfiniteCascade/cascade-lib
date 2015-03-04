@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-/**
+/*
  * @var yii\base\View $this
  * @var string $name
  * @var string $message

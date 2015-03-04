@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -28,12 +29,15 @@ trait FormObjectTrait
         if (isset($this->owner->generator)) {
             return $this->owner->getGenerator();
         }
+
         return Yii::createObject(['class' => $this->generatorClass]);
     }
 
     public function getSegment()
     {
-        if (is_null($this->owner)) { return false; }
+        if (is_null($this->owner)) {
+            return false;
+        }
         if ($this->owner instanceof Segment) {
             return $this->owner;
         }

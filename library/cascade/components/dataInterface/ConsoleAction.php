@@ -5,4 +5,3 @@ class ConsoleAction extends \infinite\action\ConsoleAction
 {
     use ActionTrait;
 }
-?>

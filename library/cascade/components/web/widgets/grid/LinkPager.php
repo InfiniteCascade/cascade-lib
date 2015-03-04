@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\web\widgets\grid;
 use infinite\helpers\Html;
 
 /**
- * LinkPager [@doctodo write class description for LinkPager]
+ * LinkPager [@doctodo write class description for LinkPager].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -22,7 +23,8 @@ class LinkPager extends \yii\widgets\LinkPager
     protected $_state;
 
     /**
-     * Get state
+     * Get state.
+     *
      * @return unknown
      */
     public function getState()
@@ -31,7 +33,8 @@ class LinkPager extends \yii\widgets\LinkPager
     }
 
     /**
-     * Set state
+     * Set state.
+     *
      * @param unknown $state
      */
     public function setState($state)
@@ -48,15 +51,16 @@ class LinkPager extends \yii\widgets\LinkPager
      * @param string  $class    the CSS class for the page button.
      * @param boolean $disabled whether this page button is disabled
      * @param boolean $active   whether this page button is active
-     * @return string  the rendering result
+     *
+     * @return string the rendering result
      */
     protected function renderPageButton($label, $page, $class, $disabled, $active)
     {
         if ($active) {
-            $class .= ' ' . $this->activePageCssClass;
+            $class .= ' '.$this->activePageCssClass;
         }
         if ($disabled) {
-            $class .= ' ' . $this->disabledPageCssClass;
+            $class .= ' '.$this->disabledPageCssClass;
         }
         $state = $this->getState();
         $state['page'] = $page + 1;
@@ -68,5 +72,4 @@ class LinkPager extends \yii\widgets\LinkPager
 
         return Html::tag('li', Html::a($label, $this->pagination->createUrl($page), ['data-page' => $page]), $options);
     }
-
 }

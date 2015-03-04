@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -9,12 +10,10 @@ namespace cascade\components\web\form\fields;
 
 use Yii;
 use infinite\helpers\Html;
-use cascade\models\Relation as RelationModel;
-
 use cascade\components\web\browser\Response as BrowserResponse;
 
 /**
- * Relation [@doctodo write class description for Relation]
+ * Relation [@doctodo write class description for Relation].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -40,7 +39,8 @@ class Relation extends Base
     }
 
     /**
-     * __method_generate_description__
+     * __method_generate_description__.
+     *
      * @return unknown
      */
     public function generate()
@@ -59,6 +59,7 @@ class Relation extends Base
             if (!isset($relationSettings['template'])) {
                 $relationSettings['template'] = 'hierarchy';
             }
+
             return $this->generateRelationField($relationSettings);
         } elseif ($this->inlineRelation) {
             //$this->model->setParentModel($this->modelField->baseModel, false);
@@ -69,14 +70,16 @@ class Relation extends Base
             $this->model->setParentModel($this->relatedObject);
             $formSegment = $this->relatedObject->objectType->getFormSegment($this->relatedObject, ['relationField' => $this->modelField]);
             $formSegment->owner = $this->owner;
+
             return $formSegment->generate();
         } else {
-            return null;
+            return;
         }
     }
 
     /**
-     * Get relation model field
+     * Get relation model field.
+     *
      * @return __return_getRelationModelField_type__ __return_getRelationModelField_description__
      */
     public function getRelationModelField()
@@ -92,8 +95,10 @@ class Relation extends Base
     }
 
     /**
-     * __method_generateRelationField_description__
-     * @param array                                 $initialSettings __param_initialSettings_description__ [optional]
+     * __method_generateRelationField_description__.
+     *
+     * @param array $initialSettings __param_initialSettings_description__ [optional]
+     *
      * @return __return_generateRelationField_type__ __return_generateRelationField_description__
      */
     protected function generateRelationField($initialSettings = [])
@@ -114,7 +119,7 @@ class Relation extends Base
         }
         $r['context']['role'] = $role = $this->modelField->relationship->companionRole($this->modelField->modelRole);
         $companionType = $this->modelField->relationship->companionRoleType($this->modelField->modelRole);
-        $r['selector']['inputLabel'] = 'Select '. $companionType->title->upperSingular;
+        $r['selector']['inputLabel'] = 'Select '.$companionType->title->upperSingular;
         //\d($r);exit;
 
         if (($modelTypeItem = $this->modelField->relationship->{$role}->collectorItem)) {
@@ -122,14 +127,14 @@ class Relation extends Base
             $r['selector']['browse']['root'] = $typeBundle->package();
         }
         $r['model'] = [
-            'prefix' => $this->model->formName() . $this->model->tabularPrefix,
-            'attributes' => array_merge($this->model->attributes, ['taxonomy_id' => $this->model->taxonomy_id])
+            'prefix' => $this->model->formName().$this->model->tabularPrefix,
+            'attributes' => array_merge($this->model->attributes, ['taxonomy_id' => $this->model->taxonomy_id]),
         ];
         if (!empty($this->modelField->value->primaryKey)) {
             $r['select'] = [
                 'id' => $this->modelField->value->primaryKey,
                 'descriptor' => $this->modelField->value->descriptor,
-                'subdescriptor' => $this->modelField->value->primarySubdescriptor
+                'subdescriptor' => $this->modelField->value->primarySubdescriptor,
             ];
         }
         if (!empty($r['model']['attributes']['start'])) {
@@ -143,7 +148,7 @@ class Relation extends Base
         $this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
         Html::addCssClass($this->htmlOptions, 'relationship');
         //$model->_moduleHandler = $this->modelField->relationship->companionRole($this->modelField->modelRole) .':'. $this->modelField->relationship->companionRoleType($this->modelField->modelRole)->systemId;
-        $parts[] = Html::activeHiddenInput($model, $this->model->tabularPrefix . '_moduleHandler');
+        $parts[] = Html::activeHiddenInput($model, $this->model->tabularPrefix.'_moduleHandler');
         $parts[] = Html::activeHiddenInput($model, $field, $this->htmlOptions);
 
         return implode($parts);
@@ -151,6 +156,7 @@ class Relation extends Base
 
     /**
      * Gets the value of relationSettings.
+     *
      * @return mixed
      */
     public function getLinkExisting()
@@ -160,7 +166,9 @@ class Relation extends Base
 
     /**
      * Sets the value of relationSettings.
+     *
      * @param mixed $relationSettings the link existing
+     *
      * @return self
      */
     public function setLinkExisting($relationSettings)
@@ -172,6 +180,7 @@ class Relation extends Base
 
     /**
      * Gets the value of linkMultiple.
+     *
      * @return mixed
      */
     public function getLinkMultiple()
@@ -181,7 +190,9 @@ class Relation extends Base
 
     /**
      * Sets the value of linkMultiple.
+     *
      * @param mixed $linkMultiple the link multiple
+     *
      * @return self
      */
     public function setLinkMultiple($linkMultiple)
@@ -190,5 +201,4 @@ class Relation extends Base
 
         return $this;
     }
-
 }

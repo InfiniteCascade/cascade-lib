@@ -15,9 +15,13 @@ $identity = $themeEngine->getIdentity($this);
 
 $itemTypes = [];
 foreach (Yii::$app->collectors['types']->getAll() as $type) {
-    if (empty($type->object)) { continue; }
-    if (empty($type->object->hasDashboard)) { continue; }
-    $itemTypes[$type->object->title .'-'.$type->systemId] = ['label' => $type->object->title->upperPlural, 'url' => ['/object/browse', 'type' => $type->systemId]];
+    if (empty($type->object)) {
+        continue;
+    }
+    if (empty($type->object->hasDashboard)) {
+        continue;
+    }
+    $itemTypes[$type->object->title.'-'.$type->systemId] = ['label' => $type->object->title->upperPlural, 'url' => ['/object/browse', 'type' => $type->systemId]];
 }
 ksort($itemTypes);
 $itemTypes = array_values($itemTypes);
@@ -31,12 +35,12 @@ TopNavBar::begin([
 if (!Yii::$app->user->isGuest) {
     $browseLabel = 'Browse';
     if (isset(Yii::$app->request->object)) {
-        $browseLabel .= ' ' . Html::tag('span', Yii::$app->request->object->objectType->title->upperPlural, ['class' => 'object-type']);
+        $browseLabel .= ' '.Html::tag('span', Yii::$app->request->object->objectType->title->upperPlural, ['class' => 'object-type']);
     }
     $topMenu = [];
     $topMenu[] = [
         'label' =>  '<span class="icon fa fa-home"></span> <span class="nav-label hidden-xs hidden-sm">Dashboard</span>',
-        'url' => ['/app/index']
+        'url' => ['/app/index'],
     ];
     $topMenu[] = [
         'label' =>  '<span class="icon fa fa-th"></span> <span class="nav-label hidden-xs hidden-sm">'.$browseLabel.'</span>',
@@ -49,21 +53,22 @@ if (!Yii::$app->user->isGuest) {
                     return true;
                 }
             }
+
             return false;
-        }
+        },
     ];
     $reports = Yii::$app->collectors['reports']->getAllActive();
     if (!empty($reports)) {
         $topMenu[] = [
             'label' =>  '<span class="icon fa fa-filter"></span> <span class="nav-label hidden-xs hidden-sm">Reports</span>',
-            'url' => ['/report']
+            'url' => ['/report'],
         ];
     }
     $tools = Yii::$app->collectors['tools']->getAllActive();
     if (!empty($tools)) {
         $topMenu[] = [
             'label' =>  '<span class="icon fa fa-wrench"></span> <span class="nav-label hidden-xs hidden-sm">Tools</span>',
-            'url' => ['/tool']
+            'url' => ['/tool'],
         ];
     }
 
@@ -77,7 +82,6 @@ if (!Yii::$app->user->isGuest) {
         'encodeLabels' => false,
         'items' => $topMenu,
     ]);
-
 }
 
 $identityLink = isset(Yii::$app->user->identity) ? Yii::$app->user->identity->url : false;
@@ -85,23 +89,23 @@ $userMenu = [];
 $userMenu[] = DeferredNavItem::widget([]);
 if (Yii::$app->user->isGuest) {
     $userMenu[] = ['label' => 'Sign In', 'url' => ['/app/login'],
-                    'linkOptions' => ['data-method' => 'post']];
+                    'linkOptions' => ['data-method' => 'post'], ];
 } else {
     $userMenuItem = [
-        'label' =>  '<span class="glyphicon glyphicon-user"></span> <span class="nav-label hidden-xs hidden-sm">' . Yii::$app->user->identity->first_name .'</span>',
+        'label' =>  '<span class="glyphicon glyphicon-user"></span> <span class="nav-label hidden-xs hidden-sm">'.Yii::$app->user->identity->first_name.'</span>',
         'url' => '#',
         'linkOptions' => [],
-        'items' => []
+        'items' => [],
     ];
     $userMenuItem['items'][] = [
         'label' => 'Profile' ,
         'url' => $identityLink,
-        'linkOptions' => ['title' => 'Profile']
+        'linkOptions' => ['title' => 'Profile'],
     ];
     $userMenuItem['items'][] = [
         'label' => 'Logout' ,
         'url' => ['/app/logout'],
-        'linkOptions' => ['data-method' => 'post', 'title' => 'Logout']
+        'linkOptions' => ['data-method' => 'post', 'title' => 'Logout'],
     ];
     $userMenu[] = $userMenuItem;
 }
@@ -111,7 +115,7 @@ echo Nav::widget([
     'items' => $userMenu,
 ]);
 if (!Yii::$app->user->isGuest) {
-    $searchModel = new SearchForm;
+    $searchModel = new SearchForm();
     $searchForm = ActiveForm::begin([
         'id' => 'search-form',
         'enableClientValidation' => false,
@@ -131,7 +135,7 @@ TopNavBar::end();
 <div class="inner-container container-fluid">
 <?=Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    'encodeLabels' => false
+    'encodeLabels' => false,
 ]); ?>
 <?php
     if (($success = Yii::$app->session->getFlash('success', false, true))) {

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,10 +9,9 @@
 namespace cascade\components\db\behaviors;
 
 use Yii;
-use infinite\helpers\ArrayHelper;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy]
+ * Taxonomy [@doctodo write class description for Taxonomy].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -40,8 +40,8 @@ class QueryTaxonomy extends \infinite\db\behaviors\ActiveRecord
         $pivotTable = $pivotTableClass::tableName();
         $taxonomy = static::parseTaxonomyValue($value);
         $params = [];
-        $this->owner->andWhere(['{{'. $taxonomyAlias .'}}.[['.$this->taxonomyKey.']]' => $taxonomy]);
-        $conditions = ['and', '{{'. $queryAlias .'}}.[['.$queryPk.']]={{'.$taxonomyAlias.'}}.[['. $this->relationKey.']]'];
+        $this->owner->andWhere(['{{'.$taxonomyAlias.'}}.[['.$this->taxonomyKey.']]' => $taxonomy]);
+        $conditions = ['and', '{{'.$queryAlias.'}}.[['.$queryPk.']]={{'.$taxonomyAlias.'}}.[['.$this->relationKey.']]'];
         $this->owner->leftJoin([$taxonomyAlias => $pivotTable], $conditions, $params);
     }
 
@@ -66,7 +66,7 @@ class QueryTaxonomy extends \infinite\db\behaviors\ActiveRecord
         if (empty($value)) {
             $value = [0];
         }
+
         return $value;
     }
-
 }

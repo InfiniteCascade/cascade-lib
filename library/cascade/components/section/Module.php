@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\section;
 use infinite\base\collector\Item as BaseItem;
 
 /**
- * Module [@doctodo write class description for Module]
+ * Module [@doctodo write class description for Module].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -28,7 +29,7 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     protected $_priority = 1000; //lower is better
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getModuleType()
     {
@@ -36,7 +37,7 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getCollectorName()
     {
@@ -44,7 +45,8 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     }
 
     /**
-     * Set title
+     * Set title.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setTitle($value)
@@ -53,7 +55,7 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getCollectedObject(BaseItem $item)
     {
@@ -66,7 +68,8 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     }
 
     /**
-     * Get priority
+     * Get priority.
+     *
      * @return __return_getPriority_type__ __return_getPriority_description__
      */
     public function getPriority()
@@ -75,7 +78,8 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     }
 
     /**
-     * Set priority
+     * Set priority.
+     *
      * @param __param_priority_type__ $priority __param_priority_description__
      */
     public function setPriority($priority)

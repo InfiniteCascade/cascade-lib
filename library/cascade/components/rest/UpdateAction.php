@@ -5,5 +5,5 @@ use Yii;
 
 class UpdateAction extends \yii\rest\UpdateAction
 {
-	use ActionTrait;
+    use ActionTrait;
 }

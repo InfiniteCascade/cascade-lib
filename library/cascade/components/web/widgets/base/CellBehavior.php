@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\web\widgets\base;
 use Yii;
 
 /**
- * CellBehavior [@doctodo write class description for CellBehavior]
+ * CellBehavior [@doctodo write class description for CellBehavior].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -26,7 +27,8 @@ class CellBehavior extends \yii\base\Behavior
     protected $_gridCell;
 
     /**
-     * Get grid cell settings
+     * Get grid cell settings.
+     *
      * @return __return_getGridCellSettings_type__ __return_getGridCellSettings_description__
      */
     public function getGridCellSettings()
@@ -34,12 +36,13 @@ class CellBehavior extends \yii\base\Behavior
         return [
             'columns' => 12,
             'maxColumns' => 12,
-            'tabletSize' => false
+            'tabletSize' => false,
         ];
     }
 
     /**
-     * Get cell
+     * Get cell.
+     *
      * @return __return_getCell_type__ __return_getCell_description__
      */
     public function getCell()
@@ -56,7 +59,8 @@ class CellBehavior extends \yii\base\Behavior
     }
 
     /**
-     * Get cell content
+     * Get cell content.
+     *
      * @return __return_getCellContent_type__ __return_getCellContent_description__
      */
     public function getCellContent()

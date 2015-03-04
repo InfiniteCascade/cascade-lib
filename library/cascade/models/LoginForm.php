@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -28,7 +29,8 @@ class LoginForm extends Model
     public $rememberMe = true;
 
     /**
-     * __method_rules_description__
+     * __method_rules_description__.
+     *
      * @return array the validation rules.
      */
     public function rules()
@@ -57,6 +59,7 @@ class LoginForm extends Model
 
     /**
      * Logs in a user using the provided username and password.
+     *
      * @return boolean whether the user is logged in successfully
      */
     public function login()
@@ -64,6 +67,7 @@ class LoginForm extends Model
         if ($this->validate()) {
             $user = User::findByEmail($this->email);
             Yii::$app->user->login($user, $this->rememberMe ? 3600*24*30 : 0);
+
             return true;
         } else {
             return false;

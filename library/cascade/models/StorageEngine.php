@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -18,7 +19,6 @@ use cascade\components\types\ActiveRecordTrait;
  * @property string $data
  * @property string $created
  * @property string $modified
- *
  * @property Registry $registry
  *
  * @author Jacob Morrison <email@ofjacob.com>
@@ -54,7 +54,7 @@ class StorageEngine extends \cascade\components\db\ActiveRecord
             [['data'], 'string'],
             [['created', 'modified'], 'safe'],
             [['id'], 'string', 'max' => 36],
-            [['handler'], 'string', 'max' => 255]
+            [['handler'], 'string', 'max' => 255],
         ];
     }
 
@@ -73,7 +73,8 @@ class StorageEngine extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get registry
+     * Get registry.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getRegistry()
@@ -82,7 +83,8 @@ class StorageEngine extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get storage handler
+     * Get storage handler.
+     *
      * @return __return_getStorageHandler_type__ __return_getStorageHandler_description__
      */
     public function getStorageHandler()

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,14 +11,14 @@ namespace cascade\setup\tasks;
 use cascade\models\User;
 
 /**
- * Task_000004_acl [@doctodo write class description for Task_000004_acl]
+ * Task_000004_acl [@doctodo write class description for Task_000004_acl].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Task_000004_acl extends AclTask
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getBaseRules()
     {
@@ -33,7 +34,7 @@ class Task_000004_acl extends AclTask
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function test()
     {
@@ -42,7 +43,7 @@ class Task_000004_acl extends AclTask
         return $run && parent::test();
     }
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function run()
     {

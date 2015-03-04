@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\db\behaviors;
 use Yii;
 
 /**
- * Familiarity [@doctodo write class description for Familiarity]
+ * Familiarity [@doctodo write class description for Familiarity].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -30,18 +31,18 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     protected $_familiarity = [];
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function events()
     {
         return [
             \infinite\db\ActiveRecord::EVENT_AFTER_INSERT => 'afterInsert',
-            \infinite\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterUpdate'
+            \infinite\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterUpdate',
         ];
     }
 
     /**
-     * __method_afterUpdate_description__
+     * __method_afterUpdate_description__.
      */
     public function afterUpdate()
     {
@@ -52,7 +53,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_afterInsert_description__
+     * __method_afterInsert_description__.
      */
     public function afterInsert()
     {
@@ -63,8 +64,10 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * Get user
-     * @param boolean                 $owner __param_owner_description__ [optional]
+     * Get user.
+     *
+     * @param boolean $owner __param_owner_description__ [optional]
+     *
      * @return __return_getUser_type__ __return_getUser_description__
      */
     public function getUser($owner = true)
@@ -79,9 +82,11 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_watch_description__
-     * @param boolean               $doWatch __param_doWatch_description__ [optional]
-     * @param __param_user_type__   $user    __param_user_description__ [optional]
+     * __method_watch_description__.
+     *
+     * @param boolean             $doWatch __param_doWatch_description__ [optional]
+     * @param __param_user_type__ $user    __param_user_description__ [optional]
+     *
      * @return __return_watch_type__ __return_watch_description__
      */
     public function watch($doWatch = true, $user = null)
@@ -100,8 +105,10 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * Get familiarity
-     * @param __param_user_type__            $user __param_user_description__ [optional]
+     * Get familiarity.
+     *
+     * @param __param_user_type__ $user __param_user_description__ [optional]
+     *
      * @return __return_getFamiliarity_type__ __return_getFamiliarity_description__
      */
     public function getFamiliarity($user = null)
@@ -122,7 +129,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
                 $attributes[$this->userField] = $user;
                 $this->_familiarity[$familarityKey] = $familiarityClass::find()->where($attributes)->one();
                 if (empty($this->_familiarity[$familarityKey])) {
-                    $this->_familiarity[$familarityKey] = new $familiarityClass;
+                    $this->_familiarity[$familarityKey] = new $familiarityClass();
                     $this->_familiarity[$familarityKey]->attributes = $attributes;
                 }
             }

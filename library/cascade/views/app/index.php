@@ -10,7 +10,7 @@ $this->title = 'Dashboard';
 $refreshable = [
     'url' => Url::to(['/app/stream']),
     'stream' => true,
-    'data' => ['baseInstructions' => []]
+    'data' => ['baseInstructions' => []],
 ];
 $this->bodyHtmlOptions['data-refreshable'] = json_encode($refreshable);
 
@@ -19,14 +19,14 @@ Yii::beginProfile("Build Grid");
 $widgets = Yii::$app->collectors['widgets']->getLocation('front');
 ArrayHelper::multisort($widgets, ['priority', 'name'], [SORT_ASC, SORT_ASC]);
 
-$topGrid = new Grid;
+$topGrid = new Grid();
 $watchingWidget = Yii::$app->collectors['widgets']->getOne('WatchingContent');
 $watchingCell = Yii::$app->collectors['widgets']->build(null, $watchingWidget, [], ['columns' => 6]);
 $topGrid->currentRow->addCell($watchingCell);
 $itemsCell = $topGrid->currentRow->addCell(new Cell(['columns' => 6]));
-$widgetGrid = new Grid;
+$widgetGrid = new Grid();
 Html::addCssClass($widgetGrid->htmlOptions, 'ic-front-side');
-$js[] = '$("#'. $widgetGrid->id .'").infiniteAffix();';
+$js[] = '$("#'.$widgetGrid->id.'").infiniteAffix();';
 
 $widgetGrid->baseRow = ['trueWidth' => 6];
 $cells = [];

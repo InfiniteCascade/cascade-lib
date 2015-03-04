@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -12,7 +13,7 @@ use infinite\base\exceptions\Exception;
 use infinite\base\collector\CollectedObjectTrait;
 
 /**
- * CollectorModule [@doctodo write class description for CollectorModule]
+ * CollectorModule [@doctodo write class description for CollectorModule].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -27,6 +28,7 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
             throw new \Exception(get_class($this->module));
         }
         $this->module = null;
+
         return $keys;
     }
 
@@ -41,14 +43,14 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
         return true;
     }
     /**
-     * Get collector name
+     * Get collector name.
      */
     abstract public function getCollectorName();
 
     /**
      * @inheritdoc
      */
-    public function __construct($id, $parent, $config=null)
+    public function __construct($id, $parent, $config = null)
     {
         if (isset(Yii::$app->params['modules'][$id])) {
             if (is_array($config)) {
@@ -58,9 +60,13 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
             }
         }
         if ($this->collectorName) {
-        	if (!isset(Yii::$app->collectors[$this->collectorName])) { throw new Exception('Cannot find the collector '. $this->collectorName .'!'); }
-        	if (!(Yii::$app->collectors[$this->collectorName]->register(null, $this))) { throw new Exception('Could not register '. $this->shortName .' in '. $this->collectorName .'!'); }
-    	}
+            if (!isset(Yii::$app->collectors[$this->collectorName])) {
+                throw new Exception('Cannot find the collector '.$this->collectorName.'!');
+            }
+            if (!(Yii::$app->collectors[$this->collectorName]->register(null, $this))) {
+                throw new Exception('Could not register '.$this->shortName.' in '.$this->collectorName.'!');
+            }
+        }
         $this->loadSubmodules();
 
         Yii::$app->collectors->onAfterInit([$this, 'onAfterInit']);
@@ -69,7 +75,8 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     }
 
     /**
-     * __method_loadSubmodules_description__
+     * __method_loadSubmodules_description__.
+     *
      * @return __return_loadSubmodules_type__ __return_loadSubmodules_description__
      */
     public function loadSubmodules()
@@ -85,7 +92,8 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     }
 
     /**
-     * Get submodules
+     * Get submodules.
+     *
      * @return __return_getSubmodules_type__ __return_getSubmodules_description__
      */
     public function getSubmodules()
@@ -94,8 +102,10 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     }
 
     /**
-     * __method_onAfterInit_description__
-     * @param __param_event_type__        $event __param_event_description__
+     * __method_onAfterInit_description__.
+     *
+     * @param __param_event_type__ $event __param_event_description__
+     *
      * @return __return_onAfterInit_type__ __return_onAfterInit_description__
      */
     public function onAfterInit($event)

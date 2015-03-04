@@ -5,5 +5,5 @@ use Yii;
 
 class OptionsAction extends \yii\rest\OptionsAction
 {
-	use ActionTrait;
+    use ActionTrait;
 }

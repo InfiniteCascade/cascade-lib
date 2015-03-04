@@ -5,5 +5,5 @@ use Yii;
 
 class ActionEvent extends \yii\base\Event
 {
-	public $isValid = true;
+    public $isValid = true;
 }

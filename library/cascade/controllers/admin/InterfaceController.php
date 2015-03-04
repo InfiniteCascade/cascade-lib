@@ -5,7 +5,6 @@ namespace cascade\controllers\admin;
 use Yii;
 use yii\filters\AccessControl;
 use infinite\web\Controller;
-use infinite\caching\Cacher;
 use infinite\base\exceptions\HttpException;
 use cascade\models\DataInterface;
 use cascade\models\DataInterfaceLog;
@@ -39,7 +38,7 @@ class InterfaceController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ]
+            ],
         ];
     }
 
@@ -57,14 +56,16 @@ class InterfaceController extends Controller
         if (!empty($lastLog) && $lastLog->isActive) {
             Yii::$app->response->error = 'There is already an active interface action.';
             Yii::$app->response->refresh = true;
+
             return;
         }
 
-        $log = new DataInterfaceLog;
+        $log = new DataInterfaceLog();
         $log->data_interface_id = $dataInterface->primaryKey;
         if (!$log->save()) {
             Yii::$app->response->error = 'An error occurred while starting the data interface log.';
             Yii::$app->response->refresh = true;
+
             return;
         }
 
@@ -76,7 +77,6 @@ class InterfaceController extends Controller
         Yii::$app->response->clientTask = 'deferredAction';
         Yii::$app->response->taskOptions = $deferredAction->package();
     }
-
 
     public function actionViewLogs()
     {
@@ -95,10 +95,11 @@ class InterfaceController extends Controller
         $this->params['dataInterfaceLog'] = $dataInterfaceLog;
         if (Yii::$app->request->isAjax && !empty($_GET['package'])) {
             Yii::$app->response->data = $dataInterfaceLog->dataPackage;
+
             return;
         } elseif (Yii::$app->request->isAjax) {
-          Yii::$app->response->taskOptions = ['title' => 'View Log', 'modalClass' => 'modal-xl'];
-          Yii::$app->response->task = 'dialog';
+            Yii::$app->response->taskOptions = ['title' => 'View Log', 'modalClass' => 'modal-xl'];
+            Yii::$app->response->task = 'dialog';
         }
         if ($dataInterfaceLog->status === 'queued') {
             Yii::$app->response->view = 'view_log_queued';
@@ -106,6 +107,4 @@ class InterfaceController extends Controller
             Yii::$app->response->view = 'view_log';
         }
     }
-
-
 }

@@ -1,26 +1,26 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
 
 namespace cascade\commands;
 
-use Yii;
 use yii\helpers\Console;
 use cascade\models\User;
 use cascade\models\Group;
 
 /**
- * UsersController [@doctodo write class description for UsersController]
+ * UsersController [@doctodo write class description for UsersController].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class UsersController extends \infinite\console\Controller
 {
     /**
-     * __method_actionIndex_description__
+     * __method_actionIndex_description__.
      */
     public function actionIndex()
     {
@@ -28,7 +28,7 @@ class UsersController extends \infinite\console\Controller
     }
 
     /**
-     * __method_actionCreate_description__
+     * __method_actionCreate_description__.
      */
     public function actionCreate()
     {
@@ -55,7 +55,7 @@ class UsersController extends \infinite\console\Controller
             $group = $options[$group];
         }
 
-        $user =  new User;
+        $user =  new User();
         $user->scenario = 'creation';
         $user->first_name = $this->prompt("First name");
         $user->last_name = $this->prompt("Last name");

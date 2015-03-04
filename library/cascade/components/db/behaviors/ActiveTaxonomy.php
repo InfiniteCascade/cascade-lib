@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,10 +9,9 @@
 namespace cascade\components\db\behaviors;
 
 use Yii;
-use infinite\helpers\ArrayHelper;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy]
+ * Taxonomy [@doctodo write class description for Taxonomy].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -40,18 +40,18 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
     protected $_current_taxonomy_id;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function events()
     {
         return [
             \infinite\db\ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
-            \infinite\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave'
+            \infinite\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
         ];
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function safeAttributes()
     {
@@ -59,7 +59,8 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_afterSave_description__
+     * __method_afterSave_description__.
+     *
      * @param __param_event_type__ $event __param_event_description__
      */
     public function afterSave($event)
@@ -74,7 +75,7 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
                     continue;
                 }
                 $base = [$this->taxonomyKey => $taxonomyId, $this->relationKey => $this->owner->primaryKey];
-                $taxonomy = new $pivotTableClass;
+                $taxonomy = new $pivotTableClass();
                 $taxonomy->attributes = $base;
                 if (!$taxonomy->save()) {
                     $event->isValid = false;
@@ -94,7 +95,8 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * Set taxonomy
+     * Set taxonomy.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setTaxonomy_id($value)
@@ -119,7 +121,8 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method__currentTaxonomies_description__
+     * __method__currentTaxonomies_description__.
+     *
      * @return __return__currentTaxonomies_type__ __return__currentTaxonomies_description__
      */
     public function _currentTaxonomies()
@@ -134,7 +137,8 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * Get taxonomy
+     * Get taxonomy.
+     *
      * @return __return_getTaxonomy_id_type__ __return_getTaxonomy_id_description__
      */
     public function getTaxonomy_id()

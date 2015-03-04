@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,38 +12,38 @@ use cascade\models\User;
 use cascade\modules\core\TypeAccount\models\ObjectAccount;
 
 /**
- * Task_000005_account [@doctodo write class description for Task_000005_account]
+ * Task_000005_account [@doctodo write class description for Task_000005_account].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Task_000005_account extends \infinite\setup\Task
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getTitle()
     {
         return 'Primary Account';
     }
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function test()
     {
         return ObjectAccount::find()->disableAccessCheck()->count() > 0 && $this->setup->app()->params['primaryAccount'] !== '##primaryAccount##';
     }
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function run()
     {
-        $account = new ObjectAccount;
+        $account = new ObjectAccount();
         $account->attributes = $this->input['account'];
 
         if ($account->save()) {
             $configResult = false;
-            $paramsFilePath = INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'params.php';
-            $moreError = 'File does not exist! ('. $paramsFilePath .')';
+            $paramsFilePath = INFINITE_APP_ENVIRONMENT_PATH.DIRECTORY_SEPARATOR.'params.php';
+            $moreError = 'File does not exist! ('.$paramsFilePath.')';
             if (file_exists($paramsFilePath)) {
                 $currentContents = $originalContents = file_get_contents($paramsFilePath);
                 $found = false;
@@ -56,7 +57,7 @@ class Task_000005_account extends \infinite\setup\Task
                 if ($found && file_put_contents($paramsFilePath, implode(PHP_EOL, $currentContents))) {
                     $configResult = true;
                 } else {
-                    $moreError = 'Invalid configuration template! <pre>'. implode(PHP_EOL, $currentContents) .'</pre>';
+                    $moreError = 'Invalid configuration template! <pre>'.implode(PHP_EOL, $currentContents).'</pre>';
                 }
             }
             if ($configResult) {
@@ -70,13 +71,14 @@ class Task_000005_account extends \infinite\setup\Task
         foreach ($user->errors as $field => $errors) {
             $this->fieldErrors[$field] = implode('; ', $errors);
         }
-        var_dump($this->fieldErrors);exit;
+        var_dump($this->fieldErrors);
+        exit;
 
         return false;
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getFields()
     {

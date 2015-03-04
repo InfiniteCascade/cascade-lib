@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,16 +9,14 @@
 namespace cascade\components\web\widgets;
 
 use Yii;
-
 use cascade\components\helpers\StringHelper;
-
 use infinite\base\ObjectTrait;
 use infinite\base\ComponentTrait;
 use infinite\web\grid\CellContentTrait;
 use infinite\web\RenderTrait;
 
 /**
- * BaseWidget [@doctodo write class description for BaseWidget]
+ * BaseWidget [@doctodo write class description for BaseWidget].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -65,16 +64,16 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     protected $_decorator;
 
     /**
-     * __method_generateContent_description__
+     * __method_generateContent_description__.
      */
     abstract public function generateContent();
     /**
-     * __method_generate_description__
+     * __method_generate_description__.
      */
     abstract public function generate();
 
     /**
-     * __method_ensureDecorator_description__
+     * __method_ensureDecorator_description__.
      */
     public function ensureDecorator()
     {
@@ -84,7 +83,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * __method_hasDecorator_description__
+     * __method_hasDecorator_description__.
+     *
      * @return __return_hasDecorator_type__ __return_hasDecorator_description__
      */
     public function hasDecorator()
@@ -93,8 +93,10 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * __method_attachDecorator_description__
-     * @param __param_decorator_type__        $decorator __param_decorator_description__
+     * __method_attachDecorator_description__.
+     *
+     * @param __param_decorator_type__ $decorator __param_decorator_description__
+     *
      * @return __return_attachDecorator_type__ __return_attachDecorator_description__
      */
     public function attachDecorator($decorator)
@@ -107,19 +109,19 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function behaviors()
     {
         return [
             'CellBehavior' => [
-                'class' => 'cascade\components\web\widgets\base\CellBehavior'
-            ]
+                'class' => 'cascade\components\web\widgets\base\CellBehavior',
+            ],
         ];
     }
 
     /**
-     * __method_output_description__
+     * __method_output_description__.
      */
     public function output()
     {
@@ -127,7 +129,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function run()
     {
@@ -135,8 +137,10 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * __method_parseText_description__
-     * @param __param_text_type__       $text __param_text_description__
+     * __method_parseText_description__.
+     *
+     * @param __param_text_type__ $text __param_text_description__
+     *
      * @return __return_parseText_type__ __return_parseText_description__
      */
     public function parseText($text)
@@ -145,7 +149,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * Get variables
+     * Get variables.
+     *
      * @return __return_getVariables_type__ __return_getVariables_description__
      */
     public function getVariables()
@@ -154,7 +159,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * Get settings
+     * Get settings.
+     *
      * @return unknown
      */
     public function getSettings()
@@ -163,7 +169,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * Set settings
+     * Set settings.
+     *
      * @param __param_settings_type__ $settings __param_settings_description__
      */
     public function setSettings($settings)
@@ -172,7 +179,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * Get widget
+     * Get widget.
+     *
      * @return unknown
      */
     public function getWidgetId()
@@ -181,11 +189,12 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
             return $this->_widgetId;
         }
 
-        return $this->_widgetId = 'ic-widget-'. md5(microtime() . mt_rand());
+        return $this->_widgetId = 'ic-widget-'.md5(microtime().mt_rand());
     }
 
     /**
-     * Set widget
+     * Set widget.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setWidgetId($value)
@@ -194,7 +203,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * Get system
+     * Get system.
+     *
      * @return unknown
      */
     public function getSystemId()
@@ -209,7 +219,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
-     * Set system
+     * Set system.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setSystemId($value)

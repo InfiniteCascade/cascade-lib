@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,12 +9,11 @@
 namespace cascade\components\web\widgets\section;
 
 use Yii;
-
 use infinite\helpers\ArrayHelper;
 use infinite\helpers\Html;
 
 /**
- * Section [@doctodo write class description for Section]
+ * Section [@doctodo write class description for Section].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -33,7 +33,7 @@ class Section extends \cascade\components\web\widgets\Widget
     public $section;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {
@@ -48,7 +48,8 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
-     * Get widget decorator class
+     * Get widget decorator class.
+     *
      * @return __return_getWidgetDecoratorClass_type__ __return_getWidgetDecoratorClass_description__
      */
     public function getWidgetDecoratorClass()
@@ -57,7 +58,8 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
-     * __method_generateStart_description__
+     * __method_generateStart_description__.
+     *
      * @return __return_generateStart_type__ __return_generateStart_description__
      */
     public function generateStart()
@@ -70,7 +72,8 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
-     * __method_widgetCellSettings_description__
+     * __method_widgetCellSettings_description__.
+     *
      * @return __return_widgetCellSettings_type__ __return_widgetCellSettings_description__
      */
     public function widgetCellSettings()
@@ -78,22 +81,25 @@ class Section extends \cascade\components\web\widgets\Widget
         return [
             'mediumDesktopColumns' => 12,
             'tabletColumns' => 12,
-            'baseSize' => 'tablet'
+            'baseSize' => 'tablet',
         ];
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function generateContent()
     {
         $items = [];
         foreach ($this->widgets as $widget) {
             $cell = Yii::$app->collectors['widgets']->build($this, $widget->object);
-            if (!$cell) { \d($widget);exit; continue; }
+            if (!$cell) {
+                \d($widget);
+                exit;
+                continue;
+            }
             $items[] = $cell;
             Yii::configure($cell, $this->widgetCellSettings());
-
         }
         $grid = Yii::createObject(['class' => $this->gridClass, 'cells' => $items]);
 
@@ -101,7 +107,8 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
-     * Get widgets
+     * Get widgets.
+     *
      * @return __return_getWidgets_type__ __return_getWidgets_description__
      */
     public function getWidgets()
@@ -113,8 +120,10 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
-     * __method_defaultItems_description__
-     * @param __param_parent_type__        $parent __param_parent_description__ [optional]
+     * __method_defaultItems_description__.
+     *
+     * @param __param_parent_type__ $parent __param_parent_description__ [optional]
+     *
      * @return __return_defaultItems_type__ __return_defaultItems_description__
      */
     public function defaultItems($parent = null)

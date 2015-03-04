@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,22 +9,16 @@
 namespace cascade\components\types;
 
 use Yii;
-
 use cascade\models\Group;
-use cascade\models\Relation;
-use cascade\models\Registry;
 use cascade\components\web\ObjectViewEvent;
-
 use infinite\base\exceptions\Exception;
 use infinite\base\exceptions\HttpException;
 use infinite\base\language\Noun;
-use infinite\db\ActiveRecord;
 use infinite\security\Access;
-
 use yii\base\Controller;
 
 /**
- * Module [@doctodo write class description for Module]
+ * Module [@doctodo write class description for Module].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -125,7 +120,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     protected $_disabledFields;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {
@@ -138,12 +133,12 @@ abstract class Module extends \cascade\components\base\CollectorModule
     {
         parent::always();
         if (isset($this->modelNamespace)) {
-            Yii::$app->registerModelAlias(':'. $this->systemId, $this->modelNamespace);
+            Yii::$app->registerModelAlias(':'.$this->systemId, $this->modelNamespace);
         }
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getCollectorName()
     {
@@ -151,15 +146,18 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_onBeforeControllerAction_description__
-     * @param unknown       $controller
-     * @param unknown       $action
+     * __method_onBeforeControllerAction_description__.
+     *
+     * @param unknown $controller
+     * @param unknown $action
+     *
      * @return unknown
+     *
      * @throws HttpException __exception_HttpException_description__
      */
     public function onBeforeControllerAction($controller, $action)
     {
-        if (!isset($_SERVER['PASS_THRU']) or $_SERVER['PASS_THRU'] != md5(Yii::$app->params['salt'] . 'PASS')) {
+        if (!isset($_SERVER['PASS_THRU']) or $_SERVER['PASS_THRU'] != md5(Yii::$app->params['salt'].'PASS')) {
             throw new HttpException(400, 'Invalid request!');
         }
 
@@ -167,18 +165,21 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function onAfterInit($event)
     {
-        if (!isset(Yii::$app->collectors['taxonomies']) || !Yii::$app->collectors['taxonomies']->registerMultiple($this, $this->taxonomies())) { throw new Exception('Could not register taxonmies for '. $this->systemId .'!'); }
-        if (!isset(Yii::$app->collectors['widgets']) || !Yii::$app->collectors['widgets']->registerMultiple($this, $this->widgets())) { throw new Exception('Could not register widgets for '. $this->systemId .'!'); }
+        if (!isset(Yii::$app->collectors['taxonomies']) || !Yii::$app->collectors['taxonomies']->registerMultiple($this, $this->taxonomies())) {
+            throw new Exception('Could not register taxonmies for '.$this->systemId.'!');
+        }
+        if (!isset(Yii::$app->collectors['widgets']) || !Yii::$app->collectors['widgets']->registerMultiple($this, $this->widgets())) {
+            throw new Exception('Could not register widgets for '.$this->systemId.'!');
+        }
         // if (!isset(Yii::$app->collectors['roles']) || !Yii::$app->collectors['roles']->registerMultiple($this, $this->roles())) { throw new Exception('Could not register roles for '. $this->systemId .'!'); }
         // if (!isset(Yii::$app->collectors['tools']) || !Yii::$app->collectors['tools']->registerMultiple($this, $this->tools())) { throw new Exception('Could not register tools for '. $this->systemId .'!'); }
         // if (!isset(Yii::$app->collectors['reports']) || !Yii::$app->collectors['reports']->registerMultiple($this, $this->reports())) { throw new Exception('Could not register reports for '. $this->systemId .'!'); }
         return parent::onAfterInit($event);
     }
-
 
     public function getPageMeta()
     {
@@ -187,6 +188,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
         $m['icon'] = $this->icon;
         $m['hasDashboard'] = $this->hasDashboard;
         $m['title'] = $this->getTitle()->package;
+
         return $m;
     }
 
@@ -196,6 +198,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
         if ($relationship) {
             return $relationship->roleType($role);
         }
+
         return false;
     }
 
@@ -214,13 +217,16 @@ abstract class Module extends \cascade\components\base\CollectorModule
                 }
             }
         }
+
         return [false, false];
     }
 
     /**
-     * __method_subactionHandle_description__
+     * __method_subactionHandle_description__.
+     *
      * @param cascade\components\web\ObjectViewEvent $event __param_event_description__
-     * @return __return_subactionHandle_type__        __return_subactionHandle_description__
+     *
+     * @return __return_subactionHandle_type__ __return_subactionHandle_description__
      */
     public function subactionHandle(ObjectViewEvent $event)
     {
@@ -240,7 +246,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_subactions_description__
+     * __method_subactions_description__.
+     *
      * @return __return_subactions_type__ __return_subactions_description__
      */
     public function subactions()
@@ -249,7 +256,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Set up
+     * Set up.
+     *
      * @return __return_setup_type__ __return_setup_description__
      */
     public function setup()
@@ -259,7 +267,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
             $groups = ['top'];
             foreach ($groups as $groupName) {
                 $group = Group::getBySystemName($groupName, false);
-                if (empty($group)) { continue; }
+                if (empty($group)) {
+                    continue;
+                }
                 if ($this->inheritParentAccess) {
                     $results[] = $this->objectTypeModel->parentAccess(null, $group);
                 }
@@ -270,7 +280,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get inherit parent access
+     * Get inherit parent access.
+     *
      * @return __return_getInheritParentAccess_type__ __return_getInheritParentAccess_description__
      */
     public function getInheritParentAccess()
@@ -279,8 +290,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_determineOwner_description__
-     * @param __param_object_type__          $object __param_object_description__
+     * __method_determineOwner_description__.
+     *
+     * @param __param_object_type__ $object __param_object_description__
+     *
      * @return __return_determineOwner_type__ __return_determineOwner_description__
      */
     public function determineOwner($object)
@@ -288,7 +301,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
         if (isset(Yii::$app->user)
             && !Yii::$app->user->isGuest
             && isset(Yii::$app->user->identity)
-            ){
+            ) {
             if (!empty(Yii::$app->user->identity->object_individual_id)) {
                 return Yii::$app->user->identity->object_individual_id;
             } else {
@@ -300,9 +313,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get role help text
-     * @param __param_roleItem_type__         $roleItem __param_roleItem_description__
-     * @param __param_object_type__           $object   __param_object_description__ [optional]
+     * Get role help text.
+     *
+     * @param __param_roleItem_type__ $roleItem __param_roleItem_description__
+     * @param __param_object_type__   $object   __param_object_description__ [optional]
+     *
      * @return __return_getRoleHelpText_type__ __return_getRoleHelpText_description__
      */
     public function getRoleHelpText($roleItem, $object = null)
@@ -325,14 +340,16 @@ abstract class Module extends \cascade\components\base\CollectorModule
             break;
         }
 
-        return null;
+        return;
     }
 
     /**
-     * __method_determineAccessLevel_description__
-     * @param __param_object_type__                $object __param_object_description__
-     * @param __param_role_type__                  $role   __param_role_description__
-     * @param __param_aro_type__                   $aro    __param_aro_description__ [optional]
+     * __method_determineAccessLevel_description__.
+     *
+     * @param __param_object_type__ $object __param_object_description__
+     * @param __param_role_type__   $role   __param_role_description__
+     * @param __param_aro_type__    $aro    __param_aro_description__ [optional]
+     *
      * @return __return_determineAccessLevel_type__ __return_determineAccessLevel_description__
      */
     public function determineAccessLevel($object, $role, $aro = null)
@@ -359,9 +376,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get action map
+     * Get action map.
+     *
      * @param __param_controlledObject_type__ $controlledObject __param_controlledObject_description__ [optional]
-     * @return __return_getActionMap_type__    __return_getActionMap_description__
+     *
+     * @return __return_getActionMap_type__ __return_getActionMap_description__
      */
     public function getActionMap($controlledObject = null)
     {
@@ -379,7 +398,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get disabled fields
+     * Get disabled fields.
+     *
      * @return __return_getDisabledFields_type__ __return_getDisabledFields_description__
      */
     public function getDisabledFields()
@@ -392,7 +412,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Set disabled fields
+     * Set disabled fields.
+     *
      * @param __param_fields_type__ $fields __param_fields_description__
      */
     public function setDisabledFields($fields)
@@ -401,16 +422,17 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get primary model
+     * Get primary model.
+     *
      * @return __return_getPrimaryModel_type__ __return_getPrimaryModel_description__
      */
     public function getPrimaryModel()
     {
-        return $this->modelNamespace .'\\'. 'Object'.$this->systemId;
+        return $this->modelNamespace.'\\'.'Object'.$this->systemId;
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getModuleType()
     {
@@ -419,21 +441,23 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     public function getInsertVerb($object)
     {
-        return null;
+        return;
     }
 
     public function getUpdateVerb($object)
     {
-        return null;
+        return;
     }
     public function getDeleteVerb($object)
     {
-        return null;
+        return;
     }
 
     /**
-     * __method_upgrade_description__
-     * @param __param_from_type__     $from __param_from_description__
+     * __method_upgrade_description__.
+     *
+     * @param __param_from_type__ $from __param_from_description__
+     *
      * @return __return_upgrade_type__ __return_upgrade_description__
      */
     public function upgrade($from)
@@ -442,7 +466,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get creator role
+     * Get creator role.
+     *
      * @return __return_getCreatorRole_type__ __return_getCreatorRole_description__
      */
     public function getCreatorRole()
@@ -451,8 +476,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get role validation settings
-     * @param __param_object_type__                     $object __param_object_description__ [optional]
+     * Get role validation settings.
+     *
+     * @param __param_object_type__ $object __param_object_description__ [optional]
+     *
      * @return __return_getRoleValidationSettings_type__ __return_getRoleValidationSettings_description__
      */
     public function getRoleValidationSettings($object = null)
@@ -464,7 +491,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get possible roles
+     * Get possible roles.
+     *
      * @return __return_getPossibleRoles_type__ __return_getPossibleRoles_description__
      */
     public function getPossibleRoles()
@@ -486,7 +514,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get required roles
+     * Get required roles.
+     *
      * @return __return_getRequiredRoles_type__ __return_getRequiredRoles_description__
      */
     public function getRequiredRoles()
@@ -508,7 +537,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get initial role
+     * Get initial role.
+     *
      * @return __return_getInitialRole_type__ __return_getInitialRole_description__
      */
     public function getInitialRole()
@@ -525,7 +555,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get is ownable
+     * Get is ownable.
+     *
      * @return __return_getIsOwnable_type__ __return_getIsOwnable_description__
      */
     public function getIsOwnable()
@@ -534,22 +565,24 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get owner object
+     * Get owner object.
+     *
      * @return __return_getOwnerObject_type__ __return_getOwnerObject_description__
      */
     public function getOwnerObject()
     {
-        return null;
+        return;
     }
 
     /**
-     * Get owner
+     * Get owner.
+     *
      * @return __return_getOwner_type__ __return_getOwner_description__
      */
     public function getOwner()
     {
         if (!$this->isOwnable) {
-            return null;
+            return;
         }
         $ownerObject = $this->getOwnerObject();
         if (is_object($ownerObject)) {
@@ -560,7 +593,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get object type model
+     * Get object type model.
+     *
      * @return __return_getObjectTypeModel_type__ __return_getObjectTypeModel_description__
      */
     public function getObjectTypeModel()
@@ -573,7 +607,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Set object type model
+     * Set object type model.
+     *
      * @param __param_model_type__ $model __param_model_description__
      */
     public function setObjectTypeModel($model)
@@ -581,14 +616,18 @@ abstract class Module extends \cascade\components\base\CollectorModule
         $this->_objectTypeModel = $model;
     }
     /**
-     * __method_search_description__
+     * __method_search_description__.
+     *
      * @param unknown $term
      * @param array   $params __param_params_description__ [optional]
+     *
      * @return unknown
      */
     public function search($term, $params = [])
     {
-        if (!$this->primaryModel) { return false; }
+        if (!$this->primaryModel) {
+            return false;
+        }
 
         $results = [];
         $modelClass = $this->primaryModel;
@@ -597,7 +636,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get object level
+     * Get object level.
+     *
      * @return __return_getObjectLevel_type__ __return_getObjectLevel_description__
      */
     public function getObjectLevel()
@@ -609,7 +649,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
         if (!empty($parents)) {
             $maxLevel = 1;
             foreach ($parents as $rel) {
-                if (get_class($rel->parent) === get_class($this)) { continue; }
+                if (get_class($rel->parent) === get_class($this)) {
+                    continue;
+                }
                 $newLevel = $rel->parent->objectLevel + 1;
                 if ($newLevel > $maxLevel) {
                     $maxLevel = $newLevel;
@@ -622,9 +664,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return 1;
     }
     /**
-     * Get section
+     * Get section.
+     *
      * @param __param_parentWidget_type__ $parentWidget __param_parentWidget_description__ [optional]
      * @param unknown                     $settings     (optional)
+     *
      * @return unknown
      */
     public function getSection($parentWidget = null, $settings = [])
@@ -642,7 +686,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
         if (($parent && $parent->systemId === $this->systemId) || ($child && $child->systemId === $this->systemId)) {
             $sectionId = $settings['relationship']->systemId.'-'.$this->systemId;
             $section = Yii::$app->collectors['sections']->getOne($sectionId);
-            $section->title = '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%';
+            $section->title = '%%relationship%% %%type.'.$this->systemId.'.title.upperPlural%%';
             $section->icon = $this->icon;
             $section->systemId = $sectionId;
             if (empty($section->object)) {
@@ -655,7 +699,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
         }
         $sectionClass = $this->sectionSingleWidgetClass;
         $sectionItemClass = $this->sectionItemClass;
-        $newSectionTitle = '%%type.'. $this->systemId .'.title.upperPlural%%';
+        $newSectionTitle = '%%type.'.$this->systemId.'.title.upperPlural%%';
         $sectionId = $this->systemId;
         if (!is_null($this->sectionName)) {
             $sectionId = $sectionItemClass::generateSectionId($this->sectionName);
@@ -678,7 +722,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get title
+     * Get title.
+     *
      * @return unknown
      */
     public function getTitle()
@@ -691,7 +736,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Set title
+     * Set title.
+     *
      * @param __param_title_type__ $title __param_title_description__
      */
     public function setTitle($title)
@@ -700,8 +746,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get details widget
-     * @param __param_objectModel_type__       $objectModel __param_objectModel_description__ [optional]
+     * Get details widget.
+     *
+     * @param __param_objectModel_type__ $objectModel __param_objectModel_description__ [optional]
+     *
      * @return __return_getDetailsWidget_type__ __return_getDetailsWidget_description__
      */
     public function getDetailsWidget($objectModel = null)
@@ -713,12 +761,14 @@ abstract class Module extends \cascade\components\base\CollectorModule
         }
 
         $detailsSection = $this->getDetailsSection();
-        if ($detailsSection === false) { return false; }
+        if ($detailsSection === false) {
+            return false;
+        }
         if ($detailsSection === true) {
             $detailsSection = '_self';
         }
 
-        $detailsWidgetClass = self::classNamespace() .'\widgets\\'. 'Details';
+        $detailsWidgetClass = self::classNamespace().'\widgets\\'.'Details';
         $widgetClass = $this->fallbackDetailsWidgetClass;
 
         @class_exists($detailsWidgetClass);
@@ -734,7 +784,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get details section
+     * Get details section.
+     *
      * @return __return_getDetailsSection_type__ __return_getDetailsSection_description__
      */
     public function getDetailsSection()
@@ -743,7 +794,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_widgets_description__
+     * __method_widgets_description__.
+     *
      * @return __return_widgets_type__ __return_widgets_description__
      */
     public function widgets()
@@ -752,12 +804,12 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
         $detailsWidget = $this->getDetailsWidget();
         if ($detailsWidget) {
-            $id = '_'. $this->systemId .'Details';
+            $id = '_'.$this->systemId.'Details';
             $widgets[$id] = $detailsWidget;
         }
 
-        $detailListClassName = self::classNamespace() .'\widgets\\'. 'DetailList';
-        $simpleListClassName = self::classNamespace() .'\widgets\\'. 'SimpleLinkList';
+        $detailListClassName = self::classNamespace().'\widgets\\'.'DetailList';
+        $simpleListClassName = self::classNamespace().'\widgets\\'.'SimpleLinkList';
         @class_exists($detailListClassName);
         @class_exists($simpleListClassName);
 
@@ -767,16 +819,20 @@ abstract class Module extends \cascade\components\base\CollectorModule
         }
 
         if (!$this->isChildless) {
-            if (!class_exists($detailListClassName, false)) { $detailListClassName = false; }
-            if (!class_exists($simpleListClassName, false)) { $simpleListClassName = false; }
+            if (!class_exists($detailListClassName, false)) {
+                $detailListClassName = false;
+            }
+            if (!class_exists($simpleListClassName, false)) {
+                $simpleListClassName = false;
+            }
             // needs widget for children and summary page
             if ($detailListClassName) {
                 $childrenWidget = $baseWidget;
-                $id = 'Parent'. $this->systemId .'Browse';
+                $id = 'Parent'.$this->systemId.'Browse';
                 $childrenWidget['widget'] = [
                     'class' => $detailListClassName,
                     'icon' => $this->icon,
-                    'title' => '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%'
+                    'title' => '%%relationship%% %%type.'.$this->systemId.'.title.upperPlural%%',
                 ];
                 $childrenWidget['locations'] = ['child_objects'];
                 $childrenWidget['priority'] = $this->priority;
@@ -787,11 +843,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
             }
             if ($this->hasDashboard && $simpleListClassName) {
                 $summaryWidget = $baseWidget;
-                $id = $this->systemId .'Summary';
+                $id = $this->systemId.'Summary';
                 $summaryWidget['widget'] = [
                     'class' => $simpleListClassName,
                     'icon' => $this->icon,
-                    'title' => '%%type.'. $this->systemId .'.title.upperPlural%%'
+                    'title' => '%%type.'.$this->systemId.'.title.upperPlural%%',
                 ];
                 $summaryWidget['locations'] = ['front'];
                 $summaryWidget['priority'] = $this->priority;
@@ -800,16 +856,18 @@ abstract class Module extends \cascade\components\base\CollectorModule
                 Yii::trace("Warning: There is no summary class for {$this->systemId}");
             }
         } else {
-            if (!class_exists($detailListClassName, false)) { $detailListClassName = false; }
+            if (!class_exists($detailListClassName, false)) {
+                $detailListClassName = false;
+            }
             // needs widget for parents
         }
         if ($detailListClassName) {
             $parentsWidget = $baseWidget;
-            $id = 'Children'. $this->systemId .'Browse';
+            $id = 'Children'.$this->systemId.'Browse';
             $parentsWidget['widget'] = [
                     'class' => $detailListClassName,
                     'icon' => $this->icon,
-                    'title' => '%%relationship%% %%type.'. $this->systemId .'.title.upperPlural%%'
+                    'title' => '%%relationship%% %%type.'.$this->systemId.'.title.upperPlural%%',
                 ];
             $parentsWidget['locations'] = ['parent_objects'];
             $parentsWidget['priority'] = $this->priority + 1;
@@ -817,11 +875,13 @@ abstract class Module extends \cascade\components\base\CollectorModule
         } else {
             Yii::trace("Warning: There is no browse class for the parent objects of {$this->systemId}");
         }
+
         return $widgets;
     }
 
     /**
-     * __method_loadFieldLink_description__
+     * __method_loadFieldLink_description__.
+     *
      * @param __param_field_type__  $field     __param_field_description__
      * @param __param_object_type__ $object    __param_object_description__
      * @param boolean               $typeMatch __param_typeMatch_description__ [optional]
@@ -839,7 +899,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_taxonomies_description__
+     * __method_taxonomies_description__.
+     *
      * @return unknown
      */
     public function taxonomies()
@@ -848,7 +909,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_roles_description__
+     * __method_roles_description__.
+     *
      * @return unknown
      */
     public function roles()
@@ -857,7 +919,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_dependencies_description__
+     * __method_dependencies_description__.
+     *
      * @return unknown
      */
     public function dependencies()
@@ -865,9 +928,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return [];
     }
 
-
     /**
-     * __method_parents_description__
+     * __method_parents_description__.
+     *
      * @return unknown
      */
     public function parents()
@@ -875,9 +938,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return [];
     }
 
-
     /**
-     * Settings for
+     * Settings for.
+     *
      * @return unknown
      */
     public function parentSettings()
@@ -885,13 +948,13 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return [
             'title' => false,
             'allow' => 1, // 0/false = no; 1 = only 1; 2 = 1 or more
-            'showDescriptor' => false
+            'showDescriptor' => false,
         ];
     }
 
-
     /**
-     * __method_childrenSettings_description__
+     * __method_childrenSettings_description__.
+     *
      * @return unknown
      */
     public function childrenSettings()
@@ -902,7 +965,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_children_description__
+     * __method_children_description__.
+     *
      * @return unknown
      */
     public function children()
@@ -910,22 +974,24 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return [];
     }
 
-
-
     /**
-     * Get dummy model
+     * Get dummy model.
+     *
      * @return __return_getDummyModel_type__ __return_getDummyModel_description__
      */
     public function getDummyModel()
     {
-        if (!$this->primaryModel) { return false; }
+        if (!$this->primaryModel) {
+            return false;
+        }
         $model = $this->primaryModel;
 
-        return new $model;
+        return new $model();
     }
 
     /**
-     * Get is childless
+     * Get is childless.
+     *
      * @return __return_getIsChildless_type__ __return_getIsChildless_description__
      */
     public function getIsChildless()
@@ -938,9 +1004,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get model
+     * Get model.
+     *
      * @param __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
      * @param array                       $input        __param_input_description__ [optional]
+     *
      * @return unknown
      */
     public function getModel($primaryModel = null, $input = false)
@@ -953,7 +1021,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
                     return false;
                 }
             } else {
-                $primaryModel = new $primaryModel;
+                $primaryModel = new $primaryModel();
             }
         }
         $primaryModel->tabularId = false;
@@ -970,16 +1038,19 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $primaryModel;
     }
 
-
     /**
-     * Get form
+     * Get form.
+     *
      * @param __param_models_type__ $models   __param_models_description__ [optional]
      * @param array                 $settings __param_settings_description__ [optional]
+     *
      * @return unknown
      */
     public function getForm($primaryModel = false, $settings = [])
     {
-        if (!$primaryModel) { return false; }
+        if (!$primaryModel) {
+            return false;
+        }
         $formSegments = [$this->getFormSegment($primaryModel, $settings)];
         $config = ['class' => $this->formGeneratorClass, 'models' => $primaryModel->collectModels(), 'items' => $formSegments];
 
@@ -987,9 +1058,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get form segment
-     * @param __param_primaryModel_type__    $primaryModel __param_primaryModel_description__ [optional]
-     * @param array                          $settings     __param_settings_description__ [optional]
+     * Get form segment.
+     *
+     * @param __param_primaryModel_type__ $primaryModel __param_primaryModel_description__ [optional]
+     * @param array                       $settings     __param_settings_description__ [optional]
+     *
      * @return __return_getFormSegment_type__ __return_getFormSegment_description__
      */
     public function getFormSegment($primaryModel = null, $settings = [])
@@ -997,6 +1070,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
         if (empty($primaryModel)) {
             return false;
         }
+
         return $primaryModel->form($settings);
     }
 }

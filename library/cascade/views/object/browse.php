@@ -7,18 +7,17 @@ cascade\components\web\assetBundles\QueryBuilderAsset::register($this);
 cascade\components\web\assetBundles\BrowseFilterAsset::register($this);
 infinite\web\assetBundles\InfiniteRestDrawAsset::register($this);
 
-$this->title = 'Browse '. $type->title->upperPlural;
+$this->title = 'Browse '.$type->title->upperPlural;
 $js = [];
-
 
 echo Html::beginTag('div', ['class' => 'panel panel-default']);
 echo Html::tag('div', Html::tag('div', 'Filter', ['class' => 'panel-title']), ['class' => 'panel-heading']);
 echo Html::beginTag('div', ['class' => 'panel-body', 'id' => 'filter']);
-$searchModel = new SearchForm;
+$searchModel = new SearchForm();
 $searchForm = ActiveForm::begin([
     'id' => 'filter-form',
     'enableClientValidation' => false,
-    'action' => ['/api/' . $type->systemId]
+    'action' => ['/api/'.$type->systemId],
 
 ]);
 echo Html::beginTag('ul', ['class' => 'nav nav-tabs', 'role' => 'tablist']);
@@ -56,7 +55,7 @@ $queryBuilderOptions = [];
 $queryBuilderOptions['filters'] = $type->dummyModel->filterFields;
 $builderId = 'advanced-filter-builder';
 echo Html::tag('div', '', ['id' => $builderId]);
-$js[] = "$('#{$builderId}').queryBuilder(". json_encode($queryBuilderOptions) .");";
+$js[] = "$('#{$builderId}').queryBuilder(".json_encode($queryBuilderOptions).");";
 echo Html::endTag('div');
 
 echo Html::submitButton('Search', ['class' => 'btn btn-default']);
@@ -73,7 +72,4 @@ echo Html::beginTag('div', ['class' => 'panel-body', 'id' => 'filter-results']);
 echo Html::endTag('div');
 echo Html::endTag('div');
 
-
 $this->registerJs(implode("\n", $js));
-
-?>

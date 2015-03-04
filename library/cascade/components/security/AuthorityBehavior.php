@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -12,24 +13,25 @@ use cascade\components\types\RelationshipEvent;
 use infinite\caching\Cacher;
 
 /**
- * AuthorityBehavior [@doctodo write class description for AuthorityBehavior]
+ * AuthorityBehavior [@doctodo write class description for AuthorityBehavior].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class AuthorityBehavior extends \infinite\security\AuthorityBehavior
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function events()
     {
         return array_merge(parent::events(), [
-            TypeModule::EVENT_RELATION_CHANGE => [$this, 'handleRelationChange']
+            TypeModule::EVENT_RELATION_CHANGE => [$this, 'handleRelationChange'],
         ]);
     }
 
     /**
-     * __method_handleRelationChange_description__
+     * __method_handleRelationChange_description__.
+     *
      * @param cascade\components\types\RelationshipEvent $event __param_event_description__
      */
     public function handleRelationChange(RelationshipEvent $event)

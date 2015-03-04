@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,6 +9,7 @@
 namespace cascade\models;
 
 use cascade\components\types\ActiveRecordTrait;
+
 /**
  * Storage is the model class for table "storage".
  *
@@ -19,7 +21,6 @@ use cascade\components\types\ActiveRecordTrait;
  * @property string $size
  * @property string $created
  * @property string $modified
- *
  * @property ObjectFile[] $objectFiles
  * @property Registry $registry
  * @property StorageEngineId $storageEngine
@@ -60,14 +61,16 @@ class Storage extends \cascade\components\db\ActiveRecord
             [['created', 'modified'], 'safe'],
             [['id', 'storage_engine_id'], 'string', 'max' => 36],
             [['storage_key', 'file_name'], 'string', 'max' => 255],
-            [['type'], 'string', 'max' => 100]
+            [['type'], 'string', 'max' => 100],
         ];
     }
 
     /**
-     * __method_fillKill_description__
+     * __method_fillKill_description__.
+     *
      * @param __param_attributes_type__ $attributes __param_attributes_description__
-     * @return __return_fillKill_type__  __return_fillKill_description__
+     *
+     * @return __return_fillKill_type__ __return_fillKill_description__
      */
     public function fillKill($attributes)
     {
@@ -91,14 +94,16 @@ class Storage extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_startBlank_description__
-     * @param __param_engine_type__      $engine __param_engine_description__
+     * __method_startBlank_description__.
+     *
+     * @param __param_engine_type__ $engine __param_engine_description__
+     *
      * @return __return_startBlank_type__ __return_startBlank_description__
      */
     public static function startBlank($engine)
     {
         $className = self::className();
-        $blank = new $className;
+        $blank = new $className();
         $blank->storage_engine_id = $engine->primaryKey;
         if ($blank->save()) {
             return $blank;
@@ -125,7 +130,8 @@ class Storage extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get object files
+     * Get object files.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getObjectFiles()
@@ -134,7 +140,8 @@ class Storage extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get registry
+     * Get registry.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getRegistry()
@@ -143,7 +150,8 @@ class Storage extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get storage engine
+     * Get storage engine.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getStorageEngine()

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\db\behaviors;
 use Yii;
 
 /**
- * Roleable [@doctodo write class description for Roleable]
+ * Roleable [@doctodo write class description for Roleable].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -56,6 +57,7 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
             }
             $models['relations'][$key] = $relation;
         }
+
         return $models;
     }
 
@@ -73,7 +75,8 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
             if (empty($relation['child_object_id']) && empty($relation['parent_object_id'])) {
                 if (!empty($this->_relations) && (!$this->companionObject || empty($this->companionObject->primaryKey))) {
                     $event->isValid = false;
-                    $this->owner->addError('_', 'Saving relations with no companion object! '. get_class($this->owner));
+                    $this->owner->addError('_', 'Saving relations with no companion object! '.get_class($this->owner));
+
                     return false;
                 }
             }
@@ -86,9 +89,10 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
         foreach ($this->_relatedObjectsFlat as $relatedObject) {
             if (!$relatedObject->save()) {
                 $event->handled = false;
-                $this->owner->addError('_', $relatedObject->objectType->title->upperSingular .' could not be saved!');
+                $this->owner->addError('_', $relatedObject->objectType->title->upperSingular.' could not be saved!');
             }
         }
+
         return $event->handled;
     }
 
@@ -96,11 +100,13 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
     {
         foreach ($this->_relatedObjectsFlat as $relatedObject) {
             if (!$relatedObject->validate()) {
-                $this->owner->addError('_', $relatedObject->objectType->title->upperSingular .' did not validate.');
+                $this->owner->addError('_', $relatedObject->objectType->title->upperSingular.' did not validate.');
                 $event->isValid = false;
+
                 return false;
             }
         }
+
         return true;
     }
 
@@ -111,18 +117,22 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
                 $this->_relatedObjects[$modelName] = [];
             }
             foreach ($objects as $tabId => $objectAttributes) {
-                if (!isset($objectAttributes['_moduleHandler'])) { continue; }
+                if (!isset($objectAttributes['_moduleHandler'])) {
+                    continue;
+                }
                 list($relationship, $role) = $this->owner->objectType->getRelationship($objectAttributes['_moduleHandler']);
                 $relatedHandler = $this->owner->objectType->getRelatedType($objectAttributes['_moduleHandler']);
-                if (!$relatedHandler) { continue; }
+                if (!$relatedHandler) {
+                    continue;
+                }
                 $objectAttributes = array_merge([
                     'companionObject' => $this->owner,
                     'companionRelationship' => $relationship,
-                    'companionRole' => $role
+                    'companionRole' => $role,
                     ], $objectAttributes);
                 $object = $relatedHandler->getModel(null, $objectAttributes);
                 $object->tabularId = $objectAttributes['_moduleHandler'];
-                if ((!$object 
+                if ((!$object
                     || $object->isEmptyObject())
                     && !($relationship->required)
                 ) {
@@ -143,7 +153,6 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
         return $this->_relatedObjects;
     }
 
-
     public function setRelations($value)
     {
         if ($this->companionObject) {
@@ -153,10 +162,15 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
         }
         $fields = $baseObject->getFields();
         foreach ($value as $tabId => $relation) {
-            if (!isset($relation['_moduleHandler'])) { \d("boom");exit; continue; }
+            if (!isset($relation['_moduleHandler'])) {
+                \d("boom");
+                exit;
+                continue;
+            }
             if (!isset($fields[$relation['_moduleHandler']])) {
                 \d($relation['_moduleHandler']);
-                \d(array_keys($fields));exit;
+                \d(array_keys($fields));
+                exit;
                 continue;
             }
             $baseAttributes = [];
@@ -169,7 +183,9 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
             $model->tabularId = $relation['_moduleHandler'];
             list($relationship, $role) = $baseObject->objectType->getRelationship($model->_moduleHandler);
             $relatedHandler = $baseObject->objectType->getRelatedType($model->_moduleHandler);
-            if (!$relatedHandler) { continue; }
+            if (!$relatedHandler) {
+                continue;
+            }
             if (!$this->owner->tabularId  // primary object
                 && !$this->owner->isNewRecord
                 && empty($model->parent_object_id)

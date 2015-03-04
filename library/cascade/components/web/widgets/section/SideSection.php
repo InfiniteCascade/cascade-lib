@@ -1,24 +1,26 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
 
 namespace cascade\components\web\widgets\section;
+
 use cascade\components\web\widgets\decorator\EmbeddedDecorator;
 use cascade\components\web\widgets\Item as WidgetItem;
 use cascade\components\web\widgets\base\Header as WidgetHeader;
 
 /**
- * SideSection [@doctodo write class description for SideSection]
+ * SideSection [@doctodo write class description for SideSection].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class SideSection extends Section
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {
@@ -28,7 +30,7 @@ class SideSection extends Section
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getWidgetDecoratorClass()
     {
@@ -36,19 +38,20 @@ class SideSection extends Section
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function widgetCellSettings()
     {
         return [
             'mediumDesktopColumns' => 12,
             'tabletColumns' => 12,
-            'baseSize' => 'tablet'
+            'baseSize' => 'tablet',
         ];
     }
 
     /**
-     * __method_isSingle_description__
+     * __method_isSingle_description__.
+     *
      * @return __return_isSingle_type__ __return_isSingle_description__
      */
     public function isSingle()
@@ -57,7 +60,7 @@ class SideSection extends Section
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function defaultItems($parent = null)
     {
@@ -66,8 +69,9 @@ class SideSection extends Section
             'object' => [
                 'class' => WidgetItem::className(),
                 'widget' => ['class' => WidgetHeader::className()],
-            ]
+            ],
         ];
+
         return $default;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,12 +9,11 @@
 namespace cascade\components\web\form\fields;
 
 use infinite\helpers\Html;
-
 use cascade\components\web\form\FormObjectTrait;
 use infinite\web\grid\CellContentTrait;
 
 /**
- * Base [@doctodo write class description for Base]
+ * Base [@doctodo write class description for Base].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -65,13 +65,15 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     protected $_type;
 
     /**
-     * __method_generate_description__
+     * __method_generate_description__.
      */
     abstract public function generate();
 
     /**
-     * Get model field name
+     * Get model field name.
+     *
      * @param unknown $formSettings (optional)
+     *
      * @return unknown
      */
     public function getModelFieldName($formSettings = [])
@@ -80,8 +82,10 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     /**
-     * __method_neightborFieldId_description__
-     * @param __param_field_type__             $field __param_field_description__
+     * __method_neightborFieldId_description__.
+     *
+     * @param __param_field_type__ $field __param_field_description__
+     *
      * @return __return_neightborFieldId_type__ __return_neightborFieldId_description__
      */
     public function neightborFieldId($field)
@@ -95,7 +99,8 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     /**
-     * Get field
+     * Get field.
+     *
      * @return __return_getFieldId_type__ __return_getFieldId_description__
      */
     public function getFieldId()
@@ -104,22 +109,24 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     /**
-     * Get type
+     * Get type.
+     *
      * @return unknown
      */
     public function getType()
     {
         if (is_null($this->_type)) {
             $this->_type = FieldTypeDetector::detect($this->modelField);
-
         }
 
         return $this->_type;
     }
 
     /**
-     * Set type
+     * Set type.
+     *
      * @param unknown $value
+     *
      * @return unknown
      */
     public function setType($value)
@@ -130,7 +137,8 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     /**
-     * Get model
+     * Get model.
+     *
      * @return unknown
      */
     public function getModel()
@@ -143,7 +151,8 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     /**
-     * Get field
+     * Get field.
+     *
      * @return unknown
      */
     public function getField()
@@ -164,6 +173,7 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
         if ($selectValues) {
             $s['values'] = $selectValues;
         }
+
         return $s;
     }
 
@@ -182,10 +192,11 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     }
 
     public function getFilterValues()
-    {   
+    {
         if ($this->type === 'boolean') {
             return [0 => 'No', 1 => 'Yes'];
         }
+
         return false;
     }
 
@@ -200,5 +211,4 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
             break;
         }
     }
-
 }

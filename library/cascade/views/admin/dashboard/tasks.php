@@ -1,9 +1,10 @@
 <?php
 /**
- * @var yii\base\View $this
+ * @var yii\base\View
  */
 use infinite\helpers\Html;
 use infinite\helpers\ArrayHelper;
+
 ArrayHelper::multisort($tasks, 'title');
 $this->title = 'Maintenance Tasks';
 $this->params['breadcrumbs'][] = ['label' => 'Administration', 'url' => ['/admin/dashboard/index']];

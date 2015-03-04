@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -12,18 +13,16 @@ use yii\gii\CodeFile;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
-
 use yii\db\ActiveRecord;
 use yii\db\Connection;
 use yii\db\Schema;
 use yii\helpers\Inflector;
-
 use cascade\components\base\ModuleSetExtension;
 
 /**
- * Generator [@doctodo write class description for Generator]
+ * Generator [@doctodo write class description for Generator].
  *
-/**
+ /**
  * Generator [@doctodo write class description for Generator]
  *
  * This generator will generate the skeleton code needed for a
@@ -34,7 +33,6 @@ use cascade\components\base\ModuleSetExtension;
  * @property string $modelNamespace The model namespace of the module. This property is read-only.
  * @property boolean $modulePath The directory that contains the module class. This property is read-only.
  * @property string $widgetNamespace The widget namespace of the module. This property is read-only.
- *
  * @property string $migrationClassName The model namespace of the module. This property is read-only.
  * @property string $migrationsAlias The model namespace of the module. This property is read-only.
  * @property string $migrationsNamespace The model namespace of the module. This property is read-only.
@@ -43,6 +41,7 @@ use cascade\components\base\ModuleSetExtension;
  * @property string $widgetNamespace The widget namespace of the module. This property is read-only.
  *
  * @author Jacob Morrison <jacob@infinitecascade.com>
+ *
  * @since 1.0
  */
 class Generator extends \yii\gii\Generator
@@ -124,7 +123,7 @@ class Generator extends \yii\gii\Generator
     public $section;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function __construct()
     {
@@ -136,14 +135,15 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * Get base namespace
+     * Get base namespace.
+     *
      * @return __return_getBaseNamespace_type__ __return_getBaseNamespace_description__
      */
     public function getBaseNamespace()
     {
         if (!empty($this->moduleSet) && isset(Yii::$app->extensions[$this->moduleSet])) {
             $bsClass = Yii::$app->extensions[$this->moduleSet]['bootstrap'];
-            $bsReflector = new \ReflectionClass(new $bsClass);
+            $bsReflector = new \ReflectionClass(new $bsClass());
 
             return $bsReflector->getNamespaceName();
         }
@@ -152,7 +152,8 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * Get model class
+     * Get model class.
+     *
      * @return __return_getModelClass_type__ __return_getModelClass_description__
      */
     public function getModelClass()
@@ -161,7 +162,8 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * Get module name
+     * Get module name.
+     *
      * @return __return_getModuleName_type__ __return_getModuleName_description__
      */
     public function getModuleName()
@@ -170,25 +172,28 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * Get module namespace
+     * Get module namespace.
+     *
      * @return __return_getModuleNamespace_type__ __return_getModuleNamespace_description__
      */
     public function getModuleNamespace()
     {
-        return $this->baseNamespace . '\\' . $this->moduleName;
+        return $this->baseNamespace.'\\'.$this->moduleName;
     }
 
     /**
-     * Get module class
+     * Get module class.
+     *
      * @return __return_getModuleClass_type__ __return_getModuleClass_description__
      */
     public function getModuleClass()
     {
-        return $this->moduleNamespace  .'\\' . 'Module';
+        return $this->moduleNamespace.'\\'.'Module';
     }
 
     /**
-     * Get module i d
+     * Get module i d.
+     *
      * @return __return_getModuleID_type__ __return_getModuleID_description__
      */
     public function getModuleID()
@@ -197,7 +202,8 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * Get module system i d
+     * Get module system i d.
+     *
      * @return __return_getModuleSystemID_type__ __return_getModuleSystemID_description__
      */
     public function getModuleSystemID()
@@ -207,12 +213,13 @@ class Generator extends \yii\gii\Generator
 
     // model
     /**
-     * Get ns
+     * Get ns.
+     *
      * @return __return_getNs_type__ __return_getNs_description__
      */
     public function getNs()
     {
-        return $this->baseNamespace . '\\models';
+        return $this->baseNamespace.'\\models';
     }
 
     /**
@@ -355,7 +362,7 @@ EOD;
     ......
 EOD;
 
-        return $output . '<pre>' . highlight_string($code, true) . '</pre>';
+        return $output.'<pre>'.highlight_string($code, true).'</pre>';
     }
 
     /**
@@ -398,12 +405,12 @@ EOD;
         if (!empty($this->section) && substr($this->section, 0, 1) === '_') {
             if ($this->section === '_side') {
                 $files[] = new CodeFile(
-                    $modulePath . '/widgets/EmbeddedList.php',
+                    $modulePath.'/widgets/EmbeddedList.php',
                     $this->render("side_list_widget.php")
                 );
             } else {
                 $files[] = new CodeFile(
-                    $modulePath . '/widgets/EmbeddedList.php',
+                    $modulePath.'/widgets/EmbeddedList.php',
                     $this->render("embedded_list_widget.php")
                 );
             }
@@ -416,13 +423,13 @@ EOD;
                 $widgets[] = "Parents{$systemId}Browse";
             }
             $files[] = new CodeFile(
-                $modulePath . '/widgets/DetailList.php',
+                $modulePath.'/widgets/DetailList.php',
                 $this->render("detail_list_widget.php")
             );
         }
         if (!empty($this->hasDashboard)) {
             $files[] = new CodeFile(
-                $modulePath . '/widgets/SimpleLinkList.php',
+                $modulePath.'/widgets/SimpleLinkList.php',
                 $this->render("simple_link_list_widget.php")
             );
             $widgets[] = "{$systemId}Summary";
@@ -431,13 +438,13 @@ EOD;
         $this->widgets = $widgets;
 
         $files[] = new CodeFile(
-            $modulePath . '/Module.php',
+            $modulePath.'/Module.php',
             $this->render("module.php")
         );
 
         if (!empty($this->moduleSet) && isset(Yii::$app->extensions[$this->moduleSet])) {
             $files[] = new CodeFile(
-                $this->moduleSetPath . '/Extension.php',
+                $this->moduleSetPath.'/Extension.php',
                 $this->render("module_set.php")
             );
         }
@@ -461,10 +468,10 @@ EOD;
                 'migrationsNamespace' => $this->migrationsNamespace,
                 'createTableSyntax' => $this->generateCreateTableColumns($tableSchema),
                 'createTableIndices' => $this->generateTableIndices($tableSchema),
-                'columnSettingSkel' => $this->generateColumnSettings($tableSchema)
+                'columnSettingSkel' => $this->generateColumnSettings($tableSchema),
             ];
             $files[] = new CodeFile(
-                Yii::getAlias('@' . str_replace('\\', '/', $this->modelNamespace)) . '/' . $className . '.php',
+                Yii::getAlias('@'.str_replace('\\', '/', $this->modelNamespace)).'/'.$className.'.php',
                 $this->render('model.php', $params)
             );
             $files[] = $migration = new CodeFile(
@@ -481,7 +488,7 @@ EOD;
      */
     public function validateModuleClass()
     {
-        if (strpos($this->moduleClass, '\\') === false || Yii::getAlias('@' . str_replace('\\', '/', $this->moduleClass)) === false) {
+        if (strpos($this->moduleClass, '\\') === false || Yii::getAlias('@'.str_replace('\\', '/', $this->moduleClass)) === false) {
             $this->addError('moduleClass', 'Module class must be properly namespaced.');
         }
         if (substr($this->moduleClass, -1, 1) == '\\') {
@@ -490,8 +497,10 @@ EOD;
     }
 
     /**
-     * __method_generateDescriptorField_description__
-     * @param __param_table_type__                    $table __param_table_description__
+     * __method_generateDescriptorField_description__.
+     *
+     * @param __param_table_type__ $table __param_table_description__
+     *
      * @return __return_generateDescriptorField_type__ __return_generateDescriptorField_description__
      */
     public function generateDescriptorField($table)
@@ -517,7 +526,8 @@ EOD;
     }
 
     /**
-     * __method_possibleSections_description__
+     * __method_possibleSections_description__.
+     *
      * @return __return_possibleSections_type__ __return_possibleSections_description__
      */
     public function possibleSections()
@@ -531,16 +541,19 @@ EOD;
     }
 
     /**
-     * __method_possibleModuleSets_description__
+     * __method_possibleModuleSets_description__.
+     *
      * @return __return_possibleModuleSets_type__ __return_possibleModuleSets_description__
      */
     public function possibleModuleSets()
     {
         $s = ['' => '(core)'];
         foreach (Yii::$app->extensions as $id => $ext) {
-            if (!isset($ext['bootstrap'])) { continue; }
+            if (!isset($ext['bootstrap'])) {
+                continue;
+            }
             $bsClass = $ext['bootstrap'];
-            $bs = new $bsClass;
+            $bs = new $bsClass();
             if ($bs instanceof ModuleSetExtension) {
                 $s[$id] = $id;
             }
@@ -550,7 +563,8 @@ EOD;
     }
 
     /**
-     * __method_possibleIcons_description__
+     * __method_possibleIcons_description__.
+     *
      * @return __return_possibleIcons_type__ __return_possibleIcons_description__
      */
     public function possibleIcons()
@@ -561,8 +575,10 @@ EOD;
         ArrayHelper::multisort($data['icons'], 'name');
         foreach ($data['icons'] as $icon) {
             $group = $icon['categories'][0];
-            if (!isset($icons[$group])) { $icons[$group] = []; }
-            $icons[$group]['fa fa-'.$icon['id']] = $icon['name'] ."&#09;". '&#x'.$icon['unicode'] . ';';
+            if (!isset($icons[$group])) {
+                $icons[$group] = [];
+            }
+            $icons[$group]['fa fa-'.$icon['id']] = $icon['name']."&#09;".'&#x'.$icon['unicode'].';';
         }
         ksort($icons);
 
@@ -570,78 +586,87 @@ EOD;
     }
 
     /**
-     * Get module path
+     * Get module path.
+     *
      * @return boolean the directory that contains the module class
      */
     public function getModulePath()
     {
-        return Yii::getAlias('@' . str_replace('\\', '/', $this->moduleNamespace));
+        return Yii::getAlias('@'.str_replace('\\', '/', $this->moduleNamespace));
     }
 
     /**
-     * Get module set path
+     * Get module set path.
+     *
      * @return __return_getModuleSetPath_type__ __return_getModuleSetPath_description__
      */
     public function getModuleSetPath()
     {
-        return Yii::getAlias('@' . str_replace('\\', '/', $this->baseNamespace));
+        return Yii::getAlias('@'.str_replace('\\', '/', $this->baseNamespace));
     }
 
     /**
-     * Get widget namespace
+     * Get widget namespace.
+     *
      * @return string the widget namespace of the module.
      */
     public function getWidgetNamespace()
     {
-        return $this->moduleNamespace . '\widgets';
+        return $this->moduleNamespace.'\widgets';
     }
 
     /**
-     * Get model namespace
+     * Get model namespace.
+     *
      * @return string the model namespace of the module.
      */
     public function getModelNamespace()
     {
-        return $this->moduleNamespace . '\models';
+        return $this->moduleNamespace.'\models';
     }
 
     /**
-     * Get migrations namespace
+     * Get migrations namespace.
+     *
      * @return string the model namespace of the module.
      */
     public function getMigrationsNamespace()
     {
-        return $this->moduleNamespace . '\migrations';
+        return $this->moduleNamespace.'\migrations';
     }
 
     /**
-     * Get migration path
+     * Get migration path.
+     *
      * @return __return_getMigrationPath_type__ __return_getMigrationPath_description__
      */
     public function getMigrationPath()
     {
-        return Yii::getAlias('@' . str_replace('\\', '/', $this->migrationsNamespace)) . '/' . $this->migrationClassName . '.php';
+        return Yii::getAlias('@'.str_replace('\\', '/', $this->migrationsNamespace)).'/'.$this->migrationClassName.'.php';
     }
 
     /**
-     * Get migration directory
+     * Get migration directory.
+     *
      * @return __return_getMigrationDirectory_type__ __return_getMigrationDirectory_description__
      */
     public function getMigrationDirectory()
     {
-        return Yii::getAlias('@' . str_replace('\\', '/', $this->migrationsNamespace));
+        return Yii::getAlias('@'.str_replace('\\', '/', $this->migrationsNamespace));
     }
     /**
-     * Get migrations alias
+     * Get migrations alias.
+     *
      * @return string the model namespace of the module.
      */
     public function getMigrationsAlias()
     {
-        return '@' . str_replace('\\', '/', $this->migrationsNamespace);
+        return '@'.str_replace('\\', '/', $this->migrationsNamespace);
     }
 
     /**
-     * Get migration class name
+     * Get migration class name.
+     *
      * @return string the model namespace of the module.
      */
     public function getMigrationClassName()
@@ -654,12 +679,14 @@ EOD;
             }
         }
 
-        return  'm' . gmdate('ymd_His', $this->migrationTimestamp) . $postfix;
+        return  'm'.gmdate('ymd_His', $this->migrationTimestamp).$postfix;
     }
 
     /**
      * Collects the foreign key column details for the given table.
-     * @param TableSchema                   $table the table metadata
+     *
+     * @param TableSchema $table the table metadata
+     *
      * @return __return_findTableKeys_type__ __return_findTableKeys_description__
      */
     protected function findTableKeys($table)
@@ -667,9 +694,9 @@ EOD;
         $r = [
                 'foreignKeys' => [],
                 'indices' => [],
-                'primaryKeys' => []
+                'primaryKeys' => [],
             ];
-        $row = $this->dbConnection->createCommand('SHOW CREATE TABLE ' . $this->dbConnection->getSchema()->quoteSimpleTableName($table->name))->queryOne();
+        $row = $this->dbConnection->createCommand('SHOW CREATE TABLE '.$this->dbConnection->getSchema()->quoteSimpleTableName($table->name))->queryOne();
         if (isset($row['Create Table'])) {
             $sql = $row['Create Table'];
         } else {
@@ -714,8 +741,10 @@ EOD;
     }
 
     /**
-     * Get primary key location
-     * @param __param_table_type__                  $table __param_table_description__
+     * Get primary key location.
+     *
+     * @param __param_table_type__ $table __param_table_description__
+     *
      * @return __return_getPrimaryKeyLocation_type__ __return_getPrimaryKeyLocation_description__
      */
     public function getPrimaryKeyLocation($table)
@@ -723,16 +752,22 @@ EOD;
         // if multiple, put the primary key in the indicies section
         $count = 0;
         foreach ($table->columns as $column) {
-            if ($column->isPrimaryKey) { $count++; }
-            if ($count > 1) { return 'index'; }
+            if ($column->isPrimaryKey) {
+                $count++;
+            }
+            if ($count > 1) {
+                return 'index';
+            }
         }
 
         return 'table_build';
     }
 
     /**
-     * __method_generateTableIndices_description__
-     * @param __param_table_type__                 $table __param_table_description__
+     * __method_generateTableIndices_description__.
+     *
+     * @param __param_table_type__ $table __param_table_description__
+     *
      * @return __return_generateTableIndices_type__ __return_generateTableIndices_description__
      */
     public function generateTableIndices($table)
@@ -753,33 +788,36 @@ EOD;
             $keys = $parts['keys'];
             $name = $this->fixIndexName($name, $table, $keys);
             $unique = !empty($parts['unique']);
-            $i[] = "\$this->createIndex('{$name}', '{$tableName}', '".implode(',', $keys)."', ". ($unique ? 'true' : 'false') .");";
+            $i[] = "\$this->createIndex('{$name}', '{$tableName}', '".implode(',', $keys)."', ".($unique ? 'true' : 'false').");";
         }
 
         foreach ($meta['foreignKeys'] as $fk) {
             $keys = $fk['keys'];
             $unique = !empty($fk['unique']);
             $name = $this->fixIndexName($fk['name'], $table, array_values($keys));
-            $i[] = "\$this->addForeignKey('{$fk['name']}', '{$tableName}', '".implode(',', array_keys($fk['keys']))."', '{$fk['table']}', '".implode(',', array_values($fk['keys'])) ."', '{$fk['onDelete']}', '{$fk['onUpdate']}');";
+            $i[] = "\$this->addForeignKey('{$fk['name']}', '{$tableName}', '".implode(',', array_keys($fk['keys']))."', '{$fk['table']}', '".implode(',', array_values($fk['keys']))."', '{$fk['onDelete']}', '{$fk['onUpdate']}');";
         }
 
         return implode("\n\t\t", $i);
     }
 
     /**
-     * Get module set modules
+     * Get module set modules.
+     *
      * @return __return_getModuleSetModules_type__ __return_getModuleSetModules_description__
      */
     public function getModuleSetModules()
     {
-        if (empty($this->moduleSet) || !isset(Yii::$app->extensions[$this->moduleSet])) { return ''; }
+        if (empty($this->moduleSet) || !isset(Yii::$app->extensions[$this->moduleSet])) {
+            return '';
+        }
         $bsClass = Yii::$app->extensions[$this->moduleSet]['bootstrap'];
         $p = [];
-        $bs = new $bsClass;
+        $bs = new $bsClass();
         $modules = $bs->getModules();
         $modules[$this->moduleID] = ['class' => $this->moduleClass];
         foreach ($modules as $id => $module) {
-            $e = '$m[\''. $id .'\'] = [';
+            $e = '$m[\''.$id.'\'] = [';
             if (!is_array($module)) {
                 $module = ['class' => $module];
             }
@@ -787,7 +825,7 @@ EOD;
             foreach ($module as $k => $v) {
                 $e .= "\n\t\t\t'{$k}' => ";
                 if (is_string($v)) {
-                    $e .= "'". addslashes($v) ."'";
+                    $e .= "'".addslashes($v)."'";
                 } elseif (is_numeric($v)) {
                     $e .= $v;
                 }
@@ -804,15 +842,19 @@ EOD;
     }
 
     /**
-     * __method_fixIndexName_description__
-     * @param __param_name_type__          $name  __param_name_description__
-     * @param __param_table_type__         $table __param_table_description__
-     * @param __param_keys_type__          $keys  __param_keys_description__
+     * __method_fixIndexName_description__.
+     *
+     * @param __param_name_type__  $name  __param_name_description__
+     * @param __param_table_type__ $table __param_table_description__
+     * @param __param_keys_type__  $keys  __param_keys_description__
+     *
      * @return __return_fixIndexName_type__ __return_fixIndexName_description__
      */
     public function fixIndexName($name, $table, $keys)
     {
-        if (strpos($name, '_') === false) { return $name; }
+        if (strpos($name, '_') === false) {
+            return $name;
+        }
         $niceName = preg_replace('/object/', '', $table->name);
         $niceName = lcfirst(Inflector::id2camel($niceName, '_'));
         $indices = [];
@@ -820,13 +862,15 @@ EOD;
             $indices[] = Inflector::id2camel(substr($key, 0, strpos($key, '_id')), '_');
         }
 
-        return $niceName . implode('', $indices);
+        return $niceName.implode('', $indices);
     }
 
     /**
-     * Generates Create table schema
+     * Generates Create table schema.
+     *
      * @param \yii\db\TableSchema $table the table schema
-     * @return array               the generated validation rules
+     *
+     * @return array the generated validation rules
      */
     public function generateCreateTableColumns($table)
     {
@@ -837,7 +881,7 @@ EOD;
             $nullExtra = $signedExtra = $defaultExtra = $primaryKeyExtra  = $autoIncrementExtra = '';
             $size = $column->size;
             if (!is_null($column->scale)) {
-                $size .= ','. $column->scale;
+                $size .= ','.$column->scale;
             }
 
             if (!$column->allowNull) {
@@ -851,12 +895,12 @@ EOD;
                 $autoIncrementExtra = ' AUTO_INCREMENT';
             }
 
-            if ($column->isPrimaryKey AND $this->getPrimaryKeyLocation($table) === 'table_build') {
+            if ($column->isPrimaryKey and $this->getPrimaryKeyLocation($table) === 'table_build') {
                 $primaryKeyExtra = ' PRIMARY KEY';
             }
 
             if (!empty($column->enumValues)) {
-                    $size = '\'' . implode('\',\'', $column->enumValues) . '\'';
+                $size = '\''.implode('\',\'', $column->enumValues).'\'';
             }
 
             $stringValue = $column->dbTypecast($column->defaultValue);
@@ -872,7 +916,7 @@ EOD;
                 $stringValue = $this->getDbConnection()->getSchema()->quoteValue($stringValue);
             }
             if ($stringValue !== false) {
-                $defaultExtra = ' DEFAULT '. addslashes($stringValue);
+                $defaultExtra = ' DEFAULT '.addslashes($stringValue);
             }
 
             $field = "'{$column->name}' => '";
@@ -882,7 +926,8 @@ EOD;
             preg_match('/^(\w+)(\((.+?)\))?\s*(.+)$/', $fieldType, $fieldTypeParts);
             if (!isset($fieldTypeParts[1])) {
                 var_dump($fieldTypeParts);
-                var_dump($column);exit;
+                var_dump($column);
+                exit;
             }
             $fieldTypeBare = $fieldTypeParts[1];
             // if (isset($fieldTypeBare[4]) AND $fieldTypeBare[4] === 'unsigned') {
@@ -890,7 +935,7 @@ EOD;
             // }
 
             if ($fieldType === 'char(36)') {
-                $fieldType = $column->dbType .' CHARACTER SET ascii COLLATE ascii_bin';
+                $fieldType = $column->dbType.' CHARACTER SET ascii COLLATE ascii_bin';
             } elseif ($fieldType === 'tinyint(1)') {
                 $fieldType = 'boolean';
             } elseif (substr($column->dbType, 0, 4) === 'enum') {
@@ -905,12 +950,12 @@ EOD;
                     }
                 }
                 if ($size !== false) {
-                    $fieldType .= '('. $size .')';
+                    $fieldType .= '('.$size.')';
                 }
             }
 
-            $fieldComplete = trim(addslashes($fieldType) . $signedExtra . $nullExtra . $defaultExtra . $autoIncrementExtra . $primaryKeyExtra);
-            $field .= $fieldComplete .'\'';
+            $fieldComplete = trim(addslashes($fieldType).$signedExtra.$nullExtra.$defaultExtra.$autoIncrementExtra.$primaryKeyExtra);
+            $field .= $fieldComplete.'\'';
 
             $fields[] = $field;
         }
@@ -920,8 +965,10 @@ EOD;
 
     /**
      * Generates the attribute labels for the specified table.
+     *
      * @param \yii\db\TableSchema $table the table schema
-     * @return array               the generated attribute labels (name => label)
+     *
+     * @return array the generated attribute labels (name => label)
      */
     public function generateLabels($table)
     {
@@ -934,7 +981,7 @@ EOD;
             } else {
                 $label = Inflector::camel2words($column->name);
                 if (strcasecmp(substr($label, -3), ' id') === 0) {
-                    $label = substr($label, 0, -3) . ' ID';
+                    $label = substr($label, 0, -3).' ID';
                 }
                 $labels[$column->name] = $label;
             }
@@ -944,15 +991,19 @@ EOD;
     }
 
     /**
-     * __method_generateColumnSettings_description__
-     * @param __param_table_type__                   $table __param_table_description__
+     * __method_generateColumnSettings_description__.
+     *
+     * @param __param_table_type__ $table __param_table_description__
+     *
      * @return __return_generateColumnSettings_type__ __return_generateColumnSettings_description__
      */
     public function generateColumnSettings($table)
     {
         $types = [];
         foreach ($table->columns as $column) {
-            if (in_array($column->name, ['id', 'created', 'modified', 'archived', 'deleted']) || strstr($column->name, '_id') !== false) { continue; }
+            if (in_array($column->name, ['id', 'created', 'modified', 'archived', 'deleted']) || strstr($column->name, '_id') !== false) {
+                continue;
+            }
             $types[] = "'{$column->name}' => []";
         }
 
@@ -961,8 +1012,10 @@ EOD;
 
     /**
      * Generates validation rules for the specified table.
+     *
      * @param \yii\db\TableSchema $table the table schema
-     * @return array               the generated validation rules
+     *
+     * @return array the generated validation rules
      */
     public function generateRules($table)
     {
@@ -1008,18 +1061,20 @@ EOD;
 
         $rules = [];
         foreach ($types as $type => $columns) {
-            $rules[] = "[['" . implode("', '", $columns) . "'], '$type']";
+            $rules[] = "[['".implode("', '", $columns)."'], '$type']";
         }
         foreach ($lengths as $length => $columns) {
-            $rules[] = "[['" . implode("', '", $columns) . "'], 'string', 'max' => $length]";
+            $rules[] = "[['".implode("', '", $columns)."'], 'string', 'max' => $length]";
         }
 
         return $rules;
     }
 
     /**
-     * __method_generateRelationUses_description__
-     * @param __param_relations_type__             $relations __param_relations_description__
+     * __method_generateRelationUses_description__.
+     *
+     * @param __param_relations_type__ $relations __param_relations_description__
+     *
      * @return __return_generateRelationUses_type__ __return_generateRelationUses_description__
      */
     public function generateRelationUses($relations)
@@ -1027,7 +1082,7 @@ EOD;
         $uses = [];
         foreach ($relations as $relation) {
             if (isset($this->modelMap[$relation[1]])) {
-                $uses[] = 'use '. $this->modelMap[$relation[1]] .';';
+                $uses[] = 'use '.$this->modelMap[$relation[1]].';';
             }
         }
 
@@ -1035,7 +1090,8 @@ EOD;
     }
 
     /**
-     * __method_generateRelations_description__
+     * __method_generateRelations_description__.
+     *
      * @return array the generated relation declarations
      */
     protected function generateRelations()
@@ -1085,7 +1141,7 @@ EOD;
                 $link = $this->generateRelationLink($refs);
                 $relationName = $this->generateRelationName($relations, $refClassName, $refTable, $className, $hasMany);
                 $relations[$refClassName][$relationName] = [
-                    "return \$this->" . ($hasMany ? 'hasMany' : 'hasOne') . "($className::className(), $link);",
+                    "return \$this->".($hasMany ? 'hasMany' : 'hasOne')."($className::className(), $link);",
                     $className,
                     $hasMany,
                 ];
@@ -1123,7 +1179,9 @@ EOD;
 
     /**
      * Generates the link parameter to be used in generating the relation declaration.
-     * @param array  $refs reference constraint
+     *
+     * @param array $refs reference constraint
+     *
      * @return string the generated link parameter.
      */
     protected function generateRelationLink($refs)
@@ -1133,7 +1191,7 @@ EOD;
             $pairs[] = "'$a' => '$b'";
         }
 
-        return '[' . implode(', ', $pairs) . ']';
+        return '['.implode(', ', $pairs).']';
     }
 
     /**
@@ -1143,8 +1201,8 @@ EOD;
      *                       or false if the table is not a pivot table.
      *
      * @param __param_table_type__ $table __param_table_description__
-     * @return array|boolean        the relevant foreign key constraint information if the table is a pivot table,
-or false if the table is not a pivot table.
+     *
+     * @return array|boolean the relevant foreign key constraint information if the table is a pivot table,
      */
     protected function checkPivotTable($table)
     {
@@ -1171,12 +1229,14 @@ or false if the table is not a pivot table.
 
     /**
      * Generate a relation name for the specified table and a base name.
+     *
      * @param array               $relations the relations being generated currently.
      * @param string              $className the class name that will contain the relation declarations
      * @param \yii\db\TableSchema $table     the table schema
      * @param string              $key       a base name that the relation name may be generated from
      * @param boolean             $multiple  whether this is a has-many relation
-     * @return string              the relation name
+     *
+     * @return string the relation name
      */
     protected function generateRelationName($relations, $className, $table, $key, $multiple)
     {
@@ -1189,10 +1249,10 @@ or false if the table is not a pivot table.
         $name = $rawName = Inflector::id2camel($key, '_');
         $i = 0;
         while (isset($table->columns[lcfirst($name)])) {
-            $name = $rawName . ($i++);
+            $name = $rawName.($i++);
         }
         while (isset($relations[$className][lcfirst($name)])) {
-            $name = $rawName . ($i++);
+            $name = $rawName.($i++);
         }
 
         return $name;
@@ -1216,7 +1276,7 @@ or false if the table is not a pivot table.
     public function validateNamespace()
     {
         $this->ns = ltrim($this->ns, '\\');
-        $path = Yii::getAlias('@' . str_replace('\\', '/', $this->ns), false);
+        $path = Yii::getAlias('@'.str_replace('\\', '/', $this->ns), false);
         if ($path === false) {
             $this->addError('ns', 'Namespace must be associated with an existing directory.');
         }
@@ -1237,6 +1297,7 @@ or false if the table is not a pivot table.
 
     /**
      * Validates the [[tableName]] attribute.
+     *
      * @return __return_validateTableName_type__ __return_validateTableName_description__
      */
     public function validateTableName()
@@ -1270,7 +1331,8 @@ or false if the table is not a pivot table.
     private $_classNames;
 
     /**
-     * Get table names
+     * Get table names.
+     *
      * @return array the table names that match the pattern specified by [[tableName]].
      */
     protected function getTableNames()
@@ -1286,15 +1348,15 @@ or false if the table is not a pivot table.
         if (strpos($this->tableName, '*') !== false) {
             if (($pos = strrpos($this->tableName, '.')) !== false) {
                 $schema = substr($this->tableName, 0, $pos);
-                $pattern = '/^' . str_replace('*', '\w+', substr($this->tableName, $pos + 1)) . '$/';
+                $pattern = '/^'.str_replace('*', '\w+', substr($this->tableName, $pos + 1)).'$/';
             } else {
                 $schema = '';
-                $pattern = '/^' . str_replace('*', '\w+', $this->tableName) . '$/';
+                $pattern = '/^'.str_replace('*', '\w+', $this->tableName).'$/';
             }
 
             foreach ($db->schema->getTableNames($schema) as $table) {
                 if (preg_match($pattern, $table)) {
-                    $tableNames[] = $schema === '' ? $table : ($schema . '.' . $table);
+                    $tableNames[] = $schema === '' ? $table : ($schema.'.'.$table);
                 }
             }
         } elseif (($table = $db->getTableSchema($this->tableName, true)) !== null) {
@@ -1307,7 +1369,9 @@ or false if the table is not a pivot table.
 
     /**
      * Generates a class name from the specified table name.
+     *
      * @param string $tableName the table name (which may contain schema prefix)
+     *
      * @return string the generated class name
      */
     protected function generateClassName($tableName)
@@ -1327,7 +1391,7 @@ or false if the table is not a pivot table.
             if (($pos = strrpos($pattern, '.')) !== false) {
                 $pattern = substr($pattern, $pos + 1);
             }
-            $patterns[] = '/^' . str_replace('*', '(\w+)', $pattern) . '$/';
+            $patterns[] = '/^'.str_replace('*', '(\w+)', $pattern).'$/';
         }
         if (!empty($db->tablePrefix)) {
             $patterns[] = "/^{$db->tablePrefix}(.*?)$/";
@@ -1348,7 +1412,8 @@ or false if the table is not a pivot table.
     }
 
     /**
-     * Get search models
+     * Get search models.
+     *
      * @return __return_getSearchModels_type__ __return_getSearchModels_description__
      */
     public function getSearchModels()
@@ -1357,7 +1422,8 @@ or false if the table is not a pivot table.
     }
 
     /**
-     * Get model map
+     * Get model map.
+     *
      * @return __return_getModelMap_type__ __return_getModelMap_description__
      */
     public function getModelMap()
@@ -1368,7 +1434,7 @@ or false if the table is not a pivot table.
             $files = FileHelper::findFiles(Yii::getAlias($path), ['only' => ['.php']]);
             foreach ($files as $file) {
                 $baseName = strstr(basename($file), '.php', true);
-                $className = $namespace .'\\'. $baseName;
+                $className = $namespace.'\\'.$baseName;
                 if (class_exists($className)) {
                     $reflector = new \ReflectionClass($className);
                     if ($reflector->isSubclassOf('yii\base\Model')) {
@@ -1381,12 +1447,12 @@ or false if the table is not a pivot table.
         return $m;
     }
     /**
-     * Get db connection
+     * Get db connection.
+     *
      * @return Connection the DB connection as specified by [[db]].
      */
     protected function getDbConnection()
     {
         return Yii::$app->{$this->db};
     }
-
 }

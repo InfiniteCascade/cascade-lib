@@ -1,21 +1,19 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
 
 namespace cascade\models;
 
-use Yii;
-
 use infinite\base\exceptions\Exception;
 use cascade\components\types\Relationship;
-
 use yii\base\Model;
 
 /**
- * DeleteForm [@doctodo write class description for DeleteForm]
+ * DeleteForm [@doctodo write class description for DeleteForm].
  *
  * LoginForm is the model behind the login form.
  *
@@ -53,7 +51,8 @@ class DeleteForm extends Model
     protected $_possibleTargets;
 
     /**
-     * __method_rules_description__
+     * __method_rules_description__.
+     *
      * @return array the validation rules.
      */
     public function rules()
@@ -64,42 +63,43 @@ class DeleteForm extends Model
     }
 
     /**
-     * Get labels
+     * Get labels.
+     *
      * @return __return_getLabels_type__ __return_getLabels_description__
      */
     public function getLabels()
     {
         $labels = [];
         $labels['delete_object'] = [
-            'short' => 'Delete ' . $this->object->objectType->title->getSingular(true),
-            'long' => 'delete the ' . $this->object->objectType->title->getSingular(false) .' <em>'. $this->object->descriptor . '</em>',
-            'past' => $this->object->objectType->title->getSingular(false) .' <em>'. $this->object->descriptor . '</em> has been deleted',
+            'short' => 'Delete '.$this->object->objectType->title->getSingular(true),
+            'long' => 'delete the '.$this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em>',
+            'past' => $this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em> has been deleted',
             'options' => ['class' => 'btn-danger'],
-            'response' => 'home'
+            'response' => 'home',
         ];
         $labels['archive_object'] = [
-            'short' => 'Archive ' . $this->object->objectType->title->getSingular(true),
-            'long' => 'archive the ' . $this->object->objectType->title->getSingular(false) .' <em>'. $this->object->descriptor . '</em>',
-            'past' => $this->object->objectType->title->getSingular(false) .' <em>'. $this->object->descriptor . '</em> has been archived',
-            'response' => 'refresh'
+            'short' => 'Archive '.$this->object->objectType->title->getSingular(true),
+            'long' => 'archive the '.$this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em>',
+            'past' => $this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em> has been archived',
+            'response' => 'refresh',
         ];
         $labels['unarchive_object'] = [
-            'short' => 'Unarchive ' . $this->object->objectType->title->getSingular(true),
-            'long' => 'unarchive the ' . $this->object->objectType->title->getSingular(false) .' <em>'. $this->object->descriptor . '</em>',
-            'past' => $this->object->objectType->title->getSingular(false) .' <em>'. $this->object->descriptor . '</em> has been unarchived',
-            'response' => 'refresh'
+            'short' => 'Unarchive '.$this->object->objectType->title->getSingular(true),
+            'long' => 'unarchive the '.$this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em>',
+            'past' => $this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em> has been unarchived',
+            'response' => 'refresh',
         ];
         if (isset($this->relationshipWith)) {
             $labels['delete_relationship'] = [
                 'short' => 'Delete Relationship',
-                'long' => 'delete the relationship between <em>'. $this->object->descriptor .'</em> and <em>'. $this->relationshipWith->descriptor .'</em>',
-                'past' => 'the relationship between <em>'. $this->object->descriptor .'</em> and <em>'. $this->relationshipWith->descriptor .'</em> has been deleted',
-                'options' => ['class' => 'btn-warning']
+                'long' => 'delete the relationship between <em>'.$this->object->descriptor.'</em> and <em>'.$this->relationshipWith->descriptor.'</em>',
+                'past' => 'the relationship between <em>'.$this->object->descriptor.'</em> and <em>'.$this->relationshipWith->descriptor.'</em> has been deleted',
+                'options' => ['class' => 'btn-warning'],
             ];
             $labels['end_relationship'] = [
                 'short' => 'End Relationship',
-                'long' => 'end the relationship between <em>'. $this->object->descriptor .'</em> and <em>'. $this->relationshipWith->descriptor .'</em>',
-                'past' => 'the relationship between <em>'. $this->object->descriptor .'</em> and <em>'. $this->relationshipWith->descriptor .'</em> has been ended',
+                'long' => 'end the relationship between <em>'.$this->object->descriptor.'</em> and <em>'.$this->relationshipWith->descriptor.'</em>',
+                'past' => 'the relationship between <em>'.$this->object->descriptor.'</em> and <em>'.$this->relationshipWith->descriptor.'</em> has been ended',
             ];
         }
 
@@ -107,7 +107,8 @@ class DeleteForm extends Model
     }
 
     /**
-     * Get target
+     * Get target.
+     *
      * @return __return_getTarget_type__ __return_getTarget_description__
      */
     public function getTarget()
@@ -120,7 +121,8 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_canDeleteObject_description__
+     * __method_canDeleteObject_description__.
+     *
      * @return __return_canDeleteObject_type__ __return_canDeleteObject_description__
      */
     public function canDeleteObject()
@@ -133,7 +135,8 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_canArchiveObject_description__
+     * __method_canArchiveObject_description__.
+     *
      * @return __return_canArchiveObject_type__ __return_canArchiveObject_description__
      */
     public function canArchiveObject()
@@ -146,7 +149,8 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_canDeleteRelation_description__
+     * __method_canDeleteRelation_description__.
+     *
      * @return __return_canDeleteRelation_type__ __return_canDeleteRelation_description__
      */
     public function canDeleteRelation()
@@ -166,7 +170,8 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_canEndRelation_description__
+     * __method_canEndRelation_description__.
+     *
      * @return __return_canEndRelation_type__ __return_canEndRelation_description__
      */
     public function canEndRelation()
@@ -185,7 +190,8 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_hasObjectTargets_description__
+     * __method_hasObjectTargets_description__.
+     *
      * @return __return_hasObjectTargets_type__ __return_hasObjectTargets_description__
      */
     public function hasObjectTargets()
@@ -200,7 +206,8 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_hasRelationshipTargets_description__
+     * __method_hasRelationshipTargets_description__.
+     *
      * @return __return_hasRelationshipTargets_type__ __return_hasRelationshipTargets_description__
      */
     public function hasRelationshipTargets()
@@ -215,7 +222,8 @@ class DeleteForm extends Model
     }
 
     /**
-     * Get possible targets
+     * Get possible targets.
+     *
      * @return __return_getPossibleTargets_type__ __return_getPossibleTargets_description__
      */
     public function getPossibleTargets()
@@ -248,8 +256,10 @@ class DeleteForm extends Model
     }
 
     /**
-     * Set target
+     * Set target.
+     *
      * @param __param_value_type__ $value __param_value_description__
+     *
      * @throws Exception __exception_Exception_description__
      */
     public function setTarget($value)
@@ -257,12 +267,13 @@ class DeleteForm extends Model
         if (in_array($value, $this->possibleTargets)) {
             $this->_target = $value;
         } else {
-            throw new Exception('Unknown deletion target '. $value);
+            throw new Exception('Unknown deletion target '.$value);
         }
     }
 
     /**
-     * Get target label
+     * Get target label.
+     *
      * @return __return_getTargetLabel_type__ __return_getTargetLabel_description__
      */
     public function getTargetLabel()
@@ -275,7 +286,8 @@ class DeleteForm extends Model
     }
 
     /**
-     * Get target descriptor
+     * Get target descriptor.
+     *
      * @return __return_getTargetDescriptor_type__ __return_getTargetDescriptor_description__
      */
     public function getTargetDescriptor()
@@ -288,7 +300,8 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_handle_description__
+     * __method_handle_description__.
+     *
      * @return __return_handle_type__ __return_handle_description__
      */
     public function handle()

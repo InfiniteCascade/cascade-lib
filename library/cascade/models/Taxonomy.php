@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -18,7 +19,6 @@ use cascade\components\types\ActiveRecordTrait;
  * @property string $system_id
  * @property string $created
  * @property string $modified
- *
  * @property RelationTaxonomy[] $relationTaxonomies
  * @property TaxonomyType $taxonomyType
  * @property Registry $id
@@ -64,7 +64,7 @@ class Taxonomy extends \cascade\components\db\ActiveRecord
             [['taxonomy_type_id', 'name'], 'required'],
             [['created', 'modified'], 'safe'],
             [['id', 'taxonomy_type_id'], 'string', 'max' => 36],
-            [['name', 'system_id'], 'string', 'max' => 255]
+            [['name', 'system_id'], 'string', 'max' => 255],
         ];
     }
 
@@ -84,7 +84,8 @@ class Taxonomy extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get relation taxonomies
+     * Get relation taxonomies.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getRelationTaxonomies()
@@ -93,7 +94,8 @@ class Taxonomy extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get taxonomy type
+     * Get taxonomy type.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getTaxonomyType()
@@ -102,7 +104,8 @@ class Taxonomy extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get id
+     * Get id.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getId()

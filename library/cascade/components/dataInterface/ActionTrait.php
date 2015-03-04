@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -9,10 +10,9 @@ namespace cascade\components\dataInterface;
 
 use Yii;
 use cascade\models\DataInterfaceLog;
-use infinite\helpers\Console;
 
 /**
- * Action [@doctodo write class description for Action]
+ * Action [@doctodo write class description for Action].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -40,6 +40,7 @@ trait ActionTrait
         if (is_object($this->_interface)) {
             $this->_interface = $this->_interface->systemId;
         }
+
         return parent::__sleep();
     }
 
@@ -50,18 +51,18 @@ trait ActionTrait
 
     public function getInterface()
     {
-        if (!empty($this->_interface) 
+        if (!empty($this->_interface)
             && is_string($this->_interface)
             && Yii::$app->collectors['dataInterfaces']->has($this->_interface)
             ) {
             $this->_interface = Yii::$app->collectors['dataInterfaces']->getOne($this->_interface);
         }
+
         return $this->_interface;
     }
 
     public function resumeLog($log)
     {
-
         $this->_log = $log;
         $this->_log->status = 'running';
         $this->_log->started = date("Y-m-d G:i:s");
@@ -69,9 +70,9 @@ trait ActionTrait
         $this->_log->save();
     }
 
-
     /**
-     * __method_start_description__
+     * __method_start_description__.
+     *
      * @return __return_start_type__ __return_start_description__
      */
     public function start()
@@ -80,8 +81,10 @@ trait ActionTrait
     }
 
     /**
-     * __method_end_description__
-     * @param boolean             $endInterrupted __param_endInterrupted_description__ [optional]
+     * __method_end_description__.
+     *
+     * @param boolean $endInterrupted __param_endInterrupted_description__ [optional]
+     *
      * @return __return_end_type__ __return_end_description__
      */
     public function end($endInterrupted = false)
@@ -90,7 +93,8 @@ trait ActionTrait
     }
 
     /**
-     * __method_save_description__
+     * __method_save_description__.
+     *
      * @return __return_save_type__ __return_save_description__
      */
     public function save()
@@ -110,13 +114,14 @@ trait ActionTrait
     }
 
     /**
-     * Get log
+     * Get log.
+     *
      * @return __return_getLog_type__ __return_getLog_description__
      */
     public function getLog()
     {
         if (!isset($this->_log)) {
-            $this->_log = new DataInterfaceLog;
+            $this->_log = new DataInterfaceLog();
             if (!empty($this->interface)) {
                 $this->_log->data_interface_id = $this->interface->interfaceObject->id;
             }
@@ -129,7 +134,8 @@ trait ActionTrait
     }
 
     /**
-     * Get status
+     * Get status.
+     *
      * @return __return_getStatus_type__ __return_getStatus_description__
      */
     public function getStatus()
@@ -140,12 +146,12 @@ trait ActionTrait
             $this->_status = new Status($this->log);
         }
 
-
         return $this->_status;
     }
 
     /**
-     * Get id
+     * Get id.
+     *
      * @return __return_getId_type__ __return_getId_description__
      */
     public function getId()
@@ -154,7 +160,8 @@ trait ActionTrait
     }
 
     /**
-     * __method_addRegistry_description__
+     * __method_addRegistry_description__.
+     *
      * @param __param_key_type__      $key      __param_key_description__
      * @param __param_objectId_type__ $objectId __param_objectId_description__
      */
@@ -164,7 +171,8 @@ trait ActionTrait
     }
 
     /**
-     * Get registry
+     * Get registry.
+     *
      * @return __return_getRegistry_type__ __return_getRegistry_description__
      */
     public function getRegistry()
@@ -173,8 +181,10 @@ trait ActionTrait
     }
 
     /**
-     * __method_objectInRegistry_description__
-     * @param __param_objectId_type__          $objectId __param_objectId_description__
+     * __method_objectInRegistry_description__.
+     *
+     * @param __param_objectId_type__ $objectId __param_objectId_description__
+     *
      * @return __return_objectInRegistry_type__ __return_objectInRegistry_description__
      */
     public function objectInRegistry($objectId)
@@ -183,8 +193,10 @@ trait ActionTrait
     }
 
     /**
-     * __method_keyInRegistry_description__
-     * @param __param_keyId_type__          $keyId __param_keyId_description__
+     * __method_keyInRegistry_description__.
+     *
+     * @param __param_keyId_type__ $keyId __param_keyId_description__
+     *
      * @return __return_keyInRegistry_type__ __return_keyInRegistry_description__
      */
     public function keyInRegistry($keyId)

@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\web\widgets\base;
 use cascade\components\web\widgets\Widget;
 
 /**
- * BaseList [@doctodo write class description for BaseList]
+ * BaseList [@doctodo write class description for BaseList].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

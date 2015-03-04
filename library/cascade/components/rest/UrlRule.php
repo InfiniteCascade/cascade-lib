@@ -1,10 +1,11 @@
 <?php
 namespace cascade\components\rest;
 
-class UrlRule extends \yii\rest\UrlRule {
-	public $controller = 'api';
+class UrlRule extends \yii\rest\UrlRule
+{
+    public $controller = 'api';
     public $pluralize = false;
-	public $patterns = [
+    public $patterns = [
         'PUT,PATCH {type}/{id}' => 'update',
         'DELETE {type}/{id}' => 'delete',
         'GET,HEAD {type}/{id}' => 'view',
@@ -16,9 +17,8 @@ class UrlRule extends \yii\rest\UrlRule {
 
     public function init()
     {
-    	$this->tokens['{id}'] = '<id:\S+>';
-    	$this->tokens['{type}'] = '<type:\S+>';
-    	parent::init();
+        $this->tokens['{id}'] = '<id:\S+>';
+        $this->tokens['{type}'] = '<type:\S+>';
+        parent::init();
     }
 }
-?>

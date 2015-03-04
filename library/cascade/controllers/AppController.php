@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,21 +11,19 @@ namespace cascade\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-
 use infinite\web\Controller;
-
 use cascade\models\LoginForm;
 use cascade\models\Registry;
 
 /**
- * AppController [@doctodo write class description for AppController]
+ * AppController [@doctodo write class description for AppController].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class AppController extends Controller
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -63,19 +62,20 @@ class AppController extends Controller
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function actions()
     {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ]
+            ],
         ];
     }
 
     /**
-     * __method_actionIndex_description__
+     * __method_actionIndex_description__.
+     *
      * @return __return_actionIndex_type__ __return_actionIndex_description__
      */
     public function actionIndex()
@@ -84,7 +84,8 @@ class AppController extends Controller
     }
 
     /**
-     * __method_actionLogin_description__
+     * __method_actionLogin_description__.
+     *
      * @return __return_actionLogin_type__ __return_actionLogin_description__
      */
     public function actionLogin()
@@ -93,6 +94,7 @@ class AppController extends Controller
         if ($model->load($_POST) && $model->login()) {
             //Yii::$app->response->redirect = Yii::$app->getUser()->getReturnUrl();
             Yii::$app->session->setFlash('delayed-instructions', json_encode(['pauseTimer' => false]));
+
             return $this->goBack();
         } else {
             Yii::$app->response->task = 'dialog';
@@ -103,7 +105,8 @@ class AppController extends Controller
     }
 
     /**
-     * __method_actionLogout_description__
+     * __method_actionLogout_description__.
+     *
      * @return __return_actionLogout_type__ __return_actionLogout_description__
      */
     public function actionLogout()
@@ -129,7 +132,8 @@ class AppController extends Controller
     }
 
     /**
-     * __method_actionRefresh_description__
+     * __method_actionRefresh_description__.
+     *
      * @return __return_actionRefresh_type__ __return_actionRefresh_description__
      */
     public function actionRefresh()
@@ -139,15 +143,19 @@ class AppController extends Controller
         Yii::$app->response->forceInstructions = true;
         Yii::$app->response->task = 'status';
 
-        if (empty($_POST['requests'])) { return; }
+        if (empty($_POST['requests'])) {
+            return;
+        }
         $baseInstrictions = (isset($_POST['baseInstructions']) ? $_POST['baseInstructions'] : []);
-        foreach ($_POST['requests'] AS $requestId => $request) {
+        foreach ($_POST['requests'] as $requestId => $request) {
             $refreshed[$requestId] = false;
             $instructions = $baseInstrictions;
             if (isset($request['instructions'])) {
                 $instructions = array_merge($instructions, $request['instructions']);
             }
-            if (empty($instructions['type']) || empty($instructions['type'])) { continue; }
+            if (empty($instructions['type']) || empty($instructions['type'])) {
+                continue;
+            }
             if (isset($request['state'])) {
                 foreach ($request['state'] as $key => $value) {
                     Yii::$app->webState->set($key, $value);
@@ -157,7 +165,7 @@ class AppController extends Controller
             if (isset($instructions['objectId'])) {
                 $object = Yii::$app->request->object = Registry::getObject($instructions['objectId']);
                 if (!$object) {
-                    $refreshed[$requestId] = ['error' => 'Invalid object '. $instructions['objectId'] .''];
+                    $refreshed[$requestId] = ['error' => 'Invalid object '.$instructions['objectId'].''];
                     continue;
                 }
                 $type = $object->objectType;
@@ -195,7 +203,8 @@ class AppController extends Controller
     }
 
     /**
-     * __method_actionRefresh_description__
+     * __method_actionRefresh_description__.
+     *
      * @return __return_actionRefresh_type__ __return_actionRefresh_description__
      */
     public function actionStream()
@@ -209,20 +218,24 @@ class AppController extends Controller
         $source = $_GET;
         if (isset($source['when']) && $source['when'] === 'handshake') {
             echo json_encode(['id' => md5(microtime(true)), 'transports' => ['stream']]);
+
             return;
         }
         if (empty($source['requests'])) {
             echo json_encode([]);
+
             return;
         }
         $baseInstrictions = (isset($source['baseInstructions']) ? $source['baseInstructions'] : []);
-        foreach ($source['requests'] AS $requestId => $request) {
+        foreach ($source['requests'] as $requestId => $request) {
             $refreshed[$requestId] = false;
             $instructions = $baseInstrictions;
             if (isset($request['instructions'])) {
                 $instructions = array_merge($instructions, $request['instructions']);
             }
-            if (empty($instructions['type']) || empty($instructions['type'])) { continue; }
+            if (empty($instructions['type']) || empty($instructions['type'])) {
+                continue;
+            }
             if (isset($request['state'])) {
                 foreach ($request['state'] as $key => $value) {
                     Yii::$app->webState->set($key, $value);
@@ -232,7 +245,7 @@ class AppController extends Controller
             if (isset($instructions['objectId'])) {
                 $object = Yii::$app->request->object = Registry::getObject($instructions['objectId']);
                 if (!$object) {
-                    $refreshed[$requestId] = ['error' => 'Invalid object '. $instructions['objectId'] .''];
+                    $refreshed[$requestId] = ['error' => 'Invalid object '.$instructions['objectId'].''];
                     continue;
                 }
                 $type = $object->objectType;
@@ -252,6 +265,7 @@ class AppController extends Controller
                     }
                     if (!$widget) {
                         $refreshed[$requestId] = ['error' => 'Unknown widget'];
+
                         return;
                     }
                     $widgetObject = $widget->object;
@@ -266,7 +280,7 @@ class AppController extends Controller
                 break;
             }
             if ($refreshed[$requestId]) {
-                echo "data: ". json_encode(['type' => 'handleRequests', 'data' => [$requestId => $refreshed[$requestId]], 'id' => round(microtime(true) * 100)]);
+                echo "data: ".json_encode(['type' => 'handleRequests', 'data' => [$requestId => $refreshed[$requestId]], 'id' => round(microtime(true) * 100)]);
                 echo "\n\n";
                 //echo str_repeat("\n\n",1024*4);
             }

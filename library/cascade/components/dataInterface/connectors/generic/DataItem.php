@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -12,7 +13,7 @@ use cascade\components\dataInterface\MissingItemException;
 use infinite\base\language\Verb;
 
 /**
- * DataItem [@doctodo write class description for DataItem]
+ * DataItem [@doctodo write class description for DataItem].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -28,7 +29,7 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
     protected $_isLoadingLocalObject = false;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {
@@ -37,14 +38,13 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         parent::init();
     }
 
-
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     protected function handleForeign($baseAttributes = [])
     {
         if ($this->ignoreForeignObject) {
-            return null;
+            return;
         }
 
         // foreign to local
@@ -52,7 +52,7 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         // find or start up local object
         $localModel = $this->dataSource->localModel;
         if (!isset($this->localObject)) {
-            $this->localObject = new $localModel;
+            $this->localObject = new $localModel();
         }
         $isNewRecord = $this->localObject->isNewRecord;
         $actionVerb = new Verb('create');
@@ -68,7 +68,8 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         }
 
         if ($this->localModelError) {
-            $this->dataSource->task->addError('Unable to match local '. $this->dataSource->descriptor .' object', ['attributes' => $attributes]);
+            $this->dataSource->task->addError('Unable to match local '.$this->dataSource->descriptor.' object', ['attributes' => $attributes]);
+
             return false;
         }
 
@@ -84,7 +85,8 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
 
         // save local object
         if (!$this->localObject->save()) {
-            $this->dataSource->task->addError('Unable to '. $actionVerb->getSimplePresent(false) .' local '. $this->dataSource->descriptor .' object: ' . $this->localObject->descriptor, ['errors' => $this->localObject->errors, 'attributes' => $this->localObject->attributes]);
+            $this->dataSource->task->addError('Unable to '.$actionVerb->getSimplePresent(false).' local '.$this->dataSource->descriptor.' object: '.$this->localObject->descriptor, ['errors' => $this->localObject->errors, 'attributes' => $this->localObject->attributes]);
+
             return false;
         }
         $dirtyAttributes = $this->localObject->getDirtyAttributes();
@@ -120,7 +122,7 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
                     $infoData['oldValues'][$key] = $oldValue;
                 }
             }
-            $this->dataSource->task->addInfo($actionVerb->getPast(true) .' local '. $this->dataSource->descriptor .' object: ' . $this->localObject->descriptor, $infoData);
+            $this->dataSource->task->addInfo($actionVerb->getPast(true).' local '.$this->dataSource->descriptor.' object: '.$this->localObject->descriptor, $infoData);
         }
 
         // save foreign key map
@@ -132,7 +134,9 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         // some interfaces ask the foreignObject for children
         foreach ($this->foreignObject->children as $table => $children) {
             $dataSource = $this->module->getDataSource($table);
-            if (empty($dataSource) || !$dataSource->isReady()) { continue; }
+            if (empty($dataSource) || !$dataSource->isReady()) {
+                continue;
+            }
             foreach ($children as $childId) {
                 // let the handler figure it out
                 if (!($dataItem = $dataSource->getForeignDataItem($childId))) {
@@ -143,7 +147,9 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         }
         foreach ($this->foreignChildren as $modelName => $children) {
             $dataSource = $this->module->getDataSource($modelName);
-            if (empty($dataSource) || !$dataSource->isReady()) { continue; }
+            if (empty($dataSource) || !$dataSource->isReady()) {
+                continue;
+            }
             foreach ($children as $relationSet) {
                 // let the handler figure it out
                 if (!($dataItem = $dataSource->getForeignDataItem($relationSet['foreignId']))) {
@@ -156,7 +162,12 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         }
         foreach ($this->foreignParents as $modelName => $parents) {
             $dataSource = $this->module->getDataSource($modelName);
-            if (empty($dataSource) || !$dataSource->isReady()) { \d($dataSource); \d("$modelName isn't ready"); exit; continue; }
+            if (empty($dataSource) || !$dataSource->isReady()) {
+                \d($dataSource);
+                \d("$modelName isn't ready");
+                exit;
+                continue;
+            }
             foreach ($parents as $relationSet) {
                 // let the handler figure it out
                 if (!($dataItem = $dataSource->getForeignDataItem($relationSet['foreignId']))) {
@@ -185,6 +196,7 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
                 $parents[$model][] = $keySet;
             }
         }
+
         return $parents;
     }
 
@@ -202,18 +214,21 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
                 $children[$model][] = $keySet;
             }
         }
+
         return $children;
     }
 
     /**
-     * __method_loadForeignObject_description__
-     * @throws RecursionException __exception_RecursionException_description__
+     * __method_loadForeignObject_description__.
+     *
+     * @throws RecursionException   __exception_RecursionException_description__
      * @throws MissingItemException __exception_MissingItemException_description__
      */
     abstract protected function loadForeignObject();
 
     /**
-     * __method_loadLocalObject_description__
+     * __method_loadLocalObject_description__.
+     *
      * @throws RecursionException __exception_RecursionException_description__
      */
     abstract protected function loadLocalObject();

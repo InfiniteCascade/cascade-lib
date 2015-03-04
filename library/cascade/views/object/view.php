@@ -19,13 +19,15 @@ $baseInstructions['objectId'] = $object->primaryKey;
 $refreshable = [
     'url' => Url::to(['/app/stream']),
     'stream' => true,
-    'data' => ['baseInstructions' => $baseInstructions]
+    'data' => ['baseInstructions' => $baseInstructions],
 ];
 $this->bodyHtmlOptions['data-refreshable'] = json_encode($refreshable);
 $js = [];
 $sectionsMenu = [];
 foreach ($sections as $section) {
-    if ($section->priority === false) { continue; }
+    if ($section->priority === false) {
+        continue;
+    }
     $sectionsMenu[] = ['label' => $section->object->title, 'url' => '#section-'.$section->systemId];
 }
 $this->tinyMenu = $sectionsMenu;
@@ -43,10 +45,10 @@ if (isset($sections['_side'])) {
 
     if (!empty($sideContent)) {
         $mainColumnSize -= 4;
-        $js[] = '$("#'. $cellInner->id .'").cascadeAffix();';
+        $js[] = '$("#'.$cellInner->id.'").cascadeAffix();';
         $js[] = "\$('body').scrollspy({ target: '.ic-sidenav', 'offset': 10 });";
         $cells[] = $sideCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $sideContent]);
-        Yii::configure($sideCell, ['mediumDesktopColumns' => 4,'maxMediumDesktopColumns' => 4, 'largeDesktopSize' => false, 'tabletColumns' => 5]);
+        Yii::configure($sideCell, ['mediumDesktopColumns' => 4, 'maxMediumDesktopColumns' => 4, 'largeDesktopSize' => false, 'tabletColumns' => 5]);
     }
 }
 
@@ -56,13 +58,15 @@ if (count($sectionsMenu) > 2) {
 
 $mainCell = [];
 foreach ($sections as $section) {
-    if ($section->priority === false) { continue; }
+    if ($section->priority === false) {
+        continue;
+    }
     $mainCell[] = $section->object->cell;
 }
 $mainCellGrid = Yii::createObject(['class' => 'infinite\web\grid\Grid']);
 $mainCellGrid->cells = $mainCell;
 $cells[] = $mainCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $mainCellGrid->generate()]);
-Yii::configure($mainCell,['mediumDesktopColumns' => 4, 'maxMediumDesktopColumns' => $mainColumnSize, 'largeDesktopSize' => false, 'tabletColumns' => $mainColumnSize + 1]);
+Yii::configure($mainCell, ['mediumDesktopColumns' => 4, 'maxMediumDesktopColumns' => $mainColumnSize, 'largeDesktopSize' => false, 'tabletColumns' => $mainColumnSize + 1]);
 Html::addCssClass($mainCell->htmlOptions, 'ic-main-cell');
 
 if (count($sectionsMenu) > 2) {
@@ -72,7 +76,7 @@ if (count($sectionsMenu) > 2) {
             'options' => ['class' => 'navbar-default'],
             'encodeLabels' => false,
             'items' => $sectionsMenu,
-        ]);;
+        ]);
     $menuContent .= Html::endTag('div');
     $cells[] = $menuCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $menuContent]);
     Yii::configure($menuCell, ['mediumDesktopColumns' => 2, 'maxMediumDesktopColumns' => 2, 'largeDesktopSize' => false, 'tabletSize' => false]);

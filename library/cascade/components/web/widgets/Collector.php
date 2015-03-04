@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,7 +12,7 @@ use Yii;
 use cascade\components\web\widgets\section\Section;
 
 /**
- * Collector [@doctodo write class description for Collector]
+ * Collector [@doctodo write class description for Collector].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -28,7 +29,6 @@ class Collector extends \infinite\base\collector\Module
 
     protected $_lazy  = false;
 
-
     public function getLazy()
     {
         return $this->_lazy;
@@ -38,9 +38,9 @@ class Collector extends \infinite\base\collector\Module
     {
         $this->_lazy = $lazy;
     }
-    
+
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getCollectorItemClass()
     {
@@ -48,7 +48,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getModulePrefix()
     {
@@ -56,11 +56,13 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_build_description__
+     * __method_build_description__.
+     *
      * @param cascade\components\web\widgets\section\Section $section          __param_section_description__
      * @param __param_widgetName_type__                      $widgetName       __param_widgetName_description__
      * @param array                                          $instanceSettings __param_instanceSettings_description__ [optional]
-     * @return __return_build_type__                          __return_build_description__
+     *
+     * @return __return_build_type__ __return_build_description__
      */
     public function build(Section $section = null, $widgetName, $instanceSettings = [])
     {
@@ -88,9 +90,11 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * Get location
+     * Get location.
+     *
      * @param unknown $location
      * @param unknown $owner    (optional)
+     *
      * @return unknown
      */
     public function getLocation($location, $owner = null)

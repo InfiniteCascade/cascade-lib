@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,7 +12,7 @@ use infinite\helpers\Html;
 use yii\bootstrap\Nav;
 
 /**
- * PanelDecorator [@doctodo write class description for PanelDecorator]
+ * PanelDecorator [@doctodo write class description for PanelDecorator].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -31,7 +32,8 @@ class PanelDecorator extends Decorator
     public $gridCellClass = 'infinite\web\grid\Cell';
 
     /**
-     * __method_generatePanelTitle_description__
+     * __method_generatePanelTitle_description__.
+     *
      * @return __return_generatePanelTitle_type__ __return_generatePanelTitle_description__
      */
     public function generatePanelTitle()
@@ -44,9 +46,9 @@ class PanelDecorator extends Decorator
                 $menu = $titleMenu;
             }
             if (!empty($this->owner->icon)) {
-                $icon = Html::tag('i', '', ['class' => 'panel-icon '. $this->owner->icon]) . Html::tag('span', '', ['class' => 'break']);
+                $icon = Html::tag('i', '', ['class' => 'panel-icon '.$this->owner->icon]).Html::tag('span', '', ['class' => 'break']);
             }
-            $parts[] = Html::tag('div', Html::tag('h2', $icon . $this->owner->parseText($this->owner->title)) . $menu, ['class' => 'panel-heading']);
+            $parts[] = Html::tag('div', Html::tag('h2', $icon.$this->owner->parseText($this->owner->title)).$menu, ['class' => 'panel-heading']);
         }
         if (empty($parts)) {
             return false;
@@ -56,7 +58,7 @@ class PanelDecorator extends Decorator
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function generateStart()
     {
@@ -67,7 +69,8 @@ class PanelDecorator extends Decorator
     }
 
     /**
-     * __method_generateHeader_description__
+     * __method_generateHeader_description__.
+     *
      * @return __return_generateHeader_type__ __return_generateHeader_description__
      */
     public function generateHeader()
@@ -83,32 +86,41 @@ class PanelDecorator extends Decorator
     }
 
     /**
-     * __method_generateTitleMenu_description__
+     * __method_generateTitleMenu_description__.
+     *
      * @return __return_generateTitleMenu_type__ __return_generateTitleMenu_description__
      */
     public function generateTitleMenu()
     {
         $menu = $this->owner->getHeaderMenu();
-        if (empty($menu)) { return false; }
+        if (empty($menu)) {
+            return false;
+        }
         $this->backgroundifyMenu($menu);
 
         return Nav::widget([
             'items' => $menu,
             'encodeLabels' => false,
-            'options' => ['class' => 'pull-right nav-pills']
+            'options' => ['class' => 'pull-right nav-pills'],
         ]);
     }
 
     /**
-     * __method_backgroundifyMenu_description__
-     * @param __param_items_type__              $items __param_items_description__
+     * __method_backgroundifyMenu_description__.
+     *
+     * @param __param_items_type__ $items __param_items_description__
+     *
      * @return __return_backgroundifyMenu_type__ __return_backgroundifyMenu_description__
      */
     protected function backgroundifyMenu(&$items)
     {
-        if (!is_array($items)) { return; }
+        if (!is_array($items)) {
+            return;
+        }
         foreach ($items as $k => $v) {
-            if (!isset($items[$k]['linkOptions'])) { $items[$k]['linkOptions'] = []; }
+            if (!isset($items[$k]['linkOptions'])) {
+                $items[$k]['linkOptions'] = [];
+            }
             if (!isset($items[$k]['linkOptions']['data-background'])) {
                 $items[$k]['linkOptions']['data-handler'] = 'background';
             }
@@ -119,7 +131,8 @@ class PanelDecorator extends Decorator
     }
 
     /**
-     * __method_generateFooter_description__
+     * __method_generateFooter_description__.
+     *
      * @return __return_generateFooter_type__ __return_generateFooter_description__
      */
     public function generateFooter()
@@ -131,7 +144,8 @@ class PanelDecorator extends Decorator
     }
 
     /**
-     * Get panel title
+     * Get panel title.
+     *
      * @return __return_getPanelTitle_type__ __return_getPanelTitle_description__
      */
     public function getPanelTitle()

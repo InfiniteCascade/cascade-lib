@@ -5,7 +5,6 @@ namespace cascade\controllers\admin;
 use Yii;
 use yii\filters\AccessControl;
 use infinite\web\Controller;
-use infinite\caching\Cacher;
 
 class DashboardController extends Controller
 {
@@ -35,7 +34,7 @@ class DashboardController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ]
+            ],
         ];
     }
 
@@ -55,6 +54,7 @@ class DashboardController extends Controller
                 Yii::$app->response->content = 'Unknown task!';
                 Yii::$app->response->taskOptions = ['state' => 'danger'];
             }
+
             return;
         }
 
@@ -67,7 +67,7 @@ class DashboardController extends Controller
         $tasks['flush-file-cache'] = [];
         $tasks['flush-file-cache']['title'] = 'Flush File Cache';
         $tasks['flush-file-cache']['description'] = 'Clear the file cache in Cascade';
-        $tasks['flush-file-cache']['run'] = function() {
+        $tasks['flush-file-cache']['run'] = function () {
             Yii::$app->fileCache->flush();
             Yii::$app->response->content = 'File cache was flushed!';
             Yii::$app->response->taskOptions = ['state' => 'success', 'title' => 'Success'];
@@ -76,11 +76,12 @@ class DashboardController extends Controller
         $tasks['flush-cache'] = [];
         $tasks['flush-cache']['title'] = 'Flush Memory Cache';
         $tasks['flush-cache']['description'] = 'Clear the memory cache in Cascade';
-        $tasks['flush-cache']['run'] = function() {
+        $tasks['flush-cache']['run'] = function () {
             Yii::$app->cache->flush();
             Yii::$app->response->content = 'Memory cache was flushed!';
             Yii::$app->response->taskOptions = ['state' => 'success', 'title' => 'Success'];
         };
+
         return $tasks;
     }
 }

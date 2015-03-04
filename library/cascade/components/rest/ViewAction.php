@@ -5,5 +5,5 @@ use Yii;
 
 class ViewAction extends \yii\rest\ViewAction
 {
-	use ActionTrait;
+    use ActionTrait;
 }

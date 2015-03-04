@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -13,12 +14,9 @@ namespace cascade\models;
  * @property string $id
  * @property string $object_id
  * @property string $taxonomy_id
- *
  * @property \yii\db\ActiveObject $taxonomy This property is read-only.
- *
  * @property Taxonomy $taxonomy
  * @property Object $object
- *
  * @property \yii\db\ActiveObject $taxonomy This property is read-only.
  *
  * @author Jacob Morrison <email@ofjacob.com>
@@ -48,7 +46,7 @@ class ObjectTaxonomy extends \cascade\components\db\ActiveRecord
     {
         return [
             [['object_id', 'taxonomy_id'], 'required'],
-            [['taxonomy_id', 'object_id'], 'string', 'max' => 36]
+            [['taxonomy_id', 'object_id'], 'string', 'max' => 36],
         ];
     }
 
@@ -65,7 +63,8 @@ class ObjectTaxonomy extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get taxonomy
+     * Get taxonomy.
+     *
      * @return \yii\db\ActiveObject
      */
     public function getTaxonomy()
@@ -73,7 +72,7 @@ class ObjectTaxonomy extends \cascade\components\db\ActiveRecord
         return $this->hasOne(Taxonomy::className(), ['id' => 'taxonomy_id']);
     }
 
-    /**
+    /*
      * @return \yii\db\ActiveObject
      */
     // public function getObject()

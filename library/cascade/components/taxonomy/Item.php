@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\taxonomy;
 use infinite\helpers\ArrayHelper;
 
 /**
- * Item [@doctodo write class description for Item]
+ * Item [@doctodo write class description for Item].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -63,8 +64,10 @@ class Item extends \infinite\base\collector\Item
     protected $_taxonomies;
 
     /**
-     * __method_package_description__
-     * @param array                   $override __param_override_description__ [optional]
+     * __method_package_description__.
+     *
+     * @param array $override __param_override_description__ [optional]
+     *
      * @return __return_package_type__ __return_package_description__
      */
     public function package($override = [])
@@ -75,11 +78,12 @@ class Item extends \infinite\base\collector\Item
             'multiple' => $this->multiple,
             'required' => $this->required,
             'default' => $this->default,
-            'taxonomies' => $this->taxonomyList
+            'taxonomies' => $this->taxonomyList,
         ], $override);
     }
     /**
-     * Get taxonomies
+     * Get taxonomies.
+     *
      * @return unknown
      */
     public function getTaxonomies()
@@ -91,7 +95,8 @@ class Item extends \infinite\base\collector\Item
         return $this->_taxonomies;
     }
     /**
-     * Get taxonomy list
+     * Get taxonomy list.
+     *
      * @return unknown
      */
     public function getTaxonomyList()
@@ -100,8 +105,10 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * Get taxonomy
+     * Get taxonomy.
+     *
      * @param __param_system_id_type__ $system_id __param_system_id_description__
+     *
      * @return unknown
      */
     public function getTaxonomy($system_id)
@@ -116,7 +123,8 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_addTaxonomy_description__
+     * __method_addTaxonomy_description__.
+     *
      * @param __param_taxonomy_type__ $taxonomy __param_taxonomy_description__
      */
     public function addTaxonomy($taxonomy)
@@ -127,5 +135,4 @@ class Item extends \infinite\base\collector\Item
         }
         $this->_taxonomies[] = $taxonomy;
     }
-
 }

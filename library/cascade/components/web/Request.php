@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,12 +9,11 @@
 namespace cascade\components\web;
 
 use Yii;
-
 use cascade\models\Registry;
 use yii\web\Application;
 
 /**
- * Request [@doctodo write class description for Request]
+ * Request [@doctodo write class description for Request].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -29,7 +29,7 @@ class Request extends \infinite\web\Request
     protected $_previousObject;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {
@@ -38,7 +38,7 @@ class Request extends \infinite\web\Request
     }
 
     /**
-     * __method_startRequest_description__
+     * __method_startRequest_description__.
      */
     public function startRequest()
     {
@@ -48,7 +48,8 @@ class Request extends \infinite\web\Request
     }
 
     /**
-     * Set object
+     * Set object.
+     *
      * @param __param_object_type__ $object __param_object_description__
      */
     public function setObject($object)
@@ -57,7 +58,8 @@ class Request extends \infinite\web\Request
     }
 
     /**
-     * Get object
+     * Get object.
+     *
      * @return __return_getObject_type__ __return_getObject_description__
      */
     public function getObject()
@@ -66,7 +68,8 @@ class Request extends \infinite\web\Request
     }
 
     /**
-     * Get previous object
+     * Get previous object.
+     *
      * @return __return_getPreviousObject_type__ __return_getPreviousObject_description__
      */
     public function getPreviousObject()

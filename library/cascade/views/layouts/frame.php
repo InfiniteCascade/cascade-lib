@@ -1,11 +1,7 @@
 <?php
 use yii\helpers\Html;
-use cascade\components\web\bootstrap\TopNavBar;
-use cascade\components\web\bootstrap\Nav;
-use cascade\models\SearchForm;
-use yii\widgets\ActiveForm;
 
-/**
+/*
  * @var $this \infinite\base\View
  * @var $content string
  */
@@ -27,9 +23,9 @@ $this->bodyHtmlOptions['data-cascade-types'] = json_encode(Yii::$app->collectors
 <head>
     <meta charset="<?=Yii::$app->charset; ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php 
+    <title><?php
     if (!empty($this->title)) {
-        echo Html::encode(strip_tags($this->title)) . ' &mdash; ';
+        echo Html::encode(strip_tags($this->title)).' &mdash; ';
     }
     echo Html::encode(Yii::$app->params['siteName']);
     ?></title>
@@ -40,7 +36,7 @@ $this->bodyHtmlOptions['data-cascade-types'] = json_encode(Yii::$app->collectors
 echo Html::beginTag('div', ['class' => 'main-container container-fluid']);
 $this->beginBody();
 echo $content;
-$this->endBody(); 
+$this->endBody();
 ?>
 </body>
 </html>

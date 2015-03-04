@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,11 +9,10 @@
 namespace cascade\components\web\widgets;
 
 use Yii;
-
 use infinite\base\collector\CollectedObjectTrait;
 
 /**
- * Item [@doctodo write class description for Item]
+ * Item [@doctodo write class description for Item].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -50,12 +50,12 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     public $settings = [];
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getObject()
     {
         if (is_null($this->widget)) {
-            return null;
+            return;
         }
         $object = Yii::createObject($this->widget);
         $object->settings = $this->settings;
@@ -65,9 +65,11 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     }
 
     /**
-     * Get section
-     * @param __param_parent_type__      $parent   __param_parent_description__ [optional]
-     * @param array                      $settings __param_settings_description__ [optional]
+     * Get section.
+     *
+     * @param __param_parent_type__ $parent   __param_parent_description__ [optional]
+     * @param array                 $settings __param_settings_description__ [optional]
+     *
      * @return __return_getSection_type__ __return_getSection_description__
      */
     public function getSection($parent = null, $settings = [])
@@ -84,7 +86,8 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     }
 
     /**
-     * Set section
+     * Set section.
+     *
      * @param __param_value_type__ $value __param_value_description__
      */
     public function setSection($value)
@@ -92,7 +95,7 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
         $this->_section = $value;
     }
 
-    public function setPriority($priority) 
+    public function setPriority($priority)
     {
         $this->_priority = $priority;
     }
@@ -101,5 +104,4 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     {
         return $this->_priority;
     }
-
 }

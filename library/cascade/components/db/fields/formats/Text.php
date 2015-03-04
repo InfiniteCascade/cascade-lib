@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,7 @@
 namespace cascade\components\db\fields\formats;
 
 /**
- * Text [@doctodo write class description for Text]
+ * Text [@doctodo write class description for Text].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -16,7 +17,7 @@ class Text extends Base
 {
     public $showEmptyString = true;
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function get()
     {

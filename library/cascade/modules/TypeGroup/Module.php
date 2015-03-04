@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,7 +12,7 @@ use Yii;
 use cascade\models\Group;
 
 /**
- * Module [@doctodo write class description for Module]
+ * Module [@doctodo write class description for Module].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

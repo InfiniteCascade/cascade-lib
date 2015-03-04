@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -14,7 +15,7 @@ use yii\bootstrap\Widget;
 use yii\bootstrap\BootstrapPluginAsset;
 
 /**
- * TopNavBar [@doctodo write class description for TopNavBar]
+ * TopNavBar [@doctodo write class description for TopNavBar].
  *
  * NavBar renders a navbar HTML component.
  *
@@ -37,8 +38,10 @@ use yii\bootstrap\BootstrapPluginAsset;
  * ```
  *
  * @see http://getbootstrap.com/components/#navbar
+ *
  * @author Antonio Ramirez <amigo.cobos@gmail.com>
  * @author Alexander Kochetov <creocoder@gmail.com>
+ *
  * @since 2.0
  */
 class TopNavBar extends Widget
@@ -46,13 +49,11 @@ class TopNavBar extends Widget
     /**
      * @var array the HTML attributes for the widget container tag. The following special options are recognized:
 
-- tag: string, defaults to "nav", the name of the container tag
      */
     public $options = [];
     /**
      * @var array the HTML attributes for the container tag. The following special options are recognized:
 
-- tag: string, defaults to "div", the name of the container tag
      */
     public $containerOptions = [];
     /**
@@ -73,7 +74,6 @@ class TopNavBar extends Widget
     public $screenReaderToggleText = 'Toggle navigation';
     /**
      * @var boolean whether the navbar content should be included in an inner div container which by default
-adds left and right padding. Set this to false for a 100% width navbar.
      */
     public $renderInnerContainer = true;
     /**
@@ -133,6 +133,7 @@ adds left and right padding. Set this to false for a 100% width navbar.
 
     /**
      * Renders collapsible toggle button.
+     *
      * @return string the rendering toggle button.
      */
     protected function renderToggleButton()

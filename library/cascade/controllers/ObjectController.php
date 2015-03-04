@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,6 @@
 namespace cascade\controllers;
 
 use Yii;
-
 use cascade\models\Registry;
 use cascade\models\Relation;
 use cascade\models\ObjectFamiliarity;
@@ -17,24 +17,21 @@ use cascade\components\types\Module as TypeModule;
 use cascade\components\types\Relationship;
 use cascade\components\web\ObjectViewEvent;
 use cascade\components\web\browser\Response as BrowseResponse;
-
 use infinite\helpers\ArrayHelper;
 use infinite\web\Controller;
-use infinite\db\ActiveRecord;
 use infinite\base\exceptions\HttpException;
-
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
- * ObjectController [@doctodo write class description for ObjectController]
+ * ObjectController [@doctodo write class description for ObjectController].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class ObjectController extends Controller
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -78,14 +75,14 @@ class ObjectController extends Controller
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function actions()
     {
         return [
             'error' => [
                 'class' => 'yii\\web\\ErrorAction',
-            ]
+            ],
         ];
     }
 
@@ -100,7 +97,8 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionBrowse_description__
+     * __method_actionBrowse_description__.
+     *
      * @return __return_actionBrowse_type__ __return_actionBrowse_description__
      */
     public function actionBrowseHierarchy()
@@ -114,6 +112,7 @@ class ObjectController extends Controller
 
         if (empty($requestParams['requests'])) {
             Yii::$app->response->data = $package;
+
             return;
         }
 
@@ -155,9 +154,9 @@ class ObjectController extends Controller
         Yii::$app->response->data = $package;
     }
 
-
     /**
-     * __method_actionSearch_description__
+     * __method_actionSearch_description__.
+     *
      * @return __return_actionSearch_type__ __return_actionSearch_description__
      */
     public function actionSearch()
@@ -194,10 +193,18 @@ class ObjectController extends Controller
         $scores = [];
         foreach ($modules as $module) {
             $moduleItem = Yii::$app->collectors['types']->getOne($module);
-            if (!$moduleItem || !($moduleObject = $moduleItem->object)) { continue; }
-            if (empty($moduleItem->object->searchWeight)) { continue; }
-            if (in_array('authority', $searchParams['typeFilters']) && $moduleItem->object->getBehavior('Authority') === null) { continue; }
-            if (in_array('dashboard', $searchParams['typeFilters']) && !$moduleItem->object->hasDashboard) { continue; }
+            if (!$moduleItem || !($moduleObject = $moduleItem->object)) {
+                continue;
+            }
+            if (empty($moduleItem->object->searchWeight)) {
+                continue;
+            }
+            if (in_array('authority', $searchParams['typeFilters']) && $moduleItem->object->getBehavior('Authority') === null) {
+                continue;
+            }
+            if (in_array('dashboard', $searchParams['typeFilters']) && !$moduleItem->object->hasDashboard) {
+                continue;
+            }
             $moduleResults = $moduleObject->search($term, $params);
             foreach ($moduleResults as $r) {
                 $package[] = $r;
@@ -211,8 +218,10 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionView_description__
+     * __method_actionView_description__.
+     *
      * @return __return_actionView_type__ __return_actionView_description__
+     *
      * @throws HttpException __exception_HttpException_description__
      */
     public function actionPhoto()
@@ -224,7 +233,7 @@ class ObjectController extends Controller
             throw new HttpException(403, "Unable to access object.");
         }
         Yii::$app->request->object = $object;
-        
+
         if ($object->getBehavior('Photo') === null) {
             throw new HttpException(404, "No profile photo available (A)");
         }
@@ -247,10 +256,11 @@ class ObjectController extends Controller
         }
     }
 
-
     /**
-     * __method_actionView_description__
+     * __method_actionView_description__.
+     *
      * @return __return_actionView_type__ __return_actionView_description__
+     *
      * @throws HttpException __exception_HttpException_description__
      */
     public function actionView()
@@ -268,14 +278,14 @@ class ObjectController extends Controller
         $viewEvent = new ObjectViewEvent(['object' => $object, 'action' => $action]);
         $type->trigger(TypeModule::EVENT_VIEW_OBJECT, $viewEvent);
         Yii::$app->collectors['widgets']->lazy = true;
-        
+
         if ($viewEvent->handled) {
             if ($viewEvent->accessed) {
                 ObjectFamiliarity::accessed($object);
             }
+
             return;
         }
-
 
         if (empty($_GET['h']) or !($relatedObject = $this->params['relatedObject'] = Registry::getObject($_GET['h'], false)) or !($relatedTypeItem = $this->params['relatedTypeItem'] = $relatedObject->objectTypeItem)) {
             $relatedObject = null;
@@ -292,19 +302,24 @@ class ObjectController extends Controller
                 } else {
                     $relatedTest = Registry::getObject($relation->child_object_id, false);
                 }
-                if (!$relatedTest || !$relatedTest->objectType->hasDashboard || !$relatedTest->can('read')) { continue; }
+                if (!$relatedTest || !$relatedTest->objectType->hasDashboard || !$relatedTest->can('read')) {
+                    continue;
+                }
                 $relatedObjectOptions[$relatedTest->primaryKey] = ['descriptor' => $relatedTest->descriptor, 'url' => $relatedTest->getUrl('view', ['h' => $object->primaryKey], false)];
             }
             if (isset($relatedObject) && isset($relatedObjectOptions[$relatedObject->primaryKey])) {
                 $this->redirect($relatedObjectOptions[$relatedObject->primaryKey]['url']);
+
                 return;
             } elseif (sizeof($relatedObjectOptions) === 1) {
                 $relatedObject = array_pop($relatedObjectOptions);
                 $this->redirect($relatedObject['url']);
+
                 return;
             } else {
                 $this->params['options'] = $relatedObjectOptions;
                 Yii::$app->response->view = 'viewOptions';
+
                 return;
             }
             throw new HttpException(400, "Bad request");
@@ -328,8 +343,10 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionView_description__
+     * __method_actionView_description__.
+     *
      * @return __return_actionView_type__ __return_actionView_description__
+     *
      * @throws HttpException __exception_HttpException_description__
      */
     public function actionActivity()
@@ -341,7 +358,7 @@ class ObjectController extends Controller
             throw new HttpException(403, "Unable to access object.");
         }
         Yii::$app->response->task = 'dialog';
-        Yii::$app->response->taskOptions = ['title' => 'Activity for ' . $object->descriptor , 'width' => '100%', 'isForm' => false];
+        Yii::$app->response->taskOptions = ['title' => 'Activity for '.$object->descriptor , 'width' => '100%', 'isForm' => false];
         Yii::$app->response->view = 'activity';
         Yii::$app->request->object = $object;
     }
@@ -363,6 +380,7 @@ class ObjectController extends Controller
                 throw new HttpException(400, "Invalid request ({$r} is required)");
             }
         }
+
         return true;
     }
 
@@ -424,6 +442,7 @@ class ObjectController extends Controller
                 throw new HttpException(404, "Unknown type relationship {$p['objectRelationName']}");
             }
         }
+
         return $p;
     }
 
@@ -432,15 +451,15 @@ class ObjectController extends Controller
         $p = $this->_parseParams();
         $this->_checkParams($p, ['type']);
         $this->params = &$p;
-        
+
         if (!Yii::$app->gk->canGeneral('create', $p['type']->primaryModel)) {
             throw new HttpException(403, "You do not have access to create {$p['type']->title->getPlural(true)}");
         }
 
         Yii::$app->response->view = 'create';
         Yii::$app->response->task = 'dialog';
-        Yii::$app->response->taskOptions = ['title' => 'Create ' . $p['type']->title->getSingular(true) , 'width' => '800px'];
-        
+        Yii::$app->response->taskOptions = ['title' => 'Create '.$p['type']->title->getSingular(true) , 'width' => '800px'];
+
         $p['primaryModel'] = $p['type']->getModel();
         $relations = [];
         if (isset($p['relatedObject'])) {
@@ -472,11 +491,11 @@ class ObjectController extends Controller
                 Yii::$app->response->error = 'Unable to create object!';
             } else {
                 Yii::$app->response->task = 'status';
-                Yii::$app->response->success = '<em>'. $p['primaryModel']->descriptor .'</em> was created successfully.';
+                Yii::$app->response->success = '<em>'.$p['primaryModel']->descriptor.'</em> was created successfully.';
                 if (isset($p['relatedType'])) {
                     $primaryModelClass = get_class($p['primaryModel']);
                     Yii::$app->response->trigger = [
-                        ['refresh', '.model-'. $primaryModelClass::baseClassName()]
+                        ['refresh', '.model-'.$primaryModelClass::baseClassName()],
                     ];
                 } else {
                     Yii::$app->response->redirect = $p['primaryModel']->getUrl('view');
@@ -495,7 +514,7 @@ class ObjectController extends Controller
         $p = $this->_parseParams();
         $this->_checkParams($p, ['type', 'object']);
         $this->params = &$p;
-        
+
         if (!$p['object']->can('update')) {
             throw new HttpException(403, "You do not have access to update the {$p['type']->title->getPlural(true)} '{$p['object']->descriptor}'");
         }
@@ -506,8 +525,8 @@ class ObjectController extends Controller
 
         Yii::$app->response->view = 'create';
         Yii::$app->response->task = 'dialog';
-        Yii::$app->response->taskOptions = ['title' => 'Update ' . $p['type']->title->getSingular(true) , 'width' => '800px'];
-        
+        Yii::$app->response->taskOptions = ['title' => 'Update '.$p['type']->title->getSingular(true) , 'width' => '800px'];
+
         $p['primaryModel'] = $p['type']->getModel($p['object']);
         if (isset($p['relatedObject'])) {
             $p['primaryModel']->setIndirectObject($p['relatedObject']);
@@ -522,11 +541,11 @@ class ObjectController extends Controller
                 Yii::$app->response->error = 'Unable to update object!';
             } else {
                 Yii::$app->response->task = 'status';
-                Yii::$app->response->success = '<em>'. $p['primaryModel']->descriptor .'</em> was updated successfully.';
+                Yii::$app->response->success = '<em>'.$p['primaryModel']->descriptor.'</em> was updated successfully.';
                 if (isset($p['relatedType'])) {
                     $primaryModelClass = get_class($p['primaryModel']);
                     Yii::$app->response->trigger = [
-                        ['refresh', '.model-'. $primaryModelClass::baseClassName()]
+                        ['refresh', '.model-'.$primaryModelClass::baseClassName()],
                     ];
                 } else {
                     Yii::$app->response->redirect = $p['primaryModel']->getUrl('view');
@@ -545,23 +564,23 @@ class ObjectController extends Controller
         $p = $this->_parseParams();
         $this->_checkParams($p, ['type', 'object', 'relation']);
         $this->params = &$p;
-        
+
         if (!$p['object']->can('update')) {
             throw new HttpException(403, "You do not have access to update the {$p['type']->title->getPlural(true)} '{$p['object']->descriptor}'");
         }
 
         Yii::$app->response->view = false;
         Yii::$app->response->task = 'status';
-        
+
         if (!$p['relation']->setPrimary($p['relationshipRole'])) {
             Yii::$app->response->error = 'Unable to set relationship as primary!';
         } else {
             Yii::$app->response->task = 'status';
-            Yii::$app->response->success = '<em>'. $p['object']->descriptor .'</em> was set as primary!';
-            
+            Yii::$app->response->success = '<em>'.$p['object']->descriptor.'</em> was set as primary!';
+
             $primaryModelClass = get_class($p['object']);
             Yii::$app->response->trigger = [
-                ['refresh', '.model-'. $primaryModelClass::baseClassName()]
+                ['refresh', '.model-'.$primaryModelClass::baseClassName()],
             ];
         }
     }
@@ -571,15 +590,15 @@ class ObjectController extends Controller
         $p = $this->_parseParams();
         $this->_checkParams($p, ['type', 'relatedObject', 'relatedType']);
         $this->params = &$p;
-        
+
         if (isset($p['relatedObject']) && !$p['relatedObject']->can('update')) {
             throw new HttpException(403, "You do not have access to update '{$p['relatedObject']->descriptor}'");
         }
 
         Yii::$app->response->view = 'create';
         Yii::$app->response->task = 'dialog';
-        Yii::$app->response->taskOptions = ['title' => 'Link ' . $p['relatedType']->title->getSingular(true) , 'width' => '800px'];
-        
+        Yii::$app->response->taskOptions = ['title' => 'Link '.$p['relatedType']->title->getSingular(true) , 'width' => '800px'];
+
         $p['primaryModel'] = $p['relatedType']->getModel($p['relatedObject']);
         $relations = [];
         $relationSettings = ['template' => 'hierarchy'];
@@ -616,11 +635,11 @@ class ObjectController extends Controller
                 Yii::$app->response->error = 'Unable to create object!';
             } else {
                 Yii::$app->response->task = 'status';
-                Yii::$app->response->success = '<em>'. $p['primaryModel']->descriptor .'</em> was created successfully.';
+                Yii::$app->response->success = '<em>'.$p['primaryModel']->descriptor.'</em> was created successfully.';
                 if (isset($p['relatedType'])) {
                     $primaryModelClass = $p['type']->primaryModel;
                     Yii::$app->response->trigger = [
-                        ['refresh', '.model-'. $primaryModelClass::baseClassName()]
+                        ['refresh', '.model-'.$primaryModelClass::baseClassName()],
                     ];
                 } else {
                     Yii::$app->response->redirect = $p['primaryModel']->getUrl('view');
@@ -654,16 +673,14 @@ class ObjectController extends Controller
             $object->indirectObject = $relatedObject;
         }
         if ($object->save()) {
-            Yii::$app->response->success = $object->descriptor .' was updated';
+            Yii::$app->response->success = $object->descriptor.' was updated';
         } else {
-            Yii::$app->response->error = 'Unable to update '. $object->descriptor;
+            Yii::$app->response->error = 'Unable to update '.$object->descriptor;
         }
     }
 
-
-
     /**
-     * __method_actionAccess_description__
+     * __method_actionAccess_description__.
      */
     public function actionAccess()
     {
@@ -675,11 +692,11 @@ class ObjectController extends Controller
         $primaryModel = $p['type']->primaryModel;
         $this->params['errors'] = [];
         Yii::$app->response->view = 'access';
-        $taskOptions = ['title' => 'Access for '. $p['type']->title->getSingular(true)];
+        $taskOptions = ['title' => 'Access for '.$p['type']->title->getSingular(true)];
         $lookAtPost = false;
         if ($p['object']->can('manageAccess')) {
             $lookAtPost = true;
-            $taskOptions['title'] = 'Manage ' . $taskOptions['title'];
+            $taskOptions['title'] = 'Manage '.$taskOptions['title'];
             $taskOptions['isForm'] = false;
         }
         $this->params['access'] = $access = $p['object']->objectAccess;
@@ -714,7 +731,7 @@ class ObjectController extends Controller
                 } else {
                     $primaryModel = $p['type']->primaryModel;
                     Yii::$app->response->trigger = [
-                        ['refresh', '.model-'. $primaryModel::baseClassName()]
+                        ['refresh', '.model-'.$primaryModel::baseClassName()],
                     ];
                 }
             }
@@ -723,7 +740,8 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionDelete_description__
+     * __method_actionDelete_description__.
+     *
      * @throws HttpException __exception_HttpException_description__
      */
     public function actionDelete()
@@ -734,7 +752,7 @@ class ObjectController extends Controller
         $this->params = &$p;
         $primaryModel = $p['type']->primaryModel;
 
-        $this->params['model'] = new DeleteForm;
+        $this->params['model'] = new DeleteForm();
         if (isset($p['relation'])) {
             $this->params['model']->object = $p['object'];
             $this->params['model']->relationship = $p['relationship'];
@@ -753,16 +771,16 @@ class ObjectController extends Controller
 
         Yii::$app->response->view = 'delete';
         Yii::$app->response->task = 'dialog';
-        Yii::$app->response->taskOptions = ['title' => 'Delete '. $p['type']->title->getSingular(true) , 'isConfirmDeletion' => true];
+        Yii::$app->response->taskOptions = ['title' => 'Delete '.$p['type']->title->getSingular(true) , 'isConfirmDeletion' => true];
 
         if (!empty($_POST['DeleteForm'])) {
             Yii::$app->response->task = 'status';
             $targetDescriptor = $this->params['model']->targetDescriptor;
             $this->params['model']->attributes = $_POST['DeleteForm'];
             if (!$this->params['model']->handle()) {
-                Yii::$app->response->error =  'Could not '. $this->params['model']->targetLabel['long'];
+                Yii::$app->response->error =  'Could not '.$this->params['model']->targetLabel['long'];
             } else {
-                Yii::$app->response->success = ucfirst($this->params['model']->targetLabel['past']). '.';
+                Yii::$app->response->success = ucfirst($this->params['model']->targetLabel['past']).'.';
                 if (isset($this->params['model']->targetLabel['response']) && empty($p['relation'])) {
                     switch ($this->params['model']->targetLabel['response']) {
                         case 'home':
@@ -774,7 +792,7 @@ class ObjectController extends Controller
                     }
                 } else {
                     Yii::$app->response->trigger = [
-                        ['refresh', '.model-'. $p['object']::baseClassName()]
+                        ['refresh', '.model-'.$p['object']::baseClassName()],
                     ];
                 }
             }
@@ -782,7 +800,8 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionWatch_description__
+     * __method_actionWatch_description__.
+     *
      * @throws HttpException __exception_HttpException_description__
      */
     public function actionWatch()
@@ -799,14 +818,14 @@ class ObjectController extends Controller
         if ($object->watch($watching)) {
             Yii::$app->response->task = 'trigger';
             if ($watching) {
-                Yii::$app->response->success = 'You are now watching '. $object->descriptor .'.';
+                Yii::$app->response->success = 'You are now watching '.$object->descriptor.'.';
                 Yii::$app->response->trigger = [
-                    ['startedWatching']
+                    ['startedWatching'],
                 ];
             } else {
-                Yii::$app->response->success = 'You stopped watching '. $object->descriptor .'.';
+                Yii::$app->response->success = 'You stopped watching '.$object->descriptor.'.';
                 Yii::$app->response->trigger = [
-                    ['stoppedWatching']
+                    ['stoppedWatching'],
                 ];
             }
         } else {
@@ -814,9 +833,8 @@ class ObjectController extends Controller
         }
     }
 
-
     /**
-     * __method_actionWidget_description__
+     * __method_actionWidget_description__.
      */
     public function actionWidget()
     {
@@ -841,8 +859,12 @@ class ObjectController extends Controller
         if (!empty($renderWidgets)) {
             foreach ($renderWidgets as $i => $widget) {
                 $w = [];
-                if (empty($widget['state'])) { $widget['state'] = []; }
-                if (empty($widget['data'])) { $widget['data'] = []; }
+                if (empty($widget['state'])) {
+                    $widget['state'] = [];
+                }
+                if (empty($widget['data'])) {
+                    $widget['data'] = [];
+                }
                 if (!isset($widget['data']['sectionCount'])) {
                     $widget['data']['sectionCount'] = $sectionCount;
                 }

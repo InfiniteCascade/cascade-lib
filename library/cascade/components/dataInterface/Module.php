@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,8 +9,9 @@
 namespace cascade\components\dataInterface;
 
 use infinite\action\Action as BaseAction;
+
 /**
- * Module [@doctodo write class description for Module]
+ * Module [@doctodo write class description for Module].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -25,7 +27,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     public $version = 1;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getCollectorName()
     {
@@ -33,7 +35,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getModuleType()
     {
@@ -41,7 +43,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * __method_run_description__
+     * __method_run_description__.
+     *
      * @param cascade\components\dataInterface\Action $action __param_action_description__
      */
     abstract public function run(BaseAction $action);

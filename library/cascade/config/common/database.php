@@ -1,9 +1,8 @@
 <?php
 /**
- * ./app/config/environments/common/database.php
+ * ./app/config/environments/common/database.php.
  *
  * @author Jacob Morrison <jacob@infinitecascade.com>
- * @package cascade
  */
 
 return [
@@ -13,6 +12,6 @@ return [
     'username' => INFINITE_APP_DATABASE_USERNAME,
     'password' => INFINITE_APP_DATABASE_PASSWORD,
     'charset' => 'utf8',
-    'enableSchemaCache' => true
+    'enableSchemaCache' => true,
 
 ];

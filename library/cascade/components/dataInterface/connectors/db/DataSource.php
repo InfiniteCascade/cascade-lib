@@ -1,22 +1,17 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
 
 namespace cascade\components\dataInterface\connectors\db;
 
-use Yii;
-
-use cascade\models\Relation;
-use cascade\models\KeyTranslation;
-
 use infinite\helpers\ArrayHelper;
-use cascade\components\dataInterface\connectors\generic\Model as GenericModel;
 
 /**
- * DataSource [@doctodo write class description for DataSource]
+ * DataSource [@doctodo write class description for DataSource].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -35,12 +30,13 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
      */
     public $searchClass = 'cascade\components\dataInterface\connectors\db\Search';
 
-
     public $keys = ['id' => 'primaryKey'];
 
     /**
-     * Get foreign data model
-     * @param __param_key_type__                  $key __param_key_description__
+     * Get foreign data model.
+     *
+     * @param __param_key_type__ $key __param_key_description__
+     *
      * @return __return_getForeignDataModel_type__ __return_getForeignDataModel_description__
      */
     public function getForeignDataModel($key)
@@ -58,10 +54,9 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
         return $this->foreignModel->findOne($config);
     }
 
-
-
     /**
-     * Get unmapped foreign keys
+     * Get unmapped foreign keys.
+     *
      * @return __return_getUnmappedForeignKeys_type__ __return_getUnmappedForeignKeys_description__
      */
     public function getUnmappedForeignKeys()
@@ -73,11 +68,8 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
         return $u;
     }
 
-    
-
-    
     /**
-     * __method_loadForeignDataItems_description__
+     * __method_loadForeignDataItems_description__.
      */
     protected function loadForeignDataItems()
     {
@@ -88,11 +80,10 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
                 $this->createForeignDataItem(null, ['foreignPrimaryKey' => $primaryKey]);
             }
         } else {
-            $foreignModels= $this->foreignModel->findAll($this->settings['foreignPullParams']);
+            $foreignModels = $this->foreignModel->findAll($this->settings['foreignPullParams']);
             foreach ($foreignModels as $key => $model) {
                 $this->createForeignDataItem($model, []);
             }
         }
-
     }
 }

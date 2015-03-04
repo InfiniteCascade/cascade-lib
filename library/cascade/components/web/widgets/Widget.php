@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,11 +9,10 @@
 namespace cascade\components\web\widgets;
 
 use Yii;
-
 use infinite\base\collector\CollectedObjectTrait;
 
 /**
- * Widget [@doctodo write class description for Widget]
+ * Widget [@doctodo write class description for Widget].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -66,15 +66,16 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     protected $_lazy  = false;
 
     /**
-     * __method_stateKeyName_description__
-     * @param __param_key_type__           $key __param_key_description__
+     * __method_stateKeyName_description__.
+     *
+     * @param __param_key_type__ $key __param_key_description__
+     *
      * @return __return_stateKeyName_type__ __return_stateKeyName_description__
      */
     public function stateKeyName($key)
     {
-        return 'widget.'.$this->systemId . '.'. $key;
+        return 'widget.'.$this->systemId.'.'.$key;
     }
-
 
     public function getRefreshInstructions()
     {
@@ -88,12 +89,13 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
         return $i;
     }
-    
+
     public function getLazy()
     {
         if (!Yii::$app->collectors['widgets']->lazy) {
             return false;
         }
+
         return $this->_lazy;
     }
 
@@ -103,9 +105,11 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * Get state
-     * @param __param_key_type__       $key     __param_key_description__
-     * @param __param_default_type__   $default __param_default_description__ [optional]
+     * Get state.
+     *
+     * @param __param_key_type__     $key     __param_key_description__
+     * @param __param_default_type__ $default __param_default_description__ [optional]
+     *
      * @return __return_getState_type__ __return_getState_description__
      */
     public function getState($key, $default = null)
@@ -114,9 +118,11 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * Set state
-     * @param __param_key_type__       $key   __param_key_description__
-     * @param __param_value_type__     $value __param_value_description__
+     * Set state.
+     *
+     * @param __param_key_type__   $key   __param_key_description__
+     * @param __param_value_type__ $value __param_value_description__
+     *
      * @return __return_setState_type__ __return_setState_description__
      */
     public function setState($key, $value)
@@ -125,7 +131,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * Get header menu
+     * Get header menu.
+     *
      * @return __return_getHeaderMenu_type__ __return_getHeaderMenu_description__
      */
     public function getHeaderMenu()
@@ -134,7 +141,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * Get title
+     * Get title.
+     *
      * @return __return_getTitle_type__ __return_getTitle_description__
      */
     public function getTitle()
@@ -143,7 +151,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * Set title
+     * Set title.
+     *
      * @param __param_title_type__ $title __param_title_description__
      */
     public function setTitle($title)
@@ -164,15 +173,17 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function generate()
     {
-        Yii::beginProfile(get_called_class() .':'. __FUNCTION__);
+        Yii::beginProfile(get_called_class().':'.__FUNCTION__);
         $this->ensureAssetBundles();
         $this->ensureDecorator();
         $content = $this->generateContent();
-        if ($content === false) { return; }
+        if ($content === false) {
+            return;
+        }
         if (($widgetAreas = $this->widgetAreas) && !empty($widgetAreas)) {
             $contentCell = ['class' => $this->gridCellClass, 'content' => $content];
             $contentRow = [Yii::createObject($contentCell)];
@@ -184,7 +195,9 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
                 }
                 $widgetArea->parentWidget = $this;
                 $widgetAreaCell = $widgetArea->cell;
-                if (!$widgetArea->isReady) { continue; }
+                if (!$widgetArea->isReady) {
+                    continue;
+                }
                 switch ($widgetArea->location) {
                     case 'bottom':
                         array_push($bottomRow, $widgetAreaCell);
@@ -211,14 +224,15 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
             //\d($grid);exit;
             $content = $grid->generate();
         }
-        $result = $this->generateStart() . $this->generateHeader() . $content . $this->generateFooter() . $this->generateEnd();
-        Yii::endProfile(get_called_class() .':'. __FUNCTION__);
+        $result = $this->generateStart().$this->generateHeader().$content.$this->generateFooter().$this->generateEnd();
+        Yii::endProfile(get_called_class().':'.__FUNCTION__);
 
         return $result;
     }
 
     /**
-     * Get widget areas
+     * Get widget areas.
+     *
      * @return __return_getWidgetAreas_type__ __return_getWidgetAreas_description__
      */
     public function getWidgetAreas()
@@ -228,7 +242,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     }
 
     /**
-     * Get widget
+     * Get widget.
+     *
      * @return unknown
      */
     public function getWidgetId()
@@ -237,11 +252,11 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
             return $this->_widgetId;
         }
 
-        return $this->_widgetId = 'ic-widget-'. md5(microtime() . mt_rand());
+        return $this->_widgetId = 'ic-widget-'.md5(microtime().mt_rand());
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function setWidgetId($value)
     {
@@ -252,5 +267,4 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     {
         return 0;
     }
-
 }

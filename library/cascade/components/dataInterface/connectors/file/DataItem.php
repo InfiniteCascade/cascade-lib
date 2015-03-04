@@ -1,18 +1,18 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
 
 namespace cascade\components\dataInterface\connectors\file;
 
-use Yii;
 use cascade\components\dataInterface\RecursionException;
 use cascade\components\dataInterface\MissingItemException;
 
 /**
- * DataItem [@doctodo write class description for DataItem]
+ * DataItem [@doctodo write class description for DataItem].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -38,11 +38,12 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
             return $this->primaryObject->primaryKey;
         }
 
-        return null;
+        return;
     }
 
     /**
-     * __method_fillRelationConfig_description__
+     * __method_fillRelationConfig_description__.
+     *
      * @param __param_config_type__      $config      __param_config_description__
      * @param __param_otherObject_type__ $otherObject __param_otherObject_description__
      */
@@ -56,7 +57,7 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     protected function handleLocal($baseAttributes = [])
     {
@@ -70,8 +71,9 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-     * __method_loadForeignObject_description__
-     * @throws RecursionException __exception_RecursionException_description__
+     * __method_loadForeignObject_description__.
+     *
+     * @throws RecursionException   __exception_RecursionException_description__
      * @throws MissingItemException __exception_MissingItemException_description__
      */
     protected function loadForeignObject()
@@ -87,7 +89,8 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-     * __method_loadLocalObject_description__
+     * __method_loadLocalObject_description__.
+     *
      * @throws RecursionException __exception_RecursionException_description__
      */
     protected function loadLocalObject()

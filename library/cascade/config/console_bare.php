@@ -5,7 +5,7 @@ return [
     'id' => 'bootstrap-console',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [],
-    'controllerPath' => dirname(__DIR__) . '/commands',
+    'controllerPath' => dirname(__DIR__).'/commands',
     'controllerNamespace' => 'cascade\commands',
     'modules' => [
     ],

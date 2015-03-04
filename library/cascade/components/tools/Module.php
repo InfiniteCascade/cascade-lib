@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,7 @@
 namespace cascade\components\tools;
 
 /**
- * Module [@doctodo write class description for Module]
+ * Module [@doctodo write class description for Module].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -26,7 +27,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     public $icon = 'fa fa-wrench';
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getCollectorName()
     {
@@ -34,7 +35,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getModuleType()
     {

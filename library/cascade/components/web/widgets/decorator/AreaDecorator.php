@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\web\widgets\decorator;
 use infinite\helpers\Html;
 
 /**
- * AreaDecorator [@doctodo write class description for AreaDecorator]
+ * AreaDecorator [@doctodo write class description for AreaDecorator].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -30,7 +31,7 @@ class AreaDecorator extends Decorator
     public $gridCellClass = 'infinite\web\grid\Cell';
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function generateStart()
     {
@@ -41,7 +42,8 @@ class AreaDecorator extends Decorator
     }
 
     /**
-     * __method_generateHeader_description__
+     * __method_generateHeader_description__.
+     *
      * @return __return_generateHeader_type__ __return_generateHeader_description__
      */
     public function generateHeader()
@@ -53,7 +55,8 @@ class AreaDecorator extends Decorator
     }
 
     /**
-     * __method_generateFooter_description__
+     * __method_generateFooter_description__.
+     *
      * @return __return_generateFooter_type__ __return_generateFooter_description__
      */
     public function generateFooter()
@@ -65,7 +68,8 @@ class AreaDecorator extends Decorator
     }
 
     /**
-     * Get panel title
+     * Get panel title.
+     *
      * @return __return_getPanelTitle_type__ __return_getPanelTitle_description__
      */
     public function getPanelTitle()

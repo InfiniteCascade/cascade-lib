@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,6 @@
 namespace cascade\models;
 
 use infinite\caching\Cacher;
-use infinite\base\exceptions\Exception;
 use infinite\helpers\StringHelper;
 use infinite\helpers\Date;
 use yii\helpers\Url;
@@ -24,10 +24,8 @@ use cascade\components\dataInterface\Status;
  * @property integer $peak_memory
  * @property string $started
  * @property string $ended
- *
  * @property string $created
  * @property string $modified
- *
  * @property DataInterface $dataInterface
  *
  * @author Jacob Morrison <email@ofjacob.com>
@@ -35,7 +33,6 @@ use cascade\components\dataInterface\Status;
 class DataInterfaceLog extends \cascade\components\db\ActiveRecord
 {
     protected $_statusLog;
-
 
     public function init()
     {
@@ -72,7 +69,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
             [['peak_memory'], 'integer'],
             [['started', 'ended', 'created', 'modified', 'last_update'], 'safe'],
             [['data_interface_id'], 'string', 'max' => 36],
-            [['status'], 'string', 'max' => 255]
+            [['status'], 'string', 'max' => 255],
         ];
     }
 
@@ -93,7 +90,8 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * Get data interface
+     * Get data interface.
+     *
      * @return \yii\db\ActiveRelation
      */
     public function getDataInterface()
@@ -106,6 +104,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         if (empty($this->dataInterface) || !($dataInterfaceItem = $this->dataInterface->dataInterfaceItem)) {
             return false;
         }
+
         return $dataInterfaceItem->run($this, $interactiveAction);
     }
 
@@ -126,7 +125,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
                 }
             }
             if (empty($this->_statusLog)) {
-                $this->_statusLog = new Status;
+                $this->_statusLog = new Status();
             }
         }
         $this->_statusLog->log = $this;
@@ -152,7 +151,6 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
 
         return $this->save();
     }
-
 
     protected function _startStatus()
     {
@@ -187,8 +185,10 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_end_description__
-     * @param  boolean             $endInterrupted __param_endInterrupted_description__ [optional]
+     * __method_end_description__.
+     *
+     * @param boolean $endInterrupted __param_endInterrupted_description__ [optional]
+     *
      * @return __return_end_type__ __return_end_description__
      */
     public function end($endInterrupted = false, $saveAlways = true)
@@ -233,7 +233,6 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return false;
     }
 
-
     public function getDuration()
     {
         $ended = microtime(true);
@@ -245,12 +244,10 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return Date::niceDuration($ended-$started);
     }
 
-
     public function getIsMostRecent()
     {
         return !empty($this->dataInterface) && $this->dataInterface->lastDataInterfaceLog && $this->dataInterface->lastDataInterfaceLog->primaryKey === $this->primaryKey;
     }
-
 
     public function getDataPackage()
     {
@@ -337,6 +334,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
             return 'danger';
           break;
         }
+
         return 'warning';
     }
 }

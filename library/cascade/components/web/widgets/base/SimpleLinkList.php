@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -9,11 +10,10 @@ namespace cascade\components\web\widgets\base;
 
 use Yii;
 use yii\helpers\Url;
-
 use infinite\helpers\Html;
 
 /**
- * SimpleLinkList [@doctodo write class description for SimpleLinkList]
+ * SimpleLinkList [@doctodo write class description for SimpleLinkList].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -25,7 +25,8 @@ class SimpleLinkList extends BaseList
     public $renderPager = false;
 
     /**
-     * Get grid cell settings
+     * Get grid cell settings.
+     *
      * @return __return_getGridCellSettings_type__ __return_getGridCellSettings_description__
      */
     public function getGridCellSettings()
@@ -33,12 +34,12 @@ class SimpleLinkList extends BaseList
         return [
             'columns' => 3,
             'maxColumns' => 6,
-            'tabletSize' => false
+            'tabletSize' => false,
         ];
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getListOptions()
     {
@@ -46,7 +47,7 @@ class SimpleLinkList extends BaseList
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getListItemOptions($model, $key, $index)
     {
@@ -59,7 +60,6 @@ class SimpleLinkList extends BaseList
         return $options;
     }
 
-
     public function getHeaderMenu()
     {
         $menu = [];
@@ -69,33 +69,35 @@ class SimpleLinkList extends BaseList
                 //'label' => 'Create',
                 'label' => '<i class="fa fa-plus" title="Create"></i>',
                 'url' => ['object/create', 'type' => $this->owner->systemId],
-                'linkOptions' => ['data-handler' => 'background']
+                'linkOptions' => ['data-handler' => 'background'],
             ];
         }
+
         return $menu;
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getMenuItems($model, $key, $index)
     {
         $menu = [];
+
         return $menu;
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function contentTemplate($model)
     {
         return [
-            'descriptor' => ['class' => 'list-group-item-heading', 'tag' => 'h5']
+            'descriptor' => ['class' => 'list-group-item-heading', 'tag' => 'h5'],
         ];
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function renderItemContent($model, $key, $index)
     {

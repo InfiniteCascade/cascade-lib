@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -12,14 +13,14 @@ use cascade\models\User;
 use infinite\base\exceptions\Exception;
 
 /**
- * Task_000007_admin_user [@doctodo write class description for Task_000007_admin_user]
+ * Task_000007_admin_user [@doctodo write class description for Task_000007_admin_user].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Task_000007_admin_user extends \infinite\setup\Task
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getTitle()
     {
@@ -27,7 +28,7 @@ class Task_000007_admin_user extends \infinite\setup\Task
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function test()
     {
@@ -35,11 +36,11 @@ class Task_000007_admin_user extends \infinite\setup\Task
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function run()
     {
-        $user = new User;
+        $user = new User();
         $user->scenario = 'creation';
         $user->attributes = $this->input['admin'];
         $user->status = User::STATUS_ACTIVE;
@@ -54,13 +55,14 @@ class Task_000007_admin_user extends \infinite\setup\Task
         foreach ($user->errors as $field => $errors) {
             $this->fieldErrors[$field] = implode('; ', $errors);
         }
-        var_dump($this->fieldErrors);exit;
+        var_dump($this->fieldErrors);
+        exit;
 
         return false;
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getFields()
     {

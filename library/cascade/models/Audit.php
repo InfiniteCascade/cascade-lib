@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -19,35 +20,33 @@ class Audit extends \infinite\db\models\Audit
 {
     use ActiveRecordTrait;
 
-
     public static function activityDataProvider($dataProvider = [])
     {
-    	$default = [
-    	];
-    	$dataProvider = array_merge_recursive($default, $dataProvider);
-    	if (!isset($dataProvider['class'])) {
-        	$dataProvider['class'] = 'cascade\components\db\behaviors\auditable\AuditDataProvider';
+        $default = [
+        ];
+        $dataProvider = array_merge_recursive($default, $dataProvider);
+        if (!isset($dataProvider['class'])) {
+            $dataProvider['class'] = 'cascade\components\db\behaviors\auditable\AuditDataProvider';
         }
 
         $dataProvider['query'] = static::find();
+
         return Yii::createObject($dataProvider);
     }
 
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['data_interface_id'], 'string', 'max' => 36]
+            [['data_interface_id'], 'string', 'max' => 36],
         ]);
     }
-
 
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [
-            'data_interface_id' => 'Data Interface'
+            'data_interface_id' => 'Data Interface',
         ]);
     }
-
 
     public function getDataInterface()
     {

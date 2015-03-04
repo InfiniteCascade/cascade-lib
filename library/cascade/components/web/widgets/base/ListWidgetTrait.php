@@ -1,13 +1,12 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
 
 namespace cascade\components\web\widgets\base;
-
-use Yii;
 
 use infinite\helpers\Html;
 use infinite\web\grid\Row;
@@ -21,7 +20,7 @@ trait ListWidgetTrait
     public $emptyMessage = 'No items exist.';
     public $defaultContentRow = [
         'class' => 'list-group-item-text',
-        'tag' => 'div'
+        'tag' => 'div',
     ];
     protected $_renderContentTemplate;
     protected $_context;
@@ -31,12 +30,12 @@ trait ListWidgetTrait
         if ($model->objectType->hasDashboard && $model->can('read')) {
             return [
                 'viewLink' => ['class' => 'list-group-item-heading', 'tag' => 'h5'],
-                'subdescriptor' => ['class' => 'list-group-item-text ic-object-subheader']
+                'subdescriptor' => ['class' => 'list-group-item-text ic-object-subheader'],
             ];
         } else {
             return [
                 'descriptor' => ['class' => 'list-group-item-heading', 'tag' => 'h5'],
-                'subdescriptor' => ['class' => 'list-group-item-text ic-object-subheader']
+                'subdescriptor' => ['class' => 'list-group-item-text ic-object-subheader'],
             ];
         }
     }
@@ -44,6 +43,7 @@ trait ListWidgetTrait
     public function buildContext($object = null)
     {
         $context = [];
+
         return $context;
     }
 
@@ -52,6 +52,7 @@ trait ListWidgetTrait
         if (!isset($this->_context)) {
             $this->_context = $this->buildContext($object);
         }
+
         return $this->_context;
     }
 
@@ -69,7 +70,8 @@ trait ListWidgetTrait
                     return $value;
                 }
             }
-            return null;
+
+            return;
         }
         $settings = array_merge($this->defaultContentRow, $settings);
         $context = $this->getContext($model);
@@ -96,7 +98,8 @@ trait ListWidgetTrait
         if (!empty($value)) {
             return $value;
         }
-        return null;
+
+        return;
     }
 
     public function renderItemContent($model, $key, $index)
@@ -106,7 +109,7 @@ trait ListWidgetTrait
         if (isset($model->relationModel) && isset($model->relationModel['id'])) {
             // $parts[] = $model->relationModel['id'];
             $template = array_merge([
-                    'relationTaxonomies' => ['class' => 'list-group-item-pre', 'tag' => 'div']
+                    'relationTaxonomies' => ['class' => 'list-group-item-pre', 'tag' => 'div'],
                 ], $template);
         }
 
@@ -122,7 +125,9 @@ trait ListWidgetTrait
                     $subrowSettings = $fieldName['settings'];
                 }
                 foreach ($fieldName as $subFieldName => $subSettings) {
-                    if ($fieldName === 'settings') { continue; }
+                    if ($fieldName === 'settings') {
+                        continue;
+                    }
                     if (is_numeric($subFieldName)) {
                         $subFieldName = $subSettings;
                         $subSettings = [];
@@ -130,7 +135,7 @@ trait ListWidgetTrait
                     $this->renderItemContentRow($subparts, $subFieldName, $subSettings, $model, $key, $index);
                 }
                 if (!empty($subparts)) {
-                    $row = new Row;
+                    $row = new Row();
                     $columnSize = floor(12 / count($subparts));
                     foreach ($subparts as $subpart) {
                         $cell = new Cell(['content' => $subpart, 'phoneColumns' => $columnSize, 'phoneSize' => 'auto', 'tabletSize' => false, 'mediumDesktopSize' => false, 'largeDesktopSize' => false]);
@@ -147,7 +152,7 @@ trait ListWidgetTrait
         return implode("", $parts);
     }
 
-    protected function renderItemContentRow (&$parts, $fieldName, $settings, $model, $key, $index)
+    protected function renderItemContentRow(&$parts, $fieldName, $settings, $model, $key, $index)
     {
         $tag = isset($settings['tag']) ? $settings['tag'] : 'div';
         unset($settings['tag']);
@@ -189,8 +194,10 @@ trait ListWidgetTrait
         if (!empty($menuItems)) {
             foreach ($menuItems as &$menuItem) {
                 if (isset($menuItem['icon'])) {
-                    if (!isset($menuItem['label'])) { $menuItem['label'] = ''; }
-                    $menuItem['label'] = '<span class="'.$menuItem['icon'].'"></span>'. $menuItem['label'];
+                    if (!isset($menuItem['label'])) {
+                        $menuItem['label'] = '';
+                    }
+                    $menuItem['label'] = '<span class="'.$menuItem['icon'].'"></span>'.$menuItem['label'];
                     unset($menuItem['icon']);
                 }
             }
@@ -202,13 +209,13 @@ trait ListWidgetTrait
                     'dropdown' => [
                         'options' => ['class' => 'pull-right'],
                         'encodeLabels' => false,
-                        'items' => $menuItems
+                        'items' => $menuItems,
                     ],
-                    'iconOptions' => ['class' => 'fa fa-angle-down']
+                    'iconOptions' => ['class' => 'fa fa-angle-down'],
                 ]);
         }
 
-        return null;
+        return;
     }
 
     public function generateContent()
@@ -247,11 +254,12 @@ trait ListWidgetTrait
             }
         }
 
-        return parent::generateFooter() . $footer;
+        return parent::generateFooter().$footer;
     }
 
     /**
      * Renders the pager.
+     *
      * @return string the rendering result
      */
     public function renderPager()
@@ -261,7 +269,7 @@ trait ListWidgetTrait
         if ($pagination === false || $pagination->getPageCount() <= 1) {
             return false;
         }
-        /** @var LinkPager $class */
+        /* @var LinkPager $class */
         $pager = $this->pagerSettings;
         $class = ArrayHelper::remove($pager, 'class', 'infinite\widgets\LinkPager');
         $pager['pagination'] = $pagination;
@@ -273,5 +281,4 @@ trait ListWidgetTrait
 
         return $class::widget($pager);
     }
-
 }

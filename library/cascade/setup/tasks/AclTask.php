@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,21 +11,22 @@ namespace cascade\setup\tasks;
 use infinite\setup\Exception;
 
 /**
- * AclTask [@doctodo write class description for AclTask]
+ * AclTask [@doctodo write class description for AclTask].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class AclTask extends \infinite\setup\Task
 {
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getTitle()
     {
         return 'ACL';
     }
     /**
-     * Get base acas
+     * Get base acas.
+     *
      * @return __return_getBaseAcas_type__ __return_getBaseAcas_description__
      */
     public function getBaseAcas()
@@ -33,12 +35,12 @@ abstract class AclTask extends \infinite\setup\Task
     }
 
     /**
-     * Get base rules
+     * Get base rules.
      */
     abstract public function getBaseRules();
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function test()
     {
@@ -80,7 +82,7 @@ abstract class AclTask extends \infinite\setup\Task
         return true;
     }
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function run()
     {
@@ -92,7 +94,7 @@ abstract class AclTask extends \infinite\setup\Task
                 $model = $controlled['model'];
                 $controlled = $model::find()->disableAccessCheck()->where($controlled['fields'])->one();
                 if (!$controlled) {
-                    throw new Exception("Could not find controlled object: ". print_r($rule['controlled'], true));
+                    throw new Exception("Could not find controlled object: ".print_r($rule['controlled'], true));
 
                     return false;
                 }
@@ -102,14 +104,14 @@ abstract class AclTask extends \infinite\setup\Task
                 $model = $accessing['model'];
                 $accessing = $model::find()->disableAccessCheck()->where($accessing['fields'])->one();
                 if (!$accessing) {
-                    throw new Exception("Could not find accessing object: ". print_r($rule['accessing'], true));
+                    throw new Exception("Could not find accessing object: ".print_r($rule['accessing'], true));
 
                     return false;
                 }
             }
 
             if (!$this->setup->app()->gk->{$rule['task']}($rule['action'], $controlled, $accessing)) {
-                    throw new Exception("Could not set up rule: ". print_r(['rule' => $rule], true));
+                throw new Exception("Could not set up rule: ".print_r(['rule' => $rule], true));
 
                 return false;
             }
@@ -118,7 +120,7 @@ abstract class AclTask extends \infinite\setup\Task
         return true;
     }
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getFields()
     {

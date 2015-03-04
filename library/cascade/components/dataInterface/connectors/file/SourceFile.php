@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -12,7 +13,7 @@ use infinite\base\exceptions\Exception;
 use infinite\helpers\Match;
 
 /**
- * Meta [@doctodo write class description for Meta]
+ * Meta [@doctodo write class description for Meta].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -56,10 +57,12 @@ class SourceFile extends \infinite\base\Object
             while (($buffer = fgetcsv($this->filePointer, 0, $this->delimeter)) !== false) {
                 $currentLineNumber++;
                 if ($currentLineNumber <= $this->skipLines) {
-                   continue;
+                    continue;
                 }
                 $line = Yii::createObject(['class' => SourceFileLine::className(), 'sourceFile' => $this, 'lineNumber' => $currentLineNumber-1, 'content' => $buffer]);
-                if ($this->testIgnore($line)) { continue; }
+                if ($this->testIgnore($line)) {
+                    continue;
+                }
                 $lineId = $line->id;
                 if (!isset($lineId)) {
                     continue;
@@ -70,6 +73,7 @@ class SourceFile extends \infinite\base\Object
                 }
             }
         }
+
         return $this->_lines;
     }
 
@@ -90,20 +94,24 @@ class SourceFile extends \infinite\base\Object
                 return true;
             }
         }
+
         return false;
     }
 
     public function readLine($line)
     {
-        if (!$this->filePointer) { return false; }
+        if (!$this->filePointer) {
+            return false;
+        }
         rewind($this->filePointer);
         $currentLineNumber = 0;
         while (($buffer = fgetcsv($this->filePointer, 0, $this->delimeter)) !== false) {
-           $currentLineNumber++;
-           if ($currentLineNumber === $line) {
-               return $buffer;
-           }
+            $currentLineNumber++;
+            if ($currentLineNumber === $line) {
+                return $buffer;
+            }
         }
+
         return false;
     }
 
@@ -117,7 +125,7 @@ class SourceFile extends \infinite\base\Object
                 $file = $this->local;
                 $pathinfo = pathinfo($this->local);
             } elseif (isset($this->url)) {
-                $fileCacheKey = md5(__CLASS__ . __FUNCTION__ . $this->url);
+                $fileCacheKey = md5(__CLASS__.__FUNCTION__.$this->url);
                 $fileContent = Yii::$app->fileCache->get($fileCacheKey);
                 $pathinfo = pathinfo($this->url);
                 $file = Yii::$app->fileStorage->getTempFile(false, $pathinfo['extension']);
@@ -138,6 +146,7 @@ class SourceFile extends \infinite\base\Object
                 $this->_filePointer = fopen($file, 'r');
             }
         }
+
         return $this->_filePointer;
     }
 
@@ -150,10 +159,12 @@ class SourceFile extends \infinite\base\Object
             break;
             case 'xls':
                 $tmpfile = Yii::$app->fileStorage->getTempFile();
+
                 return $this->convertExcel($filepath, $tmpfile, 'Excel5');
             break;
             case 'xlsx';
                 $tmpfile = Yii::$app->fileStorage->getTempFile();
+
                 return $this->convertExcel($filepath, $tmpfile);
             break;
         }
@@ -161,14 +172,14 @@ class SourceFile extends \infinite\base\Object
 
     private function _loadExcel()
     {
-        spl_autoload_unregister(array('BaseYii','autoload'));
-        $path = INFINITE_APP_VENDOR_PATH . DIRECTORY_SEPARATOR . 'phpoffice' . DIRECTORY_SEPARATOR . 'phpexcel' . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'PHPExcel.php';
-        require_once($path);
+        spl_autoload_unregister(['BaseYii', 'autoload']);
+        $path = INFINITE_APP_VENDOR_PATH.DIRECTORY_SEPARATOR.'phpoffice'.DIRECTORY_SEPARATOR.'phpexcel'.DIRECTORY_SEPARATOR.'Classes'.DIRECTORY_SEPARATOR.'PHPExcel.php';
+        require_once $path;
     }
 
     private function _unloadExcel()
     {
-        spl_autoload_register(array('Yii','autoload'));
+        spl_autoload_register(['Yii', 'autoload']);
     }
 
     protected function convertExcel($filepath, $tmpfile, $filetype = 'Excel2007')
@@ -178,6 +189,7 @@ class SourceFile extends \infinite\base\Object
         $test = Yii::$app->fileCache->get($fileCacheKey);
         if ($test) {
             file_put_contents($tmpfile, $test);
+
             return $tmpfile;
         }
         echo "Converting {$filepath}...\n";
@@ -189,13 +201,14 @@ class SourceFile extends \infinite\base\Object
         $objPHPExcelReader = $objReader->load($filepath);
         $loadedSheetNames = $objPHPExcelReader->getSheetNames();
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcelReader, 'CSV');
-        foreach($loadedSheetNames as $sheetIndex => $loadedSheetName) {
+        foreach ($loadedSheetNames as $sheetIndex => $loadedSheetName) {
             $objWriter->setSheetIndex($sheetIndex);
             $objWriter->save($tmpfile);
             break;
         }
         $this->_unloadExcel();
         Yii::$app->fileCache->set($fileCacheKey, file_get_contents($tmpfile), 86400);
+
         return $tmpfile;
     }
 
@@ -210,15 +223,18 @@ class SourceFile extends \infinite\base\Object
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
         fclose($fp);
-        if($httpCode !== 200) {
+        if ($httpCode !== 200) {
             @unlink($savePath);
+
             return false;
         }
 
         if (!file_exists($savePath) || !filesize($savePath) === 0) {
             @unlink($savePath);
+
             return false;
         }
+
         return $savePath;
     }
 
@@ -230,6 +246,7 @@ class SourceFile extends \infinite\base\Object
                 $this->_headers = [];
             }
         }
+
         return $this->_headers;
     }
 

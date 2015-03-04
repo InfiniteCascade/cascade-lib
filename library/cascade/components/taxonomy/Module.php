@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -8,7 +9,7 @@
 namespace cascade\components\taxonomy;
 
 /**
- * Module [@doctodo write class description for Module]
+ * Module [@doctodo write class description for Module].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -32,7 +33,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     public $version = 1;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getCollectorName()
     {
@@ -40,7 +41,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
-     * Get settings
+     * Get settings.
      */
     abstract public function getSettings();
 }

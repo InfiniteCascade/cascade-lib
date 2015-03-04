@@ -1,9 +1,9 @@
 <?php
 /**
  * This view is used by console/controllers/MigrateController.php
- * The following variables are available in this view:
+ * The following variables are available in this view:.
  *
- * @var string $className the new migration class name
+ * @var string the new migration class name
  */
 echo "<?php\n";
 ?>

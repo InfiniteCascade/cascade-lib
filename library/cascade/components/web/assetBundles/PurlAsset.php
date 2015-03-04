@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\components\web\assetBundles;
 use yii\web\AssetBundle;
 
 /**
- * BootstrapTypeaheadAsset [@doctodo write class description for BootstrapTypeaheadAsset]
+ * BootstrapTypeaheadAsset [@doctodo write class description for BootstrapTypeaheadAsset].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -28,7 +29,7 @@ class PurlAsset extends AssetBundle
      * @inheritdoc
      */
     public $js = [
-        'purl.js'
+        'purl.js',
     ];
     /**
      * @inheritdoc
@@ -36,7 +37,7 @@ class PurlAsset extends AssetBundle
     public $depends = [];
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function init()
     {

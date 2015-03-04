@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -11,7 +12,7 @@ use Yii;
 use cascade\models\Relation as RelationModel;
 
 /**
- * Relation [@doctodo write class description for Relation]
+ * Relation [@doctodo write class description for Relation].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -41,13 +42,12 @@ class Relation extends Base
      * @var __var_baseModel_type__ __var_baseModel_description__
      */
     public $baseModel;
-    /**
+    /*
      * @var __var__moduleHandler_type__ __var__moduleHandler_description__
      */
-    static $_moduleHandlers = [];
+    public static $_moduleHandlers = [];
 
     protected $_value;
-
 
     public function __clone()
     {
@@ -64,7 +64,8 @@ class Relation extends Base
     }
 
     /**
-     * Get value
+     * Get value.
+     *
      * @return __return_getValue_type__ __return_getValue_description__
      */
     public function getValue($createOnEmpty = true)
@@ -76,20 +77,21 @@ class Relation extends Base
             $field = $this->field;
             $fieldParts = explode(':', $field);
             $primaryObject = $this->relationship->getRelatedObject($this->baseModel, $this->modelRole, $this->model);
-            
+
             if (isset($models[$relationTabularId])) {
                 $this->_value = $models[$relationTabularId];
-            }elseif ($primaryObject) {
+            } elseif ($primaryObject) {
                 $this->_value = $primaryObject;
-            } elseif($createOnEmpty) {
+            } elseif ($createOnEmpty) {
                 $modelClass = $this->relationship->companionRoleType($this->modelRole)->primaryModel;
-                $this->_value = new $modelClass;
+                $this->_value = new $modelClass();
                 $this->_value->tabularId = $this->field;
                 $this->_value->_moduleHandler = $this->field;
             }
             $this->_value->setParentModel($this->baseModel);
           //  exit;
         }
+
         return $this->_value;
     }
 
@@ -111,15 +113,17 @@ class Relation extends Base
                 }
             }
         }
+
         return $value;
     }
 
     public function resetModel()
     {
         $relationClass = Yii::$app->classes['Relation'];
-        $this->_model = new $relationClass;
+        $this->_model = new $relationClass();
         $this->_model->tabularId = $this->field;
         $this->_model->_moduleHandler = $this->field;
+
         return $this->_model;
     }
 
@@ -140,14 +144,17 @@ class Relation extends Base
             }
             $this->_model->_moduleHandler = $this->field;
             if (empty($this->_model)) {
-                \d("what");exit;
+                \d("what");
+                exit;
             }
         }
+
         return $this->_model;
     }
 
     /**
-     * Get companion
+     * Get companion.
+     *
      * @return __return_getCompanion_type__ __return_getCompanion_description__
      */
     public function getCompanion()
@@ -159,7 +166,8 @@ class Relation extends Base
         }
     }
     /**
-     * Get module
+     * Get module.
+     *
      * @return __return_getModule_type__ __return_getModule_description__
      */
     public function getModule()
@@ -172,16 +180,19 @@ class Relation extends Base
     }
 
     /**
-     * Get module handler
+     * Get module handler.
+     *
      * @return __return_getModuleHandler_type__ __return_getModuleHandler_description__
      */
     public function getModuleHandler()
     {
         if (is_null($this->_moduleHandler)) {
             $stem = $this->field;
-            if (!isset(self::$_moduleHandlers[$stem])) { self::$_moduleHandlers[$stem] = []; }
+            if (!isset(self::$_moduleHandlers[$stem])) {
+                self::$_moduleHandlers[$stem] = [];
+            }
             $n = count(self::$_moduleHandlers[$stem]);
-            $this->_moduleHandler = $this->field .':_'. $n;
+            $this->_moduleHandler = $this->field.':_'.$n;
             self::$_moduleHandlers[$stem][] = $this->_moduleHandler;
         }
 
@@ -189,7 +200,7 @@ class Relation extends Base
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function hasFile()
     {
@@ -197,7 +208,8 @@ class Relation extends Base
     }
 
     /**
-     * Get companion field
+     * Get companion field.
+     *
      * @return __return_getCompanionField_type__ __return_getCompanionField_description__
      */
     public function getCompanionField()
@@ -211,12 +223,12 @@ class Relation extends Base
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function determineLocations()
     {
         if (!($this->modelRole === 'child' && !$this->relationship->isHasOne())
-            &&	!($this->modelRole === 'parent')) {
+            &&    !($this->modelRole === 'parent')) {
             return [self::LOCATION_DETAILS];
         }
 
@@ -231,9 +243,10 @@ class Relation extends Base
                 return ($labels[$this->field]);
             }
         }
+
         return $this->relationship->getLabel($this->modelRole);
     }
-    
+
     public function getFilterSettings()
     {
         return false;

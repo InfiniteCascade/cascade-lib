@@ -1,12 +1,10 @@
 <?php
 /**
- * ./app/config/environments/templates/development/main.php
+ * ./app/config/environments/templates/development/main.php.
  *
  * @author Jacob Morrison <jacob@infinitecascade.com>
- * @package cascade
  */
-
-$parent = INFINITE_APP_PATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR . basename(__FILE__);
+$parent = INFINITE_APP_PATH.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.basename(__FILE__);
 $config = include $parent;
 $config = array_merge($config, [
         'id' => '%%_.application_id%%',
@@ -15,4 +13,5 @@ $config = array_merge($config, [
 $config['components']['assetManager']['linkAssets'] = true;
 $config['components']['request']['cookieValidationKey'] = '%%_.cookie_salt%%';
 $config['bootstrap'][] = 'debug';
+
 return $config;

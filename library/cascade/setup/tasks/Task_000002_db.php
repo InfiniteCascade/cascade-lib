@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2014 Infinite Cascade
  * @license http://www.infinitecascade.com/license/
  */
@@ -10,7 +11,7 @@ namespace cascade\setup\tasks;
 use infinite\setup\Exception;
 
 /**
- * Task_000002_db [@doctodo write class description for Task_000002_db]
+ * Task_000002_db [@doctodo write class description for Task_000002_db].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -26,7 +27,7 @@ class Task_000002_db extends \infinite\setup\Task
     public $skipComplete = true;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getTitle()
     {
@@ -34,7 +35,7 @@ class Task_000002_db extends \infinite\setup\Task
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function skip()
     {
@@ -42,18 +43,20 @@ class Task_000002_db extends \infinite\setup\Task
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function test()
     {
-        if ($this->isNewInstall()) { return false; }
+        if ($this->isNewInstall()) {
+            return false;
+        }
         $request = $this->migrator->getRequest();
         $request->setParams(['migrate/new-plain', '--interactive=0', 1000]);
         list($route, $params) = $request->resolve();
         ob_start();
         $this->migrator->run();
         $result = ob_get_clean();
-        preg_match('/Found ([0-9]+) new migration/',$result, $matches);
+        preg_match('/Found ([0-9]+) new migration/', $result, $matches);
         if (empty($matches[1])) {
             return true;
         }
@@ -63,7 +66,8 @@ class Task_000002_db extends \infinite\setup\Task
     }
 
     /**
-     * __method_isNewInstall_description__
+     * __method_isNewInstall_description__.
+     *
      * @return __return_isNewInstall_type__ __return_isNewInstall_description__
      */
     public function isNewInstall()
@@ -76,7 +80,7 @@ class Task_000002_db extends \infinite\setup\Task
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function run()
     {
@@ -90,18 +94,20 @@ class Task_000002_db extends \infinite\setup\Task
     }
 
     /**
-     * Get migrator
+     * Get migrator.
+     *
      * @return __return_getMigrator_type__ __return_getMigrator_description__
+     *
      * @throws Exception __exception_Exception_description__
      */
     public function getMigrator()
     {
         if (is_null($this->_migrator)) {
-            $configFile = $this->setup->environmentPath . DIRECTORY_SEPARATOR . 'console.php';
+            $configFile = $this->setup->environmentPath.DIRECTORY_SEPARATOR.'console.php';
             if (!is_file($configFile)) {
                 throw new Exception("Invalid console config path: {$configFile}");
             }
-            $config = require($configFile);
+            $config = require $configFile;
             //var_dump($config);exit;
             $this->_migrator = new \infinite\console\Application($config);
         }
@@ -110,7 +116,7 @@ class Task_000002_db extends \infinite\setup\Task
     }
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     public function getVerification()
     {
