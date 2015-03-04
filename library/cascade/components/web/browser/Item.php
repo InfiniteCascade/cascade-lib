@@ -16,7 +16,6 @@ namespace cascade\components\web\browser;
 class Item extends \infinite\web\browser\Item
 {
     /**
-     * @var __var_objectType_type__ __var_objectType_description__
      */
     public $objectType = false;
 

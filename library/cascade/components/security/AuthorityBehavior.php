@@ -30,9 +30,7 @@ class AuthorityBehavior extends \infinite\security\AuthorityBehavior
     }
 
     /**
-     * __method_handleRelationChange_description__.
      *
-     * @param cascade\components\types\RelationshipEvent $event __param_event_description__
      */
     public function handleRelationChange(RelationshipEvent $event)
     {

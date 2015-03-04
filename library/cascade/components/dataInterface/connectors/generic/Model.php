@@ -16,24 +16,19 @@ namespace cascade\components\dataInterface\connectors\generic;
 abstract class Model extends \infinite\base\Object
 {
     /**
-     * @var __var_modelName_type__ __var_modelName_description__
      */
     public $modelName;
     /**
-     * @var __var__interface_type__ __var__interface_description__
      */
     protected $_interface;
     /**
-     * @var __var__attributes_type__ __var__attributes_description__
      */
     protected $_attributes;
     /**
-     * @var __var__children_type__ __var__children_description__
      */
     protected $_children;
 
     /**
-     * __method___clone_description__.
      */
     public function __clone()
     {
@@ -104,8 +99,6 @@ abstract class Model extends \infinite\base\Object
 
     /**
      * Set interface.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setInterface($value)
     {
@@ -113,7 +106,6 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_reset_description__.
      */
     public function reset()
     {
@@ -122,8 +114,6 @@ abstract class Model extends \infinite\base\Object
 
     /**
      * Set attributes.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setAttributes($value)
     {
@@ -135,17 +125,11 @@ abstract class Model extends \infinite\base\Object
     abstract public function primaryKey();
     /**
      * Get primary key.
-     *
-     * @return __return_getPrimaryKey_type__ __return_getPrimaryKey_description__
      */
     abstract public function getPrimaryKey();
 
     /**
-     * __method_populateRecord_description__.
      *
-     * @param __param_attributes_type__ $attributes __param_attributes_description__
-     *
-     * @return __return_populateRecord_type__ __return_populateRecord_description__
      */
     public function populateRecord($attributes)
     {
@@ -159,11 +143,7 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
-     * __method_populateRecords_description__.
      *
-     * @param __param_results_type__ $results __param_results_description__
-     *
-     * @return __return_populateRecords_type__ __return_populateRecords_description__
      */
     public function populateRecords($results)
     {
@@ -177,8 +157,6 @@ abstract class Model extends \infinite\base\Object
 
     /**
      * Get attributes.
-     *
-     * @return __return_getAttributes_type__ __return_getAttributes_description__
      */
     public function getAttributes()
     {
@@ -187,8 +165,6 @@ abstract class Model extends \infinite\base\Object
 
     /**
      * Get interface.
-     *
-     * @return __return_getInterface_type__ __return_getInterface_description__
      */
     public function getInterface()
     {

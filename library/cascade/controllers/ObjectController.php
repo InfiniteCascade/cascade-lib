@@ -97,9 +97,7 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionBrowse_description__.
      *
-     * @return __return_actionBrowse_type__ __return_actionBrowse_description__
      */
     public function actionBrowseHierarchy()
     {
@@ -155,9 +153,7 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionSearch_description__.
      *
-     * @return __return_actionSearch_type__ __return_actionSearch_description__
      */
     public function actionSearch()
     {
@@ -218,11 +214,7 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionView_description__.
      *
-     * @throws HttpException __exception_HttpException_description__
-     *
-     * @return __return_actionView_type__ __return_actionView_description__
      */
     public function actionPhoto()
     {
@@ -257,11 +249,7 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionView_description__.
      *
-     * @throws HttpException __exception_HttpException_description__
-     *
-     * @return __return_actionView_type__ __return_actionView_description__
      */
     public function actionView()
     {
@@ -343,11 +331,7 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionView_description__.
      *
-     * @throws HttpException __exception_HttpException_description__
-     *
-     * @return __return_actionView_type__ __return_actionView_description__
      */
     public function actionActivity()
     {
@@ -680,7 +664,6 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionAccess_description__.
      */
     public function actionAccess()
     {
@@ -740,9 +723,7 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionDelete_description__.
      *
-     * @throws HttpException __exception_HttpException_description__
      */
     public function actionDelete()
     {
@@ -800,9 +781,7 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionWatch_description__.
      *
-     * @throws HttpException __exception_HttpException_description__
      */
     public function actionWatch()
     {
@@ -834,7 +813,6 @@ class ObjectController extends Controller
     }
 
     /**
-     * __method_actionWidget_description__.
      */
     public function actionWidget()
     {

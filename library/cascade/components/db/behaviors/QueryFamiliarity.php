@@ -18,8 +18,6 @@ use Yii;
 class QueryFamiliarity extends \infinite\db\behaviors\QueryBehavior
 {
     /**
-     * __method_withFamiliarity_description__.
-     *
      * @return \yii\db\ActiveRelation
      */
     public function withFamiliarity()

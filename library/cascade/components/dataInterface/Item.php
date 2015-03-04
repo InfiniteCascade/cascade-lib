@@ -19,35 +19,27 @@ use infinite\base\exceptions\Exception;
 class Item extends \infinite\base\collector\Item
 {
     /**
-     * @var __var_error_type__ __var_error_description__
      */
     public $error;
 
     /**
-     * @var __var__name_type__ __var__name_description__
      */
     private $_name;
     /**
-     * @var __var__module_type__ __var__module_description__
      */
     private $_module;
     /**
-     * @var __var__checked_type__ __var__checked_description__
      */
     private $_checked;
     /**
-     * @var __var__interfaceObject_type__ __var__interfaceObject_description__
      */
     protected $_interfaceObject;
     /**
-     * @var __var__currentInterfaceAction_type__ __var__currentInterfaceAction_description__
      */
     protected $_currentInterfaceAction;
 
     /**
-     * __method_run_description__.
      *
-     * @return __return_run_type__ __return_run_description__
      */
     public function run($resumeLog = null, $action = null)
     {
@@ -82,9 +74,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_saveLog_description__.
      *
-     * @return __return_saveLog_type__ __return_saveLog_description__
      */
     public function saveLog()
     {
@@ -97,10 +87,6 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * Get interface object.
-     *
-     * @throws Exception __exception_Exception_description__
-     *
-     * @return __return_getInterfaceObject_type__ __return_getInterfaceObject_description__
      */
     public function getInterfaceObject()
     {

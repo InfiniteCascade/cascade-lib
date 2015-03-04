@@ -19,7 +19,6 @@ use Yii;
 class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 {
     /**
-     * @var __var__relationship_type__ __var__relationship_description__
      */
     protected $_relationship;
 
@@ -43,8 +42,6 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 
     /**
      * Get relationship.
-     *
-     * @return __return_getRelationship_type__ __return_getRelationship_description__
      */
     public function getRelationship()
     {
@@ -61,8 +58,6 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 
     /**
      * Set relationship.
-     *
-     * @param cascade\components\types\Relationship $value __param_value_description__
      */
     public function setRelationship(Relationship $value)
     {

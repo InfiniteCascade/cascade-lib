@@ -21,18 +21,15 @@ use Yii;
 abstract class Module extends BaseModule
 {
     /**
-     * @var __var_dataSourceClass_type__ __var_dataSourceClass_description__
      */
     public $dataSourceClass = 'cascade\components\dataInterface\connectors\generic\DataSource';
 
     /**
-     * @var __var__models_type__ __var__models_description__
      */
     protected $_models;
 
     protected $_dataSources;
     /**
-     * @var __var__action_type__ __var__action_description__
      */
     protected $_action;
 
@@ -95,11 +92,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get local object.
-     *
-     * @param __param_localModelClass_type__   $localModelClass   __param_localModelClass_description__
-     * @param __param_foreignPrimaryKey_type__ $foreignPrimaryKey __param_foreignPrimaryKey_description__
-     *
-     * @return __return_getLocalObject_type__ __return_getLocalObject_description__
      */
     public function getLocalObject($localModelClass, $foreignPrimaryKey)
     {
@@ -127,8 +119,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get data sources.
-     *
-     * @return __return_getDataSources_type__ __return_getDataSources_description__
      */
     public function getDataSources()
     {
@@ -159,10 +149,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get local data source.
-     *
-     * @param __param_localModelClass_type__ $localModelClass __param_localModelClass_description__
-     *
-     * @return __return_getLocalDataSource_type__ __return_getLocalDataSource_description__
      */
     public function getLocalDataSource($localModelClass)
     {
@@ -177,10 +163,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign data source.
-     *
-     * @param __param_foreignModelClass_type__ $foreignModelClass __param_foreignModelClass_description__
-     *
-     * @return __return_getForeignDataSource_type__ __return_getForeignDataSource_description__
      */
     public function getForeignDataSource($foreignModelClass)
     {
@@ -195,8 +177,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get action.
-     *
-     * @return __return_getAction_type__ __return_getAction_description__
      */
     public function getAction()
     {

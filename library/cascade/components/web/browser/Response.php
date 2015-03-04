@@ -23,9 +23,7 @@ class Response extends \infinite\web\browser\Response
     public $bundleClass = 'cascade\components\web\browser\Bundle';
 
     /**
-     * __method_defaultInstructions_description__.
      *
-     * @return __return_defaultInstructions_type__ __return_defaultInstructions_description__
      */
     public static function defaultInstructions()
     {
@@ -34,11 +32,7 @@ class Response extends \infinite\web\browser\Response
         ];
     }
     /**
-     * __method_parseStack_description__.
      *
-     * @param __param_request_type__ $request __param_request_description__
-     *
-     * @return __return_parseStack_type__ __return_parseStack_description__
      */
     public static function parseStack($request)
     {

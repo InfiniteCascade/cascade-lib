@@ -20,16 +20,13 @@ use Yii;
 class Relation extends Base
 {
     /**
-     * @var __var_relationSettings_type__ __var_relationSettings_description__
      */
     public $relationSettings = true;
     public $lockFields = [];
     /**
-     * @var __var_inlineRelation_type__ __var_inlineRelation_description__
      */
     public $inlineRelation = false;
     /**
-     * @var __var_linkMultiple_type__ __var_linkMultiple_description__
      */
     public $linkMultiple = false;
 
@@ -39,8 +36,6 @@ class Relation extends Base
     }
 
     /**
-     * __method_generate_description__.
-     *
      * @return unknown
      */
     public function generate()
@@ -79,8 +74,6 @@ class Relation extends Base
 
     /**
      * Get relation model field.
-     *
-     * @return __return_getRelationModelField_type__ __return_getRelationModelField_description__
      */
     public function getRelationModelField()
     {
@@ -95,11 +88,7 @@ class Relation extends Base
     }
 
     /**
-     * __method_generateRelationField_description__.
      *
-     * @param array $initialSettings __param_initialSettings_description__ [optional]
-     *
-     * @return __return_generateRelationField_type__ __return_generateRelationField_description__
      */
     protected function generateRelationField($initialSettings = [])
     {

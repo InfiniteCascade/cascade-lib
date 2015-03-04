@@ -185,11 +185,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
     }
 
     /**
-     * __method_end_description__.
      *
-     * @param boolean $endInterrupted __param_endInterrupted_description__ [optional]
-     *
-     * @return __return_end_type__ __return_end_description__
      */
     public function end($endInterrupted = false, $saveAlways = true)
     {

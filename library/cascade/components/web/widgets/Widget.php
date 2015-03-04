@@ -21,11 +21,9 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     use CollectedObjectTrait;
 
     /**
-     * @var __var_icon_type__ __var_icon_description__
      */
     public $icon = false;
     /**
-     * @var __var_section_type__ __var_section_description__
      */
     public $section = false;
     /**
@@ -33,11 +31,9 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
      */
     public $defaultDecoratorClass = 'cascade\components\web\widgets\decorator\PanelDecorator';
     /**
-     * @var __var_gridCellClass_type__ __var_gridCellClass_description__
      */
     public $gridCellClass = 'infinite\web\grid\Cell';
     /**
-     * @var __var_gridClass_type__ __var_gridClass_description__
      */
     public $gridClass = 'infinite\web\grid\Grid';
 
@@ -46,7 +42,6 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
      */
     public $params = [];
     /**
-     * @var __var_recreateParams_type__ __var_recreateParams_description__
      */
     public $recreateParams = [];
     /**
@@ -55,22 +50,16 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     public $htmlOptions = ['class' => 'ic-widget'];
 
     /**
-     * @var __var__widgetId_type__ __var__widgetId_description__
      */
     protected $_widgetId;
     /**
-     * @var __var__title_type__ __var__title_description__
      */
     protected $_title  = false;
 
     protected $_lazy  = false;
 
     /**
-     * __method_stateKeyName_description__.
      *
-     * @param __param_key_type__ $key __param_key_description__
-     *
-     * @return __return_stateKeyName_type__ __return_stateKeyName_description__
      */
     public function stateKeyName($key)
     {
@@ -106,11 +95,6 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Get state.
-     *
-     * @param __param_key_type__     $key     __param_key_description__
-     * @param __param_default_type__ $default __param_default_description__ [optional]
-     *
-     * @return __return_getState_type__ __return_getState_description__
      */
     public function getState($key, $default = null)
     {
@@ -119,11 +103,6 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Set state.
-     *
-     * @param __param_key_type__   $key   __param_key_description__
-     * @param __param_value_type__ $value __param_value_description__
-     *
-     * @return __return_setState_type__ __return_setState_description__
      */
     public function setState($key, $value)
     {
@@ -132,8 +111,6 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Get header menu.
-     *
-     * @return __return_getHeaderMenu_type__ __return_getHeaderMenu_description__
      */
     public function getHeaderMenu()
     {
@@ -142,8 +119,6 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Get title.
-     *
-     * @return __return_getTitle_type__ __return_getTitle_description__
      */
     public function getTitle()
     {
@@ -152,8 +127,6 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Set title.
-     *
-     * @param __param_title_type__ $title __param_title_description__
      */
     public function setTitle($title)
     {
@@ -232,8 +205,6 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Get widget areas.
-     *
-     * @return __return_getWidgetAreas_type__ __return_getWidgetAreas_description__
      */
     public function getWidgetAreas()
     {

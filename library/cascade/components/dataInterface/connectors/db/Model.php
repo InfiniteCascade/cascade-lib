@@ -19,15 +19,12 @@ use yii\db\Query;
 class Model extends \cascade\components\dataInterface\connectors\generic\Model
 {
     /**
-     * @var __var__tableName_type__ __var__tableName_description__
      */
     protected $_tableName;
     /**
-     * @var __var__meta_type__ __var__meta_description__
      */
     protected $_meta;
     /**
-     * @var __var__keys_type__ __var__keys_description__
      */
     protected $_keys;
 
@@ -51,8 +48,6 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
     /**
      * Set table name.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setTableName($value)
     {
@@ -61,8 +56,6 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Get children.
-     *
-     * @return __return_getChildren_type__ __return_getChildren_description__
      */
     public function getChildren()
     {
@@ -106,9 +99,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
         return $this->_children;
     }
     /**
-     * __method_primaryKey_description__.
      *
-     * @return __return_primaryKey_type__ __return_primaryKey_description__
      */
     public function primaryKey()
     {
@@ -127,8 +118,6 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Get primary key.
-     *
-     * @return __return_getPrimaryKey_type__ __return_getPrimaryKey_description__
      */
     public function getPrimaryKey()
     {
@@ -154,8 +143,6 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Get attributes.
-     *
-     * @return __return_getAttributes_type__ __return_getAttributes_description__
      */
     public function getAttributes()
     {
@@ -172,8 +159,6 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Get meta.
-     *
-     * @return __return_getMeta_type__ __return_getMeta_description__
      */
     public function getMeta()
     {
@@ -182,8 +167,6 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Set meta.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setMeta($value)
     {
@@ -191,11 +174,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * __method_find_description__.
      *
-     * @param __param_params_type__ $params __param_params_description__
-     *
-     * @return __return_find_type__ __return_find_description__
      */
     protected function find($params)
     {
@@ -229,11 +208,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * __method_findAll_description__.
      *
-     * @param array $params __param_params_description__ [optional]
-     *
-     * @return __return_findAll_type__ __return_findAll_description__
      */
     public function findAll($params = [])
     {
@@ -243,11 +218,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * __method_findOne_description__.
      *
-     * @param array $params __param_params_description__ [optional]
-     *
-     * @return __return_findOne_type__ __return_findOne_description__
      */
     public function findOne($params = [])
     {
@@ -255,11 +226,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * __method_findPrimaryKeys_description__.
      *
-     * @param array $params __param_params_description__ [optional]
-     *
-     * @return __return_findPrimaryKeys_type__ __return_findPrimaryKeys_description__
      */
     public function findPrimaryKeys($params = [])
     {
@@ -271,8 +238,6 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Get table name.
-     *
-     * @return __return_getTableName_type__ __return_getTableName_description__
      */
     public function getTableName()
     {

@@ -18,18 +18,14 @@ use Yii;
 class HandlerObjects extends \infinite\web\browser\Handler
 {
     /**
-     * @var __var_bundleClass_type__ __var_bundleClass_description__
      */
     public $bundleClass = 'cascade\components\web\browser\Bundle';
     /**
-     * @var __var__dataSource_type__ __var__dataSource_description__
      */
     protected $_dataSource;
 
     /**
      * Get data source.
-     *
-     * @return __return_getDataSource_type__ __return_getDataSource_description__
      */
     public function getDataSource()
     {

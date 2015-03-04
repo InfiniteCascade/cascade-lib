@@ -19,10 +19,7 @@ use cascade\components\dataInterface\RecursionException;
 class DataItem extends \cascade\components\dataInterface\connectors\generic\DataItem
 {
     /**
-     * __method_fillRelationConfig_description__.
      *
-     * @param __param_config_type__      $config      __param_config_description__
-     * @param __param_otherObject_type__ $otherObject __param_otherObject_description__
      */
     protected function fillRelationConfig(&$config, $otherObject)
     {
@@ -48,10 +45,7 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-     * __method_loadForeignObject_description__.
      *
-     * @throws RecursionException   __exception_RecursionException_description__
-     * @throws MissingItemException __exception_MissingItemException_description__
      */
     protected function loadForeignObject()
     {
@@ -74,9 +68,7 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-     * __method_loadLocalObject_description__.
      *
-     * @throws RecursionException __exception_RecursionException_description__
      */
     protected function loadLocalObject()
     {

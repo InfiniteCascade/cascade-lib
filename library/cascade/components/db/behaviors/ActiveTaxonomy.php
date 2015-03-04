@@ -18,24 +18,19 @@ use Yii;
 class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
 {
     /**
-     * @var __var_viaModelClass_type__ __var_viaModelClass_description__
      */
     public $viaModelClass = 'ObjectTaxonomy';
     /**
-     * @var __var_relationKey_type__ __var_relationKey_description__
      */
     public $relationKey = 'object_id';
     /**
-     * @var __var_taxonomyKey_type__ __var_taxonomyKey_description__
      */
     public $taxonomyKey = 'taxonomy_id';
 
     /**
-     * @var __var__taxonomy_id_type__ __var__taxonomy_id_description__
      */
     protected $_taxonomy_id;
     /**
-     * @var __var__current_taxonomy_id_type__ __var__current_taxonomy_id_description__
      */
     protected $_current_taxonomy_id;
 
@@ -59,9 +54,7 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_afterSave_description__.
      *
-     * @param __param_event_type__ $event __param_event_description__
      */
     public function afterSave($event)
     {
@@ -96,8 +89,6 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Set taxonomy.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setTaxonomy_id($value)
     {
@@ -121,9 +112,7 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method__currentTaxonomies_description__.
      *
-     * @return __return__currentTaxonomies_type__ __return__currentTaxonomies_description__
      */
     public function _currentTaxonomies()
     {
@@ -138,8 +127,6 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get taxonomy.
-     *
-     * @return __return_getTaxonomy_id_type__ __return_getTaxonomy_id_description__
      */
     public function getTaxonomy_id()
     {

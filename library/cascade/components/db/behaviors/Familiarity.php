@@ -18,15 +18,12 @@ use Yii;
 class Familiarity extends \infinite\db\behaviors\ActiveRecord
 {
     /**
-     * @var __var_objectField_type__ __var_objectField_description__
      */
     public $objectField = 'object_id';
     /**
-     * @var __var_userField_type__ __var_userField_description__
      */
     public $userField = 'user_id';
     /**
-     * @var __var__familiarity_type__ __var__familiarity_description__
      */
     protected $_familiarity = [];
 
@@ -42,7 +39,6 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_afterUpdate_description__.
      */
     public function afterUpdate()
     {
@@ -53,7 +49,6 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_afterInsert_description__.
      */
     public function afterInsert()
     {
@@ -65,10 +60,6 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get user.
-     *
-     * @param boolean $owner __param_owner_description__ [optional]
-     *
-     * @return __return_getUser_type__ __return_getUser_description__
      */
     public function getUser($owner = true)
     {
@@ -82,12 +73,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_watch_description__.
      *
-     * @param boolean             $doWatch __param_doWatch_description__ [optional]
-     * @param __param_user_type__ $user    __param_user_description__ [optional]
-     *
-     * @return __return_watch_type__ __return_watch_description__
      */
     public function watch($doWatch = true, $user = null)
     {
@@ -106,10 +92,6 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get familiarity.
-     *
-     * @param __param_user_type__ $user __param_user_description__ [optional]
-     *
-     * @return __return_getFamiliarity_type__ __return_getFamiliarity_description__
      */
     public function getFamiliarity($user = null)
     {

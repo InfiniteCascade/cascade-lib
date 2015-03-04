@@ -47,8 +47,6 @@ class Auditable extends \infinite\db\behaviors\auditable\Auditable
 
     /**
      * Get indirect object.
-     *
-     * @return __return_getIndirectObject_type__ __return_getIndirectObject_description__
      */
     public function getIndirectObject()
     {

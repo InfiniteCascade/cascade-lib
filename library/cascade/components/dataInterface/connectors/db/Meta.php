@@ -18,46 +18,33 @@ use infinite\base\exceptions\Exception;
 class Meta extends \infinite\base\Object
 {
     /**
-     * @var __var__hasMany_type__ __var__hasMany_description__
      */
     protected $_hasMany = [];
     /**
-     * @var __var__hasOne_type__ __var__hasOne_description__
      */
     protected $_hasOne = [];
     /**
-     * @var __var__belongsTo_type__ __var__belongsTo_description__
      */
     protected $_belongsTo = [];
     /**
-     * @var __var__foreignTable_type__ __var__foreignTable_description__
      */
     protected $_foreignTable;
     /**
-     * @var __var__db_type__ __var__db_description__
      */
     protected $_db;
     /**
-     * @var __var__schema_type__ __var__schema_description__
      */
     protected $_schema;
     /**
-     * @var __var__interface_type__ __var__interface_description__
      */
     protected $_interface;
 
     /*
-     * @var __var__metas_type__ __var__metas_description__
      */
     public static $_metas = [];
 
     /**
      * Get.
-     *
-     * @param __param_interface_type__    $interface    __param_interface_description__
-     * @param __param_foreignTable_type__ $foreignTable __param_foreignTable_description__
-     *
-     * @return __return_get_type__ __return_get_description__
      */
     public static function get($interface, $foreignTable)
     {
@@ -83,8 +70,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Set has many.
-     *
-     * @param __param_config_type__ $config __param_config_description__
      */
     public function setHasMany($config)
     {
@@ -114,8 +99,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get has many.
-     *
-     * @return __return_getHasMany_type__ __return_getHasMany_description__
      */
     public function getHasMany()
     {
@@ -124,8 +107,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get has one.
-     *
-     * @return __return_getHasOne_type__ __return_getHasOne_description__
      */
     public function getHasOne()
     {
@@ -134,8 +115,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get belongs to.
-     *
-     * @return __return_getBelongsTo_type__ __return_getBelongsTo_description__
      */
     public function getBelongsTo()
     {
@@ -143,11 +122,7 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * __method_hasAttribute_description__.
      *
-     * @param __param_name_type__ $name __param_name_description__
-     *
-     * @return __return_hasAttribute_type__ __return_hasAttribute_description__
      */
     public function hasAttribute($name)
     {
@@ -156,8 +131,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get attribute keys.
-     *
-     * @return __return_getAttributeKeys_type__ __return_getAttributeKeys_description__
      */
     public function getAttributeKeys()
     {
@@ -166,8 +139,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get schema.
-     *
-     * @return __return_getSchema_type__ __return_getSchema_description__
      */
     public function getSchema()
     {
@@ -176,8 +147,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Set interface.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setInterface($value)
     {
@@ -186,8 +155,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get interface.
-     *
-     * @return __return_getInterface_type__ __return_getInterface_description__
      */
     public function getInterface()
     {

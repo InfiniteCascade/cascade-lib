@@ -24,23 +24,18 @@ class Taxonomy extends Base
      */
     protected $_human = true;
     /**
-     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
      */
     protected $_moduleHandler;
     /**
-     * @var __var_taxonomy_type__ __var_taxonomy_description__
      */
     public $taxonomy;
 
     /**
-     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
      */
     protected static $_moduleHandlers = [];
 
     /**
      * Get module handler.
-     *
-     * @return __return_getModuleHandler_type__ __return_getModuleHandler_description__
      */
     public function getModuleHandler()
     {

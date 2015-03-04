@@ -72,13 +72,6 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
 
     /**
      * Get object.
-     *
-     * @param boolean $checkAccess __param_checkAccess_description__ [optional]
-     *
-     * @throws \ __exception_\_description__
-     * @throws \ __exception_\_description__
-     *
-     * @return __return_getObject_type__ __return_getObject_description__
      */
     public function getObject($checkAccess = true)
     {

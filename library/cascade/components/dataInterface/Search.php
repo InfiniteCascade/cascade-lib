@@ -20,40 +20,29 @@ use infinite\helpers\Console;
 class Search extends \infinite\base\Component
 {
     /**
-     * @var __var_interactive_type__ __var_interactive_description__
      */
     public static $interactive = true;
     /**
-     * @var __var_threshold_type__ __var_threshold_description__
      */
     public $threshold = 50;
     /**
-     * @var __var_autoadjust_type__ __var_autoadjust_description__
      */
     public $autoadjust = 1.5;
     /**
-     * @var __var_dataSource_type__ __var_dataSource_description__
      */
     public $dataSource;
 
     public $foreignFilter;
 
     /**
-     * @var __var__localFields_type__ __var__localFields_description__
      */
     protected $_localFields;
     /**
-     * @var __var__foreignFields_type__ __var__foreignFields_description__
      */
     protected $_foreignFields = [];
 
     /**
-     * __method_searchLocal_description__.
      *
-     * @param cascade\components\dataInterface\DataItem $item         __param_item_description__
-     * @param array                                     $searchParams __param_searchParams_description__ [optional]
-     *
-     * @return __return_searchLocal_type__ __return_searchLocal_description__
      */
     public function searchLocal(DataItem $item, $searchParams = [])
     {
@@ -167,11 +156,7 @@ class Search extends \infinite\base\Component
     }
 
     /**
-     * __method_searchForeign_description__.
      *
-     * @param cascade\components\dataInterface\DataItem $item __param_item_description__
-     *
-     * @return __return_searchForeign_type__ __return_searchForeign_description__
      */
     public function searchForeign(DataItem $item)
     {
@@ -180,8 +165,6 @@ class Search extends \infinite\base\Component
 
     /**
      * Set local fields.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setLocalFields($value)
     {
@@ -190,8 +173,6 @@ class Search extends \infinite\base\Component
 
     /**
      * Get local fields.
-     *
-     * @return __return_getLocalFields_type__ __return_getLocalFields_description__
      */
     public function getLocalFields()
     {
@@ -200,8 +181,6 @@ class Search extends \infinite\base\Component
 
     /**
      * Set foreign fields.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setForeignFields($value)
     {
@@ -210,8 +189,6 @@ class Search extends \infinite\base\Component
 
     /**
      * Get foreign fields.
-     *
-     * @return __return_getForeignFields_type__ __return_getForeignFields_description__
      */
     public function getForeignFields()
     {
@@ -220,8 +197,6 @@ class Search extends \infinite\base\Component
 
     /**
      * Get module.
-     *
-     * @return __return_getModule_type__ __return_getModule_description__
      */
     public function getModule()
     {

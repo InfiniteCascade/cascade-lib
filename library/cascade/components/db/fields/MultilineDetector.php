@@ -19,7 +19,6 @@ use yii\db\ColumnSchema;
 class MultilineDetector extends \infinite\base\Object
 {
     /*
-     * @var __var__machineTests_type__ __var__machineTests_description__
      */
     static $_machineTests = [
         '/text/',
@@ -27,8 +26,6 @@ class MultilineDetector extends \infinite\base\Object
     ];
 
     /*
-     * __method_test_description__
-     * @param yii\db\ColumnSchema $column __param_column_description__
      * @return unknown
      */
     public static function test(ColumnSchema $column)
@@ -44,7 +41,6 @@ class MultilineDetector extends \infinite\base\Object
     }
 
     /*
-     * __method_registerMachineTest_description__
      * @param unknown $test
      * @return unknown
      */

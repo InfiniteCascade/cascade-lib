@@ -18,18 +18,14 @@ use Yii;
 class CellBehavior extends \yii\base\Behavior
 {
     /**
-     * @var __var_gridCellClass_type__ __var_gridCellClass_description__
      */
     public $gridCellClass = 'infinite\web\grid\Cell';
     /**
-     * @var __var__gridCell_type__ __var__gridCell_description__
      */
     protected $_gridCell;
 
     /**
      * Get grid cell settings.
-     *
-     * @return __return_getGridCellSettings_type__ __return_getGridCellSettings_description__
      */
     public function getGridCellSettings()
     {
@@ -42,8 +38,6 @@ class CellBehavior extends \yii\base\Behavior
 
     /**
      * Get cell.
-     *
-     * @return __return_getCell_type__ __return_getCell_description__
      */
     public function getCell()
     {
@@ -60,8 +54,6 @@ class CellBehavior extends \yii\base\Behavior
 
     /**
      * Get cell content.
-     *
-     * @return __return_getCellContent_type__ __return_getCellContent_description__
      */
     public function getCellContent()
     {

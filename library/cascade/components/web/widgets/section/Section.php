@@ -24,7 +24,6 @@ class Section extends \cascade\components\web\widgets\Widget
      */
     public $gridClass = 'infinite\web\grid\Grid';
     /**
-     * @var __var_defaultWidgetDecoratorClass_type__ __var_defaultWidgetDecoratorClass_description__
      */
     public $defaultWidgetDecoratorClass = 'cascade\components\web\widgets\decorator\PanelDecorator';
     /**
@@ -49,8 +48,6 @@ class Section extends \cascade\components\web\widgets\Widget
 
     /**
      * Get widget decorator class.
-     *
-     * @return __return_getWidgetDecoratorClass_type__ __return_getWidgetDecoratorClass_description__
      */
     public function getWidgetDecoratorClass()
     {
@@ -58,9 +55,7 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
-     * __method_generateStart_description__.
      *
-     * @return __return_generateStart_type__ __return_generateStart_description__
      */
     public function generateStart()
     {
@@ -72,9 +67,7 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
-     * __method_widgetCellSettings_description__.
      *
-     * @return __return_widgetCellSettings_type__ __return_widgetCellSettings_description__
      */
     public function widgetCellSettings()
     {
@@ -108,8 +101,6 @@ class Section extends \cascade\components\web\widgets\Widget
 
     /**
      * Get widgets.
-     *
-     * @return __return_getWidgets_type__ __return_getWidgets_description__
      */
     public function getWidgets()
     {
@@ -120,11 +111,7 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
-     * __method_defaultItems_description__.
      *
-     * @param __param_parent_type__ $parent __param_parent_description__ [optional]
-     *
-     * @return __return_defaultItems_type__ __return_defaultItems_description__
      */
     public function defaultItems($parent = null)
     {

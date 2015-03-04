@@ -19,19 +19,15 @@ use Yii;
 trait ActionTrait
 {
     /**
-     * @var __var__interface_type__ __var__interface_description__
      */
     protected $_interface;
     /**
-     * @var __var__status_type__ __var__status_description__
      */
     protected $_status;
     /**
-     * @var __var__log_type__ __var__log_description__
      */
     protected $_log;
     /**
-     * @var __var__registry_type__ __var__registry_description__
      */
     protected $_registry = [];
 
@@ -71,9 +67,7 @@ trait ActionTrait
     }
 
     /**
-     * __method_start_description__.
      *
-     * @return __return_start_type__ __return_start_description__
      */
     public function start()
     {
@@ -81,11 +75,7 @@ trait ActionTrait
     }
 
     /**
-     * __method_end_description__.
      *
-     * @param boolean $endInterrupted __param_endInterrupted_description__ [optional]
-     *
-     * @return __return_end_type__ __return_end_description__
      */
     public function end($endInterrupted = false)
     {
@@ -93,9 +83,7 @@ trait ActionTrait
     }
 
     /**
-     * __method_save_description__.
      *
-     * @return __return_save_type__ __return_save_description__
      */
     public function save()
     {
@@ -115,8 +103,6 @@ trait ActionTrait
 
     /**
      * Get log.
-     *
-     * @return __return_getLog_type__ __return_getLog_description__
      */
     public function getLog()
     {
@@ -135,8 +121,6 @@ trait ActionTrait
 
     /**
      * Get status.
-     *
-     * @return __return_getStatus_type__ __return_getStatus_description__
      */
     public function getStatus()
     {
@@ -151,8 +135,6 @@ trait ActionTrait
 
     /**
      * Get id.
-     *
-     * @return __return_getId_type__ __return_getId_description__
      */
     public function getId()
     {
@@ -160,10 +142,7 @@ trait ActionTrait
     }
 
     /**
-     * __method_addRegistry_description__.
      *
-     * @param __param_key_type__      $key      __param_key_description__
-     * @param __param_objectId_type__ $objectId __param_objectId_description__
      */
     public function addRegistry($key, $objectId)
     {
@@ -172,8 +151,6 @@ trait ActionTrait
 
     /**
      * Get registry.
-     *
-     * @return __return_getRegistry_type__ __return_getRegistry_description__
      */
     public function getRegistry()
     {
@@ -181,11 +158,7 @@ trait ActionTrait
     }
 
     /**
-     * __method_objectInRegistry_description__.
      *
-     * @param __param_objectId_type__ $objectId __param_objectId_description__
-     *
-     * @return __return_objectInRegistry_type__ __return_objectInRegistry_description__
      */
     public function objectInRegistry($objectId)
     {
@@ -193,11 +166,7 @@ trait ActionTrait
     }
 
     /**
-     * __method_keyInRegistry_description__.
      *
-     * @param __param_keyId_type__ $keyId __param_keyId_description__
-     *
-     * @return __return_keyInRegistry_type__ __return_keyInRegistry_description__
      */
     public function keyInRegistry($keyId)
     {

@@ -45,11 +45,7 @@ class Task_000001_environment extends \infinite\setup\Task
     }
 
     /**
-     * __method_generateSalt_description__.
      *
-     * @param integer $max __param_max_description__ [optional]
-     *
-     * @return __return_generateSalt_type__ __return_generateSalt_description__
      */
     public function generateSalt($max = 120)
     {
@@ -150,11 +146,7 @@ class Task_000001_environment extends \infinite\setup\Task
     }
 
     /**
-     * __method_generateId_description__.
      *
-     * @param __param_name_type__ $name __param_name_description__
-     *
-     * @return __return_generateId_type__ __return_generateId_description__
      */
     public static function generateId($name)
     {
@@ -185,8 +177,6 @@ class Task_000001_environment extends \infinite\setup\Task
 
     /**
      * Get env options.
-     *
-     * @return __return_getEnvOptions_type__ __return_getEnvOptions_description__
      */
     public function getEnvOptions()
     {
@@ -206,8 +196,6 @@ class Task_000001_environment extends \infinite\setup\Task
 
     /**
      * Get env list options.
-     *
-     * @return __return_getEnvListOptions_type__ __return_getEnvListOptions_description__
      */
     public function getEnvListOptions()
     {

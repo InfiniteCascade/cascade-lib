@@ -19,11 +19,9 @@ use Yii;
 class Collector extends \infinite\base\collector\Module
 {
     /**
-     * @var __var_producedWidgets_type__ __var_producedWidgets_description__
      */
     public $producedWidgets = [];
     /**
-     * @var __var_lastBuildId_type__ __var_lastBuildId_description__
      */
     public $lastBuildId;
 
@@ -56,13 +54,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_build_description__.
      *
-     * @param cascade\components\web\widgets\section\Section $section          __param_section_description__
-     * @param __param_widgetName_type__                      $widgetName       __param_widgetName_description__
-     * @param array                                          $instanceSettings __param_instanceSettings_description__ [optional]
-     *
-     * @return __return_build_type__ __return_build_description__
      */
     public function build(Section $section = null, $widgetName, $instanceSettings = [])
     {

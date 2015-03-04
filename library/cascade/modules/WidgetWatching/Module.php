@@ -16,7 +16,6 @@ namespace cascade\modules\WidgetWatching;
 class Module extends \cascade\components\web\widgets\Module
 {
     /**
-     * @var __var__title_type__ __var__title_description__
      */
     protected $_title = 'Watching';
     /**

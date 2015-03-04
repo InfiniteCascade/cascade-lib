@@ -27,8 +27,6 @@ class Task_000003_groups extends \infinite\setup\Task
     }
     /**
      * Get base groups.
-     *
-     * @return __return_getBaseGroups_type__ __return_getBaseGroups_description__
      */
     public function getBaseGroups()
     {
@@ -55,13 +53,7 @@ class Task_000003_groups extends \infinite\setup\Task
     }
 
     /**
-     * __method_groupWalker_description__.
      *
-     * @param __param_item_type__    $item    __param_item_description__
-     * @param __param_key_type__     $key     __param_key_description__
-     * @param __param_mparent_type__ $mparent __param_mparent_description__ [optional]
-     *
-     * @return __return_groupWalker_type__ __return_groupWalker_description__
      */
     public function groupWalker(&$item, $key, $mparent = null)
     {
@@ -124,10 +116,6 @@ class Task_000003_groups extends \infinite\setup\Task
 
     /**
      * Get group level.
-     *
-     * @param __param_k_type__ $k __param_k_description__
-     *
-     * @return __return_getGroupLevel_type__ __return_getGroupLevel_description__
      */
     public function getGroupLevel($k)
     {

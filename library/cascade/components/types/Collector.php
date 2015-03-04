@@ -20,7 +20,6 @@ use Yii;
 class Collector extends \infinite\base\collector\Module
 {
     /**
-     * @var __var__tableRegistry_type__ __var__tableRegistry_description__
      */
     protected $_tableRegistry;
 
@@ -100,11 +99,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_registerObjectType_description__.
      *
-     * @param __param_module_type__ $module __param_module_description__
-     *
-     * @return __return_registerObjectType_type__ __return_registerObjectType_description__
      */
     public function registerObjectType($module)
     {
@@ -141,8 +136,6 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get table registry.
-     *
-     * @return __return_getTableRegistry_type__ __return_getTableRegistry_description__
      */
     public function getTableRegistry()
     {
@@ -158,8 +151,6 @@ class Collector extends \infinite\base\collector\Module
         return $this->_tableRegistry;
     }
     /**
-     * __method_addRelationship_description__.
-     *
      * @param unknown $parent
      * @param unknown $child
      * @param unknown $options (optional)
@@ -179,8 +170,6 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get authorities.
-     *
-     * @return __return_getAuthorities_type__ __return_getAuthorities_description__
      */
     public function getAuthorities()
     {

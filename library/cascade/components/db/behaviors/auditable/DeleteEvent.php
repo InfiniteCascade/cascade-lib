@@ -18,7 +18,6 @@ use Yii;
 class DeleteEvent extends \infinite\db\behaviors\auditable\DeleteEvent
 {
     /**
-     * @var __var_objectType_type__ __var_objectType_description__
      */
     public $objectType;
 

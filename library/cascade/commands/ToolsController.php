@@ -1,6 +1,7 @@
 <?php
 /**
  * @link http://www.infinitecascade.com/
+ *
  * @copyright Copyright (c) 2015 Infinite Cascade
  * @license http://www.infinitecascade.com/license
  */
@@ -20,8 +21,6 @@ use yii\helpers\FileHelper;
 class ToolsController extends \infinite\console\Controller
 {
     /**
-     * __method_actionFlush_description__.
-     * @param __param_category_type__ $category __param_category_description__ [optional]
      */
     public function actionFlush($category = null)
     {
@@ -38,7 +37,7 @@ class ToolsController extends \infinite\console\Controller
     }
 
     /**
-     * [[@doctodo method_description:actionFixProject]]
+     * [[@doctodo method_description:actionFixProject]].
      */
     public function actionFixProject()
     {
@@ -68,7 +67,7 @@ class ToolsController extends \infinite\console\Controller
         Console::stdout("done in " . round(microtime(true)-$customStart, 1) . "s!" . PHP_EOL . PHP_EOL);
 
         $phpcsStart = microtime(true);
-        Console::stdout("Running custom fixes..." . PHP_EOL);
+        Console::stdout("Running style fixes..." . PHP_EOL);
         foreach ($dirs as $dir) {
             $dirStart = microtime(true);
             $changed = 0;
@@ -109,9 +108,7 @@ class ToolsController extends \infinite\console\Controller
     }
 
     /**
-     * [[@doctodo method_description:fixFile]]
-     * @param __param_file_type__ $file __param_file_description__
-     * @return __return_fixFile_type__ __return_fixFile_description__
+     * [[@doctodo method_description:fixFile]].
      */
     public function fixFile($file)
     {
@@ -136,20 +133,18 @@ class ToolsController extends \infinite\console\Controller
         foreach ($contents as $lineNumber => $line) {
             $line = trim($line);
             if (substr($line, 0, 1) === '*' || substr($line, 0, 1) === '/') {
-                if (strpos($line, '__') === false) {
+                if (strpos($line, '__') !== false) {
                     unset($contents[$lineNumber]);
                     $changed = true;
                 }
             }
         }
+
         return $changed;
     }
 
     /**
-     * [[@doctodo method_description:fixFileSlashes]]
-     * @param __param_file_type__ $file __param_file_description__
-     * @param __param_contents_type__ $contents __param_contents_description__
-     * @return __return_fixFileSlashes_type__ __return_fixFileSlashes_description__
+     * [[@doctodo method_description:fixFileSlashes]].
      */
     public function fixFileSlashes($file, &$contents)
     {

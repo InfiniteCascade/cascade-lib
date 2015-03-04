@@ -8,8 +8,6 @@
 
 namespace cascade\components\dataInterface\connectors\generic;
 
-use cascade\components\dataInterface\MissingItemException;
-use cascade\components\dataInterface\RecursionException;
 use infinite\base\language\Verb;
 
 /**
@@ -20,11 +18,9 @@ use infinite\base\language\Verb;
 abstract class DataItem extends \cascade\components\dataInterface\DataItem
 {
     /**
-     * @var __var__isLoadingForeignObject_type__ __var__isLoadingForeignObject_description__
      */
     protected $_isLoadingForeignObject = false;
     /**
-     * @var __var__isLoadingLocalObject_type__ __var__isLoadingLocalObject_description__
      */
     protected $_isLoadingLocalObject = false;
 
@@ -219,17 +215,12 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
     }
 
     /**
-     * __method_loadForeignObject_description__.
      *
-     * @throws RecursionException   __exception_RecursionException_description__
-     * @throws MissingItemException __exception_MissingItemException_description__
      */
     abstract protected function loadForeignObject();
 
     /**
-     * __method_loadLocalObject_description__.
      *
-     * @throws RecursionException __exception_RecursionException_description__
      */
     abstract protected function loadLocalObject();
 }

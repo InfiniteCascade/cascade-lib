@@ -22,37 +22,28 @@ use yii\base\Model;
 class DeleteForm extends Model
 {
     /**
-     * @var __var_confirm_type__ __var_confirm_description__
      */
     public $confirm = false;
     /**
-     * @var __var__target_type__ __var__target_description__
      */
     protected $_target;
     /**
-     * @var __var_relationModel_type__ __var_relationModel_description__
      */
     public $relationModel;
     /**
-     * @var __var_relationshipWith_type__ __var_relationshipWith_description__
      */
     public $relationshipWith;
     /**
-     * @var __var_relationship_type__ __var_relationship_description__
      */
     public $relationship;
     /**
-     * @var __var_object_type__ __var_object_description__
      */
     public $object;
     /**
-     * @var __var__possibleTargets_type__ __var__possibleTargets_description__
      */
     protected $_possibleTargets;
 
     /**
-     * __method_rules_description__.
-     *
      * @return array the validation rules.
      */
     public function rules()
@@ -64,8 +55,6 @@ class DeleteForm extends Model
 
     /**
      * Get labels.
-     *
-     * @return __return_getLabels_type__ __return_getLabels_description__
      */
     public function getLabels()
     {
@@ -108,8 +97,6 @@ class DeleteForm extends Model
 
     /**
      * Get target.
-     *
-     * @return __return_getTarget_type__ __return_getTarget_description__
      */
     public function getTarget()
     {
@@ -121,9 +108,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_canDeleteObject_description__.
      *
-     * @return __return_canDeleteObject_type__ __return_canDeleteObject_description__
      */
     public function canDeleteObject()
     {
@@ -135,9 +120,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_canArchiveObject_description__.
      *
-     * @return __return_canArchiveObject_type__ __return_canArchiveObject_description__
      */
     public function canArchiveObject()
     {
@@ -149,9 +132,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_canDeleteRelation_description__.
      *
-     * @return __return_canDeleteRelation_type__ __return_canDeleteRelation_description__
      */
     public function canDeleteRelation()
     {
@@ -170,9 +151,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_canEndRelation_description__.
      *
-     * @return __return_canEndRelation_type__ __return_canEndRelation_description__
      */
     public function canEndRelation()
     {
@@ -190,9 +169,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_hasObjectTargets_description__.
      *
-     * @return __return_hasObjectTargets_type__ __return_hasObjectTargets_description__
      */
     public function hasObjectTargets()
     {
@@ -206,9 +183,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_hasRelationshipTargets_description__.
      *
-     * @return __return_hasRelationshipTargets_type__ __return_hasRelationshipTargets_description__
      */
     public function hasRelationshipTargets()
     {
@@ -223,8 +198,6 @@ class DeleteForm extends Model
 
     /**
      * Get possible targets.
-     *
-     * @return __return_getPossibleTargets_type__ __return_getPossibleTargets_description__
      */
     public function getPossibleTargets()
     {
@@ -257,10 +230,6 @@ class DeleteForm extends Model
 
     /**
      * Set target.
-     *
-     * @param __param_value_type__ $value __param_value_description__
-     *
-     * @throws Exception __exception_Exception_description__
      */
     public function setTarget($value)
     {
@@ -273,8 +242,6 @@ class DeleteForm extends Model
 
     /**
      * Get target label.
-     *
-     * @return __return_getTargetLabel_type__ __return_getTargetLabel_description__
      */
     public function getTargetLabel()
     {
@@ -287,8 +254,6 @@ class DeleteForm extends Model
 
     /**
      * Get target descriptor.
-     *
-     * @return __return_getTargetDescriptor_type__ __return_getTargetDescriptor_description__
      */
     public function getTargetDescriptor()
     {
@@ -300,9 +265,7 @@ class DeleteForm extends Model
     }
 
     /**
-     * __method_handle_description__.
      *
-     * @return __return_handle_type__ __return_handle_description__
      */
     public function handle()
     {

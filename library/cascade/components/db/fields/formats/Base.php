@@ -16,7 +16,6 @@ namespace cascade\components\db\fields\formats;
 abstract class Base extends \infinite\base\Object
 {
     /**
-     * @var __var_field_type__ __var_field_description__
      */
     public $field;
     /**
@@ -25,8 +24,6 @@ abstract class Base extends \infinite\base\Object
     abstract public function get();
     /**
      * Get form value.
-     *
-     * @return __return_getFormValue_type__ __return_getFormValue_description__
      */
     public function getFormValue()
     {

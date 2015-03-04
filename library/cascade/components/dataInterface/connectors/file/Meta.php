@@ -20,17 +20,11 @@ class Meta extends \infinite\base\Object
     protected $_interface;
 
     /*
-     * @var __var__metas_type__ __var__metas_description__
      */
     public static $_metas = [];
 
     /**
      * Get.
-     *
-     * @param __param_interface_type__    $interface    __param_interface_description__
-     * @param __param_foreignTable_type__ $foreignTable __param_foreignTable_description__
-     *
-     * @return __return_get_type__ __return_get_description__
      */
     public static function get($interface, $sourceFile)
     {
@@ -57,11 +51,7 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * __method_hasAttribute_description__.
      *
-     * @param __param_name_type__ $name __param_name_description__
-     *
-     * @return __return_hasAttribute_type__ __return_hasAttribute_description__
      */
     public function hasAttribute($name)
     {
@@ -70,8 +60,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get attribute keys.
-     *
-     * @return __return_getAttributeKeys_type__ __return_getAttributeKeys_description__
      */
     public function getAttributeKeys()
     {
@@ -80,8 +68,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Set interface.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setInterface($value)
     {
@@ -90,8 +76,6 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get interface.
-     *
-     * @return __return_getInterface_type__ __return_getInterface_description__
      */
     public function getInterface()
     {

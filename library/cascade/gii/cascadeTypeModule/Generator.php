@@ -47,78 +47,61 @@ use yii\helpers\Inflector;
 class Generator extends \yii\gii\Generator
 {
     /**
-     * @var __var_db_type__ __var_db_description__
      */
     public $db = 'db';
     /**
-     * @var __var_moduleSet_type__ __var_moduleSet_description__
      */
     public $moduleSet = '';
 
     //public $moduleName;
     /**
-     * @var __var_baseClass_type__ __var_baseClass_description__
      */
     public $baseClass = 'cascade\components\types\ActiveRecord';
 
     /**
-     * @var __var_title_type__ __var_title_description__
      */
     public $title;
     /**
-     * @var __var_uniparental_type__ __var_uniparental_description__
      */
     public $uniparental = 0;
     /**
-     * @var __var_hasDashboard_type__ __var_hasDashboard_description__
      */
     public $hasDashboard = 1;
     /**
-     * @var __var_priority_type__ __var_priority_description__
      */
     public $priority = 1000;
     /**
-     * @var __var_icon_type__ __var_icon_description__
      */
     public $icon;
 
     /**
-     * @var __var_widgets_type__ __var_widgets_description__
      */
     public $widgets = [];
 
     /**
-     * @var __var_migrationTimestamp_type__ __var_migrationTimestamp_description__
      */
     public $migrationTimestamp;
 
     /**
-     * @var __var_generateRelations_type__ __var_generateRelations_description__
      */
     public $generateRelations = true;
     /**
-     * @var __var_generateLabelsFromComments_type__ __var_generateLabelsFromComments_description__
      */
     public $generateLabelsFromComments = false;
 
     /**
-     * @var __var_tableName_type__ __var_tableName_description__
      */
     public $tableName;
     /**
-     * @var __var_descriptorField_type__ __var_descriptorField_description__
      */
     public $descriptorField;
     /**
-     * @var __var_children_type__ __var_children_description__
      */
     public $children = '';
     /**
-     * @var __var_parents_type__ __var_parents_description__
      */
     public $parents = '';
     /**
-     * @var __var_section_type__ __var_section_description__
      */
     public $section;
 
@@ -136,8 +119,6 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get base namespace.
-     *
-     * @return __return_getBaseNamespace_type__ __return_getBaseNamespace_description__
      */
     public function getBaseNamespace()
     {
@@ -153,8 +134,6 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get model class.
-     *
-     * @return __return_getModelClass_type__ __return_getModelClass_description__
      */
     public function getModelClass()
     {
@@ -163,8 +142,6 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get module name.
-     *
-     * @return __return_getModuleName_type__ __return_getModuleName_description__
      */
     public function getModuleName()
     {
@@ -173,8 +150,6 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get module namespace.
-     *
-     * @return __return_getModuleNamespace_type__ __return_getModuleNamespace_description__
      */
     public function getModuleNamespace()
     {
@@ -183,8 +158,6 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get module class.
-     *
-     * @return __return_getModuleClass_type__ __return_getModuleClass_description__
      */
     public function getModuleClass()
     {
@@ -193,8 +166,6 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get module i d.
-     *
-     * @return __return_getModuleID_type__ __return_getModuleID_description__
      */
     public function getModuleID()
     {
@@ -203,8 +174,6 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get module system i d.
-     *
-     * @return __return_getModuleSystemID_type__ __return_getModuleSystemID_description__
      */
     public function getModuleSystemID()
     {
@@ -214,8 +183,6 @@ class Generator extends \yii\gii\Generator
     // model
     /**
      * Get ns.
-     *
-     * @return __return_getNs_type__ __return_getNs_description__
      */
     public function getNs()
     {
@@ -497,11 +464,7 @@ EOD;
     }
 
     /**
-     * __method_generateDescriptorField_description__.
      *
-     * @param __param_table_type__ $table __param_table_description__
-     *
-     * @return __return_generateDescriptorField_type__ __return_generateDescriptorField_description__
      */
     public function generateDescriptorField($table)
     {
@@ -526,9 +489,7 @@ EOD;
     }
 
     /**
-     * __method_possibleSections_description__.
      *
-     * @return __return_possibleSections_type__ __return_possibleSections_description__
      */
     public function possibleSections()
     {
@@ -541,9 +502,7 @@ EOD;
     }
 
     /**
-     * __method_possibleModuleSets_description__.
      *
-     * @return __return_possibleModuleSets_type__ __return_possibleModuleSets_description__
      */
     public function possibleModuleSets()
     {
@@ -563,9 +522,7 @@ EOD;
     }
 
     /**
-     * __method_possibleIcons_description__.
      *
-     * @return __return_possibleIcons_type__ __return_possibleIcons_description__
      */
     public function possibleIcons()
     {
@@ -597,8 +554,6 @@ EOD;
 
     /**
      * Get module set path.
-     *
-     * @return __return_getModuleSetPath_type__ __return_getModuleSetPath_description__
      */
     public function getModuleSetPath()
     {
@@ -637,8 +592,6 @@ EOD;
 
     /**
      * Get migration path.
-     *
-     * @return __return_getMigrationPath_type__ __return_getMigrationPath_description__
      */
     public function getMigrationPath()
     {
@@ -647,8 +600,6 @@ EOD;
 
     /**
      * Get migration directory.
-     *
-     * @return __return_getMigrationDirectory_type__ __return_getMigrationDirectory_description__
      */
     public function getMigrationDirectory()
     {
@@ -686,8 +637,6 @@ EOD;
      * Collects the foreign key column details for the given table.
      *
      * @param TableSchema $table the table metadata
-     *
-     * @return __return_findTableKeys_type__ __return_findTableKeys_description__
      */
     protected function findTableKeys($table)
     {
@@ -742,10 +691,6 @@ EOD;
 
     /**
      * Get primary key location.
-     *
-     * @param __param_table_type__ $table __param_table_description__
-     *
-     * @return __return_getPrimaryKeyLocation_type__ __return_getPrimaryKeyLocation_description__
      */
     public function getPrimaryKeyLocation($table)
     {
@@ -764,11 +709,7 @@ EOD;
     }
 
     /**
-     * __method_generateTableIndices_description__.
      *
-     * @param __param_table_type__ $table __param_table_description__
-     *
-     * @return __return_generateTableIndices_type__ __return_generateTableIndices_description__
      */
     public function generateTableIndices($table)
     {
@@ -803,8 +744,6 @@ EOD;
 
     /**
      * Get module set modules.
-     *
-     * @return __return_getModuleSetModules_type__ __return_getModuleSetModules_description__
      */
     public function getModuleSetModules()
     {
@@ -842,13 +781,7 @@ EOD;
     }
 
     /**
-     * __method_fixIndexName_description__.
      *
-     * @param __param_name_type__  $name  __param_name_description__
-     * @param __param_table_type__ $table __param_table_description__
-     * @param __param_keys_type__  $keys  __param_keys_description__
-     *
-     * @return __return_fixIndexName_type__ __return_fixIndexName_description__
      */
     public function fixIndexName($name, $table, $keys)
     {
@@ -991,11 +924,7 @@ EOD;
     }
 
     /**
-     * __method_generateColumnSettings_description__.
      *
-     * @param __param_table_type__ $table __param_table_description__
-     *
-     * @return __return_generateColumnSettings_type__ __return_generateColumnSettings_description__
      */
     public function generateColumnSettings($table)
     {
@@ -1071,11 +1000,7 @@ EOD;
     }
 
     /**
-     * __method_generateRelationUses_description__.
      *
-     * @param __param_relations_type__ $relations __param_relations_description__
-     *
-     * @return __return_generateRelationUses_type__ __return_generateRelationUses_description__
      */
     public function generateRelationUses($relations)
     {
@@ -1090,8 +1015,6 @@ EOD;
     }
 
     /**
-     * __method_generateRelations_description__.
-     *
      * @return array the generated relation declarations
      */
     protected function generateRelations()
@@ -1200,7 +1123,6 @@ EOD;
      * each referencing a column in a different table.
      *                       or false if the table is not a pivot table.
      *
-     * @param __param_table_type__ $table __param_table_description__
      *
      * @return array|boolean the relevant foreign key constraint information if the table is a pivot table,
      */
@@ -1297,8 +1219,6 @@ EOD;
 
     /**
      * Validates the [[tableName]] attribute.
-     *
-     * @return __return_validateTableName_type__ __return_validateTableName_description__
      */
     public function validateTableName()
     {
@@ -1322,11 +1242,9 @@ EOD;
     }
 
     /**
-     * @var __var__tableNames_type__ __var__tableNames_description__
      */
     private $_tableNames;
     /**
-     * @var __var__classNames_type__ __var__classNames_description__
      */
     private $_classNames;
 
@@ -1413,8 +1331,6 @@ EOD;
 
     /**
      * Get search models.
-     *
-     * @return __return_getSearchModels_type__ __return_getSearchModels_description__
      */
     public function getSearchModels()
     {
@@ -1423,8 +1339,6 @@ EOD;
 
     /**
      * Get model map.
-     *
-     * @return __return_getModelMap_type__ __return_getModelMap_description__
      */
     public function getModelMap()
     {

@@ -23,67 +23,52 @@ use Yii;
 abstract class Base extends \infinite\base\Object
 {
     /**
-     * @var __var_formFieldClass_type__ __var_formFieldClass_description__
      */
     public $formFieldClass;
     /**
-     * @var __var_default_type__ __var_default_description__
      */
     public $default;
     /**
-     * @var __var_required_type__ __var_required_description__
      */
     public $required = false;
     /**
-     * @var __var_fieldSchema_type__ __var_fieldSchema_description__
      */
     public $fieldSchema;
     /**
-     * @var __var_priority_type__ __var_priority_description__
      */
     public $priority;
 
     /**
-     * @var __var_url_type__ __var_url_description__
      */
     public $url; // wrap formatted text in link
     /**
-     * @var __var_linkOptions_type__ __var_linkOptions_description__
      */
     public $linkOptions = [];
 
     /**
-     * @var __var_possiblePrimaryKeys_type__ __var_possiblePrimaryKeys_description__
      */
     public $possiblePrimaryKeys = ['id'];
 
     /**
-     * @var __var__human_type__ __var__human_description__
      */
     protected $_human;
     /**
-     * @var __var__format_type__ __var__format_description__
      */
     protected $_format;
     /**
-     * @var __var__label_type__ __var__label_description__
      */
     protected $_label;
     /**
-     * @var __var__model_type__ __var__model_description__
      */
     protected $_model;
     protected $_attributes = false;
     /**
-     * @var __var__formField_type__ __var__formField_description__
      */
     protected $_formField;
     /**
-     * @var __var__multiline_type__ __var__multiline_description__
      */
     protected $_multiline;
     /**
-     * @var __var__locations_type__ __var__locations_description__
      */
     protected $_locations;
 
@@ -119,9 +104,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_determineFormatClass_description__.
      *
-     * @return __return_determineFormatClass_type__ __return_determineFormatClass_description__
      */
     public function determineFormatClass()
     {
@@ -143,8 +126,6 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get field.
-     *
-     * @return __return_getField_type__ __return_getField_description__
      */
     public function getField()
     {
@@ -156,9 +137,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_hasFile_description__.
      *
-     * @return __return_hasFile_type__ __return_hasFile_description__
      */
     public function hasFile()
     {
@@ -167,8 +146,6 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Set locations.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setLocations($value)
     {
@@ -177,8 +154,6 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get locations.
-     *
-     * @return __return_getLocations_type__ __return_getLocations_description__
      */
     public function getLocations()
     {
@@ -190,9 +165,7 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
-     * __method_determineLocations_description__.
      *
-     * @return __return_determineLocations_type__ __return_determineLocations_description__
      */
     public function determineLocations()
     {
@@ -205,12 +178,6 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Set form field.
-     *
-     * @param __param_value_type__ $value __param_value_description__
-     *
-     * @throws Exception __exception_Exception_description__
-     *
-     * @return __return_setFormField_type__ __return_setFormField_description__
      */
     public function setFormField($value)
     {
@@ -266,8 +233,6 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get multiline.
-     *
-     * @return __return_getMultiline_type__ __return_getMultiline_description__
      */
     public function getMultiline()
     {
@@ -280,8 +245,6 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Set multiline.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setMultiline($value)
     {
@@ -392,8 +355,6 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get formatted value.
-     *
-     * @return __return_getFormattedValue_type__ __return_getFormattedValue_description__
      */
     public function getFormattedValue()
     {
@@ -414,8 +375,6 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get form value.
-     *
-     * @return __return_getFormValue_type__ __return_getFormValue_description__
      */
     public function getFormValue()
     {
@@ -432,8 +391,6 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get value package.
-     *
-     * @return __return_getValuePackage_type__ __return_getValuePackage_description__
      */
     public function getValuePackage()
     {
@@ -442,8 +399,6 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get value.
-     *
-     * @return __return_getValue_type__ __return_getValue_description__
      */
     public function getValue()
     {

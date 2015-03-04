@@ -26,8 +26,6 @@ abstract class AclTask extends \infinite\setup\Task
     }
     /**
      * Get base acas.
-     *
-     * @return __return_getBaseAcas_type__ __return_getBaseAcas_description__
      */
     public function getBaseAcas()
     {

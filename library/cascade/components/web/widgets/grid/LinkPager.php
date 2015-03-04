@@ -18,7 +18,6 @@ use infinite\helpers\Html;
 class LinkPager extends \yii\widgets\LinkPager
 {
     /**
-     * @var __var__state_type__ __var__state_description__
      */
     protected $_state;
 

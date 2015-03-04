@@ -18,57 +18,42 @@ use infinite\helpers\ArrayHelper;
 class Item extends \infinite\base\collector\Item
 {
     /**
-     * @var __var_name_type__ __var_name_description__
      */
     public $name;
     /**
-     * @var __var_systemId_type__ __var_systemId_description__
      */
     public $systemId;
     /**
-     * @var __var_systemVersion_type__ __var_systemVersion_description__
      */
     public $systemVersion = 1;
     /**
-     * @var __var_initialTaxonomies_type__ __var_initialTaxonomies_description__
      */
     public $initialTaxonomies = [];
     /**
-     * @var __var_models_type__ __var_models_description__
      */
     public $models = [];
     /**
-     * @var __var_modules_type__ __var_modules_description__
      */
     public $modules = [];
     /**
-     * @var __var_multiple_type__ __var_multiple_description__
      */
     public $multiple = false;
     /**
-     * @var __var_required_type__ __var_required_description__
      */
     public $required = false;
     /**
-     * @var __var_default_type__ __var_default_description__
      */
     public $default = [];
     /**
-     * @var __var_parentUnique_type__ __var_parentUnique_description__
      */
     public $parentUnique = false;
 
     /**
-     * @var __var__taxonomies_type__ __var__taxonomies_description__
      */
     protected $_taxonomies;
 
     /**
-     * __method_package_description__.
      *
-     * @param array $override __param_override_description__ [optional]
-     *
-     * @return __return_package_type__ __return_package_description__
      */
     public function package($override = [])
     {
@@ -107,7 +92,6 @@ class Item extends \infinite\base\collector\Item
     /**
      * Get taxonomy.
      *
-     * @param __param_system_id_type__ $system_id __param_system_id_description__
      *
      * @return unknown
      */
@@ -123,9 +107,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_addTaxonomy_description__.
      *
-     * @param __param_taxonomy_type__ $taxonomy __param_taxonomy_description__
      */
     public function addTaxonomy($taxonomy)
     {

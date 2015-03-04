@@ -16,7 +16,6 @@ namespace cascade\components\web;
 class View extends \infinite\web\View
 {
     /**
-     * @var __var_tinyMenu_type__ __var_tinyMenu_description__
      */
     public $tinyMenu;
 }

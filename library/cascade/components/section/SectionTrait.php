@@ -27,14 +27,11 @@ trait SectionTrait
     protected $_widget;
     protected $_gridCell;
     /**
-     * @var __var__priority_type__ __var__priority_description__
      */
     protected $_priority = 0;
 
     /**
      * Get priority.
-     *
-     * @return __return_getPriority_type__ __return_getPriority_description__
      */
     public function getPriority()
     {
@@ -50,8 +47,6 @@ trait SectionTrait
 
     /**
      * Set priority.
-     *
-     * @param __param_priority_type__ $priority __param_priority_description__
      */
     public function setPriority($priority)
     {

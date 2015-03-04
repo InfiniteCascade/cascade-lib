@@ -16,11 +16,9 @@ namespace cascade\components\web\themes;
 abstract class Module extends \cascade\components\base\CollectorModule
 {
     /**
-     * @var __var_name_type__ __var_name_description__
      */
     public $name;
     /**
-     * @var __var_version_type__ __var_version_description__
      */
     public $version = 1;
 
@@ -47,8 +45,6 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get asset bundles.
-     *
-     * @return __return_getAssetBundles_type__ __return_getAssetBundles_description__
      */
     public function getAssetBundles()
     {

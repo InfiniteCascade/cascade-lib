@@ -21,22 +21,18 @@ use yii\helpers\Inflector;
 abstract class Module extends BaseModule
 {
     /**
-     * @var __var_dataSourceClass_type__ __var_dataSourceClass_description__
      */
     public $dataSourceClass = 'cascade\components\dataInterface\connectors\db\DataSource';
 
     /**
-     * @var __var_dbConfig_type__ __var_dbConfig_description__
      */
     public $dbConfig = [];
 
     /**
-     * @var __var__db_type__ __var__db_description__
      */
     protected $_db;
 
     /**
-     * __method_dataSources_description__.
      */
     abstract public function dataSources();
 
@@ -52,10 +48,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get data source.
-     *
-     * @param __param_tableName_type__ $tableName __param_tableName_description__
-     *
-     * @return __return_getDataSource_type__ __return_getDataSource_description__
      */
     public function getDataSource($tableName)
     {
@@ -74,11 +66,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign object.
-     *
-     * @param __param_foreignModelClass_type__ $foreignModelClass __param_foreignModelClass_description__
-     * @param __param_foreignPrimaryKey_type__ $foreignPrimaryKey __param_foreignPrimaryKey_description__
-     *
-     * @return __return_getForeignObject_type__ __return_getForeignObject_description__
      */
     public function getForeignObject($foreignModelClass, $foreignPrimaryKey)
     {
@@ -92,10 +79,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model.
-     *
-     * @param __param_model_type__ $model __param_model_description__
-     *
-     * @return __return_getForeignModel_type__ __return_getForeignModel_description__
      */
     public function getForeignModel($model)
     {
@@ -109,8 +92,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign models config.
-     *
-     * @return __return_getForeignModelsConfig_type__ __return_getForeignModelsConfig_description__
      */
     public function getForeignModelsConfig()
     {
@@ -119,11 +100,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model config.
-     *
-     * @param __param_tableName_type__ $tableName __param_tableName_description__
-     * @param __param_modelName_type__ $modelName __param_modelName_description__
-     *
-     * @return __return_getForeignModelConfig_type__ __return_getForeignModelConfig_description__
      */
     public function getForeignModelConfig($tableName, $modelName)
     {
@@ -140,10 +116,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model name.
-     *
-     * @param __param_tableName_type__ $tableName __param_tableName_description__
-     *
-     * @return __return_getForeignModelName_type__ __return_getForeignModelName_description__
      */
     public function getForeignModelName($tableName)
     {
@@ -152,8 +124,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign models.
-     *
-     * @return __return_getForeignModels_type__ __return_getForeignModels_description__
      */
     public function getForeignModels()
     {
@@ -170,10 +140,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get db.
-     *
-     * @throws Exception __exception_Exception_description__
-     *
-     * @return __return_getDb_type__ __return_getDb_description__
      */
     public function getDb()
     {

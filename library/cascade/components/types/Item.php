@@ -19,23 +19,18 @@ use Yii;
 class Item extends \infinite\base\collector\Item
 {
     /**
-     * @var __var__children_type__ __var__children_description__
      */
     protected $_children = [];
     /**
-     * @var __var__parents_type__ __var__parents_description__
      */
     protected $_parents = [];
     /**
-     * @var __var__sections_type__ __var__sections_description__
      */
     protected $_sections;
     /**
-     * @var __var__checked_type__ __var__checked_description__
      */
     protected $_checked;
     /**
-     * @var __var__init_type__ __var__init_description__
      */
     protected $_init = false;
 
@@ -61,9 +56,7 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_distributeRelationships_description__.
      *
-     * @return __return_distributeRelationships_type__ __return_distributeRelationships_description__
      */
     protected function distributeRelationships()
     {
@@ -164,8 +157,6 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * Get widgets.
-     *
-     * @return __return_getWidgets_type__ __return_getWidgets_description__
      */
     public function getWidgets()
     {
@@ -180,8 +171,6 @@ class Item extends \infinite\base\collector\Item
         return $widgets;
     }
     /**
-     * __method_addChild_description__.
-     *
      * @param unknown $name
      * @param unknown $relationship
      *
@@ -195,8 +184,6 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
-     * __method_addParent_description__.
-     *
      * @param unknown $name
      * @param unknown $relationship
      *
@@ -315,8 +302,6 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * Get taxonomies.
-     *
-     * @return __return_getTaxonomies_type__ __return_getTaxonomies_description__
      */
     public function getTaxonomies()
     {

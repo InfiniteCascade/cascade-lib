@@ -27,8 +27,6 @@ class Gatekeeper extends \infinite\security\Gatekeeper
 
     /**
      * Get primary account.
-     *
-     * @return __return_getPrimaryAccount_type__ __return_getPrimaryAccount_description__
      */
     public function getPrimaryAccount()
     {

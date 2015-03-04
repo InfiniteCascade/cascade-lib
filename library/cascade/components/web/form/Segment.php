@@ -22,40 +22,31 @@ use Yii;
 class Segment extends FormObject
 {
     /**
-     * @var __var_cellClass_type__ __var_cellClass_description__
      */
     public $cellClass = 'cascade\components\web\form\fields\Cell';
     /**
-     * @var __var_subform_type__ __var_subform_description__
      */
     public $subform;
     /**
-     * @var __var_relationSettings_type__ __var_relationSettings_description__
      */
     public $relationSettings = true;
     /**
-     * @var __var_relationField_type__ __var_relationField_description__
      */
     public $relationField;
 
     /**
-     * @var __var__name_type__ __var__name_description__
      */
     protected $_name;
     /**
-     * @var __var__model_type__ __var__model_description__
      */
     protected $_model;
     /**
-     * @var __var__settings_type__ __var__settings_description__
      */
     protected $_settings;
     /**
-     * @var __var__grid_type__ __var__grid_description__
      */
     protected $_grid;
     /**
-     * @var __var__fields_type__ __var__fields_description__
      */
     protected $_fields;
 
@@ -75,8 +66,6 @@ class Segment extends FormObject
 
     /**
      * Set model.
-     *
-     * @param __param_model_type__ $model __param_model_description__
      */
     public function setModel($model)
     {
@@ -85,8 +74,6 @@ class Segment extends FormObject
 
     /**
      * Set name.
-     *
-     * @param __param_name_type__ $name __param_name_description__
      */
     public function setName($name)
     {
@@ -95,10 +82,6 @@ class Segment extends FormObject
 
     /**
      * Set settings.
-     *
-     * @param __param_settings_type__ $settings __param_settings_description__
-     *
-     * @throws Exception __exception_Exception_description__
      */
     public function setSettings($settings)
     {
@@ -149,7 +132,6 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_output_description__.
      */
     public function output()
     {
@@ -157,9 +139,7 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_hasFile_description__.
      *
-     * @return __return_hasFile_type__ __return_hasFile_description__
      */
     public function hasFile()
     {
@@ -177,8 +157,6 @@ class Segment extends FormObject
     }
 
     /**
-     * __method_generate_description__.
-     *
      * @return unknown
      */
     public function generate()
@@ -357,8 +335,6 @@ class Segment extends FormObject
 
     /**
      * Get grid.
-     *
-     * @return __return_getGrid_type__ __return_getGrid_description__
      */
     public function getGrid()
     {

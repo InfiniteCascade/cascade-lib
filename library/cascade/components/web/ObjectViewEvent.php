@@ -16,29 +16,20 @@ namespace cascade\components\web;
 class ObjectViewEvent extends \yii\base\Event
 {
     /**
-     * @var __var_action_type__ __var_action_description__
      */
     public $action;
     /**
-     * @var __var_accessed_type__ __var_accessed_description__
      */
     public $accessed = true;
     /**
-     * @var __var__object_type__ __var__object_description__
      */
     protected $_object;
     /**
-     * @var __var__objectType_type__ __var__objectType_description__
      */
     protected $_objectType;
 
     /**
-     * __method_handleWith_description__.
      *
-     * @param __param_callable_type__ $callable __param_callable_description__
-     * @param boolean                 $always   __param_always_description__ [optional]
-     *
-     * @return __return_handleWith_type__ __return_handleWith_description__
      */
     public function handleWith($callable, $always = false)
     {
@@ -55,8 +46,6 @@ class ObjectViewEvent extends \yii\base\Event
 
     /**
      * Set object.
-     *
-     * @param __param_object_type__ $object __param_object_description__
      */
     public function setObject($object)
     {
@@ -68,8 +57,6 @@ class ObjectViewEvent extends \yii\base\Event
 
     /**
      * Get object.
-     *
-     * @return __return_getObject_type__ __return_getObject_description__
      */
     public function getObject()
     {
@@ -78,8 +65,6 @@ class ObjectViewEvent extends \yii\base\Event
 
     /**
      * Set object type.
-     *
-     * @param __param_type_type__ $type __param_type_description__
      */
     public function setObjectType($type)
     {
@@ -95,8 +80,6 @@ class ObjectViewEvent extends \yii\base\Event
 
     /**
      * Get object type.
-     *
-     * @return __return_getObjectType_type__ __return_getObjectType_description__
      */
     public function getObjectType()
     {

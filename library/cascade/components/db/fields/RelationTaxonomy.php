@@ -20,12 +20,10 @@ class RelationTaxonomy extends Base
     public $fieldName;
 
     /**
-     * @var __var_human_type__ __var_human_description__
      */
     public $human = false;
 
     /**
-     * @var __var_multiline_type__ __var_multiline_description__
      */
     public $multiline = false;
 

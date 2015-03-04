@@ -18,15 +18,12 @@ use Yii;
 class Collector extends \infinite\base\collector\Module
 {
     /**
-     * @var __var_initial_type__ __var_initial_description__
      */
     public $initial = [];
     /**
-     * @var __var__lastLoadedTheme_type__ __var__lastLoadedTheme_description__
      */
     protected $_lastLoadedTheme;
     /**
-     * @var __var__theme_type__ __var__theme_description__
      */
     protected $_theme;
 
@@ -48,10 +45,6 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get theme.
-     *
-     * @throws Exception __exception_Exception_description__
-     *
-     * @return __return_getTheme_type__ __return_getTheme_description__
      */
     public function getTheme()
     {
@@ -66,9 +59,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     * __method_registerAssetBundles_description__.
      *
-     * @param __param_view_type__ $view __param_view_description__
      */
     public function registerAssetBundles($view)
     {
@@ -79,8 +70,6 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get identity asset bundle.
-     *
-     * @return __return_getIdentityAssetBundle_type__ __return_getIdentityAssetBundle_description__
      */
     public function getIdentityAssetBundle()
     {
@@ -100,10 +89,6 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get identity.
-     *
-     * @param __param_view_type__ $view __param_view_description__
-     *
-     * @return __return_getIdentity_type__ __return_getIdentity_description__
      */
     public function getIdentity($view)
     {

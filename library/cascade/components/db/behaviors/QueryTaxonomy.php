@@ -18,15 +18,12 @@ use Yii;
 class QueryTaxonomy extends \infinite\db\behaviors\ActiveRecord
 {
     /**
-     * @var __var_viaModelClass_type__ __var_viaModelClass_description__
      */
     public $viaModelClass = 'ObjectTaxonomy';
     /**
-     * @var __var_relationKey_type__ __var_relationKey_description__
      */
     public $relationKey = 'object_id';
     /**
-     * @var __var_taxonomyKey_type__ __var_taxonomyKey_description__
      */
     public $taxonomyKey = 'taxonomy_id';
 

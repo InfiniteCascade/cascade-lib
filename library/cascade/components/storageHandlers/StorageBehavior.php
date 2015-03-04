@@ -22,12 +22,10 @@ use yii\base\Event;
 class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 {
     /**
-     * @var __var_storageAttribute_type__ __var_storageAttribute_description__
      */
     public $storageAttribute = 'storage_id';
 
     /**
-     * @var __var__storageEngine_type__ __var__storageEngine_description__
      */
     protected $_storageEngine;
     protected $_oldStorage;
@@ -36,8 +34,6 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Converts object to string.
-     *
-     * @return __return___toString_type__ __return___toString_description__
      */
     public function __toString()
     {
@@ -69,10 +65,6 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Set storage.
-     *
-     * @param __param_value_type__ $value __param_value_description__
-     *
-     * @throws Exception __exception_Exception_description__
      */
     public function setStorage($value)
     {
@@ -86,8 +78,6 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get storage.
-     *
-     * @return __return_getStorage_type__ __return_getStorage_description__
      */
     public function getStorage()
     {
@@ -99,9 +89,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_loadPostFile_description__.
      *
-     * @param string $tabId __param_tabId_description__ [optional]
      */
     public function loadPostFile($tabId = null)
     {
@@ -116,11 +104,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_beforeSave_description__.
      *
-     * @param __param_event_type__ $event __param_event_description__
-     *
-     * @return __return_beforeSave_type__ __return_beforeSave_description__
      */
     public function beforeSave($event)
     {
@@ -160,11 +144,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_afterDelete_description__.
      *
-     * @param __param_event_type__ $event __param_event_description__
-     *
-     * @return __return_afterDelete_type__ __return_afterDelete_description__
      */
     public function afterDelete($event)
     {
@@ -172,9 +152,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_serve_description__.
      *
-     * @return __return_serve_type__ __return_serve_description__
      */
     public function serve()
     {
@@ -209,8 +187,6 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
     /**
      * Get storage object.
-     *
-     * @return __return_getStorageObject_type__ __return_getStorageObject_description__
      */
     public function getStorageObject()
     {
@@ -223,11 +199,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     * __method_beforeValidate_description__.
      *
-     * @param __param_event_type__ $event __param_event_description__
-     *
-     * @return __return_beforeValidate_type__ __return_beforeValidate_description__
      */
     public function beforeValidate($event)
     {
@@ -247,8 +219,6 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get storage engine.
-     *
-     * @return __return_getStorageEngine_type__ __return_getStorageEngine_description__
      */
     public function getStorageEngine()
     {
@@ -262,10 +232,6 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Set storage engine.
-     *
-     * @param __param_value_type__ $value __param_value_description__
-     *
-     * @return __return_setStorageEngine_type__ __return_setStorageEngine_description__
      */
     public function setStorageEngine($value)
     {

@@ -25,7 +25,6 @@ class User extends \infinite\db\models\User
 
     const SYSTEM_EMAIL = 'system@system.local';
     /**
-     * @var __var__individual_type__ __var__individual_description__
      */
     protected $_individual;
 
@@ -80,11 +79,7 @@ class User extends \infinite\db\models\User
     }
 
     /**
-     * __method_systemUser_description__.
      *
-     * @throws Exception __exception_Exception_description__
-     *
-     * @return __return_systemUser_type__ __return_systemUser_description__
      */
     public static function systemUser()
     {
@@ -158,9 +153,7 @@ class User extends \infinite\db\models\User
     }
 
     /**
-     * __method_guessIndividual_description__.
      *
-     * @return __return_guessIndividual_type__ __return_guessIndividual_description__
      */
     public function guessIndividual()
     {

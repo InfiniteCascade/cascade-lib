@@ -19,36 +19,28 @@ use Yii;
 class Generator extends \infinite\base\Object implements \infinite\web\RenderInterface
 {
     /**
-     * @var __var__items_type__ __var__items_description__
      */
     protected $_items;
     /**
-     * @var __var_form_type__ __var_form_description__
      */
     public $form;
 
     /**
-     * @var __var_models_type__ __var_models_description__
      */
     public $models = [];
 
     /**
-     * @var __var_isValid_type__ __var_isValid_description__
      */
     public $isValid = true;
     /**
-     * @var __var_class_type__ __var_class_description__
      */
     public $class = '';
     /**
-     * @var __var_ajax_type__ __var_ajax_description__
      */
     public $ajax = false;
 
     /**
      * Set items.
-     *
-     * @param __param_items_type__ $items __param_items_description__
      */
     public function setItems($items)
     {
@@ -65,8 +57,6 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     }
 
     /**
-     * __method_generate_description__.
-     *
      * @return unknown
      */
     public function generate()
@@ -108,9 +98,7 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     }
 
     /**
-     * __method_hasFile_description__.
      *
-     * @return __return_hasFile_type__ __return_hasFile_description__
      */
     public function hasFile()
     {
@@ -124,7 +112,6 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     }
 
     /**
-     * __method_output_description__.
      */
     public function output()
     {

@@ -34,10 +34,6 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
 
     /**
      * Get foreign data model.
-     *
-     * @param __param_key_type__ $key __param_key_description__
-     *
-     * @return __return_getForeignDataModel_type__ __return_getForeignDataModel_description__
      */
     public function getForeignDataModel($key)
     {
@@ -56,8 +52,6 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
 
     /**
      * Get unmapped foreign keys.
-     *
-     * @return __return_getUnmappedForeignKeys_type__ __return_getUnmappedForeignKeys_description__
      */
     public function getUnmappedForeignKeys()
     {
@@ -69,7 +63,6 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     }
 
     /**
-     * __method_loadForeignDataItems_description__.
      */
     protected function loadForeignDataItems()
     {

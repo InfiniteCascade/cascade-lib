@@ -27,23 +27,18 @@ class Relation extends Base
      */
     protected $_human = true;
     /**
-     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
      */
     protected $_moduleHandler;
     /**
-     * @var __var_relationship_type__ __var_relationship_description__
      */
     public $relationship;
     /**
-     * @var __var_modelRole_type__ __var_modelRole_description__
      */
     public $modelRole; // either parent or child
     /**
-     * @var __var_baseModel_type__ __var_baseModel_description__
      */
     public $baseModel;
     /*
-     * @var __var__moduleHandler_type__ __var__moduleHandler_description__
      */
     public static $_moduleHandlers = [];
 
@@ -65,8 +60,6 @@ class Relation extends Base
 
     /**
      * Get value.
-     *
-     * @return __return_getValue_type__ __return_getValue_description__
      */
     public function getValue($createOnEmpty = true)
     {
@@ -154,8 +147,6 @@ class Relation extends Base
 
     /**
      * Get companion.
-     *
-     * @return __return_getCompanion_type__ __return_getCompanion_description__
      */
     public function getCompanion()
     {
@@ -167,8 +158,6 @@ class Relation extends Base
     }
     /**
      * Get module.
-     *
-     * @return __return_getModule_type__ __return_getModule_description__
      */
     public function getModule()
     {
@@ -181,8 +170,6 @@ class Relation extends Base
 
     /**
      * Get module handler.
-     *
-     * @return __return_getModuleHandler_type__ __return_getModuleHandler_description__
      */
     public function getModuleHandler()
     {
@@ -209,8 +196,6 @@ class Relation extends Base
 
     /**
      * Get companion field.
-     *
-     * @return __return_getCompanionField_type__ __return_getCompanionField_description__
      */
     public function getCompanionField()
     {

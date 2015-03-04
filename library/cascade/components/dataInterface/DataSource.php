@@ -26,107 +26,83 @@ abstract class DataSource extends \infinite\base\Component
     public $taskWeight = 1;
 
     /**
-     * @var __var_fieldMapClass_type__ __var_fieldMapClass_description__
      */
     public $fieldMapClass = 'cascade\components\dataInterface\FieldMap';
     /**
-     * @var __var_dataItemClass_type__ __var_dataItemClass_description__
      */
     public $dataItemClass = 'cascade\components\dataInterface\DataItem';
     /**
-     * @var __var_searchClass_type__ __var_searchClass_description__
      */
     public $searchClass = 'cascade\components\dataInterface\Search';
 
     /**
-     * @var __var_keyGenerator_type__ __var_keyGenerator_description__
      */
     public $keyGenerator;
     /**
-     * @var __var_debug_type__ __var_debug_description__
      */
     public $debug = false;
     /**
-     * @var __var_lazyForeign_type__ __var_lazyForeign_description__
      */
     public $lazyForeign = true;
     /**
-     * @var __var_lazyLocal_type__ __var_lazyLocal_description__
      */
     public $lazyLocal = true;
     /**
-     * @var __var_childOnly_type__ __var_childOnly_description__
      */
     public $childOnly = false;
     /**
-     * @var __var_postProcess_type__ __var_postProcess_description__
      */
     public $postProcess = false;
 
     /**
-     * @var __var_ignoreForeign_type__ __var_ignoreForeign_description__
      */
     public $ignoreForeign = false;
     /**
-     * @var __var_ignoreLocal_type__ __var_ignoreLocal_description__
      */
     public $ignoreLocal = false;
 
     /**
-     * @var __var_baseAttributes_type__ __var_baseAttributes_description__
      */
     public $baseAttributes = [];
 
     /**
-     * @var __var__localModel_type__ __var__localModel_description__
      */
     protected $_localModel;
     /**
-     * @var __var__foreignModel_type__ __var__foreignModel_description__
      */
     protected $_foreignModel;
     /**
-     * @var __var__map_type__ __var__map_description__
      */
     protected $_map;
     /**
-     * @var __var__settings_type__ __var__settings_description__
      */
     protected $_settings;
     /**
-     * @var __var__search_type__ __var__search_description__
      */
     protected $_search;
 
     /**
-     * @var __var__foreignDataItems_type__ __var__foreignDataItems_description__
      */
     protected $_foreignDataItems;
     /**
-     * @var __var__localDataItems_type__ __var__localDataItems_description__
      */
     protected $_localDataItems;
 
     /**
-     * @var __var_name_type__ __var_name_description__
      */
     public $name;
     /**
-     * @var __var_module_type__ __var_module_description__
      */
     public $module;
 
     /**
-     * @var __var__countTotal_type__ __var__countTotal_description__
      */
     protected $_countTotal;
     /**
-     * @var __var__countRemaining_type__ __var__countRemaining_description__
      */
     protected $_countRemaining;
 
     /*
-     * @var __var_defaultSettings_type__ __var_defaultSettings_description__
      */
     static $defaultSettings = [
         'direction' => 'to_local', // to_local, to_foreign, both
@@ -141,9 +117,7 @@ abstract class DataSource extends \infinite\base\Component
     // abstract public function handleLocal($action, DataItem $dataItem, DataItem $parent = null);
 
     /**
-     * __method_isReady_description__.
      *
-     * @return __return_isReady_type__ __return_isReady_description__
      */
     public function isReady()
     {
@@ -151,7 +125,6 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_clearCaches_description__.
      */
     public function clearCaches()
     {
@@ -167,8 +140,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get total.
-     *
-     * @return __return_getTotal_type__ __return_getTotal_description__
      */
     public function getTotal()
     {
@@ -191,8 +162,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get done.
-     *
-     * @return __return_getDone_type__ __return_getDone_description__
      */
     public function getDone()
     {
@@ -201,8 +170,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get dummy local model.
-     *
-     * @return __return_getDummyLocalModel_type__ __return_getDummyLocalModel_description__
      */
     public function getDummyLocalModel()
     {
@@ -213,8 +180,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get remaining.
-     *
-     * @return __return_getRemaining_type__ __return_getRemaining_description__
      */
     public function getRemaining()
     {
@@ -226,9 +191,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_reduceRemaining_description__.
      *
-     * @param cascade\components\dataInterface\DataItem $dataItem __param_dataItem_description__
      */
     public function reduceRemaining(DataItem $dataItem)
     {
@@ -247,8 +210,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get foreign data items.
-     *
-     * @return __return_getForeignDataItems_type__ __return_getForeignDataItems_description__
      */
     public function getForeignDataItems()
     {
@@ -262,8 +223,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get local data items.
-     *
-     * @return __return_getLocalDataItems_type__ __return_getLocalDataItems_description__
      */
     public function getLocalDataItems()
     {
@@ -276,8 +235,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get handled local data items.
-     *
-     * @return __return_getHandledLocalDataItems_type__ __return_getHandledLocalDataItems_description__
      */
     public function getHandledLocalDataItems()
     {
@@ -311,9 +268,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
-     * __method_run_description__.
      *
-     * @return __return_run_type__ __return_run_description__
      */
     public function run()
     {
@@ -349,8 +304,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get data interface.
-     *
-     * @return __return_getDataInterface_type__ __return_getDataInterface_description__
      */
     public function getDataInterface()
     {
@@ -359,10 +312,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Set settings.
-     *
-     * @param __param_settings_type__ $settings __param_settings_description__
-     *
-     * @return __return_setSettings_type__ __return_setSettings_description__
      */
     public function setSettings($settings)
     {
@@ -379,8 +328,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get settings.
-     *
-     * @return __return_getSettings_type__ __return_getSettings_description__
      */
     public function getSettings()
     {
@@ -393,8 +340,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get search.
-     *
-     * @return __return_getSearch_type__ __return_getSearch_description__
      */
     public function getSearch()
     {
@@ -403,8 +348,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Set search.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setSearch($value)
     {
@@ -420,8 +363,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get local model.
-     *
-     * @return __return_getLocalModel_type__ __return_getLocalModel_description__
      */
     public function getLocalModel()
     {
@@ -430,8 +371,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Set local model.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setLocalModel($value)
     {
@@ -440,8 +379,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Set foreign model.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setForeignModel($value)
     {
@@ -450,8 +387,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get foreign model.
-     *
-     * @return __return_getForeignModel_type__ __return_getForeignModel_description__
      */
     public function getForeignModel()
     {
@@ -460,10 +395,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Set map.
-     *
-     * @param __param_m_type__ $m __param_m_description__
-     *
-     * @return __return_setMap_type__ __return_setMap_description__
      */
     public function setMap($m)
     {
@@ -490,8 +421,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get map.
-     *
-     * @return __return_getMap_type__ __return_getMap_description__
      */
     public function getMap()
     {
@@ -500,8 +429,6 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get action.
-     *
-     * @return __return_getAction_type__ __return_getAction_description__
      */
     public function getAction()
     {

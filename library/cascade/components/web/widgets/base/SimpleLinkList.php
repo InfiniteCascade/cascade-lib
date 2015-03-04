@@ -26,8 +26,6 @@ class SimpleLinkList extends BaseList
 
     /**
      * Get grid cell settings.
-     *
-     * @return __return_getGridCellSettings_type__ __return_getGridCellSettings_description__
      */
     public function getGridCellSettings()
     {

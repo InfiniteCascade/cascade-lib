@@ -51,10 +51,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get foreign data item.
-     *
-     * @param __param_key_type__ $key __param_key_description__
-     *
-     * @return __return_getForeignDataItem_type__ __return_getForeignDataItem_description__
      */
     public function getForeignDataItem($key)
     {
@@ -70,23 +66,11 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get foreign data model.
-     *
-     * @param __param_key_type__ $key __param_key_description__
-     *
-     * @return __return_getForeignDataModel_type__ __return_getForeignDataModel_description__
      */
     abstract public function getForeignDataModel($key);
 
     /**
-     * __method_updateLocalObject_description__.
      *
-     * @param __param_relatedType_type__       $relatedType       __param_relatedType_description__
-     * @param __param_foreignPrimaryKey_type__ $foreignPrimaryKey __param_foreignPrimaryKey_description__
-     * @param __param_valueMap_type__          $valueMap          __param_valueMap_description__
-     * @param __param_fieldMap_type__          $fieldMap          __param_fieldMap_description__
-     * @param __param_localModel_type__        $localModel        __param_localModel_description__
-     *
-     * @return __return_updateLocalObject_type__ __return_updateLocalObject_description__
      */
     public function updateLocalObject($relatedType, $valueMap, $fieldMap, $localModel)
     {
@@ -144,12 +128,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_buildLocalAttributes_description__.
      *
-     * @param cascade\components\dataInterface\connectors\db\Model $foreignModel __param_foreignModel_description__
-     * @param __param_localModel_type__                            $localModel   __param_localModel_description__ [optional]
-     *
-     * @return __return_buildLocalAttributes_type__ __return_buildLocalAttributes_description__
      */
     public function buildLocalAttributes(Model $foreignModel, $localModel = null, $fieldsMap = null)
     {
@@ -268,8 +247,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get unmapped keys.
-     *
-     * @return __return_getUnmappedKeys_type__ __return_getUnmappedKeys_description__
      */
     public function getUnmappedKeys()
     {
@@ -288,8 +265,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get unmapped local keys.
-     *
-     * @return __return_getUnmappedLocalKeys_type__ __return_getUnmappedLocalKeys_description__
      */
     public function getUnmappedLocalKeys()
     {
@@ -301,8 +276,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get unmapped foreign keys.
-     *
-     * @return __return_getUnmappedForeignKeys_type__ __return_getUnmappedForeignKeys_description__
      */
     public function getUnmappedForeignKeys()
     {
@@ -311,8 +284,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get local primary key name.
-     *
-     * @return __return_getLocalPrimaryKeyName_type__ __return_getLocalPrimaryKeyName_description__
      */
     public function getLocalPrimaryKeyName()
     {
@@ -321,8 +292,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get foreign primary key name.
-     *
-     * @return __return_getForeignPrimaryKeyName_type__ __return_getForeignPrimaryKeyName_description__
      */
     public function getForeignPrimaryKeyName()
     {
@@ -330,11 +299,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_isRelationKey_description__.
      *
-     * @param __param_key_type__ $key __param_key_description__
-     *
-     * @return __return_isRelationKey_type__ __return_isRelationKey_description__
      */
     public function isRelationKey($key)
     {
@@ -342,11 +307,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_generateKey_description__.
      *
-     * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
-     *
-     * @return __return_generateKey_type__ __return_generateKey_description__
      */
     public function generateKey(GenericModel $foreignObject, $keyName, $keyValue)
     {
@@ -372,10 +333,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
     /**
      * Get key translation.
-     *
-     * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
-     *
-     * @return __return_getKeyTranslation_type__ __return_getKeyTranslation_description__
      */
     public function getKeyTranslation(Model $foreignObject, $key = null)
     {
@@ -407,10 +364,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get reverse key translation.
-     *
-     * @param __param_localObject_type__ $localObject __param_localObject_description__
-     *
-     * @return __return_getReverseKeyTranslation_type__ __return_getReverseKeyTranslation_description__
      */
     public function getReverseKeyTranslation($localObject)
     {
@@ -425,12 +378,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_saveKeyTranslation_description__.
      *
-     * @param cascade\components\dataInterface\connectors\db\Model $foreignObject __param_foreignObject_description__
-     * @param __param_localObject_type__                           $localObject   __param_localObject_description__
-     *
-     * @return __return_saveKeyTranslation_type__ __return_saveKeyTranslation_description__
      */
     public function saveKeyTranslation(Model $foreignObject, $localObject)
     {
@@ -468,7 +416,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
         return $keyTranslation;
     }
     /**
-     * __method_loadForeignDataItems_description__.
      */
     protected function loadForeignDataItems()
     {
@@ -476,12 +423,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_createForeignDataItem_description__.
      *
-     * @param __param_model_type__ $model  __param_model_description__
-     * @param array                $config __param_config_description__ [optional]
-     *
-     * @return __return_createForeignDataItem_type__ __return_createForeignDataItem_description__
      */
     public function createForeignDataItem($model, $config = [])
     {
@@ -496,12 +438,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_createLocalDataItem_description__.
      *
-     * @param __param_model_type__ $model  __param_model_description__
-     * @param array                $config __param_config_description__ [optional]
-     *
-     * @return __return_createLocalDataItem_type__ __return_createLocalDataItem_description__
      */
     public function createLocalDataItem($model, $config = [])
     {
@@ -512,11 +449,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_createDataItem_description__.
      *
-     * @param array $config __param_config_description__ [optional]
-     *
-     * @return __return_createDataItem_type__ __return_createDataItem_description__
      */
     protected function createDataItem($config = [])
     {
@@ -529,7 +462,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
-     * __method_loadLocalDataItems_description__.
      */
     protected function loadLocalDataItems()
     {
@@ -538,8 +470,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get module.
-     *
-     * @return __return_getModule_type__ __return_getModule_description__
      */
     public function getModule()
     {

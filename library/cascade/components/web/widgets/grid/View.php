@@ -20,91 +20,69 @@ use Yii;
 class View extends \yii\base\Widget
 {
     /**
-     * @var __var_widget_type__ __var_widget_description__
      */
     public $widget;
     /**
-     * @var __var_state_type__ __var_state_description__
      */
     public $state;
     /**
-     * @var __var_dataProvider_type__ __var_dataProvider_description__
      */
     public $dataProvider;
     /**
-     * @var __var_emptyText_type__ __var_emptyText_description__
      */
     public $emptyText = 'No items found';
     /**
-     * @var __var_htmlOptions_type__ __var_htmlOptions_description__
      */
     public $htmlOptions = [];
     /**
-     * @var __var_sortableAttributes_type__ __var_sortableAttributes_description__
      */
     public $sortableAttributes;
     /**
-     * @var __var_filters_type__ __var_filters_description__
      */
     public $filters;
     /**
-     * @var __var_views_type__ __var_views_description__
      */
     public $views = ['list'];
     /**
-     * @var __var_currentView_type__ __var_currentView_description__
      */
     public $currentView = 'list';
     /**
-     * @var __var_itemsPerRequest_type__ __var_itemsPerRequest_description__
      */
     public $itemsPerRequest = 20;
     /**
-     * @var __var_limit_type__ __var_limit_description__
      */
     public $limit;
     /**
-     * @var __var_rendererSettings_type__ __var_rendererSettings_description__
      */
     public $rendererSettings = [];
     /**
-     * @var __var_itemMenu_type__ __var_itemMenu_description__
      */
     public $itemMenu = [];
     /**
-     * @var __var_additionalClasses_type__ __var_additionalClasses_description__
      */
     public $additionalClasses;
     /**
-     * @var __var_specialItemClasses_type__ __var_specialItemClasses_description__
      */
     public $specialItemClasses = [];
     /**
-     * @var __var_nullDisplay_type__ __var_nullDisplay_description__
      */
     public $nullDisplay = '';
     /**
-     * @var __var__totalItems_type__ __var__totalItems_description__
      */
     protected $_totalItems;
     /**
-     * @var __var__currentData_type__ __var__currentData_description__
      */
     protected $_currentData;
     /**
-     * @var __var__currentDataRaw_type__ __var__currentDataRaw_description__
      */
     protected $_currentDataRaw;
     /**
-     * @var __var__columns_type__ __var__columns_description__
      */
     protected $_columns;
     /**
-     * @var __var__columnSettings_type__ __var__columnSettings_description__
      */
     protected $_columnSettings;
     /**
-     * @var __var__formatter_type__ __var__formatter_description__
      */
     protected $_formatter;
 
@@ -163,8 +141,6 @@ class View extends \yii\base\Widget
 
     /**
      * Get column settings.
-     *
-     * @return __return_getColumnSettings_type__ __return_getColumnSettings_description__
      */
     public function getColumnSettings()
     {
@@ -190,8 +166,6 @@ class View extends \yii\base\Widget
 
     /**
      * Get data.
-     *
-     * @return __return_getData_type__ __return_getData_description__
      */
     public function getData()
     {
@@ -224,10 +198,6 @@ class View extends \yii\base\Widget
 
     /**
      * Set columns.
-     *
-     * @param __param_columns_type__ $columns __param_columns_description__
-     *
-     * @return __return_setColumns_type__ __return_setColumns_description__
      */
     public function setColumns($columns)
     {
@@ -281,13 +251,7 @@ class View extends \yii\base\Widget
     }
 
     /**
-     * __method_createGridColumn_description__.
      *
-     * @param __param_text_type__ $text __param_text_description__
-     *
-     * @throws Exception __exception_Exception_description__
-     *
-     * @return __return_createGridColumn_type__ __return_createGridColumn_description__
      */
     protected function createGridColumn($text)
     {
@@ -308,8 +272,6 @@ class View extends \yii\base\Widget
 
     /**
      * Get columns.
-     *
-     * @return __return_getColumns_type__ __return_getColumns_description__
      */
     public function getColumns()
     {
@@ -322,8 +284,6 @@ class View extends \yii\base\Widget
 
     /**
      * Get data key.
-     *
-     * @return __return_getDataKey_type__ __return_getDataKey_description__
      */
     public function getDataKey()
     {
@@ -332,8 +292,6 @@ class View extends \yii\base\Widget
 
     /**
      * Get total items.
-     *
-     * @return __return_getTotalItems_type__ __return_getTotalItems_description__
      */
     public function getTotalItems()
     {
@@ -345,7 +303,6 @@ class View extends \yii\base\Widget
     }
 
     /**
-     * __method__prepareDataProvider_description__.
      */
     protected function _prepareDataProvider()
     {

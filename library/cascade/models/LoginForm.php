@@ -20,17 +20,13 @@ class LoginForm extends Model
 {
     public $email;
     /**
-     * @var __var_password_type__ __var_password_description__
      */
     public $password;
     /**
-     * @var __var_rememberMe_type__ __var_rememberMe_description__
      */
     public $rememberMe = true;
 
     /**
-     * __method_rules_description__.
-     *
      * @return array the validation rules.
      */
     public function rules()

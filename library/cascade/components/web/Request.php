@@ -20,11 +20,9 @@ use yii\web\Application;
 class Request extends \infinite\web\Request
 {
     /**
-     * @var __var__object_type__ __var__object_description__
      */
     protected $_object;
     /**
-     * @var __var__previousObject_type__ __var__previousObject_description__
      */
     protected $_previousObject;
 
@@ -38,7 +36,6 @@ class Request extends \infinite\web\Request
     }
 
     /**
-     * __method_startRequest_description__.
      */
     public function startRequest()
     {
@@ -49,8 +46,6 @@ class Request extends \infinite\web\Request
 
     /**
      * Set object.
-     *
-     * @param __param_object_type__ $object __param_object_description__
      */
     public function setObject($object)
     {
@@ -59,8 +54,6 @@ class Request extends \infinite\web\Request
 
     /**
      * Get object.
-     *
-     * @return __return_getObject_type__ __return_getObject_description__
      */
     public function getObject()
     {
@@ -69,8 +62,6 @@ class Request extends \infinite\web\Request
 
     /**
      * Get previous object.
-     *
-     * @return __return_getPreviousObject_type__ __return_getPreviousObject_description__
      */
     public function getPreviousObject()
     {

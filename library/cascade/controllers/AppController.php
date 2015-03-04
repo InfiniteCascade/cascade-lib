@@ -74,9 +74,7 @@ class AppController extends Controller
     }
 
     /**
-     * __method_actionIndex_description__.
      *
-     * @return __return_actionIndex_type__ __return_actionIndex_description__
      */
     public function actionIndex()
     {
@@ -84,9 +82,7 @@ class AppController extends Controller
     }
 
     /**
-     * __method_actionLogin_description__.
      *
-     * @return __return_actionLogin_type__ __return_actionLogin_description__
      */
     public function actionLogin()
     {
@@ -105,9 +101,7 @@ class AppController extends Controller
     }
 
     /**
-     * __method_actionLogout_description__.
      *
-     * @return __return_actionLogout_type__ __return_actionLogout_description__
      */
     public function actionLogout()
     {
@@ -132,9 +126,7 @@ class AppController extends Controller
     }
 
     /**
-     * __method_actionRefresh_description__.
      *
-     * @return __return_actionRefresh_type__ __return_actionRefresh_description__
      */
     public function actionRefresh()
     {
@@ -203,9 +195,7 @@ class AppController extends Controller
     }
 
     /**
-     * __method_actionRefresh_description__.
      *
-     * @return __return_actionRefresh_type__ __return_actionRefresh_description__
      */
     public function actionStream()
     {

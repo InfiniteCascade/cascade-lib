@@ -19,11 +19,9 @@ use Yii;
 abstract class WidgetArea extends BaseWidget
 {
     /**
-     * @var __var_location_type__ __var_location_description__
      */
     public $location = 'right';
     /**
-     * @var __var_parentWidget_type__ __var_parentWidget_description__
      */
     public $parentWidget;
     /**
@@ -50,8 +48,6 @@ abstract class WidgetArea extends BaseWidget
 
     /**
      * Get cell content.
-     *
-     * @return __return_getCellContent_type__ __return_getCellContent_description__
      */
     public function getCellContent()
     {
@@ -60,8 +56,6 @@ abstract class WidgetArea extends BaseWidget
 
     /**
      * Get is ready.
-     *
-     * @return __return_getIsReady_type__ __return_getIsReady_description__
      */
     public function getIsReady()
     {

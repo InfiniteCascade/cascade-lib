@@ -18,9 +18,7 @@ use Yii;
 abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
 {
     /**
-     * __method_bootstrap_description__.
      *
-     * @param __param_app_type__ $app __param_app_description__
      */
     public function bootstrap($app)
     {
@@ -37,8 +35,6 @@ abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
 
     /**
      * Get modules.
-     *
-     * @return __return_getModules_type__ __return_getModules_description__
      */
     public static function getModules()
     {

@@ -21,13 +21,11 @@ abstract class Module extends BaseModule
 {
     protected $_sourceFiles = [];
     /**
-     * @var __var_dataSourceClass_type__ __var_dataSourceClass_description__
      */
     public $dataSourceClass = 'cascade\components\dataInterface\connectors\file\DataSource';
     public $sourceFileClass = 'cascade\components\dataInterface\connectors\file\SourceFile';
 
     /**
-     * @var __var__dataSources_type__ __var__dataSources_description__
      */
     protected $_dataSources;
 
@@ -102,11 +100,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model config.
-     *
-     * @param __param_tableName_type__ $tableName __param_tableName_description__
-     * @param __param_modelName_type__ $modelName __param_modelName_description__
-     *
-     * @return __return_getForeignModelConfig_type__ __return_getForeignModelConfig_description__
      */
     public function getForeignModelConfig($sourceFile, $modelName)
     {
@@ -123,10 +116,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model name.
-     *
-     * @param __param_tableName_type__ $tableName __param_tableName_description__
-     *
-     * @return __return_getForeignModelName_type__ __return_getForeignModelName_description__
      */
     public function getForeignModelName($tableName)
     {
@@ -135,10 +124,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model.
-     *
-     * @param __param_model_type__ $model __param_model_description__
-     *
-     * @return __return_getForeignModel_type__ __return_getForeignModel_description__
      */
     public function getForeignModel($model)
     {
@@ -152,8 +137,6 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign models.
-     *
-     * @return __return_getForeignModels_type__ __return_getForeignModels_description__
      */
     public function getForeignModels()
     {

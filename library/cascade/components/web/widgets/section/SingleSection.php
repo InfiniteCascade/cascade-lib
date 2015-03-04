@@ -23,14 +23,11 @@ class SingleSection extends Section
      */
     public $section;
     /**
-     * @var __var__singleWidget_type__ __var__singleWidget_description__
      */
     protected $_singleWidget;
 
     /**
      * Get cell.
-     *
-     * @return __return_getCell_type__ __return_getCell_description__
      */
     public function getCell()
     {
@@ -46,8 +43,6 @@ class SingleSection extends Section
 
     /**
      * Get single widget.
-     *
-     * @return __return_getSingleWidget_type__ __return_getSingleWidget_description__
      */
     public function getSingleWidget()
     {

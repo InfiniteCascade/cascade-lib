@@ -8,7 +8,6 @@
 
 namespace cascade\components\dataInterface;
 
-use cascade\models\DataInterface;
 use Yii;
 
 /**
@@ -19,11 +18,9 @@ use Yii;
 abstract class DataItem extends \infinite\base\Component
 {
     /**
-     * @var __var_dataSource_type__ __var_dataSource_description__
      */
     public $dataSource;
     /**
-     * @var __var_isForeign_type__ __var_isForeign_description__
      */
     public $isForeign = true;
 
@@ -31,28 +28,22 @@ abstract class DataItem extends \infinite\base\Component
     public $foreignModelError = false;
 
     /**
-     * @var __var__pairedDataItem_type__ __var__pairedDataItem_description__
      */
     protected $_pairedDataItem;
     /**
-     * @var __var__handledDataItem_type__ __var__handledDataItem_description__
      */
     protected $_handledDataItem = false;
     /**
-     * @var __var__foreignObject_type__ __var__foreignObject_description__
      */
     protected $_foreignObject;
     /**
-     * @var __var_foreignPrimaryKey_type__ __var_foreignPrimaryKey_description__
      */
     public $foreignPrimaryKey;
 
     /**
-     * @var __var__localObject_type__ __var__localObject_description__
      */
     protected $_localObject;
     /**
-     * @var __var_localPrimaryKey_type__ __var_localPrimaryKey_description__
      */
     public $localPrimaryKey;
 
@@ -71,11 +62,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_searchLocalObject_description__.
      *
-     * @param __param_event_type__ $event __param_event_description__
-     *
-     * @return __return_searchLocalObject_type__ __return_searchLocalObject_description__
      */
     protected function searchLocalObject($event)
     {
@@ -104,7 +91,6 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_clean_description__.
      */
     public function clean()
     {
@@ -121,8 +107,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get id.
-     *
-     * @return __return_getId_type__ __return_getId_description__
      */
     public function getId()
     {
@@ -147,12 +131,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_handle_description__.
      *
-     * @param boolean $fromParent     __param_fromParent_description__ [optional]
-     * @param array   $baseAttributes __param_baseAttributes_description__ [optional]
-     *
-     * @return __return_handle_type__ __return_handle_description__
      */
     public function handle($fromRelative = false, $baseAttributes = [])
     {
@@ -202,8 +181,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get ignore foreign object.
-     *
-     * @return __return_getIgnoreForeignObject_type__ __return_getIgnoreForeignObject_description__
      */
     public function getIgnoreForeignObject()
     {
@@ -212,8 +189,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get ignore local object.
-     *
-     * @return __return_getIgnoreLocalObject_type__ __return_getIgnoreLocalObject_description__
      */
     public function getIgnoreLocalObject()
     {
@@ -221,12 +196,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_testIgnore_description__.
      *
-     * @param __param_object_type__ $object __param_object_description__
-     * @param __param_ignore_type__ $ignore __param_ignore_description__
-     *
-     * @return __return_testIgnore_type__ __return_testIgnore_description__
      */
     protected function testIgnore($object, $ignore)
     {
@@ -258,11 +228,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_handleLocal_description__.
      *
-     * @param array $baseAttributes __param_baseAttributes_description__ [optional]
-     *
-     * @return __return_handleLocal_type__ __return_handleLocal_description__
      */
     protected function handleLocal($baseAttributes = [])
     {
@@ -270,11 +236,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
-     * __method_handleForeign_description__.
      *
-     * @param array $baseAttributes __param_baseAttributes_description__ [optional]
-     *
-     * @return __return_handleForeign_type__ __return_handleForeign_description__
      */
     protected function handleForeign($baseAttributes = [])
     {
@@ -283,8 +245,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get handler.
-     *
-     * @return __return_getHandler_type__ __return_getHandler_description__
      */
     public function getHandler()
     {
@@ -301,8 +261,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get handling comparison.
-     *
-     * @return __return_getHandlingComparison_type__ __return_getHandlingComparison_description__
      */
     public function getHandlingComparison()
     {
@@ -311,11 +269,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get handling object.
-     *
-     * @param __param_a_type__ $a __param_a_description__
-     * @param __param_b_type__ $b __param_b_description__
-     *
-     * @return __return_getHandlingObject_type__ __return_getHandlingObject_description__
      */
     public static function getHandlingObject($a, $b)
     {
@@ -338,8 +291,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get primary object.
-     *
-     * @return __return_getPrimaryObject_type__ __return_getPrimaryObject_description__
      */
     public function getPrimaryObject()
     {
@@ -352,8 +303,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get companion object.
-     *
-     * @return __return_getCompanionObject_type__ __return_getCompanionObject_description__
      */
     public function getCompanionObject()
     {
@@ -366,10 +315,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set companion object.
-     *
-     * @param __param_value_type__ $value __param_value_description__
-     *
-     * @return __return_setCompanionObject_type__ __return_setCompanionObject_description__
      */
     public function setCompanionObject($value)
     {
@@ -382,8 +327,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get companion.
-     *
-     * @return __return_getCompanionId_type__ __return_getCompanionId_description__
      */
     public function getCompanionId()
     {
@@ -401,8 +344,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set paired data item.
-     *
-     * @param cascade\components\dataInterface\DataItem $value __param_value_description__
      */
     public function setPairedDataItem(DataItem $value)
     {
@@ -422,8 +363,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get paired data item.
-     *
-     * @return __return_getPairedDataItem_type__ __return_getPairedDataItem_description__
      */
     public function getPairedDataItem()
     {
@@ -432,10 +371,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set handled data item.
-     *
-     * @param __param_value_type__ $value __param_value_description__
-     *
-     * @return __return_setHandledDataItem_type__ __return_setHandledDataItem_description__
      */
     public function setHandledDataItem($value)
     {
@@ -452,8 +387,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get handled data item.
-     *
-     * @return __return_getHandledDataItem_type__ __return_getHandledDataItem_description__
      */
     public function getHandledDataItem()
     {
@@ -462,8 +395,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get foreign object.
-     *
-     * @return __return_getForeignObject_type__ __return_getForeignObject_description__
      */
     public function getForeignObject()
     {
@@ -476,8 +407,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set foreign object.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setForeignObject($value)
     {
@@ -486,8 +415,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get local object.
-     *
-     * @return __return_getLocalObject_type__ __return_getLocalObject_description__
      */
     public function getLocalObject()
     {
@@ -500,8 +427,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set local object.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setLocalObject($value)
     {
@@ -510,8 +435,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get action.
-     *
-     * @return __return_getAction_type__ __return_getAction_description__
      */
     public function getAction()
     {
@@ -520,8 +443,6 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get module.
-     *
-     * @return __return_getModule_type__ __return_getModule_description__
      */
     public function getModule()
     {

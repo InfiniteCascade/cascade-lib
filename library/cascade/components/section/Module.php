@@ -20,11 +20,9 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     use SectionTrait;
 
     /**
-     * @var __var_version_type__ __var_version_description__
      */
     public $version = 1;
     /**
-     * @var __var_priority_type__ __var_priority_description__
      */
     protected $_priority = 1000; //lower is better
 
@@ -46,8 +44,6 @@ class Module extends \cascade\components\base\CollectorModule implements Section
 
     /**
      * Set title.
-     *
-     * @param __param_value_type__ $value __param_value_description__
      */
     public function setTitle($value)
     {
@@ -69,8 +65,6 @@ class Module extends \cascade\components\base\CollectorModule implements Section
 
     /**
      * Get priority.
-     *
-     * @return __return_getPriority_type__ __return_getPriority_description__
      */
     public function getPriority()
     {
@@ -79,8 +73,6 @@ class Module extends \cascade\components\base\CollectorModule implements Section
 
     /**
      * Set priority.
-     *
-     * @param __param_priority_type__ $priority __param_priority_description__
      */
     public function setPriority($priority)
     {

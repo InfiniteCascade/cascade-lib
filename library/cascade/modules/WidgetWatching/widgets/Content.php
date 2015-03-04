@@ -63,8 +63,6 @@ class Content extends \cascade\components\web\widgets\Widget
 
     /**
      * Get grid cell settings.
-     *
-     * @return __return_getGridCellSettings_type__ __return_getGridCellSettings_description__
      */
     public function getGridCellSettings()
     {

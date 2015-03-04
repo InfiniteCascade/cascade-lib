@@ -61,7 +61,6 @@ class TopNavBar extends Widget
      */
     public $brandLabel;
     /**
-     * @var __var_brandUrl_type__ __var_brandUrl_description__
      */
     public $brandUrl;
     /**

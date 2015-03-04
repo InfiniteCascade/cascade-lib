@@ -18,7 +18,6 @@ use infinite\setup\Exception;
 class Task_000002_db extends \infinite\setup\Task
 {
     /**
-     * @var __var__migrator_type__ __var__migrator_description__
      */
     protected $_migrator;
     /**
@@ -66,9 +65,7 @@ class Task_000002_db extends \infinite\setup\Task
     }
 
     /**
-     * __method_isNewInstall_description__.
      *
-     * @return __return_isNewInstall_type__ __return_isNewInstall_description__
      */
     public function isNewInstall()
     {
@@ -95,10 +92,6 @@ class Task_000002_db extends \infinite\setup\Task
 
     /**
      * Get migrator.
-     *
-     * @throws Exception __exception_Exception_description__
-     *
-     * @return __return_getMigrator_type__ __return_getMigrator_description__
      */
     public function getMigrator()
     {

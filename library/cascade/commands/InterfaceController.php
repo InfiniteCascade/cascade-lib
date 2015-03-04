@@ -24,15 +24,12 @@ ini_set('memory_limit', -1);
 class InterfaceController extends \infinite\console\Controller
 {
     /**
-     * @var __var__interface_type__ __var__interface_description__
      */
     protected $_interface;
     /**
-     * @var __var_verbose_type__ __var_verbose_description__
      */
     public $verbose;
     /**
-     * __method_actionIndex_description__.
      */
     public function actionIndex()
     {
@@ -40,7 +37,6 @@ class InterfaceController extends \infinite\console\Controller
     }
 
     /**
-     * __method_actionRunOne_description__.
      */
     public function actionRunOne()
     {
@@ -51,8 +47,6 @@ class InterfaceController extends \infinite\console\Controller
 
     /**
      * Get interface.
-     *
-     * @return __return_getInterface_type__ __return_getInterface_description__
      */
     public function getDataInterface()
     {
@@ -69,10 +63,6 @@ class InterfaceController extends \infinite\console\Controller
 
     /**
      * Set interface.
-     *
-     * @param __param_value_type__ $value __param_value_description__
-     *
-     * @throws Exception __exception_Exception_description__
      */
     public function setDataInterface($value)
     {

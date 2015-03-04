@@ -28,9 +28,7 @@ class AclRoleQuery extends ActiveQuery
     }
 
     /**
-     * __method_prioritizeNonType_description__.
      *
-     * @param __param_event_type__ $event __param_event_description__ [optional]
      */
     public function prioritizeNonType($event = null)
     {
