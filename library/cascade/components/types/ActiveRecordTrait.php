@@ -24,13 +24,13 @@ trait ActiveRecordTrait
 {
     use SearchTerm;
 
-    public $baseFieldClass = 'cascade\\components\\db\\fields\\Base';
-    public $artificialFieldClass = 'cascade\\components\\db\\fields\\Artificial';
-    public $modelFieldClass = 'cascade\\components\\db\\fields\\Model';
-    public $relationFieldClass = 'cascade\\components\\db\\fields\\Relation';
-    public $relationTaxonomyFieldClass = 'cascade\\components\\db\\fields\\RelationTaxonomy';
-    public $taxonomyFieldClass = 'cascade\\components\\db\\fields\\Taxonomy';
-    public $formSegmentClass = 'cascade\\components\\web\\form\\Segment';
+    public $baseFieldClass = 'cascade\components\db\fields\Base';
+    public $artificialFieldClass = 'cascade\components\db\fields\Artificial';
+    public $modelFieldClass = 'cascade\components\db\fields\Model';
+    public $relationFieldClass = 'cascade\components\db\fields\Relation';
+    public $relationTaxonomyFieldClass = 'cascade\components\db\fields\RelationTaxonomy';
+    public $taxonomyFieldClass = 'cascade\components\db\fields\Taxonomy';
+    public $formSegmentClass = 'cascade\components\web\form\Segment';
     public $columnSchemaClass = 'yii\\db\\ColumnSchema';
 
     public $foreignWeight = .7;
@@ -51,31 +51,31 @@ trait ActiveRecordTrait
     {
         return [
             'Registry' => [
-                'class' => 'infinite\\db\\behaviors\\Registry',
+                'class' => 'infinite\db\behaviors\Registry',
             ],
             'Relatable' => [
-                'class' => 'cascade\\components\\db\\behaviors\\Relatable',
+                'class' => 'cascade\components\db\behaviors\Relatable',
             ],
             'Taxonomy' => [
-                'class' => 'cascade\\components\\db\\behaviors\\ActiveTaxonomy',
+                'class' => 'cascade\components\db\behaviors\ActiveTaxonomy',
             ],
             'ActiveAccess' => [
-                'class' => 'cascade\\components\\db\\behaviors\\ActiveAccess',
+                'class' => 'cascade\components\db\behaviors\ActiveAccess',
             ],
             'Roleable' => [
-                'class' => 'cascade\\components\\db\\behaviors\\Roleable',
+                'class' => 'cascade\components\db\behaviors\Roleable',
             ],
             'Ownable' => [
-                'class' => 'cascade\\components\\db\\behaviors\\Ownable',
+                'class' => 'cascade\components\db\behaviors\Ownable',
             ],
             'Familiarity' => [
-                'class' => 'cascade\\components\\db\\behaviors\\Familiarity',
+                'class' => 'cascade\components\db\behaviors\Familiarity',
             ],
             'Auditable' => [
-                'class' => 'cascade\\components\\db\\behaviors\\auditable\\Auditable',
+                'class' => 'cascade\components\db\behaviors\auditable\Auditable',
             ],
             'RelatedObjects' => [
-                'class' => 'cascade\\components\\db\\behaviors\\RelatedObjects',
+                'class' => 'cascade\components\db\behaviors\RelatedObjects',
             ],
         ];
     }
@@ -85,7 +85,7 @@ trait ActiveRecordTrait
         return array_merge(parent::queryBehaviors(), 
             [
                 'Taxonomy' => [
-                    'class' => 'cascade\\components\\db\\behaviors\\QueryTaxonomy',
+                    'class' => 'cascade\components\db\behaviors\QueryTaxonomy',
                 ],
             ]
         );

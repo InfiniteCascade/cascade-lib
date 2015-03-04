@@ -18,7 +18,7 @@ use cascade\models\StorageEngine;
 
 class LocalHandler extends \cascade\components\storageHandlers\Handler
     implements \cascade\components\storageHandlers\UploadInterface {
-    public $localFileClass = 'infinite\\base\\File';
+    public $localFileClass = 'infinite\base\File';
     public $bucketFormat = '{year}.{month}';
     protected $_baseDir;
 

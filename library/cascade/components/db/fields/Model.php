@@ -17,7 +17,7 @@ class Model extends Base
     /**
      * @inheritdoc
      */
-    public $formFieldClass = 'cascade\\components\\web\\form\\fields\\Model';
+    public $formFieldClass = 'cascade\components\web\form\fields\Model';
     /**
     * @inheritdoc
      */

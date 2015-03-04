@@ -26,17 +26,17 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     /**
      * @inheritdoc
      */
-    public $fieldMapClass = 'cascade\\components\\dataInterface\\connectors\\file\\FieldMap';
+    public $fieldMapClass = 'cascade\components\dataInterface\connectors\file\FieldMap';
     /**
      * @inheritdoc
      */
-    public $dataItemClass = 'cascade\\components\\dataInterface\\connectors\\file\\DataItem';
+    public $dataItemClass = 'cascade\components\dataInterface\connectors\file\DataItem';
     /**
      * @inheritdoc
      */
-    public $searchClass = 'cascade\\components\\dataInterface\\connectors\\file\\Search';
+    public $searchClass = 'cascade\components\dataInterface\connectors\file\Search';
 
-    public $foreignModelClass = 'cascade\\components\\dataInterface\\connectors\\file\\Model';
+    public $foreignModelClass = 'cascade\components\dataInterface\connectors\file\Model';
 
     protected $_fileSource;
 

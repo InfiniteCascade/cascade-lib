@@ -13,7 +13,7 @@ trait FormObjectTrait
 {
     public $owner;
     public $isValid = true;
-    public $generatorClass = 'cascade\\components\\web\\form\\Generator';
+    public $generatorClass = 'cascade\components\web\form\Generator';
 
     public function output()
     {

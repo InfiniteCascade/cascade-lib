@@ -7,7 +7,7 @@
  */
 
 $config = include(__DIR__ . DIRECTORY_SEPARATOR . 'base.php');
-$config['controllerNamespace'] = 'cascade\\controllers';
+$config['controllerNamespace'] = 'cascade\controllers';
 $config['controllerMap'] = [
     // 'admin' => \cascade\controllers\admin\DefaultController::className(),
     // 'admin/interface' => \cascade\controllers\admin\InterfaceController::className(),
@@ -24,7 +24,7 @@ $config['components']['user'] = [
     'loginUrl' => ['/app/login'],
 ];
 $config['components']['webState'] = [
-    'class' => 'infinite\\web\\State'
+    'class' => 'infinite\web\State'
 ];
 $config['components']['session'] = [
     'class' => 'yii\redis\Session',

@@ -22,11 +22,11 @@ class Section extends \cascade\components\web\widgets\Widget
     /**
      * @inheritdoc
      */
-    public $gridClass = 'infinite\\web\\grid\\Grid';
+    public $gridClass = 'infinite\web\grid\Grid';
     /**
      * @var __var_defaultWidgetDecoratorClass_type__ __var_defaultWidgetDecoratorClass_description__
      */
-    public $defaultWidgetDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\PanelDecorator';
+    public $defaultWidgetDecoratorClass = 'cascade\components\web\widgets\decorator\PanelDecorator';
     /**
      * @inheritdoc
      */

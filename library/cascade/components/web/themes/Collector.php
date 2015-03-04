@@ -34,7 +34,7 @@ class Collector extends \infinite\base\collector\Module
      */
     public function getCollectorItemClass()
     {
-        return 'cascade\\components\\web\\themes\\Item';
+        return 'cascade\components\web\themes\Item';
     }
 
     /**

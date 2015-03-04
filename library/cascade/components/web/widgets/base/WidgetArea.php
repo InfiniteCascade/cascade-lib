@@ -29,7 +29,7 @@ abstract class WidgetArea extends BaseWidget
     /**
      * @inheritdoc
      */
-    public $defaultDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\AreaDecorator';
+    public $defaultDecoratorClass = 'cascade\components\web\widgets\decorator\AreaDecorator';
 
     /**
     * @inheritdoc

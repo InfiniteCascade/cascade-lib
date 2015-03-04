@@ -17,15 +17,15 @@ class Bundle extends \infinite\web\browser\Bundle
     /**
      * @inheritdoc
      */
-    public $itemClass = 'cascade\\components\\web\\browser\\Item';
+    public $itemClass = 'cascade\components\web\browser\Item';
     /**
     * @inheritdoc
      */
     public function getHandlers()
     {
         return [
-            'types' => 'cascade\\components\\web\\browser\\HandlerTypes',
-            'objects' => 'cascade\\components\\web\\browser\\HandlerObjects'
+            'types' => 'cascade\components\web\browser\HandlerTypes',
+            'objects' => 'cascade\components\web\browser\HandlerObjects'
         ];
     }
 }

@@ -23,7 +23,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
     /**
      * @inheritdoc
      */
-    public $objectAccessClass = 'cascade\\components\\security\\ObjectAccess';
+    public $objectAccessClass = 'cascade\components\security\ObjectAccess';
 
     /**
      * Get primary account

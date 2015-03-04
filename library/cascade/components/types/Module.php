@@ -92,23 +92,23 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * @var __var_formGeneratorClass_type__ __var_formGeneratorClass_description__
      */
-    public $formGeneratorClass = 'cascade\\components\\web\\form\\Generator';
+    public $formGeneratorClass = 'cascade\components\web\form\Generator';
     /**
      * @var __var_sectionItemClass_type__ __var_sectionItemClass_description__
      */
-    public $sectionItemClass = 'cascade\\components\\section\\Item';
+    public $sectionItemClass = 'cascade\components\section\Item';
     /**
      * @var __var_sectionWidgetClass_type__ __var_sectionWidgetClass_description__
      */
-    public $sectionWidgetClass = 'cascade\\components\\web\\widgets\\section\\Section';
+    public $sectionWidgetClass = 'cascade\components\web\widgets\section\Section';
     /**
      * @var __var_sectionSingleWidgetClass_type__ __var_sectionSingleWidgetClass_description__
      */
-    public $sectionSingleWidgetClass = 'cascade\\components\\web\\widgets\\section\\SingleSection';
+    public $sectionSingleWidgetClass = 'cascade\components\web\widgets\section\SingleSection';
     /**
      * @var __var_fallbackDetailsWidgetClass_type__ __var_fallbackDetailsWidgetClass_description__
      */
-    public $fallbackDetailsWidgetClass = 'cascade\\components\\web\\widgets\\base\\Details';
+    public $fallbackDetailsWidgetClass = 'cascade\components\web\widgets\base\Details';
 
     /**
      * @var __var__objectTypeModel_type__ __var__objectTypeModel_description__

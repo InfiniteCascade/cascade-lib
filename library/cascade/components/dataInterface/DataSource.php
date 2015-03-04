@@ -27,15 +27,15 @@ abstract class DataSource extends \infinite\base\Component
     /**
      * @var __var_fieldMapClass_type__ __var_fieldMapClass_description__
      */
-    public $fieldMapClass = 'cascade\\components\\dataInterface\\FieldMap';
+    public $fieldMapClass = 'cascade\components\dataInterface\FieldMap';
     /**
      * @var __var_dataItemClass_type__ __var_dataItemClass_description__
      */
-    public $dataItemClass = 'cascade\\components\\dataInterface\\DataItem';
+    public $dataItemClass = 'cascade\components\dataInterface\DataItem';
     /**
      * @var __var_searchClass_type__ __var_searchClass_description__
      */
-    public $searchClass = 'cascade\\components\\dataInterface\\Search';
+    public $searchClass = 'cascade\components\dataInterface\Search';
 
     /**
      * @var __var_keyGenerator_type__ __var_keyGenerator_description__

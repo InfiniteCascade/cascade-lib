@@ -20,7 +20,7 @@ class Model extends Base
     /**
      * @var __var_fileStorageWidgetClass_type__ __var_fileStorageWidgetClass_description__
      */
-    public $fileStorageWidgetClass = 'cascade\\components\\web\\widgets\\form\\FileStorage';
+    public $fileStorageWidgetClass = 'cascade\components\web\widgets\form\FileStorage';
     /**
      * @var __var__fieldConfig_type__ __var__fieldConfig_description__
      */

@@ -31,7 +31,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     /**
      * @inheritdoc
      */
-    public $defaultDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\PanelDecorator';
+    public $defaultDecoratorClass = 'cascade\components\web\widgets\decorator\PanelDecorator';
     /**
      * @var __var_gridCellClass_type__ __var_gridCellClass_description__
      */

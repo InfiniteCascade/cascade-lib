@@ -46,11 +46,11 @@ class Details extends Widget implements ListWidgetInterface
     /**
      * @inheritdoc
      */
-    public $gridClass = 'infinite\\web\\grid\\Grid';
+    public $gridClass = 'infinite\web\grid\Grid';
     /**
      * @inheritdoc
      */
-    public $gridCellClass = 'infinite\\web\\grid\\Cell';
+    public $gridCellClass = 'infinite\web\grid\Cell';
     /**
      * @inheritdoc
      */

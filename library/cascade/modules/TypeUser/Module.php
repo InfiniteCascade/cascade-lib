@@ -34,7 +34,7 @@ class Module extends \cascade\components\types\Module
     /**
      * @inheritdoc
      */
-    public $widgetNamespace = 'cascade\\modules\\TypeUser\\widgets';
+    public $widgetNamespace = 'cascade\modules\TypeUser\widgets';
     /**
      * @inheritdoc
      */

@@ -40,7 +40,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     /**
      * @var __var_defaultDecoratorClass_type__ __var_defaultDecoratorClass_description__
      */
-    public $defaultDecoratorClass = 'cascade\\components\\web\\widgets\\decorator\\PanelDecorator';
+    public $defaultDecoratorClass = 'cascade\components\web\widgets\decorator\PanelDecorator';
 
     /**
      * @var __var_params_type__ __var_params_description__
@@ -113,7 +113,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     {
         return [
             'CellBehavior' => [
-                'class' => 'cascade\\components\\web\\widgets\\base\\CellBehavior'
+                'class' => 'cascade\components\web\widgets\base\CellBehavior'
             ]
         ];
     }

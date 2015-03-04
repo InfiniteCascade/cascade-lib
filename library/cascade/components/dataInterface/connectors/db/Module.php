@@ -23,7 +23,7 @@ abstract class Module extends BaseModule
     /**
      * @var __var_dataSourceClass_type__ __var_dataSourceClass_description__
      */
-    public $dataSourceClass = 'cascade\\components\\dataInterface\\connectors\\db\\DataSource';
+    public $dataSourceClass = 'cascade\components\dataInterface\connectors\db\DataSource';
     
     /**
      * @var __var_dbConfig_type__ __var_dbConfig_description__
@@ -167,7 +167,7 @@ abstract class Module extends BaseModule
     {
         if (is_null($this->_db)) {
             if (!isset($this->dbConfig['class'])) {
-                $this->dbConfig['class'] = 'cascade\\components\\dataInterface\\connectors\\db\\Connection';
+                $this->dbConfig['class'] = 'cascade\components\dataInterface\connectors\db\Connection';
             }
             $this->_db = Yii::createObject($this->dbConfig);
             $this->_db->open();

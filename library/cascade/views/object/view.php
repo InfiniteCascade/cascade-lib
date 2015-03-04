@@ -31,7 +31,7 @@ foreach ($sections as $section) {
 $this->tinyMenu = $sectionsMenu;
 echo Html::beginTag('div', ['class' => 'dashboard']);
 
-$grid = Yii::createObject(['class' => 'infinite\\web\\grid\\Grid']);
+$grid = Yii::createObject(['class' => 'infinite\web\grid\Grid']);
 $cells = [];
 $mainColumnSize = 12;
 

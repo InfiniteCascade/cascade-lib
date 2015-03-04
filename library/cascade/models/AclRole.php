@@ -20,5 +20,5 @@ class AclRole extends \infinite\db\models\AclRole
     /**
      * @inheritdoc
      */
-    public static $queryClass = 'cascade\\models\\AclRoleQuery';
+    public static $queryClass = 'cascade\models\AclRoleQuery';
 }

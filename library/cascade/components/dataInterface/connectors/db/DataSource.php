@@ -25,15 +25,15 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     /**
      * @inheritdoc
      */
-    public $fieldMapClass = 'cascade\\components\\dataInterface\\connectors\\db\\FieldMap';
+    public $fieldMapClass = 'cascade\components\dataInterface\connectors\db\FieldMap';
     /**
      * @inheritdoc
      */
-    public $dataItemClass = 'cascade\\components\\dataInterface\\connectors\\db\\DataItem';
+    public $dataItemClass = 'cascade\components\dataInterface\connectors\db\DataItem';
     /**
      * @inheritdoc
      */
-    public $searchClass = 'cascade\\components\\dataInterface\\connectors\\db\\Search';
+    public $searchClass = 'cascade\components\dataInterface\connectors\db\Search';
 
 
     public $keys = ['id' => 'primaryKey'];

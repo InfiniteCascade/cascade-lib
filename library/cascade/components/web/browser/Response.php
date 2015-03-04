@@ -19,7 +19,7 @@ class Response extends \infinite\web\browser\Response
     /**
      * @inheritdoc
      */
-    public $bundleClass = 'cascade\\components\\web\\browser\\Bundle';
+    public $bundleClass = 'cascade\components\web\browser\Bundle';
 
     /**
      * __method_defaultInstructions_description__

@@ -50,7 +50,7 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     {
         return array_merge(parent::behaviors(), [
             'Registry' => [
-                'class' => 'infinite\\db\\behaviors\\Registry'
+                'class' => 'infinite\db\behaviors\Registry'
             ],
         ]);
     }

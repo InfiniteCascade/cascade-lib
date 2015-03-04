@@ -50,13 +50,13 @@ class AppAsset extends AssetBundle
      * @inheritdoc
      */
     public $depends = [
-        'infinite\\web\\assetBundles\\InfiniteAsset',
-        'infinite\\web\\assetBundles\\InfiniteBrowserAsset',
-        'infinite\\web\\assetBundles\\BootstrapSelectAsset',
-        'infinite\\web\\assetBundles\\BootstrapDatepickerAsset',
-        'infinite\\web\\assetBundles\\TimeAgoAsset',
-        'infinite\\web\\assetBundles\\BootstrapTypeaheadAsset',
-        'cascade\\components\\web\\assetBundles\\PurlAsset',
-        'cascade\\components\\web\\assetBundles\\VibeAsset'
+        'infinite\web\assetBundles\InfiniteAsset',
+        'infinite\web\assetBundles\InfiniteBrowserAsset',
+        'infinite\web\assetBundles\BootstrapSelectAsset',
+        'infinite\web\assetBundles\BootstrapDatepickerAsset',
+        'infinite\web\assetBundles\TimeAgoAsset',
+        'infinite\web\assetBundles\BootstrapTypeaheadAsset',
+        'cascade\components\web\assetBundles\PurlAsset',
+        'cascade\components\web\assetBundles\VibeAsset'
     ];
 }

@@ -19,7 +19,7 @@ class HandlerObjects extends \infinite\web\browser\Handler
     /**
      * @var __var_bundleClass_type__ __var_bundleClass_description__
      */
-    public $bundleClass = 'cascade\\components\\web\\browser\\Bundle';
+    public $bundleClass = 'cascade\components\web\browser\Bundle';
     /**
      * @var __var__dataSource_type__ __var__dataSource_description__
      */

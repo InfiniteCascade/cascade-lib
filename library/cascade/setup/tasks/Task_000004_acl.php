@@ -25,7 +25,7 @@ class Task_000004_acl extends AclTask
             [
                 'action' => null,
                 'controlled' => null,
-                'accessing' => ['model' => 'cascade\\models\\Group', 'fields' => ['system' => 'administrators']],
+                'accessing' => ['model' => 'cascade\models\Group', 'fields' => ['system' => 'administrators']],
                 'object_model' => null,
                 'task' => 'allow',
             ],

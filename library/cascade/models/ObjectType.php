@@ -36,13 +36,13 @@ class ObjectType extends \cascade\components\db\ActiveRecord
     {
         return array_merge(parent::behaviors(), [
             'Registry' => [
-                'class' => 'infinite\\db\\behaviors\\Registry'
+                'class' => 'infinite\db\behaviors\Registry'
             ],
             'Roleable' => [
-                'class' => 'cascade\\components\\db\\behaviors\\Roleable',
+                'class' => 'cascade\components\db\behaviors\Roleable',
             ],
             'ActiveAccess' => [
-                'class' => 'cascade\\components\\db\\behaviors\\ActiveAccess',
+                'class' => 'cascade\components\db\behaviors\ActiveAccess',
             ],
         ]);
     }

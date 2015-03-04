@@ -83,7 +83,7 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
 
         $return = $registryClass::getObject($this->registry_id, $checkAccess);
 
-            if (get_class($return) === 'cascade\\models\\Registry') {
+            if (get_class($return) === 'cascade\models\Registry') {
                 \d($this->registry_id);
                 throw new \Exception("TRANSLATION WHATTTT AGAIN?!");
                 exit;

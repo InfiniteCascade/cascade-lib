@@ -1,6 +1,6 @@
 <?php
 return [
-    'class' => 'infinite\\security\\role\\Collector',
+    'class' => 'infinite\security\role\Collector',
     'initialItems' => [
         'owner' => [
             'name' => 'Owner',

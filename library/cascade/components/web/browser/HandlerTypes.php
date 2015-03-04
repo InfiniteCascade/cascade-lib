@@ -22,7 +22,7 @@ class HandlerTypes extends \infinite\web\browser\Handler
     /**
      * @var __var_bundleClass_type__ __var_bundleClass_description__
      */
-    public $bundleClass = 'cascade\\components\\web\\browser\\Bundle';
+    public $bundleClass = 'cascade\components\web\browser\Bundle';
 
     /**
      * __method_possibleTypes_description__

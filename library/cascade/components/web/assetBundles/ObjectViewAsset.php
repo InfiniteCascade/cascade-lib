@@ -39,6 +39,6 @@ class ObjectViewAsset extends AssetBundle
      * @inheritdoc
      */
     public $depends = [
-        'cascade\\components\\web\\assetBundles\\AppAsset'
+        'cascade\components\web\assetBundles\AppAsset'
     ];
 }

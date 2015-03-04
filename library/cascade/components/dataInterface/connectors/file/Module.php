@@ -24,8 +24,8 @@ abstract class Module extends BaseModule
     /**
      * @var __var_dataSourceClass_type__ __var_dataSourceClass_description__
      */
-    public $dataSourceClass = 'cascade\\components\\dataInterface\\connectors\\file\\DataSource';
-    public $sourceFileClass = 'cascade\\components\\dataInterface\\connectors\\file\\SourceFile';
+    public $dataSourceClass = 'cascade\components\dataInterface\connectors\file\DataSource';
+    public $sourceFileClass = 'cascade\components\dataInterface\connectors\file\SourceFile';
     
 
     /**

@@ -148,7 +148,7 @@ class Generator extends \yii\gii\Generator
             return $bsReflector->getNamespaceName();
         }
 
-        return 'cascade\\modules';
+        return 'cascade\modules';
     }
 
     /**
@@ -485,7 +485,7 @@ EOD;
             $this->addError('moduleClass', 'Module class must be properly namespaced.');
         }
         if (substr($this->moduleClass, -1, 1) == '\\') {
-            $this->addError('moduleClass', 'Module class name must not be empty. Please enter a fully qualified class name. e.g. "cascade\\modules\\admin\\Module".');
+            $this->addError('moduleClass', 'Module class name must not be empty. Please enter a fully qualified class name. e.g. "cascade\modules\admin\Module".');
         }
     }
 

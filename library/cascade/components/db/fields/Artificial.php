@@ -61,6 +61,6 @@ class Artificial extends Base
 
     public function determineFormatClass()
     {
-        return 'cascade\\components\\db\\fields\\formats\\RawText';
+        return 'cascade\components\db\fields\formats\RawText';
     }
 }

@@ -25,15 +25,15 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     /**
      * @inheritdoc
      */
-    public $fieldMapClass = 'cascade\\components\\dataInterface\\connectors\\generic\\FieldMap';
+    public $fieldMapClass = 'cascade\components\dataInterface\connectors\generic\FieldMap';
     /**
      * @inheritdoc
      */
-    public $dataItemClass = 'cascade\\components\\dataInterface\\connectors\\generic\\DataItem';
+    public $dataItemClass = 'cascade\components\dataInterface\connectors\generic\DataItem';
     /**
      * @inheritdoc
      */
-    public $searchClass = 'cascade\\components\\dataInterface\\connectors\\generic\\Search';
+    public $searchClass = 'cascade\components\dataInterface\connectors\generic\Search';
 
     public $keys = [];
 

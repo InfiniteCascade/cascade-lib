@@ -68,7 +68,7 @@ trait ObjectWidgetTrait
         if (is_null($this->_dataProvider)) {
             $dataProvider = $this->dataProviderSettings;
             if (!isset($dataProvider['class'])) {
-                $dataProvider['class'] = 'infinite\\data\\ActiveDataProvider';
+                $dataProvider['class'] = 'infinite\data\ActiveDataProvider';
             }
             $method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
             if (in_array($method, ['parents', 'children']) && empty(Yii::$app->request->object)) {
@@ -90,7 +90,7 @@ trait ObjectWidgetTrait
             $dummyModel = new $queryModelClass;
             if (in_array($this->currentSortBy, ['familiarity', 'last_accessed'])) {
                 if ($dataProvider['query']->getBehavior('FamiliarityQuery') === null) {
-                    $dataProvider['query']->attachBehavior('FamiliarityQuery', ['class' => 'cascade\\components\\db\\behaviors\\QueryFamiliarity']);
+                    $dataProvider['query']->attachBehavior('FamiliarityQuery', ['class' => 'cascade\components\db\behaviors\QueryFamiliarity']);
                 }
                 $dataProvider['query']->withFamiliarity();
             }
@@ -397,7 +397,7 @@ trait ObjectWidgetTrait
     public function getPaginationSettings()
     {
         return [
-            'class' => 'infinite\\data\\Pagination',
+            'class' => 'infinite\data\Pagination',
             'pageSize' => $this->pageSize,
             'validatePage' => false,
             'page' => $this->getState('_page', 0),
@@ -407,7 +407,7 @@ trait ObjectWidgetTrait
     public function getSortSettings()
     {
         return [
-            'class' => 'infinite\\data\\Sort',
+            'class' => 'infinite\data\Sort',
             'sortOrders' => [
                 $this->currentSortBy => $this->currentSortByDirection === 'asc' ? SORT_ASC : SORT_DESC
             ],
@@ -419,7 +419,7 @@ trait ObjectWidgetTrait
     public function getPagerSettings()
     {
         return [
-            'class' => 'infinite\\widgets\\LinkPager',
+            'class' => 'infinite\widgets\LinkPager',
             'pageStateKey' => $this->stateKeyName('_page'),
         ];
     }
@@ -427,7 +427,7 @@ trait ObjectWidgetTrait
     public function getDataProviderSettings()
     {
         return [
-            'class' => 'infinite\\data\\ActiveDataProvider'
+            'class' => 'infinite\data\ActiveDataProvider'
         ];
     }
 }

@@ -18,9 +18,9 @@ class Auditable extends \infinite\db\behaviors\auditable\Auditable
     /**
      * @inheritdoc
      */
-    public $deleteEventClass = 'cascade\\components\\db\\behaviors\\auditable\\DeleteEvent';
-    public $createEventClass = 'cascade\\components\\db\\behaviors\\auditable\\CreateEvent';
-    public $updateEventClass = 'cascade\\components\\db\\behaviors\\auditable\\UpdateEvent';
+    public $deleteEventClass = 'cascade\components\db\behaviors\auditable\DeleteEvent';
+    public $createEventClass = 'cascade\components\db\behaviors\auditable\CreateEvent';
+    public $updateEventClass = 'cascade\components\db\behaviors\auditable\UpdateEvent';
 
 
     public function safeAttributes()
@@ -32,7 +32,7 @@ class Auditable extends \infinite\db\behaviors\auditable\Auditable
     {
         return [
             [
-                'class' => 'cascade\\components\\db\\behaviors\\auditable\\DataInterfaceEventBehavior'
+                'class' => 'cascade\components\db\behaviors\auditable\DataInterfaceEventBehavior'
             ]
         ];
     }
