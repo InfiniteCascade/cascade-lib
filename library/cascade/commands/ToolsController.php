@@ -86,9 +86,27 @@ class ToolsController extends \infinite\console\Controller
                 Console::stdout("skipped!" . PHP_EOL);
                 continue;
             }
-            Console::stdout($foundConfig);
+            $phpcsBinary = Yii::getAlias('@vendor/bin/php-cs-fixer');
+            if (!file_exists($phpcsBinary)) {
+                Console::stdout("no php-cs-fixer binary!" . PHP_EOL);
+                continue;
+            }
             
-            Console::stdout("done in ". round(microtime(true)-$dirStart,1)."s!".PHP_EOL);
+            chdir($dir);
+            $command = [];
+            $command[] = PHP_BINARY;
+            $command[] = $phpcsBinary;
+            $command[] = '--no-interaction';
+            // $command[] = '--quiet';
+            $command[] = 'fix';
+
+            exec(implode(' ', $command), $output, $exitCode);
+            if (empty($exitCode)) {
+                Console::stdout("done in ". round(microtime(true)-$dirStart,1)."s!".PHP_EOL);
+            } else {
+                Console::stdout("error!".PHP_EOL);
+                \d($output);exit;
+            }
         }
         Console::stdout("done in ". round(microtime(true)-$phpcsStart,1)."s!".PHP_EOL.PHP_EOL);
     }
