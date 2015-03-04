@@ -102,12 +102,7 @@ class ToolsController extends \infinite\console\Controller
             $command[] = 'fix';
 
             exec(implode(' ', $command), $output, $exitCode);
-            if (preg_match('/error/', implode(PHP_EOL, $output)) !== 1) {
-                Console::stdout("done in " . round(microtime(true)-$dirStart, 1) . "s!" . PHP_EOL);
-            } else {
-                Console::stdout("error!" . PHP_EOL);
-                \d($output);
-            }
+            Console::stdout("done in " . round(microtime(true)-$dirStart, 1) . "s!" . PHP_EOL);
         }
         Console::stdout("done in " . round(microtime(true)-$phpcsStart, 1) . "s!" . PHP_EOL . PHP_EOL);
     }
