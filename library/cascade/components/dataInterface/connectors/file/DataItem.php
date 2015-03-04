@@ -8,8 +8,8 @@
 
 namespace cascade\components\dataInterface\connectors\file;
 
-use cascade\components\dataInterface\RecursionException;
 use cascade\components\dataInterface\MissingItemException;
+use cascade\components\dataInterface\RecursionException;
 
 /**
  * DataItem [@doctodo write class description for DataItem].

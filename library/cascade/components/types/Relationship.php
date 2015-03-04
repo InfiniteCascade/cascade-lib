@@ -8,9 +8,9 @@
 
 namespace cascade\components\types;
 
-use Yii;
-use infinite\base\exceptions\Exception;
 use cascade\components\db\behaviors\Relatable;
+use infinite\base\exceptions\Exception;
+use Yii;
 
 /**
  * Relationship [@doctodo write class description for Relationship].
@@ -147,9 +147,9 @@ class Relationship extends \infinite\base\Object
             $childClass = $this->child->primaryModel;
             $relation = $relationClass::find();
             $alias = $relationClass::tableName();
-            $relation->andWhere(['`'.$alias.'`.`parent_object_id`' => $primaryParent->primaryKey, '`'.$alias.'`.`'.$primaryField.'`' => 1]);
-            $relation->andWhere(['or', '`'.$alias.'`.`child_object_id` LIKE :prefix']); //, '`'. $alias.'`.`child_object_id` LIKE \''.$childClass.'\''
-            $relation->params[':prefix'] = $childClass::modelPrefix().'-%';
+            $relation->andWhere(['`' . $alias . '`.`parent_object_id`' => $primaryParent->primaryKey, '`' . $alias . '`.`' . $primaryField . '`' => 1]);
+            $relation->andWhere(['or', '`' . $alias . '`.`child_object_id` LIKE :prefix']); //, '`'. $alias.'`.`child_object_id` LIKE \''.$childClass.'\''
+            $relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
             $primaryObject->addActiveConditions($relation, $alias);
             // \d([$this->systemId, $relation->createCommand()->rawSql, $primaryField, $role]);
             $relation = $relation->one();
@@ -183,9 +183,9 @@ class Relationship extends \infinite\base\Object
             $childClass = $this->child->primaryModel;
             $relation = $relationClass::find();
             $alias = $relationClass::tableName();
-            $relation->andWhere(['`'.$alias.'`.`parent_object_id`' => $parentObject->primaryKey, '`'.$alias.'`.`primary_child`' => 1]);
-            $relation->andWhere(['or', '`'.$alias.'`.`child_object_id` LIKE :prefix']); //, '`'. $alias.'`.`child_object_id` LIKE \''.$childClass.'\''
-            $relation->params[':prefix'] = $childClass::modelPrefix().'-%';
+            $relation->andWhere(['`' . $alias . '`.`parent_object_id`' => $parentObject->primaryKey, '`' . $alias . '`.`primary_child`' => 1]);
+            $relation->andWhere(['or', '`' . $alias . '`.`child_object_id` LIKE :prefix']); //, '`'. $alias.'`.`child_object_id` LIKE \''.$childClass.'\''
+            $relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
             $parentObject->addActiveConditions($relation, $alias);
             $relation = $relation->one();
             if (!empty($relation)) {
@@ -218,9 +218,9 @@ class Relationship extends \infinite\base\Object
             $childClass = $this->child->primaryModel;
             $relation = $relationClass::find();
             $alias = $relationClass::tableName();
-            $relation->andWhere(['`'.$alias.'`.`parent_object_id`' => $parentObject->primaryKey, '`'.$alias.'`.`primary_parent`' => 1]);
-            $relation->andWhere('`'.$alias.'`.`child_object_id` LIKE :prefix');
-            $relation->params[':prefix'] = $childClass::modelPrefix().'-%';
+            $relation->andWhere(['`' . $alias . '`.`parent_object_id`' => $parentObject->primaryKey, '`' . $alias . '`.`primary_parent`' => 1]);
+            $relation->andWhere('`' . $alias . '`.`child_object_id` LIKE :prefix');
+            $relation->params[':prefix'] = $childClass::modelPrefix() . '-%';
             $parentObject->addActiveConditions($relation, $alias);
             $relation = $relation->one();
             if (!empty($relation)) {
@@ -282,7 +282,7 @@ class Relationship extends \infinite\base\Object
      */
     public static function getOne(Item $parent, Item $child, $options = [])
     {
-        $key = md5($parent->systemId.".".$child->systemId);
+        $key = md5($parent->systemId . "." . $child->systemId);
         if (isset(self::$_relationships[$key])) {
             self::$_relationships[$key]->mergeOptions($options);
         } else {
@@ -315,7 +315,7 @@ class Relationship extends \infinite\base\Object
      */
     public static function has(Item $parent, Item $child)
     {
-        $key = md5($parent->systemId.".".$child->systemId);
+        $key = md5($parent->systemId . "." . $child->systemId);
 
         return isset(self::$_relationships[$key]);
     }
@@ -370,9 +370,9 @@ class Relationship extends \infinite\base\Object
     {
         $role = $this->companionRole($role);
         if ($role === 'child') {
-            return 'Child '.$this->child->title->upperSingular;
+            return 'Child ' . $this->child->title->upperSingular;
         } else {
-            return 'Parent '.$this->parent->title->upperSingular;
+            return 'Parent ' . $this->parent->title->upperSingular;
         }
     }
 
@@ -454,7 +454,7 @@ class Relationship extends \infinite\base\Object
             return false;
         }
 
-        if (!$object->can('associate:'.$this->companionRoleType($relationshipRole)->systemId)) {
+        if (!$object->can('associate:' . $this->companionRoleType($relationshipRole)->systemId)) {
             return false;
         }
 
@@ -652,6 +652,6 @@ class Relationship extends \infinite\base\Object
      */
     public function getSystemId()
     {
-        return $this->_parent->systemId.'.'.$this->_child->systemId;
+        return $this->_parent->systemId . '.' . $this->_child->systemId;
     }
 }

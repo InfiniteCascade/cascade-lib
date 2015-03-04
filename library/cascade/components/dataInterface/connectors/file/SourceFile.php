@@ -8,9 +8,9 @@
 
 namespace cascade\components\dataInterface\connectors\file;
 
-use Yii;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\Match;
+use Yii;
 
 /**
  * Meta [@doctodo write class description for Meta].
@@ -125,7 +125,7 @@ class SourceFile extends \infinite\base\Object
                 $file = $this->local;
                 $pathinfo = pathinfo($this->local);
             } elseif (isset($this->url)) {
-                $fileCacheKey = md5(__CLASS__.__FUNCTION__.$this->url);
+                $fileCacheKey = md5(__CLASS__ . __FUNCTION__ . $this->url);
                 $fileContent = Yii::$app->fileCache->get($fileCacheKey);
                 $pathinfo = pathinfo($this->url);
                 $file = Yii::$app->fileStorage->getTempFile(false, $pathinfo['extension']);
@@ -173,7 +173,7 @@ class SourceFile extends \infinite\base\Object
     private function _loadExcel()
     {
         spl_autoload_unregister(['BaseYii', 'autoload']);
-        $path = INFINITE_APP_VENDOR_PATH.DIRECTORY_SEPARATOR.'phpoffice'.DIRECTORY_SEPARATOR.'phpexcel'.DIRECTORY_SEPARATOR.'Classes'.DIRECTORY_SEPARATOR.'PHPExcel.php';
+        $path = INFINITE_APP_VENDOR_PATH . DIRECTORY_SEPARATOR . 'phpoffice' . DIRECTORY_SEPARATOR . 'phpexcel' . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'PHPExcel.php';
         require_once $path;
     }
 

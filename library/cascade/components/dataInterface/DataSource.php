@@ -8,8 +8,8 @@
 
 namespace cascade\components\dataInterface;
 
-use Yii;
 use cascade\components\db\ActiveRecord;
+use Yii;
 use yii\helpers\Inflector;
 
 /**

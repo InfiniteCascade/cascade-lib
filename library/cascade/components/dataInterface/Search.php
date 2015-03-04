@@ -8,9 +8,9 @@
 
 namespace cascade\components\dataInterface;
 
-use infinite\helpers\Console;
 use cascade\components\helpers\StringHelper;
 use infinite\helpers\ArrayHelper;
+use infinite\helpers\Console;
 
 /**
  * Search [@doctodo write class description for Search].
@@ -124,8 +124,8 @@ class Search extends \infinite\base\Component
             $resultsNice = [];
             $optionNumber = 1;
             foreach ($searchResults as $result) {
-                $resultsNice['_o'.$optionNumber] = $result;
-                $options['_o'.$optionNumber] = $result->descriptor.' ('.$result->score.'%)';
+                $resultsNice['_o' . $optionNumber] = $result;
+                $options['_o' . $optionNumber] = $result->descriptor . ' (' . $result->score . '%)';
                 $optionNumber++;
             }
             $options['new'] = 'Create New Object';
@@ -150,7 +150,7 @@ class Search extends \infinite\base\Component
                 },
             ];
             Console::output("Waiting for interaction...");
-            if (!$this->dataSource->action->createInteraction('Match Object ('.implode(' ', $query).')', $interactionOptions, $callback)) {
+            if (!$this->dataSource->action->createInteraction('Match Object (' . implode(' ', $query) . ')', $interactionOptions, $callback)) {
                 return false;
             }
 
@@ -159,7 +159,7 @@ class Search extends \infinite\base\Component
 
                 return;
             } else {
-                Console::output("Selected ".$resultsNice[$select]->descriptor);
+                Console::output("Selected " . $resultsNice[$select]->descriptor);
 
                 return $resultsNice[$select]->object;
             }

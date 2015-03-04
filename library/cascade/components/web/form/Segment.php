@@ -8,11 +8,11 @@
 
 namespace cascade\components\web\form;
 
-use Yii;
 use cascade\components\db\fields\Model as ModelField;
 use cascade\components\db\fields\Relation as RelationField;
-use infinite\web\grid\Grid;
 use infinite\helpers\Html;
+use infinite\web\grid\Grid;
+use Yii;
 
 /**
  * Segment [@doctodo write class description for Segment].
@@ -232,7 +232,7 @@ class Segment extends FormObject
             $requiredFields = true;
             $fieldsTemplate = false;
             if (!is_null($this->relationField)) {
-                $fieldName = $this->relationField->modelRole.':'.$this->relationField->baseModel->objectType->systemId;
+                $fieldName = $this->relationField->modelRole . ':' . $this->relationField->baseModel->objectType->systemId;
                 if (isset($fields[$fieldName])) {
                     $fields[$fieldName]->baseModel = $this->relationField->baseModel;
                     $fields[$fieldName]->model = $this->relationField->model;

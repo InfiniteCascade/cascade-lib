@@ -8,8 +8,8 @@
 
 namespace cascade\components\web\widgets;
 
-use Yii;
 use cascade\components\web\widgets\section\Section;
+use Yii;
 
 /**
  * Collector [@doctodo write class description for Collector].
@@ -99,7 +99,7 @@ class Collector extends \infinite\base\collector\Module
      */
     public function getLocation($location, $owner = null)
     {
-        $bucket = $this->getBucket('locations:'.$location);
+        $bucket = $this->getBucket('locations:' . $location);
         if (is_null($owner)) {
             return $bucket->toArray();
         } else {

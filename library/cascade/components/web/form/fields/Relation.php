@@ -8,9 +8,9 @@
 
 namespace cascade\components\web\form\fields;
 
-use Yii;
-use infinite\helpers\Html;
 use cascade\components\web\browser\Response as BrowserResponse;
+use infinite\helpers\Html;
+use Yii;
 
 /**
  * Relation [@doctodo write class description for Relation].
@@ -119,7 +119,7 @@ class Relation extends Base
         }
         $r['context']['role'] = $role = $this->modelField->relationship->companionRole($this->modelField->modelRole);
         $companionType = $this->modelField->relationship->companionRoleType($this->modelField->modelRole);
-        $r['selector']['inputLabel'] = 'Select '.$companionType->title->upperSingular;
+        $r['selector']['inputLabel'] = 'Select ' . $companionType->title->upperSingular;
         //\d($r);exit;
 
         if (($modelTypeItem = $this->modelField->relationship->{$role}->collectorItem)) {
@@ -127,7 +127,7 @@ class Relation extends Base
             $r['selector']['browse']['root'] = $typeBundle->package();
         }
         $r['model'] = [
-            'prefix' => $this->model->formName().$this->model->tabularPrefix,
+            'prefix' => $this->model->formName() . $this->model->tabularPrefix,
             'attributes' => array_merge($this->model->attributes, ['taxonomy_id' => $this->model->taxonomy_id]),
         ];
         if (!empty($this->modelField->value->primaryKey)) {
@@ -148,7 +148,7 @@ class Relation extends Base
         $this->htmlOptions['data-relationship'] = json_encode($r, JSON_FORCE_OBJECT);
         Html::addCssClass($this->htmlOptions, 'relationship');
         //$model->_moduleHandler = $this->modelField->relationship->companionRole($this->modelField->modelRole) .':'. $this->modelField->relationship->companionRoleType($this->modelField->modelRole)->systemId;
-        $parts[] = Html::activeHiddenInput($model, $this->model->tabularPrefix.'_moduleHandler');
+        $parts[] = Html::activeHiddenInput($model, $this->model->tabularPrefix . '_moduleHandler');
         $parts[] = Html::activeHiddenInput($model, $field, $this->htmlOptions);
 
         return implode($parts);

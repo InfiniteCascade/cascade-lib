@@ -8,8 +8,8 @@
 
 namespace cascade\components\web\widgets;
 
-use Yii;
 use infinite\base\collector\CollectedObjectTrait;
+use Yii;
 
 /**
  * Widget [@doctodo write class description for Widget].
@@ -74,7 +74,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
      */
     public function stateKeyName($key)
     {
-        return 'widget.'.$this->systemId.'.'.$key;
+        return 'widget.' . $this->systemId . '.' . $key;
     }
 
     public function getRefreshInstructions()
@@ -177,7 +177,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
      */
     public function generate()
     {
-        Yii::beginProfile(get_called_class().':'.__FUNCTION__);
+        Yii::beginProfile(get_called_class() . ':' . __FUNCTION__);
         $this->ensureAssetBundles();
         $this->ensureDecorator();
         $content = $this->generateContent();
@@ -224,8 +224,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
             //\d($grid);exit;
             $content = $grid->generate();
         }
-        $result = $this->generateStart().$this->generateHeader().$content.$this->generateFooter().$this->generateEnd();
-        Yii::endProfile(get_called_class().':'.__FUNCTION__);
+        $result = $this->generateStart() . $this->generateHeader() . $content . $this->generateFooter() . $this->generateEnd();
+        Yii::endProfile(get_called_class() . ':' . __FUNCTION__);
 
         return $result;
     }
@@ -252,7 +252,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
             return $this->_widgetId;
         }
 
-        return $this->_widgetId = 'ic-widget-'.md5(microtime().mt_rand());
+        return $this->_widgetId = 'ic-widget-' . md5(microtime() . mt_rand());
     }
 
     /**

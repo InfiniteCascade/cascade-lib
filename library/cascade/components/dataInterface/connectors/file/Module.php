@@ -8,9 +8,9 @@
 
 namespace cascade\components\dataInterface\connectors\file;
 
+use cascade\components\dataInterface\connectors\generic\Module as BaseModule;
 use Yii;
 use yii\helpers\Inflector;
-use cascade\components\dataInterface\connectors\generic\Module as BaseModule;
 
 /**
  * Module [@doctodo write class description for Module].

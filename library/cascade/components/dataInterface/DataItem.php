@@ -8,8 +8,8 @@
 
 namespace cascade\components\dataInterface;
 
-use Yii;
 use cascade\models\DataInterface;
+use Yii;
 
 /**
  * DataItem [@doctodo write class description for DataItem].

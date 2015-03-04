@@ -46,9 +46,9 @@ class PanelDecorator extends Decorator
                 $menu = $titleMenu;
             }
             if (!empty($this->owner->icon)) {
-                $icon = Html::tag('i', '', ['class' => 'panel-icon '.$this->owner->icon]).Html::tag('span', '', ['class' => 'break']);
+                $icon = Html::tag('i', '', ['class' => 'panel-icon ' . $this->owner->icon]) . Html::tag('span', '', ['class' => 'break']);
             }
-            $parts[] = Html::tag('div', Html::tag('h2', $icon.$this->owner->parseText($this->owner->title)).$menu, ['class' => 'panel-heading']);
+            $parts[] = Html::tag('div', Html::tag('h2', $icon . $this->owner->parseText($this->owner->title)) . $menu, ['class' => 'panel-heading']);
         }
         if (empty($parts)) {
             return false;

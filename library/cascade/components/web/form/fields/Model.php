@@ -51,9 +51,9 @@ class Model extends Base
     /**
      * __method_generate_description__.
      *
-     * @return unknown
-     *
      * @throws Exception __exception_Exception_description__
+     *
+     * @return unknown
      */
     public function generate()
     {
@@ -71,7 +71,7 @@ class Model extends Base
         $templatePrefix = '';
         if ($this->showLabel) {
             $templatePrefix = "{label}\n";
-            $fieldConfig['template'] = $templatePrefix.$fieldConfig['template'];
+            $fieldConfig['template'] = $templatePrefix . $fieldConfig['template'];
         }
         $item = $form->field($model, $field, $fieldConfig);
         $item->inputOptions = & $this->htmlOptions;
@@ -85,7 +85,7 @@ class Model extends Base
                 if (!$watchFieldId) {
                     unset($this->smartOptions['watchField']);
                 } else {
-                    $this->smartOptions['watchField'] = '#'.$watchFieldId;
+                    $this->smartOptions['watchField'] = '#' . $watchFieldId;
                 }
             }
             $this->htmlOptions['data-value'] = $fieldConfig['value']; //Html::getAttributeValue($model, $field)
@@ -167,7 +167,7 @@ class Model extends Base
             break;
         }
         if (!empty($item)) {
-            return $pre.$item.$post;
+            return $pre . $item . $post;
         }
 
         return false;

@@ -1,11 +1,11 @@
 <?php
-use yii\helpers\Html;
-use cascade\components\web\bootstrap\TopNavBar;
 use cascade\components\web\bootstrap\Nav;
+use cascade\components\web\bootstrap\TopNavBar;
 use cascade\models\SearchForm;
+use infinite\deferred\widgets\NavItem as DeferredNavItem;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
-use infinite\deferred\widgets\NavItem as DeferredNavItem;
 
 cascade\components\web\assetBundles\AppAsset::register($this);
 
@@ -21,7 +21,7 @@ foreach (Yii::$app->collectors['types']->getAll() as $type) {
     if (empty($type->object->hasDashboard)) {
         continue;
     }
-    $itemTypes[$type->object->title.'-'.$type->systemId] = ['label' => $type->object->title->upperPlural, 'url' => ['/object/browse', 'type' => $type->systemId]];
+    $itemTypes[$type->object->title . '-' . $type->systemId] = ['label' => $type->object->title->upperPlural, 'url' => ['/object/browse', 'type' => $type->systemId]];
 }
 ksort($itemTypes);
 $itemTypes = array_values($itemTypes);
@@ -35,7 +35,7 @@ TopNavBar::begin([
 if (!Yii::$app->user->isGuest) {
     $browseLabel = 'Browse';
     if (isset(Yii::$app->request->object)) {
-        $browseLabel .= ' '.Html::tag('span', Yii::$app->request->object->objectType->title->upperPlural, ['class' => 'object-type']);
+        $browseLabel .= ' ' . Html::tag('span', Yii::$app->request->object->objectType->title->upperPlural, ['class' => 'object-type']);
     }
     $topMenu = [];
     $topMenu[] = [
@@ -43,7 +43,7 @@ if (!Yii::$app->user->isGuest) {
         'url' => ['/app/index'],
     ];
     $topMenu[] = [
-        'label' =>  '<span class="icon fa fa-th"></span> <span class="nav-label hidden-xs hidden-sm">'.$browseLabel.'</span>',
+        'label' =>  '<span class="icon fa fa-th"></span> <span class="nav-label hidden-xs hidden-sm">' . $browseLabel . '</span>',
         'url' => ['/object/index'],
         'items' => $itemTypes,
         'active' => function ($nav, $item) {
@@ -92,7 +92,7 @@ if (Yii::$app->user->isGuest) {
                     'linkOptions' => ['data-method' => 'post'], ];
 } else {
     $userMenuItem = [
-        'label' =>  '<span class="glyphicon glyphicon-user"></span> <span class="nav-label hidden-xs hidden-sm">'.Yii::$app->user->identity->first_name.'</span>',
+        'label' =>  '<span class="glyphicon glyphicon-user"></span> <span class="nav-label hidden-xs hidden-sm">' . Yii::$app->user->identity->first_name . '</span>',
         'url' => '#',
         'linkOptions' => [],
         'items' => [],

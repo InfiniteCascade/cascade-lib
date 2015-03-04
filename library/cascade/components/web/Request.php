@@ -8,8 +8,8 @@
 
 namespace cascade\components\web;
 
-use Yii;
 use cascade\models\Registry;
+use Yii;
 use yii\web\Application;
 
 /**

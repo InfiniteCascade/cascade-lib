@@ -8,10 +8,10 @@
 
 namespace cascade\components\dataInterface\connectors\generic;
 
-use Yii;
-use cascade\models\Relation;
-use cascade\models\KeyTranslation;
 use cascade\components\dataInterface\connectors\generic\Model as GenericModel;
+use cascade\models\KeyTranslation;
+use cascade\models\Relation;
+use Yii;
 
 /**
  * DataSource [@doctodo write class description for DataSource].
@@ -212,7 +212,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
                     if (!isset($a['relationModels'])) {
                         $a['relationModels'] = [];
                     }
-                    $fieldKey = $fieldParts[0].'_object_id';
+                    $fieldKey = $fieldParts[0] . '_object_id';
                     if (empty($fieldParts[2]) && (!is_array($relationKey) || isset($relationKey[0]))) {
                         if (!is_array($relationKey)) {
                             $relationKey = [$relationKey];

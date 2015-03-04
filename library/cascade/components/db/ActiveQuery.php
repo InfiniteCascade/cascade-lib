@@ -72,30 +72,30 @@ class ActiveQuery extends \infinite\db\ActiveQuery
                 return ['or not like', $field, $value, false];
             break;
             case 'begins_with':
-                return ['like', $field, $value.'%', false];
+                return ['like', $field, $value . '%', false];
             break;
             case 'not_begins_with':
-                return ['not like', $field, $value.'%', false];
+                return ['not like', $field, $value . '%', false];
             break;
             case 'contains':
-                return ['like', $field, '%'.$value.'%', false];
+                return ['like', $field, '%' . $value . '%', false];
             case 'not_contains':
-                return ['not like', $field, '%'.$value.'%', false];
+                return ['not like', $field, '%' . $value . '%', false];
             break;
             case 'ends_with':
-                return ['like', $field, '%'.$value, false];
+                return ['like', $field, '%' . $value, false];
             break;
             case 'not_ends_with':
-                return ['not like', $field, '%'.$value, false];
+                return ['not like', $field, '%' . $value, false];
             break;
             case 'less':
             case 'less_or_equal':
             case 'greater':
             case 'greater_or_equal':
-                $paramName = ':'.md5(serialize([microtime(true), mt_rand(), $value]));
+                $paramName = ':' . md5(serialize([microtime(true), mt_rand(), $value]));
                 $this->addParams([$paramName => $value]);
 
-                return $field.$operatorMap[$operator].$paramName;
+                return $field . $operatorMap[$operator] . $paramName;
             break;
             case 'in':
                 $value = strtr($value, ', ', ',');
@@ -108,16 +108,16 @@ class ActiveQuery extends \infinite\db\ActiveQuery
                 return $this->buildLogic($field, 'not_equal', explode(",", $value));
             break;
             case 'is_empty':
-                return $field.'=""';
+                return $field . '=""';
             break;
             case 'is_not_empty':
-                return $field.'!=""';
+                return $field . '!=""';
             break;
             case 'is_null':
-                return $field.' IS NULL';
+                return $field . ' IS NULL';
             break;
             case 'is_not_null':
-                return $field.' IS NOT NULL';
+                return $field . ' IS NOT NULL';
             break;
         }
 

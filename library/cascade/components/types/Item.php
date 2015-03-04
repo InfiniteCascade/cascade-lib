@@ -8,8 +8,8 @@
 
 namespace cascade\components\types;
 
-use Yii;
 use infinite\helpers\ArrayHelper;
+use Yii;
 
 /**
  * Item [@doctodo write class description for Item].
@@ -322,6 +322,6 @@ class Item extends \infinite\base\collector\Item
     {
         $moduleClass = get_class($this->object);
 
-        return Yii::$app->collectors['taxonomies']->getBucket('modules:'.$moduleClass::className())->toArray();
+        return Yii::$app->collectors['taxonomies']->getBucket('modules:' . $moduleClass::className())->toArray();
     }
 }

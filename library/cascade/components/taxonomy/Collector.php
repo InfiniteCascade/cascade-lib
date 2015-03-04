@@ -8,8 +8,8 @@
 
 namespace cascade\components\taxonomy;
 
-use Yii;
 use infinite\base\exceptions\Exception;
+use Yii;
 
 /**
  * Collector [@doctodo write class description for Collector].
@@ -84,7 +84,7 @@ class Collector extends \infinite\base\collector\Module
             $component['object']->system_id = $component['systemId'];
             $component['object']->system_version = 0;
             if (!$component['object']->save()) {
-                throw new Exception("Couldn't save new taxonomy type {$component['systemId']} ".print_r($component['object']->getFirstErrors(), true));
+                throw new Exception("Couldn't save new taxonomy type {$component['systemId']} " . print_r($component['object']->getFirstErrors(), true));
             }
             Yii::trace("Taxonomy type has been initialized {$component['name']} ({$component['systemId']})");
         }

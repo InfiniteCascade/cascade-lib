@@ -42,8 +42,8 @@ class Task_000005_account extends \infinite\setup\Task
 
         if ($account->save()) {
             $configResult = false;
-            $paramsFilePath = INFINITE_APP_ENVIRONMENT_PATH.DIRECTORY_SEPARATOR.'params.php';
-            $moreError = 'File does not exist! ('.$paramsFilePath.')';
+            $paramsFilePath = INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'params.php';
+            $moreError = 'File does not exist! (' . $paramsFilePath . ')';
             if (file_exists($paramsFilePath)) {
                 $currentContents = $originalContents = file_get_contents($paramsFilePath);
                 $found = false;
@@ -57,7 +57,7 @@ class Task_000005_account extends \infinite\setup\Task
                 if ($found && file_put_contents($paramsFilePath, implode(PHP_EOL, $currentContents))) {
                     $configResult = true;
                 } else {
-                    $moreError = 'Invalid configuration template! <pre>'.implode(PHP_EOL, $currentContents).'</pre>';
+                    $moreError = 'Invalid configuration template! <pre>' . implode(PHP_EOL, $currentContents) . '</pre>';
                 }
             }
             if ($configResult) {

@@ -8,12 +8,12 @@
 
 namespace cascade\models;
 
-use Yii;
 use cascade\components\db\ActiveRecordTrait;
 use cascade\components\types\Module as TypeModule;
 use cascade\components\types\Relationship;
 use cascade\components\types\RelationshipEvent;
 use infinite\caching\Cacher;
+use Yii;
 
 /**
  * Relation is the model class for table "relation".

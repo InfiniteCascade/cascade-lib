@@ -8,10 +8,10 @@
 
 namespace cascade\models;
 
-use Yii;
 use cascade\components\db\ActiveRecordTrait as BaseActiveRecordTrait;
 use cascade\components\types\ActiveRecordTrait as TypesActiveRecordTrait;
 use infinite\base\exceptions\Exception;
+use Yii;
 
 /**
  * User is the model class for table "user".
@@ -82,13 +82,13 @@ class User extends \infinite\db\models\User
     /**
      * __method_systemUser_description__.
      *
-     * @return __return_systemUser_type__ __return_systemUser_description__
-     *
      * @throws Exception __exception_Exception_description__
+     *
+     * @return __return_systemUser_type__ __return_systemUser_description__
      */
     public static function systemUser()
     {
-        $user = self::findOne([self::tableName().'.'.'email' => self::SYSTEM_EMAIL], false);
+        $user = self::findOne([self::tableName() . '.' . 'email' => self::SYSTEM_EMAIL], false);
         if (empty($user)) {
             $superGroup = Group::find()->disableAccessCheck()->where(['system' => 'super_administrators'])->one();
             if (!$superGroup) {

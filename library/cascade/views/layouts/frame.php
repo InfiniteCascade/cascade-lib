@@ -25,7 +25,7 @@ $this->bodyHtmlOptions['data-cascade-types'] = json_encode(Yii::$app->collectors
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php
     if (!empty($this->title)) {
-        echo Html::encode(strip_tags($this->title)).' &mdash; ';
+        echo Html::encode(strip_tags($this->title)) . ' &mdash; ';
     }
     echo Html::encode(Yii::$app->params['siteName']);
     ?></title>

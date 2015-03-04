@@ -8,8 +8,8 @@
 
 namespace cascade\components\web\widgets;
 
-use Yii;
 use infinite\base\collector\CollectedObjectTrait;
+use Yii;
 
 /**
  * Item [@doctodo write class description for Item].

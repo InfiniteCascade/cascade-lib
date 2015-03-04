@@ -156,7 +156,7 @@ class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, 
                 $lastKey = $package['key'];
                 $lastTimestamp = $package['timestamp'];
             }
-            $key = $package['key'].'-'.$threads[$lastKey];
+            $key = $package['key'] . '-' . $threads[$lastKey];
             if (isset($p['activity'][$key])) {
                 $p['activity'][$key]['details'][$item->primaryKey] = $package['details'];
                 continue;

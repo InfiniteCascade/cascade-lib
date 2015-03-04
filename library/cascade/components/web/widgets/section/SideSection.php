@@ -8,9 +8,9 @@
 
 namespace cascade\components\web\widgets\section;
 
+use cascade\components\web\widgets\base\Header as WidgetHeader;
 use cascade\components\web\widgets\decorator\EmbeddedDecorator;
 use cascade\components\web\widgets\Item as WidgetItem;
-use cascade\components\web\widgets\base\Header as WidgetHeader;
 
 /**
  * SideSection [@doctodo write class description for SideSection].

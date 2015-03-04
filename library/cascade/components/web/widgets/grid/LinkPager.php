@@ -57,10 +57,10 @@ class LinkPager extends \yii\widgets\LinkPager
     protected function renderPageButton($label, $page, $class, $disabled, $active)
     {
         if ($active) {
-            $class .= ' '.$this->activePageCssClass;
+            $class .= ' ' . $this->activePageCssClass;
         }
         if ($disabled) {
-            $class .= ' '.$this->disabledPageCssClass;
+            $class .= ' ' . $this->disabledPageCssClass;
         }
         $state = $this->getState();
         $state['page'] = $page + 1;

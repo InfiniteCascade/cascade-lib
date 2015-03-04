@@ -8,9 +8,9 @@
 
 namespace cascade\components\web\widgets\base;
 
+use infinite\helpers\Html;
 use Yii;
 use yii\helpers\Url;
-use infinite\helpers\Html;
 
 /**
  * SimpleLinkList [@doctodo write class description for SimpleLinkList].

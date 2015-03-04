@@ -8,16 +8,16 @@
 
 namespace cascade\gii\cascadeTypeModule;
 
+use cascade\components\base\ModuleSetExtension;
 use Yii;
-use yii\gii\CodeFile;
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
-use yii\helpers\FileHelper;
 use yii\db\ActiveRecord;
 use yii\db\Connection;
 use yii\db\Schema;
+use yii\gii\CodeFile;
+use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
+use yii\helpers\Html;
 use yii\helpers\Inflector;
-use cascade\components\base\ModuleSetExtension;
 
 /**
  * Generator [@doctodo write class description for Generator].
@@ -178,7 +178,7 @@ class Generator extends \yii\gii\Generator
      */
     public function getModuleNamespace()
     {
-        return $this->baseNamespace.'\\'.$this->moduleName;
+        return $this->baseNamespace . '\\' . $this->moduleName;
     }
 
     /**
@@ -188,7 +188,7 @@ class Generator extends \yii\gii\Generator
      */
     public function getModuleClass()
     {
-        return $this->moduleNamespace.'\\'.'Module';
+        return $this->moduleNamespace . '\\' . 'Module';
     }
 
     /**
@@ -219,7 +219,7 @@ class Generator extends \yii\gii\Generator
      */
     public function getNs()
     {
-        return $this->baseNamespace.'\\models';
+        return $this->baseNamespace . '\\models';
     }
 
     /**
@@ -362,7 +362,7 @@ EOD;
     ......
 EOD;
 
-        return $output.'<pre>'.highlight_string($code, true).'</pre>';
+        return $output . '<pre>' . highlight_string($code, true) . '</pre>';
     }
 
     /**
@@ -405,12 +405,12 @@ EOD;
         if (!empty($this->section) && substr($this->section, 0, 1) === '_') {
             if ($this->section === '_side') {
                 $files[] = new CodeFile(
-                    $modulePath.'/widgets/EmbeddedList.php',
+                    $modulePath . '/widgets/EmbeddedList.php',
                     $this->render("side_list_widget.php")
                 );
             } else {
                 $files[] = new CodeFile(
-                    $modulePath.'/widgets/EmbeddedList.php',
+                    $modulePath . '/widgets/EmbeddedList.php',
                     $this->render("embedded_list_widget.php")
                 );
             }
@@ -423,13 +423,13 @@ EOD;
                 $widgets[] = "Parents{$systemId}Browse";
             }
             $files[] = new CodeFile(
-                $modulePath.'/widgets/DetailList.php',
+                $modulePath . '/widgets/DetailList.php',
                 $this->render("detail_list_widget.php")
             );
         }
         if (!empty($this->hasDashboard)) {
             $files[] = new CodeFile(
-                $modulePath.'/widgets/SimpleLinkList.php',
+                $modulePath . '/widgets/SimpleLinkList.php',
                 $this->render("simple_link_list_widget.php")
             );
             $widgets[] = "{$systemId}Summary";
@@ -438,13 +438,13 @@ EOD;
         $this->widgets = $widgets;
 
         $files[] = new CodeFile(
-            $modulePath.'/Module.php',
+            $modulePath . '/Module.php',
             $this->render("module.php")
         );
 
         if (!empty($this->moduleSet) && isset(Yii::$app->extensions[$this->moduleSet])) {
             $files[] = new CodeFile(
-                $this->moduleSetPath.'/Extension.php',
+                $this->moduleSetPath . '/Extension.php',
                 $this->render("module_set.php")
             );
         }
@@ -471,7 +471,7 @@ EOD;
                 'columnSettingSkel' => $this->generateColumnSettings($tableSchema),
             ];
             $files[] = new CodeFile(
-                Yii::getAlias('@'.str_replace('\\', '/', $this->modelNamespace)).'/'.$className.'.php',
+                Yii::getAlias('@' . str_replace('\\', '/', $this->modelNamespace)) . '/' . $className . '.php',
                 $this->render('model.php', $params)
             );
             $files[] = $migration = new CodeFile(
@@ -488,7 +488,7 @@ EOD;
      */
     public function validateModuleClass()
     {
-        if (strpos($this->moduleClass, '\\') === false || Yii::getAlias('@'.str_replace('\\', '/', $this->moduleClass)) === false) {
+        if (strpos($this->moduleClass, '\\') === false || Yii::getAlias('@' . str_replace('\\', '/', $this->moduleClass)) === false) {
             $this->addError('moduleClass', 'Module class must be properly namespaced.');
         }
         if (substr($this->moduleClass, -1, 1) == '\\') {
@@ -511,7 +511,7 @@ EOD;
                 $field = "\tpublic \$descriptorField = '{$this->descriptorField}';\n";
             } else {
                 $parts = explode(',', str_replace(' ', '', $this->descriptorField));
-                $field = "\tpublic \$descriptorField = ['".implode("', '", $parts)."'];\n";
+                $field = "\tpublic \$descriptorField = ['" . implode("', '", $parts) . "'];\n";
             }
         } else {
             $check = ['name', 'title'];
@@ -578,7 +578,7 @@ EOD;
             if (!isset($icons[$group])) {
                 $icons[$group] = [];
             }
-            $icons[$group]['fa fa-'.$icon['id']] = $icon['name']."&#09;".'&#x'.$icon['unicode'].';';
+            $icons[$group]['fa fa-' . $icon['id']] = $icon['name'] . "&#09;" . '&#x' . $icon['unicode'] . ';';
         }
         ksort($icons);
 
@@ -592,7 +592,7 @@ EOD;
      */
     public function getModulePath()
     {
-        return Yii::getAlias('@'.str_replace('\\', '/', $this->moduleNamespace));
+        return Yii::getAlias('@' . str_replace('\\', '/', $this->moduleNamespace));
     }
 
     /**
@@ -602,7 +602,7 @@ EOD;
      */
     public function getModuleSetPath()
     {
-        return Yii::getAlias('@'.str_replace('\\', '/', $this->baseNamespace));
+        return Yii::getAlias('@' . str_replace('\\', '/', $this->baseNamespace));
     }
 
     /**
@@ -612,7 +612,7 @@ EOD;
      */
     public function getWidgetNamespace()
     {
-        return $this->moduleNamespace.'\widgets';
+        return $this->moduleNamespace . '\widgets';
     }
 
     /**
@@ -622,7 +622,7 @@ EOD;
      */
     public function getModelNamespace()
     {
-        return $this->moduleNamespace.'\models';
+        return $this->moduleNamespace . '\models';
     }
 
     /**
@@ -632,7 +632,7 @@ EOD;
      */
     public function getMigrationsNamespace()
     {
-        return $this->moduleNamespace.'\migrations';
+        return $this->moduleNamespace . '\migrations';
     }
 
     /**
@@ -642,7 +642,7 @@ EOD;
      */
     public function getMigrationPath()
     {
-        return Yii::getAlias('@'.str_replace('\\', '/', $this->migrationsNamespace)).'/'.$this->migrationClassName.'.php';
+        return Yii::getAlias('@' . str_replace('\\', '/', $this->migrationsNamespace)) . '/' . $this->migrationClassName . '.php';
     }
 
     /**
@@ -652,7 +652,7 @@ EOD;
      */
     public function getMigrationDirectory()
     {
-        return Yii::getAlias('@'.str_replace('\\', '/', $this->migrationsNamespace));
+        return Yii::getAlias('@' . str_replace('\\', '/', $this->migrationsNamespace));
     }
     /**
      * Get migrations alias.
@@ -661,7 +661,7 @@ EOD;
      */
     public function getMigrationsAlias()
     {
-        return '@'.str_replace('\\', '/', $this->migrationsNamespace);
+        return '@' . str_replace('\\', '/', $this->migrationsNamespace);
     }
 
     /**
@@ -671,15 +671,15 @@ EOD;
      */
     public function getMigrationClassName()
     {
-        $postfix = '_initial_'.$this->tableName;
+        $postfix = '_initial_' . $this->tableName;
         if (is_dir($this->migrationDirectory)) {
-            $searchExisting = FileHelper::findFiles($this->migrationDirectory, ['only' => [$postfix.'.php']]);
+            $searchExisting = FileHelper::findFiles($this->migrationDirectory, ['only' => [$postfix . '.php']]);
             if (!empty($searchExisting)) {
                 return strstr(basename($searchExisting[0]), '.php', true);
             }
         }
 
-        return  'm'.gmdate('ymd_His', $this->migrationTimestamp).$postfix;
+        return  'm' . gmdate('ymd_His', $this->migrationTimestamp) . $postfix;
     }
 
     /**
@@ -696,7 +696,7 @@ EOD;
                 'indices' => [],
                 'primaryKeys' => [],
             ];
-        $row = $this->dbConnection->createCommand('SHOW CREATE TABLE '.$this->dbConnection->getSchema()->quoteSimpleTableName($table->name))->queryOne();
+        $row = $this->dbConnection->createCommand('SHOW CREATE TABLE ' . $this->dbConnection->getSchema()->quoteSimpleTableName($table->name))->queryOne();
         if (isset($row['Create Table'])) {
             $sql = $row['Create Table'];
         } else {
@@ -780,7 +780,7 @@ EOD;
             foreach ($meta['primaryKeys'] as $name => $parts) {
                 $keys = $parts['keys'];
                 $unique = !empty($parts['unique']);
-                $i[] = "\$this->addPrimaryKey('{$niceName}Pk', '{$tableName}', '".implode(',', $keys)."');";
+                $i[] = "\$this->addPrimaryKey('{$niceName}Pk', '{$tableName}', '" . implode(',', $keys) . "');";
             }
         }
 
@@ -788,14 +788,14 @@ EOD;
             $keys = $parts['keys'];
             $name = $this->fixIndexName($name, $table, $keys);
             $unique = !empty($parts['unique']);
-            $i[] = "\$this->createIndex('{$name}', '{$tableName}', '".implode(',', $keys)."', ".($unique ? 'true' : 'false').");";
+            $i[] = "\$this->createIndex('{$name}', '{$tableName}', '" . implode(',', $keys) . "', " . ($unique ? 'true' : 'false') . ");";
         }
 
         foreach ($meta['foreignKeys'] as $fk) {
             $keys = $fk['keys'];
             $unique = !empty($fk['unique']);
             $name = $this->fixIndexName($fk['name'], $table, array_values($keys));
-            $i[] = "\$this->addForeignKey('{$fk['name']}', '{$tableName}', '".implode(',', array_keys($fk['keys']))."', '{$fk['table']}', '".implode(',', array_values($fk['keys']))."', '{$fk['onDelete']}', '{$fk['onUpdate']}');";
+            $i[] = "\$this->addForeignKey('{$fk['name']}', '{$tableName}', '" . implode(',', array_keys($fk['keys'])) . "', '{$fk['table']}', '" . implode(',', array_values($fk['keys'])) . "', '{$fk['onDelete']}', '{$fk['onUpdate']}');";
         }
 
         return implode("\n\t\t", $i);
@@ -817,7 +817,7 @@ EOD;
         $modules = $bs->getModules();
         $modules[$this->moduleID] = ['class' => $this->moduleClass];
         foreach ($modules as $id => $module) {
-            $e = '$m[\''.$id.'\'] = [';
+            $e = '$m[\'' . $id . '\'] = [';
             if (!is_array($module)) {
                 $module = ['class' => $module];
             }
@@ -825,7 +825,7 @@ EOD;
             foreach ($module as $k => $v) {
                 $e .= "\n\t\t\t'{$k}' => ";
                 if (is_string($v)) {
-                    $e .= "'".addslashes($v)."'";
+                    $e .= "'" . addslashes($v) . "'";
                 } elseif (is_numeric($v)) {
                     $e .= $v;
                 }
@@ -862,7 +862,7 @@ EOD;
             $indices[] = Inflector::id2camel(substr($key, 0, strpos($key, '_id')), '_');
         }
 
-        return $niceName.implode('', $indices);
+        return $niceName . implode('', $indices);
     }
 
     /**
@@ -881,7 +881,7 @@ EOD;
             $nullExtra = $signedExtra = $defaultExtra = $primaryKeyExtra  = $autoIncrementExtra = '';
             $size = $column->size;
             if (!is_null($column->scale)) {
-                $size .= ','.$column->scale;
+                $size .= ',' . $column->scale;
             }
 
             if (!$column->allowNull) {
@@ -900,7 +900,7 @@ EOD;
             }
 
             if (!empty($column->enumValues)) {
-                $size = '\''.implode('\',\'', $column->enumValues).'\'';
+                $size = '\'' . implode('\',\'', $column->enumValues) . '\'';
             }
 
             $stringValue = $column->dbTypecast($column->defaultValue);
@@ -916,7 +916,7 @@ EOD;
                 $stringValue = $this->getDbConnection()->getSchema()->quoteValue($stringValue);
             }
             if ($stringValue !== false) {
-                $defaultExtra = ' DEFAULT '.addslashes($stringValue);
+                $defaultExtra = ' DEFAULT ' . addslashes($stringValue);
             }
 
             $field = "'{$column->name}' => '";
@@ -935,7 +935,7 @@ EOD;
             // }
 
             if ($fieldType === 'char(36)') {
-                $fieldType = $column->dbType.' CHARACTER SET ascii COLLATE ascii_bin';
+                $fieldType = $column->dbType . ' CHARACTER SET ascii COLLATE ascii_bin';
             } elseif ($fieldType === 'tinyint(1)') {
                 $fieldType = 'boolean';
             } elseif (substr($column->dbType, 0, 4) === 'enum') {
@@ -950,12 +950,12 @@ EOD;
                     }
                 }
                 if ($size !== false) {
-                    $fieldType .= '('.$size.')';
+                    $fieldType .= '(' . $size . ')';
                 }
             }
 
-            $fieldComplete = trim(addslashes($fieldType).$signedExtra.$nullExtra.$defaultExtra.$autoIncrementExtra.$primaryKeyExtra);
-            $field .= $fieldComplete.'\'';
+            $fieldComplete = trim(addslashes($fieldType) . $signedExtra . $nullExtra . $defaultExtra . $autoIncrementExtra . $primaryKeyExtra);
+            $field .= $fieldComplete . '\'';
 
             $fields[] = $field;
         }
@@ -981,7 +981,7 @@ EOD;
             } else {
                 $label = Inflector::camel2words($column->name);
                 if (strcasecmp(substr($label, -3), ' id') === 0) {
-                    $label = substr($label, 0, -3).' ID';
+                    $label = substr($label, 0, -3) . ' ID';
                 }
                 $labels[$column->name] = $label;
             }
@@ -1061,10 +1061,10 @@ EOD;
 
         $rules = [];
         foreach ($types as $type => $columns) {
-            $rules[] = "[['".implode("', '", $columns)."'], '$type']";
+            $rules[] = "[['" . implode("', '", $columns) . "'], '$type']";
         }
         foreach ($lengths as $length => $columns) {
-            $rules[] = "[['".implode("', '", $columns)."'], 'string', 'max' => $length]";
+            $rules[] = "[['" . implode("', '", $columns) . "'], 'string', 'max' => $length]";
         }
 
         return $rules;
@@ -1082,7 +1082,7 @@ EOD;
         $uses = [];
         foreach ($relations as $relation) {
             if (isset($this->modelMap[$relation[1]])) {
-                $uses[] = 'use '.$this->modelMap[$relation[1]].';';
+                $uses[] = 'use ' . $this->modelMap[$relation[1]] . ';';
             }
         }
 
@@ -1141,7 +1141,7 @@ EOD;
                 $link = $this->generateRelationLink($refs);
                 $relationName = $this->generateRelationName($relations, $refClassName, $refTable, $className, $hasMany);
                 $relations[$refClassName][$relationName] = [
-                    "return \$this->".($hasMany ? 'hasMany' : 'hasOne')."($className::className(), $link);",
+                    "return \$this->" . ($hasMany ? 'hasMany' : 'hasOne') . "($className::className(), $link);",
                     $className,
                     $hasMany,
                 ];
@@ -1191,7 +1191,7 @@ EOD;
             $pairs[] = "'$a' => '$b'";
         }
 
-        return '['.implode(', ', $pairs).']';
+        return '[' . implode(', ', $pairs) . ']';
     }
 
     /**
@@ -1249,10 +1249,10 @@ EOD;
         $name = $rawName = Inflector::id2camel($key, '_');
         $i = 0;
         while (isset($table->columns[lcfirst($name)])) {
-            $name = $rawName.($i++);
+            $name = $rawName . ($i++);
         }
         while (isset($relations[$className][lcfirst($name)])) {
-            $name = $rawName.($i++);
+            $name = $rawName . ($i++);
         }
 
         return $name;
@@ -1276,7 +1276,7 @@ EOD;
     public function validateNamespace()
     {
         $this->ns = ltrim($this->ns, '\\');
-        $path = Yii::getAlias('@'.str_replace('\\', '/', $this->ns), false);
+        $path = Yii::getAlias('@' . str_replace('\\', '/', $this->ns), false);
         if ($path === false) {
             $this->addError('ns', 'Namespace must be associated with an existing directory.');
         }
@@ -1348,15 +1348,15 @@ EOD;
         if (strpos($this->tableName, '*') !== false) {
             if (($pos = strrpos($this->tableName, '.')) !== false) {
                 $schema = substr($this->tableName, 0, $pos);
-                $pattern = '/^'.str_replace('*', '\w+', substr($this->tableName, $pos + 1)).'$/';
+                $pattern = '/^' . str_replace('*', '\w+', substr($this->tableName, $pos + 1)) . '$/';
             } else {
                 $schema = '';
-                $pattern = '/^'.str_replace('*', '\w+', $this->tableName).'$/';
+                $pattern = '/^' . str_replace('*', '\w+', $this->tableName) . '$/';
             }
 
             foreach ($db->schema->getTableNames($schema) as $table) {
                 if (preg_match($pattern, $table)) {
-                    $tableNames[] = $schema === '' ? $table : ($schema.'.'.$table);
+                    $tableNames[] = $schema === '' ? $table : ($schema . '.' . $table);
                 }
             }
         } elseif (($table = $db->getTableSchema($this->tableName, true)) !== null) {
@@ -1391,7 +1391,7 @@ EOD;
             if (($pos = strrpos($pattern, '.')) !== false) {
                 $pattern = substr($pattern, $pos + 1);
             }
-            $patterns[] = '/^'.str_replace('*', '(\w+)', $pattern).'$/';
+            $patterns[] = '/^' . str_replace('*', '(\w+)', $pattern) . '$/';
         }
         if (!empty($db->tablePrefix)) {
             $patterns[] = "/^{$db->tablePrefix}(.*?)$/";
@@ -1434,7 +1434,7 @@ EOD;
             $files = FileHelper::findFiles(Yii::getAlias($path), ['only' => ['.php']]);
             foreach ($files as $file) {
                 $baseName = strstr(basename($file), '.php', true);
-                $className = $namespace.'\\'.$baseName;
+                $className = $namespace . '\\' . $baseName;
                 if (class_exists($className)) {
                     $reflector = new \ReflectionClass($className);
                     if ($reflector->isSubclassOf('yii\base\Model')) {

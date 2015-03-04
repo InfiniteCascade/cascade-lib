@@ -37,7 +37,7 @@ class Gravatar extends \emberlabs\gravatarlib\Gravatar
     public function fetch($email, $hash_email = true)
     {
         $url = $this->get($email, $hash_email);
-        $cacheKey = md5('gravatar-'.$url);
+        $cacheKey = md5('gravatar-' . $url);
         $cache = Yii::$app->fileCache->get($cacheKey);
         if ($cache) {
             return unserialize($cache);

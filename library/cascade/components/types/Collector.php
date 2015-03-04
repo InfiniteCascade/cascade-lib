@@ -8,9 +8,9 @@
 
 namespace cascade\components\types;
 
-use Yii;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\ArrayHelper;
+use Yii;
 
 /**
  * Collector [@doctodo write class description for Collector].

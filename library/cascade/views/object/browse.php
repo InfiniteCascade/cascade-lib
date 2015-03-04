@@ -1,13 +1,13 @@
 <?php
-use infinite\helpers\Html;
 use cascade\models\SearchForm;
+use infinite\helpers\Html;
 use yii\widgets\ActiveForm;
 
 cascade\components\web\assetBundles\QueryBuilderAsset::register($this);
 cascade\components\web\assetBundles\BrowseFilterAsset::register($this);
 infinite\web\assetBundles\InfiniteRestDrawAsset::register($this);
 
-$this->title = 'Browse '.$type->title->upperPlural;
+$this->title = 'Browse ' . $type->title->upperPlural;
 $js = [];
 
 echo Html::beginTag('div', ['class' => 'panel panel-default']);
@@ -17,7 +17,7 @@ $searchModel = new SearchForm();
 $searchForm = ActiveForm::begin([
     'id' => 'filter-form',
     'enableClientValidation' => false,
-    'action' => ['/api/'.$type->systemId],
+    'action' => ['/api/' . $type->systemId],
 
 ]);
 echo Html::beginTag('ul', ['class' => 'nav nav-tabs', 'role' => 'tablist']);
@@ -55,7 +55,7 @@ $queryBuilderOptions = [];
 $queryBuilderOptions['filters'] = $type->dummyModel->filterFields;
 $builderId = 'advanced-filter-builder';
 echo Html::tag('div', '', ['id' => $builderId]);
-$js[] = "$('#{$builderId}').queryBuilder(".json_encode($queryBuilderOptions).");";
+$js[] = "$('#{$builderId}').queryBuilder(" . json_encode($queryBuilderOptions) . ");";
 echo Html::endTag('div');
 
 echo Html::submitButton('Search', ['class' => 'btn btn-default']);

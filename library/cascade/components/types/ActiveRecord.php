@@ -8,9 +8,9 @@
 
 namespace cascade\components\types;
 
-use yii\web\Linkable;
-use yii\web\Link;
 use yii\helpers\Url;
+use yii\web\Link;
+use yii\web\Linkable;
 
 /**
  * ActiveRecord is the model class for table "{{%active_record}}".

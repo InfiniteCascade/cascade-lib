@@ -32,7 +32,7 @@ class DeferredResult extends \infinite\deferred\components\Result
 
     public function handleException(\Exception $e)
     {
-        $message = [$e->getFile().':'.$e->getLine().' '.$e->getMessage()];
+        $message = [$e->getFile() . ':' . $e->getLine() . ' ' . $e->getMessage()];
         $message[] = $e->getTraceAsString();
         $logModel = $this->action->logModel;
         $logModel->getStatusLog(true)->setCommandOutput(implode(PHP_EOL, $message))->save();

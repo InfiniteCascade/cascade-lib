@@ -8,8 +8,8 @@
 
 namespace cascade\modules\TypeUser;
 
-use Yii;
 use cascade\models\User;
+use Yii;
 
 /**
  * Module [@doctodo write class description for Module].

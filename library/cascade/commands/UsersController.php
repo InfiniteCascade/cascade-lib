@@ -8,9 +8,9 @@
 
 namespace cascade\commands;
 
-use yii\helpers\Console;
-use cascade\models\User;
 use cascade\models\Group;
+use cascade\models\User;
+use yii\helpers\Console;
 
 /**
  * UsersController [@doctodo write class description for UsersController].

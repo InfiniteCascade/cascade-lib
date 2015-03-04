@@ -50,7 +50,7 @@ class Taxonomy extends Base
                 self::$_moduleHandlers[$stem] = [];
             }
             $n = count(self::$_moduleHandlers[$stem]);
-            $this->_moduleHandler = $this->field.':_'.$n;
+            $this->_moduleHandler = $this->field . ':_' . $n;
             self::$_moduleHandlers[$stem][] = $this->_moduleHandler;
         }
 

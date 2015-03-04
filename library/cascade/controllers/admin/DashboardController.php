@@ -2,9 +2,9 @@
 
 namespace cascade\controllers\admin;
 
+use infinite\web\Controller;
 use Yii;
 use yii\filters\AccessControl;
-use infinite\web\Controller;
 
 class DashboardController extends Controller
 {

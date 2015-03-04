@@ -8,12 +8,12 @@
 
 namespace cascade\components\web\widgets;
 
-use Yii;
 use cascade\components\helpers\StringHelper;
-use infinite\base\ObjectTrait;
 use infinite\base\ComponentTrait;
+use infinite\base\ObjectTrait;
 use infinite\web\grid\CellContentTrait;
 use infinite\web\RenderTrait;
+use Yii;
 
 /**
  * BaseWidget [@doctodo write class description for BaseWidget].
@@ -189,7 +189,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
             return $this->_widgetId;
         }
 
-        return $this->_widgetId = 'ic-widget-'.md5(microtime().mt_rand());
+        return $this->_widgetId = 'ic-widget-' . md5(microtime() . mt_rand());
     }
 
     /**

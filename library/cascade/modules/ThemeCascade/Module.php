@@ -30,6 +30,6 @@ class Module extends \cascade\components\web\themes\Module
      */
     public function getIdentityAssetBundle()
     {
-        return $this->componentNamespace.'\IdentityAsset';
+        return $this->componentNamespace . '\IdentityAsset';
     }
 }

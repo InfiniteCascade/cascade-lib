@@ -46,6 +46,6 @@ class DeleteEvent extends \infinite\db\behaviors\auditable\DeleteEvent
     {
         $objectType = Yii::$app->collectors['types']->getOne($this->objectType);
 
-        return '{{agent}} '.$this->verb->past.' '.$objectType->object->title->getSingular(false).' [['.$this->descriptor.']]'.$this->indirectStory;
+        return '{{agent}} ' . $this->verb->past . ' ' . $objectType->object->title->getSingular(false) . ' [[' . $this->descriptor . ']]' . $this->indirectStory;
     }
 }

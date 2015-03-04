@@ -1,9 +1,9 @@
 <?php
-use yii\helpers\Url;
-use infinite\helpers\Html;
 use infinite\helpers\ArrayHelper;
-use infinite\web\grid\Grid;
+use infinite\helpers\Html;
 use infinite\web\grid\Cell;
+use infinite\web\grid\Grid;
+use yii\helpers\Url;
 
 $js = [];
 $this->title = 'Dashboard';
@@ -26,7 +26,7 @@ $topGrid->currentRow->addCell($watchingCell);
 $itemsCell = $topGrid->currentRow->addCell(new Cell(['columns' => 6]));
 $widgetGrid = new Grid();
 Html::addCssClass($widgetGrid->htmlOptions, 'ic-front-side');
-$js[] = '$("#'.$widgetGrid->id.'").infiniteAffix();';
+$js[] = '$("#' . $widgetGrid->id . '").infiniteAffix();';
 
 $widgetGrid->baseRow = ['trueWidth' => 6];
 $cells = [];

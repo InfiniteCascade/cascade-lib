@@ -8,9 +8,9 @@
 
 namespace cascade\components\web\widgets\section;
 
-use Yii;
 use infinite\helpers\ArrayHelper;
 use infinite\helpers\Html;
+use Yii;
 
 /**
  * Section [@doctodo write class description for Section].
@@ -65,7 +65,7 @@ class Section extends \cascade\components\web\widgets\Widget
     public function generateStart()
     {
         $parts = [];
-        $parts[] = Html::tag('div', '', ['id' => 'section-'.$this->systemId, 'class' => 'scroll-mark']);
+        $parts[] = Html::tag('div', '', ['id' => 'section-' . $this->systemId, 'class' => 'scroll-mark']);
         $parts[] = parent::generateStart();
 
         return implode('', $parts);

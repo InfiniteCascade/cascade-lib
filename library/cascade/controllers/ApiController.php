@@ -10,8 +10,8 @@ namespace cascade\controllers;
 
 use Yii;
 use yii\base\Model;
-use yii\web\ForbiddenHttpException;
 use yii\rest\Controller;
+use yii\web\ForbiddenHttpException;
 
 class ApiController extends Controller
 {
@@ -34,7 +34,7 @@ class ApiController extends Controller
         }
 
         if ($this->modelClass === null) {
-            throw new ForbiddenHttpException('Unable to access the object type \''.(isset($_GET['type']) ? $_GET['type'] : 'unknown').'\'.');
+            throw new ForbiddenHttpException('Unable to access the object type \'' . (isset($_GET['type']) ? $_GET['type'] : 'unknown') . '\'.');
         }
     }
 

@@ -8,8 +8,8 @@
 
 namespace cascade\models;
 
-use infinite\db\Query;
 use infinite\db\ActiveQuery;
+use infinite\db\Query;
 
 /**
  * AclRoleQuery [@doctodo write class description for AclRoleQuery].
@@ -34,12 +34,12 @@ class AclRoleQuery extends ActiveQuery
      */
     public function prioritizeNonType($event = null)
     {
-        $objectTypePrefix = ObjectType::modelPrefix().'-';
+        $objectTypePrefix = ObjectType::modelPrefix() . '-';
         if (!isset($this->orderBy)) {
             $this->orderBy = [];
         }
         $prioritize = [
-            'IF([[controlled_object_id]] LIKE "'.addslashes($objectTypePrefix).'%", 0, 1)' => SORT_DESC,
+            'IF([[controlled_object_id]] LIKE "' . addslashes($objectTypePrefix) . '%", 0, 1)' => SORT_DESC,
         ];
         $this->orderBy = array_merge($prioritize, $this->orderBy);
     }

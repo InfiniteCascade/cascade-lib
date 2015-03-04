@@ -8,8 +8,8 @@
 
 namespace cascade\components\db\fields;
 
-use Yii;
 use cascade\models\Relation as RelationModel;
+use Yii;
 
 /**
  * Relation [@doctodo write class description for Relation].
@@ -192,7 +192,7 @@ class Relation extends Base
                 self::$_moduleHandlers[$stem] = [];
             }
             $n = count(self::$_moduleHandlers[$stem]);
-            $this->_moduleHandler = $this->field.':_'.$n;
+            $this->_moduleHandler = $this->field . ':_' . $n;
             self::$_moduleHandlers[$stem][] = $this->_moduleHandler;
         }
 
@@ -216,9 +216,9 @@ class Relation extends Base
     {
         $fieldParts = explode(':', $this->field);
         if ($this->modelRole === 'parent') {
-            return 'child:'.$fieldParts[1];
+            return 'child:' . $fieldParts[1];
         } else {
-            return 'parent:'.$fieldParts[1];
+            return 'parent:' . $fieldParts[1];
         }
     }
 

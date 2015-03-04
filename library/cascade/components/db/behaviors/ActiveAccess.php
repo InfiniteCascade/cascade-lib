@@ -40,7 +40,7 @@ class ActiveAccess extends \infinite\db\behaviors\ActiveAccess
     public function canDeleteAssociation($relatedObject)
     {
         return parent::canDeleteAssociation($relatedObject)
-                && $relatedObject->can('associate:'.$this->owner->objectType->systemId);
+                && $relatedObject->can('associate:' . $this->owner->objectType->systemId);
     }
 
     /**
@@ -49,6 +49,6 @@ class ActiveAccess extends \infinite\db\behaviors\ActiveAccess
     public function canUpdateAssociation($relatedObject)
     {
         return parent::canUpdateAssociation($relatedObject)
-                && $relatedObject->can('associate:'.$this->owner->objectType->systemId);
+                && $relatedObject->can('associate:' . $this->owner->objectType->systemId);
     }
 }

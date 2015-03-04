@@ -28,7 +28,7 @@ abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
         Yii::$app->modules = static::getModules();
         Yii::$app->on(\yii\base\Application::EVENT_BEFORE_REQUEST, [$this, 'beforeRequest']);
         Yii::endProfile(get_called_class());
-        Yii::trace("Registered ".count(static::getModules())." modules in ".get_called_class());
+        Yii::trace("Registered " . count(static::getModules()) . " modules in " . get_called_class());
     }
 
     public function beforeRequest($event)

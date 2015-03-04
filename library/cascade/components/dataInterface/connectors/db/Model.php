@@ -86,9 +86,9 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
                 $where = isset($r['where']) ? $r['where'] : [];
                 if (!empty($where)) {
-                    $where = ['and', $where, $r['foreignKey'].'=:foreignKeyId'];
+                    $where = ['and', $where, $r['foreignKey'] . '=:foreignKeyId'];
                 } else {
-                    $where = $r['foreignKey'].'=:foreignKeyId';
+                    $where = $r['foreignKey'] . '=:foreignKeyId';
                 }
                 $query = [
                     'where' => $where,
@@ -264,7 +264,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     public function findPrimaryKeys($params = [])
     {
         $q = $this->find($params);
-        $q->select($this->_tableName.'.'.$this->meta->schema->primaryKey[0]);
+        $q->select($this->_tableName . '.' . $this->meta->schema->primaryKey[0]);
 
         return $q->column($this->interface->db);
     }

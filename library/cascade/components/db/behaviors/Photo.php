@@ -8,12 +8,12 @@
 
 namespace cascade\components\db\behaviors;
 
-use Yii;
+use cascade\components\helpers\Gravatar;
 use infinite\base\FileInterface;
 use infinite\base\RawFile;
+use Yii;
 use yii\helpers\Url;
 use yii\imagine\Image;
-use cascade\components\helpers\Gravatar;
 
 /**
  * Roleable [@doctodo write class description for Roleable].

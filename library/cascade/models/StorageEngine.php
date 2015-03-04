@@ -8,8 +8,8 @@
 
 namespace cascade\models;
 
-use Yii;
 use cascade\components\types\ActiveRecordTrait;
+use Yii;
 
 /**
  * StorageEngine is the model class for table "storage_engine".

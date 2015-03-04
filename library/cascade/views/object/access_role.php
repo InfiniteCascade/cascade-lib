@@ -17,6 +17,6 @@ if ($isDisabled) {
     Html::addCssClass($htmlOptions, 'disabled');
 }
 if (!$editable) {
-    $selectedRole['label'] = 'Inherited '.$selectedRole['label'];
+    $selectedRole['label'] = 'Inherited ' . $selectedRole['label'];
 }
-echo Html::tag('button', Html::tag('span', $selectedRole['label'], ['class' => 'role-label']).' '.Html::tag('span', '', ['class' => 'caret']), $htmlOptions);
+echo Html::tag('button', Html::tag('span', $selectedRole['label'], ['class' => 'role-label']) . ' ' . Html::tag('span', '', ['class' => 'caret']), $htmlOptions);

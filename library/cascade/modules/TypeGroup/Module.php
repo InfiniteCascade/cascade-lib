@@ -8,8 +8,8 @@
 
 namespace cascade\modules\TypeGroup;
 
-use Yii;
 use cascade\models\Group;
+use Yii;
 
 /**
  * Module [@doctodo write class description for Module].

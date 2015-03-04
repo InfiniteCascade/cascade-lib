@@ -8,8 +8,8 @@
 
 namespace cascade\models;
 
-use Yii;
 use cascade\components\db\ActiveRecordTrait;
+use Yii;
 
 /**
  * Audit is the model class for table "audit".

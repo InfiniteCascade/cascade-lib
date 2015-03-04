@@ -8,10 +8,10 @@
 
 namespace cascade\components\dataInterface\connectors\db;
 
+use cascade\components\dataInterface\connectors\generic\Module as BaseModule;
+use infinite\base\exceptions\Exception;
 use Yii;
 use yii\helpers\Inflector;
-use infinite\base\exceptions\Exception;
-use cascade\components\dataInterface\connectors\generic\Module as BaseModule;
 
 /**
  * Module [@doctodo write class description for Module].
@@ -171,9 +171,9 @@ abstract class Module extends BaseModule
     /**
      * Get db.
      *
-     * @return __return_getDb_type__ __return_getDb_description__
-     *
      * @throws Exception __exception_Exception_description__
+     *
+     * @return __return_getDb_type__ __return_getDb_description__
      */
     public function getDb()
     {

@@ -8,10 +8,10 @@
 
 namespace cascade\components\storageHandlers;
 
-use Yii;
-use infinite\base\collector\CollectedObjectTrait;
 use cascade\models\Storage;
 use cascade\models\StorageEngine;
+use infinite\base\collector\CollectedObjectTrait;
+use Yii;
 
 /**
  * Handler [@doctodo write class description for Handler].

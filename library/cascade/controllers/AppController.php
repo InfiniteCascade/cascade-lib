@@ -8,12 +8,12 @@
 
 namespace cascade\controllers;
 
+use cascade\models\LoginForm;
+use cascade\models\Registry;
+use infinite\web\Controller;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use infinite\web\Controller;
-use cascade\models\LoginForm;
-use cascade\models\Registry;
 
 /**
  * AppController [@doctodo write class description for AppController].
@@ -165,7 +165,7 @@ class AppController extends Controller
             if (isset($instructions['objectId'])) {
                 $object = Yii::$app->request->object = Registry::getObject($instructions['objectId']);
                 if (!$object) {
-                    $refreshed[$requestId] = ['error' => 'Invalid object '.$instructions['objectId'].''];
+                    $refreshed[$requestId] = ['error' => 'Invalid object ' . $instructions['objectId'] . ''];
                     continue;
                 }
                 $type = $object->objectType;
@@ -245,7 +245,7 @@ class AppController extends Controller
             if (isset($instructions['objectId'])) {
                 $object = Yii::$app->request->object = Registry::getObject($instructions['objectId']);
                 if (!$object) {
-                    $refreshed[$requestId] = ['error' => 'Invalid object '.$instructions['objectId'].''];
+                    $refreshed[$requestId] = ['error' => 'Invalid object ' . $instructions['objectId'] . ''];
                     continue;
                 }
                 $type = $object->objectType;
@@ -280,7 +280,7 @@ class AppController extends Controller
                 break;
             }
             if ($refreshed[$requestId]) {
-                echo "data: ".json_encode(['type' => 'handleRequests', 'data' => [$requestId => $refreshed[$requestId]], 'id' => round(microtime(true) * 100)]);
+                echo "data: " . json_encode(['type' => 'handleRequests', 'data' => [$requestId => $refreshed[$requestId]], 'id' => round(microtime(true) * 100)]);
                 echo "\n\n";
                 //echo str_repeat("\n\n",1024*4);
             }

@@ -26,11 +26,11 @@ namespace <?= $generator->getModelNamespace() ?>;
 <?php if (!empty($relations)): ?>
  *
 <?php foreach ($relations as $name => $relation): ?>
- * @property <?= $relation[1].($relation[2] ? '[]' : '').' $'.lcfirst($name)."\n" ?>
+ * @property <?= $relation[1] . ($relation[2] ? '[]' : '') . ' $' . lcfirst($name) . "\n" ?>
 <?php endforeach; ?>
 <?php endif; ?>
  */
-class <?= $className ?> extends <?= '\\'.ltrim($generator->baseClass, '\\')."\n" ?>
+class <?= $className ?> extends <?= '\\' . ltrim($generator->baseClass, '\\') . "\n" ?>
 {
 <?= $descriptorField ?>
 
@@ -55,7 +55,7 @@ class <?= $className ?> extends <?= '\\'.ltrim($generator->baseClass, '\\')."\n"
      */
     public function rules()
     {
-        return [<?= "\n\t\t\t".implode(",\n\t\t\t", $rules)."\n\t\t" ?>];
+        return [<?= "\n\t\t\t" . implode(",\n\t\t\t", $rules) . "\n\t\t" ?>];
     }
 
     /**
@@ -63,7 +63,7 @@ class <?= $className ?> extends <?= '\\'.ltrim($generator->baseClass, '\\')."\n"
      */
     public function fieldSettings()
     {
-        return [<?= "\n\t\t\t".implode(",\n\t\t\t", $columnSettingSkel)."\n\t\t" ?>];
+        return [<?= "\n\t\t\t" . implode(",\n\t\t\t", $columnSettingSkel) . "\n\t\t" ?>];
     }
 
     /**
@@ -81,7 +81,7 @@ class <?= $className ?> extends <?= '\\'.ltrim($generator->baseClass, '\\')."\n"
     {
         return [
 <?php foreach ($labels as $name => $label): ?>
-            <?= "'$name' => '".addslashes($label)."',\n" ?>
+            <?= "'$name' => '" . addslashes($label) . "',\n" ?>
 <?php endforeach; ?>
         ];
     }
@@ -92,7 +92,7 @@ class <?= $className ?> extends <?= '\\'.ltrim($generator->baseClass, '\\')."\n"
      */
     public function get<?= $name ?>()
     {
-        <?= $relation[0]."\n" ?>
+        <?= $relation[0] . "\n" ?>
     }
 <?php endforeach; ?>
 }

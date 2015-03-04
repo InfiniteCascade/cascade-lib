@@ -8,9 +8,9 @@
 
 namespace cascade\components\base;
 
-use Yii;
-use infinite\base\exceptions\Exception;
 use infinite\base\collector\CollectedObjectTrait;
+use infinite\base\exceptions\Exception;
+use Yii;
 
 /**
  * CollectorModule [@doctodo write class description for CollectorModule].
@@ -61,10 +61,10 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
         }
         if ($this->collectorName) {
             if (!isset(Yii::$app->collectors[$this->collectorName])) {
-                throw new Exception('Cannot find the collector '.$this->collectorName.'!');
+                throw new Exception('Cannot find the collector ' . $this->collectorName . '!');
             }
             if (!(Yii::$app->collectors[$this->collectorName]->register(null, $this))) {
-                throw new Exception('Could not register '.$this->shortName.' in '.$this->collectorName.'!');
+                throw new Exception('Could not register ' . $this->shortName . ' in ' . $this->collectorName . '!');
             }
         }
         $this->loadSubmodules();

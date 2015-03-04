@@ -8,8 +8,8 @@
 
 namespace cascade\modules\WidgetWatching\widgets;
 
-use yii\helpers\Url;
 use infinite\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * Content [@doctodo write class description for Content].
@@ -51,10 +51,10 @@ class Content extends \cascade\components\web\widgets\Widget
     {
         switch ($this->currentScope) {
             case 'watching':
-                return $this->_title.' of Watched Items';
+                return $this->_title . ' of Watched Items';
             break;
             case 'familiar':
-                return $this->_title.' of Familiar Items';
+                return $this->_title . ' of Familiar Items';
             break;
         }
 

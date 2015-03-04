@@ -8,8 +8,8 @@
 
 namespace cascade\components\db;
 
-use cascade\models\Relation;
 use cascade\models\Registry;
+use cascade\models\Relation;
 
 trait ActiveRecordTrait
 {

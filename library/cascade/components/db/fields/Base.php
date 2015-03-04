@@ -8,12 +8,12 @@
 
 namespace cascade\components\db\fields;
 
-use Yii;
-use infinite\base\exceptions\Exception;
 use cascade\components\db\fields\formats\Base as BaseFormat;
-use cascade\components\db\fields\formats\Date as DateType;
 use cascade\components\db\fields\formats\Binary as BinaryType;
+use cascade\components\db\fields\formats\Date as DateType;
 use cascade\components\db\fields\formats\Text as TextType;
+use infinite\base\exceptions\Exception;
+use Yii;
 
 /**
  * Base [@doctodo write class description for Base].
@@ -208,9 +208,9 @@ abstract class Base extends \infinite\base\Object
      *
      * @param __param_value_type__ $value __param_value_description__
      *
-     * @return __return_setFormField_type__ __return_setFormField_description__
-     *
      * @throws Exception __exception_Exception_description__
+     *
+     * @return __return_setFormField_type__ __return_setFormField_description__
      */
     public function setFormField($value)
     {

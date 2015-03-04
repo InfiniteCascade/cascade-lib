@@ -9,10 +9,10 @@
 namespace cascade\components\web\bootstrap;
 
 use Yii;
+use yii\bootstrap\BootstrapPluginAsset;
+use yii\bootstrap\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\bootstrap\Widget;
-use yii\bootstrap\BootstrapPluginAsset;
 
 /**
  * TopNavBar [@doctodo write class description for TopNavBar].

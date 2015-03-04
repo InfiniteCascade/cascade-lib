@@ -1,7 +1,7 @@
 <?php
+use cascade\components\web\browser\Response as BrowserResponse;
 use infinite\helpers\Html;
 use yii\widgets\ActiveForm;
-use cascade\components\web\browser\Response as BrowserResponse;
 
 $specialRequestors = $access->specialRequestors;
 $primaryAccount = false;

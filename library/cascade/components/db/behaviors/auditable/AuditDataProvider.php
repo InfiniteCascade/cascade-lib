@@ -8,9 +8,9 @@
 
 namespace cascade\components\db\behaviors\auditable;
 
-use Yii;
-use infinite\helpers\ArrayHelper;
 use cascade\models\ObjectFamiliarity;
+use infinite\helpers\ArrayHelper;
+use Yii;
 
 /**
  * ActiveRecord is the model class for table "{{%active_record}}".
@@ -50,8 +50,8 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
         if ($direction === '_newer') {
             $mostRecentItem = ArrayHelper::getValue($params, 'mostRecentItem', false);
             $this->query->params[':mostRecentItem'] = (int) $mostRecentItem;
-            $this->query->andWhere($this->query->primaryAlias.'.id > :mostRecentItem');
-            $this->query->orderBy([$this->query->primaryAlias.'.id' => SORT_DESC]);
+            $this->query->andWhere($this->query->primaryAlias . '.id > :mostRecentItem');
+            $this->query->orderBy([$this->query->primaryAlias . '.id' => SORT_DESC]);
             $this->pagination->pageSize = false;
             //\d(["newer", $this->query->createCommand()->rawSql]);exit;
         } else { // _older
@@ -60,25 +60,25 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
             $lastItem = ArrayHelper::getValue($params, 'lastItem', false);
             if ($lastItem) {
                 $this->query->params[':lastItem'] = (int) $lastItem;
-                $this->query->andWhere($this->query->primaryAlias.'.id < :lastItem');
+                $this->query->andWhere($this->query->primaryAlias . '.id < :lastItem');
             }
-            $this->query->orderBy([$this->query->primaryAlias.'.id' => SORT_DESC]); //SORT_ASC
+            $this->query->orderBy([$this->query->primaryAlias . '.id' => SORT_DESC]); //SORT_ASC
             //\d($lastTime);
             //echo $this->query->createCommand()->rawSql;exit;
         }
 
         if ($this->scope === 'object' && $object) {
             $this->query->andWhere(['or',
-                [$this->query->primaryAlias.'.direct_object_id' => $object],
-                [$this->query->primaryAlias.'.indirect_object_id' => $object], ]);
+                [$this->query->primaryAlias . '.direct_object_id' => $object],
+                [$this->query->primaryAlias . '.indirect_object_id' => $object], ]);
         } elseif ($this->scope !== 'all' && !empty(Yii::$app->user->id)) {
             $subquery = ObjectFamiliarity::find();
-            $subquery->andWhere([$subquery->primaryAlias.'.user_id' => Yii::$app->user->id]);
+            $subquery->andWhere([$subquery->primaryAlias . '.user_id' => Yii::$app->user->id]);
             if ($this->scope === 'watching') {
-                $subquery->andWhere([$subquery->primaryAlias.'.watching' => 1]);
+                $subquery->andWhere([$subquery->primaryAlias . '.watching' => 1]);
             }
             $subquery->select(['object_id']);
-            $this->query->join('INNER JOIN', ['sof' => $subquery], ['or', '{{sof}}.[[object_id]] = {{'.$this->query->primaryAlias.'}}.[[direct_object_id]]', '{{sof}}.[[object_id]] = {{'.$this->query->primaryAlias.'}}.[[indirect_object_id]]']);
+            $this->query->join('INNER JOIN', ['sof' => $subquery], ['or', '{{sof}}.[[object_id]] = {{' . $this->query->primaryAlias . '}}.[[direct_object_id]]', '{{sof}}.[[object_id]] = {{' . $this->query->primaryAlias . '}}.[[indirect_object_id]]']);
             $this->query->distinct = true;
         } else {
             $this->scope = 'all';

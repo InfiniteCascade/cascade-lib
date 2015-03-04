@@ -75,7 +75,7 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
             if (empty($relation['child_object_id']) && empty($relation['parent_object_id'])) {
                 if (!empty($this->_relations) && (!$this->companionObject || empty($this->companionObject->primaryKey))) {
                     $event->isValid = false;
-                    $this->owner->addError('_', 'Saving relations with no companion object! '.get_class($this->owner));
+                    $this->owner->addError('_', 'Saving relations with no companion object! ' . get_class($this->owner));
 
                     return false;
                 }
@@ -89,7 +89,7 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
         foreach ($this->_relatedObjectsFlat as $relatedObject) {
             if (!$relatedObject->save()) {
                 $event->handled = false;
-                $this->owner->addError('_', $relatedObject->objectType->title->upperSingular.' could not be saved!');
+                $this->owner->addError('_', $relatedObject->objectType->title->upperSingular . ' could not be saved!');
             }
         }
 
@@ -100,7 +100,7 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
     {
         foreach ($this->_relatedObjectsFlat as $relatedObject) {
             if (!$relatedObject->validate()) {
-                $this->owner->addError('_', $relatedObject->objectType->title->upperSingular.' did not validate.');
+                $this->owner->addError('_', $relatedObject->objectType->title->upperSingular . ' did not validate.');
                 $event->isValid = false;
 
                 return false;

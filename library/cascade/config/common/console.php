@@ -5,7 +5,7 @@
  * @author Jacob Morrison <jacob@infinitecascade.com>
  */
 defined('IS_CONSOLE') || define('IS_CONSOLE', true);
-$config = include __DIR__.DIRECTORY_SEPARATOR.'base.php';
+$config = include __DIR__ . DIRECTORY_SEPARATOR . 'base.php';
 $config['controllerNamespace'] = 'cascade\commands';
 $config['controllerMap'] = [
     'migrate' => 'infinite\console\controllers\MigrateController',

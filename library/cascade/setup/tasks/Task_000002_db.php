@@ -96,14 +96,14 @@ class Task_000002_db extends \infinite\setup\Task
     /**
      * Get migrator.
      *
-     * @return __return_getMigrator_type__ __return_getMigrator_description__
-     *
      * @throws Exception __exception_Exception_description__
+     *
+     * @return __return_getMigrator_type__ __return_getMigrator_description__
      */
     public function getMigrator()
     {
         if (is_null($this->_migrator)) {
-            $configFile = $this->setup->environmentPath.DIRECTORY_SEPARATOR.'console.php';
+            $configFile = $this->setup->environmentPath . DIRECTORY_SEPARATOR . 'console.php';
             if (!is_file($configFile)) {
                 throw new Exception("Invalid console config path: {$configFile}");
             }

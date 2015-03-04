@@ -8,8 +8,8 @@
 
 namespace cascade\models;
 
-use infinite\base\exceptions\Exception;
 use cascade\components\types\Relationship;
+use infinite\base\exceptions\Exception;
 use yii\base\Model;
 
 /**
@@ -71,35 +71,35 @@ class DeleteForm extends Model
     {
         $labels = [];
         $labels['delete_object'] = [
-            'short' => 'Delete '.$this->object->objectType->title->getSingular(true),
-            'long' => 'delete the '.$this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em>',
-            'past' => $this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em> has been deleted',
+            'short' => 'Delete ' . $this->object->objectType->title->getSingular(true),
+            'long' => 'delete the ' . $this->object->objectType->title->getSingular(false) . ' <em>' . $this->object->descriptor . '</em>',
+            'past' => $this->object->objectType->title->getSingular(false) . ' <em>' . $this->object->descriptor . '</em> has been deleted',
             'options' => ['class' => 'btn-danger'],
             'response' => 'home',
         ];
         $labels['archive_object'] = [
-            'short' => 'Archive '.$this->object->objectType->title->getSingular(true),
-            'long' => 'archive the '.$this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em>',
-            'past' => $this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em> has been archived',
+            'short' => 'Archive ' . $this->object->objectType->title->getSingular(true),
+            'long' => 'archive the ' . $this->object->objectType->title->getSingular(false) . ' <em>' . $this->object->descriptor . '</em>',
+            'past' => $this->object->objectType->title->getSingular(false) . ' <em>' . $this->object->descriptor . '</em> has been archived',
             'response' => 'refresh',
         ];
         $labels['unarchive_object'] = [
-            'short' => 'Unarchive '.$this->object->objectType->title->getSingular(true),
-            'long' => 'unarchive the '.$this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em>',
-            'past' => $this->object->objectType->title->getSingular(false).' <em>'.$this->object->descriptor.'</em> has been unarchived',
+            'short' => 'Unarchive ' . $this->object->objectType->title->getSingular(true),
+            'long' => 'unarchive the ' . $this->object->objectType->title->getSingular(false) . ' <em>' . $this->object->descriptor . '</em>',
+            'past' => $this->object->objectType->title->getSingular(false) . ' <em>' . $this->object->descriptor . '</em> has been unarchived',
             'response' => 'refresh',
         ];
         if (isset($this->relationshipWith)) {
             $labels['delete_relationship'] = [
                 'short' => 'Delete Relationship',
-                'long' => 'delete the relationship between <em>'.$this->object->descriptor.'</em> and <em>'.$this->relationshipWith->descriptor.'</em>',
-                'past' => 'the relationship between <em>'.$this->object->descriptor.'</em> and <em>'.$this->relationshipWith->descriptor.'</em> has been deleted',
+                'long' => 'delete the relationship between <em>' . $this->object->descriptor . '</em> and <em>' . $this->relationshipWith->descriptor . '</em>',
+                'past' => 'the relationship between <em>' . $this->object->descriptor . '</em> and <em>' . $this->relationshipWith->descriptor . '</em> has been deleted',
                 'options' => ['class' => 'btn-warning'],
             ];
             $labels['end_relationship'] = [
                 'short' => 'End Relationship',
-                'long' => 'end the relationship between <em>'.$this->object->descriptor.'</em> and <em>'.$this->relationshipWith->descriptor.'</em>',
-                'past' => 'the relationship between <em>'.$this->object->descriptor.'</em> and <em>'.$this->relationshipWith->descriptor.'</em> has been ended',
+                'long' => 'end the relationship between <em>' . $this->object->descriptor . '</em> and <em>' . $this->relationshipWith->descriptor . '</em>',
+                'past' => 'the relationship between <em>' . $this->object->descriptor . '</em> and <em>' . $this->relationshipWith->descriptor . '</em> has been ended',
             ];
         }
 
@@ -267,7 +267,7 @@ class DeleteForm extends Model
         if (in_array($value, $this->possibleTargets)) {
             $this->_target = $value;
         } else {
-            throw new Exception('Unknown deletion target '.$value);
+            throw new Exception('Unknown deletion target ' . $value);
         }
     }
 

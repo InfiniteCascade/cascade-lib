@@ -8,8 +8,8 @@
 
 namespace cascade\components\db\behaviors;
 
-use Yii;
 use cascade\components\types\Relationship;
+use Yii;
 
 /**
  * PrimaryRelation [@doctodo write class description for PrimaryRelation].

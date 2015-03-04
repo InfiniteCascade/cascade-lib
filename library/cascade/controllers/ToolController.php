@@ -8,8 +8,8 @@
 
 namespace cascade\controllers;
 
-use Yii;
 use infinite\web\Controller;
+use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 

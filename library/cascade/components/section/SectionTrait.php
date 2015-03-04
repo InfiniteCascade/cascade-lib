@@ -8,10 +8,10 @@
 
 namespace cascade\components\section;
 
-use yii\helpers\Inflector;
 use cascade\components\helpers\StringHelper;
 use infinite\base\collector\CollectorTrait;
 use infinite\web\RenderTrait;
+use yii\helpers\Inflector;
 
 trait SectionTrait
 {

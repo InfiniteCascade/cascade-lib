@@ -8,11 +8,11 @@
 
 namespace cascade\components\web\widgets\base;
 
-use Yii;
+use cascade\components\types\Relationship;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\ArrayHelper;
 use infinite\helpers\Html;
-use cascade\components\types\Relationship;
+use Yii;
 
 trait ObjectWidgetTrait
 {
@@ -47,7 +47,7 @@ trait ObjectWidgetTrait
         $classes = parent::getWidgetClasses();
         $classes[] = 'refreshable';
         $queryModelClass = $this->owner->primaryModel;
-        $classes[] = 'model-'.$queryModelClass::baseClassName();
+        $classes[] = 'model-' . $queryModelClass::baseClassName();
 
         return $classes;
     }
@@ -167,7 +167,7 @@ trait ObjectWidgetTrait
         if ($relationship) {
             $objectType = $relationship->companionRoleType($method);
             $objectRole = $relationship->companionRole($method);
-            $relationName = $objectRole.':'.$objectType->systemId;
+            $relationName = $objectRole . ':' . $objectType->systemId;
             $context['relation'] = [$relationName];
         }
 
@@ -191,7 +191,7 @@ trait ObjectWidgetTrait
             $baseCreate['related_object_id'] = Yii::$app->request->object->primaryKey;
             $objectRole = $relationship->companionRole($method);
             $companionRole = $relationship->companionRole($objectRole);
-            $relatedType = $companionRole.':'.$relationship->roleType($companionRole)->systemId;
+            $relatedType = $companionRole . ':' . $relationship->roleType($companionRole)->systemId;
             $baseCreate['object_relation'] = $relatedType;
             $link = $link && $relationship->canLink($objectRole, Yii::$app->request->object);
             $create = $create && $relationship->canCreate($objectRole, Yii::$app->request->object);
@@ -236,7 +236,7 @@ trait ObjectWidgetTrait
                 $isActive = $sortKey === $currentSortBy;
                 $extra = '';
                 if ($isActive) {
-                    $extra = '<i class="pull-right fa fa-sort-'.$oppositeSortByDirection.'"></i>';
+                    $extra = '<i class="pull-right fa fa-sort-' . $oppositeSortByDirection . '"></i>';
                     $newSortByDirection = $oppositeSortByDirection;
                 }
 
@@ -246,9 +246,9 @@ trait ObjectWidgetTrait
                 ];
 
                 $item['items'][] = [
-                    'label' => $extra.$sortItem['label'],
+                    'label' => $extra . $sortItem['label'],
                     'linkOptions' => [
-                        'title' => 'Sort by '.$sortItem['label'],
+                        'title' => 'Sort by ' . $sortItem['label'],
                         'data-state-change' => json_encode($stateChange),
                     ],
                     'options' => [
@@ -308,11 +308,11 @@ trait ObjectWidgetTrait
         // $baseUrl['relationship_id'] = $relationship->systemId;
         if ($queryRole === 'children') {
             $primaryRelation = $relationship->getPrimaryObject(Yii::$app->request->object, $model, 'child');
-            $baseUrl['object_relation'] = 'child:'.$model->objectType->systemId;
+            $baseUrl['object_relation'] = 'child:' . $model->objectType->systemId;
             $checkField = 'child_object_id';
         } else {
             $primaryRelation = $relationship->getPrimaryObject(Yii::$app->request->object, $model, 'parent');
-            $baseUrl['object_relation'] = 'parent:'.$model->objectType->systemId;
+            $baseUrl['object_relation'] = 'parent:' . $model->objectType->systemId;
             $checkField = 'parent_object_id';
         }
         if ($primaryRelation !== false

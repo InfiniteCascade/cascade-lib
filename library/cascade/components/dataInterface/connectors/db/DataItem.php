@@ -8,8 +8,8 @@
 
 namespace cascade\components\dataInterface\connectors\db;
 
-use cascade\components\dataInterface\RecursionException;
 use cascade\components\dataInterface\MissingItemException;
+use cascade\components\dataInterface\RecursionException;
 
 /**
  * DataItem [@doctodo write class description for DataItem].
@@ -68,7 +68,7 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
         if (empty($this->_foreignObject)) {
             \d($this->foreignPrimaryKey);
             \d($this->dataSource->name);
-            throw new MissingItemException('Foreign item could not be found: '.$this->foreignPrimaryKey);
+            throw new MissingItemException('Foreign item could not be found: ' . $this->foreignPrimaryKey);
         }
         $this->_isLoadingForeignObject = false;
     }

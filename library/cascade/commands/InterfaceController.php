@@ -8,11 +8,11 @@
 
 namespace cascade\commands;
 
-use Yii;
-use infinite\helpers\Console;
-use yii\console\Exception;
 use cascade\components\dataInterface\ConsoleAction;
 use infinite\helpers\ArrayHelper;
+use infinite\helpers\Console;
+use Yii;
+use yii\console\Exception;
 
 ini_set('memory_limit', -1);
 
@@ -44,7 +44,7 @@ class InterfaceController extends \infinite\console\Controller
      */
     public function actionRunOne()
     {
-        $this->out("Run Interface ".$this->dataInterface->object->name, Console::UNDERLINE, Console::FG_GREEN);
+        $this->out("Run Interface " . $this->dataInterface->object->name, Console::UNDERLINE, Console::FG_GREEN);
         $this->hr();
         $this->dataInterface->run(null, new ConsoleAction());
     }

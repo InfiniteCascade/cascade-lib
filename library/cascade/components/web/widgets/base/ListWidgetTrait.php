@@ -8,11 +8,11 @@
 
 namespace cascade\components\web\widgets\base;
 
-use infinite\helpers\Html;
-use infinite\web\grid\Row;
-use infinite\web\grid\Cell;
-use infinite\web\bootstrap\ButtonDropdown;
 use infinite\helpers\ArrayHelper;
+use infinite\helpers\Html;
+use infinite\web\bootstrap\ButtonDropdown;
+use infinite\web\grid\Cell;
+use infinite\web\grid\Row;
 
 trait ListWidgetTrait
 {
@@ -79,7 +79,7 @@ trait ListWidgetTrait
         $fieldOptions = isset($settings['fieldOptions']) ? $settings['fieldOptions'] : [];
         switch ($fieldName) {
             case 'subdescriptor':
-                $functionName = 'get'.ucfirst($fieldName);
+                $functionName = 'get' . ucfirst($fieldName);
                 $value = $model->{$functionName}($context);
             break;
             default:
@@ -197,7 +197,7 @@ trait ListWidgetTrait
                     if (!isset($menuItem['label'])) {
                         $menuItem['label'] = '';
                     }
-                    $menuItem['label'] = '<span class="'.$menuItem['icon'].'"></span>'.$menuItem['label'];
+                    $menuItem['label'] = '<span class="' . $menuItem['icon'] . '"></span>' . $menuItem['label'];
                     unset($menuItem['icon']);
                 }
             }
@@ -254,7 +254,7 @@ trait ListWidgetTrait
             }
         }
 
-        return parent::generateFooter().$footer;
+        return parent::generateFooter() . $footer;
     }
 
     /**

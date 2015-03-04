@@ -8,10 +8,10 @@
 
 namespace cascade\commands;
 
-use Yii;
 use infinite\caching\Cacher;
-use yii\helpers\FileHelper;
+use Yii;
 use yii\helpers\Console;
+use yii\helpers\FileHelper;
 
 /**
  * ToolsController [@doctodo write class description for ToolsController].
@@ -50,32 +50,32 @@ class ToolsController extends \infinite\console\Controller
             Yii::getAlias('@infinite/notification'),
         ];
         $customStart = microtime(true);
-        Console::stdout("Running custom fixes...".PHP_EOL);
+        Console::stdout("Running custom fixes..." . PHP_EOL);
         foreach ($dirs as $dir) {
             $dirStart = microtime(true);
             $changed = 0;
-            Console::stdout("\t".$dir."...");
+            Console::stdout("\t" . $dir . "...");
             $files = FileHelper::findFiles($dir, ['only' => ['*.php'], 'recursive' => true]);
-            Console::stdout("found ".count($files)." files...");
+            Console::stdout("found " . count($files) . " files...");
             foreach ($files as $file) {
                 if ($this->fixFile($file)) {
                     $changed++;
                 }
             }
-            Console::stdout("changed {$changed} files in ".round(microtime(true)-$dirStart, 1)."s!".PHP_EOL);
+            Console::stdout("changed {$changed} files in " . round(microtime(true)-$dirStart, 1) . "s!" . PHP_EOL);
         }
-        Console::stdout("done in ".round(microtime(true)-$customStart, 1)."s!".PHP_EOL.PHP_EOL);
+        Console::stdout("done in " . round(microtime(true)-$customStart, 1) . "s!" . PHP_EOL . PHP_EOL);
 
         $phpcsStart = microtime(true);
-        Console::stdout("Running custom fixes...".PHP_EOL);
+        Console::stdout("Running custom fixes..." . PHP_EOL);
         foreach ($dirs as $dir) {
             $dirStart = microtime(true);
             $changed = 0;
-            Console::stdout("\t".$dir."...");
+            Console::stdout("\t" . $dir . "...");
             $configFiles = [];
-            $configFiles[] = $dir.DIRECTORY_SEPARATOR.'.php_cs';
-            $configFiles[] = dirname($dir).DIRECTORY_SEPARATOR.'.php_cs';
-            $configFiles[] = dirname(dirname($dir)).DIRECTORY_SEPARATOR.'.php_cs';
+            $configFiles[] = $dir . DIRECTORY_SEPARATOR . '.php_cs';
+            $configFiles[] = dirname($dir) . DIRECTORY_SEPARATOR . '.php_cs';
+            $configFiles[] = dirname(dirname($dir)) . DIRECTORY_SEPARATOR . '.php_cs';
             $foundConfig = false;
             foreach ($configFiles as $configFile) {
                 if (file_exists($configFile)) {
@@ -84,12 +84,12 @@ class ToolsController extends \infinite\console\Controller
                 }
             }
             if (!$foundConfig) {
-                Console::stdout("skipped!".PHP_EOL);
+                Console::stdout("skipped!" . PHP_EOL);
                 continue;
             }
             $phpcsBinary = Yii::getAlias('@vendor/bin/php-cs-fixer');
             if (!file_exists($phpcsBinary)) {
-                Console::stdout("no php-cs-fixer binary!".PHP_EOL);
+                Console::stdout("no php-cs-fixer binary!" . PHP_EOL);
                 continue;
             }
 
@@ -97,20 +97,19 @@ class ToolsController extends \infinite\console\Controller
             $command[] = PHP_BINARY;
             $command[] = $phpcsBinary;
             $command[] = '--no-interaction';
-            $command[] = '--config-file='.$foundConfig;
+            $command[] = '--config-file=' . $foundConfig;
             // $command[] = '--quiet';
             $command[] = 'fix';
 
             exec(implode(' ', $command), $output, $exitCode);
-            if (empty($exitCode)) {
-                Console::stdout("done in ".round(microtime(true)-$dirStart, 1)."s!".PHP_EOL);
+            if (preg_match('/error/', implode(PHP_EOL, $output)) !== 1) {
+                Console::stdout("done in " . round(microtime(true)-$dirStart, 1) . "s!" . PHP_EOL);
             } else {
-                Console::stdout("error!".PHP_EOL);
+                Console::stdout("error!" . PHP_EOL);
                 \d($output);
-                exit;
             }
         }
-        Console::stdout("done in ".round(microtime(true)-$phpcsStart, 1)."s!".PHP_EOL.PHP_EOL);
+        Console::stdout("done in " . round(microtime(true)-$phpcsStart, 1) . "s!" . PHP_EOL . PHP_EOL);
     }
 
     public function fixFile($file)

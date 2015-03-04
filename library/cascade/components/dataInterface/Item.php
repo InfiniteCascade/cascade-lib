@@ -8,8 +8,8 @@
 
 namespace cascade\components\dataInterface;
 
-use infinite\base\exceptions\Exception;
 use cascade\models\DataInterface;
+use infinite\base\exceptions\Exception;
 
 /**
  * Item [@doctodo write class description for Item].
@@ -70,9 +70,9 @@ class Item extends \infinite\base\collector\Item
         try {
             $this->object->run($this->_currentInterfaceAction);
         } catch (Exception $e) {
-            $this->_currentInterfaceAction->status->addError('Exception raised: '.$e->getMessage());
+            $this->_currentInterfaceAction->status->addError('Exception raised: ' . $e->getMessage());
             $this->_currentInterfaceAction->end(true);
-            $this->error = 'Exception raised while running action ('.$e->getMessage().').';
+            $this->error = 'Exception raised while running action (' . $e->getMessage() . ').';
 
             return false;
         }
@@ -98,9 +98,9 @@ class Item extends \infinite\base\collector\Item
     /**
      * Get interface object.
      *
-     * @return __return_getInterfaceObject_type__ __return_getInterfaceObject_description__
-     *
      * @throws Exception __exception_Exception_description__
+     *
+     * @return __return_getInterfaceObject_type__ __return_getInterfaceObject_description__
      */
     public function getInterfaceObject()
     {

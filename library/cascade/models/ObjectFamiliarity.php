@@ -8,8 +8,8 @@
 
 namespace cascade\models;
 
-use Yii;
 use infinite\data\ActiveDataProvider;
+use Yii;
 
 /**
  * ObjectFamiliarity is the model class for table "object_familiarity".

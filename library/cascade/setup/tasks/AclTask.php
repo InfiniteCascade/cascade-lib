@@ -94,7 +94,7 @@ abstract class AclTask extends \infinite\setup\Task
                 $model = $controlled['model'];
                 $controlled = $model::find()->disableAccessCheck()->where($controlled['fields'])->one();
                 if (!$controlled) {
-                    throw new Exception("Could not find controlled object: ".print_r($rule['controlled'], true));
+                    throw new Exception("Could not find controlled object: " . print_r($rule['controlled'], true));
 
                     return false;
                 }
@@ -104,14 +104,14 @@ abstract class AclTask extends \infinite\setup\Task
                 $model = $accessing['model'];
                 $accessing = $model::find()->disableAccessCheck()->where($accessing['fields'])->one();
                 if (!$accessing) {
-                    throw new Exception("Could not find accessing object: ".print_r($rule['accessing'], true));
+                    throw new Exception("Could not find accessing object: " . print_r($rule['accessing'], true));
 
                     return false;
                 }
             }
 
             if (!$this->setup->app()->gk->{$rule['task']}($rule['action'], $controlled, $accessing)) {
-                throw new Exception("Could not set up rule: ".print_r(['rule' => $rule], true));
+                throw new Exception("Could not set up rule: " . print_r(['rule' => $rule], true));
 
                 return false;
             }

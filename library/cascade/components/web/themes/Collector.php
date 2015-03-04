@@ -49,9 +49,9 @@ class Collector extends \infinite\base\collector\Module
     /**
      * Get theme.
      *
-     * @return __return_getTheme_type__ __return_getTheme_description__
-     *
      * @throws Exception __exception_Exception_description__
+     *
+     * @return __return_getTheme_type__ __return_getTheme_description__
      */
     public function getTheme()
     {

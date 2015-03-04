@@ -8,10 +8,10 @@
 
 namespace cascade\components\web\browser;
 
-use Yii;
-use yii\base\InvalidConfigException;
 use cascade\components\types\Relationship;
 use infinite\helpers\ArrayHelper;
+use Yii;
+use yii\base\InvalidConfigException;
 
 /**
  * HandlerTypes [@doctodo write class description for HandlerTypes].
@@ -132,7 +132,7 @@ class HandlerTypes extends \infinite\web\browser\Handler
                 'descriptor' => $type->title->upperPlural,
                 'hasChildren' => !empty($type->collectorItem->children) || ($instructions['modules'] !== false && in_array($type->systemId, $instructions['modules'])),
             ];
-            if ($item['hasChildren'] && (!$this->filterQuery || preg_match('/'.preg_quote($this->filterQuery).'/i', $item['descriptor']) === 1)) {
+            if ($item['hasChildren'] && (!$this->filterQuery || preg_match('/' . preg_quote($this->filterQuery) . '/i', $item['descriptor']) === 1)) {
                 $items[] = $item;
             }
         }

@@ -4,7 +4,7 @@
  *
  * @author Jacob Morrison <jacob@infinitecascade.com>
  */
-$config = include __DIR__.DIRECTORY_SEPARATOR.'base.php';
+$config = include __DIR__ . DIRECTORY_SEPARATOR . 'base.php';
 $config['controllerNamespace'] = 'cascade\controllers';
 $config['controllerMap'] = [
     // 'admin' => \cascade\controllers\admin\DefaultController::className(),

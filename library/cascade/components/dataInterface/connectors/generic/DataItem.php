@@ -8,8 +8,8 @@
 
 namespace cascade\components\dataInterface\connectors\generic;
 
-use cascade\components\dataInterface\RecursionException;
 use cascade\components\dataInterface\MissingItemException;
+use cascade\components\dataInterface\RecursionException;
 use infinite\base\language\Verb;
 
 /**
@@ -68,7 +68,7 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         }
 
         if ($this->localModelError) {
-            $this->dataSource->task->addError('Unable to match local '.$this->dataSource->descriptor.' object', ['attributes' => $attributes]);
+            $this->dataSource->task->addError('Unable to match local ' . $this->dataSource->descriptor . ' object', ['attributes' => $attributes]);
 
             return false;
         }
@@ -85,7 +85,7 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
 
         // save local object
         if (!$this->localObject->save()) {
-            $this->dataSource->task->addError('Unable to '.$actionVerb->getSimplePresent(false).' local '.$this->dataSource->descriptor.' object: '.$this->localObject->descriptor, ['errors' => $this->localObject->errors, 'attributes' => $this->localObject->attributes]);
+            $this->dataSource->task->addError('Unable to ' . $actionVerb->getSimplePresent(false) . ' local ' . $this->dataSource->descriptor . ' object: ' . $this->localObject->descriptor, ['errors' => $this->localObject->errors, 'attributes' => $this->localObject->attributes]);
 
             return false;
         }
@@ -122,7 +122,7 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
                     $infoData['oldValues'][$key] = $oldValue;
                 }
             }
-            $this->dataSource->task->addInfo($actionVerb->getPast(true).' local '.$this->dataSource->descriptor.' object: '.$this->localObject->descriptor, $infoData);
+            $this->dataSource->task->addInfo($actionVerb->getPast(true) . ' local ' . $this->dataSource->descriptor . ' object: ' . $this->localObject->descriptor, $infoData);
         }
 
         // save foreign key map

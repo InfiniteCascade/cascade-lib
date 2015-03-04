@@ -8,9 +8,9 @@
 
 namespace cascade\components\web\widgets\base;
 
-use Yii;
-use infinite\helpers\Html;
 use cascade\components\web\widgets\Widget;
+use infinite\helpers\Html;
+use Yii;
 
 /**
  * Details [@doctodo write class description for Details].

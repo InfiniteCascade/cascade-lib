@@ -17,7 +17,7 @@ class Relatable extends \infinite\db\behaviors\Relatable
         $p = [];
         if (isset($this->owner->objectTypeItem) && !empty($this->owner->objectTypeItem->parents)) {
             foreach ($this->owner->objectTypeItem->parents as $relationship) {
-                $relationshipId = $relationship->parent->systemId.'.'.$childObject->objectType->systemId;
+                $relationshipId = $relationship->parent->systemId . '.' . $childObject->objectType->systemId;
                 if (!Relationship::getById($relationshipId)) {
                     continue;
                 }
@@ -35,7 +35,7 @@ class Relatable extends \infinite\db\behaviors\Relatable
         $p = [];
         if (isset($this->owner->objectTypeItem) && !empty($this->owner->objectTypeItem->children)) {
             foreach ($this->owner->objectTypeItem->children as $relationship) {
-                $relationshipId =  $parentObject->objectType->systemId.'.'.$relationship->child->systemId;
+                $relationshipId =  $parentObject->objectType->systemId . '.' . $relationship->child->systemId;
                 if (!Relationship::getById($relationshipId)) {
                     continue;
                 }

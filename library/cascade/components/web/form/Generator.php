@@ -8,8 +8,8 @@
 
 namespace cascade\components\web\form;
 
-use Yii;
 use infinite\helpers\Html;
+use Yii;
 
 /**
  * Generator [@doctodo write class description for Generator].

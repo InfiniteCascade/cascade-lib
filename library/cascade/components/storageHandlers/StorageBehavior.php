@@ -8,11 +8,11 @@
 
 namespace cascade\components\storageHandlers;
 
+use infinite\base\exceptions\Exception;
+use infinite\base\FileInterface;
+use infinite\web\UploadedFile;
 use Yii;
 use yii\base\Event;
-use infinite\web\UploadedFile;
-use infinite\base\FileInterface;
-use infinite\base\exceptions\Exception;
 
 /**
  * StorageBehavior [@doctodo write class description for StorageBehavior].
@@ -129,7 +129,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         }
         if (is_object($this->owner->{$this->storageAttribute}) && !$this->storageEngine->storageHandler->object->beforeSave($this->storageEngine, $this->owner, $this->storageAttribute)) {
             $event->isValid = false;
-            $this->owner->addError($this->storageAttribute, 'Unable to save file in storage engine. Try again later. ('.$this->storageEngine->storageHandler->object->error.')');
+            $this->owner->addError($this->storageAttribute, 'Unable to save file in storage engine. Try again later. (' . $this->storageEngine->storageHandler->object->error . ')');
 
             return false;
         }

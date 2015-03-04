@@ -8,11 +8,11 @@
 
 namespace cascade\models;
 
-use infinite\caching\Cacher;
-use infinite\helpers\StringHelper;
-use infinite\helpers\Date;
-use yii\helpers\Url;
 use cascade\components\dataInterface\Status;
+use infinite\caching\Cacher;
+use infinite\helpers\Date;
+use infinite\helpers\StringHelper;
+use yii\helpers\Url;
 
 /**
  * DataInterfaceLog is the model class for table "data_interface_log".
@@ -295,7 +295,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         $p['messages'] = [];
         $lasttime = $started = $this->statusLog->started;
         foreach ($this->statusLog->messages as $key => $message) {
-            $key = $key.'-'.substr(md5($key), 0, 5);
+            $key = $key . '-' . substr(md5($key), 0, 5);
             $timestamp = (float) $message['time'];
             $duration = $timestamp - $lasttime;
             $lasttime = $timestamp;

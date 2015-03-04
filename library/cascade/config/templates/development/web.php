@@ -4,7 +4,7 @@
  *
  * @author Jacob Morrison <jacob@infinitecascade.com>
  */
-$parent = INFINITE_APP_PATH.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'common'.DIRECTORY_SEPARATOR.basename(__FILE__);
+$parent = INFINITE_APP_PATH . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'common' . DIRECTORY_SEPARATOR . basename(__FILE__);
 $config = include $parent;
 $config = array_merge($config, [
         'id' => '%%_.application_id%%',

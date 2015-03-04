@@ -35,7 +35,7 @@ class AssetBundle extends \yii\web\AssetBundle
             return $imagePath;
         }
         $filename = pathinfo($imagePath);
-        $cachePath = $cachePath.DIRECTORY_SEPARATOR.$filename['filename'].'_'.$sizeKey.'.'.$filename['extension'];
+        $cachePath = $cachePath . DIRECTORY_SEPARATOR . $filename['filename'] . '_' . $sizeKey . '.' . $filename['extension'];
         if (file_exists($cachePath)) {
             return $cachePath;
         }
@@ -91,7 +91,7 @@ class AssetBundle extends \yii\web\AssetBundle
         if (empty($this->basePath)) {
             return false;
         }
-        $cachePath = $this->basePath.DIRECTORY_SEPARATOR.'cache';
+        $cachePath = $this->basePath . DIRECTORY_SEPARATOR . 'cache';
         if (!is_dir($cachePath)) {
             @mkdir($cachePath, 0777, true);
         }
@@ -112,7 +112,7 @@ class AssetBundle extends \yii\web\AssetBundle
         if (empty($this->baseUrl)) {
             return false;
         }
-        $cacheUrl = $this->baseUrl.'/cache';
+        $cacheUrl = $this->baseUrl . '/cache';
 
         return $cacheUrl;
     }
@@ -126,7 +126,7 @@ class AssetBundle extends \yii\web\AssetBundle
      */
     public function getCacheAssetUrl($path)
     {
-        $url = $this->cacheUrl.'/'.basename($path);
+        $url = $this->cacheUrl . '/' . basename($path);
 
         return $url;
     }

@@ -8,15 +8,15 @@
 
 namespace cascade\components\types;
 
+use cascade\components\db\behaviors\SearchTerm;
+use cascade\components\db\fields\Base as BaseField;
+use cascade\components\web\form\Segment as FormSegment;
+use cascade\models\Relation;
+use infinite\caching\Cacher;
+use infinite\helpers\ArrayHelper;
+use infinite\helpers\Html;
 use Yii;
 use yii\helpers\Inflector;
-use infinite\helpers\Html;
-use infinite\helpers\ArrayHelper;
-use infinite\caching\Cacher;
-use cascade\components\web\form\Segment as FormSegment;
-use cascade\components\db\fields\Base as BaseField;
-use cascade\components\db\behaviors\SearchTerm;
-use cascade\models\Relation;
 
 trait ActiveRecordTrait
 {
@@ -120,7 +120,7 @@ trait ActiveRecordTrait
         if (isset($this->_parentModel)) {
             $parentModelClass = get_class($this->_parentModel);
 
-            return $this->_parentModel->formName().$this->_parentModel->tabularPrefix.'[relatedObjects]['.$parentFormName.']';
+            return $this->_parentModel->formName() . $this->_parentModel->tabularPrefix . '[relatedObjects][' . $parentFormName . ']';
         }
 
         return $parentFormName;
@@ -158,7 +158,7 @@ trait ActiveRecordTrait
         $companionName = $parts[1];
         $fieldName = isset($parts[2]) ? $parts[2] : 'descriptor';
         $myTypeItem = $model->objectTypeItem;
-        $weightField = $parts[0].'SearchWeight';
+        $weightField = $parts[0] . 'SearchWeight';
         $companionTypeItem = Yii::$app->collectors['types']->getOne($companionName);
         if (!$companionTypeItem || !$myTypeItem || !($companionType = $companionTypeItem->object) || !($myType = $myTypeItem->object)) {
             return;
@@ -284,9 +284,9 @@ trait ActiveRecordTrait
             }
             ArrayHelper::multisort($loopRelations, 'priority', SORT_ASC);
             foreach ($loopRelations as $relatedType) {
-                $fieldName = $relationshipType.':'.$relatedType->systemId;
+                $fieldName = $relationshipType . ':' . $relatedType->systemId;
                 if (isset($parts[2])) {
-                    $fieldName .= ':'.$parts[2];
+                    $fieldName .= ':' . $parts[2];
                 }
                 $fieldValue = $this->getForeignField($fieldName, $options, $context);
                 if (!empty($fieldValue)) {
@@ -410,9 +410,9 @@ trait ActiveRecordTrait
             }
             ArrayHelper::multisort($loopRelations, 'priority', SORT_ASC);
             foreach ($loopRelations as $relatedType) {
-                $fieldName = $relationshipType.':'.$relatedType->systemId;
+                $fieldName = $relationshipType . ':' . $relatedType->systemId;
                 if (isset($parts[2])) {
-                    $fieldName .= ':'.$parts[2];
+                    $fieldName .= ':' . $parts[2];
                 }
                 $fieldValue = $this->getForeignField($fieldName, $options, $context);
                 if (!empty($fieldValue)) {
@@ -550,12 +550,12 @@ trait ActiveRecordTrait
         if (($moduleItem = $model->getObjectTypeItem())) {
             foreach ($moduleItem->children as $key => $relationship) {
                 if ($relationship->child->childSearchWeight) {
-                    $fields[] = 'child:'.$key;
+                    $fields[] = 'child:' . $key;
                 }
             }
             foreach ($moduleItem->parents as $key => $relationship) {
                 if ($relationship->parent->parentSearchWeight) {
-                    $fields[] = 'parent:'.$key;
+                    $fields[] = 'parent:' . $key;
                 }
             }
         }
@@ -664,7 +664,7 @@ trait ActiveRecordTrait
 
     public function getUrl($action = 'view', $base = [], $pathLink = true)
     {
-        $url = ['/object/'.$action, 'id' => $this->primaryKey];
+        $url = ['/object/' . $action, 'id' => $this->primaryKey];
         $url = array_merge($url, $base);
         if ($action === 'view'
                 && $pathLink === true
@@ -718,7 +718,7 @@ trait ActiveRecordTrait
      */
     public function form($settings = [])
     {
-        Yii::beginProfile(__CLASS__.':'.__FUNCTION__);
+        Yii::beginProfile(__CLASS__ . ':' . __FUNCTION__);
         $settings['class'] = $this->formSegmentClass;
         $settings['model'] = $this;
         if (!isset($settings['settings'])) {
@@ -726,7 +726,7 @@ trait ActiveRecordTrait
         }
         $form = Yii::createObject($settings);
         // $form = new FormSegment($this, $name, $settings);
-        Yii::endProfile(__CLASS__.':'.__FUNCTION__);
+        Yii::endProfile(__CLASS__ . ':' . __FUNCTION__);
 
         return $form;
     }
@@ -841,7 +841,7 @@ trait ActiveRecordTrait
         if (isset($fields[$field])) {
             return $fields[$field];
         } else {
-            $functionName = 'get'.Inflector::camelize($field).'Field';
+            $functionName = 'get' . Inflector::camelize($field) . 'Field';
             if (method_exists($this, $functionName)) {
                 return $this->$functionName();
             } elseif (isset($this->{$field})) {
@@ -930,7 +930,7 @@ trait ActiveRecordTrait
                 $relationClass = Yii::$app->classes['Relation'];
                 $taxonomies = $objectTypeItem->taxonomies;
                 foreach ($objectTypeItem->parents as $relationship) {
-                    $fieldName = 'parent:'.$relationship->parent->systemId;
+                    $fieldName = 'parent:' . $relationship->parent->systemId;
                     if (in_array($fieldName, $disabledFields)) {
                         continue;
                     }
@@ -949,7 +949,7 @@ trait ActiveRecordTrait
                 }
 
                 foreach ($objectTypeItem->children as $relationship) {
-                    $fieldName = 'child:'.$relationship->child->systemId;
+                    $fieldName = 'child:' . $relationship->child->systemId;
                     if (in_array($fieldName, $disabledFields)) {
                         continue;
                     }
@@ -972,7 +972,7 @@ trait ActiveRecordTrait
                         continue;
                     }
 
-                    $fieldName = 'taxonomy:'.$taxonomy->systemId;
+                    $fieldName = 'taxonomy:' . $taxonomy->systemId;
                     if (in_array($fieldName, $disabledFields)) {
                         continue;
                     }

@@ -8,13 +8,13 @@
 
 namespace cascade\components\types;
 
-use Yii;
-use cascade\models\Group;
 use cascade\components\web\ObjectViewEvent;
+use cascade\models\Group;
 use infinite\base\exceptions\Exception;
 use infinite\base\exceptions\HttpException;
 use infinite\base\language\Noun;
 use infinite\security\Access;
+use Yii;
 use yii\base\Controller;
 
 /**
@@ -133,7 +133,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     {
         parent::always();
         if (isset($this->modelNamespace)) {
-            Yii::$app->registerModelAlias(':'.$this->systemId, $this->modelNamespace);
+            Yii::$app->registerModelAlias(':' . $this->systemId, $this->modelNamespace);
         }
     }
 
@@ -151,13 +151,13 @@ abstract class Module extends \cascade\components\base\CollectorModule
      * @param unknown $controller
      * @param unknown $action
      *
-     * @return unknown
-     *
      * @throws HttpException __exception_HttpException_description__
+     *
+     * @return unknown
      */
     public function onBeforeControllerAction($controller, $action)
     {
-        if (!isset($_SERVER['PASS_THRU']) or $_SERVER['PASS_THRU'] != md5(Yii::$app->params['salt'].'PASS')) {
+        if (!isset($_SERVER['PASS_THRU']) or $_SERVER['PASS_THRU'] != md5(Yii::$app->params['salt'] . 'PASS')) {
             throw new HttpException(400, 'Invalid request!');
         }
 
@@ -170,10 +170,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
     public function onAfterInit($event)
     {
         if (!isset(Yii::$app->collectors['taxonomies']) || !Yii::$app->collectors['taxonomies']->registerMultiple($this, $this->taxonomies())) {
-            throw new Exception('Could not register taxonmies for '.$this->systemId.'!');
+            throw new Exception('Could not register taxonmies for ' . $this->systemId . '!');
         }
         if (!isset(Yii::$app->collectors['widgets']) || !Yii::$app->collectors['widgets']->registerMultiple($this, $this->widgets())) {
-            throw new Exception('Could not register widgets for '.$this->systemId.'!');
+            throw new Exception('Could not register widgets for ' . $this->systemId . '!');
         }
         // if (!isset(Yii::$app->collectors['roles']) || !Yii::$app->collectors['roles']->registerMultiple($this, $this->roles())) { throw new Exception('Could not register roles for '. $this->systemId .'!'); }
         // if (!isset(Yii::$app->collectors['tools']) || !Yii::$app->collectors['tools']->registerMultiple($this, $this->tools())) { throw new Exception('Could not register tools for '. $this->systemId .'!'); }
@@ -428,7 +428,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
      */
     public function getPrimaryModel()
     {
-        return $this->modelNamespace.'\\'.'Object'.$this->systemId;
+        return $this->modelNamespace . '\\' . 'Object' . $this->systemId;
     }
 
     /**
@@ -684,9 +684,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
             }
         }
         if (($parent && $parent->systemId === $this->systemId) || ($child && $child->systemId === $this->systemId)) {
-            $sectionId = $settings['relationship']->systemId.'-'.$this->systemId;
+            $sectionId = $settings['relationship']->systemId . '-' . $this->systemId;
             $section = Yii::$app->collectors['sections']->getOne($sectionId);
-            $section->title = '%%relationship%% %%type.'.$this->systemId.'.title.upperPlural%%';
+            $section->title = '%%relationship%% %%type.' . $this->systemId . '.title.upperPlural%%';
             $section->icon = $this->icon;
             $section->systemId = $sectionId;
             if (empty($section->object)) {
@@ -699,7 +699,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
         }
         $sectionClass = $this->sectionSingleWidgetClass;
         $sectionItemClass = $this->sectionItemClass;
-        $newSectionTitle = '%%type.'.$this->systemId.'.title.upperPlural%%';
+        $newSectionTitle = '%%type.' . $this->systemId . '.title.upperPlural%%';
         $sectionId = $this->systemId;
         if (!is_null($this->sectionName)) {
             $sectionId = $sectionItemClass::generateSectionId($this->sectionName);
@@ -768,7 +768,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
             $detailsSection = '_self';
         }
 
-        $detailsWidgetClass = self::classNamespace().'\widgets\\'.'Details';
+        $detailsWidgetClass = self::classNamespace() . '\widgets\\' . 'Details';
         $widgetClass = $this->fallbackDetailsWidgetClass;
 
         @class_exists($detailsWidgetClass);
@@ -804,12 +804,12 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
         $detailsWidget = $this->getDetailsWidget();
         if ($detailsWidget) {
-            $id = '_'.$this->systemId.'Details';
+            $id = '_' . $this->systemId . 'Details';
             $widgets[$id] = $detailsWidget;
         }
 
-        $detailListClassName = self::classNamespace().'\widgets\\'.'DetailList';
-        $simpleListClassName = self::classNamespace().'\widgets\\'.'SimpleLinkList';
+        $detailListClassName = self::classNamespace() . '\widgets\\' . 'DetailList';
+        $simpleListClassName = self::classNamespace() . '\widgets\\' . 'SimpleLinkList';
         @class_exists($detailListClassName);
         @class_exists($simpleListClassName);
 
@@ -828,11 +828,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
             // needs widget for children and summary page
             if ($detailListClassName) {
                 $childrenWidget = $baseWidget;
-                $id = 'Parent'.$this->systemId.'Browse';
+                $id = 'Parent' . $this->systemId . 'Browse';
                 $childrenWidget['widget'] = [
                     'class' => $detailListClassName,
                     'icon' => $this->icon,
-                    'title' => '%%relationship%% %%type.'.$this->systemId.'.title.upperPlural%%',
+                    'title' => '%%relationship%% %%type.' . $this->systemId . '.title.upperPlural%%',
                 ];
                 $childrenWidget['locations'] = ['child_objects'];
                 $childrenWidget['priority'] = $this->priority;
@@ -843,11 +843,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
             }
             if ($this->hasDashboard && $simpleListClassName) {
                 $summaryWidget = $baseWidget;
-                $id = $this->systemId.'Summary';
+                $id = $this->systemId . 'Summary';
                 $summaryWidget['widget'] = [
                     'class' => $simpleListClassName,
                     'icon' => $this->icon,
-                    'title' => '%%type.'.$this->systemId.'.title.upperPlural%%',
+                    'title' => '%%type.' . $this->systemId . '.title.upperPlural%%',
                 ];
                 $summaryWidget['locations'] = ['front'];
                 $summaryWidget['priority'] = $this->priority;
@@ -863,11 +863,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
         }
         if ($detailListClassName) {
             $parentsWidget = $baseWidget;
-            $id = 'Children'.$this->systemId.'Browse';
+            $id = 'Children' . $this->systemId . 'Browse';
             $parentsWidget['widget'] = [
                     'class' => $detailListClassName,
                     'icon' => $this->icon,
-                    'title' => '%%relationship%% %%type.'.$this->systemId.'.title.upperPlural%%',
+                    'title' => '%%relationship%% %%type.' . $this->systemId . '.title.upperPlural%%',
                 ];
             $parentsWidget['locations'] = ['parent_objects'];
             $parentsWidget['priority'] = $this->priority + 1;

@@ -1,11 +1,11 @@
 <?php
 namespace cascade\components\base;
 
+use infinite\base\Cron;
+use infinite\base\Daemon;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Event;
-use infinite\base\Daemon;
-use infinite\base\Cron;
 
 class Bootstrap extends \yii\base\Object implements BootstrapInterface
 {

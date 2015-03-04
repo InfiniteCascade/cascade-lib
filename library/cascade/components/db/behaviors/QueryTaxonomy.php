@@ -40,8 +40,8 @@ class QueryTaxonomy extends \infinite\db\behaviors\ActiveRecord
         $pivotTable = $pivotTableClass::tableName();
         $taxonomy = static::parseTaxonomyValue($value);
         $params = [];
-        $this->owner->andWhere(['{{'.$taxonomyAlias.'}}.[['.$this->taxonomyKey.']]' => $taxonomy]);
-        $conditions = ['and', '{{'.$queryAlias.'}}.[['.$queryPk.']]={{'.$taxonomyAlias.'}}.[['.$this->relationKey.']]'];
+        $this->owner->andWhere(['{{' . $taxonomyAlias . '}}.[[' . $this->taxonomyKey . ']]' => $taxonomy]);
+        $conditions = ['and', '{{' . $queryAlias . '}}.[[' . $queryPk . ']]={{' . $taxonomyAlias . '}}.[[' . $this->relationKey . ']]'];
         $this->owner->leftJoin([$taxonomyAlias => $pivotTable], $conditions, $params);
     }
 

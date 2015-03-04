@@ -3,8 +3,8 @@ namespace cascade\components\rest;
 
 use Yii;
 use yii\base\InvalidParamException;
-use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
 
 class IndexAction extends \yii\rest\IndexAction
 {
@@ -19,7 +19,7 @@ class IndexAction extends \yii\rest\IndexAction
         $modelClass = $this->modelClass;
         $objectType = (new $modelClass())->objectType;
         if (empty($objectType)) {
-            throw new InvalidParamException($modelClass.' does not have a corresponding object type');
+            throw new InvalidParamException($modelClass . ' does not have a corresponding object type');
         }
         if (!$objectType->hasDashboard) {
             $requiredParams[] = 'parentObject';
@@ -54,7 +54,7 @@ class IndexAction extends \yii\rest\IndexAction
             }
             $whereConditions = $dataProvider->query->andWhereFromQuery($query);
             if (empty($objectType)) {
-                throw new InvalidParamException($modelClass.' does not have a corresponding object type');
+                throw new InvalidParamException($modelClass . ' does not have a corresponding object type');
             }
             if (!isset($this->parentObject)) {
                 $dataProvider->query->denyInherit();

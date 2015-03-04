@@ -8,8 +8,8 @@
 
 namespace cascade\components\web\widgets\section;
 
-use Yii;
 use infinite\helpers\Html;
+use Yii;
 
 /**
  * SingleSection [@doctodo write class description for SingleSection].
@@ -36,7 +36,7 @@ class SingleSection extends Section
     {
         $widgetCell = $this->singleWidget;
         if ($widgetCell) {
-            $widgetCell->prepend(Html::tag('div', '', ['id' => 'section-'.$this->systemId, 'class' => 'scroll-mark']));
+            $widgetCell->prepend(Html::tag('div', '', ['id' => 'section-' . $this->systemId, 'class' => 'scroll-mark']));
 
             return $widgetCell;
         }

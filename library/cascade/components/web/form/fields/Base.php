@@ -8,8 +8,8 @@
 
 namespace cascade\components\web\form\fields;
 
-use infinite\helpers\Html;
 use cascade\components\web\form\FormObjectTrait;
+use infinite\helpers\Html;
 use infinite\web\grid\CellContentTrait;
 
 /**

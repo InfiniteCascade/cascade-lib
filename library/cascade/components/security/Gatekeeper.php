@@ -8,10 +8,10 @@
 
 namespace cascade\components\security;
 
-use Yii;
-use infinite\base\exceptions\Exception;
 use cascade\modules\core\TypeAccount\models\ObjectAccount;
+use infinite\base\exceptions\Exception;
 use infinite\db\Query;
+use Yii;
 
 /**
  * Gatekeeper [@doctodo write class description for Gatekeeper].
@@ -43,7 +43,7 @@ class Gatekeeper extends \infinite\security\Gatekeeper
         if (!isset($authority['type'])
             || !($authorityTypeItem = Yii::$app->collectors['types']->getOne($authority['type']))
             || !($authorityType = $authorityTypeItem->object)) {
-            throw new Exception("Access Control Authority is not set up correctly!".print_r($authority, true));
+            throw new Exception("Access Control Authority is not set up correctly!" . print_r($authority, true));
         }
         unset($authority['type']);
         $authority['handler'] = $authorityType;
@@ -131,10 +131,10 @@ class Gatekeeper extends \infinite\security\Gatekeeper
             if (isset($subquery->where[1])) {
                 $firstKey = array_keys($subquery->where[1])[0];
                 unset($subquery->where[1][$firstKey]);
-                $subquery->where[1] = $firstKey.' = {{'.$query->primaryAlias.'}}.[['.$query->primaryTablePk.']]';
+                $subquery->where[1] = $firstKey . ' = {{' . $query->primaryAlias . '}}.[[' . $query->primaryTablePk . ']]';
             }
-            $subquery->select(['{{'.$superInnerAlias.'}}.[[parent_object_id]]']);
-            $innerOnConditions[] = '{{'.$innerAlias.'}}.[[controlled_object_id]] IN ('.$subquery->createCommand()->rawSql.')';
+            $subquery->select(['{{' . $superInnerAlias . '}}.[[parent_object_id]]']);
+            $innerOnConditions[] = '{{' . $innerAlias . '}}.[[controlled_object_id]] IN (' . $subquery->createCommand()->rawSql . ')';
             //echo $subquery->createCommand()->rawSql;exit;
         }
 

@@ -1,7 +1,7 @@
 <?php
+use infinite\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\helpers\Url;
-use infinite\helpers\Html;
 
 cascade\components\web\assetBundles\ObjectViewAsset::register($this);
 
@@ -28,7 +28,7 @@ foreach ($sections as $section) {
     if ($section->priority === false) {
         continue;
     }
-    $sectionsMenu[] = ['label' => $section->object->title, 'url' => '#section-'.$section->systemId];
+    $sectionsMenu[] = ['label' => $section->object->title, 'url' => '#section-' . $section->systemId];
 }
 $this->tinyMenu = $sectionsMenu;
 echo Html::beginTag('div', ['class' => 'dashboard']);
@@ -45,7 +45,7 @@ if (isset($sections['_side'])) {
 
     if (!empty($sideContent)) {
         $mainColumnSize -= 4;
-        $js[] = '$("#'.$cellInner->id.'").cascadeAffix();';
+        $js[] = '$("#' . $cellInner->id . '").cascadeAffix();';
         $js[] = "\$('body').scrollspy({ target: '.ic-sidenav', 'offset': 10 });";
         $cells[] = $sideCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $sideContent]);
         Yii::configure($sideCell, ['mediumDesktopColumns' => 4, 'maxMediumDesktopColumns' => 4, 'largeDesktopSize' => false, 'tabletColumns' => 5]);

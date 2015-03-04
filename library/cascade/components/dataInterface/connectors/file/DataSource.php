@@ -8,8 +8,8 @@
 
 namespace cascade\components\dataInterface\connectors\file;
 
-use Yii;
 use infinite\helpers\ArrayHelper;
+use Yii;
 
 /**
  * DataSource [@doctodo write class description for DataSource].

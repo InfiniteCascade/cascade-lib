@@ -8,9 +8,9 @@
 
 namespace cascade\components\web\widgets\grid;
 
-use Yii;
 use cascade\web\widgets\grid\columns\Data as DataColumn;
 use infinite\base\exceptions\Exception;
+use Yii;
 
 /**
  * View [@doctodo write class description for View].
@@ -154,7 +154,7 @@ class View extends \yii\base\Widget
             $options['rendererSettings']['grid']['sortable'] = $this->sortableAttributes;
             $options = CJSON::encode($options);
             if (!empty($this->additionalClasses)) {
-                $this->htmlOptions['class'] .= ' '.$this->additionalClasses;
+                $this->htmlOptions['class'] .= ' ' . $this->additionalClasses;
             }
             $this->htmlOptions['data-grid-view-options'] = $options;
             echo Html::tag('div', '', $this->htmlOptions);
@@ -213,7 +213,7 @@ class View extends \yii\base\Widget
                 } elseif ($r->hasBehavior('Access')) {
                     $p['acl'] = $r->aclSummary();
                 }
-                $this->_currentData['item-'.$itemNumber] = $p;
+                $this->_currentData['item-' . $itemNumber] = $p;
                 $row++;
                 $itemNumber++;
             }
@@ -285,9 +285,9 @@ class View extends \yii\base\Widget
      *
      * @param __param_text_type__ $text __param_text_description__
      *
-     * @return __return_createGridColumn_type__ __return_createGridColumn_description__
-     *
      * @throws Exception __exception_Exception_description__
+     *
+     * @return __return_createGridColumn_type__ __return_createGridColumn_description__
      */
     protected function createGridColumn($text)
     {
@@ -327,7 +327,7 @@ class View extends \yii\base\Widget
      */
     public function getDataKey()
     {
-        return 'ajax-'.$this->id;
+        return 'ajax-' . $this->id;
     }
 
     /**

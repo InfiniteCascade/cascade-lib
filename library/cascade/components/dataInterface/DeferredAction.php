@@ -65,7 +65,7 @@ class DeferredAction extends \infinite\deferred\components\Action
             return 'Unknown Data Interface';
         }
 
-        return 'Interface: '.$logModel->dataInterface->name;
+        return 'Interface: ' . $logModel->dataInterface->name;
     }
 
     public function cancel()

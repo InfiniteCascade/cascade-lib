@@ -29,6 +29,6 @@ class IdentityAsset extends \cascade\components\web\themes\IdentityAsset
             return false;
         }
 
-        return $this->basePath.DIRECTORY_SEPARATOR.'logo.png';
+        return $this->basePath . DIRECTORY_SEPARATOR . 'logo.png';
     }
 }

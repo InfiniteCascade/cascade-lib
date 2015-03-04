@@ -8,10 +8,10 @@
 
 namespace cascade\components\dataInterface\connectors\generic;
 
-use Yii;
 use cascade\components\dataInterface\Action;
 use cascade\components\dataInterface\Module as BaseModule;
 use infinite\action\Action as BaseAction;
+use Yii;
 
 /**
  * Module [@doctodo write class description for Module].
@@ -61,7 +61,7 @@ abstract class Module extends BaseModule
                 $prefix = 'Syncing';
             }
 
-            $task = $action->status->addTask($id, $prefix.' '.$source->descriptor);
+            $task = $action->status->addTask($id, $prefix . ' ' . $source->descriptor);
             $source->task = $task;
             $source->prepareTask();
             $taskSets[] = [

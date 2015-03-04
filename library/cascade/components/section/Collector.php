@@ -8,8 +8,8 @@
 
 namespace cascade\components\section;
 
-use cascade\components\web\widgets\section\SideSection;
 use cascade\components\web\widgets\section\ParentSection;
+use cascade\components\web\widgets\section\SideSection;
 
 /**
  * Collector [@doctodo write class description for Collector].
