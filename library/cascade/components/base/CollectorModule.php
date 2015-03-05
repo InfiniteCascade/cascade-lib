@@ -11,7 +11,6 @@ namespace cascade\components\base;
 use infinite\base\collector\CollectedObjectTrait;
 use infinite\base\exceptions\Exception;
 use Yii;
-use Exception;
 
 /**
  * CollectorModule [[@doctodo class_description:cascade\components\base\CollectorModule]].
@@ -25,6 +24,7 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     /**
      * Prepares object for serialization.
      *
+     * @throws Exception [[@doctodo exception_description:Exception]]
      * @return [[@doctodo return_type:__sleep]] [[@doctodo return_description:__sleep]]
      *
      */

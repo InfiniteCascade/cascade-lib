@@ -11,7 +11,6 @@ namespace cascade\components\dataInterface\connectors\file;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\Match;
 use Yii;
-use Exception;
 
 /**
  * SourceFile [[@doctodo class_description:cascade\components\dataInterface\connectors\file\SourceFile]].
