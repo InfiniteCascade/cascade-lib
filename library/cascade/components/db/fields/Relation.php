@@ -42,7 +42,7 @@ class Relation extends Base
      * @var [[@doctodo var_type:baseModel]] [[@doctodo var_description:baseModel]]
      */
     public $baseModel;
-    
+
     /**
      * @var [[@doctodo var_type:_moduleHandlers]] [[@doctodo var_description:_moduleHandlers]]
      */

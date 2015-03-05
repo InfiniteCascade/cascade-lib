@@ -318,7 +318,6 @@ class Relationship extends \infinite\base\Object
         return false;
     }
 
-    
     /**
      * [[@doctodo method_description:has]].
      *

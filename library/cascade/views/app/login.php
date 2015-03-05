@@ -2,7 +2,6 @@
 use infinite\helpers\Html;
 use yii\widgets\ActiveForm;
 
-
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 $formOptions = ['class' => 'form-horizontal'];
