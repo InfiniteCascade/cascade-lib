@@ -18,7 +18,7 @@ use yii\db\ColumnSchema;
  */
 class MultilineDetector extends \infinite\base\Object
 {
-    /*
+    /**
      * @var [[@doctodo var_type:_machineTests]] $_machineTests [[@doctodo var_description:_machineTests]]
      */
     static $_machineTests = [

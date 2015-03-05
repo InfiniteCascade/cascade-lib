@@ -17,8 +17,7 @@ use cascade\components\db\fields\Base as DbBaseField;
  */
 class FieldTypeDetector extends \infinite\base\object
 {
-    /*
-     */
+    
     /**
      * [[@doctodo method_description:detect]].
      *

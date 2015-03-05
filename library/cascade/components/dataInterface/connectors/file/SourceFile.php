@@ -260,6 +260,7 @@ class SourceFile extends \infinite\base\Object
      *
      * @param string $filetype [[@doctodo param_description:filetype]] [optional]
      *
+     * @throws Exception [[@doctodo exception_description:Exception]]
      * @return [[@doctodo return_type:convertExcel]] [[@doctodo return_description:convertExcel]]
      *
      */

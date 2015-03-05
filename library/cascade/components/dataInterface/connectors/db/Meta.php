@@ -46,8 +46,7 @@ class Meta extends \infinite\base\Object
      */
     protected $_interface;
 
-    /*
-     */
+    
     /**
      * @var [[@doctodo var_type:_metas]] [[@doctodo var_description:_metas]]
      */

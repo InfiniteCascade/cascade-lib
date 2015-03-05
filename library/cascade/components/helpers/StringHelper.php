@@ -17,9 +17,6 @@ use Yii;
  */
 class StringHelper extends \infinite\helpers\StringHelper
 {
-    /*
-    * @inheritdoc
-     */
     /**
      * @inheritdoc
      */

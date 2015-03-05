@@ -2,13 +2,6 @@
 
 use yii\helpers\Html;
 
-/*
- * @var yii\base\View $this
- * @var string $name
- * @var string $message
- * @var Exception $exception
- */
-
 $this->title = $name;
 ?>
 <div class="site-error">

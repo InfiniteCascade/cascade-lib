@@ -18,12 +18,7 @@ use yii\db\ColumnSchema;
  */
 class HumanFieldDetector extends \infinite\base\Object
 {
-    /*
-     */
-    /*
-     * @var [[@doctodo var_type:_machineTests]] $_machineTests [[@doctodo var_description:_machineTests]]
-     */
-    /*
+    /**
      * @var [[@doctodo var_type:_machineTests]] $_machineTests [[@doctodo var_description:_machineTests]]
      */
     static $_machineTests = [
@@ -37,9 +32,6 @@ class HumanFieldDetector extends \infinite\base\Object
         'archived',
     ];
 
-    /*
-     * @return unknown
-     */
     /**
      * [[@doctodo method_description:test]].
      *
@@ -59,10 +51,6 @@ class HumanFieldDetector extends \infinite\base\Object
         return true;
     }
 
-    /*
-     * @param unknown $test
-     * @return unknown
-     */
     /**
      * [[@doctodo method_description:registerMachineTest]].
      *

@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-/*
+/**
  * @var $this \infinite\base\View
  * @var $content string
  */

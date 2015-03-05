@@ -70,12 +70,4 @@ class RelationTaxonomy extends \cascade\components\db\ActiveRecord
     {
         return $this->hasOne(Taxonomy::className(), ['id' => 'taxonomy_id']);
     }
-
-    /*
-     * @return \yii\db\ActiveRelation
-     */
-    // public function getRelation()
-    // {
-    // 	return $this->hasOne(Relation::className(), ['id' => 'relation_id']);
-    // }
 }

@@ -282,13 +282,6 @@ class Relationship extends \infinite\base\Object
         return parent::__get($name);
     }
 
-    /*
-     * Get one
-     * @param object  $parent
-     * @param object  $child
-     * @param unknown $options (optional)
-     * @return unknown
-     */
     /**
      * Get one.
      *
@@ -310,9 +303,6 @@ class Relationship extends \infinite\base\Object
         return self::$_relationships[$key];
     }
 
-    /*
-     * Get by
-     */
     /**
      * Get by.
      *
@@ -328,8 +318,7 @@ class Relationship extends \infinite\base\Object
         return false;
     }
 
-    /*
-     */
+    
     /**
      * [[@doctodo method_description:has]].
      *

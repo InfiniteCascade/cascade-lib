@@ -72,11 +72,4 @@ class ObjectTaxonomy extends \cascade\components\db\ActiveRecord
         return $this->hasOne(Taxonomy::className(), ['id' => 'taxonomy_id']);
     }
 
-    /*
-     * @return \yii\db\ActiveObject
-     */
-    // public function getObject()
-    // {
-    // 	return $this->hasOne(Object::className(), ['id' => 'object_id']);
-    // }
 }

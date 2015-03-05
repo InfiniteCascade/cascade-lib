@@ -8,8 +8,8 @@
 
 namespace cascade\components\dataInterface\connectors\generic;
 
-use infinite\base\language\Verb;
 use Exception;
+use infinite\base\language\Verb;
 
 /**
  * DataItem [[@doctodo class_description:cascade\components\dataInterface\connectors\generic\DataItem]].

@@ -76,7 +76,6 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
      * @param boolean $checkAccess [[@doctodo param_description:checkAccess]] [optional]
      *
      * @return [[@doctodo return_type:getObject]] [[@doctodo return_description:getObject]]
-     *
      */
     public function getObject($checkAccess = true)
     {

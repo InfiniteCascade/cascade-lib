@@ -131,12 +131,7 @@ abstract class DataSource extends \infinite\base\Component
      */
     protected $_countRemaining;
 
-    /*
-     */
-    /*
-     * @var [[@doctodo var_type:defaultSettings]] $defaultSettings [[@doctodo var_description:defaultSettings]]
-     */
-    /*
+    /**
      * @var [[@doctodo var_type:defaultSettings]] $defaultSettings [[@doctodo var_description:defaultSettings]]
      */
     static $defaultSettings = [
