@@ -20,11 +20,9 @@ class Module extends \cascade\components\base\CollectorModule implements Section
     use SectionTrait;
 
     /**
+     * @var [[@doctodo var_type:version]] [[@doctodo var_description:version]]
      */
     public $version = 1;
-    /**
-     */
-    protected $_priority = 1000; //lower is better
 
     /**
      * @inheritdoc
@@ -65,6 +63,8 @@ class Module extends \cascade\components\base\CollectorModule implements Section
 
     /**
      * Get priority.
+     *
+     * @return [[@doctodo return_type:getPriority]] [[@doctodo return_description:getPriority]]
      */
     public function getPriority()
     {
