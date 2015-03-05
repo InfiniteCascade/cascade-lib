@@ -133,7 +133,7 @@ class ToolsController extends \infinite\console\Controller
         foreach ($contents as $lineNumber => $line) {
             $line = trim($line);
             if (substr($line, 0, 1) === '*' || substr($line, 0, 1) === '/') {
-                if (strpos($line, '__') !== false) {
+                if (strpos($line, '__') !== false || strpos($line, '@doctodo write class description') !== false) {
                     unset($contents[$lineNumber]);
                     $changed = true;
                 }
