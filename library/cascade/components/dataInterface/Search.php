@@ -138,13 +138,9 @@ class Search extends \infinite\base\Component
             $callback = [
                 'callback' => function ($response) use (&$select, $options) {
                     if (empty($response)) {
-                        // throw new \Exception("Response was empty");
                         return false;
                     }
                     if (!isset($options[$response])) {
-                        // \d($options);
-                        // \d($response);
-                        // throw new \Exception("Response was not valid: $response");
                         return false;
                     }
                     $select = $response;

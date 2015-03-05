@@ -9,6 +9,7 @@
 namespace cascade\components\dataInterface\connectors\generic;
 
 use infinite\base\language\Verb;
+use Exception;
 
 /**
  * DataItem [[@doctodo class_description:cascade\components\dataInterface\connectors\generic\DataItem]].
@@ -125,7 +126,7 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
 
         // save foreign key map
         if (!$this->dataSource->saveKeyTranslation($this->foreignObject, $this->localObject)) {
-            throw new \Exception("Unable to save key translation!");
+            throw new Exception("Unable to save key translation!");
         }
 
         // loop through children

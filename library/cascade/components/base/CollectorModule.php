@@ -11,6 +11,7 @@ namespace cascade\components\base;
 use infinite\base\collector\CollectedObjectTrait;
 use infinite\base\exceptions\Exception;
 use Yii;
+use Exception;
 
 /**
  * CollectorModule [[@doctodo class_description:cascade\components\base\CollectorModule]].
@@ -24,7 +25,6 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     /**
      * Prepares object for serialization.
      *
-     * @throws \ [[@doctodo exception_description:\]]
      * @return [[@doctodo return_type:__sleep]] [[@doctodo return_description:__sleep]]
      *
      */
@@ -32,7 +32,7 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     {
         $keys = array_keys((array) $this);
         if ($this->module !== Yii::$app) {
-            throw new \Exception(get_class($this->module));
+            throw new Exception(get_class($this->module));
         }
         $this->module = null;
 

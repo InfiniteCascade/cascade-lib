@@ -90,20 +90,9 @@ abstract class DataItem extends \infinite\base\Component
                 $this->localObject = $localObject;
             }
 
-            // if (!$this->ignoreForeignObject) {
-            //     \d([$localObject]);
-            //     throw new \Exception("boom");
-            //     exit;
-            // }
             if ($localObject === false) {
                 $this->localModelError = true;
             }
-            // if (empty($this->localObject)) {
-            //     \d($this->foreignObject->attributes);
-            //     unset($this->dataSource->search->dataSource);
-            //     \d($this->dataSource->search);
-            //     \d("should have local object!");exit;
-            // }
         }
 
         return true;

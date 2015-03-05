@@ -11,6 +11,7 @@ namespace cascade\components\dataInterface\connectors\file;
 use infinite\base\exceptions\Exception;
 use infinite\helpers\Match;
 use Yii;
+use Exception;
 
 /**
  * SourceFile [[@doctodo class_description:cascade\components\dataInterface\connectors\file\SourceFile]].
@@ -260,7 +261,6 @@ class SourceFile extends \infinite\base\Object
      *
      * @param string $filetype [[@doctodo param_description:filetype]] [optional]
      *
-     * @throws \ [[@doctodo exception_description:\]]
      * @return [[@doctodo return_type:convertExcel]] [[@doctodo return_description:convertExcel]]
      *
      */
@@ -277,7 +277,7 @@ class SourceFile extends \infinite\base\Object
         echo "Converting {$filepath}...\n";
         if (!class_exists('\PHPExcel_IOFactory')) {
             $this->_unloadExcel();
-            throw new \Exception("Unable to load PHPExcel library!");
+            throw new Exception("Unable to load PHPExcel library!");
         }
         $objReader = \PHPExcel_IOFactory::createReader($filetype);
         $objPHPExcelReader = $objReader->load($filepath);

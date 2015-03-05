@@ -120,9 +120,9 @@ class ToolsController extends \infinite\console\Controller
         if ($this->fixFileSlashes($file, $contents)) {
             $changed = true;
         }
-        if ($this->fixDocBlockPlaceholder($file, $contents)) {
-            $changed = true;
-        }
+        // if ($this->fixDocBlockPlaceholder($file, $contents)) {
+        //     $changed = true;
+        // }
         if ($changed) {
             file_put_contents($file, implode("\n", $contents));
         }
@@ -141,7 +141,7 @@ class ToolsController extends \infinite\console\Controller
         foreach ($contents as $lineNumber => $line) {
             $line = trim($line);
             if (substr($line, 0, 1) === '*' || substr($line, 0, 1) === '/') {
-                if (strpos($line, '__') !== false || strpos($line, '@doctodo write class description') !== false) {
+                if (strpos($line, '@doctodo write class description') !== false) {
                     unset($contents[$lineNumber]);
                     $changed = true;
                 }

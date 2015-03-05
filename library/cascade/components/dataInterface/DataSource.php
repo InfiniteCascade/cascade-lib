@@ -136,6 +136,9 @@ abstract class DataSource extends \infinite\base\Component
     /*
      * @var [[@doctodo var_type:defaultSettings]] $defaultSettings [[@doctodo var_description:defaultSettings]]
      */
+    /*
+     * @var [[@doctodo var_type:defaultSettings]] $defaultSettings [[@doctodo var_description:defaultSettings]]
+     */
     static $defaultSettings = [
         'direction' => 'to_local', // to_local, to_foreign, both
         'update' => true,

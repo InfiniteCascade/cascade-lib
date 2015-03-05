@@ -75,7 +75,6 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
      *
      * @param boolean $checkAccess [[@doctodo param_description:checkAccess]] [optional]
      *
-     * @throws \ [[@doctodo exception_description:\]]
      * @return [[@doctodo return_type:getObject]] [[@doctodo return_description:getObject]]
      *
      */
@@ -87,7 +86,7 @@ class KeyTranslation extends \cascade\components\db\ActiveRecord
 
         if (get_class($return) === 'cascade\models\Registry') {
             \d($this->registry_id);
-            throw new \Exception("TRANSLATION WHATTTT AGAIN?!");
+            //throw new \Exception("TRANSLATION WHATTTT AGAIN?!");
             exit;
         }
 

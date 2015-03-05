@@ -83,7 +83,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     /**
      * [[@doctodo method_description:updateLocalObject]].
      *
-     * @throws \ [[@doctodo exception_description:\]]
+     * @throws \Exception [[@doctodo exception_description:\Exception]]
      * @return [[@doctodo return_type:updateLocalObject]] [[@doctodo return_description:updateLocalObject]]
      *
      */
@@ -92,9 +92,6 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
         $localModelClass = $relatedType->primaryModel;
         // @todo eventually we'll probably take some keys out of this
         $searchMap = $valueMap;
-        if (isset($searchMap[0])) {
-            throw new \Exception("boo");
-        }
         if (isset($fieldMap->searchFields) && is_array($fieldMap->searchFields)) {
             foreach ($searchMap as $field => $value) {
                 if (!in_array($field, $fieldMap->searchFields)) {
