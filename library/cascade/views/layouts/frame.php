@@ -2,8 +2,8 @@
 use yii\helpers\Html;
 
 /**
- * @var $this \infinite\base\View
- * @var $content string
+ * @var \infinite\base\View
+ * @var string
  */
 cascade\components\web\assetBundles\AppAsset::register($this);
 Yii::$app->collectors['themes']->registerAssetBundles($this);
