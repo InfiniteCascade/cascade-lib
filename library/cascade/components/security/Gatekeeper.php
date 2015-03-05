@@ -14,7 +14,7 @@ use infinite\db\Query;
 use Yii;
 
 /**
- * Gatekeeper [@doctodo write class description for Gatekeeper].
+ * Gatekeeper [[@doctodo class_description:cascade\components\security\Gatekeeper]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -27,6 +27,8 @@ class Gatekeeper extends \infinite\security\Gatekeeper
 
     /**
      * Get primary account.
+     *
+     * @return [[@doctodo return_type:getPrimaryAccount]] [[@doctodo return_description:getPrimaryAccount]]
      */
     public function getPrimaryAccount()
     {

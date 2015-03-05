@@ -84,6 +84,8 @@ class StorageEngine extends \cascade\components\db\ActiveRecord
 
     /**
      * Get storage handler.
+     *
+     * @return [[@doctodo return_type:getStorageHandler]] [[@doctodo return_description:getStorageHandler]]
      */
     public function getStorageHandler()
     {

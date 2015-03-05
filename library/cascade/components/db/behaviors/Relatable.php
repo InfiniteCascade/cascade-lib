@@ -10,8 +10,16 @@ namespace cascade\components\db\behaviors;
 
 use cascade\components\types\Relationship;
 
+/**
+ * Relatable [[@doctodo class_description:cascade\components\db\behaviors\Relatable]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class Relatable extends \infinite\db\behaviors\Relatable
 {
+    /**
+     * @inheritdoc
+     */
     public function getInheritedParentModels($childObject)
     {
         $p = [];
@@ -30,6 +38,9 @@ class Relatable extends \infinite\db\behaviors\Relatable
         return $p;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getInheritedChildModels($parentObject)
     {
         $p = [];

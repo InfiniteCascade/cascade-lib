@@ -11,7 +11,7 @@ namespace cascade\components\web;
 use yii\web\AssetBundle;
 
 /**
- * ThemeAssetBundle [@doctodo write class description for ThemeAssetBundle].
+ * ThemeAssetBundle [[@doctodo class_description:cascade\components\web\ThemeAssetBundle]].
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  *

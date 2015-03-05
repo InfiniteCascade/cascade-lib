@@ -9,7 +9,7 @@
 namespace cascade;
 
 /**
- * Cascade [@doctodo write class description for Cascade].
+ * Cascade [[@doctodo class_description:cascade\Cascade]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

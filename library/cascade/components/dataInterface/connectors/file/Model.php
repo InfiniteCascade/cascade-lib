@@ -8,14 +8,27 @@
 
 namespace cascade\components\dataInterface\connectors\file;
 
+/**
+ * Model [[@doctodo class_description:cascade\components\dataInterface\connectors\file\Model]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class Model extends \cascade\components\dataInterface\connectors\generic\Model
 {
+    /**
+     * @var [[@doctodo var_type:_id]] [[@doctodo var_description:_id]]
+     */
     protected $_id;
     /**
+     * @var [[@doctodo var_type:_keys]] [[@doctodo var_description:_keys]]
      */
     protected $_keys;
+    /**
+     * @var [[@doctodo var_type:_meta]] [[@doctodo var_description:_meta]]
+     */
     protected $_meta;
     /**
+     * @var [[@doctodo var_type:_children]] [[@doctodo var_description:_children]]
      */
     protected $_children = [];
 
@@ -25,16 +38,31 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     // {
     //     return in_array($attribute, $this->attributeNames);
     // }
+    /**
+     * Get id.
+     *
+     * @return [[@doctodo return_type:getId]] [[@doctodo return_description:getId]]
+     */
     public function getId()
     {
         return $this->_id;
     }
 
+    /**
+     * Set id.
+     *
+     * @return [[@doctodo return_type:setId]] [[@doctodo return_description:setId]]
+     */
     public function setId($id)
     {
         return $this->_id = $id;
     }
 
+    /**
+     * Set source file.
+     *
+     * @return [[@doctodo return_type:setSourceFile]] [[@doctodo return_description:setSourceFile]]
+     */
     public function setSourceFile($sourceFile)
     {
         $this->_meta = Meta::get($this->interface, $sourceFile);
@@ -44,19 +72,26 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Get children.
+     *
+     * @return [[@doctodo return_type:getChildren]] [[@doctodo return_description:getChildren]]
      */
     public function getChildren()
     {
         return $this->_children;
     }
 
+    /**
+     * [[@doctodo method_description:addChild]].
+     */
     public function addChild($object)
     {
         $this->_children[$object->id] = $object;
     }
 
     /**
+     * [[@doctodo method_description:primaryKey]].
      *
+     * @return [[@doctodo return_type:primaryKey]] [[@doctodo return_description:primaryKey]]
      */
     public function primaryKey()
     {
@@ -65,6 +100,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Get primary key.
+     *
+     * @return [[@doctodo return_type:getPrimaryKey]] [[@doctodo return_description:getPrimaryKey]]
      */
     public function getPrimaryKey()
     {
@@ -73,6 +110,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Get attributes.
+     *
+     * @return [[@doctodo return_type:getAttributes]] [[@doctodo return_description:getAttributes]]
      */
     public function getAttributes()
     {
@@ -87,11 +126,17 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
         return $a;
     }
 
+    /**
+     * Set table name.
+     */
     public function setTableName($value)
     {
         $this->_tableName = $value;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getTableName()
     {
         if (isset($this->_tableName)) {
@@ -101,6 +146,13 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
         return static::baseClassName();
     }
 
+    /**
+     * [[@doctodo method_description:fetchAll]].
+     *
+     * @param boolean $lazy [[@doctodo param_description:lazy]] [optional]
+     *
+     * @return [[@doctodo return_type:fetchAll]] [[@doctodo return_description:fetchAll]]
+     */
     public static function fetchAll($lazy = false)
     {
         $models = [];

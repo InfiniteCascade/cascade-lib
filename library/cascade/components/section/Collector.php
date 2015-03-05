@@ -12,7 +12,7 @@ use cascade\components\web\widgets\section\ParentSection;
 use cascade\components\web\widgets\section\SideSection;
 
 /**
- * Collector [@doctodo write class description for Collector].
+ * Collector [[@doctodo class_description:cascade\components\section\Collector]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

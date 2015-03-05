@@ -11,20 +11,44 @@ namespace cascade\components\db\behaviors;
 use Yii;
 
 /**
- * Roleable [@doctodo write class description for Roleable].
+ * RelatedObjects [[@doctodo class_description:cascade\components\db\behaviors\RelatedObjects]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
 {
+    /**
+     * @var [[@doctodo var_type:companionObject]] [[@doctodo var_description:companionObject]]
+     */
     public $companionObject = false;
+    /**
+     * @var [[@doctodo var_type:companionRelationship]] [[@doctodo var_description:companionRelationship]]
+     */
     public $companionRelationship = false;
+    /**
+     * @var [[@doctodo var_type:companionRole]] [[@doctodo var_description:companionRole]]
+     */
     public $companionRole = false;
+    /**
+     * @var [[@doctodo var_type:relation]] [[@doctodo var_description:relation]]
+     */
     public $relation;
+    /**
+     * @var [[@doctodo var_type:_relatedObjects]] [[@doctodo var_description:_relatedObjects]]
+     */
     protected $_relatedObjects = [];
+    /**
+     * @var [[@doctodo var_type:_relatedObjectsFlat]] [[@doctodo var_description:_relatedObjectsFlat]]
+     */
     protected $_relatedObjectsFlat = [];
+    /**
+     * @var [[@doctodo var_type:_relations]] [[@doctodo var_description:_relations]]
+     */
     protected $_relations = [];
 
+    /**
+     * @inheritdoc
+     */
     public function events()
     {
         return [
@@ -35,6 +59,13 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
             \infinite\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
         ];
     }
+    /**
+     * [[@doctodo method_description:collectModels]].
+     *
+     * @param array $models [[@doctodo param_description:models]] [optional]
+     *
+     * @return [[@doctodo return_type:collectModels]] [[@doctodo return_description:collectModels]]
+     */
     public function collectModels($models = [])
     {
         if (!isset($models['relations'])) {
@@ -61,6 +92,11 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
         return $models;
     }
 
+    /**
+     * [[@doctodo method_description:beforeSave]].
+     *
+     * @return [[@doctodo return_type:beforeSave]] [[@doctodo return_description:beforeSave]]
+     */
     public function beforeSave($event)
     {
         foreach ($this->_relations as $key => $relation) {
@@ -84,6 +120,11 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * [[@doctodo method_description:afterSave]].
+     *
+     * @return [[@doctodo return_type:afterSave]] [[@doctodo return_description:afterSave]]
+     */
     public function afterSave($event)
     {
         foreach ($this->_relatedObjectsFlat as $relatedObject) {
@@ -96,6 +137,11 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
         return $event->handled;
     }
 
+    /**
+     * [[@doctodo method_description:beforeValidate]].
+     *
+     * @return [[@doctodo return_type:beforeValidate]] [[@doctodo return_description:beforeValidate]]
+     */
     public function beforeValidate($event)
     {
         foreach ($this->_relatedObjectsFlat as $relatedObject) {
@@ -110,6 +156,9 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
         return true;
     }
 
+    /**
+     * Set related objects.
+     */
     public function setRelatedObjects($relatedObjects)
     {
         foreach ($relatedObjects as $modelName => $objects) {
@@ -148,11 +197,19 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * Get related objects.
+     *
+     * @return [[@doctodo return_type:getRelatedObjects]] [[@doctodo return_description:getRelatedObjects]]
+     */
     public function getRelatedObjects()
     {
         return $this->_relatedObjects;
     }
 
+    /**
+     * Set relations.
+     */
     public function setRelations($value)
     {
         if ($this->companionObject) {
@@ -196,11 +253,19 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * Get relations.
+     *
+     * @return [[@doctodo return_type:getRelations]] [[@doctodo return_description:getRelations]]
+     */
     public function getRelations()
     {
         return $this->_relations;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeAttributes()
     {
         return ['relatedObjects', 'relations', 'companionObject', 'companionRole', 'companionRelationship'];

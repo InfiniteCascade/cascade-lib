@@ -9,7 +9,7 @@
 namespace cascade\components\db\behaviors;
 
 /**
- * Ownable [@doctodo write class description for Ownable].
+ * Ownable [[@doctodo class_description:cascade\components\db\behaviors\Ownable]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

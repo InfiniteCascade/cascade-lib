@@ -9,13 +9,14 @@
 namespace cascade\components\web\browser;
 
 /**
- * Item [@doctodo write class description for Item].
+ * Item [[@doctodo class_description:cascade\components\web\browser\Item]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Item extends \infinite\web\browser\Item
 {
     /**
+     * @var [[@doctodo var_type:objectType]] [[@doctodo var_description:objectType]]
      */
     public $objectType = false;
 

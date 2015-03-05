@@ -11,14 +11,14 @@ namespace cascade\components\base;
 use Yii;
 
 /**
- * ModuleSetExtension [@doctodo write class description for ModuleSetExtension].
+ * ModuleSetExtension [[@doctodo class_description:cascade\components\base\ModuleSetExtension]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
 {
     /**
-     *
+     * [[@doctodo method_description:bootstrap]].
      */
     public function bootstrap($app)
     {
@@ -29,12 +29,17 @@ abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
         Yii::trace("Registered " . count(static::getModules()) . " modules in " . get_called_class());
     }
 
+    /**
+     * [[@doctodo method_description:beforeRequest]].
+     */
     public function beforeRequest($event)
     {
     }
 
     /**
      * Get modules.
+     *
+     * @return [[@doctodo return_type:getModules]] [[@doctodo return_description:getModules]]
      */
     public static function getModules()
     {

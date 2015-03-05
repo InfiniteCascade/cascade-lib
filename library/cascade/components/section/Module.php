@@ -11,7 +11,7 @@ namespace cascade\components\section;
 use infinite\base\collector\Item as BaseItem;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\components\section\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

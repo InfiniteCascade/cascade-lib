@@ -41,6 +41,9 @@ class Relation extends \infinite\db\models\Relation
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public static function queryBehaviors()
     {
         return array_merge(parent::queryBehaviors(),
@@ -96,7 +99,7 @@ class Relation extends \infinite\db\models\Relation
     }
 
     /**
-     *
+     * [[@doctodo method_description:addFields]].
      */
     public function addFields($caller, &$fields, $relationship, $owner)
     {
@@ -117,6 +120,8 @@ class Relation extends \infinite\db\models\Relation
 
     /**
      * Get relationship.
+     *
+     * @return [[@doctodo return_type:getRelationship]] [[@doctodo return_description:getRelationship]]
      */
     public function getRelationship()
     {

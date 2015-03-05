@@ -12,30 +12,36 @@ use infinite\helpers\Html;
 use Yii;
 
 /**
- * Generator [@doctodo write class description for Generator].
+ * Generator [[@doctodo class_description:cascade\components\web\form\Generator]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Generator extends \infinite\base\Object implements \infinite\web\RenderInterface
 {
     /**
+     * @var [[@doctodo var_type:_items]] [[@doctodo var_description:_items]]
      */
     protected $_items;
     /**
+     * @var [[@doctodo var_type:form]] [[@doctodo var_description:form]]
      */
     public $form;
 
     /**
+     * @var [[@doctodo var_type:models]] [[@doctodo var_description:models]]
      */
     public $models = [];
 
     /**
+     * @var [[@doctodo var_type:isValid]] [[@doctodo var_description:isValid]]
      */
     public $isValid = true;
     /**
+     * @var [[@doctodo var_type:class]] [[@doctodo var_description:class]]
      */
     public $class = '';
     /**
+     * @var [[@doctodo var_type:ajax]] [[@doctodo var_description:ajax]]
      */
     public $ajax = false;
 
@@ -57,6 +63,8 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     }
 
     /**
+     * [[@doctodo method_description:generate]].
+     *
      * @return unknown
      */
     public function generate()
@@ -98,7 +106,9 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     }
 
     /**
+     * [[@doctodo method_description:hasFile]].
      *
+     * @return [[@doctodo return_type:hasFile]] [[@doctodo return_description:hasFile]]
      */
     public function hasFile()
     {
@@ -112,6 +122,7 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
     }
 
     /**
+     * [[@doctodo method_description:output]].
      */
     public function output()
     {

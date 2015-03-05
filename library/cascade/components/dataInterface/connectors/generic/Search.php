@@ -9,7 +9,7 @@
 namespace cascade\components\dataInterface\connectors\generic;
 
 /**
- * Search [@doctodo write class description for Search].
+ * Search [[@doctodo class_description:cascade\components\dataInterface\connectors\generic\Search]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

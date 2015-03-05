@@ -12,34 +12,42 @@ use cascade\models\DataInterface;
 use infinite\base\exceptions\Exception;
 
 /**
- * Item [@doctodo write class description for Item].
+ * Item [[@doctodo class_description:cascade\components\dataInterface\Item]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Item extends \infinite\base\collector\Item
 {
     /**
+     * @var [[@doctodo var_type:error]] [[@doctodo var_description:error]]
      */
     public $error;
 
     /**
+     * @var [[@doctodo var_type:_name]] [[@doctodo var_description:_name]]
      */
     private $_name;
     /**
+     * @var [[@doctodo var_type:_module]] [[@doctodo var_description:_module]]
      */
     private $_module;
     /**
+     * @var [[@doctodo var_type:_checked]] [[@doctodo var_description:_checked]]
      */
     private $_checked;
     /**
+     * @var [[@doctodo var_type:_interfaceObject]] [[@doctodo var_description:_interfaceObject]]
      */
     protected $_interfaceObject;
     /**
+     * @var [[@doctodo var_type:_currentInterfaceAction]] [[@doctodo var_description:_currentInterfaceAction]]
      */
     protected $_currentInterfaceAction;
 
     /**
+     * [[@doctodo method_description:run]].
      *
+     * @return [[@doctodo return_type:run]] [[@doctodo return_description:run]]
      */
     public function run($resumeLog = null, $action = null)
     {
@@ -74,7 +82,9 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
+     * [[@doctodo method_description:saveLog]].
      *
+     * @return [[@doctodo return_type:saveLog]] [[@doctodo return_description:saveLog]]
      */
     public function saveLog()
     {
@@ -87,6 +97,10 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * Get interface object.
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
+     * @return [[@doctodo return_type:getInterfaceObject]] [[@doctodo return_description:getInterfaceObject]]
+     *
      */
     public function getInterfaceObject()
     {

@@ -11,13 +11,15 @@ namespace cascade\components\db\behaviors;
 use Yii;
 
 /**
- * QueryFamiliarity [@doctodo write class description for QueryFamiliarity].
+ * QueryFamiliarity [[@doctodo class_description:cascade\components\db\behaviors\QueryFamiliarity]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class QueryFamiliarity extends \infinite\db\behaviors\QueryBehavior
 {
     /**
+     * [[@doctodo method_description:withFamiliarity]].
+     *
      * @return \yii\db\ActiveRelation
      */
     public function withFamiliarity()

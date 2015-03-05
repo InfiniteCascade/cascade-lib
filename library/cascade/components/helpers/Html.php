@@ -9,12 +9,17 @@
 namespace cascade\components\helpers;
 
 /**
- * StringHelper [@doctodo write class description for StringHelper].
+ * Html [[@doctodo class_description:cascade\components\helpers\Html]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Html extends \infinite\helpers\Html
 {
+    /**
+     * [[@doctodo method_description:prepareEditInPlace]].
+     *
+     * @return [[@doctodo return_type:prepareEditInPlace]] [[@doctodo return_description:prepareEditInPlace]]
+     */
     public static function prepareEditInPlace(&$htmlOptions, $model, $attribute, $relative = null)
     {
         $eip = ['data' => []];

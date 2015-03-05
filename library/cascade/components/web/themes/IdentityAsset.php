@@ -9,7 +9,7 @@
 namespace cascade\components\web\themes;
 
 /**
- * IdentityAsset [@doctodo write class description for IdentityAsset].
+ * IdentityAsset [[@doctodo class_description:cascade\components\web\themes\IdentityAsset]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -22,6 +22,8 @@ abstract class IdentityAsset extends AssetBundle
 
     /**
      * Get logo.
+     *
+     * @return [[@doctodo return_type:getLogo]] [[@doctodo return_description:getLogo]]
      */
     public function getLogo($size = null)
     {

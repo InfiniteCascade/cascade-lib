@@ -9,7 +9,7 @@
 namespace cascade\components\db\fields;
 
 /**
- * Artificial [@doctodo write class description for Artificial].
+ * Artificial [[@doctodo class_description:cascade\components\db\fields\Artificial]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -20,15 +20,19 @@ class Artificial extends Base
      */
     public $formFieldClass = false;
     /**
+     * @var [[@doctodo var_type:fieldName]] [[@doctodo var_description:fieldName]]
      */
     public $fieldName;
     /**
+     * @var [[@doctodo var_type:fieldValue]] [[@doctodo var_description:fieldValue]]
      */
     public $fieldValue;
     /**
+     * @var [[@doctodo var_type:human]] [[@doctodo var_description:human]]
      */
     public $human = true;
     /**
+     * @var [[@doctodo var_type:multiline]] [[@doctodo var_description:multiline]]
      */
     public $multiline = false;
 
@@ -56,6 +60,9 @@ class Artificial extends Base
         return false;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function determineFormatClass()
     {
         return 'cascade\components\db\fields\formats\RawText';

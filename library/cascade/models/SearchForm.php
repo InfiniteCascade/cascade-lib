@@ -18,10 +18,13 @@ use yii\base\Model;
 class SearchForm extends Model
 {
     /**
+     * @var [[@doctodo var_type:query]] [[@doctodo var_description:query]]
      */
     public $query;
 
     /**
+     * [[@doctodo method_description:rules]].
+     *
      * @return array the validation rules.
      */
     public function rules()
@@ -32,6 +35,9 @@ class SearchForm extends Model
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [

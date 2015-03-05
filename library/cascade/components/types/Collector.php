@@ -13,13 +13,14 @@ use infinite\helpers\ArrayHelper;
 use Yii;
 
 /**
- * Collector [@doctodo write class description for Collector].
+ * Collector [[@doctodo class_description:cascade\components\types\Collector]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Collector extends \infinite\base\collector\Module
 {
     /**
+     * @var [[@doctodo var_type:_tableRegistry]] [[@doctodo var_description:_tableRegistry]]
      */
     protected $_tableRegistry;
 
@@ -99,7 +100,9 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
+     * [[@doctodo method_description:registerObjectType]].
      *
+     * @return [[@doctodo return_type:registerObjectType]] [[@doctodo return_description:registerObjectType]]
      */
     public function registerObjectType($module)
     {
@@ -136,6 +139,8 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get table registry.
+     *
+     * @return [[@doctodo return_type:getTableRegistry]] [[@doctodo return_description:getTableRegistry]]
      */
     public function getTableRegistry()
     {
@@ -151,6 +156,8 @@ class Collector extends \infinite\base\collector\Module
         return $this->_tableRegistry;
     }
     /**
+     * [[@doctodo method_description:addRelationship]].
+     *
      * @param unknown $parent
      * @param unknown $child
      * @param unknown $options (optional)
@@ -170,6 +177,8 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get authorities.
+     *
+     * @return [[@doctodo return_type:getAuthorities]] [[@doctodo return_description:getAuthorities]]
      */
     public function getAuthorities()
     {
@@ -183,6 +192,11 @@ class Collector extends \infinite\base\collector\Module
         return $authorities;
     }
 
+    /**
+     * Get page meta.
+     *
+     * @return [[@doctodo return_type:getPageMeta]] [[@doctodo return_description:getPageMeta]]
+     */
     public function getPageMeta()
     {
         $m = [];

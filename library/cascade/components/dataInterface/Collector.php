@@ -9,7 +9,7 @@
 namespace cascade\components\dataInterface;
 
 /**
- * Collector [@doctodo write class description for Collector].
+ * Collector [[@doctodo class_description:cascade\components\dataInterface\Collector]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -31,6 +31,11 @@ class Collector extends \infinite\base\collector\Module
         return 'Interface';
     }
 
+    /**
+     * Get by pk.
+     *
+     * @return [[@doctodo return_type:getByPk]] [[@doctodo return_description:getByPk]]
+     */
     public function getByPk($pk)
     {
         foreach ($this->getAll() as $interface) {

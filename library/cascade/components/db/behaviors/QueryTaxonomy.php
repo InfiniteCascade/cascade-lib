@@ -11,22 +11,30 @@ namespace cascade\components\db\behaviors;
 use Yii;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy].
+ * QueryTaxonomy [[@doctodo class_description:cascade\components\db\behaviors\QueryTaxonomy]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class QueryTaxonomy extends \infinite\db\behaviors\ActiveRecord
 {
     /**
+     * @var [[@doctodo var_type:viaModelClass]] [[@doctodo var_description:viaModelClass]]
      */
     public $viaModelClass = 'ObjectTaxonomy';
     /**
+     * @var [[@doctodo var_type:relationKey]] [[@doctodo var_description:relationKey]]
      */
     public $relationKey = 'object_id';
     /**
+     * @var [[@doctodo var_type:taxonomyKey]] [[@doctodo var_description:taxonomyKey]]
      */
     public $taxonomyKey = 'taxonomy_id';
 
+    /**
+     * [[@doctodo method_description:filterByTaxonomy]].
+     *
+     * @param array $params [[@doctodo param_description:params]] [optional]
+     */
     public function filterByTaxonomy($value, $params = [])
     {
         $queryAlias = isset($params['queryAlias']) ? $params['queryAlias'] : $this->owner->primaryAlias;
@@ -42,6 +50,11 @@ class QueryTaxonomy extends \infinite\db\behaviors\ActiveRecord
         $this->owner->leftJoin([$taxonomyAlias => $pivotTable], $conditions, $params);
     }
 
+    /**
+     * [[@doctodo method_description:parseTaxonomyValue]].
+     *
+     * @return [[@doctodo return_type:parseTaxonomyValue]] [[@doctodo return_description:parseTaxonomyValue]]
+     */
     public static function parseTaxonomyValue($value)
     {
         if (!is_array($value)) {

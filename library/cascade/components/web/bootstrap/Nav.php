@@ -11,7 +11,7 @@ namespace cascade\components\web\bootstrap;
 use Yii;
 
 /**
- * Nav [@doctodo write class description for Nav].
+ * Nav [[@doctodo class_description:cascade\components\web\bootstrap\Nav]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

@@ -9,7 +9,7 @@
 namespace cascade\components\dataInterface;
 
 /**
- * RecursionException [@doctodo write class description for RecursionException].
+ * RecursionException [[@doctodo class_description:cascade\components\dataInterface\RecursionException]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

@@ -11,7 +11,7 @@ namespace cascade\setup\tasks;
 use infinite\setup\Exception;
 
 /**
- * AclTask [@doctodo write class description for AclTask].
+ * AclTask [[@doctodo class_description:cascade\setup\tasks\AclTask]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -26,6 +26,8 @@ abstract class AclTask extends \infinite\setup\Task
     }
     /**
      * Get base acas.
+     *
+     * @return [[@doctodo return_type:getBaseAcas]] [[@doctodo return_description:getBaseAcas]]
      */
     public function getBaseAcas()
     {

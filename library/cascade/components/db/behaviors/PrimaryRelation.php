@@ -12,13 +12,14 @@ use cascade\components\types\Relationship;
 use Yii;
 
 /**
- * PrimaryRelation [@doctodo write class description for PrimaryRelation].
+ * PrimaryRelation [[@doctodo class_description:cascade\components\db\behaviors\PrimaryRelation]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 {
     /**
+     * @var [[@doctodo var_type:_relationship]] [[@doctodo var_description:_relationship]]
      */
     protected $_relationship;
 
@@ -42,6 +43,8 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 
     /**
      * Get relationship.
+     *
+     * @return [[@doctodo return_type:getRelationship]] [[@doctodo return_description:getRelationship]]
      */
     public function getRelationship()
     {
@@ -58,6 +61,8 @@ class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
 
     /**
      * Set relationship.
+     *
+     * @param cascade\components\types\Relationship $value [[@doctodo param_description:value]]
      */
     public function setRelationship(Relationship $value)
     {

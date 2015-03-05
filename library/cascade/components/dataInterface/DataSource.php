@@ -13,7 +13,7 @@ use Yii;
 use yii\helpers\Inflector;
 
 /**
- * DataSource [@doctodo write class description for DataSource].
+ * DataSource [[@doctodo class_description:cascade\components\dataInterface\DataSource]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -22,87 +22,119 @@ abstract class DataSource extends \infinite\base\Component
     const EVENT_LOAD_FOREIGN_DATA_ITEMS = 0x01;
     const EVENT_LOAD_LOCAL_DATA_ITEMS = 0x02;
 
+    /**
+     * @var [[@doctodo var_type:task]] [[@doctodo var_description:task]]
+     */
     public $task;
+    /**
+     * @var [[@doctodo var_type:taskWeight]] [[@doctodo var_description:taskWeight]]
+     */
     public $taskWeight = 1;
 
     /**
+     * @var [[@doctodo var_type:fieldMapClass]] [[@doctodo var_description:fieldMapClass]]
      */
     public $fieldMapClass = 'cascade\components\dataInterface\FieldMap';
     /**
+     * @var [[@doctodo var_type:dataItemClass]] [[@doctodo var_description:dataItemClass]]
      */
     public $dataItemClass = 'cascade\components\dataInterface\DataItem';
     /**
+     * @var [[@doctodo var_type:searchClass]] [[@doctodo var_description:searchClass]]
      */
     public $searchClass = 'cascade\components\dataInterface\Search';
 
     /**
+     * @var [[@doctodo var_type:keyGenerator]] [[@doctodo var_description:keyGenerator]]
      */
     public $keyGenerator;
     /**
+     * @var [[@doctodo var_type:debug]] [[@doctodo var_description:debug]]
      */
     public $debug = false;
     /**
+     * @var [[@doctodo var_type:lazyForeign]] [[@doctodo var_description:lazyForeign]]
      */
     public $lazyForeign = true;
     /**
+     * @var [[@doctodo var_type:lazyLocal]] [[@doctodo var_description:lazyLocal]]
      */
     public $lazyLocal = true;
     /**
+     * @var [[@doctodo var_type:childOnly]] [[@doctodo var_description:childOnly]]
      */
     public $childOnly = false;
     /**
+     * @var [[@doctodo var_type:postProcess]] [[@doctodo var_description:postProcess]]
      */
     public $postProcess = false;
 
     /**
+     * @var [[@doctodo var_type:ignoreForeign]] [[@doctodo var_description:ignoreForeign]]
      */
     public $ignoreForeign = false;
     /**
+     * @var [[@doctodo var_type:ignoreLocal]] [[@doctodo var_description:ignoreLocal]]
      */
     public $ignoreLocal = false;
 
     /**
+     * @var [[@doctodo var_type:baseAttributes]] [[@doctodo var_description:baseAttributes]]
      */
     public $baseAttributes = [];
 
     /**
+     * @var [[@doctodo var_type:_localModel]] [[@doctodo var_description:_localModel]]
      */
     protected $_localModel;
     /**
+     * @var [[@doctodo var_type:_foreignModel]] [[@doctodo var_description:_foreignModel]]
      */
     protected $_foreignModel;
     /**
+     * @var [[@doctodo var_type:_map]] [[@doctodo var_description:_map]]
      */
     protected $_map;
     /**
+     * @var [[@doctodo var_type:_settings]] [[@doctodo var_description:_settings]]
      */
     protected $_settings;
     /**
+     * @var [[@doctodo var_type:_search]] [[@doctodo var_description:_search]]
      */
     protected $_search;
 
     /**
+     * @var [[@doctodo var_type:_foreignDataItems]] [[@doctodo var_description:_foreignDataItems]]
      */
     protected $_foreignDataItems;
     /**
+     * @var [[@doctodo var_type:_localDataItems]] [[@doctodo var_description:_localDataItems]]
      */
     protected $_localDataItems;
 
     /**
+     * @var [[@doctodo var_type:name]] [[@doctodo var_description:name]]
      */
     public $name;
     /**
+     * @var [[@doctodo var_type:module]] [[@doctodo var_description:module]]
      */
     public $module;
 
     /**
+     * @var [[@doctodo var_type:_countTotal]] [[@doctodo var_description:_countTotal]]
      */
     protected $_countTotal;
     /**
+     * @var [[@doctodo var_type:_countRemaining]] [[@doctodo var_description:_countRemaining]]
      */
     protected $_countRemaining;
 
     /*
+     */
+    /*
+     * @var [[@doctodo var_type:defaultSettings]] $defaultSettings [[@doctodo var_description:defaultSettings]]
      */
     static $defaultSettings = [
         'direction' => 'to_local', // to_local, to_foreign, both
@@ -117,7 +149,9 @@ abstract class DataSource extends \infinite\base\Component
     // abstract public function handleLocal($action, DataItem $dataItem, DataItem $parent = null);
 
     /**
+     * [[@doctodo method_description:isReady]].
      *
+     * @return [[@doctodo return_type:isReady]] [[@doctodo return_description:isReady]]
      */
     public function isReady()
     {
@@ -125,6 +159,7 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
+     * [[@doctodo method_description:clearCaches]].
      */
     public function clearCaches()
     {
@@ -133,6 +168,11 @@ abstract class DataSource extends \infinite\base\Component
         \cascade\components\types\Relationship::clearCache();
     }
 
+    /**
+     * Get descriptor.
+     *
+     * @return [[@doctodo return_type:getDescriptor]] [[@doctodo return_description:getDescriptor]]
+     */
     public function getDescriptor()
     {
         return Inflector::titleize($this->name, true);
@@ -140,6 +180,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get total.
+     *
+     * @return [[@doctodo return_type:getTotal]] [[@doctodo return_description:getTotal]]
      */
     public function getTotal()
     {
@@ -162,6 +204,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get done.
+     *
+     * @return [[@doctodo return_type:getDone]] [[@doctodo return_description:getDone]]
      */
     public function getDone()
     {
@@ -170,6 +214,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get dummy local model.
+     *
+     * @return [[@doctodo return_type:getDummyLocalModel]] [[@doctodo return_description:getDummyLocalModel]]
      */
     public function getDummyLocalModel()
     {
@@ -180,6 +226,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get remaining.
+     *
+     * @return [[@doctodo return_type:getRemaining]] [[@doctodo return_description:getRemaining]]
      */
     public function getRemaining()
     {
@@ -191,7 +239,9 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
+     * [[@doctodo method_description:reduceRemaining]].
      *
+     * @param cascade\components\dataInterface\DataItem $dataItem [[@doctodo param_description:dataItem]]
      */
     public function reduceRemaining(DataItem $dataItem)
     {
@@ -210,6 +260,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get foreign data items.
+     *
+     * @return [[@doctodo return_type:getForeignDataItems]] [[@doctodo return_description:getForeignDataItems]]
      */
     public function getForeignDataItems()
     {
@@ -223,6 +275,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get local data items.
+     *
+     * @return [[@doctodo return_type:getLocalDataItems]] [[@doctodo return_description:getLocalDataItems]]
      */
     public function getLocalDataItems()
     {
@@ -235,6 +289,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get handled local data items.
+     *
+     * @return [[@doctodo return_type:getHandledLocalDataItems]] [[@doctodo return_description:getHandledLocalDataItems]]
      */
     public function getHandledLocalDataItems()
     {
@@ -248,11 +304,19 @@ abstract class DataSource extends \infinite\base\Component
         return $handled;
     }
 
+    /**
+     * [[@doctodo method_description:universalFilter]].
+     *
+     * @return [[@doctodo return_type:universalFilter]] [[@doctodo return_description:universalFilter]]
+     */
     public function universalFilter($value)
     {
         return $value;
     }
 
+    /**
+     * [[@doctodo method_description:prepareTask]].
+     */
     public function prepareTask()
     {
         $total = 0;
@@ -268,7 +332,9 @@ abstract class DataSource extends \infinite\base\Component
     }
 
     /**
+     * [[@doctodo method_description:run]].
      *
+     * @return [[@doctodo return_type:run]] [[@doctodo return_description:run]]
      */
     public function run()
     {
@@ -304,6 +370,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get data interface.
+     *
+     * @return [[@doctodo return_type:getDataInterface]] [[@doctodo return_description:getDataInterface]]
      */
     public function getDataInterface()
     {
@@ -312,6 +380,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Set settings.
+     *
+     * @return [[@doctodo return_type:setSettings]] [[@doctodo return_description:setSettings]]
      */
     public function setSettings($settings)
     {
@@ -328,6 +398,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get settings.
+     *
+     * @return [[@doctodo return_type:getSettings]] [[@doctodo return_description:getSettings]]
      */
     public function getSettings()
     {
@@ -340,6 +412,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get search.
+     *
+     * @return [[@doctodo return_type:getSearch]] [[@doctodo return_description:getSearch]]
      */
     public function getSearch()
     {
@@ -363,6 +437,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get local model.
+     *
+     * @return [[@doctodo return_type:getLocalModel]] [[@doctodo return_description:getLocalModel]]
      */
     public function getLocalModel()
     {
@@ -387,6 +463,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get foreign model.
+     *
+     * @return [[@doctodo return_type:getForeignModel]] [[@doctodo return_description:getForeignModel]]
      */
     public function getForeignModel()
     {
@@ -395,6 +473,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Set map.
+     *
+     * @return [[@doctodo return_type:setMap]] [[@doctodo return_description:setMap]]
      */
     public function setMap($m)
     {
@@ -403,6 +483,11 @@ abstract class DataSource extends \infinite\base\Component
         return true;
     }
 
+    /**
+     * [[@doctodo method_description:buildMap]].
+     *
+     * @return [[@doctodo return_type:buildMap]] [[@doctodo return_description:buildMap]]
+     */
     public function buildMap($m)
     {
         $map = [];
@@ -421,6 +506,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get map.
+     *
+     * @return [[@doctodo return_type:getMap]] [[@doctodo return_description:getMap]]
      */
     public function getMap()
     {
@@ -429,6 +516,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Get action.
+     *
+     * @return [[@doctodo return_type:getAction]] [[@doctodo return_description:getAction]]
      */
     public function getAction()
     {

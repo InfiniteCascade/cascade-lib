@@ -9,13 +9,14 @@
 namespace cascade\modules\WidgetWatching;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\modules\WidgetWatching\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Module extends \cascade\components\web\widgets\Module
 {
     /**
+     * @var [[@doctodo var_type:_title]] [[@doctodo var_description:_title]]
      */
     protected $_title = 'Watching';
     /**

@@ -9,7 +9,7 @@
 namespace cascade\components\web\form;
 
 /**
- * ActiveForm [@doctodo write class description for ActiveForm].
+ * ActiveForm [[@doctodo class_description:cascade\components\web\form\ActiveForm]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

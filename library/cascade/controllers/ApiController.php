@@ -13,10 +13,24 @@ use yii\base\Model;
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
 
+/**
+ * ApiController [[@doctodo class_description:cascade\controllers\ApiController]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class ApiController extends Controller
 {
+    /**
+     * @var [[@doctodo var_type:modelClass]] [[@doctodo var_description:modelClass]]
+     */
     public $modelClass;
+    /**
+     * @var [[@doctodo var_type:updateScenario]] [[@doctodo var_description:updateScenario]]
+     */
     public $updateScenario = Model::SCENARIO_DEFAULT;
+    /**
+     * @var [[@doctodo var_type:createScenario]] [[@doctodo var_description:createScenario]]
+     */
     public $createScenario = Model::SCENARIO_DEFAULT;
 
     /**
@@ -40,7 +54,6 @@ class ApiController extends Controller
 
     /**
      * Checks the privilege of the current user.
-     *
      * This method should be overridden to check whether the current user has the privilege
      * to run the specified action against the specified data model.
      * If the user does not have access, a [[ForbiddenHttpException]] should be thrown.

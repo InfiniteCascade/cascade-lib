@@ -13,8 +13,7 @@ use infinite\base\exceptions\Exception;
 use yii\base\Model;
 
 /**
- * DeleteForm [@doctodo write class description for DeleteForm].
- *
+ * DeleteForm [[@doctodo class_description:cascade\models\DeleteForm]]
  * LoginForm is the model behind the login form.
  *
  * @author Jacob Morrison <email@ofjacob.com>
@@ -22,28 +21,37 @@ use yii\base\Model;
 class DeleteForm extends Model
 {
     /**
+     * @var [[@doctodo var_type:confirm]] [[@doctodo var_description:confirm]]
      */
     public $confirm = false;
     /**
+     * @var [[@doctodo var_type:_target]] [[@doctodo var_description:_target]]
      */
     protected $_target;
     /**
+     * @var [[@doctodo var_type:relationModel]] [[@doctodo var_description:relationModel]]
      */
     public $relationModel;
     /**
+     * @var [[@doctodo var_type:relationshipWith]] [[@doctodo var_description:relationshipWith]]
      */
     public $relationshipWith;
     /**
+     * @var [[@doctodo var_type:relationship]] [[@doctodo var_description:relationship]]
      */
     public $relationship;
     /**
+     * @var [[@doctodo var_type:object]] [[@doctodo var_description:object]]
      */
     public $object;
     /**
+     * @var [[@doctodo var_type:_possibleTargets]] [[@doctodo var_description:_possibleTargets]]
      */
     protected $_possibleTargets;
 
     /**
+     * [[@doctodo method_description:rules]].
+     *
      * @return array the validation rules.
      */
     public function rules()
@@ -55,6 +63,8 @@ class DeleteForm extends Model
 
     /**
      * Get labels.
+     *
+     * @return [[@doctodo return_type:getLabels]] [[@doctodo return_description:getLabels]]
      */
     public function getLabels()
     {
@@ -97,6 +107,8 @@ class DeleteForm extends Model
 
     /**
      * Get target.
+     *
+     * @return [[@doctodo return_type:getTarget]] [[@doctodo return_description:getTarget]]
      */
     public function getTarget()
     {
@@ -108,7 +120,9 @@ class DeleteForm extends Model
     }
 
     /**
+     * [[@doctodo method_description:canDeleteObject]].
      *
+     * @return [[@doctodo return_type:canDeleteObject]] [[@doctodo return_description:canDeleteObject]]
      */
     public function canDeleteObject()
     {
@@ -120,7 +134,9 @@ class DeleteForm extends Model
     }
 
     /**
+     * [[@doctodo method_description:canArchiveObject]].
      *
+     * @return [[@doctodo return_type:canArchiveObject]] [[@doctodo return_description:canArchiveObject]]
      */
     public function canArchiveObject()
     {
@@ -132,7 +148,9 @@ class DeleteForm extends Model
     }
 
     /**
+     * [[@doctodo method_description:canDeleteRelation]].
      *
+     * @return [[@doctodo return_type:canDeleteRelation]] [[@doctodo return_description:canDeleteRelation]]
      */
     public function canDeleteRelation()
     {
@@ -151,7 +169,9 @@ class DeleteForm extends Model
     }
 
     /**
+     * [[@doctodo method_description:canEndRelation]].
      *
+     * @return [[@doctodo return_type:canEndRelation]] [[@doctodo return_description:canEndRelation]]
      */
     public function canEndRelation()
     {
@@ -169,7 +189,9 @@ class DeleteForm extends Model
     }
 
     /**
+     * [[@doctodo method_description:hasObjectTargets]].
      *
+     * @return [[@doctodo return_type:hasObjectTargets]] [[@doctodo return_description:hasObjectTargets]]
      */
     public function hasObjectTargets()
     {
@@ -183,7 +205,9 @@ class DeleteForm extends Model
     }
 
     /**
+     * [[@doctodo method_description:hasRelationshipTargets]].
      *
+     * @return [[@doctodo return_type:hasRelationshipTargets]] [[@doctodo return_description:hasRelationshipTargets]]
      */
     public function hasRelationshipTargets()
     {
@@ -198,6 +222,8 @@ class DeleteForm extends Model
 
     /**
      * Get possible targets.
+     *
+     * @return [[@doctodo return_type:getPossibleTargets]] [[@doctodo return_description:getPossibleTargets]]
      */
     public function getPossibleTargets()
     {
@@ -230,6 +256,8 @@ class DeleteForm extends Model
 
     /**
      * Set target.
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
      */
     public function setTarget($value)
     {
@@ -242,6 +270,8 @@ class DeleteForm extends Model
 
     /**
      * Get target label.
+     *
+     * @return [[@doctodo return_type:getTargetLabel]] [[@doctodo return_description:getTargetLabel]]
      */
     public function getTargetLabel()
     {
@@ -254,6 +284,8 @@ class DeleteForm extends Model
 
     /**
      * Get target descriptor.
+     *
+     * @return [[@doctodo return_type:getTargetDescriptor]] [[@doctodo return_description:getTargetDescriptor]]
      */
     public function getTargetDescriptor()
     {
@@ -265,7 +297,9 @@ class DeleteForm extends Model
     }
 
     /**
+     * [[@doctodo method_description:handle]].
      *
+     * @return [[@doctodo return_type:handle]] [[@doctodo return_description:handle]]
      */
     public function handle()
     {

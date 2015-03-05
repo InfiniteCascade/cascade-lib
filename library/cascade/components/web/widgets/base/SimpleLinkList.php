@@ -13,7 +13,7 @@ use Yii;
 use yii\helpers\Url;
 
 /**
- * SimpleLinkList [@doctodo write class description for SimpleLinkList].
+ * SimpleLinkList [[@doctodo class_description:cascade\components\web\widgets\base\SimpleLinkList]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -26,6 +26,8 @@ class SimpleLinkList extends BaseList
 
     /**
      * Get grid cell settings.
+     *
+     * @return [[@doctodo return_type:getGridCellSettings]] [[@doctodo return_description:getGridCellSettings]]
      */
     public function getGridCellSettings()
     {
@@ -58,6 +60,9 @@ class SimpleLinkList extends BaseList
         return $options;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getHeaderMenu()
     {
         $menu = [];

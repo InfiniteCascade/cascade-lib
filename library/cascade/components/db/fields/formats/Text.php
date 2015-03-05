@@ -9,12 +9,15 @@
 namespace cascade\components\db\fields\formats;
 
 /**
- * Text [@doctodo write class description for Text].
+ * Text [[@doctodo class_description:cascade\components\db\fields\formats\Text]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Text extends Base
 {
+    /**
+     * @var [[@doctodo var_type:showEmptyString]] [[@doctodo var_description:showEmptyString]]
+     */
     public $showEmptyString = true;
     /**
      * @inheritdoc

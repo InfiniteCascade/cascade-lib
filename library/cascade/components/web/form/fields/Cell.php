@@ -9,7 +9,7 @@
 namespace cascade\components\web\form\fields;
 
 /**
- * Cell [@doctodo write class description for Cell].
+ * Cell [[@doctodo class_description:cascade\components\web\form\fields\Cell]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

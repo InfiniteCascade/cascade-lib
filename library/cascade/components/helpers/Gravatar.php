@@ -3,8 +3,20 @@ namespace cascade\components\helpers;
 
 use infinite\caching\Cacher;
 
+/**
+ * Gravatar [[@doctodo class_description:cascade\components\helpers\Gravatar]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class Gravatar extends \emberlabs\gravatarlib\Gravatar
 {
+    /**
+     * [[@doctodo method_description:test]].
+     *
+     * @param boolean $hash_email [[@doctodo param_description:hash_email]] [optional]
+     *
+     * @return [[@doctodo return_type:test]] [[@doctodo return_description:test]]
+     */
     public function test($email, $hash_email = true)
     {
         $original = $this->getDefaultImage();
@@ -34,6 +46,13 @@ class Gravatar extends \emberlabs\gravatarlib\Gravatar
         return $result;
     }
 
+    /**
+     * [[@doctodo method_description:fetch]].
+     *
+     * @param boolean $hash_email [[@doctodo param_description:hash_email]] [optional]
+     *
+     * @return [[@doctodo return_type:fetch]] [[@doctodo return_description:fetch]]
+     */
     public function fetch($email, $hash_email = true)
     {
         $url = $this->get($email, $hash_email);

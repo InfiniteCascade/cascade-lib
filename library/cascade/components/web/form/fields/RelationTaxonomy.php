@@ -9,7 +9,7 @@
 namespace cascade\components\web\form\fields;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy].
+ * RelationTaxonomy [[@doctodo class_description:cascade\components\web\form\fields\RelationTaxonomy]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

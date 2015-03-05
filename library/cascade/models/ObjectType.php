@@ -49,7 +49,9 @@ class ObjectType extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:determineAccessLevel]].
      *
+     * @return [[@doctodo return_type:determineAccessLevel]] [[@doctodo return_description:determineAccessLevel]]
      */
     public function determineAccessLevel($role, $aro = null)
     {

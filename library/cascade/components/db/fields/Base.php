@@ -16,59 +16,77 @@ use infinite\base\exceptions\Exception;
 use Yii;
 
 /**
- * Base [@doctodo write class description for Base].
+ * Base [[@doctodo class_description:cascade\components\db\fields\Base]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Base extends \infinite\base\Object
 {
     /**
+     * @var [[@doctodo var_type:formFieldClass]] [[@doctodo var_description:formFieldClass]]
      */
     public $formFieldClass;
     /**
+     * @var [[@doctodo var_type:default]] [[@doctodo var_description:default]]
      */
     public $default;
     /**
+     * @var [[@doctodo var_type:required]] [[@doctodo var_description:required]]
      */
     public $required = false;
     /**
+     * @var [[@doctodo var_type:fieldSchema]] [[@doctodo var_description:fieldSchema]]
      */
     public $fieldSchema;
     /**
+     * @var [[@doctodo var_type:priority]] [[@doctodo var_description:priority]]
      */
     public $priority;
 
     /**
+     * @var [[@doctodo var_type:url]] [[@doctodo var_description:url]]
      */
     public $url; // wrap formatted text in link
     /**
+     * @var [[@doctodo var_type:linkOptions]] [[@doctodo var_description:linkOptions]]
      */
     public $linkOptions = [];
 
     /**
+     * @var [[@doctodo var_type:possiblePrimaryKeys]] [[@doctodo var_description:possiblePrimaryKeys]]
      */
     public $possiblePrimaryKeys = ['id'];
 
     /**
+     * @var [[@doctodo var_type:_human]] [[@doctodo var_description:_human]]
      */
     protected $_human;
     /**
+     * @var [[@doctodo var_type:_format]] [[@doctodo var_description:_format]]
      */
     protected $_format;
     /**
+     * @var [[@doctodo var_type:_label]] [[@doctodo var_description:_label]]
      */
     protected $_label;
     /**
+     * @var [[@doctodo var_type:_model]] [[@doctodo var_description:_model]]
      */
     protected $_model;
+    /**
+     * @var [[@doctodo var_type:_attributes]] [[@doctodo var_description:_attributes]]
+     */
     protected $_attributes = false;
     /**
+     * @var [[@doctodo var_type:_formField]] [[@doctodo var_description:_formField]]
      */
     protected $_formField;
     /**
+     * @var [[@doctodo var_type:_multiline]] [[@doctodo var_description:_multiline]]
      */
     protected $_multiline;
     /**
+     * @var [[@doctodo var_type:_locations]] [[@doctodo var_description:_locations]]
      */
     protected $_locations;
 
@@ -77,6 +95,9 @@ abstract class Base extends \infinite\base\Object
     const LOCATION_HEADER = 0x02;
     const LOCATION_SUBHEADER = 0x03;
 
+    /**
+     * [[@doctodo method_description:__clone]].
+     */
     public function __clone()
     {
         $this->formField = clone $this->formField;
@@ -104,7 +125,9 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:determineFormatClass]].
      *
+     * @return [[@doctodo return_type:determineFormatClass]] [[@doctodo return_description:determineFormatClass]]
      */
     public function determineFormatClass()
     {
@@ -126,6 +149,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get field.
+     *
+     * @return [[@doctodo return_type:getField]] [[@doctodo return_description:getField]]
      */
     public function getField()
     {
@@ -137,7 +162,9 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:hasFile]].
      *
+     * @return [[@doctodo return_type:hasFile]] [[@doctodo return_description:hasFile]]
      */
     public function hasFile()
     {
@@ -154,6 +181,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get locations.
+     *
+     * @return [[@doctodo return_type:getLocations]] [[@doctodo return_description:getLocations]]
      */
     public function getLocations()
     {
@@ -165,7 +194,9 @@ abstract class Base extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:determineLocations]].
      *
+     * @return [[@doctodo return_type:determineLocations]] [[@doctodo return_description:determineLocations]]
      */
     public function determineLocations()
     {
@@ -178,6 +209,10 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Set form field.
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
+     * @return [[@doctodo return_type:setFormField]] [[@doctodo return_description:setFormField]]
+     *
      */
     public function setFormField($value)
     {
@@ -233,6 +268,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get multiline.
+     *
+     * @return [[@doctodo return_type:getMultiline]] [[@doctodo return_description:getMultiline]]
      */
     public function getMultiline()
     {
@@ -279,6 +316,11 @@ abstract class Base extends \infinite\base\Object
         return $this->_model;
     }
 
+    /**
+     * [[@doctodo method_description:resetModel]].
+     *
+     * @return [[@doctodo return_type:resetModel]] [[@doctodo return_description:resetModel]]
+     */
     public function resetModel()
     {
         $this->_model = null;
@@ -286,6 +328,11 @@ abstract class Base extends \infinite\base\Object
         return $this->_model;
     }
 
+    /**
+     * [[@doctodo method_description:hasModel]].
+     *
+     * @return [[@doctodo return_type:hasModel]] [[@doctodo return_description:hasModel]]
+     */
     public function hasModel()
     {
         return isset($this->_model);
@@ -307,6 +354,9 @@ abstract class Base extends \infinite\base\Object
         return true;
     }
 
+    /**
+     * Set attributes.
+     */
     public function setAttributes($value)
     {
         $this->_attributes = $value;
@@ -315,6 +365,11 @@ abstract class Base extends \infinite\base\Object
         }
     }
 
+    /**
+     * Get attributes.
+     *
+     * @return [[@doctodo return_type:getAttributes]] [[@doctodo return_description:getAttributes]]
+     */
     public function getAttributes()
     {
         return $this->_attributes;
@@ -355,6 +410,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get formatted value.
+     *
+     * @return [[@doctodo return_type:getFormattedValue]] [[@doctodo return_description:getFormattedValue]]
      */
     public function getFormattedValue()
     {
@@ -375,6 +432,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get form value.
+     *
+     * @return [[@doctodo return_type:getFormValue]] [[@doctodo return_description:getFormValue]]
      */
     public function getFormValue()
     {
@@ -391,6 +450,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get value package.
+     *
+     * @return [[@doctodo return_type:getValuePackage]] [[@doctodo return_description:getValuePackage]]
      */
     public function getValuePackage()
     {
@@ -399,6 +460,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Get value.
+     *
+     * @return [[@doctodo return_type:getValue]] [[@doctodo return_description:getValue]]
      */
     public function getValue()
     {
@@ -437,6 +500,11 @@ abstract class Base extends \infinite\base\Object
         return true;
     }
 
+    /**
+     * Get filter settings.
+     *
+     * @return [[@doctodo return_type:getFilterSettings]] [[@doctodo return_description:getFilterSettings]]
+     */
     public function getFilterSettings()
     {
         if (!$this->human) {

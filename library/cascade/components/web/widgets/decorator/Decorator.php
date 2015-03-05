@@ -11,14 +11,16 @@ namespace cascade\components\web\widgets\decorator;
 use infinite\helpers\Html;
 
 /**
- * Decorator [@doctodo write class description for Decorator].
+ * Decorator [[@doctodo class_description:cascade\components\web\widgets\decorator\Decorator]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Decorator extends \yii\base\Behavior implements DecoratorInterface
 {
     /**
+     * [[@doctodo method_description:generateStart]].
      *
+     * @return [[@doctodo return_type:generateStart]] [[@doctodo return_description:generateStart]]
      */
     public function generateStart()
     {
@@ -32,7 +34,9 @@ abstract class Decorator extends \yii\base\Behavior implements DecoratorInterfac
     }
 
     /**
+     * [[@doctodo method_description:generateEnd]].
      *
+     * @return [[@doctodo return_type:generateEnd]] [[@doctodo return_description:generateEnd]]
      */
     public function generateEnd()
     {
@@ -44,6 +48,8 @@ abstract class Decorator extends \yii\base\Behavior implements DecoratorInterfac
 
     /**
      * Get widget classes.
+     *
+     * @return [[@doctodo return_type:getWidgetClasses]] [[@doctodo return_description:getWidgetClasses]]
      */
     public function getWidgetClasses()
     {

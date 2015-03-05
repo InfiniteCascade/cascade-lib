@@ -18,15 +18,22 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
+    /**
+     * @var [[@doctodo var_type:email]] [[@doctodo var_description:email]]
+     */
     public $email;
     /**
+     * @var [[@doctodo var_type:password]] [[@doctodo var_description:password]]
      */
     public $password;
     /**
+     * @var [[@doctodo var_type:rememberMe]] [[@doctodo var_description:rememberMe]]
      */
     public $rememberMe = true;
 
     /**
+     * [[@doctodo method_description:rules]].
+     *
      * @return array the validation rules.
      */
     public function rules()

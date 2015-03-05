@@ -9,7 +9,7 @@
 namespace cascade\components\web\widgets\base;
 
 /**
- * DetailList [@doctodo write class description for DetailList].
+ * DetailList [[@doctodo class_description:cascade\components\web\widgets\base\DetailList]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

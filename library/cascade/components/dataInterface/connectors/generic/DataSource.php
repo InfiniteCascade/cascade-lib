@@ -14,7 +14,7 @@ use cascade\models\Relation;
 use Yii;
 
 /**
- * DataSource [@doctodo write class description for DataSource].
+ * DataSource [[@doctodo class_description:cascade\components\dataInterface\connectors\generic\DataSource]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -33,9 +33,18 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      */
     public $searchClass = 'cascade\components\dataInterface\connectors\generic\Search';
 
+    /**
+     * @var [[@doctodo var_type:keys]] [[@doctodo var_description:keys]]
+     */
     public $keys = [];
 
+    /**
+     * @var [[@doctodo var_type:foreignParentKeys]] [[@doctodo var_description:foreignParentKeys]]
+     */
     public $foreignParentKeys = [];
+    /**
+     * @var [[@doctodo var_type:foreignChildKeys]] [[@doctodo var_description:foreignChildKeys]]
+     */
     public $foreignChildKeys = [];
 
     /**
@@ -51,6 +60,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get foreign data item.
+     *
+     * @return [[@doctodo return_type:getForeignDataItem]] [[@doctodo return_description:getForeignDataItem]]
      */
     public function getForeignDataItem($key)
     {
@@ -70,6 +81,10 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     abstract public function getForeignDataModel($key);
 
     /**
+     * [[@doctodo method_description:updateLocalObject]].
+     *
+     * @throws \ [[@doctodo exception_description:\]]
+     * @return [[@doctodo return_type:updateLocalObject]] [[@doctodo return_description:updateLocalObject]]
      *
      */
     public function updateLocalObject($relatedType, $valueMap, $fieldMap, $localModel)
@@ -128,7 +143,11 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
+     * [[@doctodo method_description:buildLocalAttributes]].
      *
+     * @param cascade\components\dataInterface\connectors\generic\Model $foreignModel [[@doctodo param_description:foreignModel]]
+     *
+     * @return [[@doctodo return_type:buildLocalAttributes]] [[@doctodo return_description:buildLocalAttributes]]
      */
     public function buildLocalAttributes(Model $foreignModel, $localModel = null, $fieldsMap = null)
     {
@@ -247,6 +266,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get unmapped keys.
+     *
+     * @return [[@doctodo return_type:getUnmappedKeys]] [[@doctodo return_description:getUnmappedKeys]]
      */
     public function getUnmappedKeys()
     {
@@ -265,6 +286,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get unmapped local keys.
+     *
+     * @return [[@doctodo return_type:getUnmappedLocalKeys]] [[@doctodo return_description:getUnmappedLocalKeys]]
      */
     public function getUnmappedLocalKeys()
     {
@@ -276,6 +299,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get unmapped foreign keys.
+     *
+     * @return [[@doctodo return_type:getUnmappedForeignKeys]] [[@doctodo return_description:getUnmappedForeignKeys]]
      */
     public function getUnmappedForeignKeys()
     {
@@ -284,6 +309,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get local primary key name.
+     *
+     * @return [[@doctodo return_type:getLocalPrimaryKeyName]] [[@doctodo return_description:getLocalPrimaryKeyName]]
      */
     public function getLocalPrimaryKeyName()
     {
@@ -292,6 +319,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get foreign primary key name.
+     *
+     * @return [[@doctodo return_type:getForeignPrimaryKeyName]] [[@doctodo return_description:getForeignPrimaryKeyName]]
      */
     public function getForeignPrimaryKeyName()
     {
@@ -299,7 +328,9 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
+     * [[@doctodo method_description:isRelationKey]].
      *
+     * @return [[@doctodo return_type:isRelationKey]] [[@doctodo return_description:isRelationKey]]
      */
     public function isRelationKey($key)
     {
@@ -307,7 +338,11 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
+     * [[@doctodo method_description:generateKey]].
      *
+     * @param cascade\components\dataInterface\connectors\generic\Model $foreignObject [[@doctodo param_description:foreignObject]]
+     *
+     * @return [[@doctodo return_type:generateKey]] [[@doctodo return_description:generateKey]]
      */
     public function generateKey(GenericModel $foreignObject, $keyName, $keyValue)
     {
@@ -333,6 +368,10 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
     /**
      * Get key translation.
+     *
+     * @param cascade\components\dataInterface\connectors\generic\Model $foreignObject [[@doctodo param_description:foreignObject]]
+     *
+     * @return [[@doctodo return_type:getKeyTranslation]] [[@doctodo return_description:getKeyTranslation]]
      */
     public function getKeyTranslation(Model $foreignObject, $key = null)
     {
@@ -353,6 +392,13 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
         return false;
     }
 
+    /**
+     * [[@doctodo method_description:internalGetKeyTranslation]].
+     *
+     * @param cascade\components\dataInterface\connectors\generic\Model $foreignObject [[@doctodo param_description:foreignObject]]
+     *
+     * @return [[@doctodo return_type:internalGetKeyTranslation]] [[@doctodo return_description:internalGetKeyTranslation]]
+     */
     protected function internalGetKeyTranslation(Model $foreignObject, $key)
     {
         if ($this->settings['universalKey']) {
@@ -364,6 +410,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get reverse key translation.
+     *
+     * @return [[@doctodo return_type:getReverseKeyTranslation]] [[@doctodo return_description:getReverseKeyTranslation]]
      */
     public function getReverseKeyTranslation($localObject)
     {
@@ -378,7 +426,11 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
+     * [[@doctodo method_description:saveKeyTranslation]].
      *
+     * @param cascade\components\dataInterface\connectors\generic\Model $foreignObject [[@doctodo param_description:foreignObject]]
+     *
+     * @return [[@doctodo return_type:saveKeyTranslation]] [[@doctodo return_description:saveKeyTranslation]]
      */
     public function saveKeyTranslation(Model $foreignObject, $localObject)
     {
@@ -396,6 +448,13 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
         return $firstKey;
     }
 
+    /**
+     * [[@doctodo method_description:internalSaveKeyTranslation]].
+     *
+     * @param cascade\components\dataInterface\connectors\generic\Model $foreignModel [[@doctodo param_description:foreignModel]]
+     *
+     * @return [[@doctodo return_type:internalSaveKeyTranslation]] [[@doctodo return_description:internalSaveKeyTranslation]]
+     */
     public function internalSaveKeyTranslation(Model $foreignModel, $localObject, $key)
     {
         $keyTranslation = $this->getKeyTranslation($foreignModel, $key);
@@ -416,6 +475,9 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
         return $keyTranslation;
     }
     /**
+     * [[@doctodo method_description:loadForeignDataItems]].
+     *
+     * @return [[@doctodo return_type:loadForeignDataItems]] [[@doctodo return_description:loadForeignDataItems]]
      */
     protected function loadForeignDataItems()
     {
@@ -423,7 +485,11 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
+     * [[@doctodo method_description:createForeignDataItem]].
      *
+     * @param array $config [[@doctodo param_description:config]] [optional]
+     *
+     * @return [[@doctodo return_type:createForeignDataItem]] [[@doctodo return_description:createForeignDataItem]]
      */
     public function createForeignDataItem($model, $config = [])
     {
@@ -438,7 +504,11 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
+     * [[@doctodo method_description:createLocalDataItem]].
      *
+     * @param array $config [[@doctodo param_description:config]] [optional]
+     *
+     * @return [[@doctodo return_type:createLocalDataItem]] [[@doctodo return_description:createLocalDataItem]]
      */
     public function createLocalDataItem($model, $config = [])
     {
@@ -449,7 +519,11 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
+     * [[@doctodo method_description:createDataItem]].
      *
+     * @param array $config [[@doctodo param_description:config]] [optional]
+     *
+     * @return [[@doctodo return_type:createDataItem]] [[@doctodo return_description:createDataItem]]
      */
     protected function createDataItem($config = [])
     {
@@ -462,6 +536,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     }
 
     /**
+     * [[@doctodo method_description:loadLocalDataItems]].
      */
     protected function loadLocalDataItems()
     {
@@ -470,6 +545,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get module.
+     *
+     * @return [[@doctodo return_type:getModule]] [[@doctodo return_description:getModule]]
      */
     public function getModule()
     {

@@ -31,6 +31,11 @@ class ActiveRecord extends \cascade\components\db\ActiveRecord implements Linkab
         return array_merge(parent::behaviors(), self::baseBehaviors(), []);
     }
 
+    /**
+     * Get links.
+     *
+     * @return [[@doctodo return_type:getLinks]] [[@doctodo return_description:getLinks]]
+     */
     public function getLinks()
     {
         return [

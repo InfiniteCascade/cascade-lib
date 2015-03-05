@@ -12,7 +12,7 @@ use cascade\models\Group;
 use Yii;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\modules\TypeGroup\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

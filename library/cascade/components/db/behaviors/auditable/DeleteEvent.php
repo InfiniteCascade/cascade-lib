@@ -11,13 +11,14 @@ namespace cascade\components\db\behaviors\auditable;
 use Yii;
 
 /**
- * DeleteEvent [@doctodo write class description for DeleteEvent].
+ * DeleteEvent [[@doctodo class_description:cascade\components\db\behaviors\auditable\DeleteEvent]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class DeleteEvent extends \infinite\db\behaviors\auditable\DeleteEvent
 {
     /**
+     * @var [[@doctodo var_type:objectType]] [[@doctodo var_description:objectType]]
      */
     public $objectType;
 
@@ -32,6 +33,9 @@ class DeleteEvent extends \infinite\db\behaviors\auditable\DeleteEvent
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getVerb()
     {
         if (isset($this->directObject->objectType) && $this->directObject->objectType->getDeleteVerb($this->directObject) !== null) {
@@ -41,6 +45,9 @@ class DeleteEvent extends \infinite\db\behaviors\auditable\DeleteEvent
         return parent::getVerb();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getStory()
     {
         $objectType = Yii::$app->collectors['types']->getOne($this->objectType);

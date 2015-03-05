@@ -13,7 +13,7 @@ use cascade\components\web\widgets\decorator\EmbeddedDecorator;
 use cascade\components\web\widgets\Item as WidgetItem;
 
 /**
- * SideSection [@doctodo write class description for SideSection].
+ * SideSection [[@doctodo class_description:cascade\components\web\widgets\section\SideSection]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -50,7 +50,9 @@ class SideSection extends Section
     }
 
     /**
+     * [[@doctodo method_description:isSingle]].
      *
+     * @return [[@doctodo return_type:isSingle]] [[@doctodo return_description:isSingle]]
      */
     public function isSingle()
     {

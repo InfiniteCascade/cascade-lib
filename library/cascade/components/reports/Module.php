@@ -9,19 +9,24 @@
 namespace cascade\components\reports;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\components\reports\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Module extends \cascade\components\base\CollectorModule
 {
     /**
+     * @var [[@doctodo var_type:name]] [[@doctodo var_description:name]]
      */
     public $name;
     /**
+     * @var [[@doctodo var_type:version]] [[@doctodo var_description:version]]
      */
     public $version = 1;
 
+    /**
+     * @var [[@doctodo var_type:icon]] [[@doctodo var_description:icon]]
+     */
     public $icon = 'fa fa-filter';
 
     /**

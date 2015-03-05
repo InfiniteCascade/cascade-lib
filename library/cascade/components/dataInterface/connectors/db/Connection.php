@@ -9,7 +9,7 @@
 namespace cascade\components\dataInterface\connectors\db;
 
 /**
- * Connection [@doctodo write class description for Connection].
+ * Connection [[@doctodo class_description:cascade\components\dataInterface\connectors\db\Connection]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

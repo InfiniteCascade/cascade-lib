@@ -111,6 +111,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:created]].
+     *
      * @param unknown $object
      * @param unknown $user   (optional)
      *
@@ -140,6 +142,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:modified]].
+     *
      * @param unknown $object
      * @param unknown $user   (optional)
      *
@@ -169,6 +173,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:accessed]].
+     *
      * @param unknown $object
      * @param unknown $user   (optional)
      *
@@ -198,7 +204,11 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:familiarObjects]].
      *
+     * @param integer $limit [[@doctodo param_description:limit]] [optional]
+     *
+     * @return [[@doctodo return_type:familiarObjects]] [[@doctodo return_description:familiarObjects]]
      */
     public static function familiarObjects($model, $limit = 10)
     {
@@ -215,7 +225,9 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:familiarObjectsProvider]].
      *
+     * @return [[@doctodo return_type:familiarObjectsProvider]] [[@doctodo return_description:familiarObjectsProvider]]
      */
     public static function familiarObjectsProvider($model, $state)
     {
@@ -246,7 +258,11 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:familiarObjectsList]].
      *
+     * @param integer $limit [[@doctodo param_description:limit]] [optional]
+     *
+     * @return [[@doctodo return_type:familiarObjectsList]] [[@doctodo return_description:familiarObjectsList]]
      */
     public static function familiarObjectsList($model, $limit = 10)
     {

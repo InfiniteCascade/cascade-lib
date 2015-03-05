@@ -14,16 +14,18 @@ use infinite\base\exceptions\Exception;
 use Yii;
 
 /**
- * Item [@doctodo write class description for Item].
+ * Item [[@doctodo class_description:cascade\components\storageHandlers\Item]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Item extends \infinite\base\collector\Item
 {
     /**
+     * @var [[@doctodo var_type:publicEngine]] [[@doctodo var_description:publicEngine]]
      */
     public $publicEngine = false;
     /**
+     * @var [[@doctodo var_type:publicEngineGroup]] [[@doctodo var_description:publicEngineGroup]]
      */
     public $publicEngineGroup = 'top';
 
@@ -39,7 +41,9 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
+     * [[@doctodo method_description:ensurePublicEngine]].
      *
+     * @throws Exception [[@doctodo exception_description:Exception]]
      */
     public function ensurePublicEngine()
     {

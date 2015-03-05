@@ -32,8 +32,14 @@ use yii\helpers\Url;
  */
 class DataInterfaceLog extends \cascade\components\db\ActiveRecord
 {
+    /**
+     * @var [[@doctodo var_type:_statusLog]] [[@doctodo var_description:_statusLog]]
+     */
     protected $_statusLog;
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -99,6 +105,11 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return $this->hasOne(DataInterface::className(), ['id' => 'data_interface_id']);
     }
 
+    /**
+     * [[@doctodo method_description:run]].
+     *
+     * @return [[@doctodo return_type:run]] [[@doctodo return_description:run]]
+     */
     public function run($interactiveAction = null)
     {
         if (empty($this->dataInterface) || !($dataInterfaceItem = $this->dataInterface->dataInterfaceItem)) {
@@ -108,6 +119,13 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return $dataInterfaceItem->run($this, $interactiveAction);
     }
 
+    /**
+     * Get status log.
+     *
+     * @param boolean $checkRecent [[@doctodo param_description:checkRecent]] [optional]
+     *
+     * @return [[@doctodo return_type:getStatusLog]] [[@doctodo return_description:getStatusLog]]
+     */
     public function getStatusLog($checkRecent = false)
     {
         if (!isset($this->_statusLog)) {
@@ -133,18 +151,29 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return $this->_statusLog;
     }
 
+    /**
+     * [[@doctodo method_description:saveCache]].
+     */
     public function saveCache()
     {
         $this->statusLog->lastUpdate = microtime(true);
         Cacher::set([get_called_class(), $this->primaryKey], $this->statusLog, 3600);
     }
 
+    /**
+     * [[@doctodo method_description:serializeStatusLog]].
+     */
     public function serializeStatusLog()
     {
         $this->statusLog->lastUpdate = microtime(true);
         $this->message = serialize($this->statusLog);
     }
 
+    /**
+     * [[@doctodo method_description:updateStatus]].
+     *
+     * @return [[@doctodo return_type:updateStatus]] [[@doctodo return_description:updateStatus]]
+     */
     public function updateStatus($newStatus)
     {
         $this->status = $newStatus;
@@ -152,6 +181,11 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return $this->save();
     }
 
+    /**
+     * [[@doctodo method_description:_startStatus]].
+     *
+     * @return [[@doctodo return_type:_startStatus]] [[@doctodo return_description:_startStatus]]
+     */
     protected function _startStatus()
     {
         $status = new Status($this);
@@ -159,6 +193,11 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return $status;
     }
 
+    /**
+     * [[@doctodo method_description:start]].
+     *
+     * @return [[@doctodo return_type:start]] [[@doctodo return_description:start]]
+     */
     public function start()
     {
         Cacher::set([get_called_class(), $this->primaryKey], false);
@@ -166,6 +205,9 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return $this->save();
     }
 
+    /**
+     * [[@doctodo method_description:updatePeakMemory]].
+     */
     public function updatePeakMemory()
     {
         if (is_null($this->peak_memory)
@@ -174,18 +216,29 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         }
     }
 
+    /**
+     * [[@doctodo method_description:updateLastUpdated]].
+     */
     public function updateLastUpdated()
     {
         $this->last_update = date("Y-m-d G:i:s");
     }
 
+    /**
+     * [[@doctodo method_description:clearStatusLogCache]].
+     */
     public function clearStatusLogCache()
     {
         Cacher::set([get_called_class(), $this->primaryKey], false, 3600);
     }
 
     /**
+     * [[@doctodo method_description:end]].
      *
+     * @param boolean $endInterrupted [[@doctodo param_description:endInterrupted]] [optional]
+     * @param boolean $saveAlways     [[@doctodo param_description:saveAlways]] [optional]
+     *
+     * @return [[@doctodo return_type:end]] [[@doctodo return_description:end]]
      */
     public function end($endInterrupted = false, $saveAlways = true)
     {
@@ -213,6 +266,11 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return $this->save();
     }
 
+    /**
+     * Get estimate time remaining.
+     *
+     * @return [[@doctodo return_type:getEstimateTimeRemaining]] [[@doctodo return_description:getEstimateTimeRemaining]]
+     */
     public function getEstimateTimeRemaining()
     {
         $estimatedDuration = $this->dataInterface->estimateDuration();
@@ -229,6 +287,11 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return false;
     }
 
+    /**
+     * Get duration.
+     *
+     * @return [[@doctodo return_type:getDuration]] [[@doctodo return_description:getDuration]]
+     */
     public function getDuration()
     {
         $ended = microtime(true);
@@ -240,11 +303,21 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return Date::niceDuration($ended-$started);
     }
 
+    /**
+     * Get is most recent.
+     *
+     * @return [[@doctodo return_type:getIsMostRecent]] [[@doctodo return_description:getIsMostRecent]]
+     */
     public function getIsMostRecent()
     {
         return !empty($this->dataInterface) && $this->dataInterface->lastDataInterfaceLog && $this->dataInterface->lastDataInterfaceLog->primaryKey === $this->primaryKey;
     }
 
+    /**
+     * Get data package.
+     *
+     * @return [[@doctodo return_type:getDataPackage]] [[@doctodo return_description:getDataPackage]]
+     */
     public function getDataPackage()
     {
         $p = [];
@@ -310,11 +383,21 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
         return $p;
     }
 
+    /**
+     * Get is active.
+     *
+     * @return [[@doctodo return_type:getIsActive]] [[@doctodo return_description:getIsActive]]
+     */
     public function getIsActive()
     {
         return in_array($this->status, ['queued', 'running']);
     }
 
+    /**
+     * Get bootstrap state.
+     *
+     * @return [[@doctodo return_type:getBootstrapState]] [[@doctodo return_description:getBootstrapState]]
+     */
     public function getBootstrapState()
     {
         switch ($this->status) {

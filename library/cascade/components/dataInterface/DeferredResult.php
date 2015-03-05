@@ -11,7 +11,7 @@ namespace cascade\components\dataInterface;
 use yii\helpers\Url;
 
 /**
- * Item [@doctodo write class description for Item].
+ * DeferredResult [[@doctodo class_description:cascade\components\dataInterface\DeferredResult]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -19,6 +19,9 @@ class DeferredResult extends \infinite\deferred\components\Result
 {
     //public $logModel;
 
+    /**
+     * @inheritdoc
+     */
     public function package($details = false)
     {
         $package = parent::package($details);
@@ -30,6 +33,9 @@ class DeferredResult extends \infinite\deferred\components\Result
         return $package;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function handleException(\Exception $e)
     {
         $message = [$e->getFile() . ':' . $e->getLine() . ' ' . $e->getMessage()];

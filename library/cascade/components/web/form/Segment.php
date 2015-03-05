@@ -15,38 +15,47 @@ use infinite\web\grid\Grid;
 use Yii;
 
 /**
- * Segment [@doctodo write class description for Segment].
+ * Segment [[@doctodo class_description:cascade\components\web\form\Segment]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Segment extends FormObject
 {
     /**
+     * @var [[@doctodo var_type:cellClass]] [[@doctodo var_description:cellClass]]
      */
     public $cellClass = 'cascade\components\web\form\fields\Cell';
     /**
+     * @var [[@doctodo var_type:subform]] [[@doctodo var_description:subform]]
      */
     public $subform;
     /**
+     * @var [[@doctodo var_type:relationSettings]] [[@doctodo var_description:relationSettings]]
      */
     public $relationSettings = true;
     /**
+     * @var [[@doctodo var_type:relationField]] [[@doctodo var_description:relationField]]
      */
     public $relationField;
 
     /**
+     * @var [[@doctodo var_type:_name]] [[@doctodo var_description:_name]]
      */
     protected $_name;
     /**
+     * @var [[@doctodo var_type:_model]] [[@doctodo var_description:_model]]
      */
     protected $_model;
     /**
+     * @var [[@doctodo var_type:_settings]] [[@doctodo var_description:_settings]]
      */
     protected $_settings;
     /**
+     * @var [[@doctodo var_type:_grid]] [[@doctodo var_description:_grid]]
      */
     protected $_grid;
     /**
+     * @var [[@doctodo var_type:_fields]] [[@doctodo var_description:_fields]]
      */
     protected $_fields;
 
@@ -82,6 +91,8 @@ class Segment extends FormObject
 
     /**
      * Set settings.
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
      */
     public function setSettings($settings)
     {
@@ -132,6 +143,7 @@ class Segment extends FormObject
     }
 
     /**
+     * [[@doctodo method_description:output]].
      */
     public function output()
     {
@@ -139,7 +151,9 @@ class Segment extends FormObject
     }
 
     /**
+     * [[@doctodo method_description:hasFile]].
      *
+     * @return [[@doctodo return_type:hasFile]] [[@doctodo return_description:hasFile]]
      */
     public function hasFile()
     {
@@ -157,6 +171,8 @@ class Segment extends FormObject
     }
 
     /**
+     * [[@doctodo method_description:generate]].
+     *
      * @return unknown
      */
     public function generate()
@@ -335,6 +351,8 @@ class Segment extends FormObject
 
     /**
      * Get grid.
+     *
+     * @return [[@doctodo return_type:getGrid]] [[@doctodo return_description:getGrid]]
      */
     public function getGrid()
     {

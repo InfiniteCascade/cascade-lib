@@ -9,26 +9,31 @@
 namespace cascade\components\dataInterface\connectors\generic;
 
 /**
- * Model [@doctodo write class description for Model].
+ * Model [[@doctodo class_description:cascade\components\dataInterface\connectors\generic\Model]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Model extends \infinite\base\Object
 {
     /**
+     * @var [[@doctodo var_type:modelName]] [[@doctodo var_description:modelName]]
      */
     public $modelName;
     /**
+     * @var [[@doctodo var_type:_interface]] [[@doctodo var_description:_interface]]
      */
     protected $_interface;
     /**
+     * @var [[@doctodo var_type:_attributes]] [[@doctodo var_description:_attributes]]
      */
     protected $_attributes;
     /**
+     * @var [[@doctodo var_type:_children]] [[@doctodo var_description:_children]]
      */
     protected $_children;
 
     /**
+     * [[@doctodo method_description:__clone]].
      */
     public function __clone()
     {
@@ -87,11 +92,21 @@ abstract class Model extends \infinite\base\Object
         return parent::__unset($name);
     }
 
+    /**
+     * Get table name.
+     *
+     * @return [[@doctodo return_type:getTableName]] [[@doctodo return_description:getTableName]]
+     */
     public function getTableName()
     {
         return static::baseClassName();
     }
 
+    /**
+     * [[@doctodo method_description:hasAttribute]].
+     *
+     * @return [[@doctodo return_type:hasAttribute]] [[@doctodo return_description:hasAttribute]]
+     */
     public function hasAttribute($attribute)
     {
         return !$this->hasProperty($attribute, true);
@@ -106,6 +121,7 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:reset]].
      */
     public function reset()
     {
@@ -122,6 +138,9 @@ abstract class Model extends \infinite\base\Object
         }
     }
 
+    /**
+     * [[@doctodo method_description:primaryKey]].
+     */
     abstract public function primaryKey();
     /**
      * Get primary key.
@@ -129,7 +148,9 @@ abstract class Model extends \infinite\base\Object
     abstract public function getPrimaryKey();
 
     /**
+     * [[@doctodo method_description:populateRecord]].
      *
+     * @return [[@doctodo return_type:populateRecord]] [[@doctodo return_description:populateRecord]]
      */
     public function populateRecord($attributes)
     {
@@ -143,7 +164,9 @@ abstract class Model extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:populateRecords]].
      *
+     * @return [[@doctodo return_type:populateRecords]] [[@doctodo return_description:populateRecords]]
      */
     public function populateRecords($results)
     {
@@ -157,6 +180,8 @@ abstract class Model extends \infinite\base\Object
 
     /**
      * Get attributes.
+     *
+     * @return [[@doctodo return_type:getAttributes]] [[@doctodo return_description:getAttributes]]
      */
     public function getAttributes()
     {
@@ -165,6 +190,8 @@ abstract class Model extends \infinite\base\Object
 
     /**
      * Get interface.
+     *
+     * @return [[@doctodo return_type:getInterface]] [[@doctodo return_description:getInterface]]
      */
     public function getInterface()
     {

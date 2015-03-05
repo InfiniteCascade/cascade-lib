@@ -11,7 +11,6 @@ namespace cascade\setup\tasks;
 use cascade\models\User;
 
 /**
- * Task_000004_acl [@doctodo write class description for Task_000004_acl].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

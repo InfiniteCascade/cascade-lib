@@ -9,7 +9,7 @@
 namespace cascade\components\db\fields\formats;
 
 /**
- * RawText [@doctodo write class description for RawText].
+ * RawText [[@doctodo class_description:cascade\components\db\fields\formats\RawText]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

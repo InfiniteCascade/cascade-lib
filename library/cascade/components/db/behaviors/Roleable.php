@@ -9,7 +9,7 @@
 namespace cascade\components\db\behaviors;
 
 /**
- * Roleable [@doctodo write class description for Roleable].
+ * Roleable [[@doctodo class_description:cascade\components\db\behaviors\Roleable]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

@@ -9,13 +9,14 @@
 namespace cascade\components\storageHandlers;
 
 /**
- * Collector [@doctodo write class description for Collector].
+ * Collector [[@doctodo class_description:cascade\components\storageHandlers\Collector]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Collector extends \infinite\base\collector\Module
 {
     /**
+     * @var [[@doctodo var_type:_initialItems]] [[@doctodo var_description:_initialItems]]
      */
     protected $_initialItems = [];
 

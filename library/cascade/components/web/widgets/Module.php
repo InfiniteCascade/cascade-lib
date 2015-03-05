@@ -12,28 +12,38 @@ use infinite\base\exceptions\Exception;
 use Yii;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\components\web\widgets\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Module extends \cascade\components\base\CollectorModule
 {
     /**
+     * @var [[@doctodo var_type:title]] [[@doctodo var_description:title]]
      */
     public $title;
     /**
+     * @var [[@doctodo var_type:icon]] [[@doctodo var_description:icon]]
      */
     public $icon = 'ic-icon-info';
     /**
+     * @var [[@doctodo var_type:priority]] [[@doctodo var_description:priority]]
      */
     public $priority = 1000; //lower is better
 
+    /**
+     * @var [[@doctodo var_type:locations]] [[@doctodo var_description:locations]]
+     */
     public $locations = []; //lower is better
 
     /**
+     * @var [[@doctodo var_type:widgetNamespace]] [[@doctodo var_description:widgetNamespace]]
      */
     public $widgetNamespace;
 
+    /**
+     * @inheritdoc
+     */
     public function getCollectorName()
     {
         return false;
@@ -48,6 +58,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:onAfterInit]].
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
+     * @return [[@doctodo return_type:onAfterInit]] [[@doctodo return_description:onAfterInit]]
      *
      */
     public function onAfterInit($event)
@@ -60,7 +74,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:widgets]].
      *
+     * @return [[@doctodo return_type:widgets]] [[@doctodo return_description:widgets]]
      */
     public function widgets()
     {
@@ -85,6 +101,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get short name.
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
+     * @return [[@doctodo return_type:getShortName]] [[@doctodo return_description:getShortName]]
+     *
      */
     public function getShortName()
     {

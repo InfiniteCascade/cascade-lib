@@ -12,13 +12,16 @@ use infinite\helpers\Match;
 use yii\db\ColumnSchema;
 
 /**
- * HumanFieldDetector [@doctodo write class description for HumanFieldDetector].
+ * HumanFieldDetector [[@doctodo class_description:cascade\components\db\fields\HumanFieldDetector]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class HumanFieldDetector extends \infinite\base\Object
 {
     /*
+     */
+    /*
+     * @var [[@doctodo var_type:_machineTests]] $_machineTests [[@doctodo var_description:_machineTests]]
      */
     static $_machineTests = [
         'id',
@@ -33,6 +36,13 @@ class HumanFieldDetector extends \infinite\base\Object
 
     /*
      * @return unknown
+     */
+    /**
+     * [[@doctodo method_description:test]].
+     *
+     * @param yii\db\ColumnSchema $column [[@doctodo param_description:column]]
+     *
+     * @return [[@doctodo return_type:test]] [[@doctodo return_description:test]]
      */
     public static function test(ColumnSchema $column)
     {
@@ -49,6 +59,11 @@ class HumanFieldDetector extends \infinite\base\Object
     /*
      * @param unknown $test
      * @return unknown
+     */
+    /**
+     * [[@doctodo method_description:registerMachineTest]].
+     *
+     * @return [[@doctodo return_type:registerMachineTest]] [[@doctodo return_description:registerMachineTest]]
      */
     public static function registerMachineTest($test)
     {

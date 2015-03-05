@@ -13,76 +13,98 @@ use infinite\base\exceptions\Exception;
 use Yii;
 
 /**
- * View [@doctodo write class description for View].
+ * View [[@doctodo class_description:cascade\components\web\widgets\grid\View]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class View extends \yii\base\Widget
 {
     /**
+     * @var [[@doctodo var_type:widget]] [[@doctodo var_description:widget]]
      */
     public $widget;
     /**
+     * @var [[@doctodo var_type:state]] [[@doctodo var_description:state]]
      */
     public $state;
     /**
+     * @var [[@doctodo var_type:dataProvider]] [[@doctodo var_description:dataProvider]]
      */
     public $dataProvider;
     /**
+     * @var [[@doctodo var_type:emptyText]] [[@doctodo var_description:emptyText]]
      */
     public $emptyText = 'No items found';
     /**
+     * @var [[@doctodo var_type:htmlOptions]] [[@doctodo var_description:htmlOptions]]
      */
     public $htmlOptions = [];
     /**
+     * @var [[@doctodo var_type:sortableAttributes]] [[@doctodo var_description:sortableAttributes]]
      */
     public $sortableAttributes;
     /**
+     * @var [[@doctodo var_type:filters]] [[@doctodo var_description:filters]]
      */
     public $filters;
     /**
+     * @var [[@doctodo var_type:views]] [[@doctodo var_description:views]]
      */
     public $views = ['list'];
     /**
+     * @var [[@doctodo var_type:currentView]] [[@doctodo var_description:currentView]]
      */
     public $currentView = 'list';
     /**
+     * @var [[@doctodo var_type:itemsPerRequest]] [[@doctodo var_description:itemsPerRequest]]
      */
     public $itemsPerRequest = 20;
     /**
+     * @var [[@doctodo var_type:limit]] [[@doctodo var_description:limit]]
      */
     public $limit;
     /**
+     * @var [[@doctodo var_type:rendererSettings]] [[@doctodo var_description:rendererSettings]]
      */
     public $rendererSettings = [];
     /**
+     * @var [[@doctodo var_type:itemMenu]] [[@doctodo var_description:itemMenu]]
      */
     public $itemMenu = [];
     /**
+     * @var [[@doctodo var_type:additionalClasses]] [[@doctodo var_description:additionalClasses]]
      */
     public $additionalClasses;
     /**
+     * @var [[@doctodo var_type:specialItemClasses]] [[@doctodo var_description:specialItemClasses]]
      */
     public $specialItemClasses = [];
     /**
+     * @var [[@doctodo var_type:nullDisplay]] [[@doctodo var_description:nullDisplay]]
      */
     public $nullDisplay = '';
     /**
+     * @var [[@doctodo var_type:_totalItems]] [[@doctodo var_description:_totalItems]]
      */
     protected $_totalItems;
     /**
+     * @var [[@doctodo var_type:_currentData]] [[@doctodo var_description:_currentData]]
      */
     protected $_currentData;
     /**
+     * @var [[@doctodo var_type:_currentDataRaw]] [[@doctodo var_description:_currentDataRaw]]
      */
     protected $_currentDataRaw;
     /**
+     * @var [[@doctodo var_type:_columns]] [[@doctodo var_description:_columns]]
      */
     protected $_columns;
     /**
+     * @var [[@doctodo var_type:_columnSettings]] [[@doctodo var_description:_columnSettings]]
      */
     protected $_columnSettings;
     /**
+     * @var [[@doctodo var_type:_formatter]] [[@doctodo var_description:_formatter]]
      */
     protected $_formatter;
 
@@ -141,6 +163,8 @@ class View extends \yii\base\Widget
 
     /**
      * Get column settings.
+     *
+     * @return [[@doctodo return_type:getColumnSettings]] [[@doctodo return_description:getColumnSettings]]
      */
     public function getColumnSettings()
     {
@@ -166,6 +190,8 @@ class View extends \yii\base\Widget
 
     /**
      * Get data.
+     *
+     * @return [[@doctodo return_type:getData]] [[@doctodo return_description:getData]]
      */
     public function getData()
     {
@@ -198,6 +224,8 @@ class View extends \yii\base\Widget
 
     /**
      * Set columns.
+     *
+     * @return [[@doctodo return_type:setColumns]] [[@doctodo return_description:setColumns]]
      */
     public function setColumns($columns)
     {
@@ -251,6 +279,10 @@ class View extends \yii\base\Widget
     }
 
     /**
+     * [[@doctodo method_description:createGridColumn]].
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
+     * @return [[@doctodo return_type:createGridColumn]] [[@doctodo return_description:createGridColumn]]
      *
      */
     protected function createGridColumn($text)
@@ -272,6 +304,8 @@ class View extends \yii\base\Widget
 
     /**
      * Get columns.
+     *
+     * @return [[@doctodo return_type:getColumns]] [[@doctodo return_description:getColumns]]
      */
     public function getColumns()
     {
@@ -284,6 +318,8 @@ class View extends \yii\base\Widget
 
     /**
      * Get data key.
+     *
+     * @return [[@doctodo return_type:getDataKey]] [[@doctodo return_description:getDataKey]]
      */
     public function getDataKey()
     {
@@ -292,6 +328,8 @@ class View extends \yii\base\Widget
 
     /**
      * Get total items.
+     *
+     * @return [[@doctodo return_type:getTotalItems]] [[@doctodo return_description:getTotalItems]]
      */
     public function getTotalItems()
     {
@@ -303,6 +341,7 @@ class View extends \yii\base\Widget
     }
 
     /**
+     * [[@doctodo method_description:_prepareDataProvider]].
      */
     protected function _prepareDataProvider()
     {

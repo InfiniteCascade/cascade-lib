@@ -13,7 +13,7 @@ use cascade\components\types\RelationshipEvent;
 use infinite\caching\Cacher;
 
 /**
- * AuthorityBehavior [@doctodo write class description for AuthorityBehavior].
+ * AuthorityBehavior [[@doctodo class_description:cascade\components\security\AuthorityBehavior]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -30,7 +30,9 @@ class AuthorityBehavior extends \infinite\security\AuthorityBehavior
     }
 
     /**
+     * [[@doctodo method_description:handleRelationChange]].
      *
+     * @param cascade\components\types\RelationshipEvent $event [[@doctodo param_description:event]]
      */
     public function handleRelationChange(RelationshipEvent $event)
     {

@@ -9,12 +9,15 @@
 namespace cascade\components\db\behaviors\auditable;
 
 /**
- * DeleteEvent [@doctodo write class description for DeleteEvent].
+ * CreateEvent [[@doctodo class_description:cascade\components\db\behaviors\auditable\CreateEvent]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class CreateEvent extends \infinite\db\behaviors\auditable\CreateEvent
 {
+    /**
+     * @inheritdoc
+     */
     public function getVerb()
     {
         if (isset($this->directObject->objectType) && !is_object($this->directObject->objectType)) {

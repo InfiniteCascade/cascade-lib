@@ -11,16 +11,18 @@ namespace cascade\components\dataInterface\connectors\generic;
 use infinite\base\language\Verb;
 
 /**
- * DataItem [@doctodo write class description for DataItem].
+ * DataItem [[@doctodo class_description:cascade\components\dataInterface\connectors\generic\DataItem]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class DataItem extends \cascade\components\dataInterface\DataItem
 {
     /**
+     * @var [[@doctodo var_type:_isLoadingForeignObject]] [[@doctodo var_description:_isLoadingForeignObject]]
      */
     protected $_isLoadingForeignObject = false;
     /**
+     * @var [[@doctodo var_type:_isLoadingLocalObject]] [[@doctodo var_description:_isLoadingLocalObject]]
      */
     protected $_isLoadingLocalObject = false;
 
@@ -178,6 +180,11 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         return $this->localObject;
     }
 
+    /**
+     * Get foreign parents.
+     *
+     * @return [[@doctodo return_type:getForeignParents]] [[@doctodo return_description:getForeignParents]]
+     */
     public function getForeignParents()
     {
         $parents = [];
@@ -196,6 +203,11 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         return $parents;
     }
 
+    /**
+     * Get foreign children.
+     *
+     * @return [[@doctodo return_type:getForeignChildren]] [[@doctodo return_description:getForeignChildren]]
+     */
     public function getForeignChildren()
     {
         $children = [];
@@ -215,12 +227,12 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
     }
 
     /**
-     *
+     * [[@doctodo method_description:loadForeignObject]].
      */
     abstract protected function loadForeignObject();
 
     /**
-     *
+     * [[@doctodo method_description:loadLocalObject]].
      */
     abstract protected function loadLocalObject();
 }

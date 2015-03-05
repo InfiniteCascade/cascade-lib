@@ -12,12 +12,15 @@ use infinite\helpers\ArrayHelper;
 use Yii;
 
 /**
- * DataSource [@doctodo write class description for DataSource].
+ * DataSource [[@doctodo class_description:cascade\components\dataInterface\connectors\file\DataSource]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class DataSource extends \cascade\components\dataInterface\connectors\generic\DataSource
 {
+    /**
+     * @inheritdoc
+     */
     public $lazyForeign = false;
     /**
      * @inheritdoc
@@ -32,10 +35,19 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
      */
     public $searchClass = 'cascade\components\dataInterface\connectors\file\Search';
 
+    /**
+     * @var [[@doctodo var_type:foreignModelClass]] [[@doctodo var_description:foreignModelClass]]
+     */
     public $foreignModelClass = 'cascade\components\dataInterface\connectors\file\Model';
 
+    /**
+     * @var [[@doctodo var_type:_fileSource]] [[@doctodo var_description:_fileSource]]
+     */
     protected $_fileSource;
 
+    /**
+     * Set file source.
+     */
     public function setFileSource($value)
     {
         if (isset($this->module->sourceFiles[$value])) {
@@ -45,6 +57,11 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
         }
     }
 
+    /**
+     * Get file source.
+     *
+     * @return [[@doctodo return_type:getFileSource]] [[@doctodo return_description:getFileSource]]
+     */
     public function getFileSource()
     {
         return $this->_fileSource;
@@ -52,6 +69,8 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
 
     /**
      * Get foreign data model.
+     *
+     * @return [[@doctodo return_type:getForeignDataModel]] [[@doctodo return_description:getForeignDataModel]]
      */
     public function getForeignDataModel($key)
     {
@@ -60,6 +79,8 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
 
     /**
      * Get unmapped foreign keys.
+     *
+     * @return [[@doctodo return_type:getUnmappedForeignKeys]] [[@doctodo return_description:getUnmappedForeignKeys]]
      */
     public function getUnmappedForeignKeys()
     {
@@ -71,6 +92,9 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     }
 
     /**
+     * [[@doctodo method_description:loadForeignDataItems]].
+     *
+     * @return [[@doctodo return_type:loadForeignDataItems]] [[@doctodo return_description:loadForeignDataItems]]
      */
     protected function loadForeignDataItems()
     {
@@ -95,6 +119,11 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
         $this->task->addInfo("Processed {$lineCount} lines from {$this->fileSource->id}");
     }
 
+    /**
+     * [[@doctodo method_description:createModel]].
+     *
+     * @return [[@doctodo return_type:createModel]] [[@doctodo return_description:createModel]]
+     */
     public function createModel($id, $attributes)
     {
         return Yii::createObject(['class' => $this->foreignModelClass, 'tableName' => $this->fileSource->id, 'interface' => $this->module, 'id' => $id, 'attributes' => $attributes]);

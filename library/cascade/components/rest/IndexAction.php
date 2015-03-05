@@ -6,13 +6,31 @@ use yii\base\InvalidParamException;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
+/**
+ * IndexAction [[@doctodo class_description:cascade\components\rest\IndexAction]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class IndexAction extends \yii\rest\IndexAction
 {
     use ActionTrait;
 
+    /**
+     * @var [[@doctodo var_type:parentObject]] [[@doctodo var_description:parentObject]]
+     */
     public $parentObject;
+    /**
+     * @var [[@doctodo var_type:_dataProvider]] [[@doctodo var_description:_dataProvider]]
+     */
     protected $_dataProvider;
 
+    /**
+     * Get required params.
+     *
+     * @throws InvalidParamException [[@doctodo exception_description:InvalidParamException]]
+     * @return [[@doctodo return_type:getRequiredParams]] [[@doctodo return_description:getRequiredParams]]
+     *
+     */
     public function getRequiredParams()
     {
         $requiredParams = parent::getRequiredParams();
@@ -28,11 +46,19 @@ class IndexAction extends \yii\rest\IndexAction
         return $requiredParams;
     }
 
+    /**
+     * [[@doctodo method_description:params]].
+     *
+     * @return [[@doctodo return_type:params]] [[@doctodo return_description:params]]
+     */
     public function params()
     {
         return ['parentObject'];
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function prepareDataProvider()
     {
         if (!isset($this->_dataProvider)) {

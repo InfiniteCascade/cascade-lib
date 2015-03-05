@@ -9,13 +9,14 @@
 namespace cascade\components\web;
 
 /**
- * View [@doctodo write class description for View].
+ * View [[@doctodo class_description:cascade\components\web\View]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class View extends \infinite\web\View
 {
     /**
+     * @var [[@doctodo var_type:tinyMenu]] [[@doctodo var_description:tinyMenu]]
      */
     public $tinyMenu;
 }

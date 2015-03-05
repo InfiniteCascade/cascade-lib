@@ -103,6 +103,11 @@ class DataInterface extends \cascade\components\db\ActiveRecord
         return $this->hasMany(DataInterfaceLog::className(), ['data_interface_id' => 'id']);
     }
 
+    /**
+     * Get last data interface log.
+     *
+     * @return [[@doctodo return_type:getLastDataInterfaceLog]] [[@doctodo return_description:getLastDataInterfaceLog]]
+     */
     public function getLastDataInterfaceLog()
     {
         return DataInterfaceLog::find()->where(['data_interface_id' => $this->primaryKey])->orderBy(['created' => SORT_DESC])->one();
@@ -118,6 +123,9 @@ class DataInterface extends \cascade\components\db\ActiveRecord
         return $this->hasMany(DataInterface::className(), ['data_interface_id' => 'id']);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getPackage($urlAction = 'view')
     {
         $p = parent::getPackage($urlAction);
@@ -129,16 +137,27 @@ class DataInterface extends \cascade\components\db\ActiveRecord
         return $p;
     }
 
+    /**
+     * Get data interface item.
+     *
+     * @return [[@doctodo return_type:getDataInterfaceItem]] [[@doctodo return_description:getDataInterfaceItem]]
+     */
     public function getDataInterfaceItem()
     {
         return Yii::$app->collectors['dataInterfaces']->getByPk($this->primaryKey);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function hasIcon()
     {
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getIcon()
     {
         return [
@@ -146,6 +165,11 @@ class DataInterface extends \cascade\components\db\ActiveRecord
         ];
     }
 
+    /**
+     * [[@doctodo method_description:estimateDuration]].
+     *
+     * @return [[@doctodo return_type:estimateDuration]] [[@doctodo return_description:estimateDuration]]
+     */
     public function estimateDuration()
     {
         $durations = [];
@@ -167,6 +191,11 @@ class DataInterface extends \cascade\components\db\ActiveRecord
         return ($average + $max) / 2;
     }
 
+    /**
+     * Get related log query.
+     *
+     * @return [[@doctodo return_type:getRelatedLogQuery]] [[@doctodo return_description:getRelatedLogQuery]]
+     */
     public function getRelatedLogQuery()
     {
         return DataInterfaceLog::find()->where(['data_interface_id' => $this->primaryKey]);

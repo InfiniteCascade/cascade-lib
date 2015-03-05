@@ -20,6 +20,13 @@ class Audit extends \infinite\db\models\Audit
 {
     use ActiveRecordTrait;
 
+    /**
+     * [[@doctodo method_description:activityDataProvider]].
+     *
+     * @param array $dataProvider [[@doctodo param_description:dataProvider]] [optional]
+     *
+     * @return [[@doctodo return_type:activityDataProvider]] [[@doctodo return_description:activityDataProvider]]
+     */
     public static function activityDataProvider($dataProvider = [])
     {
         $default = [
@@ -34,6 +41,9 @@ class Audit extends \infinite\db\models\Audit
         return Yii::createObject($dataProvider);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), [
@@ -41,6 +51,9 @@ class Audit extends \infinite\db\models\Audit
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [
@@ -48,6 +61,11 @@ class Audit extends \infinite\db\models\Audit
         ]);
     }
 
+    /**
+     * Get data interface.
+     *
+     * @return [[@doctodo return_type:getDataInterface]] [[@doctodo return_description:getDataInterface]]
+     */
     public function getDataInterface()
     {
         return $this->hasOne(Yii::$app->classes['DataInterface'], ['id' => 'data_interface_id']);

@@ -9,7 +9,7 @@
 namespace cascade\components\web\widgets\grid\columns;
 
 /**
- * Data [@doctodo write class description for Data].
+ * Data [[@doctodo class_description:cascade\components\web\widgets\grid\columns\Data]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

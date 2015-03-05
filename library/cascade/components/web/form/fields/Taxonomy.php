@@ -11,7 +11,7 @@ namespace cascade\components\web\form\fields;
 use infinite\helpers\ArrayHelper;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy].
+ * Taxonomy [[@doctodo class_description:cascade\components\web\form\fields\Taxonomy]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

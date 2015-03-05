@@ -9,14 +9,20 @@
 namespace cascade\components\db\behaviors\auditable;
 
 /**
- * ActiveRecord is the model class for table "{{%active_record}}".
+ * DataInterfaceEventBehavior [[@doctodo class_description:cascade\components\db\behaviors\auditable\DataInterfaceEventBehavior]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class DataInterfaceEventBehavior extends \infinite\db\behaviors\ActiveRecord
 {
+    /**
+     * @var [[@doctodo var_type:_dataInterface]] [[@doctodo var_description:_dataInterface]]
+     */
     protected $_dataInterface;
 
+    /**
+     * @inheritdoc
+     */
     public function events()
     {
         return [
@@ -24,6 +30,9 @@ class DataInterfaceEventBehavior extends \infinite\db\behaviors\ActiveRecord
         ];
     }
 
+    /**
+     * [[@doctodo method_description:beforeModelSave]].
+     */
     public function beforeModelSave($event)
     {
         if (isset($this->dataInterface)) {
@@ -35,11 +44,19 @@ class DataInterfaceEventBehavior extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * Set data interface.
+     */
     public function setDataInterface($object)
     {
         $this->_dataInterface = $object;
     }
 
+    /**
+     * Get data interface.
+     *
+     * @return [[@doctodo return_type:getDataInterface]] [[@doctodo return_description:getDataInterface]]
+     */
     public function getDataInterface()
     {
         return $this->_dataInterface;

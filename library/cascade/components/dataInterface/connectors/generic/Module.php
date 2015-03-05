@@ -14,26 +14,38 @@ use infinite\action\Action as BaseAction;
 use Yii;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\components\dataInterface\connectors\generic\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Module extends BaseModule
 {
     /**
+     * @var [[@doctodo var_type:dataSourceClass]] [[@doctodo var_description:dataSourceClass]]
      */
     public $dataSourceClass = 'cascade\components\dataInterface\connectors\generic\DataSource';
 
     /**
+     * @var [[@doctodo var_type:_models]] [[@doctodo var_description:_models]]
      */
     protected $_models;
 
+    /**
+     * @var [[@doctodo var_type:_dataSources]] [[@doctodo var_description:_dataSources]]
+     */
     protected $_dataSources;
     /**
+     * @var [[@doctodo var_type:_action]] [[@doctodo var_description:_action]]
      */
     protected $_action;
 
+    /**
+     * Get foreign object.
+     */
     abstract public function getForeignObject($foreignModelClass, $foreignPrimaryKey);
+    /**
+     * Get foreign model.
+     */
     abstract public function getForeignModel($model);
 
     /**
@@ -80,11 +92,21 @@ abstract class Module extends BaseModule
         return true;
     }
 
+    /**
+     * [[@doctodo method_description:beforeRun]].
+     *
+     * @return [[@doctodo return_type:beforeRun]] [[@doctodo return_description:beforeRun]]
+     */
     public function beforeRun()
     {
         return true;
     }
 
+    /**
+     * [[@doctodo method_description:afterRun]].
+     *
+     * @return [[@doctodo return_type:afterRun]] [[@doctodo return_description:afterRun]]
+     */
     public function afterRun()
     {
         return true;
@@ -92,6 +114,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get local object.
+     *
+     * @return [[@doctodo return_type:getLocalObject]] [[@doctodo return_description:getLocalObject]]
      */
     public function getLocalObject($localModelClass, $foreignPrimaryKey)
     {
@@ -108,6 +132,11 @@ abstract class Module extends BaseModule
         return false;
     }
 
+    /**
+     * Get data source.
+     *
+     * @return [[@doctodo return_type:getDataSource]] [[@doctodo return_description:getDataSource]]
+     */
     public function getDataSource($dataSourceName)
     {
         if (isset($this->dataSources[$dataSourceName])) {
@@ -119,6 +148,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get data sources.
+     *
+     * @return [[@doctodo return_type:getDataSources]] [[@doctodo return_description:getDataSources]]
      */
     public function getDataSources()
     {
@@ -149,6 +180,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get local data source.
+     *
+     * @return [[@doctodo return_type:getLocalDataSource]] [[@doctodo return_description:getLocalDataSource]]
      */
     public function getLocalDataSource($localModelClass)
     {
@@ -163,6 +196,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign data source.
+     *
+     * @return [[@doctodo return_type:getForeignDataSource]] [[@doctodo return_description:getForeignDataSource]]
      */
     public function getForeignDataSource($foreignModelClass)
     {
@@ -177,6 +212,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get action.
+     *
+     * @return [[@doctodo return_type:getAction]] [[@doctodo return_description:getAction]]
      */
     public function getAction()
     {

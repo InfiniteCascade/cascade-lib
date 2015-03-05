@@ -12,24 +12,29 @@ use infinite\helpers\Html;
 use yii\bootstrap\Nav;
 
 /**
- * PanelDecorator [@doctodo write class description for PanelDecorator].
+ * PanelDecorator [[@doctodo class_description:cascade\components\web\widgets\decorator\PanelDecorator]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class PanelDecorator extends Decorator
 {
     /**
+     * @var [[@doctodo var_type:panelCssClass]] [[@doctodo var_description:panelCssClass]]
      */
     public $panelCssClass = 'panel';
     /**
+     * @var [[@doctodo var_type:panelStateCssClass]] [[@doctodo var_description:panelStateCssClass]]
      */
     public $panelStateCssClass = 'panel-default';
     /**
+     * @var [[@doctodo var_type:gridCellClass]] [[@doctodo var_description:gridCellClass]]
      */
     public $gridCellClass = 'infinite\web\grid\Cell';
 
     /**
+     * [[@doctodo method_description:generatePanelTitle]].
      *
+     * @return [[@doctodo return_type:generatePanelTitle]] [[@doctodo return_description:generatePanelTitle]]
      */
     public function generatePanelTitle()
     {
@@ -64,7 +69,9 @@ class PanelDecorator extends Decorator
     }
 
     /**
+     * [[@doctodo method_description:generateHeader]].
      *
+     * @return [[@doctodo return_type:generateHeader]] [[@doctodo return_description:generateHeader]]
      */
     public function generateHeader()
     {
@@ -79,7 +86,9 @@ class PanelDecorator extends Decorator
     }
 
     /**
+     * [[@doctodo method_description:generateTitleMenu]].
      *
+     * @return [[@doctodo return_type:generateTitleMenu]] [[@doctodo return_description:generateTitleMenu]]
      */
     public function generateTitleMenu()
     {
@@ -97,7 +106,9 @@ class PanelDecorator extends Decorator
     }
 
     /**
+     * [[@doctodo method_description:backgroundifyMenu]].
      *
+     * @return [[@doctodo return_type:backgroundifyMenu]] [[@doctodo return_description:backgroundifyMenu]]
      */
     protected function backgroundifyMenu(&$items)
     {
@@ -118,7 +129,9 @@ class PanelDecorator extends Decorator
     }
 
     /**
+     * [[@doctodo method_description:generateFooter]].
      *
+     * @return [[@doctodo return_type:generateFooter]] [[@doctodo return_description:generateFooter]]
      */
     public function generateFooter()
     {
@@ -130,6 +143,8 @@ class PanelDecorator extends Decorator
 
     /**
      * Get panel title.
+     *
+     * @return [[@doctodo return_type:getPanelTitle]] [[@doctodo return_description:getPanelTitle]]
      */
     public function getPanelTitle()
     {

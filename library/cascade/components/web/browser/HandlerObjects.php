@@ -11,21 +11,25 @@ namespace cascade\components\web\browser;
 use Yii;
 
 /**
- * HandlerObjects [@doctodo write class description for HandlerObjects].
+ * HandlerObjects [[@doctodo class_description:cascade\components\web\browser\HandlerObjects]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class HandlerObjects extends \infinite\web\browser\Handler
 {
     /**
+     * @var [[@doctodo var_type:bundleClass]] [[@doctodo var_description:bundleClass]]
      */
     public $bundleClass = 'cascade\components\web\browser\Bundle';
     /**
+     * @var [[@doctodo var_type:_dataSource]] [[@doctodo var_description:_dataSource]]
      */
     protected $_dataSource;
 
     /**
      * Get data source.
+     *
+     * @return [[@doctodo return_type:getDataSource]] [[@doctodo return_description:getDataSource]]
      */
     public function getDataSource()
     {

@@ -20,11 +20,18 @@ use Yii;
  */
 class User extends \infinite\db\models\User
 {
+    /**
+     * @var [[@doctodo var_type:_icon]] [[@doctodo var_description:_icon]]
+     */
     protected $_icon;
+    /**
+     * @var [[@doctodo var_type:_profilePhoto]] [[@doctodo var_description:_profilePhoto]]
+     */
     protected $_profilePhoto;
 
     const SYSTEM_EMAIL = 'system@system.local';
     /**
+     * @var [[@doctodo var_type:_individual]] [[@doctodo var_description:_individual]]
      */
     protected $_individual;
 
@@ -51,6 +58,9 @@ class User extends \infinite\db\models\User
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return array_merge(parent::rules(), [
@@ -59,11 +69,17 @@ class User extends \infinite\db\models\User
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function hasIcon()
     {
         return isset($this->icon) && $this->icon;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getIcon($size = 40)
     {
         if (is_null($this->_icon)) {
@@ -79,6 +95,10 @@ class User extends \infinite\db\models\User
     }
 
     /**
+     * [[@doctodo method_description:systemUser]].
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
+     * @return [[@doctodo return_type:systemUser]] [[@doctodo return_description:systemUser]]
      *
      */
     public static function systemUser()
@@ -127,6 +147,13 @@ class User extends \infinite\db\models\User
         return $this->_individual;
     }
 
+    /**
+     * Get photo url.
+     *
+     * @param integer $size [[@doctodo param_description:size]] [optional]
+     *
+     * @return [[@doctodo return_type:getPhotoUrl]] [[@doctodo return_description:getPhotoUrl]]
+     */
     public function getPhotoUrl($size = 200)
     {
         if (!empty($this->individual)
@@ -143,6 +170,11 @@ class User extends \infinite\db\models\User
         return false;
     }
 
+    /**
+     * Get photo email.
+     *
+     * @return [[@doctodo return_type:getPhotoEmail]] [[@doctodo return_description:getPhotoEmail]]
+     */
     public function getPhotoEmail()
     {
         if (!empty($this->email) && substr($this->email, -6) !== ".local") {
@@ -153,7 +185,9 @@ class User extends \infinite\db\models\User
     }
 
     /**
+     * [[@doctodo method_description:guessIndividual]].
      *
+     * @return [[@doctodo return_type:guessIndividual]] [[@doctodo return_description:guessIndividual]]
      */
     public function guessIndividual()
     {

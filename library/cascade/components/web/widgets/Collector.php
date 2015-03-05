@@ -12,26 +12,39 @@ use cascade\components\web\widgets\section\Section;
 use Yii;
 
 /**
- * Collector [@doctodo write class description for Collector].
+ * Collector [[@doctodo class_description:cascade\components\web\widgets\Collector]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Collector extends \infinite\base\collector\Module
 {
     /**
+     * @var [[@doctodo var_type:producedWidgets]] [[@doctodo var_description:producedWidgets]]
      */
     public $producedWidgets = [];
     /**
+     * @var [[@doctodo var_type:lastBuildId]] [[@doctodo var_description:lastBuildId]]
      */
     public $lastBuildId;
 
+    /**
+     * @var [[@doctodo var_type:_lazy]] [[@doctodo var_description:_lazy]]
+     */
     protected $_lazy  = false;
 
+    /**
+     * Get lazy.
+     *
+     * @return [[@doctodo return_type:getLazy]] [[@doctodo return_description:getLazy]]
+     */
     public function getLazy()
     {
         return $this->_lazy;
     }
 
+    /**
+     * Set lazy.
+     */
     public function setLazy($lazy)
     {
         $this->_lazy = $lazy;
@@ -54,7 +67,12 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
+     * [[@doctodo method_description:build]].
      *
+     * @param cascade\components\web\widgets\section\Section $section          [[@doctodo param_description:section]]
+     * @param array                                          $instanceSettings [[@doctodo param_description:instanceSettings]] [optional]
+     *
+     * @return [[@doctodo return_type:build]] [[@doctodo return_description:build]]
      */
     public function build(Section $section = null, $widgetName, $instanceSettings = [])
     {

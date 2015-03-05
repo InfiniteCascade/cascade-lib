@@ -24,7 +24,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
- * ObjectController [@doctodo write class description for ObjectController].
+ * ObjectController [[@doctodo class_description:cascade\controllers\ObjectController]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -86,6 +86,11 @@ class ObjectController extends Controller
         ];
     }
 
+    /**
+     * [[@doctodo method_description:actionBrowse]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     */
     public function actionBrowse()
     {
         if (!isset($_GET['type'])
@@ -97,6 +102,10 @@ class ObjectController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionBrowseHierarchy]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     * @return [[@doctodo return_type:actionBrowseHierarchy]] [[@doctodo return_description:actionBrowseHierarchy]]
      *
      */
     public function actionBrowseHierarchy()
@@ -153,7 +162,9 @@ class ObjectController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionSearch]].
      *
+     * @return [[@doctodo return_type:actionSearch]] [[@doctodo return_description:actionSearch]]
      */
     public function actionSearch()
     {
@@ -214,7 +225,9 @@ class ObjectController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionPhoto]].
      *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
      */
     public function actionPhoto()
     {
@@ -249,6 +262,10 @@ class ObjectController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionView]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     * @return [[@doctodo return_type:actionView]] [[@doctodo return_description:actionView]]
      *
      */
     public function actionView()
@@ -331,7 +348,9 @@ class ObjectController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionActivity]].
      *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
      */
     public function actionActivity()
     {
@@ -347,6 +366,15 @@ class ObjectController extends Controller
         Yii::$app->request->object = $object;
     }
 
+    /**
+     * [[@doctodo method_description:_checkParams]].
+     *
+     * @param array $required [[@doctodo param_description:required]] [optional]
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     * @return [[@doctodo return_type:_checkParams]] [[@doctodo return_description:_checkParams]]
+     *
+     */
     public function _checkParams($params, $required = [])
     {
         if (in_array('type', $required) && isset($params['type'])) {
@@ -368,6 +396,13 @@ class ObjectController extends Controller
         return true;
     }
 
+    /**
+     * [[@doctodo method_description:_parseParams]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     * @return [[@doctodo return_type:_parseParams]] [[@doctodo return_description:_parseParams]]
+     *
+     */
     public function _parseParams()
     {
         $paramSource = $_GET;
@@ -430,6 +465,11 @@ class ObjectController extends Controller
         return $p;
     }
 
+    /**
+     * [[@doctodo method_description:actionCreate]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     */
     public function actionCreate()
     {
         $p = $this->_parseParams();
@@ -493,6 +533,11 @@ class ObjectController extends Controller
         $p['form']->ajax = true;
     }
 
+    /**
+     * [[@doctodo method_description:actionUpdate]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     */
     public function actionUpdate()
     {
         $p = $this->_parseParams();
@@ -543,6 +588,11 @@ class ObjectController extends Controller
         $p['form']->ajax = true;
     }
 
+    /**
+     * [[@doctodo method_description:actionSetPrimary]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     */
     public function actionSetPrimary()
     {
         $p = $this->_parseParams();
@@ -569,6 +619,11 @@ class ObjectController extends Controller
         }
     }
 
+    /**
+     * [[@doctodo method_description:actionLink]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     */
     public function actionLink()
     {
         $p = $this->_parseParams();
@@ -636,6 +691,11 @@ class ObjectController extends Controller
         $p['form']->ajax = true;
     }
 
+    /**
+     * [[@doctodo method_description:actionUpdateField]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     */
     public function actionUpdateField()
     {
         Yii::$app->response->task = 'status';
@@ -664,6 +724,7 @@ class ObjectController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionAccess]].
      */
     public function actionAccess()
     {
@@ -723,7 +784,9 @@ class ObjectController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionDelete]].
      *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
      */
     public function actionDelete()
     {
@@ -781,7 +844,9 @@ class ObjectController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionWatch]].
      *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
      */
     public function actionWatch()
     {
@@ -813,6 +878,7 @@ class ObjectController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionWidget]].
      */
     public function actionWidget()
     {

@@ -12,20 +12,24 @@ use infinite\base\exceptions\Exception;
 use infinite\helpers\Html;
 
 /**
- * Model [@doctodo write class description for Model].
+ * Model [[@doctodo class_description:cascade\components\web\form\fields\Model]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Model extends Base
 {
     /**
+     * @var [[@doctodo var_type:fileStorageWidgetClass]] [[@doctodo var_description:fileStorageWidgetClass]]
      */
     public $fileStorageWidgetClass = 'cascade\components\web\widgets\form\FileStorage';
     /**
+     * @var [[@doctodo var_type:_fieldConfig]] [[@doctodo var_description:_fieldConfig]]
      */
     protected $_fieldConfig = [];
     /**
      * Get field config.
+     *
+     * @return [[@doctodo return_type:getFieldConfig]] [[@doctodo return_description:getFieldConfig]]
      */
     public function getFieldConfig()
     {
@@ -43,7 +47,11 @@ class Model extends Base
         $this->_fieldConfig = $value;
     }
     /**
+     * [[@doctodo method_description:generate]].
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
      * @return unknown
+     *
      */
     public function generate()
     {

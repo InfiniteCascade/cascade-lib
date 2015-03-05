@@ -11,13 +11,14 @@ namespace cascade\components\web\widgets\grid;
 use infinite\helpers\Html;
 
 /**
- * LinkPager [@doctodo write class description for LinkPager].
+ * LinkPager [[@doctodo class_description:cascade\components\web\widgets\grid\LinkPager]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class LinkPager extends \yii\widgets\LinkPager
 {
     /**
+     * @var [[@doctodo var_type:_state]] [[@doctodo var_description:_state]]
      */
     protected $_state;
 

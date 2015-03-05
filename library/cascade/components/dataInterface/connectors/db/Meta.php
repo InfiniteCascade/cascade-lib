@@ -11,40 +11,52 @@ namespace cascade\components\dataInterface\connectors\db;
 use infinite\base\exceptions\Exception;
 
 /**
- * Meta [@doctodo write class description for Meta].
+ * Meta [[@doctodo class_description:cascade\components\dataInterface\connectors\db\Meta]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Meta extends \infinite\base\Object
 {
     /**
+     * @var [[@doctodo var_type:_hasMany]] [[@doctodo var_description:_hasMany]]
      */
     protected $_hasMany = [];
     /**
+     * @var [[@doctodo var_type:_hasOne]] [[@doctodo var_description:_hasOne]]
      */
     protected $_hasOne = [];
     /**
+     * @var [[@doctodo var_type:_belongsTo]] [[@doctodo var_description:_belongsTo]]
      */
     protected $_belongsTo = [];
     /**
+     * @var [[@doctodo var_type:_foreignTable]] [[@doctodo var_description:_foreignTable]]
      */
     protected $_foreignTable;
     /**
+     * @var [[@doctodo var_type:_db]] [[@doctodo var_description:_db]]
      */
     protected $_db;
     /**
+     * @var [[@doctodo var_type:_schema]] [[@doctodo var_description:_schema]]
      */
     protected $_schema;
     /**
+     * @var [[@doctodo var_type:_interface]] [[@doctodo var_description:_interface]]
      */
     protected $_interface;
 
     /*
      */
+    /**
+     * @var [[@doctodo var_type:_metas]] [[@doctodo var_description:_metas]]
+     */
     public static $_metas = [];
 
     /**
      * Get.
+     *
+     * @return [[@doctodo return_type:get]] [[@doctodo return_description:get]]
      */
     public static function get($interface, $foreignTable)
     {
@@ -99,6 +111,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get has many.
+     *
+     * @return [[@doctodo return_type:getHasMany]] [[@doctodo return_description:getHasMany]]
      */
     public function getHasMany()
     {
@@ -107,6 +121,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get has one.
+     *
+     * @return [[@doctodo return_type:getHasOne]] [[@doctodo return_description:getHasOne]]
      */
     public function getHasOne()
     {
@@ -115,6 +131,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get belongs to.
+     *
+     * @return [[@doctodo return_type:getBelongsTo]] [[@doctodo return_description:getBelongsTo]]
      */
     public function getBelongsTo()
     {
@@ -122,7 +140,9 @@ class Meta extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:hasAttribute]].
      *
+     * @return [[@doctodo return_type:hasAttribute]] [[@doctodo return_description:hasAttribute]]
      */
     public function hasAttribute($name)
     {
@@ -131,6 +151,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get attribute keys.
+     *
+     * @return [[@doctodo return_type:getAttributeKeys]] [[@doctodo return_description:getAttributeKeys]]
      */
     public function getAttributeKeys()
     {
@@ -139,6 +161,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get schema.
+     *
+     * @return [[@doctodo return_type:getSchema]] [[@doctodo return_description:getSchema]]
      */
     public function getSchema()
     {
@@ -155,6 +179,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get interface.
+     *
+     * @return [[@doctodo return_type:getInterface]] [[@doctodo return_description:getInterface]]
      */
     public function getInterface()
     {

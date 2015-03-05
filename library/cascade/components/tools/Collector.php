@@ -9,7 +9,7 @@
 namespace cascade\components\tools;
 
 /**
- * Collector [@doctodo write class description for Collector].
+ * Collector [[@doctodo class_description:cascade\components\tools\Collector]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -31,6 +31,11 @@ class Collector extends \infinite\base\collector\Module
         return 'Tool';
     }
 
+    /**
+     * Get all active.
+     *
+     * @return [[@doctodo return_type:getAllActive]] [[@doctodo return_description:getAllActive]]
+     */
     public function getAllActive()
     {
         return $this->getAll();

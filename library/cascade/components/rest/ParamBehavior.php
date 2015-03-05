@@ -3,8 +3,16 @@ namespace cascade\components\rest;
 
 use yii\base\InvalidParamException;
 
+/**
+ * ParamBehavior [[@doctodo class_description:cascade\components\rest\ParamBehavior]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class ParamBehavior extends \yii\base\Behavior
 {
+    /**
+     * @inheritdoc
+     */
     public function events()
     {
         return [
@@ -12,11 +20,21 @@ class ParamBehavior extends \yii\base\Behavior
         ];
     }
 
+    /**
+     * [[@doctodo method_description:params]].
+     *
+     * @return [[@doctodo return_type:params]] [[@doctodo return_description:params]]
+     */
     public function params()
     {
         return [];
     }
 
+    /**
+     * Get required params.
+     *
+     * @return [[@doctodo return_type:getRequiredParams]] [[@doctodo return_description:getRequiredParams]]
+     */
     public function getRequiredParams()
     {
         $params = [];
@@ -38,6 +56,11 @@ class ParamBehavior extends \yii\base\Behavior
         return $params;
     }
 
+    /**
+     * Get param.
+     *
+     * @return [[@doctodo return_type:getParam]] [[@doctodo return_description:getParam]]
+     */
     protected function getParam($param)
     {
         if (isset($_POST[$param])) {
@@ -48,6 +71,13 @@ class ParamBehavior extends \yii\base\Behavior
 
         return;
     }
+    /**
+     * [[@doctodo method_description:beforeRun]].
+     *
+     * @throws InvalidParamException [[@doctodo exception_description:InvalidParamException]]
+     * @return [[@doctodo return_type:beforeRun]] [[@doctodo return_description:beforeRun]]
+     *
+     */
     public function beforeRun($event)
     {
         foreach ($this->owner->params() as $param) {

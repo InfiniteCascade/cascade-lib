@@ -11,42 +11,59 @@ namespace cascade\components\dataInterface;
 use Yii;
 
 /**
- * DataItem [@doctodo write class description for DataItem].
+ * DataItem [[@doctodo class_description:cascade\components\dataInterface\DataItem]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class DataItem extends \infinite\base\Component
 {
     /**
+     * @var [[@doctodo var_type:dataSource]] [[@doctodo var_description:dataSource]]
      */
     public $dataSource;
     /**
+     * @var [[@doctodo var_type:isForeign]] [[@doctodo var_description:isForeign]]
      */
     public $isForeign = true;
 
+    /**
+     * @var [[@doctodo var_type:localModelError]] [[@doctodo var_description:localModelError]]
+     */
     public $localModelError = false;
+    /**
+     * @var [[@doctodo var_type:foreignModelError]] [[@doctodo var_description:foreignModelError]]
+     */
     public $foreignModelError = false;
 
     /**
+     * @var [[@doctodo var_type:_pairedDataItem]] [[@doctodo var_description:_pairedDataItem]]
      */
     protected $_pairedDataItem;
     /**
+     * @var [[@doctodo var_type:_handledDataItem]] [[@doctodo var_description:_handledDataItem]]
      */
     protected $_handledDataItem = false;
     /**
+     * @var [[@doctodo var_type:_foreignObject]] [[@doctodo var_description:_foreignObject]]
      */
     protected $_foreignObject;
     /**
+     * @var [[@doctodo var_type:foreignPrimaryKey]] [[@doctodo var_description:foreignPrimaryKey]]
      */
     public $foreignPrimaryKey;
 
     /**
+     * @var [[@doctodo var_type:_localObject]] [[@doctodo var_description:_localObject]]
      */
     protected $_localObject;
     /**
+     * @var [[@doctodo var_type:localPrimaryKey]] [[@doctodo var_description:localPrimaryKey]]
      */
     public $localPrimaryKey;
 
+    /**
+     * @var [[@doctodo var_type:baseAttributes]] [[@doctodo var_description:baseAttributes]]
+     */
     public $baseAttributes = [];
 
     const EVENT_LOAD_FOREIGN_OBJECT = 0x01;
@@ -62,7 +79,9 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
+     * [[@doctodo method_description:searchLocalObject]].
      *
+     * @return [[@doctodo return_type:searchLocalObject]] [[@doctodo return_description:searchLocalObject]]
      */
     protected function searchLocalObject($event)
     {
@@ -91,6 +110,7 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
+     * [[@doctodo method_description:clean]].
      */
     public function clean()
     {
@@ -107,6 +127,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get id.
+     *
+     * @return [[@doctodo return_type:getId]] [[@doctodo return_description:getId]]
      */
     public function getId()
     {
@@ -131,7 +153,12 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
+     * [[@doctodo method_description:handle]].
      *
+     * @param boolean $fromRelative   [[@doctodo param_description:fromRelative]] [optional]
+     * @param array   $baseAttributes [[@doctodo param_description:baseAttributes]] [optional]
+     *
+     * @return [[@doctodo return_type:handle]] [[@doctodo return_description:handle]]
      */
     public function handle($fromRelative = false, $baseAttributes = [])
     {
@@ -181,6 +208,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get ignore foreign object.
+     *
+     * @return [[@doctodo return_type:getIgnoreForeignObject]] [[@doctodo return_description:getIgnoreForeignObject]]
      */
     public function getIgnoreForeignObject()
     {
@@ -189,6 +218,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get ignore local object.
+     *
+     * @return [[@doctodo return_type:getIgnoreLocalObject]] [[@doctodo return_description:getIgnoreLocalObject]]
      */
     public function getIgnoreLocalObject()
     {
@@ -196,7 +227,9 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
+     * [[@doctodo method_description:testIgnore]].
      *
+     * @return [[@doctodo return_type:testIgnore]] [[@doctodo return_description:testIgnore]]
      */
     protected function testIgnore($object, $ignore)
     {
@@ -228,7 +261,11 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
+     * [[@doctodo method_description:handleLocal]].
      *
+     * @param array $baseAttributes [[@doctodo param_description:baseAttributes]] [optional]
+     *
+     * @return [[@doctodo return_type:handleLocal]] [[@doctodo return_description:handleLocal]]
      */
     protected function handleLocal($baseAttributes = [])
     {
@@ -236,7 +273,11 @@ abstract class DataItem extends \infinite\base\Component
     }
 
     /**
+     * [[@doctodo method_description:handleForeign]].
      *
+     * @param array $baseAttributes [[@doctodo param_description:baseAttributes]] [optional]
+     *
+     * @return [[@doctodo return_type:handleForeign]] [[@doctodo return_description:handleForeign]]
      */
     protected function handleForeign($baseAttributes = [])
     {
@@ -245,6 +286,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get handler.
+     *
+     * @return [[@doctodo return_type:getHandler]] [[@doctodo return_description:getHandler]]
      */
     public function getHandler()
     {
@@ -261,6 +304,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get handling comparison.
+     *
+     * @return [[@doctodo return_type:getHandlingComparison]] [[@doctodo return_description:getHandlingComparison]]
      */
     public function getHandlingComparison()
     {
@@ -269,6 +314,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get handling object.
+     *
+     * @return [[@doctodo return_type:getHandlingObject]] [[@doctodo return_description:getHandlingObject]]
      */
     public static function getHandlingObject($a, $b)
     {
@@ -291,6 +338,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get primary object.
+     *
+     * @return [[@doctodo return_type:getPrimaryObject]] [[@doctodo return_description:getPrimaryObject]]
      */
     public function getPrimaryObject()
     {
@@ -303,6 +352,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get companion object.
+     *
+     * @return [[@doctodo return_type:getCompanionObject]] [[@doctodo return_description:getCompanionObject]]
      */
     public function getCompanionObject()
     {
@@ -315,6 +366,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set companion object.
+     *
+     * @return [[@doctodo return_type:setCompanionObject]] [[@doctodo return_description:setCompanionObject]]
      */
     public function setCompanionObject($value)
     {
@@ -327,6 +380,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get companion.
+     *
+     * @return [[@doctodo return_type:getCompanionId]] [[@doctodo return_description:getCompanionId]]
      */
     public function getCompanionId()
     {
@@ -344,6 +399,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set paired data item.
+     *
+     * @param cascade\components\dataInterface\DataItem $value [[@doctodo param_description:value]]
      */
     public function setPairedDataItem(DataItem $value)
     {
@@ -363,6 +420,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get paired data item.
+     *
+     * @return [[@doctodo return_type:getPairedDataItem]] [[@doctodo return_description:getPairedDataItem]]
      */
     public function getPairedDataItem()
     {
@@ -371,6 +430,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set handled data item.
+     *
+     * @return [[@doctodo return_type:setHandledDataItem]] [[@doctodo return_description:setHandledDataItem]]
      */
     public function setHandledDataItem($value)
     {
@@ -387,6 +448,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get handled data item.
+     *
+     * @return [[@doctodo return_type:getHandledDataItem]] [[@doctodo return_description:getHandledDataItem]]
      */
     public function getHandledDataItem()
     {
@@ -395,6 +458,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get foreign object.
+     *
+     * @return [[@doctodo return_type:getForeignObject]] [[@doctodo return_description:getForeignObject]]
      */
     public function getForeignObject()
     {
@@ -415,6 +480,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get local object.
+     *
+     * @return [[@doctodo return_type:getLocalObject]] [[@doctodo return_description:getLocalObject]]
      */
     public function getLocalObject()
     {
@@ -435,6 +502,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get action.
+     *
+     * @return [[@doctodo return_type:getAction]] [[@doctodo return_description:getAction]]
      */
     public function getAction()
     {
@@ -443,6 +512,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Get module.
+     *
+     * @return [[@doctodo return_type:getModule]] [[@doctodo return_description:getModule]]
      */
     public function getModule()
     {

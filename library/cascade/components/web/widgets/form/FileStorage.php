@@ -14,13 +14,14 @@ use infinite\base\exceptions\Exception;
 use infinite\helpers\Html;
 
 /**
- * FileStorage [@doctodo write class description for FileStorage].
+ * FileStorage [[@doctodo class_description:cascade\components\web\widgets\form\FileStorage]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class FileStorage extends Widget
 {
     /**
+     * @var [[@doctodo var_type:item]] [[@doctodo var_description:item]]
      */
     public $item;
 
@@ -55,7 +56,9 @@ class FileStorage extends Widget
     }
 
     /**
+     * [[@doctodo method_description:prepareItem]].
      *
+     * @return [[@doctodo return_type:prepareItem]] [[@doctodo return_description:prepareItem]]
      */
     public function prepareItem($engine)
     {
@@ -67,7 +70,9 @@ class FileStorage extends Widget
     }
 
     /**
+     * [[@doctodo method_description:renderItem]].
      *
+     * @return [[@doctodo return_type:renderItem]] [[@doctodo return_description:renderItem]]
      */
     public function renderItem($storageEngine)
     {

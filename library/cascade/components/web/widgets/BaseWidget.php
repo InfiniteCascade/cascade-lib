@@ -16,7 +16,7 @@ use infinite\web\RenderTrait;
 use Yii;
 
 /**
- * BaseWidget [@doctodo write class description for BaseWidget].
+ * BaseWidget [[@doctodo class_description:cascade\components\web\widgets\BaseWidget]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -28,41 +28,52 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     use RenderTrait;
 
     /**
+     * @var [[@doctodo var_type:owner]] [[@doctodo var_description:owner]]
      */
     public $owner;
     /**
+     * @var [[@doctodo var_type:instanceSettings]] [[@doctodo var_description:instanceSettings]]
      */
     public $instanceSettings;
 
     /**
+     * @var [[@doctodo var_type:defaultDecoratorClass]] [[@doctodo var_description:defaultDecoratorClass]]
      */
     public $defaultDecoratorClass = 'cascade\components\web\widgets\decorator\PanelDecorator';
 
     /**
+     * @var [[@doctodo var_type:params]] [[@doctodo var_description:params]]
      */
     public $params = [];
     /**
+     * @var [[@doctodo var_type:htmlOptions]] [[@doctodo var_description:htmlOptions]]
      */
     public $htmlOptions = [];
 
     /**
+     * @var [[@doctodo var_type:_systemId]] [[@doctodo var_description:_systemId]]
      */
     protected $_systemId;
     /**
+     * @var [[@doctodo var_type:_settings]] [[@doctodo var_description:_settings]]
      */
     protected $_settings;
     /**
+     * @var [[@doctodo var_type:_decorator]] [[@doctodo var_description:_decorator]]
      */
     protected $_decorator;
 
     /**
+     * [[@doctodo method_description:generateContent]].
      */
     abstract public function generateContent();
     /**
+     * [[@doctodo method_description:generate]].
      */
     abstract public function generate();
 
     /**
+     * [[@doctodo method_description:ensureDecorator]].
      */
     public function ensureDecorator()
     {
@@ -72,7 +83,9 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
+     * [[@doctodo method_description:hasDecorator]].
      *
+     * @return [[@doctodo return_type:hasDecorator]] [[@doctodo return_description:hasDecorator]]
      */
     public function hasDecorator()
     {
@@ -80,7 +93,9 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
+     * [[@doctodo method_description:attachDecorator]].
      *
+     * @return [[@doctodo return_type:attachDecorator]] [[@doctodo return_description:attachDecorator]]
      */
     public function attachDecorator($decorator)
     {
@@ -104,6 +119,7 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
+     * [[@doctodo method_description:output]].
      */
     public function output()
     {
@@ -119,7 +135,9 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     }
 
     /**
+     * [[@doctodo method_description:parseText]].
      *
+     * @return [[@doctodo return_type:parseText]] [[@doctodo return_description:parseText]]
      */
     public function parseText($text)
     {
@@ -128,6 +146,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
 
     /**
      * Get variables.
+     *
+     * @return [[@doctodo return_type:getVariables]] [[@doctodo return_description:getVariables]]
      */
     public function getVariables()
     {

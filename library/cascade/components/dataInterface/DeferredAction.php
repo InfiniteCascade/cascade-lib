@@ -12,7 +12,7 @@ use cascade\models\DataInterface;
 use cascade\models\DataInterfaceLog;
 
 /**
- * Item [@doctodo write class description for Item].
+ * DeferredAction [[@doctodo class_description:cascade\components\dataInterface\DeferredAction]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -20,6 +20,11 @@ class DeferredAction extends \infinite\deferred\components\Action
 {
     use ActionTrait;
 
+    /**
+     * [[@doctodo method_description:run]].
+     *
+     * @return [[@doctodo return_type:run]] [[@doctodo return_description:run]]
+     */
     public function run()
     {
         $logModel = $this->getLogModel(true);
@@ -44,6 +49,9 @@ class DeferredAction extends \infinite\deferred\components\Action
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function pauseAction()
     {
         $logModel = $this->getLogModel(true);
@@ -51,6 +59,9 @@ class DeferredAction extends \infinite\deferred\components\Action
         return $logModel->statusLog->pause();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function resumeAction()
     {
         $logModel = $this->getLogModel(true);
@@ -58,6 +69,11 @@ class DeferredAction extends \infinite\deferred\components\Action
         return $logModel->statusLog->resume();
     }
 
+    /**
+     * Get descriptor.
+     *
+     * @return [[@doctodo return_type:getDescriptor]] [[@doctodo return_description:getDescriptor]]
+     */
     public function getDescriptor()
     {
         $logModel = $this->getLogModel(true);
@@ -68,11 +84,19 @@ class DeferredAction extends \infinite\deferred\components\Action
         return 'Interface: ' . $logModel->dataInterface->name;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function cancel()
     {
         return $this->cancelLog();
     }
 
+    /**
+     * [[@doctodo method_description:cancelLog]].
+     *
+     * @return [[@doctodo return_type:cancelLog]] [[@doctodo return_description:cancelLog]]
+     */
     public function cancelLog()
     {
         $logModel = $this->getLogModel(true);
@@ -86,6 +110,13 @@ class DeferredAction extends \infinite\deferred\components\Action
         }
     }
 
+    /**
+     * Get log model.
+     *
+     * @param boolean $refresh [[@doctodo param_description:refresh]] [optional]
+     *
+     * @return [[@doctodo return_type:getLogModel]] [[@doctodo return_description:getLogModel]]
+     */
     public function getLogModel($refresh = false)
     {
         $config = $this->config;
@@ -107,11 +138,17 @@ class DeferredAction extends \infinite\deferred\components\Action
         return;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function requiredConfigParams()
     {
         return ['logModel'];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getResultConfig()
     {
         return [

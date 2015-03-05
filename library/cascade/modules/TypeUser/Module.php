@@ -12,7 +12,7 @@ use cascade\models\User;
 use Yii;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\modules\TypeUser\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -41,8 +41,14 @@ class Module extends \cascade\components\types\Module
      */
     public $modelNamespace = false;
 
+    /**
+     * @inheritdoc
+     */
     public $searchWeight = 0;
 
+    /**
+     * @inheritdoc
+     */
     public $enableApiAccess = false;
     /**
      * @inheritdoc

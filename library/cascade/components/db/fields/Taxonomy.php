@@ -9,7 +9,7 @@
 namespace cascade\components\db\fields;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy].
+ * Taxonomy [[@doctodo class_description:cascade\components\db\fields\Taxonomy]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -24,18 +24,23 @@ class Taxonomy extends Base
      */
     protected $_human = true;
     /**
+     * @var [[@doctodo var_type:_moduleHandler]] [[@doctodo var_description:_moduleHandler]]
      */
     protected $_moduleHandler;
     /**
+     * @var [[@doctodo var_type:taxonomy]] [[@doctodo var_description:taxonomy]]
      */
     public $taxonomy;
 
     /**
+     * @var [[@doctodo var_type:_moduleHandlers]] [[@doctodo var_description:_moduleHandlers]]
      */
     protected static $_moduleHandlers = [];
 
     /**
      * Get module handler.
+     *
+     * @return [[@doctodo return_type:getModuleHandler]] [[@doctodo return_description:getModuleHandler]]
      */
     public function getModuleHandler()
     {
@@ -51,6 +56,9 @@ class Taxonomy extends Base
 
         return $this->_moduleHandler;
     }
+    /**
+     * @inheritdoc
+     */
     public function getFilterSettings()
     {
         return false;

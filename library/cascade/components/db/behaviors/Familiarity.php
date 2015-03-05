@@ -11,19 +11,22 @@ namespace cascade\components\db\behaviors;
 use Yii;
 
 /**
- * Familiarity [@doctodo write class description for Familiarity].
+ * Familiarity [[@doctodo class_description:cascade\components\db\behaviors\Familiarity]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Familiarity extends \infinite\db\behaviors\ActiveRecord
 {
     /**
+     * @var [[@doctodo var_type:objectField]] [[@doctodo var_description:objectField]]
      */
     public $objectField = 'object_id';
     /**
+     * @var [[@doctodo var_type:userField]] [[@doctodo var_description:userField]]
      */
     public $userField = 'user_id';
     /**
+     * @var [[@doctodo var_type:_familiarity]] [[@doctodo var_description:_familiarity]]
      */
     protected $_familiarity = [];
 
@@ -39,6 +42,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:afterUpdate]].
      */
     public function afterUpdate()
     {
@@ -49,6 +53,7 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:afterInsert]].
      */
     public function afterInsert()
     {
@@ -60,6 +65,10 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get user.
+     *
+     * @param boolean $owner [[@doctodo param_description:owner]] [optional]
+     *
+     * @return [[@doctodo return_type:getUser]] [[@doctodo return_description:getUser]]
      */
     public function getUser($owner = true)
     {
@@ -73,7 +82,11 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:watch]].
      *
+     * @param boolean $doWatch [[@doctodo param_description:doWatch]] [optional]
+     *
+     * @return [[@doctodo return_type:watch]] [[@doctodo return_description:watch]]
      */
     public function watch($doWatch = true, $user = null)
     {
@@ -92,6 +105,8 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get familiarity.
+     *
+     * @return [[@doctodo return_type:getFamiliarity]] [[@doctodo return_description:getFamiliarity]]
      */
     public function getFamiliarity($user = null)
     {

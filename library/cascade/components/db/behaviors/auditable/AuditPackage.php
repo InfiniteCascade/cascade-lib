@@ -11,17 +11,32 @@ namespace cascade\components\db\behaviors\auditable;
 use ArrayIterator;
 
 /**
- * ActiveRecord is the model class for table "{{%active_record}}".
+ * AuditPackage [[@doctodo class_description:cascade\components\db\behaviors\auditable\AuditPackage]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, \ArrayAccess, \Countable
 {
+    /**
+     * @var [[@doctodo var_type:similarThreshold]] [[@doctodo var_description:similarThreshold]]
+     */
     public $similarThreshold = 21600;
+    /**
+     * @var [[@doctodo var_type:_items]] [[@doctodo var_description:_items]]
+     */
     protected $_items = [];
+    /**
+     * @var [[@doctodo var_type:direction]] [[@doctodo var_description:direction]]
+     */
     public $direction = '_older';
+    /**
+     * @var [[@doctodo var_type:context]] [[@doctodo var_description:context]]
+     */
     public $context = false;
 
+    /**
+     * @inheritdoc
+     */
     public function __construct($dataSource, $context = false)
     {
         foreach ($dataSource->models as $item) {
@@ -32,6 +47,11 @@ class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, 
         parent::__construct();
     }
 
+    /**
+     * [[@doctodo method_description:count]].
+     *
+     * @return [[@doctodo return_type:count]] [[@doctodo return_description:count]]
+     */
     public function count()
     {
         return $this->getCount();
@@ -119,9 +139,9 @@ class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, 
 
     /**
      * Returns the collection as a PHP array.
+     *               The array keys are item names, and the array values are the corresponding item objects.
      *
      * @return array the array representation of the collection.
-     *               The array keys are item names, and the array values are the corresponding item objects.
      */
     public function toArray()
     {
@@ -238,6 +258,11 @@ class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, 
         $this->remove($name);
     }
 
+    /**
+     * Get iterator.
+     *
+     * @return [[@doctodo return_type:getIterator]] [[@doctodo return_description:getIterator]]
+     */
     public function getIterator()
     {
         return new ArrayIterator($this->_items);

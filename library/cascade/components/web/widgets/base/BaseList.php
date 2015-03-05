@@ -11,7 +11,7 @@ namespace cascade\components\web\widgets\base;
 use cascade\components\web\widgets\Widget;
 
 /**
- * BaseList [@doctodo write class description for BaseList].
+ * BaseList [[@doctodo class_description:cascade\components\web\widgets\base\BaseList]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

@@ -1,8 +1,18 @@
 <?php
 namespace cascade\components\db;
 
+/**
+ * ActiveQuery [[@doctodo class_description:cascade\components\db\ActiveQuery]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class ActiveQuery extends \infinite\db\ActiveQuery
 {
+    /**
+     * [[@doctodo method_description:andWhereFromQuery]].
+     *
+     * @return [[@doctodo return_type:andWhereFromQuery]] [[@doctodo return_description:andWhereFromQuery]]
+     */
     public function andWhereFromQuery($instructions)
     {
         $where = $this->buildWhereFromQuery($instructions);
@@ -14,6 +24,11 @@ class ActiveQuery extends \infinite\db\ActiveQuery
         return true;
     }
 
+    /**
+     * [[@doctodo method_description:buildWhereFromQuery]].
+     *
+     * @return [[@doctodo return_type:buildWhereFromQuery]] [[@doctodo return_description:buildWhereFromQuery]]
+     */
     public function buildWhereFromQuery($instructions)
     {
         $where = [];
@@ -32,6 +47,11 @@ class ActiveQuery extends \infinite\db\ActiveQuery
         return $where;
     }
 
+    /**
+     * [[@doctodo method_description:parseRule]].
+     *
+     * @return [[@doctodo return_type:parseRule]] [[@doctodo return_description:parseRule]]
+     */
     protected function parseRule($rule)
     {
         if (isset($rule['condition'])) {
@@ -53,6 +73,11 @@ class ActiveQuery extends \infinite\db\ActiveQuery
         }
     }
 
+    /**
+     * [[@doctodo method_description:buildLogic]].
+     *
+     * @return [[@doctodo return_type:buildLogic]] [[@doctodo return_description:buildLogic]]
+     */
     protected function buildLogic($field, $operator, $value = null)
     {
         $operatorMap = [
@@ -124,6 +149,11 @@ class ActiveQuery extends \infinite\db\ActiveQuery
         return false;
     }
 
+    /**
+     * [[@doctodo method_description:buildContainsQuery]].
+     *
+     * @return [[@doctodo return_type:buildContainsQuery]] [[@doctodo return_description:buildContainsQuery]]
+     */
     public function buildContainsQuery($queryString)
     {
         $queryString = trim($queryString);

@@ -16,7 +16,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
- * AppController [@doctodo write class description for AppController].
+ * AppController [[@doctodo class_description:cascade\controllers\AppController]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -74,7 +74,9 @@ class AppController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionIndex]].
      *
+     * @return [[@doctodo return_type:actionIndex]] [[@doctodo return_description:actionIndex]]
      */
     public function actionIndex()
     {
@@ -82,7 +84,9 @@ class AppController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionLogin]].
      *
+     * @return [[@doctodo return_type:actionLogin]] [[@doctodo return_description:actionLogin]]
      */
     public function actionLogin()
     {
@@ -101,7 +105,9 @@ class AppController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionLogout]].
      *
+     * @return [[@doctodo return_type:actionLogout]] [[@doctodo return_description:actionLogout]]
      */
     public function actionLogout()
     {
@@ -110,6 +116,9 @@ class AppController extends Controller
         return $this->goHome();
     }
 
+    /**
+     * [[@doctodo method_description:actionActivity]].
+     */
     public function actionActivity()
     {
         // Yii::$app->response->baseInstructions['timestamp'] = time();
@@ -126,7 +135,9 @@ class AppController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionRefresh]].
      *
+     * @return [[@doctodo return_type:actionRefresh]] [[@doctodo return_description:actionRefresh]]
      */
     public function actionRefresh()
     {
@@ -195,7 +206,9 @@ class AppController extends Controller
     }
 
     /**
+     * [[@doctodo method_description:actionStream]].
      *
+     * @return [[@doctodo return_type:actionStream]] [[@doctodo return_description:actionStream]]
      */
     public function actionStream()
     {

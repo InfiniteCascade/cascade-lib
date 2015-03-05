@@ -9,7 +9,7 @@
 namespace cascade\components\db\fields;
 
 /**
- * Model [@doctodo write class description for Model].
+ * Model [[@doctodo class_description:cascade\components\db\fields\Model]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

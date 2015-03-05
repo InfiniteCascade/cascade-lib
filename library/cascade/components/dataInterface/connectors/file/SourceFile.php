@@ -13,25 +13,61 @@ use infinite\helpers\Match;
 use Yii;
 
 /**
- * Meta [@doctodo write class description for Meta].
+ * SourceFile [[@doctodo class_description:cascade\components\dataInterface\connectors\file\SourceFile]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class SourceFile extends \infinite\base\Object
 {
+    /**
+     * @var [[@doctodo var_type:id]] [[@doctodo var_description:id]]
+     */
     public $id;
+    /**
+     * @var [[@doctodo var_type:url]] [[@doctodo var_description:url]]
+     */
     public $url;
+    /**
+     * @var [[@doctodo var_type:local]] [[@doctodo var_description:local]]
+     */
     public $local;
+    /**
+     * @var [[@doctodo var_type:skipLines]] [[@doctodo var_description:skipLines]]
+     */
     public $skipLines = 1;
+    /**
+     * @var [[@doctodo var_type:idColumn]] [[@doctodo var_description:idColumn]]
+     */
     public $idColumn = 'id';
+    /**
+     * @var [[@doctodo var_type:delimeter]] [[@doctodo var_description:delimeter]]
+     */
     public $delimeter = ',';
+    /**
+     * @var [[@doctodo var_type:excelSheetIndex]] [[@doctodo var_description:excelSheetIndex]]
+     */
     public $excelSheetIndex = 0;
+    /**
+     * @var [[@doctodo var_type:ignore]] [[@doctodo var_description:ignore]]
+     */
     public $ignore = [];
 
+    /**
+     * @var [[@doctodo var_type:_headers]] [[@doctodo var_description:_headers]]
+     */
     protected $_headers;
+    /**
+     * @var [[@doctodo var_type:_filePointer]] [[@doctodo var_description:_filePointer]]
+     */
     protected $_filePointer;
+    /**
+     * @var [[@doctodo var_type:_lines]] [[@doctodo var_description:_lines]]
+     */
     protected $_lines;
 
+    /**
+     * [[@doctodo method_description:__destruct]].
+     */
     public function __destruct()
     {
         if (!empty($this->_filePointer)) {
@@ -39,11 +75,22 @@ class SourceFile extends \infinite\base\Object
         }
     }
 
+    /**
+     * [[@doctodo method_description:clean]].
+     */
     public function clean()
     {
         $this->_lines = null;
     }
 
+    /**
+     * Get lines.
+     *
+     * @param boolean $lazy [[@doctodo param_description:lazy]] [optional]
+     * @param boolean $raw  [[@doctodo param_description:raw]] [optional]
+     *
+     * @return [[@doctodo return_type:getLines]] [[@doctodo return_description:getLines]]
+     */
     public function getLines($lazy = true, $raw = false)
     {
         if (is_null($this->_lines)) {
@@ -77,6 +124,11 @@ class SourceFile extends \infinite\base\Object
         return $this->_lines;
     }
 
+    /**
+     * [[@doctodo method_description:testIgnore]].
+     *
+     * @return [[@doctodo return_type:testIgnore]] [[@doctodo return_description:testIgnore]]
+     */
     public function testIgnore($line)
     {
         foreach ($this->ignore as $field => $test) {
@@ -98,6 +150,11 @@ class SourceFile extends \infinite\base\Object
         return false;
     }
 
+    /**
+     * [[@doctodo method_description:readLine]].
+     *
+     * @return [[@doctodo return_type:readLine]] [[@doctodo return_description:readLine]]
+     */
     public function readLine($line)
     {
         if (!$this->filePointer) {
@@ -115,6 +172,11 @@ class SourceFile extends \infinite\base\Object
         return false;
     }
 
+    /**
+     * Get file pointer.
+     *
+     * @return [[@doctodo return_type:getFilePointer]] [[@doctodo return_description:getFilePointer]]
+     */
     public function getFilePointer()
     {
         if (!isset($this->_filePointer)) {
@@ -150,6 +212,11 @@ class SourceFile extends \infinite\base\Object
         return $this->_filePointer;
     }
 
+    /**
+     * [[@doctodo method_description:normalizeFile]].
+     *
+     * @return [[@doctodo return_type:normalizeFile]] [[@doctodo return_description:normalizeFile]]
+     */
     public function normalizeFile($filepath)
     {
         $pathinfo = pathinfo($filepath);
@@ -170,6 +237,9 @@ class SourceFile extends \infinite\base\Object
         }
     }
 
+    /**
+     * [[@doctodo method_description:_loadExcel]].
+     */
     private function _loadExcel()
     {
         spl_autoload_unregister(['BaseYii', 'autoload']);
@@ -177,11 +247,23 @@ class SourceFile extends \infinite\base\Object
         require_once $path;
     }
 
+    /**
+     * [[@doctodo method_description:_unloadExcel]].
+     */
     private function _unloadExcel()
     {
         spl_autoload_register(['Yii', 'autoload']);
     }
 
+    /**
+     * [[@doctodo method_description:convertExcel]].
+     *
+     * @param string $filetype [[@doctodo param_description:filetype]] [optional]
+     *
+     * @throws \ [[@doctodo exception_description:\]]
+     * @return [[@doctodo return_type:convertExcel]] [[@doctodo return_description:convertExcel]]
+     *
+     */
     protected function convertExcel($filepath, $tmpfile, $filetype = 'Excel2007')
     {
         $this->_loadExcel();
@@ -212,6 +294,11 @@ class SourceFile extends \infinite\base\Object
         return $tmpfile;
     }
 
+    /**
+     * [[@doctodo method_description:downloadFile]].
+     *
+     * @return [[@doctodo return_type:downloadFile]] [[@doctodo return_description:downloadFile]]
+     */
     protected function downloadFile($url, $savePath)
     {
         echo "Download $url...\n";
@@ -238,6 +325,11 @@ class SourceFile extends \infinite\base\Object
         return $savePath;
     }
 
+    /**
+     * Get headers.
+     *
+     * @return [[@doctodo return_type:getHeaders]] [[@doctodo return_description:getHeaders]]
+     */
     public function getHeaders()
     {
         if (!isset($this->_headers)) {
@@ -250,6 +342,9 @@ class SourceFile extends \infinite\base\Object
         return $this->_headers;
     }
 
+    /**
+     * Set headers.
+     */
     public function setHeaders($headers)
     {
         $this->_headers = $headers;

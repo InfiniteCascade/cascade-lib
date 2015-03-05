@@ -12,7 +12,7 @@ use infinite\helpers\Html;
 use Yii;
 
 /**
- * SingleSection [@doctodo write class description for SingleSection].
+ * SingleSection [[@doctodo class_description:cascade\components\web\widgets\section\SingleSection]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -23,11 +23,14 @@ class SingleSection extends Section
      */
     public $section;
     /**
+     * @var [[@doctodo var_type:_singleWidget]] [[@doctodo var_description:_singleWidget]]
      */
     protected $_singleWidget;
 
     /**
      * Get cell.
+     *
+     * @return [[@doctodo return_type:getCell]] [[@doctodo return_description:getCell]]
      */
     public function getCell()
     {
@@ -43,6 +46,8 @@ class SingleSection extends Section
 
     /**
      * Get single widget.
+     *
+     * @return [[@doctodo return_type:getSingleWidget]] [[@doctodo return_description:getSingleWidget]]
      */
     public function getSingleWidget()
     {

@@ -9,7 +9,7 @@
 namespace cascade\components\web\browser;
 
 /**
- * Bundle [@doctodo write class description for Bundle].
+ * Bundle [[@doctodo class_description:cascade\components\web\browser\Bundle]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

@@ -16,13 +16,30 @@ use infinite\helpers\Date;
 use Yii;
 use yii\helpers\FileHelper;
 
+/**
+ * LocalHandler [[@doctodo class_description:cascade\components\storageHandlers\core\LocalHandler]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class LocalHandler extends \cascade\components\storageHandlers\Handler
     implements \cascade\components\storageHandlers\UploadInterface
 {
+    /**
+     * @var [[@doctodo var_type:localFileClass]] [[@doctodo var_description:localFileClass]]
+     */
     public $localFileClass = 'infinite\base\File';
+    /**
+     * @var [[@doctodo var_type:bucketFormat]] [[@doctodo var_description:bucketFormat]]
+     */
     public $bucketFormat = '{year}.{month}';
+    /**
+     * @var [[@doctodo var_type:_baseDir]] [[@doctodo var_description:_baseDir]]
+     */
     protected $_baseDir;
 
+    /**
+     * @inheritdoc
+     */
     public function beforeSetStorage($value)
     {
         if (is_array($value) && isset($value['tempName'])) {
@@ -44,6 +61,11 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         return $value;
     }
 
+    /**
+     * [[@doctodo method_description:buildKey]].
+     *
+     * @return [[@doctodo return_type:buildKey]] [[@doctodo return_description:buildKey]]
+     */
     public function buildKey()
     {
         $keyVariables = $this->keyVariables;
@@ -55,6 +77,11 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         return $keyParts;
     }
 
+    /**
+     * Get key variables.
+     *
+     * @return [[@doctodo return_type:getKeyVariables]] [[@doctodo return_description:getKeyVariables]]
+     */
     public function getKeyVariables()
     {
         $vars = [];
@@ -68,6 +95,9 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         return $vars;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function serve(Storage $storage)
     {
         $path = $this->getPath($storage);
@@ -79,11 +109,17 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function handleSave(Storage $storage, $model, $attribute)
     {
         return $this->handleUpload($storage, $model, $attribute);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function afterDelete(StorageEngine $engine, Storage $model)
     {
         $path = $this->getPath($model);
@@ -94,6 +130,13 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         return true;
     }
 
+    /**
+     * Get path.
+     *
+     * @param cascade\models\Storage $model [[@doctodo param_description:model]]
+     *
+     * @return [[@doctodo return_type:getPath]] [[@doctodo return_description:getPath]]
+     */
     public function getPath(Storage $model)
     {
         $baseKey = explode('.', $model->storage_key);
@@ -110,6 +153,13 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         return $dirPath . DIRECTORY_SEPARATOR . $model->primaryKey;
     }
 
+    /**
+     * [[@doctodo method_description:handleUpload]].
+     *
+     * @param cascade\models\Storage $storage [[@doctodo param_description:storage]]
+     *
+     * @return [[@doctodo return_type:handleUpload]] [[@doctodo return_description:handleUpload]]
+     */
     public function handleUpload(Storage $storage, $model, $attribute)
     {
         if (!($model->{$attribute} instanceof FileInterface)) {
@@ -141,6 +191,9 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         return false;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function validate(StorageEngine $engine, $model, $attribute)
     {
         $errorMessage = "No file was uploaded!";
@@ -158,6 +211,13 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         return false;
     }
 
+    /**
+     * Set base dir.
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
+     * @return [[@doctodo return_type:setBaseDir]] [[@doctodo return_description:setBaseDir]]
+     *
+     */
     public function setBaseDir($value)
     {
         $value = Yii::getAlias($value);
@@ -171,11 +231,19 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         return $this->_baseDir = $value;
     }
 
+    /**
+     * Get base dir.
+     *
+     * @return [[@doctodo return_type:getBaseDir]] [[@doctodo return_description:getBaseDir]]
+     */
     public function getBaseDir()
     {
         return $this->_baseDir;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function generateInternal($item)
     {
         return $item->fileInput();

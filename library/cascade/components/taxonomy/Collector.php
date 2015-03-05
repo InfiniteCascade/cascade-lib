@@ -12,7 +12,7 @@ use infinite\base\exceptions\Exception;
 use Yii;
 
 /**
- * Collector [@doctodo write class description for Collector].
+ * Collector [[@doctodo class_description:cascade\components\taxonomy\Collector]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -110,7 +110,9 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
+     * [[@doctodo method_description:initializeTaxonomies]].
      *
+     * @return [[@doctodo return_type:initializeTaxonomies]] [[@doctodo return_description:initializeTaxonomies]]
      */
     public function initializeTaxonomies($model, $taxonomies)
     {

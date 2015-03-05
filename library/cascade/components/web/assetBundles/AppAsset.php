@@ -11,7 +11,7 @@ namespace cascade\components\web\assetBundles;
 use yii\web\AssetBundle;
 
 /**
- * AppAsset [@doctodo write class description for AppAsset].
+ * AppAsset [[@doctodo class_description:cascade\components\web\assetBundles\AppAsset]].
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  *

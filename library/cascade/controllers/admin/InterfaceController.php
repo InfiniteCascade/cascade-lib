@@ -10,8 +10,16 @@ use infinite\web\Controller;
 use Yii;
 use yii\filters\AccessControl;
 
+/**
+ * InterfaceController [[@doctodo class_description:cascade\controllers\admin\InterfaceController]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class InterfaceController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -33,6 +41,9 @@ class InterfaceController extends Controller
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function actions()
     {
         return [
@@ -42,11 +53,22 @@ class InterfaceController extends Controller
         ];
     }
 
+    /**
+     * [[@doctodo method_description:actionIndex]].
+     */
     public function actionIndex()
     {
         Yii::$app->response->view = 'index';
     }
 
+    /**
+     * [[@doctodo method_description:actionRun]].
+     *
+     * @throws HttpException         [[@doctodo exception_description:HttpException]]
+     * @throws NotFoundHttpException [[@doctodo exception_description:NotFoundHttpException]]
+     * @return [[@doctodo return_type:actionRun]] [[@doctodo return_description:actionRun]]
+     *
+     */
     public function actionRun()
     {
         if (empty($_GET['id']) || !($dataInterface = DataInterface::get($_GET['id']))) {
@@ -78,6 +100,11 @@ class InterfaceController extends Controller
         Yii::$app->response->taskOptions = $deferredAction->package();
     }
 
+    /**
+     * [[@doctodo method_description:actionViewLogs]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     */
     public function actionViewLogs()
     {
         if (empty($_GET['id']) || !($dataInterface = DataInterface::get($_GET['id']))) {
@@ -87,6 +114,13 @@ class InterfaceController extends Controller
         Yii::$app->response->view = 'view_logs';
     }
 
+    /**
+     * [[@doctodo method_description:actionViewLog]].
+     *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
+     * @return [[@doctodo return_type:actionViewLog]] [[@doctodo return_description:actionViewLog]]
+     *
+     */
     public function actionViewLog()
     {
         if (empty($_GET['id']) || !($dataInterfaceLog = DataInterfaceLog::get($_GET['id']))) {

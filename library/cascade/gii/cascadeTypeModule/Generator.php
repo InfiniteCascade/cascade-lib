@@ -20,10 +20,8 @@ use yii\helpers\Html;
 use yii\helpers\Inflector;
 
 /**
- * Generator [@doctodo write class description for Generator].
- *
+ * Generator [[@doctodo class_description:cascade\gii\cascadeTypeModule\Generator]].
  /**
- * Generator [@doctodo write class description for Generator]
  *
  * This generator will generate the skeleton code needed for a
  *
@@ -47,61 +45,78 @@ use yii\helpers\Inflector;
 class Generator extends \yii\gii\Generator
 {
     /**
+     * @var [[@doctodo var_type:db]] [[@doctodo var_description:db]]
      */
     public $db = 'db';
     /**
+     * @var [[@doctodo var_type:moduleSet]] [[@doctodo var_description:moduleSet]]
      */
     public $moduleSet = '';
 
     //public $moduleName;
     /**
+     * @var [[@doctodo var_type:baseClass]] [[@doctodo var_description:baseClass]]
      */
     public $baseClass = 'cascade\components\types\ActiveRecord';
 
     /**
+     * @var [[@doctodo var_type:title]] [[@doctodo var_description:title]]
      */
     public $title;
     /**
+     * @var [[@doctodo var_type:uniparental]] [[@doctodo var_description:uniparental]]
      */
     public $uniparental = 0;
     /**
+     * @var [[@doctodo var_type:hasDashboard]] [[@doctodo var_description:hasDashboard]]
      */
     public $hasDashboard = 1;
     /**
+     * @var [[@doctodo var_type:priority]] [[@doctodo var_description:priority]]
      */
     public $priority = 1000;
     /**
+     * @var [[@doctodo var_type:icon]] [[@doctodo var_description:icon]]
      */
     public $icon;
 
     /**
+     * @var [[@doctodo var_type:widgets]] [[@doctodo var_description:widgets]]
      */
     public $widgets = [];
 
     /**
+     * @var [[@doctodo var_type:migrationTimestamp]] [[@doctodo var_description:migrationTimestamp]]
      */
     public $migrationTimestamp;
 
     /**
+     * @var [[@doctodo var_type:generateRelations]] [[@doctodo var_description:generateRelations]]
      */
     public $generateRelations = true;
     /**
+     * @var [[@doctodo var_type:generateLabelsFromComments]] [[@doctodo var_description:generateLabelsFromComments]]
      */
     public $generateLabelsFromComments = false;
 
     /**
+     * @var [[@doctodo var_type:tableName]] [[@doctodo var_description:tableName]]
      */
     public $tableName;
     /**
+     * @var [[@doctodo var_type:descriptorField]] [[@doctodo var_description:descriptorField]]
      */
     public $descriptorField;
     /**
+     * @var [[@doctodo var_type:children]] [[@doctodo var_description:children]]
      */
     public $children = '';
     /**
+     * @var [[@doctodo var_type:parents]] [[@doctodo var_description:parents]]
      */
     public $parents = '';
     /**
+     * @var [[@doctodo var_type:section]] [[@doctodo var_description:section]]
      */
     public $section;
 
@@ -119,6 +134,8 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get base namespace.
+     *
+     * @return [[@doctodo return_type:getBaseNamespace]] [[@doctodo return_description:getBaseNamespace]]
      */
     public function getBaseNamespace()
     {
@@ -134,6 +151,8 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get model class.
+     *
+     * @return [[@doctodo return_type:getModelClass]] [[@doctodo return_description:getModelClass]]
      */
     public function getModelClass()
     {
@@ -142,6 +161,8 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get module name.
+     *
+     * @return [[@doctodo return_type:getModuleName]] [[@doctodo return_description:getModuleName]]
      */
     public function getModuleName()
     {
@@ -150,6 +171,8 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get module namespace.
+     *
+     * @return [[@doctodo return_type:getModuleNamespace]] [[@doctodo return_description:getModuleNamespace]]
      */
     public function getModuleNamespace()
     {
@@ -158,6 +181,8 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get module class.
+     *
+     * @return [[@doctodo return_type:getModuleClass]] [[@doctodo return_description:getModuleClass]]
      */
     public function getModuleClass()
     {
@@ -166,6 +191,8 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get module i d.
+     *
+     * @return [[@doctodo return_type:getModuleID]] [[@doctodo return_description:getModuleID]]
      */
     public function getModuleID()
     {
@@ -174,6 +201,8 @@ class Generator extends \yii\gii\Generator
 
     /**
      * Get module system i d.
+     *
+     * @return [[@doctodo return_type:getModuleSystemID]] [[@doctodo return_description:getModuleSystemID]]
      */
     public function getModuleSystemID()
     {
@@ -183,6 +212,8 @@ class Generator extends \yii\gii\Generator
     // model
     /**
      * Get ns.
+     *
+     * @return [[@doctodo return_type:getNs]] [[@doctodo return_description:getNs]]
      */
     public function getNs()
     {
@@ -464,7 +495,9 @@ EOD;
     }
 
     /**
+     * [[@doctodo method_description:generateDescriptorField]].
      *
+     * @return [[@doctodo return_type:generateDescriptorField]] [[@doctodo return_description:generateDescriptorField]]
      */
     public function generateDescriptorField($table)
     {
@@ -489,7 +522,9 @@ EOD;
     }
 
     /**
+     * [[@doctodo method_description:possibleSections]].
      *
+     * @return [[@doctodo return_type:possibleSections]] [[@doctodo return_description:possibleSections]]
      */
     public function possibleSections()
     {
@@ -502,7 +537,9 @@ EOD;
     }
 
     /**
+     * [[@doctodo method_description:possibleModuleSets]].
      *
+     * @return [[@doctodo return_type:possibleModuleSets]] [[@doctodo return_description:possibleModuleSets]]
      */
     public function possibleModuleSets()
     {
@@ -522,7 +559,9 @@ EOD;
     }
 
     /**
+     * [[@doctodo method_description:possibleIcons]].
      *
+     * @return [[@doctodo return_type:possibleIcons]] [[@doctodo return_description:possibleIcons]]
      */
     public function possibleIcons()
     {
@@ -554,6 +593,8 @@ EOD;
 
     /**
      * Get module set path.
+     *
+     * @return [[@doctodo return_type:getModuleSetPath]] [[@doctodo return_description:getModuleSetPath]]
      */
     public function getModuleSetPath()
     {
@@ -592,6 +633,8 @@ EOD;
 
     /**
      * Get migration path.
+     *
+     * @return [[@doctodo return_type:getMigrationPath]] [[@doctodo return_description:getMigrationPath]]
      */
     public function getMigrationPath()
     {
@@ -600,6 +643,8 @@ EOD;
 
     /**
      * Get migration directory.
+     *
+     * @return [[@doctodo return_type:getMigrationDirectory]] [[@doctodo return_description:getMigrationDirectory]]
      */
     public function getMigrationDirectory()
     {
@@ -637,6 +682,8 @@ EOD;
      * Collects the foreign key column details for the given table.
      *
      * @param TableSchema $table the table metadata
+     *
+     * @return [[@doctodo return_type:findTableKeys]] [[@doctodo return_description:findTableKeys]]
      */
     protected function findTableKeys($table)
     {
@@ -691,6 +738,8 @@ EOD;
 
     /**
      * Get primary key location.
+     *
+     * @return [[@doctodo return_type:getPrimaryKeyLocation]] [[@doctodo return_description:getPrimaryKeyLocation]]
      */
     public function getPrimaryKeyLocation($table)
     {
@@ -709,7 +758,9 @@ EOD;
     }
 
     /**
+     * [[@doctodo method_description:generateTableIndices]].
      *
+     * @return [[@doctodo return_type:generateTableIndices]] [[@doctodo return_description:generateTableIndices]]
      */
     public function generateTableIndices($table)
     {
@@ -744,6 +795,8 @@ EOD;
 
     /**
      * Get module set modules.
+     *
+     * @return [[@doctodo return_type:getModuleSetModules]] [[@doctodo return_description:getModuleSetModules]]
      */
     public function getModuleSetModules()
     {
@@ -781,7 +834,9 @@ EOD;
     }
 
     /**
+     * [[@doctodo method_description:fixIndexName]].
      *
+     * @return [[@doctodo return_type:fixIndexName]] [[@doctodo return_description:fixIndexName]]
      */
     public function fixIndexName($name, $table, $keys)
     {
@@ -924,7 +979,9 @@ EOD;
     }
 
     /**
+     * [[@doctodo method_description:generateColumnSettings]].
      *
+     * @return [[@doctodo return_type:generateColumnSettings]] [[@doctodo return_description:generateColumnSettings]]
      */
     public function generateColumnSettings($table)
     {
@@ -1000,7 +1057,9 @@ EOD;
     }
 
     /**
+     * [[@doctodo method_description:generateRelationUses]].
      *
+     * @return [[@doctodo return_type:generateRelationUses]] [[@doctodo return_description:generateRelationUses]]
      */
     public function generateRelationUses($relations)
     {
@@ -1015,6 +1074,8 @@ EOD;
     }
 
     /**
+     * [[@doctodo method_description:generateRelations]].
+     *
      * @return array the generated relation declarations
      */
     protected function generateRelations()
@@ -1123,7 +1184,6 @@ EOD;
      * each referencing a column in a different table.
      *                       or false if the table is not a pivot table.
      *
-     *
      * @return array|boolean the relevant foreign key constraint information if the table is a pivot table,
      */
     protected function checkPivotTable($table)
@@ -1219,6 +1279,8 @@ EOD;
 
     /**
      * Validates the [[tableName]] attribute.
+     *
+     * @return [[@doctodo return_type:validateTableName]] [[@doctodo return_description:validateTableName]]
      */
     public function validateTableName()
     {
@@ -1242,9 +1304,11 @@ EOD;
     }
 
     /**
+     * @var [[@doctodo var_type:_tableNames]] [[@doctodo var_description:_tableNames]]
      */
     private $_tableNames;
     /**
+     * @var [[@doctodo var_type:_classNames]] [[@doctodo var_description:_classNames]]
      */
     private $_classNames;
 
@@ -1331,6 +1395,8 @@ EOD;
 
     /**
      * Get search models.
+     *
+     * @return [[@doctodo return_type:getSearchModels]] [[@doctodo return_description:getSearchModels]]
      */
     public function getSearchModels()
     {
@@ -1339,6 +1405,8 @@ EOD;
 
     /**
      * Get model map.
+     *
+     * @return [[@doctodo return_type:getModelMap]] [[@doctodo return_description:getModelMap]]
      */
     public function getModelMap()
     {

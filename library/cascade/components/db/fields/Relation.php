@@ -12,7 +12,7 @@ use cascade\models\Relation as RelationModel;
 use Yii;
 
 /**
- * Relation [@doctodo write class description for Relation].
+ * Relation [[@doctodo class_description:cascade\components\db\fields\Relation]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -27,29 +27,45 @@ class Relation extends Base
      */
     protected $_human = true;
     /**
+     * @var [[@doctodo var_type:_moduleHandler]] [[@doctodo var_description:_moduleHandler]]
      */
     protected $_moduleHandler;
     /**
+     * @var [[@doctodo var_type:relationship]] [[@doctodo var_description:relationship]]
      */
     public $relationship;
     /**
+     * @var [[@doctodo var_type:modelRole]] [[@doctodo var_description:modelRole]]
      */
     public $modelRole; // either parent or child
     /**
+     * @var [[@doctodo var_type:baseModel]] [[@doctodo var_description:baseModel]]
      */
     public $baseModel;
     /*
      */
+    /**
+     * @var [[@doctodo var_type:_moduleHandlers]] [[@doctodo var_description:_moduleHandlers]]
+     */
     public static $_moduleHandlers = [];
 
+    /**
+     * @var [[@doctodo var_type:_value]] [[@doctodo var_description:_value]]
+     */
     protected $_value;
 
+    /**
+     * @inheritdoc
+     */
     public function __clone()
     {
         parent::__clone();
         $this->baseModel = clone $this->baseModel;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
@@ -60,6 +76,10 @@ class Relation extends Base
 
     /**
      * Get value.
+     *
+     * @param boolean $createOnEmpty [[@doctodo param_description:createOnEmpty]] [optional]
+     *
+     * @return [[@doctodo return_type:getValue]] [[@doctodo return_description:getValue]]
      */
     public function getValue($createOnEmpty = true)
     {
@@ -88,6 +108,11 @@ class Relation extends Base
         return $this->_value;
     }
 
+    /**
+     * [[@doctodo method_description:parseRelationTaxonomy]].
+     *
+     * @return [[@doctodo return_type:parseRelationTaxonomy]] [[@doctodo return_description:parseRelationTaxonomy]]
+     */
     public function parseRelationTaxonomy($value)
     {
         if (!is_array($value)) {
@@ -110,6 +135,9 @@ class Relation extends Base
         return $value;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function resetModel()
     {
         $relationClass = Yii::$app->classes['Relation'];
@@ -120,6 +148,9 @@ class Relation extends Base
         return $this->_model;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getModel()
     {
         if (is_null($this->_model)) {
@@ -147,6 +178,8 @@ class Relation extends Base
 
     /**
      * Get companion.
+     *
+     * @return [[@doctodo return_type:getCompanion]] [[@doctodo return_description:getCompanion]]
      */
     public function getCompanion()
     {
@@ -158,6 +191,8 @@ class Relation extends Base
     }
     /**
      * Get module.
+     *
+     * @return [[@doctodo return_type:getModule]] [[@doctodo return_description:getModule]]
      */
     public function getModule()
     {
@@ -170,6 +205,8 @@ class Relation extends Base
 
     /**
      * Get module handler.
+     *
+     * @return [[@doctodo return_type:getModuleHandler]] [[@doctodo return_description:getModuleHandler]]
      */
     public function getModuleHandler()
     {
@@ -196,6 +233,8 @@ class Relation extends Base
 
     /**
      * Get companion field.
+     *
+     * @return [[@doctodo return_type:getCompanionField]] [[@doctodo return_description:getCompanionField]]
      */
     public function getCompanionField()
     {
@@ -220,6 +259,9 @@ class Relation extends Base
         return [self::LOCATION_HIDDEN];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getLabel()
     {
         if (isset($this->baseModel)) {
@@ -232,6 +274,9 @@ class Relation extends Base
         return $this->relationship->getLabel($this->modelRole);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFilterSettings()
     {
         return false;

@@ -9,7 +9,7 @@
 namespace cascade\components\dataInterface;
 
 /**
- * MissingItemException [@doctodo write class description for MissingItemException].
+ * MissingItemException [[@doctodo class_description:cascade\components\dataInterface\MissingItemException]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

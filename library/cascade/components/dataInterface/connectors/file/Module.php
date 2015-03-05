@@ -13,28 +13,42 @@ use Yii;
 use yii\helpers\Inflector;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\components\dataInterface\connectors\file\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Module extends BaseModule
 {
+    /**
+     * @var [[@doctodo var_type:_sourceFiles]] [[@doctodo var_description:_sourceFiles]]
+     */
     protected $_sourceFiles = [];
     /**
+     * @var [[@doctodo var_type:dataSourceClass]] [[@doctodo var_description:dataSourceClass]]
      */
     public $dataSourceClass = 'cascade\components\dataInterface\connectors\file\DataSource';
+    /**
+     * @var [[@doctodo var_type:sourceFileClass]] [[@doctodo var_description:sourceFileClass]]
+     */
     public $sourceFileClass = 'cascade\components\dataInterface\connectors\file\SourceFile';
 
     /**
+     * @var [[@doctodo var_type:_dataSources]] [[@doctodo var_description:_dataSources]]
      */
     protected $_dataSources;
 
+    /**
+     * @inheritdoc
+     */
     public function beforeRun()
     {
         //\d($this->dataSources);exit;
         return true;
     }
 
+    /**
+     * Set source files.
+     */
     public function setSourceFiles($value)
     {
         foreach ($value as $key => $settings) {
@@ -50,15 +64,28 @@ abstract class Module extends BaseModule
         }
     }
 
+    /**
+     * Get source files.
+     *
+     * @return [[@doctodo return_type:getSourceFiles]] [[@doctodo return_description:getSourceFiles]]
+     */
     public function getSourceFiles()
     {
         return $this->_sourceFiles;
     }
 
+    /**
+     * [[@doctodo method_description:loadForeignModels]].
+     */
     public function loadForeignModels()
     {
     }
 
+    /**
+     * [[@doctodo method_description:packageNode]].
+     *
+     * @return [[@doctodo return_type:packageNode]] [[@doctodo return_description:packageNode]]
+     */
     public function packageNode($ous, $node)
     {
         $attributes = $node->getAttributes();
@@ -93,6 +120,11 @@ abstract class Module extends BaseModule
         return $p;
     }
 
+    /**
+     * Get foreign models config.
+     *
+     * @return [[@doctodo return_type:getForeignModelsConfig]] [[@doctodo return_description:getForeignModelsConfig]]
+     */
     public function getForeignModelsConfig()
     {
         return [];
@@ -100,6 +132,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model config.
+     *
+     * @return [[@doctodo return_type:getForeignModelConfig]] [[@doctodo return_description:getForeignModelConfig]]
      */
     public function getForeignModelConfig($sourceFile, $modelName)
     {
@@ -116,6 +150,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model name.
+     *
+     * @return [[@doctodo return_type:getForeignModelName]] [[@doctodo return_description:getForeignModelName]]
      */
     public function getForeignModelName($tableName)
     {
@@ -124,6 +160,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model.
+     *
+     * @return [[@doctodo return_type:getForeignModel]] [[@doctodo return_description:getForeignModel]]
      */
     public function getForeignModel($model)
     {
@@ -137,6 +175,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign models.
+     *
+     * @return [[@doctodo return_type:getForeignModels]] [[@doctodo return_description:getForeignModels]]
      */
     public function getForeignModels()
     {
@@ -151,6 +191,9 @@ abstract class Module extends BaseModule
         return $this->_models;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getForeignObject($foreignModelClass, $foreignPrimaryKey)
     {
         \d($foreignPrimaryKey);

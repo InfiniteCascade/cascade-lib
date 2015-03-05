@@ -11,13 +11,19 @@ namespace cascade\components\dataInterface\connectors\file;
 use cascade\components\dataInterface\RecursionException;
 
 /**
- * DataItem [@doctodo write class description for DataItem].
+ * DataItem [[@doctodo class_description:cascade\components\dataInterface\connectors\file\DataItem]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class DataItem extends \cascade\components\dataInterface\connectors\generic\DataItem
 {
+    /**
+     * @var [[@doctodo var_type:deferredModel]] [[@doctodo var_description:deferredModel]]
+     */
     public $deferredModel;
+    /**
+     * @inheritdoc
+     */
     public function getId()
     {
         if ($this->isForeign) {
@@ -41,7 +47,7 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-     *
+     * [[@doctodo method_description:fillRelationConfig]].
      */
     protected function fillRelationConfig(&$config, $otherObject)
     {
@@ -67,7 +73,9 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
+     * [[@doctodo method_description:loadForeignObject]].
      *
+     * @throws RecursionException [[@doctodo exception_description:RecursionException]]
      */
     protected function loadForeignObject()
     {
@@ -82,7 +90,9 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
+     * [[@doctodo method_description:loadLocalObject]].
      *
+     * @throws RecursionException [[@doctodo exception_description:RecursionException]]
      */
     protected function loadLocalObject()
     {

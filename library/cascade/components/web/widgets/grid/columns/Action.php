@@ -9,7 +9,7 @@
 namespace cascade\components\web\widgets\grid\columns;
 
 /**
- * Action [@doctodo write class description for Action].
+ * Action [[@doctodo class_description:cascade\components\web\widgets\grid\columns\Action]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

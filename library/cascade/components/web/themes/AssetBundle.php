@@ -11,14 +11,16 @@ namespace cascade\components\web\themes;
 use yii\imagine\Image;
 
 /**
- * AssetBundle [@doctodo write class description for AssetBundle].
+ * AssetBundle [[@doctodo class_description:cascade\components\web\themes\AssetBundle]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class AssetBundle extends \yii\web\AssetBundle
 {
     /**
+     * [[@doctodo method_description:sizeImageCache]].
      *
+     * @return [[@doctodo return_type:sizeImageCache]] [[@doctodo return_description:sizeImageCache]]
      */
     public function sizeImageCache($imagePath, $size)
     {
@@ -47,7 +49,9 @@ class AssetBundle extends \yii\web\AssetBundle
     }
 
     /**
+     * [[@doctodo method_description:followResizeInstructions]].
      *
+     * @return [[@doctodo return_type:followResizeInstructions]] [[@doctodo return_description:followResizeInstructions]]
      */
     protected function followResizeInstructions($imagePath, $resize)
     {
@@ -73,6 +77,8 @@ class AssetBundle extends \yii\web\AssetBundle
 
     /**
      * Get cache path.
+     *
+     * @return [[@doctodo return_type:getCachePath]] [[@doctodo return_description:getCachePath]]
      */
     public function getCachePath()
     {
@@ -92,6 +98,8 @@ class AssetBundle extends \yii\web\AssetBundle
 
     /**
      * Get cache url.
+     *
+     * @return [[@doctodo return_type:getCacheUrl]] [[@doctodo return_description:getCacheUrl]]
      */
     public function getCacheUrl()
     {
@@ -105,6 +113,8 @@ class AssetBundle extends \yii\web\AssetBundle
 
     /**
      * Get cache asset url.
+     *
+     * @return [[@doctodo return_type:getCacheAssetUrl]] [[@doctodo return_description:getCacheAssetUrl]]
      */
     public function getCacheAssetUrl($path)
     {

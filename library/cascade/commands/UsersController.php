@@ -13,13 +13,14 @@ use cascade\models\User;
 use yii\helpers\Console;
 
 /**
- * UsersController [@doctodo write class description for UsersController].
+ * UsersController [[@doctodo class_description:cascade\commands\UsersController]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class UsersController extends \infinite\console\Controller
 {
     /**
+     * [[@doctodo method_description:actionIndex]].
      */
     public function actionIndex()
     {
@@ -27,6 +28,7 @@ class UsersController extends \infinite\console\Controller
     }
 
     /**
+     * [[@doctodo method_description:actionCreate]].
      */
     public function actionCreate()
     {

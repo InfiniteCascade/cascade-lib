@@ -9,7 +9,7 @@
 namespace cascade\components\dataInterface;
 
 /**
- * Status [@doctodo write class description for Status].
+ * Task [[@doctodo class_description:cascade\components\dataInterface\Task]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

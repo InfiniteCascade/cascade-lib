@@ -9,7 +9,7 @@
 namespace cascade\components\web\form;
 
 /**
- * FormObject [@doctodo write class description for FormObject].
+ * FormObject [[@doctodo class_description:cascade\components\web\form\FormObject]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

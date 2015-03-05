@@ -9,7 +9,7 @@
 namespace cascade\components\web\themes;
 
 /**
- * Exception [@doctodo write class description for Exception].
+ * Exception [[@doctodo class_description:cascade\components\web\themes\Exception]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

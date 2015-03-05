@@ -14,18 +14,21 @@ use Yii;
 use yii\base\InvalidConfigException;
 
 /**
- * HandlerTypes [@doctodo write class description for HandlerTypes].
+ * HandlerTypes [[@doctodo class_description:cascade\components\web\browser\HandlerTypes]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class HandlerTypes extends \infinite\web\browser\Handler
 {
     /**
+     * @var [[@doctodo var_type:bundleClass]] [[@doctodo var_description:bundleClass]]
      */
     public $bundleClass = 'cascade\components\web\browser\Bundle';
 
     /**
+     * [[@doctodo method_description:possibleTypes]].
      *
+     * @return [[@doctodo return_type:possibleTypes]] [[@doctodo return_description:possibleTypes]]
      */
     public static function possibleTypes($topType, $goodTypes)
     {
@@ -43,7 +46,11 @@ class HandlerTypes extends \infinite\web\browser\Handler
     }
 
     /**
+     * [[@doctodo method_description:descendantHas]].
      *
+     * @param integer $depth [[@doctodo param_description:depth]] [optional]
+     *
+     * @return [[@doctodo return_type:descendantHas]] [[@doctodo return_description:descendantHas]]
      */
     public static function descendantHas($topType, $goodTypes, $depth = 3)
     {

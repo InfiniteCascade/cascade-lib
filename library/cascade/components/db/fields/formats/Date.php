@@ -11,7 +11,7 @@ namespace cascade\components\db\fields\formats;
 use Yii;
 
 /**
- * Date [@doctodo write class description for Date].
+ * Date [[@doctodo class_description:cascade\components\db\fields\formats\Date]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

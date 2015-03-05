@@ -14,25 +14,29 @@ use Yii;
 use yii\helpers\Inflector;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\components\dataInterface\connectors\db\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Module extends BaseModule
 {
     /**
+     * @var [[@doctodo var_type:dataSourceClass]] [[@doctodo var_description:dataSourceClass]]
      */
     public $dataSourceClass = 'cascade\components\dataInterface\connectors\db\DataSource';
 
     /**
+     * @var [[@doctodo var_type:dbConfig]] [[@doctodo var_description:dbConfig]]
      */
     public $dbConfig = [];
 
     /**
+     * @var [[@doctodo var_type:_db]] [[@doctodo var_description:_db]]
      */
     protected $_db;
 
     /**
+     * [[@doctodo method_description:dataSources]].
      */
     abstract public function dataSources();
 
@@ -48,6 +52,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get data source.
+     *
+     * @return [[@doctodo return_type:getDataSource]] [[@doctodo return_description:getDataSource]]
      */
     public function getDataSource($tableName)
     {
@@ -66,6 +72,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign object.
+     *
+     * @return [[@doctodo return_type:getForeignObject]] [[@doctodo return_description:getForeignObject]]
      */
     public function getForeignObject($foreignModelClass, $foreignPrimaryKey)
     {
@@ -79,6 +87,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model.
+     *
+     * @return [[@doctodo return_type:getForeignModel]] [[@doctodo return_description:getForeignModel]]
      */
     public function getForeignModel($model)
     {
@@ -92,6 +102,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign models config.
+     *
+     * @return [[@doctodo return_type:getForeignModelsConfig]] [[@doctodo return_description:getForeignModelsConfig]]
      */
     public function getForeignModelsConfig()
     {
@@ -100,6 +112,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model config.
+     *
+     * @return [[@doctodo return_type:getForeignModelConfig]] [[@doctodo return_description:getForeignModelConfig]]
      */
     public function getForeignModelConfig($tableName, $modelName)
     {
@@ -116,6 +130,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model name.
+     *
+     * @return [[@doctodo return_type:getForeignModelName]] [[@doctodo return_description:getForeignModelName]]
      */
     public function getForeignModelName($tableName)
     {
@@ -124,6 +140,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign models.
+     *
+     * @return [[@doctodo return_type:getForeignModels]] [[@doctodo return_description:getForeignModels]]
      */
     public function getForeignModels()
     {
@@ -140,6 +158,10 @@ abstract class Module extends BaseModule
 
     /**
      * Get db.
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
+     * @return [[@doctodo return_type:getDb]] [[@doctodo return_description:getDb]]
+     *
      */
     public function getDb()
     {

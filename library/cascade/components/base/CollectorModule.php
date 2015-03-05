@@ -13,7 +13,7 @@ use infinite\base\exceptions\Exception;
 use Yii;
 
 /**
- * CollectorModule [@doctodo write class description for CollectorModule].
+ * CollectorModule [[@doctodo class_description:cascade\components\base\CollectorModule]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -21,6 +21,13 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
 {
     use CollectedObjectTrait;
 
+    /**
+     * Prepares object for serialization.
+     *
+     * @throws \ [[@doctodo exception_description:\]]
+     * @return [[@doctodo return_type:__sleep]] [[@doctodo return_description:__sleep]]
+     *
+     */
     public function __sleep()
     {
         $keys = array_keys((array) $this);
@@ -32,12 +39,20 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
         return $keys;
     }
 
+    /**
+     * [[@doctodo method_description:__wakeup]].
+     */
     public function __wakeup()
     {
         $this->module = Yii::$app;
         $this->always();
     }
 
+    /**
+     * [[@doctodo method_description:always]].
+     *
+     * @return [[@doctodo return_type:always]] [[@doctodo return_description:always]]
+     */
     public function always()
     {
         return true;
@@ -75,7 +90,9 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     }
 
     /**
+     * [[@doctodo method_description:loadSubmodules]].
      *
+     * @return [[@doctodo return_type:loadSubmodules]] [[@doctodo return_description:loadSubmodules]]
      */
     public function loadSubmodules()
     {
@@ -91,6 +108,8 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
 
     /**
      * Get submodules.
+     *
+     * @return [[@doctodo return_type:getSubmodules]] [[@doctodo return_description:getSubmodules]]
      */
     public function getSubmodules()
     {
@@ -98,7 +117,9 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     }
 
     /**
+     * [[@doctodo method_description:onAfterInit]].
      *
+     * @return [[@doctodo return_type:onAfterInit]] [[@doctodo return_description:onAfterInit]]
      */
     public function onAfterInit($event)
     {

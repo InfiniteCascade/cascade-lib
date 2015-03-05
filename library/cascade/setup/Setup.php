@@ -9,7 +9,7 @@
 namespace cascade\setup;
 
 /**
- * Setup [@doctodo write class description for Setup].
+ * Setup [[@doctodo class_description:cascade\setup\Setup]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

@@ -9,7 +9,6 @@
 namespace cascade\setup\tasks;
 
 /**
- * Task_000006_acl [@doctodo write class description for Task_000006_acl].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

@@ -13,7 +13,7 @@ use infinite\helpers\Html;
 use Yii;
 
 /**
- * Section [@doctodo write class description for Section].
+ * Section [[@doctodo class_description:cascade\components\web\widgets\section\Section]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -24,6 +24,7 @@ class Section extends \cascade\components\web\widgets\Widget
      */
     public $gridClass = 'infinite\web\grid\Grid';
     /**
+     * @var [[@doctodo var_type:defaultWidgetDecoratorClass]] [[@doctodo var_description:defaultWidgetDecoratorClass]]
      */
     public $defaultWidgetDecoratorClass = 'cascade\components\web\widgets\decorator\PanelDecorator';
     /**
@@ -48,6 +49,8 @@ class Section extends \cascade\components\web\widgets\Widget
 
     /**
      * Get widget decorator class.
+     *
+     * @return [[@doctodo return_type:getWidgetDecoratorClass]] [[@doctodo return_description:getWidgetDecoratorClass]]
      */
     public function getWidgetDecoratorClass()
     {
@@ -55,7 +58,9 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
+     * [[@doctodo method_description:generateStart]].
      *
+     * @return [[@doctodo return_type:generateStart]] [[@doctodo return_description:generateStart]]
      */
     public function generateStart()
     {
@@ -67,7 +72,9 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
+     * [[@doctodo method_description:widgetCellSettings]].
      *
+     * @return [[@doctodo return_type:widgetCellSettings]] [[@doctodo return_description:widgetCellSettings]]
      */
     public function widgetCellSettings()
     {
@@ -101,6 +108,8 @@ class Section extends \cascade\components\web\widgets\Widget
 
     /**
      * Get widgets.
+     *
+     * @return [[@doctodo return_type:getWidgets]] [[@doctodo return_description:getWidgets]]
      */
     public function getWidgets()
     {
@@ -111,7 +120,9 @@ class Section extends \cascade\components\web\widgets\Widget
     }
 
     /**
+     * [[@doctodo method_description:defaultItems]].
      *
+     * @return [[@doctodo return_type:defaultItems]] [[@doctodo return_description:defaultItems]]
      */
     public function defaultItems($parent = null)
     {

@@ -13,36 +13,50 @@ use infinite\helpers\ArrayHelper;
 use infinite\helpers\Console;
 
 /**
- * Search [@doctodo write class description for Search].
+ * Search [[@doctodo class_description:cascade\components\dataInterface\Search]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Search extends \infinite\base\Component
 {
     /**
+     * @var [[@doctodo var_type:interactive]] [[@doctodo var_description:interactive]]
      */
     public static $interactive = true;
     /**
+     * @var [[@doctodo var_type:threshold]] [[@doctodo var_description:threshold]]
      */
     public $threshold = 50;
     /**
+     * @var [[@doctodo var_type:autoadjust]] [[@doctodo var_description:autoadjust]]
      */
     public $autoadjust = 1.5;
     /**
+     * @var [[@doctodo var_type:dataSource]] [[@doctodo var_description:dataSource]]
      */
     public $dataSource;
 
+    /**
+     * @var [[@doctodo var_type:foreignFilter]] [[@doctodo var_description:foreignFilter]]
+     */
     public $foreignFilter;
 
     /**
+     * @var [[@doctodo var_type:_localFields]] [[@doctodo var_description:_localFields]]
      */
     protected $_localFields;
     /**
+     * @var [[@doctodo var_type:_foreignFields]] [[@doctodo var_description:_foreignFields]]
      */
     protected $_foreignFields = [];
 
     /**
+     * [[@doctodo method_description:searchLocal]].
      *
+     * @param cascade\components\dataInterface\DataItem $item         [[@doctodo param_description:item]]
+     * @param array                                     $searchParams [[@doctodo param_description:searchParams]] [optional]
+     *
+     * @return [[@doctodo return_type:searchLocal]] [[@doctodo return_description:searchLocal]]
      */
     public function searchLocal(DataItem $item, $searchParams = [])
     {
@@ -156,7 +170,11 @@ class Search extends \infinite\base\Component
     }
 
     /**
+     * [[@doctodo method_description:searchForeign]].
      *
+     * @param cascade\components\dataInterface\DataItem $item [[@doctodo param_description:item]]
+     *
+     * @return [[@doctodo return_type:searchForeign]] [[@doctodo return_description:searchForeign]]
      */
     public function searchForeign(DataItem $item)
     {
@@ -173,6 +191,8 @@ class Search extends \infinite\base\Component
 
     /**
      * Get local fields.
+     *
+     * @return [[@doctodo return_type:getLocalFields]] [[@doctodo return_description:getLocalFields]]
      */
     public function getLocalFields()
     {
@@ -189,6 +209,8 @@ class Search extends \infinite\base\Component
 
     /**
      * Get foreign fields.
+     *
+     * @return [[@doctodo return_type:getForeignFields]] [[@doctodo return_description:getForeignFields]]
      */
     public function getForeignFields()
     {
@@ -197,6 +219,8 @@ class Search extends \infinite\base\Component
 
     /**
      * Get module.
+     *
+     * @return [[@doctodo return_type:getModule]] [[@doctodo return_description:getModule]]
      */
     public function getModule()
     {

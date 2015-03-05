@@ -11,7 +11,7 @@ namespace cascade\components\dataInterface\connectors\db;
 use infinite\helpers\ArrayHelper;
 
 /**
- * DataSource [@doctodo write class description for DataSource].
+ * DataSource [[@doctodo class_description:cascade\components\dataInterface\connectors\db\DataSource]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -30,10 +30,15 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
      */
     public $searchClass = 'cascade\components\dataInterface\connectors\db\Search';
 
+    /**
+     * @inheritdoc
+     */
     public $keys = ['id' => 'primaryKey'];
 
     /**
      * Get foreign data model.
+     *
+     * @return [[@doctodo return_type:getForeignDataModel]] [[@doctodo return_description:getForeignDataModel]]
      */
     public function getForeignDataModel($key)
     {
@@ -52,6 +57,8 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
 
     /**
      * Get unmapped foreign keys.
+     *
+     * @return [[@doctodo return_type:getUnmappedForeignKeys]] [[@doctodo return_description:getUnmappedForeignKeys]]
      */
     public function getUnmappedForeignKeys()
     {
@@ -63,6 +70,7 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     }
 
     /**
+     * [[@doctodo method_description:loadForeignDataItems]].
      */
     protected function loadForeignDataItems()
     {

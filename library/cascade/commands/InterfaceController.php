@@ -17,19 +17,22 @@ use yii\console\Exception;
 ini_set('memory_limit', -1);
 
 /**
- * InterfaceController [@doctodo write class description for InterfaceController].
+ * InterfaceController [[@doctodo class_description:cascade\commands\InterfaceController]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class InterfaceController extends \infinite\console\Controller
 {
     /**
+     * @var [[@doctodo var_type:_interface]] [[@doctodo var_description:_interface]]
      */
     protected $_interface;
     /**
+     * @var [[@doctodo var_type:verbose]] [[@doctodo var_description:verbose]]
      */
     public $verbose;
     /**
+     * [[@doctodo method_description:actionIndex]].
      */
     public function actionIndex()
     {
@@ -37,6 +40,7 @@ class InterfaceController extends \infinite\console\Controller
     }
 
     /**
+     * [[@doctodo method_description:actionRunOne]].
      */
     public function actionRunOne()
     {
@@ -47,6 +51,8 @@ class InterfaceController extends \infinite\console\Controller
 
     /**
      * Get interface.
+     *
+     * @return [[@doctodo return_type:getDataInterface]] [[@doctodo return_description:getDataInterface]]
      */
     public function getDataInterface()
     {
@@ -63,6 +69,8 @@ class InterfaceController extends \infinite\console\Controller
 
     /**
      * Set interface.
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
      */
     public function setDataInterface($value)
     {

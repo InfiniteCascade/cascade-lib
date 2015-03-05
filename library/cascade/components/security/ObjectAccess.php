@@ -11,13 +11,14 @@ namespace cascade\components\security;
 use Yii;
 
 /**
- * ObjectAccess [@doctodo write class description for ObjectAccess].
+ * ObjectAccess [[@doctodo class_description:cascade\components\security\ObjectAccess]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class ObjectAccess extends \infinite\security\ObjectAccess
 {
     /**
+     * @var [[@doctodo var_type:specialAuthorities]] [[@doctodo var_description:specialAuthorities]]
      */
     public $specialAuthorities = ['Group'];
 

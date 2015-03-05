@@ -15,8 +15,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /**
- * TopNavBar [@doctodo write class description for TopNavBar].
- *
+ * TopNavBar [[@doctodo class_description:cascade\components\web\bootstrap\TopNavBar]]
  * NavBar renders a navbar HTML component.
  *
  * Any content enclosed between the [[begin()]] and [[end()]] calls of NavBar
@@ -48,12 +47,10 @@ class TopNavBar extends Widget
 {
     /**
      * @var array the HTML attributes for the widget container tag. The following special options are recognized:
-
      */
     public $options = [];
     /**
      * @var array the HTML attributes for the container tag. The following special options are recognized:
-
      */
     public $containerOptions = [];
     /**
@@ -61,6 +58,7 @@ class TopNavBar extends Widget
      */
     public $brandLabel;
     /**
+     * @var [[@doctodo var_type:brandUrl]] [[@doctodo var_description:brandUrl]]
      */
     public $brandUrl;
     /**

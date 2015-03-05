@@ -18,76 +18,98 @@ use Yii;
 use yii\base\Controller;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\components\types\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Module extends \cascade\components\base\CollectorModule
 {
     /**
+     * @var [[@doctodo var_type:_title]] [[@doctodo var_description:_title]]
      */
     protected $_title;
     /**
+     * @var [[@doctodo var_type:version]] [[@doctodo var_description:version]]
      */
     public $version = 1;
 
     /**
+     * @var [[@doctodo var_type:objectSubInfo]] [[@doctodo var_description:objectSubInfo]]
      */
     public $objectSubInfo = [];
     /**
+     * @var [[@doctodo var_type:icon]] [[@doctodo var_description:icon]]
      */
     public $icon = 'ic-icon-info';
     /**
+     * @var [[@doctodo var_type:priority]] [[@doctodo var_description:priority]]
      */
     public $priority = 1000; //lower is better
 
     /**
+     * @var [[@doctodo var_type:hasDashboard]] [[@doctodo var_description:hasDashboard]]
      */
     public $hasDashboard = true;
     /**
+     * @var [[@doctodo var_type:uniparental]] [[@doctodo var_description:uniparental]]
      */
     public $uniparental = false;
 
     /**
+     * @var [[@doctodo var_type:searchWeight]] [[@doctodo var_description:searchWeight]]
      */
     public $searchWeight = 1; // overall weight of item in search results
     /**
+     * @var [[@doctodo var_type:childSearchWeight]] [[@doctodo var_description:childSearchWeight]]
      */
     public $childSearchWeight = false; // weight when a child of a searchable object
     /**
+     * @var [[@doctodo var_type:parentSearchWeight]] [[@doctodo var_description:parentSearchWeight]]
      */
     public $parentSearchWeight = false; // weight when a parent of a searchable object
 
+    /**
+     * @var [[@doctodo var_type:enableApiAccess]] [[@doctodo var_description:enableApiAccess]]
+     */
     public $enableApiAccess = true;
 
     /**
+     * @var [[@doctodo var_type:sectionName]] [[@doctodo var_description:sectionName]]
      */
     public $sectionName;
 
     /**
+     * @var [[@doctodo var_type:widgetNamespace]] [[@doctodo var_description:widgetNamespace]]
      */
     public $widgetNamespace;
     /**
+     * @var [[@doctodo var_type:modelNamespace]] [[@doctodo var_description:modelNamespace]]
      */
     public $modelNamespace;
 
     /**
+     * @var [[@doctodo var_type:formGeneratorClass]] [[@doctodo var_description:formGeneratorClass]]
      */
     public $formGeneratorClass = 'cascade\components\web\form\Generator';
     /**
+     * @var [[@doctodo var_type:sectionItemClass]] [[@doctodo var_description:sectionItemClass]]
      */
     public $sectionItemClass = 'cascade\components\section\Item';
     /**
+     * @var [[@doctodo var_type:sectionWidgetClass]] [[@doctodo var_description:sectionWidgetClass]]
      */
     public $sectionWidgetClass = 'cascade\components\web\widgets\section\Section';
     /**
+     * @var [[@doctodo var_type:sectionSingleWidgetClass]] [[@doctodo var_description:sectionSingleWidgetClass]]
      */
     public $sectionSingleWidgetClass = 'cascade\components\web\widgets\section\SingleSection';
     /**
+     * @var [[@doctodo var_type:fallbackDetailsWidgetClass]] [[@doctodo var_description:fallbackDetailsWidgetClass]]
      */
     public $fallbackDetailsWidgetClass = 'cascade\components\web\widgets\base\Details';
 
     /**
+     * @var [[@doctodo var_type:_objectTypeModel]] [[@doctodo var_description:_objectTypeModel]]
      */
     protected $_objectTypeModel;
 
@@ -96,6 +118,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     const EVENT_VIEW_OBJECT = 'onViewObject';
 
     /**
+     * @var [[@doctodo var_type:_disabledFields]] [[@doctodo var_description:_disabledFields]]
      */
     protected $_disabledFields;
 
@@ -109,6 +132,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
         parent::init();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function always()
     {
         parent::always();
@@ -126,10 +152,14 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:onBeforeControllerAction]].
+     *
      * @param unknown $controller
      * @param unknown $action
      *
+     * @throws HttpException [[@doctodo exception_description:HttpException]]
      * @return unknown
+     *
      */
     public function onBeforeControllerAction($controller, $action)
     {
@@ -157,6 +187,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return parent::onAfterInit($event);
     }
 
+    /**
+     * Get page meta.
+     *
+     * @return [[@doctodo return_type:getPageMeta]] [[@doctodo return_description:getPageMeta]]
+     */
     public function getPageMeta()
     {
         $m = [];
@@ -168,6 +203,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return $m;
     }
 
+    /**
+     * Get related type.
+     *
+     * @return [[@doctodo return_type:getRelatedType]] [[@doctodo return_description:getRelatedType]]
+     */
     public function getRelatedType($name)
     {
         list($relationship, $role) = $this->getRelationship($name);
@@ -178,6 +218,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return false;
     }
 
+    /**
+     * Get relationship.
+     *
+     * @return [[@doctodo return_type:getRelationship]] [[@doctodo return_description:getRelationship]]
+     */
     public function getRelationship($name)
     {
         $parts = explode(':', $name);
@@ -198,7 +243,11 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:subactionHandle]].
      *
+     * @param cascade\components\web\ObjectViewEvent $event [[@doctodo param_description:event]]
+     *
+     * @return [[@doctodo return_type:subactionHandle]] [[@doctodo return_description:subactionHandle]]
      */
     public function subactionHandle(ObjectViewEvent $event)
     {
@@ -218,7 +267,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:subactions]].
      *
+     * @return [[@doctodo return_type:subactions]] [[@doctodo return_description:subactions]]
      */
     public function subactions()
     {
@@ -227,6 +278,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Set up.
+     *
+     * @return [[@doctodo return_type:setup]] [[@doctodo return_description:setup]]
      */
     public function setup()
     {
@@ -249,6 +302,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get inherit parent access.
+     *
+     * @return [[@doctodo return_type:getInheritParentAccess]] [[@doctodo return_description:getInheritParentAccess]]
      */
     public function getInheritParentAccess()
     {
@@ -256,7 +311,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:determineOwner]].
      *
+     * @return [[@doctodo return_type:determineOwner]] [[@doctodo return_description:determineOwner]]
      */
     public function determineOwner($object)
     {
@@ -276,6 +333,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get role help text.
+     *
+     * @return [[@doctodo return_type:getRoleHelpText]] [[@doctodo return_description:getRoleHelpText]]
      */
     public function getRoleHelpText($roleItem, $object = null)
     {
@@ -301,7 +360,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:determineAccessLevel]].
      *
+     * @return [[@doctodo return_type:determineAccessLevel]] [[@doctodo return_description:determineAccessLevel]]
      */
     public function determineAccessLevel($object, $role, $aro = null)
     {
@@ -328,17 +389,33 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get action map.
+     *
+     * @return [[@doctodo return_type:getActionMap]] [[@doctodo return_description:getActionMap]]
      */
     public function getActionMap($controlledObject = null)
     {
         return [];
     }
 
+    /**
+     * Get primary as child.
+     *
+     * @param cascade\components\types\Module $parent [[@doctodo param_description:parent]]
+     *
+     * @return [[@doctodo return_type:getPrimaryAsChild]] [[@doctodo return_description:getPrimaryAsChild]]
+     */
     public function getPrimaryAsChild(Module $parent)
     {
         return false;
     }
 
+    /**
+     * Get primary as parent.
+     *
+     * @param cascade\components\types\Module $child [[@doctodo param_description:child]]
+     *
+     * @return [[@doctodo return_type:getPrimaryAsParent]] [[@doctodo return_description:getPrimaryAsParent]]
+     */
     public function getPrimaryAsParent(Module $child)
     {
         return false;
@@ -346,6 +423,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get disabled fields.
+     *
+     * @return [[@doctodo return_type:getDisabledFields]] [[@doctodo return_description:getDisabledFields]]
      */
     public function getDisabledFields()
     {
@@ -366,6 +445,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get primary model.
+     *
+     * @return [[@doctodo return_type:getPrimaryModel]] [[@doctodo return_description:getPrimaryModel]]
      */
     public function getPrimaryModel()
     {
@@ -380,22 +461,39 @@ abstract class Module extends \cascade\components\base\CollectorModule
         return 'Type';
     }
 
+    /**
+     * Get insert verb.
+     *
+     * @return [[@doctodo return_type:getInsertVerb]] [[@doctodo return_description:getInsertVerb]]
+     */
     public function getInsertVerb($object)
     {
         return;
     }
 
+    /**
+     * Get update verb.
+     *
+     * @return [[@doctodo return_type:getUpdateVerb]] [[@doctodo return_description:getUpdateVerb]]
+     */
     public function getUpdateVerb($object)
     {
         return;
     }
+    /**
+     * Get delete verb.
+     *
+     * @return [[@doctodo return_type:getDeleteVerb]] [[@doctodo return_description:getDeleteVerb]]
+     */
     public function getDeleteVerb($object)
     {
         return;
     }
 
     /**
+     * [[@doctodo method_description:upgrade]].
      *
+     * @return [[@doctodo return_type:upgrade]] [[@doctodo return_description:upgrade]]
      */
     public function upgrade($from)
     {
@@ -404,6 +502,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get creator role.
+     *
+     * @return [[@doctodo return_type:getCreatorRole]] [[@doctodo return_description:getCreatorRole]]
      */
     public function getCreatorRole()
     {
@@ -412,6 +512,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get role validation settings.
+     *
+     * @return [[@doctodo return_type:getRoleValidationSettings]] [[@doctodo return_description:getRoleValidationSettings]]
      */
     public function getRoleValidationSettings($object = null)
     {
@@ -423,6 +525,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get possible roles.
+     *
+     * @return [[@doctodo return_type:getPossibleRoles]] [[@doctodo return_description:getPossibleRoles]]
      */
     public function getPossibleRoles()
     {
@@ -444,6 +548,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get required roles.
+     *
+     * @return [[@doctodo return_type:getRequiredRoles]] [[@doctodo return_description:getRequiredRoles]]
      */
     public function getRequiredRoles()
     {
@@ -465,6 +571,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get initial role.
+     *
+     * @return [[@doctodo return_type:getInitialRole]] [[@doctodo return_description:getInitialRole]]
      */
     public function getInitialRole()
     {
@@ -481,6 +589,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get is ownable.
+     *
+     * @return [[@doctodo return_type:getIsOwnable]] [[@doctodo return_description:getIsOwnable]]
      */
     public function getIsOwnable()
     {
@@ -489,6 +599,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get owner object.
+     *
+     * @return [[@doctodo return_type:getOwnerObject]] [[@doctodo return_description:getOwnerObject]]
      */
     public function getOwnerObject()
     {
@@ -497,6 +609,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get owner.
+     *
+     * @return [[@doctodo return_type:getOwner]] [[@doctodo return_description:getOwner]]
      */
     public function getOwner()
     {
@@ -513,6 +627,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get object type model.
+     *
+     * @return [[@doctodo return_type:getObjectTypeModel]] [[@doctodo return_description:getObjectTypeModel]]
      */
     public function getObjectTypeModel()
     {
@@ -531,7 +647,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
         $this->_objectTypeModel = $model;
     }
     /**
+     * [[@doctodo method_description:search]].
+     *
      * @param unknown $term
+     * @param array   $params [[@doctodo param_description:params]] [optional]
      *
      * @return unknown
      */
@@ -549,6 +668,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get object level.
+     *
+     * @return [[@doctodo return_type:getObjectLevel]] [[@doctodo return_description:getObjectLevel]]
      */
     public function getObjectLevel()
     {
@@ -654,6 +775,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get details widget.
+     *
+     * @return [[@doctodo return_type:getDetailsWidget]] [[@doctodo return_description:getDetailsWidget]]
      */
     public function getDetailsWidget($objectModel = null)
     {
@@ -688,6 +811,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get details section.
+     *
+     * @return [[@doctodo return_type:getDetailsSection]] [[@doctodo return_description:getDetailsSection]]
      */
     public function getDetailsSection()
     {
@@ -695,7 +820,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:widgets]].
      *
+     * @return [[@doctodo return_type:widgets]] [[@doctodo return_description:widgets]]
      */
     public function widgets()
     {
@@ -779,7 +906,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:loadFieldLink]].
      *
+     * @param boolean $typeMatch [[@doctodo param_description:typeMatch]] [optional]
      */
     public function loadFieldLink($field, $object, $typeMatch = true)
     {
@@ -794,6 +923,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:taxonomies]].
+     *
      * @return unknown
      */
     public function taxonomies()
@@ -802,6 +933,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:roles]].
+     *
      * @return unknown
      */
     public function roles()
@@ -810,6 +943,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:dependencies]].
+     *
      * @return unknown
      */
     public function dependencies()
@@ -818,6 +953,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:parents]].
+     *
      * @return unknown
      */
     public function parents()
@@ -840,6 +977,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:childrenSettings]].
+     *
      * @return unknown
      */
     public function childrenSettings()
@@ -850,6 +989,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
 
     /**
+     * [[@doctodo method_description:children]].
+     *
      * @return unknown
      */
     public function children()
@@ -859,6 +1000,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get dummy model.
+     *
+     * @return [[@doctodo return_type:getDummyModel]] [[@doctodo return_description:getDummyModel]]
      */
     public function getDummyModel()
     {
@@ -872,6 +1015,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get is childless.
+     *
+     * @return [[@doctodo return_type:getIsChildless]] [[@doctodo return_description:getIsChildless]]
      */
     public function getIsChildless()
     {
@@ -885,6 +1030,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * Get model.
      *
+     * @param boolean $input [[@doctodo param_description:input]] [optional]
      *
      * @return unknown
      */
@@ -918,6 +1064,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * Get form.
      *
+     * @param boolean $primaryModel [[@doctodo param_description:primaryModel]] [optional]
+     * @param array   $settings     [[@doctodo param_description:settings]] [optional]
      *
      * @return unknown
      */
@@ -934,6 +1082,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get form segment.
+     *
+     * @param array $settings [[@doctodo param_description:settings]] [optional]
+     *
+     * @return [[@doctodo return_type:getFormSegment]] [[@doctodo return_description:getFormSegment]]
      */
     public function getFormSegment($primaryModel = null, $settings = [])
     {

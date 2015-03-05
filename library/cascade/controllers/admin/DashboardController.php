@@ -6,8 +6,16 @@ use infinite\web\Controller;
 use Yii;
 use yii\filters\AccessControl;
 
+/**
+ * DashboardController [[@doctodo class_description:cascade\controllers\admin\DashboardController]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class DashboardController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -29,6 +37,9 @@ class DashboardController extends Controller
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function actions()
     {
         return [
@@ -38,11 +49,19 @@ class DashboardController extends Controller
         ];
     }
 
+    /**
+     * [[@doctodo method_description:actionIndex]].
+     */
     public function actionIndex()
     {
         Yii::$app->response->view = 'index';
     }
 
+    /**
+     * [[@doctodo method_description:actionTasks]].
+     *
+     * @return [[@doctodo return_type:actionTasks]] [[@doctodo return_description:actionTasks]]
+     */
     public function actionTasks()
     {
         $tasks = $this->params['tasks'] = $this->getTasks();
@@ -61,6 +80,11 @@ class DashboardController extends Controller
         Yii::$app->response->view = 'tasks';
     }
 
+    /**
+     * Get tasks.
+     *
+     * @return [[@doctodo return_type:getTasks]] [[@doctodo return_description:getTasks]]
+     */
     protected function getTasks()
     {
         $tasks = [];

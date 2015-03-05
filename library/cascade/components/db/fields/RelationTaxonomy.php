@@ -11,19 +11,24 @@ namespace cascade\components\db\fields;
 use cascade\components\db\fields\formats\RawText;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy].
+ * RelationTaxonomy [[@doctodo class_description:cascade\components\db\fields\RelationTaxonomy]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class RelationTaxonomy extends Base
 {
+    /**
+     * @var [[@doctodo var_type:fieldName]] [[@doctodo var_description:fieldName]]
+     */
     public $fieldName;
 
     /**
+     * @var [[@doctodo var_type:human]] [[@doctodo var_description:human]]
      */
     public $human = false;
 
     /**
+     * @var [[@doctodo var_type:multiline]] [[@doctodo var_description:multiline]]
      */
     public $multiline = false;
 
@@ -51,11 +56,17 @@ class RelationTaxonomy extends Base
         return false;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function determineFormatClass()
     {
         return RawText::className();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFilterSettings()
     {
         return false;

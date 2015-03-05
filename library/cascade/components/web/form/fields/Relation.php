@@ -13,29 +13,42 @@ use infinite\helpers\Html;
 use Yii;
 
 /**
- * Relation [@doctodo write class description for Relation].
+ * Relation [[@doctodo class_description:cascade\components\web\form\fields\Relation]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Relation extends Base
 {
     /**
+     * @var [[@doctodo var_type:relationSettings]] [[@doctodo var_description:relationSettings]]
      */
     public $relationSettings = true;
+    /**
+     * @var [[@doctodo var_type:lockFields]] [[@doctodo var_description:lockFields]]
+     */
     public $lockFields = [];
     /**
+     * @var [[@doctodo var_type:inlineRelation]] [[@doctodo var_description:inlineRelation]]
      */
     public $inlineRelation = false;
     /**
+     * @var [[@doctodo var_type:linkMultiple]] [[@doctodo var_description:linkMultiple]]
      */
     public $linkMultiple = false;
 
+    /**
+     * Get related object.
+     *
+     * @return [[@doctodo return_type:getRelatedObject]] [[@doctodo return_description:getRelatedObject]]
+     */
     public function getRelatedObject()
     {
         return $this->modelField->value;
     }
 
     /**
+     * [[@doctodo method_description:generate]].
+     *
      * @return unknown
      */
     public function generate()
@@ -74,6 +87,8 @@ class Relation extends Base
 
     /**
      * Get relation model field.
+     *
+     * @return [[@doctodo return_type:getRelationModelField]] [[@doctodo return_description:getRelationModelField]]
      */
     public function getRelationModelField()
     {
@@ -88,7 +103,11 @@ class Relation extends Base
     }
 
     /**
+     * [[@doctodo method_description:generateRelationField]].
      *
+     * @param array $initialSettings [[@doctodo param_description:initialSettings]] [optional]
+     *
+     * @return [[@doctodo return_type:generateRelationField]] [[@doctodo return_description:generateRelationField]]
      */
     protected function generateRelationField($initialSettings = [])
     {

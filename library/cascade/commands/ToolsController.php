@@ -14,13 +14,14 @@ use yii\helpers\Console;
 use yii\helpers\FileHelper;
 
 /**
- * ToolsController [@doctodo write class description for ToolsController].
+ * ToolsController [[@doctodo class_description:cascade\commands\ToolsController]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class ToolsController extends \infinite\console\Controller
 {
     /**
+     * [[@doctodo method_description:actionFlush]].
      */
     public function actionFlush($category = null)
     {
@@ -109,6 +110,8 @@ class ToolsController extends \infinite\console\Controller
 
     /**
      * [[@doctodo method_description:fixFile]].
+     *
+     * @return [[@doctodo return_type:fixFile]] [[@doctodo return_description:fixFile]]
      */
     public function fixFile($file)
     {
@@ -127,6 +130,11 @@ class ToolsController extends \infinite\console\Controller
         return $changed;
     }
 
+    /**
+     * [[@doctodo method_description:fixDocBlockPlaceholder]].
+     *
+     * @return [[@doctodo return_type:fixDocBlockPlaceholder]] [[@doctodo return_description:fixDocBlockPlaceholder]]
+     */
     public function fixDocBlockPlaceholder($file, &$contents)
     {
         $changed = false;
@@ -145,6 +153,8 @@ class ToolsController extends \infinite\console\Controller
 
     /**
      * [[@doctodo method_description:fixFileSlashes]].
+     *
+     * @return [[@doctodo return_type:fixFileSlashes]] [[@doctodo return_description:fixFileSlashes]]
      */
     public function fixFileSlashes($file, &$contents)
     {

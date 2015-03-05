@@ -9,42 +9,61 @@
 namespace cascade\components\dataInterface;
 
 /**
- * FieldMap [@doctodo write class description for FieldMap].
+ * FieldMap [[@doctodo class_description:cascade\components\dataInterface\FieldMap]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class FieldMap extends \infinite\base\Object
 {
     /**
+     * @var [[@doctodo var_type:dataSource]] [[@doctodo var_description:dataSource]]
      */
     public $dataSource;
 
     /**
+     * @var [[@doctodo var_type:localField]] [[@doctodo var_description:localField]]
      */
     public $localField = false;
     /**
+     * @var [[@doctodo var_type:foreignField]] [[@doctodo var_description:foreignField]]
      */
     public $foreignField = false;
     /**
+     * @var [[@doctodo var_type:foreignModel]] [[@doctodo var_description:foreignModel]]
      */
     public $foreignModel = false;
     /**
+     * @var [[@doctodo var_type:searchFields]] [[@doctodo var_description:searchFields]]
      */
     public $searchFields;
     /**
+     * @var [[@doctodo var_type:value]] [[@doctodo var_description:value]]
      */
     public $value;
     /**
+     * @var [[@doctodo var_type:filter]] [[@doctodo var_description:filter]]
      */
     public $filter;
     /**
+     * @var [[@doctodo var_type:taxonomy]] [[@doctodo var_description:taxonomy]]
      */
     public $taxonomy;
 
+    /**
+     * @var [[@doctodo var_type:mute]] [[@doctodo var_description:mute]]
+     */
     public $mute = [];
 
+    /**
+     * @var [[@doctodo var_type:ignore]] [[@doctodo var_description:ignore]]
+     */
     public $ignore = [];
 
+    /**
+     * [[@doctodo method_description:testIgnore]].
+     *
+     * @return [[@doctodo return_type:testIgnore]] [[@doctodo return_description:testIgnore]]
+     */
     public function testIgnore($value)
     {
         if (is_array($value)) {
@@ -84,7 +103,9 @@ class FieldMap extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:extractValue]].
      *
+     * @return [[@doctodo return_type:extractValue]] [[@doctodo return_description:extractValue]]
      */
     public function extractValue($caller, $foreignModel = null, $localModel = null)
     {

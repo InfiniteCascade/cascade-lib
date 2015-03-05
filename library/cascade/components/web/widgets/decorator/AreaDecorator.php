@@ -11,19 +11,22 @@ namespace cascade\components\web\widgets\decorator;
 use infinite\helpers\Html;
 
 /**
- * AreaDecorator [@doctodo write class description for AreaDecorator].
+ * AreaDecorator [[@doctodo class_description:cascade\components\web\widgets\decorator\AreaDecorator]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class AreaDecorator extends Decorator
 {
     /**
+     * @var [[@doctodo var_type:panelCssClass]] [[@doctodo var_description:panelCssClass]]
      */
     public $panelCssClass = 'panel';
     /**
+     * @var [[@doctodo var_type:panelStateCssClass]] [[@doctodo var_description:panelStateCssClass]]
      */
     public $panelStateCssClass = 'panel-default';
     /**
+     * @var [[@doctodo var_type:gridCellClass]] [[@doctodo var_description:gridCellClass]]
      */
     public $gridCellClass = 'infinite\web\grid\Cell';
 
@@ -39,7 +42,9 @@ class AreaDecorator extends Decorator
     }
 
     /**
+     * [[@doctodo method_description:generateHeader]].
      *
+     * @return [[@doctodo return_type:generateHeader]] [[@doctodo return_description:generateHeader]]
      */
     public function generateHeader()
     {
@@ -50,7 +55,9 @@ class AreaDecorator extends Decorator
     }
 
     /**
+     * [[@doctodo method_description:generateFooter]].
      *
+     * @return [[@doctodo return_type:generateFooter]] [[@doctodo return_description:generateFooter]]
      */
     public function generateFooter()
     {
@@ -62,6 +69,8 @@ class AreaDecorator extends Decorator
 
     /**
      * Get panel title.
+     *
+     * @return [[@doctodo return_type:getPanelTitle]] [[@doctodo return_description:getPanelTitle]]
      */
     public function getPanelTitle()
     {

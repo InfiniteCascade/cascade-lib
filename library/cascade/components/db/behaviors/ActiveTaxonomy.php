@@ -11,26 +11,31 @@ namespace cascade\components\db\behaviors;
 use Yii;
 
 /**
- * Taxonomy [@doctodo write class description for Taxonomy].
+ * ActiveTaxonomy [[@doctodo class_description:cascade\components\db\behaviors\ActiveTaxonomy]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
 {
     /**
+     * @var [[@doctodo var_type:viaModelClass]] [[@doctodo var_description:viaModelClass]]
      */
     public $viaModelClass = 'ObjectTaxonomy';
     /**
+     * @var [[@doctodo var_type:relationKey]] [[@doctodo var_description:relationKey]]
      */
     public $relationKey = 'object_id';
     /**
+     * @var [[@doctodo var_type:taxonomyKey]] [[@doctodo var_description:taxonomyKey]]
      */
     public $taxonomyKey = 'taxonomy_id';
 
     /**
+     * @var [[@doctodo var_type:_taxonomy_id]] [[@doctodo var_description:_taxonomy_id]]
      */
     protected $_taxonomy_id;
     /**
+     * @var [[@doctodo var_type:_current_taxonomy_id]] [[@doctodo var_description:_current_taxonomy_id]]
      */
     protected $_current_taxonomy_id;
 
@@ -54,7 +59,7 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     *
+     * [[@doctodo method_description:afterSave]].
      */
     public function afterSave($event)
     {
@@ -112,7 +117,9 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:_currentTaxonomies]].
      *
+     * @return [[@doctodo return_type:_currentTaxonomies]] [[@doctodo return_description:_currentTaxonomies]]
      */
     public function _currentTaxonomies()
     {
@@ -127,6 +134,8 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get taxonomy.
+     *
+     * @return [[@doctodo return_type:getTaxonomy_id]] [[@doctodo return_description:getTaxonomy_id]]
      */
     public function getTaxonomy_id()
     {

@@ -13,16 +13,18 @@ use Yii;
 use yii\web\Application;
 
 /**
- * Request [@doctodo write class description for Request].
+ * Request [[@doctodo class_description:cascade\components\web\Request]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Request extends \infinite\web\Request
 {
     /**
+     * @var [[@doctodo var_type:_object]] [[@doctodo var_description:_object]]
      */
     protected $_object;
     /**
+     * @var [[@doctodo var_type:_previousObject]] [[@doctodo var_description:_previousObject]]
      */
     protected $_previousObject;
 
@@ -36,6 +38,7 @@ class Request extends \infinite\web\Request
     }
 
     /**
+     * [[@doctodo method_description:startRequest]].
      */
     public function startRequest()
     {
@@ -54,6 +57,8 @@ class Request extends \infinite\web\Request
 
     /**
      * Get object.
+     *
+     * @return [[@doctodo return_type:getObject]] [[@doctodo return_description:getObject]]
      */
     public function getObject()
     {
@@ -62,6 +67,8 @@ class Request extends \infinite\web\Request
 
     /**
      * Get previous object.
+     *
+     * @return [[@doctodo return_type:getPreviousObject]] [[@doctodo return_description:getPreviousObject]]
      */
     public function getPreviousObject()
     {

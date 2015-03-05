@@ -9,7 +9,7 @@
 namespace cascade\modules\ThemeCascade\components;
 
 /**
- * IdentityAsset [@doctodo write class description for IdentityAsset].
+ * IdentityAsset [[@doctodo class_description:cascade\modules\ThemeCascade\components\IdentityAsset]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

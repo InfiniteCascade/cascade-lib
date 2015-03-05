@@ -9,7 +9,7 @@
 namespace cascade\components\web\widgets\decorator;
 
 /**
- * EmbeddedDecorator [@doctodo write class description for EmbeddedDecorator].
+ * EmbeddedDecorator [[@doctodo class_description:cascade\components\web\widgets\decorator\EmbeddedDecorator]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

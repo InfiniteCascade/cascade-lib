@@ -16,30 +16,54 @@ use yii\helpers\Url;
 use yii\imagine\Image;
 
 /**
- * Roleable [@doctodo write class description for Roleable].
+ * Photo [[@doctodo class_description:cascade\components\db\behaviors\Photo]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Photo extends \cascade\components\storageHandlers\StorageBehavior
 {
+    /**
+     * @inheritdoc
+     */
     public $storageAttribute = 'photo_storage_id';
+    /**
+     * @inheritdoc
+     */
     public $required = false;
 
+    /**
+     * [[@doctodo method_description:badFields]].
+     *
+     * @return [[@doctodo return_type:badFields]] [[@doctodo return_description:badFields]]
+     */
     public function badFields()
     {
         return [$this->storageAttribute];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function safeAttributes()
     {
         return ['rawPhoto', 'photo'];
     }
 
+    /**
+     * Set photo.
+     *
+     * @return [[@doctodo return_type:setPhoto]] [[@doctodo return_description:setPhoto]]
+     */
     public function setPhoto($photo)
     {
         return $this->setStorage($photo);
     }
 
+    /**
+     * Set raw photo.
+     *
+     * @return [[@doctodo return_type:setRawPhoto]] [[@doctodo return_description:setRawPhoto]]
+     */
     public function setRawPhoto($photo)
     {
         if (empty($photo)) {
@@ -52,16 +76,29 @@ class Photo extends \cascade\components\storageHandlers\StorageBehavior
         return $this->setStorage($photo);
     }
 
+    /**
+     * Get raw photo.
+     *
+     * @return [[@doctodo return_type:getRawPhoto]] [[@doctodo return_description:getRawPhoto]]
+     */
     public function getRawPhoto()
     {
         return $this->getStorage();
     }
 
+    /**
+     * Get photo.
+     *
+     * @return [[@doctodo return_type:getPhoto]] [[@doctodo return_description:getPhoto]]
+     */
     public function getPhoto()
     {
         return $this->getStorage();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function beforeValidate($event)
     {
         if (!parent::beforeValidate($event)) {
@@ -71,6 +108,13 @@ class Photo extends \cascade\components\storageHandlers\StorageBehavior
         return true;
     }
 
+    /**
+     * Get photo url.
+     *
+     * @param integer $size [[@doctodo param_description:size]] [optional]
+     *
+     * @return [[@doctodo return_type:getPhotoUrl]] [[@doctodo return_description:getPhotoUrl]]
+     */
     public function getPhotoUrl($size = 200)
     {
         $storage = $this->storageObject;
@@ -90,6 +134,9 @@ class Photo extends \cascade\components\storageHandlers\StorageBehavior
         return false;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function serve($options = [])
     {
         if (empty($options)) {
@@ -155,6 +202,11 @@ class Photo extends \cascade\components\storageHandlers\StorageBehavior
         return true;
     }
 
+    /**
+     * Get photo email.
+     *
+     * @return [[@doctodo return_type:getPhotoEmail]] [[@doctodo return_description:getPhotoEmail]]
+     */
     public function getPhotoEmail()
     {
         return false;

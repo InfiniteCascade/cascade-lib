@@ -12,7 +12,7 @@ use infinite\base\collector\CollectedObjectInterface;
 use infinite\base\collector\CollectedObjectTrait;
 
 /**
- * Item [@doctodo write class description for Item].
+ * Item [[@doctodo class_description:cascade\components\section\Item]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

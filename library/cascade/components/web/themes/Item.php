@@ -9,7 +9,7 @@
 namespace cascade\components\web\themes;
 
 /**
- * Item [@doctodo write class description for Item].
+ * Item [[@doctodo class_description:cascade\components\web\themes\Item]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

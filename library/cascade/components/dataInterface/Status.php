@@ -9,11 +9,14 @@
 namespace cascade\components\dataInterface;
 
 /**
- * Status [@doctodo write class description for Status].
+ * Status [[@doctodo class_description:cascade\components\dataInterface\Status]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Status extends \infinite\action\Status
 {
+  /**
+   * @inheritdoc
+   */
   public $linearTasks = false;
 }

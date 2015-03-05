@@ -9,16 +9,18 @@
 namespace cascade\components\web\themes;
 
 /**
- * Module [@doctodo write class description for Module].
+ * Module [[@doctodo class_description:cascade\components\web\themes\Module]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Module extends \cascade\components\base\CollectorModule
 {
     /**
+     * @var [[@doctodo var_type:name]] [[@doctodo var_description:name]]
      */
     public $name;
     /**
+     * @var [[@doctodo var_type:version]] [[@doctodo var_description:version]]
      */
     public $version = 1;
 
@@ -45,6 +47,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get asset bundles.
+     *
+     * @return [[@doctodo return_type:getAssetBundles]] [[@doctodo return_description:getAssetBundles]]
      */
     public function getAssetBundles()
     {

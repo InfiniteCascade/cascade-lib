@@ -11,7 +11,7 @@ namespace cascade\components\db\behaviors;
 use Yii;
 
 /**
- * ActiveAccess [@doctodo write class description for ActiveAccess].
+ * ActiveAccess [[@doctodo class_description:cascade\components\db\behaviors\ActiveAccess]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

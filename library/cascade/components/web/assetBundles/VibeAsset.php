@@ -11,7 +11,7 @@ namespace cascade\components\web\assetBundles;
 use yii\web\AssetBundle;
 
 /**
- * BootstrapTypeaheadAsset [@doctodo write class description for BootstrapTypeaheadAsset].
+ * VibeAsset [[@doctodo class_description:cascade\components\web\assetBundles\VibeAsset]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

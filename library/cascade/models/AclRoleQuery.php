@@ -12,7 +12,7 @@ use infinite\db\ActiveQuery;
 use infinite\db\Query;
 
 /**
- * AclRoleQuery [@doctodo write class description for AclRoleQuery].
+ * AclRoleQuery [[@doctodo class_description:cascade\models\AclRoleQuery]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -28,7 +28,7 @@ class AclRoleQuery extends ActiveQuery
     }
 
     /**
-     *
+     * [[@doctodo method_description:prioritizeNonType]].
      */
     public function prioritizeNonType($event = null)
     {

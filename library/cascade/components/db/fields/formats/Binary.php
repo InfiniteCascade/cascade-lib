@@ -8,6 +8,11 @@
 
 namespace cascade\components\db\fields\formats;
 
+/**
+ * Binary [[@doctodo class_description:cascade\components\db\fields\formats\Binary]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class Binary extends Base
 {
     /**

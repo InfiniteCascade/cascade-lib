@@ -3,6 +3,11 @@ namespace cascade\components\rest;
 
 use Yii;
 
+/**
+ * Action [[@doctodo class_description:cascade\components\rest\Action]].
+ *
+ * @author Jacob Morrison <email@ofjacob.com>
+ */
 class Action extends \yii\rest\Action
 {
     use ActionTrait;

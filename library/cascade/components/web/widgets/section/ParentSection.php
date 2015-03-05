@@ -9,7 +9,7 @@
 namespace cascade\components\web\widgets\section;
 
 /**
- * ParentSection [@doctodo write class description for ParentSection].
+ * ParentSection [[@doctodo class_description:cascade\components\web\widgets\section\ParentSection]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -38,7 +38,9 @@ class ParentSection extends Section
     }
 
     /**
+     * [[@doctodo method_description:isSingle]].
      *
+     * @return [[@doctodo return_type:isSingle]] [[@doctodo return_description:isSingle]]
      */
     public function isSingle()
     {

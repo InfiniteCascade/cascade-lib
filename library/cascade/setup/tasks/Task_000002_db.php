@@ -11,7 +11,6 @@ namespace cascade\setup\tasks;
 use infinite\setup\Exception;
 
 /**
- * Task_000002_db [@doctodo write class description for Task_000002_db].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

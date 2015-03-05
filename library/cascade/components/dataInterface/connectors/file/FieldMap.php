@@ -9,7 +9,7 @@
 namespace cascade\components\dataInterface\connectors\file;
 
 /**
- * FieldMap [@doctodo write class description for FieldMap].
+ * FieldMap [[@doctodo class_description:cascade\components\dataInterface\connectors\file\FieldMap]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

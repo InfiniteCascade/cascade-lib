@@ -11,7 +11,7 @@ namespace cascade\components\helpers;
 use Yii;
 
 /**
- * StringHelper [@doctodo write class description for StringHelper].
+ * StringHelper [[@doctodo class_description:cascade\components\helpers\StringHelper]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -19,6 +19,9 @@ class StringHelper extends \infinite\helpers\StringHelper
 {
     /*
     * @inheritdoc
+     */
+    /**
+     * @inheritdoc
      */
     public static function parseInstructions()
     {

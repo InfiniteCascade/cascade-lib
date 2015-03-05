@@ -12,14 +12,14 @@ use cascade\components\dataInterface\MissingItemException;
 use cascade\components\dataInterface\RecursionException;
 
 /**
- * DataItem [@doctodo write class description for DataItem].
+ * DataItem [[@doctodo class_description:cascade\components\dataInterface\connectors\db\DataItem]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class DataItem extends \cascade\components\dataInterface\connectors\generic\DataItem
 {
     /**
-     *
+     * [[@doctodo method_description:fillRelationConfig]].
      */
     protected function fillRelationConfig(&$config, $otherObject)
     {
@@ -45,7 +45,10 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
+     * [[@doctodo method_description:loadForeignObject]].
      *
+     * @throws RecursionException   [[@doctodo exception_description:RecursionException]]
+     * @throws MissingItemException [[@doctodo exception_description:MissingItemException]]
      */
     protected function loadForeignObject()
     {
@@ -68,7 +71,9 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
+     * [[@doctodo method_description:loadLocalObject]].
      *
+     * @throws RecursionException [[@doctodo exception_description:RecursionException]]
      */
     protected function loadLocalObject()
     {

@@ -13,7 +13,7 @@ use infinite\base\exceptions\Exception;
 use Yii;
 
 /**
- * Relationship [@doctodo write class description for Relationship].
+ * Relationship [[@doctodo class_description:cascade\components\types\Relationship]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -25,15 +25,19 @@ class Relationship extends \infinite\base\Object
     const ROLE_CHILD = 0x04;
 
     /**
+     * @var [[@doctodo var_type:_parent]] [[@doctodo var_description:_parent]]
      */
     protected $_parent;
     /**
+     * @var [[@doctodo var_type:_child]] [[@doctodo var_description:_child]]
      */
     protected $_child;
     /**
+     * @var [[@doctodo var_type:_cache]] [[@doctodo var_description:_cache]]
      */
     protected static $_cache = [];
     /**
+     * @var [[@doctodo var_type:_defaultOptions]] [[@doctodo var_description:_defaultOptions]]
      */
     protected $_defaultOptions = [
         'required' => false,
@@ -45,19 +49,26 @@ class Relationship extends \infinite\base\Object
         'parentInherit' => false,
     ];
     /**
+     * @var [[@doctodo var_type:_options]] [[@doctodo var_description:_options]]
      */
     protected $_options = [];
     /**
+     * @var [[@doctodo var_type:_relationships]] [[@doctodo var_description:_relationships]]
      */
     protected static $_relationships = [];
 
+    /**
+     * [[@doctodo method_description:clearCache]].
+     */
     public static function clearCache()
     {
         self::$_cache = [];
         self::$_relationships = [];
     }
     /**
+     * [[@doctodo method_description:package]].
      *
+     * @return [[@doctodo return_type:package]] [[@doctodo return_description:package]]
      */
     public function package()
     {
@@ -70,6 +81,11 @@ class Relationship extends \infinite\base\Object
         ];
     }
 
+    /**
+     * [[@doctodo method_description:doHandlePrimary]].
+     *
+     * @return [[@doctodo return_type:doHandlePrimary]] [[@doctodo return_description:doHandlePrimary]]
+     */
     public function doHandlePrimary($role = null)
     {
         if (!$this->handlePrimary) {
@@ -91,6 +107,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get taxonomy package.
+     *
+     * @return [[@doctodo return_type:getTaxonomyPackage]] [[@doctodo return_description:getTaxonomyPackage]]
      */
     public function getTaxonomyPackage()
     {
@@ -109,6 +127,11 @@ class Relationship extends \infinite\base\Object
         return $taxonomy->package($taxonomySettings);
     }
 
+    /**
+     * Get primary object.
+     *
+     * @return [[@doctodo return_type:getPrimaryObject]] [[@doctodo return_description:getPrimaryObject]]
+     */
     public function getPrimaryObject($primaryObject, $relatedObject, $role)
     {
         if (!$this->handlePrimary) {
@@ -153,6 +176,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get primary child.
+     *
+     * @return [[@doctodo return_type:getPrimaryChild]] [[@doctodo return_description:getPrimaryChild]]
      */
     public function getPrimaryChild($parentObject)
     {
@@ -184,6 +209,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get primary parent.
+     *
+     * @return [[@doctodo return_type:getPrimaryParent]] [[@doctodo return_description:getPrimaryParent]]
      */
     public function getPrimaryParent($parentObject)
     {
@@ -262,6 +289,15 @@ class Relationship extends \infinite\base\Object
      * @param unknown $options (optional)
      * @return unknown
      */
+    /**
+     * Get one.
+     *
+     * @param cascade\components\types\Item $parent  [[@doctodo param_description:parent]]
+     * @param cascade\components\types\Item $child   [[@doctodo param_description:child]]
+     * @param array                         $options [[@doctodo param_description:options]] [optional]
+     *
+     * @return [[@doctodo return_type:getOne]] [[@doctodo return_description:getOne]]
+     */
     public static function getOne(Item $parent, Item $child, $options = [])
     {
         $key = md5($parent->systemId . "." . $child->systemId);
@@ -277,6 +313,11 @@ class Relationship extends \infinite\base\Object
     /*
      * Get by
      */
+    /**
+     * Get by.
+     *
+     * @return [[@doctodo return_type:getById]] [[@doctodo return_description:getById]]
+     */
     public static function getById($relationshipId)
     {
         $key = md5($relationshipId);
@@ -289,6 +330,14 @@ class Relationship extends \infinite\base\Object
 
     /*
      */
+    /**
+     * [[@doctodo method_description:has]].
+     *
+     * @param cascade\components\types\Item $parent [[@doctodo param_description:parent]]
+     * @param cascade\components\types\Item $child  [[@doctodo param_description:child]]
+     *
+     * @return [[@doctodo return_type:has]] [[@doctodo return_description:has]]
+     */
     public static function has(Item $parent, Item $child)
     {
         $key = md5($parent->systemId . "." . $child->systemId);
@@ -298,6 +347,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get has fields.
+     *
+     * @return [[@doctodo return_type:getHasFields]] [[@doctodo return_description:getHasFields]]
      */
     public function getHasFields()
     {
@@ -305,7 +356,9 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:isHasOne]].
      *
+     * @return [[@doctodo return_type:isHasOne]] [[@doctodo return_description:isHasOne]]
      */
     public function isHasOne()
     {
@@ -313,7 +366,9 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:isHasMany]].
      *
+     * @return [[@doctodo return_type:isHasMany]] [[@doctodo return_description:isHasMany]]
      */
     public function isHasMany()
     {
@@ -321,7 +376,9 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:companionRole]].
      *
+     * @return [[@doctodo return_type:companionRole]] [[@doctodo return_description:companionRole]]
      */
     public function companionRole($queryRole)
     {
@@ -332,6 +389,11 @@ class Relationship extends \infinite\base\Object
         return 'child';
     }
 
+    /**
+     * Get label.
+     *
+     * @return [[@doctodo return_type:getLabel]] [[@doctodo return_description:getLabel]]
+     */
     public function getLabel($role)
     {
         $role = $this->companionRole($role);
@@ -342,6 +404,11 @@ class Relationship extends \infinite\base\Object
         }
     }
 
+    /**
+     * Get nice.
+     *
+     * @return [[@doctodo return_type:getNiceId]] [[@doctodo return_description:getNiceId]]
+     */
     public function getNiceId($queryRole)
     {
         $roleType = $this->roleType($queryRole);
@@ -352,6 +419,11 @@ class Relationship extends \infinite\base\Object
         return implode(':', [$this->role($queryRole), $roleType->systemId]);
     }
 
+    /**
+     * Get companion nice.
+     *
+     * @return [[@doctodo return_type:getCompanionNiceId]] [[@doctodo return_description:getCompanionNiceId]]
+     */
     public function getCompanionNiceId($queryRole)
     {
         $companionRoleType = $this->companionRoleType($queryRole);
@@ -363,7 +435,9 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:companionRoleType]].
      *
+     * @return [[@doctodo return_type:companionRoleType]] [[@doctodo return_description:companionRoleType]]
      */
     public function companionRoleType($queryRole)
     {
@@ -374,6 +448,11 @@ class Relationship extends \infinite\base\Object
         return $this->child;
     }
 
+    /**
+     * [[@doctodo method_description:role]].
+     *
+     * @return [[@doctodo return_type:role]] [[@doctodo return_description:role]]
+     */
     public function role($queryRole)
     {
         if ($queryRole === 'children' || $queryRole === 'child') {
@@ -384,7 +463,9 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:roleType]].
      *
+     * @return [[@doctodo return_type:roleType]] [[@doctodo return_description:roleType]]
      */
     public function roleType($queryRole)
     {
@@ -396,7 +477,9 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:canLink]].
      *
+     * @return [[@doctodo return_type:canLink]] [[@doctodo return_description:canLink]]
      */
     public function canLink($relationshipRole, $object)
     {
@@ -415,7 +498,9 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:canCreate]].
      *
+     * @return [[@doctodo return_type:canCreate]] [[@doctodo return_description:canCreate]]
      */
     public function canCreate($relationshipRole, $object)
     {
@@ -430,6 +515,10 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get model.
+     *
+     * @param boolean $activeOnly [[@doctodo param_description:activeOnly]] [optional]
+     *
+     * @return [[@doctodo return_type:getModel]] [[@doctodo return_description:getModel]]
      */
     public function getModel($parentObjectId, $childObjectId, $activeOnly = true)
     {
@@ -468,7 +557,11 @@ class Relationship extends \infinite\base\Object
     }
 
     /**
+     * [[@doctodo method_description:mergeOptions]].
+     *
      * @param unknown $newOptions
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
      */
     public function mergeOptions($newOptions)
     {
@@ -486,6 +579,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Set default options.
+     *
+     * @return [[@doctodo return_type:setDefaultOptions]] [[@doctodo return_description:setDefaultOptions]]
      */
     public function setDefaultOptions()
     {
@@ -518,6 +613,11 @@ class Relationship extends \infinite\base\Object
         return $this->_child->object;
     }
 
+    /**
+     * Get related object.
+     *
+     * @return [[@doctodo return_type:getRelatedObject]] [[@doctodo return_description:getRelatedObject]]
+     */
     public function getRelatedObject($baseObject, $baseRole, $primaryRelation = null)
     {
         $companionRole = $this->companionRole($baseRole);
@@ -540,6 +640,13 @@ class Relationship extends \infinite\base\Object
         return false;
     }
 
+    /**
+     * Get primary relation.
+     *
+     * @param array $relationOptions [[@doctodo param_description:relationOptions]] [optional]
+     *
+     * @return [[@doctodo return_type:getPrimaryRelation]] [[@doctodo return_description:getPrimaryRelation]]
+     */
     public function getPrimaryRelation($baseObject, $baseRole, $relationOptions = [])
     {
         $companionRole = $this->companionRole($baseRole);
@@ -574,6 +681,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get options.
+     *
+     * @return [[@doctodo return_type:getOptions]] [[@doctodo return_description:getOptions]]
      */
     public function getOptions()
     {
@@ -582,6 +691,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get system.
+     *
+     * @return [[@doctodo return_type:getSystemId]] [[@doctodo return_description:getSystemId]]
      */
     public function getSystemId()
     {

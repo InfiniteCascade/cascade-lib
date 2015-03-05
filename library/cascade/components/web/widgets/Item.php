@@ -12,7 +12,7 @@ use infinite\base\collector\CollectedObjectTrait;
 use Yii;
 
 /**
- * Item [@doctodo write class description for Item].
+ * Item [[@doctodo class_description:cascade\components\web\widgets\Item]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -21,24 +21,31 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     use CollectedObjectTrait;
 
     /**
+     * @var [[@doctodo var_type:name]] [[@doctodo var_description:name]]
      */
     public $name;
     /**
+     * @var [[@doctodo var_type:widget]] [[@doctodo var_description:widget]]
      */
     public $widget;
     /**
+     * @var [[@doctodo var_type:tab]] [[@doctodo var_description:tab]]
      */
     public $tab;
     /**
+     * @var [[@doctodo var_type:_priority]] [[@doctodo var_description:_priority]]
      */
     public $_priority = 0;
     /**
+     * @var [[@doctodo var_type:locations]] [[@doctodo var_description:locations]]
      */
     public $locations = [];
     /**
+     * @var [[@doctodo var_type:_section]] [[@doctodo var_description:_section]]
      */
     protected $_section;
     /**
+     * @var [[@doctodo var_type:settings]] [[@doctodo var_description:settings]]
      */
     public $settings = [];
 
@@ -59,6 +66,10 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
 
     /**
      * Get section.
+     *
+     * @param array $settings [[@doctodo param_description:settings]] [optional]
+     *
+     * @return [[@doctodo return_type:getSection]] [[@doctodo return_description:getSection]]
      */
     public function getSection($parent = null, $settings = [])
     {
@@ -81,11 +92,19 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
         $this->_section = $value;
     }
 
+    /**
+     * Set priority.
+     */
     public function setPriority($priority)
     {
         $this->_priority = $priority;
     }
 
+    /**
+     * Get priority.
+     *
+     * @return [[@doctodo return_type:getPriority]] [[@doctodo return_description:getPriority]]
+     */
     public function getPriority()
     {
         return $this->_priority;

@@ -9,7 +9,7 @@
 namespace cascade\components\tools;
 
 /**
- * Item [@doctodo write class description for Item].
+ * Item [[@doctodo class_description:cascade\components\tools\Item]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

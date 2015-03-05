@@ -11,22 +11,26 @@ namespace cascade\components\db\behaviors;
 use yii\helpers\Url;
 
 /**
- * SearchTermResult [@doctodo write class description for SearchTermResult].
+ * SearchTermResult [[@doctodo class_description:cascade\components\db\behaviors\SearchTermResult]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 {
     /**
+     * @var [[@doctodo var_type:_icon]] [[@doctodo var_description:_icon]]
      */
     protected $_icon;
     /**
+     * @var [[@doctodo var_type:_objectType]] [[@doctodo var_description:_objectType]]
      */
     protected $_objectType;
     /**
+     * @var [[@doctodo var_type:_objectTypeDescriptor]] [[@doctodo var_description:_objectTypeDescriptor]]
      */
     protected $_objectTypeDescriptor;
     /**
+     * @var [[@doctodo var_type:_url]] [[@doctodo var_description:_url]]
      */
     protected $_url;
 
@@ -40,6 +44,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 
     /**
      * Get url.
+     *
+     * @return [[@doctodo return_type:getUrl]] [[@doctodo return_description:getUrl]]
      */
     public function getUrl()
     {
@@ -52,6 +58,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 
     /**
      * Get icon.
+     *
+     * @return [[@doctodo return_type:getIcon]] [[@doctodo return_description:getIcon]]
      */
     public function getIcon()
     {
@@ -75,6 +83,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 
     /**
      * Get object type descriptor.
+     *
+     * @return [[@doctodo return_type:getObjectTypeDescriptor]] [[@doctodo return_description:getObjectTypeDescriptor]]
      */
     public function getObjectTypeDescriptor()
     {
@@ -95,6 +105,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 
     /**
      * Get object type.
+     *
+     * @return [[@doctodo return_type:getObjectType]] [[@doctodo return_description:getObjectType]]
      */
     public function getObjectType()
     {

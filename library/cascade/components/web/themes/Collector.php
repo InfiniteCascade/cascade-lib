@@ -11,19 +11,22 @@ namespace cascade\components\web\themes;
 use Yii;
 
 /**
- * Collector [@doctodo write class description for Collector].
+ * Collector [[@doctodo class_description:cascade\components\web\themes\Collector]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Collector extends \infinite\base\collector\Module
 {
     /**
+     * @var [[@doctodo var_type:initial]] [[@doctodo var_description:initial]]
      */
     public $initial = [];
     /**
+     * @var [[@doctodo var_type:_lastLoadedTheme]] [[@doctodo var_description:_lastLoadedTheme]]
      */
     protected $_lastLoadedTheme;
     /**
+     * @var [[@doctodo var_type:_theme]] [[@doctodo var_description:_theme]]
      */
     protected $_theme;
 
@@ -45,6 +48,10 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get theme.
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
+     * @return [[@doctodo return_type:getTheme]] [[@doctodo return_description:getTheme]]
+     *
      */
     public function getTheme()
     {
@@ -59,7 +66,7 @@ class Collector extends \infinite\base\collector\Module
     }
 
     /**
-     *
+     * [[@doctodo method_description:registerAssetBundles]].
      */
     public function registerAssetBundles($view)
     {
@@ -70,6 +77,8 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get identity asset bundle.
+     *
+     * @return [[@doctodo return_type:getIdentityAssetBundle]] [[@doctodo return_description:getIdentityAssetBundle]]
      */
     public function getIdentityAssetBundle()
     {
@@ -89,6 +98,8 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get identity.
+     *
+     * @return [[@doctodo return_type:getIdentity]] [[@doctodo return_description:getIdentity]]
      */
     public function getIdentity($view)
     {

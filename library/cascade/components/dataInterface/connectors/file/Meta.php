@@ -9,22 +9,36 @@
 namespace cascade\components\dataInterface\connectors\file;
 
 /**
- * Meta [@doctodo write class description for Meta].
+ * Meta [[@doctodo class_description:cascade\components\dataInterface\connectors\file\Meta]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Meta extends \infinite\base\Object
 {
+    /**
+     * @var [[@doctodo var_type:_sourceFile]] [[@doctodo var_description:_sourceFile]]
+     */
     protected $_sourceFile;
+    /**
+     * @var [[@doctodo var_type:_attributes]] [[@doctodo var_description:_attributes]]
+     */
     protected $_attributes;
+    /**
+     * @var [[@doctodo var_type:_interface]] [[@doctodo var_description:_interface]]
+     */
     protected $_interface;
 
     /*
+     */
+    /**
+     * @var [[@doctodo var_type:_metas]] [[@doctodo var_description:_metas]]
      */
     public static $_metas = [];
 
     /**
      * Get.
+     *
+     * @return [[@doctodo return_type:get]] [[@doctodo return_description:get]]
      */
     public static function get($interface, $sourceFile)
     {
@@ -45,13 +59,20 @@ class Meta extends \infinite\base\Object
         $this->_attributes = $sourceFile->readLine(1);
     }
 
+    /**
+     * Get source file.
+     *
+     * @return [[@doctodo return_type:getSourceFile]] [[@doctodo return_description:getSourceFile]]
+     */
     public function getSourceFile()
     {
         return $this->_sourceFile;
     }
 
     /**
+     * [[@doctodo method_description:hasAttribute]].
      *
+     * @return [[@doctodo return_type:hasAttribute]] [[@doctodo return_description:hasAttribute]]
      */
     public function hasAttribute($name)
     {
@@ -60,6 +81,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get attribute keys.
+     *
+     * @return [[@doctodo return_type:getAttributeKeys]] [[@doctodo return_description:getAttributeKeys]]
      */
     public function getAttributeKeys()
     {
@@ -76,6 +99,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Get interface.
+     *
+     * @return [[@doctodo return_type:getInterface]] [[@doctodo return_description:getInterface]]
      */
     public function getInterface()
     {

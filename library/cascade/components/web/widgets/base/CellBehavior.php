@@ -11,21 +11,25 @@ namespace cascade\components\web\widgets\base;
 use Yii;
 
 /**
- * CellBehavior [@doctodo write class description for CellBehavior].
+ * CellBehavior [[@doctodo class_description:cascade\components\web\widgets\base\CellBehavior]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class CellBehavior extends \yii\base\Behavior
 {
     /**
+     * @var [[@doctodo var_type:gridCellClass]] [[@doctodo var_description:gridCellClass]]
      */
     public $gridCellClass = 'infinite\web\grid\Cell';
     /**
+     * @var [[@doctodo var_type:_gridCell]] [[@doctodo var_description:_gridCell]]
      */
     protected $_gridCell;
 
     /**
      * Get grid cell settings.
+     *
+     * @return [[@doctodo return_type:getGridCellSettings]] [[@doctodo return_description:getGridCellSettings]]
      */
     public function getGridCellSettings()
     {
@@ -38,6 +42,8 @@ class CellBehavior extends \yii\base\Behavior
 
     /**
      * Get cell.
+     *
+     * @return [[@doctodo return_type:getCell]] [[@doctodo return_description:getCell]]
      */
     public function getCell()
     {
@@ -54,6 +60,8 @@ class CellBehavior extends \yii\base\Behavior
 
     /**
      * Get cell content.
+     *
+     * @return [[@doctodo return_type:getCellContent]] [[@doctodo return_description:getCellContent]]
      */
     public function getCellContent()
     {

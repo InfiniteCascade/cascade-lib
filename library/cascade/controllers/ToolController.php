@@ -14,7 +14,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
- * ObjectController [@doctodo write class description for ObjectController].
+ * ToolController [[@doctodo class_description:cascade\controllers\ToolController]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -60,6 +60,9 @@ class ToolController extends Controller
         ];
     }
 
+    /**
+     * [[@doctodo method_description:actionIndex]].
+     */
     public function actionIndex()
     {
         Yii::$app->response->view = 'index';

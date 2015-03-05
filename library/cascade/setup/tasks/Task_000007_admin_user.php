@@ -13,7 +13,6 @@ use cascade\models\User;
 use infinite\base\exceptions\Exception;
 
 /**
- * Task_000007_admin_user [@doctodo write class description for Task_000007_admin_user].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

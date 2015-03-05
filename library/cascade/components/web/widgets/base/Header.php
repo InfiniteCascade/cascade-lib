@@ -13,7 +13,7 @@ use infinite\helpers\Html;
 use Yii;
 
 /**
- * Header [@doctodo write class description for Header].
+ * Header [[@doctodo class_description:cascade\components\web\widgets\base\Header]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

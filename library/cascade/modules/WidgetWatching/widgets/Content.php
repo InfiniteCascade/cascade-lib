@@ -12,13 +12,19 @@ use infinite\helpers\Html;
 use yii\helpers\Url;
 
 /**
- * Content [@doctodo write class description for Content].
+ * Content [[@doctodo class_description:cascade\modules\WidgetWatching\widgets\Content]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Content extends \cascade\components\web\widgets\Widget
 {
+    /**
+     * @var [[@doctodo var_type:_lazyObjectWidget]] [[@doctodo var_description:_lazyObjectWidget]]
+     */
     protected $_lazyObjectWidget;
+    /**
+     * @var [[@doctodo var_type:id]] [[@doctodo var_description:id]]
+     */
     public $id = 'Watching';
 
     /**
@@ -30,6 +36,9 @@ class Content extends \cascade\components\web\widgets\Widget
      */
     public $icon = 'fa-eye';
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         Html::addCssClass($this->htmlOptions, 'ic-watching-widget');
@@ -37,6 +46,11 @@ class Content extends \cascade\components\web\widgets\Widget
         parent::init();
     }
 
+    /**
+     * [[@doctodo method_description:generateStart]].
+     *
+     * @return [[@doctodo return_type:generateStart]] [[@doctodo return_description:generateStart]]
+     */
     public function generateStart()
     {
         $this->htmlOptions['data-instructions'] = json_encode($this->refreshInstructions);
@@ -47,6 +61,9 @@ class Content extends \cascade\components\web\widgets\Widget
         return parent::generateStart();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getTitle()
     {
         switch ($this->currentScope) {
@@ -63,6 +80,8 @@ class Content extends \cascade\components\web\widgets\Widget
 
     /**
      * Get grid cell settings.
+     *
+     * @return [[@doctodo return_type:getGridCellSettings]] [[@doctodo return_description:getGridCellSettings]]
      */
     public function getGridCellSettings()
     {
@@ -88,11 +107,21 @@ class Content extends \cascade\components\web\widgets\Widget
         return implode($parts);
     }
 
+    /**
+     * Get current scope.
+     *
+     * @return [[@doctodo return_type:getCurrentScope]] [[@doctodo return_description:getCurrentScope]]
+     */
     public function getCurrentScope()
     {
         return $this->getState('scope', 'familiar');
     }
 
+    /**
+     * Get widget classes.
+     *
+     * @return [[@doctodo return_type:getWidgetClasses]] [[@doctodo return_description:getWidgetClasses]]
+     */
     public function getWidgetClasses()
     {
         $classes = parent::getWidgetClasses();
@@ -101,6 +130,9 @@ class Content extends \cascade\components\web\widgets\Widget
         return $classes;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getHeaderMenu()
     {
         $items = [];

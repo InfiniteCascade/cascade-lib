@@ -15,25 +15,35 @@ use Yii;
 use yii\base\Event;
 
 /**
- * StorageBehavior [@doctodo write class description for StorageBehavior].
+ * StorageBehavior [[@doctodo class_description:cascade\components\storageHandlers\StorageBehavior]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 {
     /**
+     * @var [[@doctodo var_type:storageAttribute]] [[@doctodo var_description:storageAttribute]]
      */
     public $storageAttribute = 'storage_id';
 
     /**
+     * @var [[@doctodo var_type:_storageEngine]] [[@doctodo var_description:_storageEngine]]
      */
     protected $_storageEngine;
+    /**
+     * @var [[@doctodo var_type:_oldStorage]] [[@doctodo var_description:_oldStorage]]
+     */
     protected $_oldStorage;
 
+    /**
+     * @var [[@doctodo var_type:required]] [[@doctodo var_description:required]]
+     */
     public $required = true;
 
     /**
      * Converts object to string.
+     *
+     * @return [[@doctodo return_type:__toString]] [[@doctodo return_description:__toString]]
      */
     public function __toString()
     {
@@ -65,6 +75,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Set storage.
+     *
+     * @throws Exception [[@doctodo exception_description:Exception]]
      */
     public function setStorage($value)
     {
@@ -78,6 +90,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get storage.
+     *
+     * @return [[@doctodo return_type:getStorage]] [[@doctodo return_description:getStorage]]
      */
     public function getStorage()
     {
@@ -89,7 +103,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     *
+     * [[@doctodo method_description:loadPostFile]].
      */
     public function loadPostFile($tabId = null)
     {
@@ -104,7 +118,9 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:beforeSave]].
      *
+     * @return [[@doctodo return_type:beforeSave]] [[@doctodo return_description:beforeSave]]
      */
     public function beforeSave($event)
     {
@@ -119,6 +135,9 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * [[@doctodo method_description:afterSave]].
+     */
     public function afterSave($event)
     {
         if (!empty($this->_oldStorage) && $this->_oldStorage !== $this->owner->{$this->storageAttribute}) {
@@ -130,6 +149,11 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         }
     }
 
+    /**
+     * [[@doctodo method_description:handleDelete]].
+     *
+     * @return [[@doctodo return_type:handleDelete]] [[@doctodo return_description:handleDelete]]
+     */
     public function handleDelete($storageObject)
     {
         if (is_null($this->storageEngine)) {
@@ -144,7 +168,7 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
-     *
+     * [[@doctodo method_description:afterDelete]].
      */
     public function afterDelete($event)
     {
@@ -152,7 +176,9 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:serve]].
      *
+     * @return [[@doctodo return_type:serve]] [[@doctodo return_description:serve]]
      */
     public function serve()
     {
@@ -170,6 +196,11 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
         return true;
     }
 
+    /**
+     * Get storage path.
+     *
+     * @return [[@doctodo return_type:getStoragePath]] [[@doctodo return_description:getStoragePath]]
+     */
     public function getStoragePath()
     {
         if (!$this->storageEngine || !$this->storageEngine->storageHandler) {
@@ -187,6 +218,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
     /**
      * Get storage object.
+     *
+     * @return [[@doctodo return_type:getStorageObject]] [[@doctodo return_description:getStorageObject]]
      */
     public function getStorageObject()
     {
@@ -199,7 +232,9 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     }
 
     /**
+     * [[@doctodo method_description:beforeValidate]].
      *
+     * @return [[@doctodo return_type:beforeValidate]] [[@doctodo return_description:beforeValidate]]
      */
     public function beforeValidate($event)
     {
@@ -219,6 +254,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get storage engine.
+     *
+     * @return [[@doctodo return_type:getStorageEngine]] [[@doctodo return_description:getStorageEngine]]
      */
     public function getStorageEngine()
     {
@@ -232,6 +269,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Set storage engine.
+     *
+     * @return [[@doctodo return_type:setStorageEngine]] [[@doctodo return_description:setStorageEngine]]
      */
     public function setStorageEngine($value)
     {

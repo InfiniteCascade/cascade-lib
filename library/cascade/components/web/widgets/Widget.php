@@ -12,7 +12,7 @@ use infinite\base\collector\CollectedObjectTrait;
 use Yii;
 
 /**
- * Widget [@doctodo write class description for Widget].
+ * Widget [[@doctodo class_description:cascade\components\web\widgets\Widget]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -21,9 +21,11 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     use CollectedObjectTrait;
 
     /**
+     * @var [[@doctodo var_type:icon]] [[@doctodo var_description:icon]]
      */
     public $icon = false;
     /**
+     * @var [[@doctodo var_type:section]] [[@doctodo var_description:section]]
      */
     public $section = false;
     /**
@@ -31,9 +33,11 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
      */
     public $defaultDecoratorClass = 'cascade\components\web\widgets\decorator\PanelDecorator';
     /**
+     * @var [[@doctodo var_type:gridCellClass]] [[@doctodo var_description:gridCellClass]]
      */
     public $gridCellClass = 'infinite\web\grid\Cell';
     /**
+     * @var [[@doctodo var_type:gridClass]] [[@doctodo var_description:gridClass]]
      */
     public $gridClass = 'infinite\web\grid\Grid';
 
@@ -42,6 +46,7 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
      */
     public $params = [];
     /**
+     * @var [[@doctodo var_type:recreateParams]] [[@doctodo var_description:recreateParams]]
      */
     public $recreateParams = [];
     /**
@@ -50,22 +55,34 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     public $htmlOptions = ['class' => 'ic-widget'];
 
     /**
+     * @var [[@doctodo var_type:_widgetId]] [[@doctodo var_description:_widgetId]]
      */
     protected $_widgetId;
     /**
+     * @var [[@doctodo var_type:_title]] [[@doctodo var_description:_title]]
      */
     protected $_title  = false;
 
+    /**
+     * @var [[@doctodo var_type:_lazy]] [[@doctodo var_description:_lazy]]
+     */
     protected $_lazy  = false;
 
     /**
+     * [[@doctodo method_description:stateKeyName]].
      *
+     * @return [[@doctodo return_type:stateKeyName]] [[@doctodo return_description:stateKeyName]]
      */
     public function stateKeyName($key)
     {
         return 'widget.' . $this->systemId . '.' . $key;
     }
 
+    /**
+     * Get refresh instructions.
+     *
+     * @return [[@doctodo return_type:getRefreshInstructions]] [[@doctodo return_description:getRefreshInstructions]]
+     */
     public function getRefreshInstructions()
     {
         $i = [];
@@ -79,6 +96,11 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
         return $i;
     }
 
+    /**
+     * Get lazy.
+     *
+     * @return [[@doctodo return_type:getLazy]] [[@doctodo return_description:getLazy]]
+     */
     public function getLazy()
     {
         if (!Yii::$app->collectors['widgets']->lazy) {
@@ -88,6 +110,9 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
         return $this->_lazy;
     }
 
+    /**
+     * Set lazy.
+     */
     public function setLazy($lazy)
     {
         $this->_lazy = $lazy;
@@ -95,6 +120,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Get state.
+     *
+     * @return [[@doctodo return_type:getState]] [[@doctodo return_description:getState]]
      */
     public function getState($key, $default = null)
     {
@@ -103,6 +130,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Set state.
+     *
+     * @return [[@doctodo return_type:setState]] [[@doctodo return_description:setState]]
      */
     public function setState($key, $value)
     {
@@ -111,6 +140,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Get header menu.
+     *
+     * @return [[@doctodo return_type:getHeaderMenu]] [[@doctodo return_description:getHeaderMenu]]
      */
     public function getHeaderMenu()
     {
@@ -119,6 +150,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Get title.
+     *
+     * @return [[@doctodo return_type:getTitle]] [[@doctodo return_description:getTitle]]
      */
     public function getTitle()
     {
@@ -133,6 +166,9 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
         $this->_title = $title;
     }
 
+    /**
+     * [[@doctodo method_description:ensureAssetBundles]].
+     */
     public function ensureAssetBundles()
     {
         foreach ($this->assetBundles as $bundleClass) {
@@ -140,6 +176,11 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
         }
     }
 
+    /**
+     * Get asset bundles.
+     *
+     * @return [[@doctodo return_type:getAssetBundles]] [[@doctodo return_description:getAssetBundles]]
+     */
     public function getAssetBundles()
     {
         return [];
@@ -205,6 +246,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Get widget areas.
+     *
+     * @return [[@doctodo return_type:getWidgetAreas]] [[@doctodo return_description:getWidgetAreas]]
      */
     public function getWidgetAreas()
     {
@@ -234,6 +277,11 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
         $this->_widgetId = $value;
     }
 
+    /**
+     * Get priority adjust.
+     *
+     * @return [[@doctodo return_type:getPriorityAdjust]] [[@doctodo return_description:getPriorityAdjust]]
+     */
     public function getPriorityAdjust()
     {
         return 0;

@@ -12,7 +12,6 @@ use cascade\models\User;
 use cascade\modules\core\TypeAccount\models\ObjectAccount;
 
 /**
- * Task_000005_account [@doctodo write class description for Task_000005_account].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

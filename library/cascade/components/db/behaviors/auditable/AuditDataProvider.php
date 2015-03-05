@@ -13,16 +13,28 @@ use infinite\helpers\ArrayHelper;
 use Yii;
 
 /**
- * ActiveRecord is the model class for table "{{%active_record}}".
+ * AuditDataProvider [[@doctodo class_description:cascade\components\db\behaviors\auditable\AuditDataProvider]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class AuditDataProvider extends \infinite\data\ActiveDataProvider
 {
+    /**
+     * @var [[@doctodo var_type:scope]] [[@doctodo var_description:scope]]
+     */
     public $scope = 'all';
+    /**
+     * @var [[@doctodo var_type:direction]] [[@doctodo var_description:direction]]
+     */
     public $direction = '_older';
+    /**
+     * @var [[@doctodo var_type:context]] [[@doctodo var_description:context]]
+     */
     public $context = false;
 
+    /**
+     * [[@doctodo method_description:clearParams]].
+     */
     protected function clearParams(&$params)
     {
         foreach ($params as $key => &$value) {
@@ -34,11 +46,19 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
         }
     }
 
+    /**
+     * Get package.
+     *
+     * @return [[@doctodo return_type:getPackage]] [[@doctodo return_description:getPackage]]
+     */
     public function getPackage()
     {
         return new AuditPackage($this, $this->context);
     }
 
+    /**
+     * [[@doctodo method_description:handleInstructions]].
+     */
     public function handleInstructions($params)
     {
         $this->clearParams($params);

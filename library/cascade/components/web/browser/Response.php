@@ -11,7 +11,7 @@ namespace cascade\components\web\browser;
 use Yii;
 
 /**
- * Response [@doctodo write class description for Response].
+ * Response [[@doctodo class_description:cascade\components\web\browser\Response]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -23,7 +23,9 @@ class Response extends \infinite\web\browser\Response
     public $bundleClass = 'cascade\components\web\browser\Bundle';
 
     /**
+     * [[@doctodo method_description:defaultInstructions]].
      *
+     * @return [[@doctodo return_type:defaultInstructions]] [[@doctodo return_description:defaultInstructions]]
      */
     public static function defaultInstructions()
     {
@@ -32,7 +34,9 @@ class Response extends \infinite\web\browser\Response
         ];
     }
     /**
+     * [[@doctodo method_description:parseStack]].
      *
+     * @return [[@doctodo return_type:parseStack]] [[@doctodo return_description:parseStack]]
      */
     public static function parseStack($request)
     {

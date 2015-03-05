@@ -9,27 +9,35 @@
 namespace cascade\components\web;
 
 /**
- * ObjectViewEvent [@doctodo write class description for ObjectViewEvent].
+ * ObjectViewEvent [[@doctodo class_description:cascade\components\web\ObjectViewEvent]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class ObjectViewEvent extends \yii\base\Event
 {
     /**
+     * @var [[@doctodo var_type:action]] [[@doctodo var_description:action]]
      */
     public $action;
     /**
+     * @var [[@doctodo var_type:accessed]] [[@doctodo var_description:accessed]]
      */
     public $accessed = true;
     /**
+     * @var [[@doctodo var_type:_object]] [[@doctodo var_description:_object]]
      */
     protected $_object;
     /**
+     * @var [[@doctodo var_type:_objectType]] [[@doctodo var_description:_objectType]]
      */
     protected $_objectType;
 
     /**
+     * [[@doctodo method_description:handleWith]].
      *
+     * @param boolean $always [[@doctodo param_description:always]] [optional]
+     *
+     * @return [[@doctodo return_type:handleWith]] [[@doctodo return_description:handleWith]]
      */
     public function handleWith($callable, $always = false)
     {
@@ -57,6 +65,8 @@ class ObjectViewEvent extends \yii\base\Event
 
     /**
      * Get object.
+     *
+     * @return [[@doctodo return_type:getObject]] [[@doctodo return_description:getObject]]
      */
     public function getObject()
     {
@@ -80,6 +90,8 @@ class ObjectViewEvent extends \yii\base\Event
 
     /**
      * Get object type.
+     *
+     * @return [[@doctodo return_type:getObjectType]] [[@doctodo return_description:getObjectType]]
      */
     public function getObjectType()
     {

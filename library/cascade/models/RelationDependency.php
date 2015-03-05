@@ -11,7 +11,7 @@ namespace cascade\models;
 use cascade\components\types\ActiveRecordTrait;
 
 /**
- * Role is the model class for table "role".
+ * RelationDependency is the model class for table "relation_dependency".
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -26,6 +26,9 @@ class RelationDependency extends \infinite\db\models\RelationDependency
         return false;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [];

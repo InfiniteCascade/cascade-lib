@@ -12,25 +12,30 @@ use infinite\helpers\ArrayHelper;
 use Yii;
 
 /**
- * Item [@doctodo write class description for Item].
+ * Item [[@doctodo class_description:cascade\components\types\Item]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Item extends \infinite\base\collector\Item
 {
     /**
+     * @var [[@doctodo var_type:_children]] [[@doctodo var_description:_children]]
      */
     protected $_children = [];
     /**
+     * @var [[@doctodo var_type:_parents]] [[@doctodo var_description:_parents]]
      */
     protected $_parents = [];
     /**
+     * @var [[@doctodo var_type:_sections]] [[@doctodo var_description:_sections]]
      */
     protected $_sections;
     /**
+     * @var [[@doctodo var_type:_checked]] [[@doctodo var_description:_checked]]
      */
     protected $_checked;
     /**
+     * @var [[@doctodo var_type:_init]] [[@doctodo var_description:_init]]
      */
     protected $_init = false;
 
@@ -56,7 +61,9 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
+     * [[@doctodo method_description:distributeRelationships]].
      *
+     * @return [[@doctodo return_type:distributeRelationships]] [[@doctodo return_description:distributeRelationships]]
      */
     protected function distributeRelationships()
     {
@@ -157,6 +164,8 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * Get widgets.
+     *
+     * @return [[@doctodo return_type:getWidgets]] [[@doctodo return_description:getWidgets]]
      */
     public function getWidgets()
     {
@@ -171,6 +180,8 @@ class Item extends \infinite\base\collector\Item
         return $widgets;
     }
     /**
+     * [[@doctodo method_description:addChild]].
+     *
      * @param unknown $name
      * @param unknown $relationship
      *
@@ -184,6 +195,8 @@ class Item extends \infinite\base\collector\Item
     }
 
     /**
+     * [[@doctodo method_description:addParent]].
+     *
      * @param unknown $name
      * @param unknown $relationship
      *
@@ -302,6 +315,8 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * Get taxonomies.
+     *
+     * @return [[@doctodo return_type:getTaxonomies]] [[@doctodo return_description:getTaxonomies]]
      */
     public function getTaxonomies()
     {

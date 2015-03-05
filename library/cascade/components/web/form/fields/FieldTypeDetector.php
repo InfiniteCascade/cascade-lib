@@ -11,13 +11,20 @@ namespace cascade\components\web\form\fields;
 use cascade\components\db\fields\Base as DbBaseField;
 
 /**
- * FieldTypeDetector [@doctodo write class description for FieldTypeDetector].
+ * FieldTypeDetector [[@doctodo class_description:cascade\components\web\form\fields\FieldTypeDetector]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class FieldTypeDetector extends \infinite\base\object
 {
     /*
+     */
+    /**
+     * [[@doctodo method_description:detect]].
+     *
+     * @param cascade\components\db\fields\Base $field [[@doctodo param_description:field]]
+     *
+     * @return [[@doctodo return_type:detect]] [[@doctodo return_description:detect]]
      */
     public static function detect(DbBaseField $field)
     {
