@@ -60,6 +60,8 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * [[@doctodo method_description:afterSave]].
+     *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
      */
     public function afterSave($event)
     {
@@ -94,6 +96,8 @@ class ActiveTaxonomy extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Set taxonomy.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setTaxonomy_id($value)
     {

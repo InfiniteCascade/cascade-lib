@@ -305,6 +305,8 @@ abstract class DataSource extends \infinite\base\Component
     /**
      * [[@doctodo method_description:universalFilter]].
      *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     *
      * @return [[@doctodo return_type:universalFilter]] [[@doctodo return_description:universalFilter]]
      */
     public function universalFilter($value)
@@ -379,6 +381,8 @@ abstract class DataSource extends \infinite\base\Component
     /**
      * Set settings.
      *
+     * @param [[@doctodo param_type:settings]] $settings [[@doctodo param_description:settings]]
+     *
      * @return [[@doctodo return_type:setSettings]] [[@doctodo return_description:setSettings]]
      */
     public function setSettings($settings)
@@ -420,6 +424,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Set search.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setSearch($value)
     {
@@ -445,6 +451,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Set local model.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setLocalModel($value)
     {
@@ -453,6 +461,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * Set foreign model.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setForeignModel($value)
     {
@@ -472,6 +482,8 @@ abstract class DataSource extends \infinite\base\Component
     /**
      * Set map.
      *
+     * @param [[@doctodo param_type:m]] $m [[@doctodo param_description:m]]
+     *
      * @return [[@doctodo return_type:setMap]] [[@doctodo return_description:setMap]]
      */
     public function setMap($m)
@@ -483,6 +495,8 @@ abstract class DataSource extends \infinite\base\Component
 
     /**
      * [[@doctodo method_description:buildMap]].
+     *
+     * @param [[@doctodo param_type:m]] $m [[@doctodo param_description:m]]
      *
      * @return [[@doctodo return_type:buildMap]] [[@doctodo return_description:buildMap]]
      */

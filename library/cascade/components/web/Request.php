@@ -49,6 +49,8 @@ class Request extends \infinite\web\Request
 
     /**
      * Set object.
+     *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
      */
     public function setObject($object)
     {

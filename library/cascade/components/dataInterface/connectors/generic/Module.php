@@ -41,10 +41,15 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign object.
+     *
+     * @param [[@doctodo param_type:foreignModelClass]] $foreignModelClass [[@doctodo param_description:foreignModelClass]]
+     * @param [[@doctodo param_type:foreignPrimaryKey]] $foreignPrimaryKey [[@doctodo param_description:foreignPrimaryKey]]
      */
     abstract public function getForeignObject($foreignModelClass, $foreignPrimaryKey);
     /**
      * Get foreign model.
+     *
+     * @param [[@doctodo param_type:model]] $model [[@doctodo param_description:model]]
      */
     abstract public function getForeignModel($model);
 
@@ -115,6 +120,9 @@ abstract class Module extends BaseModule
     /**
      * Get local object.
      *
+     * @param [[@doctodo param_type:localModelClass]]   $localModelClass   [[@doctodo param_description:localModelClass]]
+     * @param [[@doctodo param_type:foreignPrimaryKey]] $foreignPrimaryKey [[@doctodo param_description:foreignPrimaryKey]]
+     *
      * @return [[@doctodo return_type:getLocalObject]] [[@doctodo return_description:getLocalObject]]
      */
     public function getLocalObject($localModelClass, $foreignPrimaryKey)
@@ -134,6 +142,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get data source.
+     *
+     * @param [[@doctodo param_type:dataSourceName]] $dataSourceName [[@doctodo param_description:dataSourceName]]
      *
      * @return [[@doctodo return_type:getDataSource]] [[@doctodo return_description:getDataSource]]
      */
@@ -181,6 +191,8 @@ abstract class Module extends BaseModule
     /**
      * Get local data source.
      *
+     * @param [[@doctodo param_type:localModelClass]] $localModelClass [[@doctodo param_description:localModelClass]]
+     *
      * @return [[@doctodo return_type:getLocalDataSource]] [[@doctodo return_description:getLocalDataSource]]
      */
     public function getLocalDataSource($localModelClass)
@@ -196,6 +208,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign data source.
+     *
+     * @param [[@doctodo param_type:foreignModelClass]] $foreignModelClass [[@doctodo param_description:foreignModelClass]]
      *
      * @return [[@doctodo return_type:getForeignDataSource]] [[@doctodo return_description:getForeignDataSource]]
      */

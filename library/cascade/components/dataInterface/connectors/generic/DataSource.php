@@ -61,6 +61,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     /**
      * Get foreign data item.
      *
+     * @param [[@doctodo param_type:key]] $key [[@doctodo param_description:key]]
+     *
      * @return [[@doctodo return_type:getForeignDataItem]] [[@doctodo return_description:getForeignDataItem]]
      */
     public function getForeignDataItem($key)
@@ -77,11 +79,18 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get foreign data model.
+     *
+     * @param [[@doctodo param_type:key]] $key [[@doctodo param_description:key]]
      */
     abstract public function getForeignDataModel($key);
 
     /**
      * [[@doctodo method_description:updateLocalObject]].
+     *
+     * @param [[@doctodo param_type:relatedType]] $relatedType [[@doctodo param_description:relatedType]]
+     * @param [[@doctodo param_type:valueMap]]    $valueMap    [[@doctodo param_description:valueMap]]
+     * @param [[@doctodo param_type:fieldMap]]    $fieldMap    [[@doctodo param_description:fieldMap]]
+     * @param [[@doctodo param_type:localModel]]  $localModel  [[@doctodo param_description:localModel]]
      *
      * @throws \Exception [[@doctodo exception_description:\Exception]]
      * @return [[@doctodo return_type:updateLocalObject]] [[@doctodo return_description:updateLocalObject]]
@@ -143,6 +152,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      * [[@doctodo method_description:buildLocalAttributes]].
      *
      * @param cascade\components\dataInterface\connectors\generic\Model $foreignModel [[@doctodo param_description:foreignModel]]
+     * @param [[@doctodo param_type:localModel]]                        $localModel   [[@doctodo param_description:localModel]] [optional]
+     * @param [[@doctodo param_type:fieldsMap]]                         $fieldsMap    [[@doctodo param_description:fieldsMap]] [optional]
      *
      * @return [[@doctodo return_type:buildLocalAttributes]] [[@doctodo return_description:buildLocalAttributes]]
      */
@@ -327,6 +338,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     /**
      * [[@doctodo method_description:isRelationKey]].
      *
+     * @param [[@doctodo param_type:key]] $key [[@doctodo param_description:key]]
+     *
      * @return [[@doctodo return_type:isRelationKey]] [[@doctodo return_description:isRelationKey]]
      */
     public function isRelationKey($key)
@@ -338,6 +351,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      * [[@doctodo method_description:generateKey]].
      *
      * @param cascade\components\dataInterface\connectors\generic\Model $foreignObject [[@doctodo param_description:foreignObject]]
+     * @param [[@doctodo param_type:keyName]]                           $keyName       [[@doctodo param_description:keyName]]
+     * @param [[@doctodo param_type:keyValue]]                          $keyValue      [[@doctodo param_description:keyValue]]
      *
      * @return [[@doctodo return_type:generateKey]] [[@doctodo return_description:generateKey]]
      */
@@ -367,6 +382,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      * Get key translation.
      *
      * @param cascade\components\dataInterface\connectors\generic\Model $foreignObject [[@doctodo param_description:foreignObject]]
+     * @param [[@doctodo param_type:key]]                               $key           [[@doctodo param_description:key]] [optional]
      *
      * @return [[@doctodo return_type:getKeyTranslation]] [[@doctodo return_description:getKeyTranslation]]
      */
@@ -393,6 +409,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      * [[@doctodo method_description:internalGetKeyTranslation]].
      *
      * @param cascade\components\dataInterface\connectors\generic\Model $foreignObject [[@doctodo param_description:foreignObject]]
+     * @param [[@doctodo param_type:key]]                               $key           [[@doctodo param_description:key]]
      *
      * @return [[@doctodo return_type:internalGetKeyTranslation]] [[@doctodo return_description:internalGetKeyTranslation]]
      */
@@ -407,6 +424,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
 
     /**
      * Get reverse key translation.
+     *
+     * @param [[@doctodo param_type:localObject]] $localObject [[@doctodo param_description:localObject]]
      *
      * @return [[@doctodo return_type:getReverseKeyTranslation]] [[@doctodo return_description:getReverseKeyTranslation]]
      */
@@ -426,6 +445,7 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      * [[@doctodo method_description:saveKeyTranslation]].
      *
      * @param cascade\components\dataInterface\connectors\generic\Model $foreignObject [[@doctodo param_description:foreignObject]]
+     * @param [[@doctodo param_type:localObject]]                       $localObject   [[@doctodo param_description:localObject]]
      *
      * @return [[@doctodo return_type:saveKeyTranslation]] [[@doctodo return_description:saveKeyTranslation]]
      */
@@ -449,6 +469,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
      * [[@doctodo method_description:internalSaveKeyTranslation]].
      *
      * @param cascade\components\dataInterface\connectors\generic\Model $foreignModel [[@doctodo param_description:foreignModel]]
+     * @param [[@doctodo param_type:localObject]]                       $localObject  [[@doctodo param_description:localObject]]
+     * @param [[@doctodo param_type:key]]                               $key          [[@doctodo param_description:key]]
      *
      * @return [[@doctodo return_type:internalSaveKeyTranslation]] [[@doctodo return_description:internalSaveKeyTranslation]]
      */
@@ -484,7 +506,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     /**
      * [[@doctodo method_description:createForeignDataItem]].
      *
-     * @param array $config [[@doctodo param_description:config]] [optional]
+     * @param [[@doctodo param_type:model]] $model  [[@doctodo param_description:model]]
+     * @param array                         $config [[@doctodo param_description:config]] [optional]
      *
      * @return [[@doctodo return_type:createForeignDataItem]] [[@doctodo return_description:createForeignDataItem]]
      */
@@ -503,7 +526,8 @@ abstract class DataSource extends \cascade\components\dataInterface\DataSource
     /**
      * [[@doctodo method_description:createLocalDataItem]].
      *
-     * @param array $config [[@doctodo param_description:config]] [optional]
+     * @param [[@doctodo param_type:model]] $model  [[@doctodo param_description:model]]
+     * @param array                         $config [[@doctodo param_description:config]] [optional]
      *
      * @return [[@doctodo return_type:createLocalDataItem]] [[@doctodo return_description:createLocalDataItem]]
      */

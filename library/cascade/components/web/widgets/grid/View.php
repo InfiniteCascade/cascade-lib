@@ -225,6 +225,8 @@ class View extends \yii\base\Widget
     /**
      * Set columns.
      *
+     * @param [[@doctodo param_type:columns]] $columns [[@doctodo param_description:columns]]
+     *
      * @return [[@doctodo return_type:setColumns]] [[@doctodo return_description:setColumns]]
      */
     public function setColumns($columns)
@@ -280,6 +282,8 @@ class View extends \yii\base\Widget
 
     /**
      * [[@doctodo method_description:createGridColumn]].
+     *
+     * @param [[@doctodo param_type:text]] $text [[@doctodo param_description:text]]
      *
      * @throws Exception [[@doctodo exception_description:Exception]]
      * @return [[@doctodo return_type:createGridColumn]] [[@doctodo return_description:createGridColumn]]

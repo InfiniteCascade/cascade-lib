@@ -105,6 +105,8 @@ abstract class Model extends \infinite\base\Object
     /**
      * [[@doctodo method_description:hasAttribute]].
      *
+     * @param [[@doctodo param_type:attribute]] $attribute [[@doctodo param_description:attribute]]
+     *
      * @return [[@doctodo return_type:hasAttribute]] [[@doctodo return_description:hasAttribute]]
      */
     public function hasAttribute($attribute)
@@ -114,6 +116,8 @@ abstract class Model extends \infinite\base\Object
 
     /**
      * Set interface.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setInterface($value)
     {
@@ -130,6 +134,8 @@ abstract class Model extends \infinite\base\Object
 
     /**
      * Set attributes.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setAttributes($value)
     {
@@ -150,6 +156,8 @@ abstract class Model extends \infinite\base\Object
     /**
      * [[@doctodo method_description:populateRecord]].
      *
+     * @param [[@doctodo param_type:attributes]] $attributes [[@doctodo param_description:attributes]]
+     *
      * @return [[@doctodo return_type:populateRecord]] [[@doctodo return_description:populateRecord]]
      */
     public function populateRecord($attributes)
@@ -165,6 +173,8 @@ abstract class Model extends \infinite\base\Object
 
     /**
      * [[@doctodo method_description:populateRecords]].
+     *
+     * @param [[@doctodo param_type:results]] $results [[@doctodo param_description:results]]
      *
      * @return [[@doctodo return_type:populateRecords]] [[@doctodo return_description:populateRecords]]
      */

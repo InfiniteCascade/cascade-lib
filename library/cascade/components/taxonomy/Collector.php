@@ -112,6 +112,9 @@ class Collector extends \infinite\base\collector\Module
     /**
      * [[@doctodo method_description:initializeTaxonomies]].
      *
+     * @param [[@doctodo param_type:model]]      $model      [[@doctodo param_description:model]]
+     * @param [[@doctodo param_type:taxonomies]] $taxonomies [[@doctodo param_description:taxonomies]]
+     *
      * @return [[@doctodo return_type:initializeTaxonomies]] [[@doctodo return_description:initializeTaxonomies]]
      */
     public function initializeTaxonomies($model, $taxonomies)

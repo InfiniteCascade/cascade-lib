@@ -95,6 +95,8 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
     /**
      * [[@doctodo method_description:beforeSave]].
      *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
+     *
      * @return [[@doctodo return_type:beforeSave]] [[@doctodo return_description:beforeSave]]
      */
     public function beforeSave($event)
@@ -123,6 +125,8 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
     /**
      * [[@doctodo method_description:afterSave]].
      *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
+     *
      * @return [[@doctodo return_type:afterSave]] [[@doctodo return_description:afterSave]]
      */
     public function afterSave($event)
@@ -139,6 +143,8 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * [[@doctodo method_description:beforeValidate]].
+     *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
      *
      * @return [[@doctodo return_type:beforeValidate]] [[@doctodo return_description:beforeValidate]]
      */
@@ -158,6 +164,8 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Set related objects.
+     *
+     * @param [[@doctodo param_type:relatedObjects]] $relatedObjects [[@doctodo param_description:relatedObjects]]
      */
     public function setRelatedObjects($relatedObjects)
     {
@@ -209,6 +217,8 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Set relations.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setRelations($value)
     {

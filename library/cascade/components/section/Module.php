@@ -42,6 +42,8 @@ class Module extends \cascade\components\base\CollectorModule implements Section
 
     /**
      * Set title.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setTitle($value)
     {
@@ -73,6 +75,8 @@ class Module extends \cascade\components\base\CollectorModule implements Section
 
     /**
      * Set priority.
+     *
+     * @param [[@doctodo param_type:priority]] $priority [[@doctodo param_description:priority]]
      */
     public function setPriority($priority)
     {

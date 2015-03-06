@@ -54,6 +54,8 @@ class HumanFieldDetector extends \infinite\base\Object
     /**
      * [[@doctodo method_description:registerMachineTest]].
      *
+     * @param [[@doctodo param_type:test]] $test [[@doctodo param_description:test]]
+     *
      * @return [[@doctodo return_type:registerMachineTest]] [[@doctodo return_description:registerMachineTest]]
      */
     public static function registerMachineTest($test)

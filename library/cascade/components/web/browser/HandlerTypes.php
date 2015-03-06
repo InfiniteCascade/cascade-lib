@@ -28,6 +28,9 @@ class HandlerTypes extends \infinite\web\browser\Handler
     /**
      * [[@doctodo method_description:possibleTypes]].
      *
+     * @param [[@doctodo param_type:topType]]   $topType   [[@doctodo param_description:topType]]
+     * @param [[@doctodo param_type:goodTypes]] $goodTypes [[@doctodo param_description:goodTypes]]
+     *
      * @return [[@doctodo return_type:possibleTypes]] [[@doctodo return_description:possibleTypes]]
      */
     public static function possibleTypes($topType, $goodTypes)
@@ -48,7 +51,9 @@ class HandlerTypes extends \infinite\web\browser\Handler
     /**
      * [[@doctodo method_description:descendantHas]].
      *
-     * @param integer $depth [[@doctodo param_description:depth]] [optional]
+     * @param [[@doctodo param_type:topType]]   $topType   [[@doctodo param_description:topType]]
+     * @param [[@doctodo param_type:goodTypes]] $goodTypes [[@doctodo param_description:goodTypes]]
+     * @param integer                           $depth     [[@doctodo param_description:depth]] [optional]
      *
      * @return [[@doctodo return_type:descendantHas]] [[@doctodo return_description:descendantHas]]
      */

@@ -11,6 +11,8 @@ class ActiveQuery extends \infinite\db\ActiveQuery
     /**
      * [[@doctodo method_description:andWhereFromQuery]].
      *
+     * @param [[@doctodo param_type:instructions]] $instructions [[@doctodo param_description:instructions]]
+     *
      * @return [[@doctodo return_type:andWhereFromQuery]] [[@doctodo return_description:andWhereFromQuery]]
      */
     public function andWhereFromQuery($instructions)
@@ -26,6 +28,8 @@ class ActiveQuery extends \infinite\db\ActiveQuery
 
     /**
      * [[@doctodo method_description:buildWhereFromQuery]].
+     *
+     * @param [[@doctodo param_type:instructions]] $instructions [[@doctodo param_description:instructions]]
      *
      * @return [[@doctodo return_type:buildWhereFromQuery]] [[@doctodo return_description:buildWhereFromQuery]]
      */
@@ -49,6 +53,8 @@ class ActiveQuery extends \infinite\db\ActiveQuery
 
     /**
      * [[@doctodo method_description:parseRule]].
+     *
+     * @param [[@doctodo param_type:rule]] $rule [[@doctodo param_description:rule]]
      *
      * @return [[@doctodo return_type:parseRule]] [[@doctodo return_description:parseRule]]
      */
@@ -75,6 +81,10 @@ class ActiveQuery extends \infinite\db\ActiveQuery
 
     /**
      * [[@doctodo method_description:buildLogic]].
+     *
+     * @param [[@doctodo param_type:field]]    $field    [[@doctodo param_description:field]]
+     * @param [[@doctodo param_type:operator]] $operator [[@doctodo param_description:operator]]
+     * @param [[@doctodo param_type:value]]    $value    [[@doctodo param_description:value]] [optional]
      *
      * @return [[@doctodo return_type:buildLogic]] [[@doctodo return_description:buildLogic]]
      */
@@ -151,6 +161,8 @@ class ActiveQuery extends \infinite\db\ActiveQuery
 
     /**
      * [[@doctodo method_description:buildContainsQuery]].
+     *
+     * @param [[@doctodo param_type:queryString]] $queryString [[@doctodo param_description:queryString]]
      *
      * @return [[@doctodo return_type:buildContainsQuery]] [[@doctodo return_description:buildContainsQuery]]
      */

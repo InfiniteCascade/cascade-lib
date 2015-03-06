@@ -206,7 +206,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
     /**
      * [[@doctodo method_description:familiarObjects]].
      *
-     * @param integer $limit [[@doctodo param_description:limit]] [optional]
+     * @param [[@doctodo param_type:model]] $model [[@doctodo param_description:model]]
+     * @param integer                       $limit [[@doctodo param_description:limit]] [optional]
      *
      * @return [[@doctodo return_type:familiarObjects]] [[@doctodo return_description:familiarObjects]]
      */
@@ -226,6 +227,9 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
 
     /**
      * [[@doctodo method_description:familiarObjectsProvider]].
+     *
+     * @param [[@doctodo param_type:model]] $model [[@doctodo param_description:model]]
+     * @param [[@doctodo param_type:state]] $state [[@doctodo param_description:state]]
      *
      * @return [[@doctodo return_type:familiarObjectsProvider]] [[@doctodo return_description:familiarObjectsProvider]]
      */
@@ -260,7 +264,8 @@ class ObjectFamiliarity extends \cascade\components\db\ActiveRecord
     /**
      * [[@doctodo method_description:familiarObjectsList]].
      *
-     * @param integer $limit [[@doctodo param_description:limit]] [optional]
+     * @param [[@doctodo param_type:model]] $model [[@doctodo param_description:model]]
+     * @param integer                       $limit [[@doctodo param_description:limit]] [optional]
      *
      * @return [[@doctodo return_type:familiarObjectsList]] [[@doctodo return_description:familiarObjectsList]]
      */

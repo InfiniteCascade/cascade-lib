@@ -206,6 +206,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * Get related type.
      *
+     * @param [[@doctodo param_type:name]] $name [[@doctodo param_description:name]]
+     *
      * @return [[@doctodo return_type:getRelatedType]] [[@doctodo return_description:getRelatedType]]
      */
     public function getRelatedType($name)
@@ -220,6 +222,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get relationship.
+     *
+     * @param [[@doctodo param_type:name]] $name [[@doctodo param_description:name]]
      *
      * @return [[@doctodo return_type:getRelationship]] [[@doctodo return_description:getRelationship]]
      */
@@ -313,6 +317,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * [[@doctodo method_description:determineOwner]].
      *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
+     *
      * @return [[@doctodo return_type:determineOwner]] [[@doctodo return_description:determineOwner]]
      */
     public function determineOwner($object)
@@ -333,6 +339,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get role help text.
+     *
+     * @param [[@doctodo param_type:roleItem]] $roleItem [[@doctodo param_description:roleItem]]
+     * @param [[@doctodo param_type:object]]   $object   [[@doctodo param_description:object]] [optional]
      *
      * @return [[@doctodo return_type:getRoleHelpText]] [[@doctodo return_description:getRoleHelpText]]
      */
@@ -362,6 +371,10 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * [[@doctodo method_description:determineAccessLevel]].
      *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
+     * @param [[@doctodo param_type:role]]   $role   [[@doctodo param_description:role]]
+     * @param [[@doctodo param_type:aro]]    $aro    [[@doctodo param_description:aro]] [optional]
+     *
      * @return [[@doctodo return_type:determineAccessLevel]] [[@doctodo return_description:determineAccessLevel]]
      */
     public function determineAccessLevel($object, $role, $aro = null)
@@ -389,6 +402,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get action map.
+     *
+     * @param [[@doctodo param_type:controlledObject]] $controlledObject [[@doctodo param_description:controlledObject]] [optional]
      *
      * @return [[@doctodo return_type:getActionMap]] [[@doctodo return_description:getActionMap]]
      */
@@ -437,6 +452,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Set disabled fields.
+     *
+     * @param [[@doctodo param_type:fields]] $fields [[@doctodo param_description:fields]]
      */
     public function setDisabledFields($fields)
     {
@@ -464,6 +481,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * Get insert verb.
      *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
+     *
      * @return [[@doctodo return_type:getInsertVerb]] [[@doctodo return_description:getInsertVerb]]
      */
     public function getInsertVerb($object)
@@ -474,6 +493,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * Get update verb.
      *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
+     *
      * @return [[@doctodo return_type:getUpdateVerb]] [[@doctodo return_description:getUpdateVerb]]
      */
     public function getUpdateVerb($object)
@@ -482,6 +503,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     }
     /**
      * Get delete verb.
+     *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
      *
      * @return [[@doctodo return_type:getDeleteVerb]] [[@doctodo return_description:getDeleteVerb]]
      */
@@ -492,6 +515,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * [[@doctodo method_description:upgrade]].
+     *
+     * @param [[@doctodo param_type:from]] $from [[@doctodo param_description:from]]
      *
      * @return [[@doctodo return_type:upgrade]] [[@doctodo return_description:upgrade]]
      */
@@ -512,6 +537,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get role validation settings.
+     *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]] [optional]
      *
      * @return [[@doctodo return_type:getRoleValidationSettings]] [[@doctodo return_description:getRoleValidationSettings]]
      */
@@ -641,6 +668,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Set object type model.
+     *
+     * @param [[@doctodo param_type:model]] $model [[@doctodo param_description:model]]
      */
     public function setObjectTypeModel($model)
     {
@@ -697,7 +726,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * Get section.
      *
-     * @param unknown $settings (optional)
+     * @param [[@doctodo param_type:parentWidget]] $parentWidget [[@doctodo param_description:parentWidget]] [optional]
+     * @param unknown                              $settings     (optional)
      *
      * @return unknown
      */
@@ -767,6 +797,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Set title.
+     *
+     * @param [[@doctodo param_type:title]] $title [[@doctodo param_description:title]]
      */
     public function setTitle($title)
     {
@@ -775,6 +807,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
 
     /**
      * Get details widget.
+     *
+     * @param [[@doctodo param_type:objectModel]] $objectModel [[@doctodo param_description:objectModel]] [optional]
      *
      * @return [[@doctodo return_type:getDetailsWidget]] [[@doctodo return_description:getDetailsWidget]]
      */
@@ -908,7 +942,9 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * [[@doctodo method_description:loadFieldLink]].
      *
-     * @param boolean $typeMatch [[@doctodo param_description:typeMatch]] [optional]
+     * @param [[@doctodo param_type:field]]  $field     [[@doctodo param_description:field]]
+     * @param [[@doctodo param_type:object]] $object    [[@doctodo param_description:object]]
+     * @param boolean                        $typeMatch [[@doctodo param_description:typeMatch]] [optional]
      */
     public function loadFieldLink($field, $object, $typeMatch = true)
     {
@@ -1030,7 +1066,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * Get model.
      *
-     * @param boolean $input [[@doctodo param_description:input]] [optional]
+     * @param [[@doctodo param_type:primaryModel]] $primaryModel [[@doctodo param_description:primaryModel]] [optional]
+     * @param boolean                              $input        [[@doctodo param_description:input]] [optional]
      *
      * @return unknown
      */
@@ -1083,7 +1120,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * Get form segment.
      *
-     * @param array $settings [[@doctodo param_description:settings]] [optional]
+     * @param [[@doctodo param_type:primaryModel]] $primaryModel [[@doctodo param_description:primaryModel]] [optional]
+     * @param array                                $settings     [[@doctodo param_description:settings]] [optional]
      *
      * @return [[@doctodo return_type:getFormSegment]] [[@doctodo return_description:getFormSegment]]
      */

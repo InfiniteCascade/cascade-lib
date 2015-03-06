@@ -156,7 +156,9 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
     /**
      * [[@doctodo method_description:handleUpload]].
      *
-     * @param cascade\models\Storage $storage [[@doctodo param_description:storage]]
+     * @param cascade\models\Storage            $storage   [[@doctodo param_description:storage]]
+     * @param [[@doctodo param_type:model]]     $model     [[@doctodo param_description:model]]
+     * @param [[@doctodo param_type:attribute]] $attribute [[@doctodo param_description:attribute]]
      *
      * @return [[@doctodo return_type:handleUpload]] [[@doctodo return_description:handleUpload]]
      */
@@ -213,6 +215,8 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
 
     /**
      * Set base dir.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      *
      * @throws Exception [[@doctodo exception_description:Exception]]
      * @return [[@doctodo return_type:setBaseDir]] [[@doctodo return_description:setBaseDir]]

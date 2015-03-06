@@ -51,6 +51,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     /**
      * Set id.
      *
+     * @param [[@doctodo param_type:id]] $id [[@doctodo param_description:id]]
+     *
      * @return [[@doctodo return_type:setId]] [[@doctodo return_description:setId]]
      */
     public function setId($id)
@@ -60,6 +62,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Set source file.
+     *
+     * @param [[@doctodo param_type:sourceFile]] $sourceFile [[@doctodo param_description:sourceFile]]
      *
      * @return [[@doctodo return_type:setSourceFile]] [[@doctodo return_description:setSourceFile]]
      */
@@ -82,6 +86,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * [[@doctodo method_description:addChild]].
+     *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
      */
     public function addChild($object)
     {
@@ -128,6 +134,8 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
 
     /**
      * Set table name.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setTableName($value)
     {

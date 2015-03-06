@@ -34,6 +34,8 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 
     /**
      * [[@doctodo method_description:clearParams]].
+     *
+     * @param [[@doctodo param_type:params]] $params [[@doctodo param_description:params]]
      */
     protected function clearParams(&$params)
     {
@@ -58,6 +60,8 @@ class AuditDataProvider extends \infinite\data\ActiveDataProvider
 
     /**
      * [[@doctodo method_description:handleInstructions]].
+     *
+     * @param [[@doctodo param_type:params]] $params [[@doctodo param_description:params]]
      */
     public function handleInstructions($params)
     {

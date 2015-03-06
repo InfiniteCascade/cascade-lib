@@ -22,6 +22,8 @@ class ToolsController extends \infinite\console\Controller
 {
     /**
      * Flush the cache.
+     *
+     * @param [[@doctodo param_type:category]] $category [[@doctodo param_description:category]] [optional]
      */
     public function actionFlush($category = null)
     {
@@ -111,6 +113,8 @@ class ToolsController extends \infinite\console\Controller
     /**
      * Run a series of fixes on a file's code formatting.
      *
+     * @param [[@doctodo param_type:file]] $file [[@doctodo param_description:file]]
+     *
      * @return bool if the file was changed
      */
     public function fixFile($file)
@@ -133,6 +137,9 @@ class ToolsController extends \infinite\console\Controller
     /**
      * Removes the old @doctodo.
      *
+     * @param [[@doctodo param_type:file]]     $file     [[@doctodo param_description:file]]
+     * @param [[@doctodo param_type:contents]] $contents [[@doctodo param_description:contents]]
+     *
      * @return bool if the file was changed
      */
     public function fixDocBlockPlaceholder($file, &$contents)
@@ -153,6 +160,9 @@ class ToolsController extends \infinite\console\Controller
 
     /**
      * Fixes slashes inside namespace strings.
+     *
+     * @param [[@doctodo param_type:file]]     $file     [[@doctodo param_description:file]]
+     * @param [[@doctodo param_type:contents]] $contents [[@doctodo param_description:contents]]
      *
      * @return bool if the file changed
      */

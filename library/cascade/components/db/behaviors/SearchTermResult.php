@@ -36,6 +36,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 
     /**
      * Set url.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setUrl($value)
     {
@@ -72,6 +74,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 
     /**
      * Set icon.
+     *
+     * @param [[@doctodo param_type:icon]] $icon [[@doctodo param_description:icon]]
      */
     public function setIcon($icon)
     {
@@ -97,6 +101,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 
     /**
      * Set object type descriptor.
+     *
+     * @param [[@doctodo param_type:type]] $type [[@doctodo param_description:type]]
      */
     public function setObjectTypeDescriptor($type)
     {
@@ -119,6 +125,8 @@ class SearchTermResult extends \infinite\db\behaviors\SearchTermResult
 
     /**
      * Set object type.
+     *
+     * @param [[@doctodo param_type:type]] $type [[@doctodo param_description:type]]
      */
     public function setObjectType($type)
     {

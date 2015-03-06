@@ -95,6 +95,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     /**
      * [[@doctodo method_description:attachDecorator]].
      *
+     * @param [[@doctodo param_type:decorator]] $decorator [[@doctodo param_description:decorator]]
+     *
      * @return [[@doctodo return_type:attachDecorator]] [[@doctodo return_description:attachDecorator]]
      */
     public function attachDecorator($decorator)
@@ -137,6 +139,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
     /**
      * [[@doctodo method_description:parseText]].
      *
+     * @param [[@doctodo param_type:text]] $text [[@doctodo param_description:text]]
+     *
      * @return [[@doctodo return_type:parseText]] [[@doctodo return_description:parseText]]
      */
     public function parseText($text)
@@ -166,6 +170,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
 
     /**
      * Set settings.
+     *
+     * @param [[@doctodo param_type:settings]] $settings [[@doctodo param_description:settings]]
      */
     public function setSettings($settings)
     {
@@ -188,6 +194,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
 
     /**
      * Set widget.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setWidgetId($value)
     {
@@ -212,6 +220,8 @@ abstract class BaseWidget extends \yii\bootstrap\Widget
 
     /**
      * Set system.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setSystemId($value)
     {

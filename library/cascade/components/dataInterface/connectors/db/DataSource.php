@@ -38,6 +38,8 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     /**
      * Get foreign data model.
      *
+     * @param [[@doctodo param_type:key]] $key [[@doctodo param_description:key]]
+     *
      * @return Model foreign data model
      */
     public function getForeignDataModel($key)

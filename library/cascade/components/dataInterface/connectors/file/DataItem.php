@@ -48,6 +48,9 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
 
     /**
      * [[@doctodo method_description:fillRelationConfig]].
+     *
+     * @param [[@doctodo param_type:config]]      $config      [[@doctodo param_description:config]]
+     * @param [[@doctodo param_type:otherObject]] $otherObject [[@doctodo param_description:otherObject]]
      */
     protected function fillRelationConfig(&$config, $otherObject)
     {

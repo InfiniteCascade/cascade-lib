@@ -107,6 +107,8 @@ class Item extends \infinite\base\collector\Item
     /**
      * Get taxonomy.
      *
+     * @param [[@doctodo param_type:system_id]] $system_id [[@doctodo param_description:system_id]]
+     *
      * @return unknown
      */
     public function getTaxonomy($system_id)
@@ -122,6 +124,8 @@ class Item extends \infinite\base\collector\Item
 
     /**
      * [[@doctodo method_description:addTaxonomy]].
+     *
+     * @param [[@doctodo param_type:taxonomy]] $taxonomy [[@doctodo param_description:taxonomy]]
      */
     public function addTaxonomy($taxonomy)
     {

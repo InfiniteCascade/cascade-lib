@@ -33,7 +33,8 @@ class QueryTaxonomy extends \infinite\db\behaviors\ActiveRecord
     /**
      * [[@doctodo method_description:filterByTaxonomy]].
      *
-     * @param array $params [[@doctodo param_description:params]] [optional]
+     * @param [[@doctodo param_type:value]] $value  [[@doctodo param_description:value]]
+     * @param array                         $params [[@doctodo param_description:params]] [optional]
      */
     public function filterByTaxonomy($value, $params = [])
     {
@@ -52,6 +53,8 @@ class QueryTaxonomy extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * [[@doctodo method_description:parseTaxonomyValue]].
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      *
      * @return [[@doctodo return_type:parseTaxonomyValue]] [[@doctodo return_description:parseTaxonomyValue]]
      */

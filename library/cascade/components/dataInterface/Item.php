@@ -47,6 +47,9 @@ class Item extends \infinite\base\collector\Item
     /**
      * [[@doctodo method_description:run]].
      *
+     * @param [[@doctodo param_type:resumeLog]] $resumeLog [[@doctodo param_description:resumeLog]] [optional]
+     * @param [[@doctodo param_type:action]]    $action    [[@doctodo param_description:action]] [optional]
+     *
      * @return [[@doctodo return_type:run]] [[@doctodo return_description:run]]
      */
     public function run($resumeLog = null, $action = null)

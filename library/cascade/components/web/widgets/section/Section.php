@@ -122,6 +122,8 @@ class Section extends \cascade\components\web\widgets\Widget
     /**
      * [[@doctodo method_description:defaultItems]].
      *
+     * @param [[@doctodo param_type:parent]] $parent [[@doctodo param_description:parent]] [optional]
+     *
      * @return [[@doctodo return_type:defaultItems]] [[@doctodo return_description:defaultItems]]
      */
     public function defaultItems($parent = null)

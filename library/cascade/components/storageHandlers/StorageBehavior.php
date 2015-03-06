@@ -76,6 +76,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     /**
      * Set storage.
      *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     *
      * @throws Exception [[@doctodo exception_description:Exception]]
      */
     public function setStorage($value)
@@ -104,6 +106,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * [[@doctodo method_description:loadPostFile]].
+     *
+     * @param [[@doctodo param_type:tabId]] $tabId [[@doctodo param_description:tabId]] [optional]
      */
     public function loadPostFile($tabId = null)
     {
@@ -119,6 +123,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * [[@doctodo method_description:beforeSave]].
+     *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
      *
      * @return [[@doctodo return_type:beforeSave]] [[@doctodo return_description:beforeSave]]
      */
@@ -137,6 +143,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * [[@doctodo method_description:afterSave]].
+     *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
      */
     public function afterSave($event)
     {
@@ -151,6 +159,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * [[@doctodo method_description:handleDelete]].
+     *
+     * @param [[@doctodo param_type:storageObject]] $storageObject [[@doctodo param_description:storageObject]]
      *
      * @return [[@doctodo return_type:handleDelete]] [[@doctodo return_description:handleDelete]]
      */
@@ -169,6 +179,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * [[@doctodo method_description:afterDelete]].
+     *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
      */
     public function afterDelete($event)
     {
@@ -234,6 +246,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     /**
      * [[@doctodo method_description:beforeValidate]].
      *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
+     *
      * @return [[@doctodo return_type:beforeValidate]] [[@doctodo return_description:beforeValidate]]
      */
     public function beforeValidate($event)
@@ -269,6 +283,8 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Set storage engine.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      *
      * @return [[@doctodo return_type:setStorageEngine]] [[@doctodo return_description:setStorageEngine]]
      */

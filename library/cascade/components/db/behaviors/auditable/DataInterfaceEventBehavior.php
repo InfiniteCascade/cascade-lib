@@ -32,6 +32,8 @@ class DataInterfaceEventBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * [[@doctodo method_description:beforeModelSave]].
+     *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
      */
     public function beforeModelSave($event)
     {
@@ -46,6 +48,8 @@ class DataInterfaceEventBehavior extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Set data interface.
+     *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
      */
     public function setDataInterface($object)
     {

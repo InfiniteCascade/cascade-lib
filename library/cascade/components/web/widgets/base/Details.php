@@ -108,6 +108,8 @@ class Details extends Widget implements ListWidgetInterface
     /**
      * [[@doctodo method_description:generateCell]].
      *
+     * @param [[@doctodo param_type:content]] $content [[@doctodo param_description:content]]
+     *
      * @return [[@doctodo return_type:generateCell]] [[@doctodo return_description:generateCell]]
      */
     protected function generateCell($content)

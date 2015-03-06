@@ -102,6 +102,8 @@ class Collector extends \infinite\base\collector\Module
     /**
      * [[@doctodo method_description:registerObjectType]].
      *
+     * @param [[@doctodo param_type:module]] $module [[@doctodo param_description:module]]
+     *
      * @return [[@doctodo return_type:registerObjectType]] [[@doctodo return_description:registerObjectType]]
      */
     public function registerObjectType($module)

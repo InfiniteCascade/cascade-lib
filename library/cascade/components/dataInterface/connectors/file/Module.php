@@ -48,6 +48,8 @@ abstract class Module extends BaseModule
 
     /**
      * Set source files.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setSourceFiles($value)
     {
@@ -83,6 +85,9 @@ abstract class Module extends BaseModule
 
     /**
      * [[@doctodo method_description:packageNode]].
+     *
+     * @param [[@doctodo param_type:ous]]  $ous  [[@doctodo param_description:ous]]
+     * @param [[@doctodo param_type:node]] $node [[@doctodo param_description:node]]
      *
      * @return [[@doctodo return_type:packageNode]] [[@doctodo return_description:packageNode]]
      */
@@ -133,6 +138,9 @@ abstract class Module extends BaseModule
     /**
      * Get foreign model config.
      *
+     * @param [[@doctodo param_type:sourceFile]] $sourceFile [[@doctodo param_description:sourceFile]]
+     * @param [[@doctodo param_type:modelName]]  $modelName  [[@doctodo param_description:modelName]]
+     *
      * @return [[@doctodo return_type:getForeignModelConfig]] [[@doctodo return_description:getForeignModelConfig]]
      */
     public function getForeignModelConfig($sourceFile, $modelName)
@@ -151,6 +159,8 @@ abstract class Module extends BaseModule
     /**
      * Get foreign model name.
      *
+     * @param [[@doctodo param_type:tableName]] $tableName [[@doctodo param_description:tableName]]
+     *
      * @return [[@doctodo return_type:getForeignModelName]] [[@doctodo return_description:getForeignModelName]]
      */
     public function getForeignModelName($tableName)
@@ -160,6 +170,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model.
+     *
+     * @param [[@doctodo param_type:model]] $model [[@doctodo param_description:model]]
      *
      * @return [[@doctodo return_type:getForeignModel]] [[@doctodo return_description:getForeignModel]]
      */

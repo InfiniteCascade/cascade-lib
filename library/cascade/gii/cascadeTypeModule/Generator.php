@@ -497,6 +497,8 @@ EOD;
     /**
      * [[@doctodo method_description:generateDescriptorField]].
      *
+     * @param [[@doctodo param_type:table]] $table [[@doctodo param_description:table]]
+     *
      * @return [[@doctodo return_type:generateDescriptorField]] [[@doctodo return_description:generateDescriptorField]]
      */
     public function generateDescriptorField($table)
@@ -739,6 +741,8 @@ EOD;
     /**
      * Get primary key location.
      *
+     * @param [[@doctodo param_type:table]] $table [[@doctodo param_description:table]]
+     *
      * @return [[@doctodo return_type:getPrimaryKeyLocation]] [[@doctodo return_description:getPrimaryKeyLocation]]
      */
     public function getPrimaryKeyLocation($table)
@@ -759,6 +763,8 @@ EOD;
 
     /**
      * [[@doctodo method_description:generateTableIndices]].
+     *
+     * @param [[@doctodo param_type:table]] $table [[@doctodo param_description:table]]
      *
      * @return [[@doctodo return_type:generateTableIndices]] [[@doctodo return_description:generateTableIndices]]
      */
@@ -835,6 +841,10 @@ EOD;
 
     /**
      * [[@doctodo method_description:fixIndexName]].
+     *
+     * @param [[@doctodo param_type:name]]  $name  [[@doctodo param_description:name]]
+     * @param [[@doctodo param_type:table]] $table [[@doctodo param_description:table]]
+     * @param [[@doctodo param_type:keys]]  $keys  [[@doctodo param_description:keys]]
      *
      * @return [[@doctodo return_type:fixIndexName]] [[@doctodo return_description:fixIndexName]]
      */
@@ -981,6 +991,8 @@ EOD;
     /**
      * [[@doctodo method_description:generateColumnSettings]].
      *
+     * @param [[@doctodo param_type:table]] $table [[@doctodo param_description:table]]
+     *
      * @return [[@doctodo return_type:generateColumnSettings]] [[@doctodo return_description:generateColumnSettings]]
      */
     public function generateColumnSettings($table)
@@ -1058,6 +1070,8 @@ EOD;
 
     /**
      * [[@doctodo method_description:generateRelationUses]].
+     *
+     * @param [[@doctodo param_type:relations]] $relations [[@doctodo param_description:relations]]
      *
      * @return [[@doctodo return_type:generateRelationUses]] [[@doctodo return_description:generateRelationUses]]
      */
@@ -1183,6 +1197,8 @@ EOD;
      * For simplicity, this method only deals with the case where the pivot contains two PK columns,
      * each referencing a column in a different table.
      *                       or false if the table is not a pivot table.
+     *
+     * @param [[@doctodo param_type:table]] $table [[@doctodo param_description:table]]
      *
      * @return array|boolean the relevant foreign key constraint information if the table is a pivot table,
      */

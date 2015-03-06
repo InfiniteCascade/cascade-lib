@@ -54,6 +54,9 @@ class Meta extends \infinite\base\Object
     /**
      * Get.
      *
+     * @param [[@doctodo param_type:interface]]    $interface    [[@doctodo param_description:interface]]
+     * @param [[@doctodo param_type:foreignTable]] $foreignTable [[@doctodo param_description:foreignTable]]
+     *
      * @return static meta object for the given interface and foreign table
      */
     public static function get($interface, $foreignTable)
@@ -80,6 +83,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Set has many.
+     *
+     * @param [[@doctodo param_type:config]] $config [[@doctodo param_description:config]]
      */
     public function setHasMany($config)
     {
@@ -140,6 +145,8 @@ class Meta extends \infinite\base\Object
     /**
      * Check if data source has a certain attribute.
      *
+     * @param [[@doctodo param_type:name]] $name [[@doctodo param_description:name]]
+     *
      * @return bool if the attribute exists
      */
     public function hasAttribute($name)
@@ -169,6 +176,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Set interface.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setInterface($value)
     {

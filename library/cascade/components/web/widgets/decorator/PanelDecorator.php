@@ -108,6 +108,8 @@ class PanelDecorator extends Decorator
     /**
      * [[@doctodo method_description:backgroundifyMenu]].
      *
+     * @param [[@doctodo param_type:items]] $items [[@doctodo param_description:items]]
+     *
      * @return [[@doctodo return_type:backgroundifyMenu]] [[@doctodo return_description:backgroundifyMenu]]
      */
     protected function backgroundifyMenu(&$items)

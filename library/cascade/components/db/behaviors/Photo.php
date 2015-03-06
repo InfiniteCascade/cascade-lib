@@ -52,6 +52,8 @@ class Photo extends \cascade\components\storageHandlers\StorageBehavior
     /**
      * Set photo.
      *
+     * @param [[@doctodo param_type:photo]] $photo [[@doctodo param_description:photo]]
+     *
      * @return [[@doctodo return_type:setPhoto]] [[@doctodo return_description:setPhoto]]
      */
     public function setPhoto($photo)
@@ -61,6 +63,8 @@ class Photo extends \cascade\components\storageHandlers\StorageBehavior
 
     /**
      * Set raw photo.
+     *
+     * @param [[@doctodo param_type:photo]] $photo [[@doctodo param_description:photo]]
      *
      * @return [[@doctodo return_type:setRawPhoto]] [[@doctodo return_description:setRawPhoto]]
      */

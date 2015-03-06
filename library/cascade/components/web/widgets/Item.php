@@ -67,7 +67,8 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
     /**
      * Get section.
      *
-     * @param array $settings [[@doctodo param_description:settings]] [optional]
+     * @param [[@doctodo param_type:parent]] $parent   [[@doctodo param_description:parent]] [optional]
+     * @param array                          $settings [[@doctodo param_description:settings]] [optional]
      *
      * @return [[@doctodo return_type:getSection]] [[@doctodo return_description:getSection]]
      */
@@ -86,6 +87,8 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
 
     /**
      * Set section.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setSection($value)
     {
@@ -94,6 +97,8 @@ class Item extends \infinite\base\collector\Item implements \infinite\base\colle
 
     /**
      * Set priority.
+     *
+     * @param [[@doctodo param_type:priority]] $priority [[@doctodo param_description:priority]]
      */
     public function setPriority($priority)
     {

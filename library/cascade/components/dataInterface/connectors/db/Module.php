@@ -53,6 +53,8 @@ abstract class Module extends BaseModule
     /**
      * Get data source.
      *
+     * @param [[@doctodo param_type:tableName]] $tableName [[@doctodo param_description:tableName]]
+     *
      * @return DataSource|bool the data source based on {$tableName} or false if not found
      */
     public function getDataSource($tableName)
@@ -73,6 +75,9 @@ abstract class Module extends BaseModule
     /**
      * Get foreign object.
      *
+     * @param [[@doctodo param_type:foreignModelClass]] $foreignModelClass [[@doctodo param_description:foreignModelClass]]
+     * @param [[@doctodo param_type:foreignPrimaryKey]] $foreignPrimaryKey [[@doctodo param_description:foreignPrimaryKey]]
+     *
      * @return Model|bool foreign data model or false if failed or not found
      */
     public function getForeignObject($foreignModelClass, $foreignPrimaryKey)
@@ -87,6 +92,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model.
+     *
+     * @param [[@doctodo param_type:model]] $model [[@doctodo param_description:model]]
      *
      * @return [[@doctodo return_type:getForeignModel]] [[@doctodo return_description:getForeignModel]]
      */
@@ -113,6 +120,9 @@ abstract class Module extends BaseModule
     /**
      * Get foreign model config.
      *
+     * @param [[@doctodo param_type:tableName]] $tableName [[@doctodo param_description:tableName]]
+     * @param [[@doctodo param_type:modelName]] $modelName [[@doctodo param_description:modelName]]
+     *
      * @return [[@doctodo return_type:getForeignModelConfig]] [[@doctodo return_description:getForeignModelConfig]]
      */
     public function getForeignModelConfig($tableName, $modelName)
@@ -130,6 +140,8 @@ abstract class Module extends BaseModule
 
     /**
      * Get foreign model name.
+     *
+     * @param [[@doctodo param_type:tableName]] $tableName [[@doctodo param_description:tableName]]
      *
      * @return [[@doctodo return_type:getForeignModelName]] [[@doctodo return_description:getForeignModelName]]
      */

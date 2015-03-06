@@ -108,6 +108,8 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
     /**
      * [[@doctodo method_description:run]].
      *
+     * @param [[@doctodo param_type:interactiveAction]] $interactiveAction [[@doctodo param_description:interactiveAction]] [optional]
+     *
      * @return [[@doctodo return_type:run]] [[@doctodo return_description:run]]
      */
     public function run($interactiveAction = null)
@@ -171,6 +173,8 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
 
     /**
      * [[@doctodo method_description:updateStatus]].
+     *
+     * @param [[@doctodo param_type:newStatus]] $newStatus [[@doctodo param_description:newStatus]]
      *
      * @return [[@doctodo return_type:updateStatus]] [[@doctodo return_description:updateStatus]]
      */

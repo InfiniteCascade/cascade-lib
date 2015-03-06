@@ -18,6 +18,11 @@ class Html extends \infinite\helpers\Html
     /**
      * [[@doctodo method_description:prepareEditInPlace]].
      *
+     * @param [[@doctodo param_type:htmlOptions]] $htmlOptions [[@doctodo param_description:htmlOptions]]
+     * @param [[@doctodo param_type:model]]       $model       [[@doctodo param_description:model]]
+     * @param [[@doctodo param_type:attribute]]   $attribute   [[@doctodo param_description:attribute]]
+     * @param [[@doctodo param_type:relative]]    $relative    [[@doctodo param_description:relative]] [optional]
+     *
      * @return [[@doctodo return_type:prepareEditInPlace]] [[@doctodo return_description:prepareEditInPlace]]
      */
     public static function prepareEditInPlace(&$htmlOptions, $model, $attribute, $relative = null)

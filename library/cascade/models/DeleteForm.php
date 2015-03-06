@@ -257,6 +257,8 @@ class DeleteForm extends Model
     /**
      * Set target.
      *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     *
      * @throws Exception [[@doctodo exception_description:Exception]]
      */
     public function setTarget($value)

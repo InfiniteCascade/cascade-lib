@@ -68,6 +68,8 @@ class Storage extends \cascade\components\db\ActiveRecord
     /**
      * [[@doctodo method_description:fillKill]].
      *
+     * @param [[@doctodo param_type:attributes]] $attributes [[@doctodo param_description:attributes]]
+     *
      * @return [[@doctodo return_type:fillKill]] [[@doctodo return_description:fillKill]]
      */
     public function fillKill($attributes)
@@ -93,6 +95,8 @@ class Storage extends \cascade\components\db\ActiveRecord
 
     /**
      * [[@doctodo method_description:startBlank]].
+     *
+     * @param [[@doctodo param_type:engine]] $engine [[@doctodo param_description:engine]]
      *
      * @return [[@doctodo return_type:startBlank]] [[@doctodo return_description:startBlank]]
      */

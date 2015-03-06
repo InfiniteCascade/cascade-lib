@@ -41,6 +41,8 @@ class Model extends Base
 
     /**
      * Set field config.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setFieldConfig($value)
     {

@@ -47,6 +47,8 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
 
     /**
      * Set file source.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setFileSource($value)
     {
@@ -69,6 +71,8 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
 
     /**
      * Get foreign data model.
+     *
+     * @param [[@doctodo param_type:key]] $key [[@doctodo param_description:key]]
      *
      * @return [[@doctodo return_type:getForeignDataModel]] [[@doctodo return_description:getForeignDataModel]]
      */
@@ -121,6 +125,9 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
 
     /**
      * [[@doctodo method_description:createModel]].
+     *
+     * @param [[@doctodo param_type:id]]         $id         [[@doctodo param_description:id]]
+     * @param [[@doctodo param_type:attributes]] $attributes [[@doctodo param_description:attributes]]
      *
      * @return [[@doctodo return_type:createModel]] [[@doctodo return_description:createModel]]
      */

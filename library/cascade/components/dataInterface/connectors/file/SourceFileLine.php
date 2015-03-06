@@ -48,6 +48,8 @@ class SourceFileLine extends \infinite\base\Object
 
     /**
      * Set content.
+     *
+     * @param [[@doctodo param_type:content]] $content [[@doctodo param_description:content]]
      */
     public function setContent($content)
     {
@@ -85,6 +87,8 @@ class SourceFileLine extends \infinite\base\Object
 
     /**
      * [[@doctodo method_description:generateId]].
+     *
+     * @param [[@doctodo param_type:column]] $column [[@doctodo param_description:column]] [optional]
      *
      * @return [[@doctodo return_type:generateId]] [[@doctodo return_description:generateId]]
      */

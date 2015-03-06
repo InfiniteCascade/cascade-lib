@@ -47,6 +47,8 @@ class Generator extends \infinite\base\Object implements \infinite\web\RenderInt
 
     /**
      * Set items.
+     *
+     * @param [[@doctodo param_type:items]] $items [[@doctodo param_description:items]]
      */
     public function setItems($items)
     {

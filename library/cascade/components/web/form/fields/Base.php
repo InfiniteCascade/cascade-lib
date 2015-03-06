@@ -84,6 +84,8 @@ abstract class Base extends \infinite\base\Object implements \infinite\web\grid\
     /**
      * [[@doctodo method_description:neightborFieldId]].
      *
+     * @param [[@doctodo param_type:field]] $field [[@doctodo param_description:field]]
+     *
      * @return [[@doctodo return_type:neightborFieldId]] [[@doctodo return_description:neightborFieldId]]
      */
     public function neightborFieldId($field)

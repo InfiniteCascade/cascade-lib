@@ -84,6 +84,8 @@ class Relationship extends \infinite\base\Object
     /**
      * [[@doctodo method_description:doHandlePrimary]].
      *
+     * @param [[@doctodo param_type:role]] $role [[@doctodo param_description:role]] [optional]
+     *
      * @return [[@doctodo return_type:doHandlePrimary]] [[@doctodo return_description:doHandlePrimary]]
      */
     public function doHandlePrimary($role = null)
@@ -129,6 +131,10 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get primary object.
+     *
+     * @param [[@doctodo param_type:primaryObject]] $primaryObject [[@doctodo param_description:primaryObject]]
+     * @param [[@doctodo param_type:relatedObject]] $relatedObject [[@doctodo param_description:relatedObject]]
+     * @param [[@doctodo param_type:role]]          $role          [[@doctodo param_description:role]]
      *
      * @return [[@doctodo return_type:getPrimaryObject]] [[@doctodo return_description:getPrimaryObject]]
      */
@@ -177,6 +183,8 @@ class Relationship extends \infinite\base\Object
     /**
      * Get primary child.
      *
+     * @param [[@doctodo param_type:parentObject]] $parentObject [[@doctodo param_description:parentObject]]
+     *
      * @return [[@doctodo return_type:getPrimaryChild]] [[@doctodo return_description:getPrimaryChild]]
      */
     public function getPrimaryChild($parentObject)
@@ -209,6 +217,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get primary parent.
+     *
+     * @param [[@doctodo param_type:parentObject]] $parentObject [[@doctodo param_description:parentObject]]
      *
      * @return [[@doctodo return_type:getPrimaryParent]] [[@doctodo return_description:getPrimaryParent]]
      */
@@ -306,6 +316,8 @@ class Relationship extends \infinite\base\Object
     /**
      * Get by.
      *
+     * @param [[@doctodo param_type:relationshipId]] $relationshipId [[@doctodo param_description:relationshipId]]
+     *
      * @return [[@doctodo return_type:getById]] [[@doctodo return_description:getById]]
      */
     public static function getById($relationshipId)
@@ -366,6 +378,8 @@ class Relationship extends \infinite\base\Object
     /**
      * [[@doctodo method_description:companionRole]].
      *
+     * @param [[@doctodo param_type:queryRole]] $queryRole [[@doctodo param_description:queryRole]]
+     *
      * @return [[@doctodo return_type:companionRole]] [[@doctodo return_description:companionRole]]
      */
     public function companionRole($queryRole)
@@ -379,6 +393,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get label.
+     *
+     * @param [[@doctodo param_type:role]] $role [[@doctodo param_description:role]]
      *
      * @return [[@doctodo return_type:getLabel]] [[@doctodo return_description:getLabel]]
      */
@@ -395,6 +411,8 @@ class Relationship extends \infinite\base\Object
     /**
      * Get nice.
      *
+     * @param [[@doctodo param_type:queryRole]] $queryRole [[@doctodo param_description:queryRole]]
+     *
      * @return [[@doctodo return_type:getNiceId]] [[@doctodo return_description:getNiceId]]
      */
     public function getNiceId($queryRole)
@@ -409,6 +427,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * Get companion nice.
+     *
+     * @param [[@doctodo param_type:queryRole]] $queryRole [[@doctodo param_description:queryRole]]
      *
      * @return [[@doctodo return_type:getCompanionNiceId]] [[@doctodo return_description:getCompanionNiceId]]
      */
@@ -425,6 +445,8 @@ class Relationship extends \infinite\base\Object
     /**
      * [[@doctodo method_description:companionRoleType]].
      *
+     * @param [[@doctodo param_type:queryRole]] $queryRole [[@doctodo param_description:queryRole]]
+     *
      * @return [[@doctodo return_type:companionRoleType]] [[@doctodo return_description:companionRoleType]]
      */
     public function companionRoleType($queryRole)
@@ -438,6 +460,8 @@ class Relationship extends \infinite\base\Object
 
     /**
      * [[@doctodo method_description:role]].
+     *
+     * @param [[@doctodo param_type:queryRole]] $queryRole [[@doctodo param_description:queryRole]]
      *
      * @return [[@doctodo return_type:role]] [[@doctodo return_description:role]]
      */
@@ -453,6 +477,8 @@ class Relationship extends \infinite\base\Object
     /**
      * [[@doctodo method_description:roleType]].
      *
+     * @param [[@doctodo param_type:queryRole]] $queryRole [[@doctodo param_description:queryRole]]
+     *
      * @return [[@doctodo return_type:roleType]] [[@doctodo return_description:roleType]]
      */
     public function roleType($queryRole)
@@ -466,6 +492,9 @@ class Relationship extends \infinite\base\Object
 
     /**
      * [[@doctodo method_description:canLink]].
+     *
+     * @param [[@doctodo param_type:relationshipRole]] $relationshipRole [[@doctodo param_description:relationshipRole]]
+     * @param [[@doctodo param_type:object]]           $object           [[@doctodo param_description:object]]
      *
      * @return [[@doctodo return_type:canLink]] [[@doctodo return_description:canLink]]
      */
@@ -488,6 +517,9 @@ class Relationship extends \infinite\base\Object
     /**
      * [[@doctodo method_description:canCreate]].
      *
+     * @param [[@doctodo param_type:relationshipRole]] $relationshipRole [[@doctodo param_description:relationshipRole]]
+     * @param [[@doctodo param_type:object]]           $object           [[@doctodo param_description:object]]
+     *
      * @return [[@doctodo return_type:canCreate]] [[@doctodo return_description:canCreate]]
      */
     public function canCreate($relationshipRole, $object)
@@ -504,7 +536,9 @@ class Relationship extends \infinite\base\Object
     /**
      * Get model.
      *
-     * @param boolean $activeOnly [[@doctodo param_description:activeOnly]] [optional]
+     * @param [[@doctodo param_type:parentObjectId]] $parentObjectId [[@doctodo param_description:parentObjectId]]
+     * @param [[@doctodo param_type:childObjectId]]  $childObjectId  [[@doctodo param_description:childObjectId]]
+     * @param boolean                                $activeOnly     [[@doctodo param_description:activeOnly]] [optional]
      *
      * @return [[@doctodo return_type:getModel]] [[@doctodo return_description:getModel]]
      */
@@ -604,6 +638,10 @@ class Relationship extends \infinite\base\Object
     /**
      * Get related object.
      *
+     * @param [[@doctodo param_type:baseObject]]      $baseObject      [[@doctodo param_description:baseObject]]
+     * @param [[@doctodo param_type:baseRole]]        $baseRole        [[@doctodo param_description:baseRole]]
+     * @param [[@doctodo param_type:primaryRelation]] $primaryRelation [[@doctodo param_description:primaryRelation]] [optional]
+     *
      * @return [[@doctodo return_type:getRelatedObject]] [[@doctodo return_description:getRelatedObject]]
      */
     public function getRelatedObject($baseObject, $baseRole, $primaryRelation = null)
@@ -631,7 +669,9 @@ class Relationship extends \infinite\base\Object
     /**
      * Get primary relation.
      *
-     * @param array $relationOptions [[@doctodo param_description:relationOptions]] [optional]
+     * @param [[@doctodo param_type:baseObject]] $baseObject      [[@doctodo param_description:baseObject]]
+     * @param [[@doctodo param_type:baseRole]]   $baseRole        [[@doctodo param_description:baseRole]]
+     * @param array                              $relationOptions [[@doctodo param_description:relationOptions]] [optional]
      *
      * @return [[@doctodo return_type:getPrimaryRelation]] [[@doctodo return_description:getPrimaryRelation]]
      */

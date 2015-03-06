@@ -71,6 +71,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     /**
      * [[@doctodo method_description:stateKeyName]].
      *
+     * @param [[@doctodo param_type:key]] $key [[@doctodo param_description:key]]
+     *
      * @return [[@doctodo return_type:stateKeyName]] [[@doctodo return_description:stateKeyName]]
      */
     public function stateKeyName($key)
@@ -112,6 +114,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Set lazy.
+     *
+     * @param [[@doctodo param_type:lazy]] $lazy [[@doctodo param_description:lazy]]
      */
     public function setLazy($lazy)
     {
@@ -120,6 +124,9 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Get state.
+     *
+     * @param [[@doctodo param_type:key]]     $key     [[@doctodo param_description:key]]
+     * @param [[@doctodo param_type:default]] $default [[@doctodo param_description:default]] [optional]
      *
      * @return [[@doctodo return_type:getState]] [[@doctodo return_description:getState]]
      */
@@ -130,6 +137,9 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Set state.
+     *
+     * @param [[@doctodo param_type:key]]   $key   [[@doctodo param_description:key]]
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      *
      * @return [[@doctodo return_type:setState]] [[@doctodo return_description:setState]]
      */
@@ -160,6 +170,8 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
 
     /**
      * Set title.
+     *
+     * @param [[@doctodo param_type:title]] $title [[@doctodo param_description:title]]
      */
     public function setTitle($title)
     {

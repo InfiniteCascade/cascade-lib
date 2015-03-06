@@ -84,7 +84,8 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
     /**
      * [[@doctodo method_description:watch]].
      *
-     * @param boolean $doWatch [[@doctodo param_description:doWatch]] [optional]
+     * @param boolean                      $doWatch [[@doctodo param_description:doWatch]] [optional]
+     * @param [[@doctodo param_type:user]] $user    [[@doctodo param_description:user]] [optional]
      *
      * @return [[@doctodo return_type:watch]] [[@doctodo return_description:watch]]
      */
@@ -105,6 +106,8 @@ class Familiarity extends \infinite\db\behaviors\ActiveRecord
 
     /**
      * Get familiarity.
+     *
+     * @param [[@doctodo param_type:user]] $user [[@doctodo param_description:user]] [optional]
      *
      * @return [[@doctodo return_type:getFamiliarity]] [[@doctodo return_description:getFamiliarity]]
      */

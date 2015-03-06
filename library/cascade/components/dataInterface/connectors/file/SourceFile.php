@@ -127,6 +127,8 @@ class SourceFile extends \infinite\base\Object
     /**
      * [[@doctodo method_description:testIgnore]].
      *
+     * @param [[@doctodo param_type:line]] $line [[@doctodo param_description:line]]
+     *
      * @return [[@doctodo return_type:testIgnore]] [[@doctodo return_description:testIgnore]]
      */
     public function testIgnore($line)
@@ -152,6 +154,8 @@ class SourceFile extends \infinite\base\Object
 
     /**
      * [[@doctodo method_description:readLine]].
+     *
+     * @param [[@doctodo param_type:line]] $line [[@doctodo param_description:line]]
      *
      * @return [[@doctodo return_type:readLine]] [[@doctodo return_description:readLine]]
      */
@@ -215,6 +219,8 @@ class SourceFile extends \infinite\base\Object
     /**
      * [[@doctodo method_description:normalizeFile]].
      *
+     * @param [[@doctodo param_type:filepath]] $filepath [[@doctodo param_description:filepath]]
+     *
      * @return [[@doctodo return_type:normalizeFile]] [[@doctodo return_description:normalizeFile]]
      */
     public function normalizeFile($filepath)
@@ -258,7 +264,9 @@ class SourceFile extends \infinite\base\Object
     /**
      * [[@doctodo method_description:convertExcel]].
      *
-     * @param string $filetype [[@doctodo param_description:filetype]] [optional]
+     * @param [[@doctodo param_type:filepath]] $filepath [[@doctodo param_description:filepath]]
+     * @param [[@doctodo param_type:tmpfile]]  $tmpfile  [[@doctodo param_description:tmpfile]]
+     * @param string                           $filetype [[@doctodo param_description:filetype]] [optional]
      *
      * @throws Exception [[@doctodo exception_description:Exception]]
      * @return [[@doctodo return_type:convertExcel]] [[@doctodo return_description:convertExcel]]
@@ -296,6 +304,9 @@ class SourceFile extends \infinite\base\Object
 
     /**
      * [[@doctodo method_description:downloadFile]].
+     *
+     * @param [[@doctodo param_type:url]]      $url      [[@doctodo param_description:url]]
+     * @param [[@doctodo param_type:savePath]] $savePath [[@doctodo param_description:savePath]]
      *
      * @return [[@doctodo return_type:downloadFile]] [[@doctodo return_description:downloadFile]]
      */
@@ -344,6 +355,8 @@ class SourceFile extends \infinite\base\Object
 
     /**
      * Set headers.
+     *
+     * @param [[@doctodo param_type:headers]] $headers [[@doctodo param_description:headers]]
      */
     public function setHeaders($headers)
     {

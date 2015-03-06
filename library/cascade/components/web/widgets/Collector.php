@@ -44,6 +44,8 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Set lazy.
+     *
+     * @param [[@doctodo param_type:lazy]] $lazy [[@doctodo param_description:lazy]]
      */
     public function setLazy($lazy)
     {
@@ -70,6 +72,7 @@ class Collector extends \infinite\base\collector\Module
      * [[@doctodo method_description:build]].
      *
      * @param cascade\components\web\widgets\section\Section $section          [[@doctodo param_description:section]]
+     * @param [[@doctodo param_type:widgetName]]             $widgetName       [[@doctodo param_description:widgetName]]
      * @param array                                          $instanceSettings [[@doctodo param_description:instanceSettings]] [optional]
      *
      * @return [[@doctodo return_type:build]] [[@doctodo return_description:build]]

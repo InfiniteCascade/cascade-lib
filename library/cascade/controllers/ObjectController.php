@@ -369,7 +369,8 @@ class ObjectController extends Controller
     /**
      * [[@doctodo method_description:_checkParams]].
      *
-     * @param array $required [[@doctodo param_description:required]] [optional]
+     * @param [[@doctodo param_type:params]] $params   [[@doctodo param_description:params]]
+     * @param array                          $required [[@doctodo param_description:required]] [optional]
      *
      * @throws HttpException [[@doctodo exception_description:HttpException]]
      * @return [[@doctodo return_type:_checkParams]] [[@doctodo return_description:_checkParams]]

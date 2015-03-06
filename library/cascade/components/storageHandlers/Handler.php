@@ -29,18 +29,24 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 
     /**
      * [[@doctodo method_description:generateInternal]].
+     *
+     * @param [[@doctodo param_type:item]] $item [[@doctodo param_description:item]]
      */
     abstract public function generateInternal($item);
     /**
      * [[@doctodo method_description:validate]].
      *
-     * @param cascade\models\StorageEngine $engine [[@doctodo param_description:engine]]
+     * @param cascade\models\StorageEngine      $engine    [[@doctodo param_description:engine]]
+     * @param [[@doctodo param_type:model]]     $model     [[@doctodo param_description:model]]
+     * @param [[@doctodo param_type:attribute]] $attribute [[@doctodo param_description:attribute]]
      */
     abstract public function validate(StorageEngine $engine, $model, $attribute);
     /**
      * [[@doctodo method_description:handleSave]].
      *
-     * @param cascade\models\Storage $storage [[@doctodo param_description:storage]]
+     * @param cascade\models\Storage            $storage   [[@doctodo param_description:storage]]
+     * @param [[@doctodo param_type:model]]     $model     [[@doctodo param_description:model]]
+     * @param [[@doctodo param_type:attribute]] $attribute [[@doctodo param_description:attribute]]
      */
     abstract public function handleSave(Storage $storage, $model, $attribute);
 
@@ -53,6 +59,8 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 
     /**
      * [[@doctodo method_description:generate]].
+     *
+     * @param [[@doctodo param_type:item]] $item [[@doctodo param_description:item]]
      *
      * @return [[@doctodo return_type:generate]] [[@doctodo return_description:generate]]
      */
@@ -68,6 +76,9 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 
     /**
      * [[@doctodo method_description:prepareRendered]].
+     *
+     * @param [[@doctodo param_type:rendered]] $rendered [[@doctodo param_description:rendered]]
+     * @param [[@doctodo param_type:item]]     $item     [[@doctodo param_description:item]]
      */
     public function prepareRendered(&$rendered, $item)
     {
@@ -113,7 +124,9 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
     /**
      * [[@doctodo method_description:beforeSave]].
      *
-     * @param cascade\models\StorageEngine $engine [[@doctodo param_description:engine]]
+     * @param cascade\models\StorageEngine      $engine    [[@doctodo param_description:engine]]
+     * @param [[@doctodo param_type:model]]     $model     [[@doctodo param_description:model]]
+     * @param [[@doctodo param_type:attribute]] $attribute [[@doctodo param_description:attribute]]
      *
      * @return [[@doctodo return_type:beforeSave]] [[@doctodo return_description:beforeSave]]
      */
@@ -133,6 +146,8 @@ abstract class Handler extends \infinite\base\Component implements \infinite\bas
 
     /**
      * [[@doctodo method_description:beforeSetStorage]].
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      *
      * @return [[@doctodo return_type:beforeSetStorage]] [[@doctodo return_description:beforeSetStorage]]
      */

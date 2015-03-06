@@ -36,6 +36,9 @@ class Meta extends \infinite\base\Object
     /**
      * Get.
      *
+     * @param [[@doctodo param_type:interface]]  $interface  [[@doctodo param_description:interface]]
+     * @param [[@doctodo param_type:sourceFile]] $sourceFile [[@doctodo param_description:sourceFile]]
+     *
      * @return [[@doctodo return_type:get]] [[@doctodo return_description:get]]
      */
     public static function get($interface, $sourceFile)
@@ -70,6 +73,8 @@ class Meta extends \infinite\base\Object
     /**
      * [[@doctodo method_description:hasAttribute]].
      *
+     * @param [[@doctodo param_type:name]] $name [[@doctodo param_description:name]]
+     *
      * @return [[@doctodo return_type:hasAttribute]] [[@doctodo return_description:hasAttribute]]
      */
     public function hasAttribute($name)
@@ -89,6 +94,8 @@ class Meta extends \infinite\base\Object
 
     /**
      * Set interface.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setInterface($value)
     {

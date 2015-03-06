@@ -80,6 +80,8 @@ class Auditable extends \infinite\db\behaviors\auditable\Auditable
 
     /**
      * Set audit data interface.
+     *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
      */
     public function setAuditDataInterface($object)
     {

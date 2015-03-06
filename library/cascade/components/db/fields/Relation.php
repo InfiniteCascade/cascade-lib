@@ -110,6 +110,8 @@ class Relation extends Base
     /**
      * [[@doctodo method_description:parseRelationTaxonomy]].
      *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     *
      * @return [[@doctodo return_type:parseRelationTaxonomy]] [[@doctodo return_description:parseRelationTaxonomy]]
      */
     public function parseRelationTaxonomy($value)

@@ -34,6 +34,8 @@ class Collector extends \infinite\base\collector\Module
     /**
      * Get by pk.
      *
+     * @param [[@doctodo param_type:pk]] $pk [[@doctodo param_description:pk]]
+     *
      * @return Item data interface item
      */
     public function getByPk($pk)

@@ -36,6 +36,8 @@ class Response extends \infinite\web\browser\Response
     /**
      * [[@doctodo method_description:parseStack]].
      *
+     * @param [[@doctodo param_type:request]] $request [[@doctodo param_description:request]]
+     *
      * @return [[@doctodo return_type:parseStack]] [[@doctodo return_description:parseStack]]
      */
     public static function parseStack($request)

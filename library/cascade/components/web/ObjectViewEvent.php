@@ -35,7 +35,8 @@ class ObjectViewEvent extends \yii\base\Event
     /**
      * [[@doctodo method_description:handleWith]].
      *
-     * @param boolean $always [[@doctodo param_description:always]] [optional]
+     * @param [[@doctodo param_type:callable]] $callable [[@doctodo param_description:callable]]
+     * @param boolean                          $always   [[@doctodo param_description:always]] [optional]
      *
      * @return [[@doctodo return_type:handleWith]] [[@doctodo return_description:handleWith]]
      */
@@ -54,6 +55,8 @@ class ObjectViewEvent extends \yii\base\Event
 
     /**
      * Set object.
+     *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
      */
     public function setObject($object)
     {
@@ -75,6 +78,8 @@ class ObjectViewEvent extends \yii\base\Event
 
     /**
      * Set object type.
+     *
+     * @param [[@doctodo param_type:type]] $type [[@doctodo param_description:type]]
      */
     public function setObjectType($type)
     {

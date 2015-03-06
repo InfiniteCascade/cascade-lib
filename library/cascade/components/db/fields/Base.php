@@ -173,6 +173,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Set locations.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setLocations($value)
     {
@@ -209,6 +211,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Set form field.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      *
      * @throws Exception [[@doctodo exception_description:Exception]]
      * @return [[@doctodo return_type:setFormField]] [[@doctodo return_description:setFormField]]
@@ -282,6 +286,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Set multiline.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setMultiline($value)
     {
@@ -356,6 +362,8 @@ abstract class Base extends \infinite\base\Object
 
     /**
      * Set attributes.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setAttributes($value)
     {

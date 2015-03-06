@@ -75,6 +75,8 @@ class Segment extends FormObject
 
     /**
      * Set model.
+     *
+     * @param [[@doctodo param_type:model]] $model [[@doctodo param_description:model]]
      */
     public function setModel($model)
     {
@@ -83,6 +85,8 @@ class Segment extends FormObject
 
     /**
      * Set name.
+     *
+     * @param [[@doctodo param_type:name]] $name [[@doctodo param_description:name]]
      */
     public function setName($name)
     {
@@ -91,6 +95,8 @@ class Segment extends FormObject
 
     /**
      * Set settings.
+     *
+     * @param [[@doctodo param_type:settings]] $settings [[@doctodo param_description:settings]]
      *
      * @throws Exception [[@doctodo exception_description:Exception]]
      */

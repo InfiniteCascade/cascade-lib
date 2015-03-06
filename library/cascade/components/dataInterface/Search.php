@@ -179,6 +179,8 @@ class Search extends \infinite\base\Component
 
     /**
      * Set local fields.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setLocalFields($value)
     {
@@ -197,6 +199,8 @@ class Search extends \infinite\base\Component
 
     /**
      * Set foreign fields.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setForeignFields($value)
     {

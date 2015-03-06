@@ -59,6 +59,8 @@ class ParamBehavior extends \yii\base\Behavior
     /**
      * Get param.
      *
+     * @param [[@doctodo param_type:param]] $param [[@doctodo param_description:param]]
+     *
      * @return [[@doctodo return_type:getParam]] [[@doctodo return_description:getParam]]
      */
     protected function getParam($param)
@@ -73,6 +75,8 @@ class ParamBehavior extends \yii\base\Behavior
     }
     /**
      * [[@doctodo method_description:beforeRun]].
+     *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
      *
      * @throws InvalidParamException [[@doctodo exception_description:InvalidParamException]]
      * @return [[@doctodo return_type:beforeRun]] [[@doctodo return_description:beforeRun]]

@@ -60,6 +60,8 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * [[@doctodo method_description:onAfterInit]].
      *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
+     *
      * @throws Exception [[@doctodo exception_description:Exception]]
      * @return [[@doctodo return_type:onAfterInit]] [[@doctodo return_description:onAfterInit]]
      *

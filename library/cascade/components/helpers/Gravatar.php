@@ -13,7 +13,8 @@ class Gravatar extends \emberlabs\gravatarlib\Gravatar
     /**
      * [[@doctodo method_description:test]].
      *
-     * @param boolean $hash_email [[@doctodo param_description:hash_email]] [optional]
+     * @param [[@doctodo param_type:email]] $email      [[@doctodo param_description:email]]
+     * @param boolean                       $hash_email [[@doctodo param_description:hash_email]] [optional]
      *
      * @return [[@doctodo return_type:test]] [[@doctodo return_description:test]]
      */
@@ -49,7 +50,8 @@ class Gravatar extends \emberlabs\gravatarlib\Gravatar
     /**
      * [[@doctodo method_description:fetch]].
      *
-     * @param boolean $hash_email [[@doctodo param_description:hash_email]] [optional]
+     * @param [[@doctodo param_type:email]] $email      [[@doctodo param_description:email]]
+     * @param boolean                       $hash_email [[@doctodo param_description:hash_email]] [optional]
      *
      * @return [[@doctodo return_type:fetch]] [[@doctodo return_description:fetch]]
      */

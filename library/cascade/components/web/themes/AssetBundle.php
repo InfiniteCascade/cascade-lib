@@ -20,6 +20,9 @@ class AssetBundle extends \yii\web\AssetBundle
     /**
      * [[@doctodo method_description:sizeImageCache]].
      *
+     * @param [[@doctodo param_type:imagePath]] $imagePath [[@doctodo param_description:imagePath]]
+     * @param [[@doctodo param_type:size]]      $size      [[@doctodo param_description:size]]
+     *
      * @return [[@doctodo return_type:sizeImageCache]] [[@doctodo return_description:sizeImageCache]]
      */
     public function sizeImageCache($imagePath, $size)
@@ -50,6 +53,9 @@ class AssetBundle extends \yii\web\AssetBundle
 
     /**
      * [[@doctodo method_description:followResizeInstructions]].
+     *
+     * @param [[@doctodo param_type:imagePath]] $imagePath [[@doctodo param_description:imagePath]]
+     * @param [[@doctodo param_type:resize]]    $resize    [[@doctodo param_description:resize]]
      *
      * @return [[@doctodo return_type:followResizeInstructions]] [[@doctodo return_description:followResizeInstructions]]
      */
@@ -113,6 +119,8 @@ class AssetBundle extends \yii\web\AssetBundle
 
     /**
      * Get cache asset url.
+     *
+     * @param [[@doctodo param_type:path]] $path [[@doctodo param_description:path]]
      *
      * @return [[@doctodo return_type:getCacheAssetUrl]] [[@doctodo return_description:getCacheAssetUrl]]
      */

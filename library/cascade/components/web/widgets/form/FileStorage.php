@@ -58,6 +58,8 @@ class FileStorage extends Widget
     /**
      * [[@doctodo method_description:prepareItem]].
      *
+     * @param [[@doctodo param_type:engine]] $engine [[@doctodo param_description:engine]]
+     *
      * @return [[@doctodo return_type:prepareItem]] [[@doctodo return_description:prepareItem]]
      */
     public function prepareItem($engine)
@@ -71,6 +73,8 @@ class FileStorage extends Widget
 
     /**
      * [[@doctodo method_description:renderItem]].
+     *
+     * @param [[@doctodo param_type:storageEngine]] $storageEngine [[@doctodo param_description:storageEngine]]
      *
      * @return [[@doctodo return_type:renderItem]] [[@doctodo return_description:renderItem]]
      */

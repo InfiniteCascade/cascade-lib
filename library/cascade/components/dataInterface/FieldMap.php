@@ -62,6 +62,8 @@ class FieldMap extends \infinite\base\Object
     /**
      * [[@doctodo method_description:testIgnore]].
      *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     *
      * @return [[@doctodo return_type:testIgnore]] [[@doctodo return_description:testIgnore]]
      */
     public function testIgnore($value)
@@ -104,6 +106,10 @@ class FieldMap extends \infinite\base\Object
 
     /**
      * [[@doctodo method_description:extractValue]].
+     *
+     * @param [[@doctodo param_type:caller]]       $caller       [[@doctodo param_description:caller]]
+     * @param [[@doctodo param_type:foreignModel]] $foreignModel [[@doctodo param_description:foreignModel]] [optional]
+     * @param [[@doctodo param_type:localModel]]   $localModel   [[@doctodo param_description:localModel]] [optional]
      *
      * @return [[@doctodo return_type:extractValue]] [[@doctodo return_description:extractValue]]
      */

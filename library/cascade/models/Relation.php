@@ -100,6 +100,11 @@ class Relation extends \infinite\db\models\Relation
 
     /**
      * [[@doctodo method_description:addFields]].
+     *
+     * @param [[@doctodo param_type:caller]]       $caller       [[@doctodo param_description:caller]]
+     * @param [[@doctodo param_type:fields]]       $fields       [[@doctodo param_description:fields]]
+     * @param [[@doctodo param_type:relationship]] $relationship [[@doctodo param_description:relationship]]
+     * @param [[@doctodo param_type:owner]]        $owner        [[@doctodo param_description:owner]]
      */
     public function addFields($caller, &$fields, $relationship, $owner)
     {

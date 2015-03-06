@@ -67,6 +67,8 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * [[@doctodo method_description:registerAssetBundles]].
+     *
+     * @param [[@doctodo param_type:view]] $view [[@doctodo param_description:view]]
      */
     public function registerAssetBundles($view)
     {
@@ -98,6 +100,8 @@ class Collector extends \infinite\base\collector\Module
 
     /**
      * Get identity.
+     *
+     * @param [[@doctodo param_type:view]] $view [[@doctodo param_description:view]]
      *
      * @return [[@doctodo return_type:getIdentity]] [[@doctodo return_description:getIdentity]]
      */

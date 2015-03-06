@@ -23,6 +23,8 @@ abstract class IdentityAsset extends AssetBundle
     /**
      * Get logo.
      *
+     * @param [[@doctodo param_type:size]] $size [[@doctodo param_description:size]] [optional]
+     *
      * @return [[@doctodo return_type:getLogo]] [[@doctodo return_description:getLogo]]
      */
     public function getLogo($size = null)

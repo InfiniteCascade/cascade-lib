@@ -119,6 +119,8 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     /**
      * Action after module init.
      *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
+     *
      * @return bool ran successfully
      */
     public function onAfterInit($event)

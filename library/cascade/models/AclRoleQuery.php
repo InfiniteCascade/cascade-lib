@@ -29,6 +29,8 @@ class AclRoleQuery extends ActiveQuery
 
     /**
      * [[@doctodo method_description:prioritizeNonType]].
+     *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]] [optional]
      */
     public function prioritizeNonType($event = null)
     {

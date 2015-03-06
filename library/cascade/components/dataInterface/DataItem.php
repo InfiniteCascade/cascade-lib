@@ -81,6 +81,8 @@ abstract class DataItem extends \infinite\base\Component
     /**
      * [[@doctodo method_description:searchLocalObject]].
      *
+     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
+     *
      * @return [[@doctodo return_type:searchLocalObject]] [[@doctodo return_description:searchLocalObject]]
      */
     protected function searchLocalObject($event)
@@ -218,6 +220,9 @@ abstract class DataItem extends \infinite\base\Component
     /**
      * [[@doctodo method_description:testIgnore]].
      *
+     * @param [[@doctodo param_type:object]] $object [[@doctodo param_description:object]]
+     * @param [[@doctodo param_type:ignore]] $ignore [[@doctodo param_description:ignore]]
+     *
      * @return [[@doctodo return_type:testIgnore]] [[@doctodo return_description:testIgnore]]
      */
     protected function testIgnore($object, $ignore)
@@ -304,6 +309,9 @@ abstract class DataItem extends \infinite\base\Component
     /**
      * Get handling object.
      *
+     * @param [[@doctodo param_type:a]] $a [[@doctodo param_description:a]]
+     * @param [[@doctodo param_type:b]] $b [[@doctodo param_description:b]]
+     *
      * @return [[@doctodo return_type:getHandlingObject]] [[@doctodo return_description:getHandlingObject]]
      */
     public static function getHandlingObject($a, $b)
@@ -355,6 +363,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set companion object.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      *
      * @return [[@doctodo return_type:setCompanionObject]] [[@doctodo return_description:setCompanionObject]]
      */
@@ -420,6 +430,8 @@ abstract class DataItem extends \infinite\base\Component
     /**
      * Set handled data item.
      *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     *
      * @return [[@doctodo return_type:setHandledDataItem]] [[@doctodo return_description:setHandledDataItem]]
      */
     public function setHandledDataItem($value)
@@ -461,6 +473,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set foreign object.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setForeignObject($value)
     {
@@ -483,6 +497,8 @@ abstract class DataItem extends \infinite\base\Component
 
     /**
      * Set local object.
+     *
+     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
      */
     public function setLocalObject($value)
     {
