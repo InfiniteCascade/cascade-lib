@@ -9,7 +9,7 @@
 namespace cascade\components\dataInterface;
 
 /**
- * Collector [[@doctodo class_description:cascade\components\dataInterface\Collector]].
+ * Collector collector for the data interfaces.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -34,7 +34,7 @@ class Collector extends \infinite\base\collector\Module
     /**
      * Get by pk.
      *
-     * @return [[@doctodo return_type:getByPk]] [[@doctodo return_description:getByPk]]
+     * @return Item data interface item
      */
     public function getByPk($pk)
     {

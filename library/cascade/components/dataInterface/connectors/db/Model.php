@@ -12,22 +12,22 @@ use Yii;
 use yii\db\Query;
 
 /**
- * Model [[@doctodo class_description:cascade\components\dataInterface\connectors\db\Model]].
+ * Model for foreign data items in a database connection.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Model extends \cascade\components\dataInterface\connectors\generic\Model
 {
     /**
-     * @var [[@doctodo var_type:_tableName]] [[@doctodo var_description:_tableName]]
+     * @var string table name for model
      */
     protected $_tableName;
     /**
-     * @var [[@doctodo var_type:_meta]] [[@doctodo var_description:_meta]]
+     * @var Meta meta object
      */
     protected $_meta;
     /**
-     * @var [[@doctodo var_type:_keys]] [[@doctodo var_description:_keys]]
+     * @var array keys from model
      */
     protected $_keys;
 
@@ -63,7 +63,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     /**
      * Get children.
      *
-     * @return [[@doctodo return_type:getChildren]] [[@doctodo return_description:getChildren]]
+     * @return array child objects for this model
      */
     public function getChildren()
     {
@@ -107,9 +107,9 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
         return $this->_children;
     }
     /**
-     * [[@doctodo method_description:primaryKey]].
+     * Retrieve the primary key column for the model item.
      *
-     * @return [[@doctodo return_type:primaryKey]] [[@doctodo return_description:primaryKey]]
+     * @return string the primary key
      */
     public function primaryKey()
     {
@@ -129,7 +129,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     /**
      * Get primary key.
      *
-     * @return [[@doctodo return_type:getPrimaryKey]] [[@doctodo return_description:getPrimaryKey]]
+     * @return string the primary key
      */
     public function getPrimaryKey()
     {
@@ -156,7 +156,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     /**
      * Get attributes.
      *
-     * @return [[@doctodo return_type:getAttributes]] [[@doctodo return_description:getAttributes]]
+     * @return array of the attribute values
      */
     public function getAttributes()
     {
@@ -174,7 +174,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     /**
      * Get meta.
      *
-     * @return [[@doctodo return_type:getMeta]] [[@doctodo return_description:getMeta]]
+     * @return Meta the model meta
      */
     public function getMeta()
     {
@@ -190,9 +190,9 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * [[@doctodo method_description:find]].
+     * Find the models for a foreign data source.
      *
-     * @return [[@doctodo return_type:find]] [[@doctodo return_description:find]]
+     * @return Query the foreign data query
      */
     protected function find($params)
     {
@@ -226,11 +226,11 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * [[@doctodo method_description:findAll]].
+     * Find all the foreign database records.
      *
-     * @param array $params [[@doctodo param_description:params]] [optional]
+     * @param array $params find params for the query [optional]
      *
-     * @return [[@doctodo return_type:findAll]] [[@doctodo return_description:findAll]]
+     * @return array of foreign data records
      */
     public function findAll($params = [])
     {
@@ -240,11 +240,11 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * [[@doctodo method_description:findOne]].
+     * Find one foreign database record.
      *
-     * @param array $params [[@doctodo param_description:params]] [optional]
+     * @param array $params find params for the query [optional]
      *
-     * @return [[@doctodo return_type:findOne]] [[@doctodo return_description:findOne]]
+     * @return Model database record
      */
     public function findOne($params = [])
     {
@@ -252,11 +252,11 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     }
 
     /**
-     * [[@doctodo method_description:findPrimaryKeys]].
+     * Return the primary keys (used in lazy loading).
      *
-     * @param array $params [[@doctodo param_description:params]] [optional]
+     * @param array $params find params for the query [optional]
      *
-     * @return [[@doctodo return_type:findPrimaryKeys]] [[@doctodo return_description:findPrimaryKeys]]
+     * @return array keys from the data source items
      */
     public function findPrimaryKeys($params = [])
     {
@@ -269,7 +269,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     /**
      * Get table name.
      *
-     * @return [[@doctodo return_type:getTableName]] [[@doctodo return_description:getTableName]]
+     * @return string name of the table
      */
     public function getTableName()
     {

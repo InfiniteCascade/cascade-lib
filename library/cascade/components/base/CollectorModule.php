@@ -13,7 +13,7 @@ use infinite\base\exceptions\Exception;
 use Yii;
 
 /**
- * CollectorModule [[@doctodo class_description:cascade\components\base\CollectorModule]].
+ * CollectorModule is the base class for all collected modules in Cascade.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -24,8 +24,8 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     /**
      * Prepares object for serialization.
      *
-     * @throws Exception [[@doctodo exception_description:Exception]]
-     * @return [[@doctodo return_type:__sleep]] [[@doctodo return_description:__sleep]]
+     * @throws Exception when the module isn't the app
+     * @return array keys to sleep
      *
      */
     public function __sleep()
@@ -40,7 +40,7 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     }
 
     /**
-     * [[@doctodo method_description:__wakeup]].
+     * Actions to take on object wakeup.
      */
     public function __wakeup()
     {
@@ -49,9 +49,9 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     }
 
     /**
-     * [[@doctodo method_description:always]].
+     * Prepare the collected module on wakeup and init.
      *
-     * @return [[@doctodo return_type:always]] [[@doctodo return_description:always]]
+     * @return bool ran successfully
      */
     public function always()
     {
@@ -90,9 +90,9 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     }
 
     /**
-     * [[@doctodo method_description:loadSubmodules]].
+     * Load the submodule sof this collected module.
      *
-     * @return [[@doctodo return_type:loadSubmodules]] [[@doctodo return_description:loadSubmodules]]
+     * @return bool load was successful
      */
     public function loadSubmodules()
     {
@@ -109,7 +109,7 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     /**
      * Get submodules.
      *
-     * @return [[@doctodo return_type:getSubmodules]] [[@doctodo return_description:getSubmodules]]
+     * @return array submodules of this modules
      */
     public function getSubmodules()
     {
@@ -117,9 +117,9 @@ abstract class CollectorModule extends \infinite\base\Module implements \infinit
     }
 
     /**
-     * [[@doctodo method_description:onAfterInit]].
+     * Action after module init.
      *
-     * @return [[@doctodo return_type:onAfterInit]] [[@doctodo return_description:onAfterInit]]
+     * @return bool ran successfully
      */
     public function onAfterInit($event)
     {

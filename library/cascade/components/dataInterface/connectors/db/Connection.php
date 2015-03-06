@@ -9,7 +9,7 @@
 namespace cascade\components\dataInterface\connectors\db;
 
 /**
- * Connection [[@doctodo class_description:cascade\components\dataInterface\connectors\db\Connection]].
+ * Connection overloaded database connection class.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

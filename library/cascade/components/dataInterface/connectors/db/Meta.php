@@ -11,50 +11,50 @@ namespace cascade\components\dataInterface\connectors\db;
 use infinite\base\exceptions\Exception;
 
 /**
- * Meta [[@doctodo class_description:cascade\components\dataInterface\connectors\db\Meta]].
+ * Meta meta for the database data interface connector.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Meta extends \infinite\base\Object
 {
     /**
-     * @var [[@doctodo var_type:_hasMany]] [[@doctodo var_description:_hasMany]]
+     * @var array has many relationships for model meta
      */
     protected $_hasMany = [];
     /**
-     * @var [[@doctodo var_type:_hasOne]] [[@doctodo var_description:_hasOne]]
+     * @var array has one relationships for model meta
      */
     protected $_hasOne = [];
     /**
-     * @var [[@doctodo var_type:_belongsTo]] [[@doctodo var_description:_belongsTo]]
+     * @var array belongs to relationships for model meta
      */
     protected $_belongsTo = [];
     /**
-     * @var [[@doctodo var_type:_foreignTable]] [[@doctodo var_description:_foreignTable]]
+     * @var string foreign table name
      */
     protected $_foreignTable;
     /**
-     * @var [[@doctodo var_type:_db]] [[@doctodo var_description:_db]]
+     * @var Connection database connection for this model
      */
     protected $_db;
     /**
-     * @var [[@doctodo var_type:_schema]] [[@doctodo var_description:_schema]]
+     * @var Schema database schema for the table
      */
     protected $_schema;
     /**
-     * @var [[@doctodo var_type:_interface]] [[@doctodo var_description:_interface]]
+     * @var Item database item for the model
      */
     protected $_interface;
 
     /**
-     * @var [[@doctodo var_type:_metas]] [[@doctodo var_description:_metas]]
+     * @var array static collection of all meta objects
      */
     public static $_metas = [];
 
     /**
      * Get.
      *
-     * @return [[@doctodo return_type:get]] [[@doctodo return_description:get]]
+     * @return static meta object for the given interface and foreign table
      */
     public static function get($interface, $foreignTable)
     {
@@ -110,7 +110,7 @@ class Meta extends \infinite\base\Object
     /**
      * Get has many.
      *
-     * @return [[@doctodo return_type:getHasMany]] [[@doctodo return_description:getHasMany]]
+     * @return array has many relationships for model meta
      */
     public function getHasMany()
     {
@@ -120,7 +120,7 @@ class Meta extends \infinite\base\Object
     /**
      * Get has one.
      *
-     * @return [[@doctodo return_type:getHasOne]] [[@doctodo return_description:getHasOne]]
+     * @return array has one relationships for model meta
      */
     public function getHasOne()
     {
@@ -130,7 +130,7 @@ class Meta extends \infinite\base\Object
     /**
      * Get belongs to.
      *
-     * @return [[@doctodo return_type:getBelongsTo]] [[@doctodo return_description:getBelongsTo]]
+     * @return array belongs to relationships for model meta
      */
     public function getBelongsTo()
     {
@@ -138,9 +138,9 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * [[@doctodo method_description:hasAttribute]].
+     * Check if data source has a certain attribute.
      *
-     * @return [[@doctodo return_type:hasAttribute]] [[@doctodo return_description:hasAttribute]]
+     * @return bool if the attribute exists
      */
     public function hasAttribute($name)
     {
@@ -150,7 +150,7 @@ class Meta extends \infinite\base\Object
     /**
      * Get attribute keys.
      *
-     * @return [[@doctodo return_type:getAttributeKeys]] [[@doctodo return_description:getAttributeKeys]]
+     * @return array of column names
      */
     public function getAttributeKeys()
     {
@@ -160,7 +160,7 @@ class Meta extends \infinite\base\Object
     /**
      * Get schema.
      *
-     * @return [[@doctodo return_type:getSchema]] [[@doctodo return_description:getSchema]]
+     * @return Schema database schema
      */
     public function getSchema()
     {
@@ -178,7 +178,7 @@ class Meta extends \infinite\base\Object
     /**
      * Get interface.
      *
-     * @return [[@doctodo return_type:getInterface]] [[@doctodo return_description:getInterface]]
+     * @return Item data interface Item
      */
     public function getInterface()
     {

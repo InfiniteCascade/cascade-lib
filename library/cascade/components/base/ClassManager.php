@@ -9,7 +9,7 @@
 namespace cascade\components\base;
 
 /**
- * ClassManager [[@doctodo class_description:cascade\components\base\ClassManager]].
+ * ClassManager Class name helper for the application.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

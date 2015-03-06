@@ -11,14 +11,14 @@ namespace cascade\components\base;
 use Yii;
 
 /**
- * ModuleSetExtension [[@doctodo class_description:cascade\components\base\ModuleSetExtension]].
+ * ModuleSetExtension base class for a module set.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
 {
     /**
-     * [[@doctodo method_description:bootstrap]].
+     * Bootstrap the module set on load.
      */
     public function bootstrap($app)
     {
@@ -30,7 +30,7 @@ abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
     }
 
     /**
-     * [[@doctodo method_description:beforeRequest]].
+     * Actions to run before request starts.
      */
     public function beforeRequest($event)
     {
@@ -39,7 +39,7 @@ abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
     /**
      * Get modules.
      *
-     * @return [[@doctodo return_type:getModules]] [[@doctodo return_description:getModules]]
+     * @return array of the modules in the set
      */
     public static function getModules()
     {

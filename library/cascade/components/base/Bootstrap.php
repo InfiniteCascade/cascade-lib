@@ -8,14 +8,14 @@ use yii\base\BootstrapInterface;
 use yii\base\Event;
 
 /**
- * Bootstrap [[@doctodo class_description:cascade\components\base\Bootstrap]].
+ * Bootstrap Bootstrap cascade.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Bootstrap extends \yii\base\Object implements BootstrapInterface
 {
     /**
-     * [[@doctodo method_description:bootstrap]].
+     * @inheritdocs.
      */
     public function bootstrap($app)
     {

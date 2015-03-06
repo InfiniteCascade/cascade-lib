@@ -11,7 +11,7 @@ namespace cascade\components\dataInterface\connectors\db;
 use infinite\helpers\ArrayHelper;
 
 /**
- * DataSource [[@doctodo class_description:cascade\components\dataInterface\connectors\db\DataSource]].
+ * DataSource data source for database data source connectors.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -38,7 +38,7 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     /**
      * Get foreign data model.
      *
-     * @return [[@doctodo return_type:getForeignDataModel]] [[@doctodo return_description:getForeignDataModel]]
+     * @return Model foreign data model
      */
     public function getForeignDataModel($key)
     {
@@ -58,7 +58,7 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     /**
      * Get unmapped foreign keys.
      *
-     * @return [[@doctodo return_type:getUnmappedForeignKeys]] [[@doctodo return_description:getUnmappedForeignKeys]]
+     * @return array array without the mapped foreign keys
      */
     public function getUnmappedForeignKeys()
     {
@@ -70,7 +70,7 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     }
 
     /**
-     * [[@doctodo method_description:loadForeignDataItems]].
+     * Load the foreign data items, either lazily or not.
      */
     protected function loadForeignDataItems()
     {

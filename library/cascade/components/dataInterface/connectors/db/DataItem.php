@@ -12,14 +12,14 @@ use cascade\components\dataInterface\MissingItemException;
 use cascade\components\dataInterface\RecursionException;
 
 /**
- * DataItem [[@doctodo class_description:cascade\components\dataInterface\connectors\db\DataItem]].
+ * DataItem data item for db data interface connector.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class DataItem extends \cascade\components\dataInterface\connectors\generic\DataItem
 {
     /**
-     * [[@doctodo method_description:fillRelationConfig]].
+     * Fill the unfilled child|parent_object_id field in the relation config.
      */
     protected function fillRelationConfig(&$config, $otherObject)
     {
@@ -45,10 +45,10 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-     * [[@doctodo method_description:loadForeignObject]].
+     * Retrieve the foreign object.
      *
-     * @throws RecursionException   [[@doctodo exception_description:RecursionException]]
-     * @throws MissingItemException [[@doctodo exception_description:MissingItemException]]
+     * @throws RecursionException   when an object load is attempted when it is already being loaded above the call
+     * @throws MissingItemException when the item can't be found in the foreign data source
      */
     protected function loadForeignObject()
     {
@@ -71,9 +71,9 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-     * [[@doctodo method_description:loadLocalObject]].
+     * Retrieve the local object.
      *
-     * @throws RecursionException [[@doctodo exception_description:RecursionException]]
+     * @throws RecursionException when an object load is attempted when it is already being loaded above the call
      */
     protected function loadLocalObject()
     {
