@@ -23,7 +23,7 @@ class ToolsController extends \infinite\console\Controller
     /**
      * Flush the cache.
      *
-     * @param [[@doctodo param_type:category]] $category [[@doctodo param_description:category]] [optional]
+     * @param string $category flush a particular category from cache [optional]
      */
     public function actionFlush($category = null)
     {
@@ -137,8 +137,8 @@ class ToolsController extends \infinite\console\Controller
     /**
      * Removes the old @doctodo.
      *
-     * @param [[@doctodo param_type:file]]     $file     [[@doctodo param_description:file]]
-     * @param [[@doctodo param_type:contents]] $contents [[@doctodo param_description:contents]]
+     * @param string     $file     file name of the file being checked
+     * @param array $contents array of the file contents
      *
      * @return bool if the file was changed
      */

@@ -70,7 +70,7 @@ class InterfaceController extends \infinite\console\Controller
     /**
      * Set interface.
      *
-     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     * @param string $value system ID of data interface
      *
      * @throws Exception on invalid interface selection
      */
