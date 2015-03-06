@@ -14,29 +14,29 @@ use Yii;
 use yii\helpers\Inflector;
 
 /**
- * Module [[@doctodo class_description:cascade\components\dataInterface\connectors\db\Module]].
+ * Module base module for database data interfaces.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 abstract class Module extends BaseModule
 {
     /**
-     * @var [[@doctodo var_type:dataSourceClass]] [[@doctodo var_description:dataSourceClass]]
+     * @var string class to use for module's data source
      */
     public $dataSourceClass = 'cascade\components\dataInterface\connectors\db\DataSource';
 
     /**
-     * @var [[@doctodo var_type:dbConfig]] [[@doctodo var_description:dbConfig]]
+     * @var array database connection configuration
      */
     public $dbConfig = [];
 
     /**
-     * @var [[@doctodo var_type:_db]] [[@doctodo var_description:_db]]
+     * @var Connection database connection to be used
      */
     protected $_db;
 
     /**
-     * [[@doctodo method_description:dataSources]].
+     * Returns the data sources to be used in the interface.
      */
     abstract public function dataSources();
 
@@ -53,7 +53,7 @@ abstract class Module extends BaseModule
     /**
      * Get data source.
      *
-     * @return [[@doctodo return_type:getDataSource]] [[@doctodo return_description:getDataSource]]
+     * @return DataSource|bool the data source based on {$tableName} or false if not found
      */
     public function getDataSource($tableName)
     {
@@ -73,7 +73,7 @@ abstract class Module extends BaseModule
     /**
      * Get foreign object.
      *
-     * @return [[@doctodo return_type:getForeignObject]] [[@doctodo return_description:getForeignObject]]
+     * @return Model|bool foreign data model or false if failed or not found
      */
     public function getForeignObject($foreignModelClass, $foreignPrimaryKey)
     {
