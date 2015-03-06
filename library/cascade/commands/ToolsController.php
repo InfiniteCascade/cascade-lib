@@ -14,14 +14,14 @@ use yii\helpers\Console;
 use yii\helpers\FileHelper;
 
 /**
- * ToolsController [[@doctodo class_description:cascade\commands\ToolsController]].
+ * ToolsController runs various commands for Cascade.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class ToolsController extends \infinite\console\Controller
 {
     /**
-     * [[@doctodo method_description:actionFlush]].
+     * Flush the cache.
      */
     public function actionFlush($category = null)
     {
@@ -38,7 +38,7 @@ class ToolsController extends \infinite\console\Controller
     }
 
     /**
-     * [[@doctodo method_description:actionFixProject]].
+     * Fix the code formatting throughout Cascade and its related libraries.
      */
     public function actionFixProject()
     {
@@ -109,9 +109,9 @@ class ToolsController extends \infinite\console\Controller
     }
 
     /**
-     * [[@doctodo method_description:fixFile]].
+     * Run a series of fixes on a file's code formatting.
      *
-     * @return [[@doctodo return_type:fixFile]] [[@doctodo return_description:fixFile]]
+     * @return bool if the file was changed
      */
     public function fixFile($file)
     {
@@ -131,9 +131,9 @@ class ToolsController extends \infinite\console\Controller
     }
 
     /**
-     * [[@doctodo method_description:fixDocBlockPlaceholder]].
+     * Removes the old @doctodo.
      *
-     * @return [[@doctodo return_type:fixDocBlockPlaceholder]] [[@doctodo return_description:fixDocBlockPlaceholder]]
+     * @return bool if the file was changed
      */
     public function fixDocBlockPlaceholder($file, &$contents)
     {
@@ -152,9 +152,9 @@ class ToolsController extends \infinite\console\Controller
     }
 
     /**
-     * [[@doctodo method_description:fixFileSlashes]].
+     * Fixes slashes inside namespace strings.
      *
-     * @return [[@doctodo return_type:fixFileSlashes]] [[@doctodo return_description:fixFileSlashes]]
+     * @return bool if the file changed
      */
     public function fixFileSlashes($file, &$contents)
     {
