@@ -34,7 +34,7 @@ class Collector extends \infinite\base\collector\Module
     /**
      * Get by pk.
      *
-     * @param [[@doctodo param_type:pk]] $pk [[@doctodo param_description:pk]]
+     * @param mixed $pk the primary key
      *
      * @return Item data interface item
      */

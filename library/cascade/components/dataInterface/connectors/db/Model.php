@@ -55,7 +55,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     /**
      * Set table name.
      *
-     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     * @param string $value the table name
      */
     public function setTableName($value)
     {
@@ -186,7 +186,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     /**
      * Set meta.
      *
-     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     * @param Meta $value the meta object
      */
     public function setMeta($value)
     {
@@ -196,7 +196,7 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
     /**
      * Find the models for a foreign data source.
      *
-     * @param [[@doctodo param_type:params]] $params [[@doctodo param_description:params]]
+     * @param array $params the query parameters
      *
      * @return Query the foreign data query
      */

@@ -21,8 +21,8 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     /**
      * Fill the unfilled child|parent_object_id field in the relation config.
      *
-     * @param [[@doctodo param_type:config]]      $config      [[@doctodo param_description:config]]
-     * @param [[@doctodo param_type:otherObject]] $otherObject [[@doctodo param_description:otherObject]]
+     * @param array      $config      relationship configuration
+     * @param Model $otherObject the other object to fill in the relation config data
      */
     protected function fillRelationConfig(&$config, $otherObject)
     {

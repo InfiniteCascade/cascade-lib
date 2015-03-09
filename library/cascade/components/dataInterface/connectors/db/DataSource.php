@@ -38,7 +38,7 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     /**
      * Get foreign data model.
      *
-     * @param [[@doctodo param_type:key]] $key [[@doctodo param_description:key]]
+     * @param int|string $key the foreign model's primary key
      *
      * @return Model foreign data model
      */

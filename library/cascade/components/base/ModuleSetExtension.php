@@ -20,7 +20,7 @@ abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
     /**
      * Bootstrap the module set on load.
      *
-     * @param [[@doctodo param_type:app]] $app [[@doctodo param_description:app]]
+     * @param Application $app the application parameter
      */
     public function bootstrap($app)
     {
@@ -34,7 +34,7 @@ abstract class ModuleSetExtension implements \yii\base\BootstrapInterface
     /**
      * Actions to run before request starts.
      *
-     * @param [[@doctodo param_type:event]] $event [[@doctodo param_description:event]]
+     * @param Event $event the event parameter
      */
     public function beforeRequest($event)
     {

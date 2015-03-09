@@ -12,7 +12,7 @@ use infinite\helpers\ArrayHelper;
 use Yii;
 
 /**
- * DataSource [[@doctodo class_description:cascade\components\dataInterface\connectors\file\DataSource]].
+ * DataSource data source for the file connectors.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
@@ -36,19 +36,19 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     public $searchClass = 'cascade\components\dataInterface\connectors\file\Search';
 
     /**
-     * @var [[@doctodo var_type:foreignModelClass]] [[@doctodo var_description:foreignModelClass]]
+     * @var string class name for foreign models
      */
     public $foreignModelClass = 'cascade\components\dataInterface\connectors\file\Model';
 
     /**
-     * @var [[@doctodo var_type:_fileSource]] [[@doctodo var_description:_fileSource]]
+     * @var Source the file source for this connector
      */
     protected $_fileSource;
 
     /**
      * Set file source.
      *
-     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     * @param Source|bool $value file source or false if not found
      */
     public function setFileSource($value)
     {
@@ -62,7 +62,7 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     /**
      * Get file source.
      *
-     * @return [[@doctodo return_type:getFileSource]] [[@doctodo return_description:getFileSource]]
+     * @return Source|bool the file source object or false if not found
      */
     public function getFileSource()
     {
@@ -72,9 +72,9 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     /**
      * Get foreign data model.
      *
-     * @param [[@doctodo param_type:key]] $key [[@doctodo param_description:key]]
+     * @param int|string $key the foreign model's primary key
      *
-     * @return [[@doctodo return_type:getForeignDataModel]] [[@doctodo return_description:getForeignDataModel]]
+     * @return Model|false the foreign model or false if not found
      */
     public function getForeignDataModel($key)
     {
@@ -84,7 +84,7 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     /**
      * Get unmapped foreign keys.
      *
-     * @return [[@doctodo return_type:getUnmappedForeignKeys]] [[@doctodo return_description:getUnmappedForeignKeys]]
+     * @return array the foreign keys that haven't been mapped
      */
     public function getUnmappedForeignKeys()
     {
@@ -96,9 +96,9 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     }
 
     /**
-     * [[@doctodo method_description:loadForeignDataItems]].
+     * Load the data items from the file source.
      *
-     * @return [[@doctodo return_type:loadForeignDataItems]] [[@doctodo return_description:loadForeignDataItems]]
+     * @return bool|null False on fail, null on success (@todo change this to true)
      */
     protected function loadForeignDataItems()
     {
@@ -124,12 +124,12 @@ class DataSource extends \cascade\components\dataInterface\connectors\generic\Da
     }
 
     /**
-     * [[@doctodo method_description:createModel]].
+     * Create the model.
      *
-     * @param [[@doctodo param_type:id]]         $id         [[@doctodo param_description:id]]
-     * @param [[@doctodo param_type:attributes]] $attributes [[@doctodo param_description:attributes]]
+     * @param string|int         $id         the primary key for the model
+     * @param array $attributes attrribute for the model
      *
-     * @return [[@doctodo return_type:createModel]] [[@doctodo return_description:createModel]]
+     * @return Model the foreign model
      */
     public function createModel($id, $attributes)
     {

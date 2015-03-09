@@ -11,14 +11,14 @@ namespace cascade\components\dataInterface\connectors\file;
 use cascade\components\dataInterface\RecursionException;
 
 /**
- * DataItem [[@doctodo class_description:cascade\components\dataInterface\connectors\file\DataItem]].
+ * DataItem data item for file data connectors.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class DataItem extends \cascade\components\dataInterface\connectors\generic\DataItem
 {
     /**
-     * @var [[@doctodo var_type:deferredModel]] [[@doctodo var_description:deferredModel]]
+     * @var Model the deferred model, without loaded attributes
      */
     public $deferredModel;
     /**
@@ -47,10 +47,10 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-     * [[@doctodo method_description:fillRelationConfig]].
+     * fill absent relation attributes.
      *
-     * @param [[@doctodo param_type:config]]      $config      [[@doctodo param_description:config]]
-     * @param [[@doctodo param_type:otherObject]] $otherObject [[@doctodo param_description:otherObject]]
+     * @param array      $config      relationship configuration
+     * @param Model $otherObject the other object to fill in the relation config data
      */
     protected function fillRelationConfig(&$config, $otherObject)
     {
@@ -76,9 +76,9 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-     * [[@doctodo method_description:loadForeignObject]].
+     * Load the foreign object from the foreign data source.
      *
-     * @throws RecursionException [[@doctodo exception_description:RecursionException]]
+     * @throws RecursionException on recursive call when the object is already loading the same object
      */
     protected function loadForeignObject()
     {
@@ -93,9 +93,9 @@ class DataItem extends \cascade\components\dataInterface\connectors\generic\Data
     }
 
     /**
-     * [[@doctodo method_description:loadLocalObject]].
+     * Load the local object.
      *
-     * @throws RecursionException [[@doctodo exception_description:RecursionException]]
+     * @throws RecursionException on recursive call when the object is already loading the same object
      */
     protected function loadLocalObject()
     {

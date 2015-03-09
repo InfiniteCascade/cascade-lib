@@ -9,7 +9,7 @@
 namespace cascade\components\dataInterface\connectors\db;
 
 /**
- * Search [[@doctodo class_description:cascade\components\dataInterface\connectors\db\Search]].
+ * Search search for database data sources.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */

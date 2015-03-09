@@ -53,7 +53,7 @@ abstract class Module extends BaseModule
     /**
      * Get data source.
      *
-     * @param [[@doctodo param_type:tableName]] $tableName [[@doctodo param_description:tableName]]
+     * @param string $tableName the table name
      *
      * @return DataSource|bool the data source based on {$tableName} or false if not found
      */
@@ -75,8 +75,8 @@ abstract class Module extends BaseModule
     /**
      * Get foreign object.
      *
-     * @param [[@doctodo param_type:foreignModelClass]] $foreignModelClass [[@doctodo param_description:foreignModelClass]]
-     * @param [[@doctodo param_type:foreignPrimaryKey]] $foreignPrimaryKey [[@doctodo param_description:foreignPrimaryKey]]
+     * @param string $foreignModelClass the foreign model class name
+     * @param string|int $foreignPrimaryKey the foreign primary key
      *
      * @return Model|bool foreign data model or false if failed or not found
      */
@@ -93,9 +93,9 @@ abstract class Module extends BaseModule
     /**
      * Get foreign model.
      *
-     * @param [[@doctodo param_type:model]] $model [[@doctodo param_description:model]]
+     * @param string|int $model the foreign primary key
      *
-     * @return [[@doctodo return_type:getForeignModel]] [[@doctodo return_description:getForeignModel]]
+     * @return bool|Model the foreign model or false if not found
      */
     public function getForeignModel($model)
     {
@@ -110,7 +110,7 @@ abstract class Module extends BaseModule
     /**
      * Get foreign models config.
      *
-     * @return [[@doctodo return_type:getForeignModelsConfig]] [[@doctodo return_description:getForeignModelsConfig]]
+     * @return array the configuration for new foreign models
      */
     public function getForeignModelsConfig()
     {
@@ -120,10 +120,10 @@ abstract class Module extends BaseModule
     /**
      * Get foreign model config.
      *
-     * @param [[@doctodo param_type:tableName]] $tableName [[@doctodo param_description:tableName]]
-     * @param [[@doctodo param_type:modelName]] $modelName [[@doctodo param_description:modelName]]
+     * @param string $tableName the table name fo the foreign model
+     * @param string $modelName the name of the foreign model
      *
-     * @return [[@doctodo return_type:getForeignModelConfig]] [[@doctodo return_description:getForeignModelConfig]]
+     * @return array the foreign model configuration
      */
     public function getForeignModelConfig($tableName, $modelName)
     {
@@ -141,9 +141,9 @@ abstract class Module extends BaseModule
     /**
      * Get foreign model name.
      *
-     * @param [[@doctodo param_type:tableName]] $tableName [[@doctodo param_description:tableName]]
+     * @param string $tableName the foreign model table name
      *
-     * @return [[@doctodo return_type:getForeignModelName]] [[@doctodo return_description:getForeignModelName]]
+     * @return string the name of the model
      */
     public function getForeignModelName($tableName)
     {
@@ -153,7 +153,7 @@ abstract class Module extends BaseModule
     /**
      * Get foreign models.
      *
-     * @return [[@doctodo return_type:getForeignModels]] [[@doctodo return_description:getForeignModels]]
+     * @return array the collected foreign models
      */
     public function getForeignModels()
     {
@@ -171,8 +171,8 @@ abstract class Module extends BaseModule
     /**
      * Get db.
      *
-     * @throws Exception [[@doctodo exception_description:Exception]]
-     * @return [[@doctodo return_type:getDb]] [[@doctodo return_description:getDb]]
+     * @throws Exception on database connection failure
+     * @return Connection the database connection
      *
      */
     public function getDb()

@@ -113,7 +113,7 @@ class ToolsController extends \infinite\console\Controller
     /**
      * Run a series of fixes on a file's code formatting.
      *
-     * @param [[@doctodo param_type:file]] $file [[@doctodo param_description:file]]
+     * @param string $file file name of the file being checked
      *
      * @return bool if the file was changed
      */
@@ -161,8 +161,8 @@ class ToolsController extends \infinite\console\Controller
     /**
      * Fixes slashes inside namespace strings.
      *
-     * @param [[@doctodo param_type:file]]     $file     [[@doctodo param_description:file]]
-     * @param [[@doctodo param_type:contents]] $contents [[@doctodo param_description:contents]]
+     * @param string     $file     file name of the file being fixed
+     * @param array $contents array of the file contents
      *
      * @return bool if the file changed
      */
