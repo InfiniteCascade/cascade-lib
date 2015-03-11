@@ -88,7 +88,7 @@ class Details extends Widget implements ListWidgetInterface
             $valueCell = $this->generateCell(Html::tag('p', $field->formattedValue, $this->valueHtmlOptions));
             $row = $grid->addRow([$labelCell, $valueCell]);
 
-            if ($field->multiline) {
+            if (true || $field->multiline) {
                 $labelCell->columns = 12;
                 $valueCell->columns = 12;
                 Html::addCssClass($row->htmlOptions, 'form-vertical');

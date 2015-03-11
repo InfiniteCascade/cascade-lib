@@ -9,37 +9,37 @@
 namespace cascade\components\dataInterface\connectors\file;
 
 /**
- * Meta [[@doctodo class_description:cascade\components\dataInterface\connectors\file\Meta]].
+ * Meta meta for file models (@todo determine if used?).
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
 class Meta extends \infinite\base\Object
 {
     /**
-     * @var [[@doctodo var_type:_sourceFile]] [[@doctodo var_description:_sourceFile]]
+     * @var SourceFile the source file referenced in this meta
      */
     protected $_sourceFile;
     /**
-     * @var [[@doctodo var_type:_attributes]] [[@doctodo var_description:_attributes]]
+     * @var array attribute names
      */
     protected $_attributes;
     /**
-     * @var [[@doctodo var_type:_interface]] [[@doctodo var_description:_interface]]
+     * @var InterfaceItem the interface for this meta
      */
     protected $_interface;
 
     /**
-     * @var [[@doctodo var_type:_metas]] [[@doctodo var_description:_metas]]
+     * @var array static collection of metas
      */
     public static $_metas = [];
 
     /**
      * Get.
      *
-     * @param [[@doctodo param_type:interface]]  $interface  [[@doctodo param_description:interface]]
-     * @param [[@doctodo param_type:sourceFile]] $sourceFile [[@doctodo param_description:sourceFile]]
+     * @param InterfaceItem  $interface  the interface object
+     * @param Source $sourceFile the source file
      *
-     * @return [[@doctodo return_type:get]] [[@doctodo return_description:get]]
+     * @return Meta the prepared meta object
      */
     public static function get($interface, $sourceFile)
     {
@@ -63,7 +63,7 @@ class Meta extends \infinite\base\Object
     /**
      * Get source file.
      *
-     * @return [[@doctodo return_type:getSourceFile]] [[@doctodo return_description:getSourceFile]]
+     * @return Source the source file
      */
     public function getSourceFile()
     {
@@ -71,11 +71,11 @@ class Meta extends \infinite\base\Object
     }
 
     /**
-     * [[@doctodo method_description:hasAttribute]].
+     * Check if a specific attribute exists.
      *
-     * @param [[@doctodo param_type:name]] $name [[@doctodo param_description:name]]
+     * @param string $name attribute name
      *
-     * @return [[@doctodo return_type:hasAttribute]] [[@doctodo return_description:hasAttribute]]
+     * @return bool true if attribute exists, false otherwise
      */
     public function hasAttribute($name)
     {
@@ -85,7 +85,7 @@ class Meta extends \infinite\base\Object
     /**
      * Get attribute keys.
      *
-     * @return [[@doctodo return_type:getAttributeKeys]] [[@doctodo return_description:getAttributeKeys]]
+     * @return array array of attribute names
      */
     public function getAttributeKeys()
     {
@@ -95,7 +95,7 @@ class Meta extends \infinite\base\Object
     /**
      * Set interface.
      *
-     * @param [[@doctodo param_type:value]] $value [[@doctodo param_description:value]]
+     * @param InterfaceItem $value interface item for meta
      */
     public function setInterface($value)
     {
@@ -105,7 +105,7 @@ class Meta extends \infinite\base\Object
     /**
      * Get interface.
      *
-     * @return [[@doctodo return_type:getInterface]] [[@doctodo return_description:getInterface]]
+     * @return InterfaceItem the interface item for meta
      */
     public function getInterface()
     {
