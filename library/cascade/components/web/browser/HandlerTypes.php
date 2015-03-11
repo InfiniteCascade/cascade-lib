@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\browser;
 
 use cascade\components\types\Relationship;
-use infinite\helpers\ArrayHelper;
+use teal\helpers\ArrayHelper;
 use Yii;
 use yii\base\InvalidConfigException;
 
@@ -18,7 +18,7 @@ use yii\base\InvalidConfigException;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class HandlerTypes extends \infinite\web\browser\Handler
+class HandlerTypes extends \teal\web\browser\Handler
 {
     /**
      * @var [[@doctodo var_type:bundleClass]] [[@doctodo var_description:bundleClass]]

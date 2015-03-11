@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\dataInterface\connectors\file;
 
-use infinite\base\exceptions\Exception;
-use infinite\helpers\Match;
+use teal\base\exceptions\Exception;
+use teal\helpers\Match;
 use Yii;
 
 /**
@@ -17,7 +17,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class SourceFile extends \infinite\base\Object
+class SourceFile extends \teal\base\Object
 {
     /**
      * @var [[@doctodo var_type:id]] [[@doctodo var_description:id]]
@@ -249,7 +249,7 @@ class SourceFile extends \infinite\base\Object
     private function _loadExcel()
     {
         spl_autoload_unregister(['BaseYii', 'autoload']);
-        $path = INFINITE_APP_VENDOR_PATH . DIRECTORY_SEPARATOR . 'phpoffice' . DIRECTORY_SEPARATOR . 'phpexcel' . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'PHPExcel.php';
+        $path = TEAL_APP_VENDOR_PATH . DIRECTORY_SEPARATOR . 'phpoffice' . DIRECTORY_SEPARATOR . 'phpexcel' . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'PHPExcel.php';
         require_once $path;
     }
 

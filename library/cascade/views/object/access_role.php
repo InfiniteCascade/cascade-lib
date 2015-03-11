@@ -1,5 +1,5 @@
 <?php
-use infinite\helpers\Html;
+use teal\helpers\Html;
 
 if (empty($role)) {
     $role = 'none';

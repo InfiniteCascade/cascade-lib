@@ -2,11 +2,11 @@
 $lazyLoad = !(defined('IS_CONSOLE') && IS_CONSOLE);
 
 return [
-    'class' => 'infinite\base\collector\Component',
+    'class' => 'teal\base\collector\Component',
     'cacheTime' => 120,
     'collectors' => [
-        'roles' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'roles.php'),
-        'identityProviders' => include(INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'identityProviders.php'),
+        'roles' => include(TEAL_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'roles.php'),
+        'identityProviders' => include(TEAL_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'identityProviders.php'),
         'types' => [
             'class' => 'cascade\components\types\Collector',
         ],
@@ -27,7 +27,7 @@ return [
                     'object' => [
                         'class' => 'cascade\components\storageHandlers\core\LocalHandler',
                         'bucketFormat' => '{year}.{month}',
-                        'baseDir' => INFINITE_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'storage',
+                        'baseDir' => TEAL_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'storage',
                     ],
                     'publicEngine' => true,
                 ],

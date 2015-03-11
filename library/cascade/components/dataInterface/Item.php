@@ -1,22 +1,22 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\dataInterface;
 
 use cascade\models\DataInterface;
-use infinite\base\exceptions\Exception;
+use teal\base\exceptions\Exception;
 
 /**
  * Item [[@doctodo class_description:cascade\components\dataInterface\Item]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Item extends \infinite\base\collector\Item
+class Item extends \teal\base\collector\Item
 {
     /**
      * @var [[@doctodo var_type:error]] [[@doctodo var_description:error]]

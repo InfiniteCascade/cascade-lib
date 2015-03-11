@@ -1,17 +1,17 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\widgets\form;
 
 use cascade\components\web\widgets\Widget;
 use cascade\models\StorageEngine;
-use infinite\base\exceptions\Exception;
-use infinite\helpers\Html;
+use teal\base\exceptions\Exception;
+use teal\helpers\Html;
 
 /**
  * FileStorage [[@doctodo class_description:cascade\components\web\widgets\form\FileStorage]].

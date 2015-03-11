@@ -28,7 +28,7 @@ $preparer.add(function(context) {
 });
 
 // side menu bar
-$.fn.cascadeAffix = $.fn.infiniteAffix;
+$.fn.cascadeAffix = $.fn.tealAffix;
 
 // basic template engine used in typeahead.js
 // from https://github.com/twitter/typeahead.js/issues/14

@@ -2,8 +2,8 @@
 /**
  * @var yii\base\View
  */
-use infinite\helpers\ArrayHelper;
-use infinite\helpers\Html;
+use teal\helpers\ArrayHelper;
+use teal\helpers\Html;
 
 ArrayHelper::multisort($tasks, 'title');
 $this->title = 'Maintenance Tasks';

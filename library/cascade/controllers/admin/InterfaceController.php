@@ -5,8 +5,8 @@ namespace cascade\controllers\admin;
 use cascade\components\dataInterface\DeferredAction;
 use cascade\models\DataInterface;
 use cascade\models\DataInterfaceLog;
-use infinite\base\exceptions\HttpException;
-use infinite\web\Controller;
+use teal\base\exceptions\HttpException;
+use teal\web\Controller;
 use Yii;
 use yii\filters\AccessControl;
 

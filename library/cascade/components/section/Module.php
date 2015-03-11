@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\section;
 
-use infinite\base\collector\Item as BaseItem;
+use teal\base\collector\Item as BaseItem;
 
 /**
  * Module [[@doctodo class_description:cascade\components\section\Module]].

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\db\behaviors\auditable;
@@ -15,7 +15,7 @@ use ArrayIterator;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class AuditPackage extends \infinite\base\Object implements \IteratorAggregate, \ArrayAccess, \Countable
+class AuditPackage extends \teal\base\Object implements \IteratorAggregate, \ArrayAccess, \Countable
 {
     /**
      * @var [[@doctodo var_type:similarThreshold]] [[@doctodo var_description:similarThreshold]]

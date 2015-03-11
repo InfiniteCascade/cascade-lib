@@ -1,8 +1,8 @@
 function ObjectSelector (parent, options) {
-   InfiniteSelector.call(this, parent, options);
+   TealSelector.call(this, parent, options);
 }
 
-ObjectSelector.prototype = Object.create(InfiniteSelector.prototype);
+ObjectSelector.prototype = Object.create(TealSelector.prototype);
 
 (function ($) { 
    $.fn.objectSelector = function (options) {

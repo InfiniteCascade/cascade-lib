@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\storageHandlers;
 
-use infinite\base\exceptions\Exception;
-use infinite\base\FileInterface;
-use infinite\web\UploadedFile;
+use teal\base\exceptions\Exception;
+use teal\base\FileInterface;
+use teal\web\UploadedFile;
 use Yii;
 use yii\base\Event;
 
@@ -19,7 +19,7 @@ use yii\base\Event;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
+class StorageBehavior extends \teal\db\behaviors\ActiveRecord
 {
     /**
      * @var [[@doctodo var_type:storageAttribute]] [[@doctodo var_description:storageAttribute]]
@@ -56,12 +56,12 @@ class StorageBehavior extends \infinite\db\behaviors\ActiveRecord
     public function events()
     {
         return [
-            \infinite\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
-            \infinite\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
-            \infinite\db\ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
-            \infinite\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
-            \infinite\db\ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
-            \infinite\db\ActiveRecord::EVENT_AFTER_DELETE => 'afterDelete',
+            \teal\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
+            \teal\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
+            \teal\db\ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
+            \teal\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
+            \teal\db\ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
+            \teal\db\ActiveRecord::EVENT_AFTER_DELETE => 'afterDelete',
         ];
     }
 

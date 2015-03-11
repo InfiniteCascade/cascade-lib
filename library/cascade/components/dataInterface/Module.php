@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\dataInterface;
 
-use infinite\action\Action as BaseAction;
+use teal\action\Action as BaseAction;
 
 /**
  * Module [[@doctodo class_description:cascade\components\dataInterface\Module]].
@@ -45,7 +45,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * [[@doctodo method_description:run]].
      *
-     * @param infinite\action\Action $action [[@doctodo param_description:action]]
+     * @param teal\action\Action $action [[@doctodo param_description:action]]
      */
     abstract public function run(BaseAction $action);
 }

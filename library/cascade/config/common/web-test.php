@@ -2,8 +2,8 @@
 /**
  * ./app/config/environments/common/main.php.
  *
- * @author Jacob Morrison <jacob@infinitecascade.com>
+ * @author Jacob Morrison <jacob@tealcascade.com>
  */
-$main = include INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . "web.php";
+$main = include TEAL_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . "web.php";
 
 return $main;

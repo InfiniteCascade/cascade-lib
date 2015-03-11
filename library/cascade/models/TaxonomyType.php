@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\models;
 
 use cascade\components\types\ActiveRecordTrait;
-use infinite\base\collector\CollectedObjectTrait;
+use teal\base\collector\CollectedObjectTrait;
 
 /**
  * TaxonomyType is the model class for table "taxonomy_type".
@@ -25,7 +25,7 @@ use infinite\base\collector\CollectedObjectTrait;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class TaxonomyType extends \cascade\components\db\ActiveRecord implements \infinite\base\collector\CollectedObjectInterface
+class TaxonomyType extends \cascade\components\db\ActiveRecord implements \teal\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;
     use ActiveRecordTrait {

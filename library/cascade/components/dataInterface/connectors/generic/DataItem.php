@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\dataInterface\connectors\generic;
 
 use Exception;
-use infinite\base\language\Verb;
+use teal\base\language\Verb;
 
 /**
  * DataItem [[@doctodo class_description:cascade\components\dataInterface\connectors\generic\DataItem]].

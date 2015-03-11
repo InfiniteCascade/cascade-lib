@@ -1,18 +1,18 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\widgets\base;
 
-use infinite\helpers\ArrayHelper;
-use infinite\helpers\Html;
-use infinite\web\bootstrap\ButtonDropdown;
-use infinite\web\grid\Cell;
-use infinite\web\grid\Row;
+use teal\helpers\ArrayHelper;
+use teal\helpers\Html;
+use teal\web\bootstrap\ButtonDropdown;
+use teal\web\grid\Cell;
+use teal\web\grid\Row;
 
 trait ListWidgetTrait
 {
@@ -271,7 +271,7 @@ trait ListWidgetTrait
         }
         /* @var LinkPager $class */
         $pager = $this->pagerSettings;
-        $class = ArrayHelper::remove($pager, 'class', 'infinite\widgets\LinkPager');
+        $class = ArrayHelper::remove($pager, 'class', 'teal\widgets\LinkPager');
         $pager['pagination'] = $pagination;
         if (!isset($pager['options'])) {
             $pager['options'] = [];

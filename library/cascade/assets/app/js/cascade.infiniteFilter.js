@@ -1,4 +1,4 @@
-function InfiniteFilter (parent, opts) {
+function TealFilter (parent, opts) {
 	var defaultOptions = {
 		'url': '/search',
       'pageSize': 20
@@ -16,25 +16,25 @@ function InfiniteFilter (parent, opts) {
 
 
 
-InfiniteFilter.prototype.init = function() {
+TealFilter.prototype.init = function() {
    var self = this;
-   this.elements.canvas = $("<div />").hide().addClass('infinite-filter').appendTo(this.parent);
+   this.elements.canvas = $("<div />").hide().addClass('teal-filter').appendTo(this.parent);
    
 }
 
-InfiniteFilter.prototype.reset = function() {
+TealFilter.prototype.reset = function() {
    this.elements.canvas.find('.section').hide();
    this.state = {'type': null, 'query': null};
    this.search();
 };
 
 (function ($) { 
-   $.fn.infiniteFilter = function (opts) {
+   $.fn.tealFilter = function (opts) {
    		var $this = this;
-      	if ($this.infiniteFilter === undefined) {
-      		$this.infiniteFilter = new InfiniteFilter($this, opts);
+      	if ($this.tealFilter === undefined) {
+      		$this.tealFilter = new TealFilter($this, opts);
       	}
 
-         return $this.infiniteFilter;
+         return $this.tealFilter;
    };
 }(jQuery));

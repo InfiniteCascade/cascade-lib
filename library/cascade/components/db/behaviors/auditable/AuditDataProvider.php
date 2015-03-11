@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\db\behaviors\auditable;
 
 use cascade\models\ObjectFamiliarity;
-use infinite\helpers\ArrayHelper;
+use teal\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -17,7 +17,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class AuditDataProvider extends \infinite\data\ActiveDataProvider
+class AuditDataProvider extends \teal\data\ActiveDataProvider
 {
     /**
      * @var [[@doctodo var_type:scope]] [[@doctodo var_description:scope]]

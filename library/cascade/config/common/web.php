@@ -2,7 +2,7 @@
 /**
  * ./app/config/environments/common/main.php.
  *
- * @author Jacob Morrison <jacob@infinitecascade.com>
+ * @author Jacob Morrison <jacob@tealcascade.com>
  */
 $config = include __DIR__ . DIRECTORY_SEPARATOR . 'base.php';
 $config['controllerNamespace'] = 'cascade\controllers';
@@ -16,13 +16,13 @@ $config['components']['request'] = [
     'enableCookieValidation' => true,
 ];
 $config['components']['user'] = [
-    'class' => 'infinite\web\User',
+    'class' => 'teal\web\User',
     'enableAutoLogin' => false,
     'identityClass' => 'cascade\models\User',
     'loginUrl' => ['/app/login'],
 ];
 $config['components']['webState'] = [
-    'class' => 'infinite\web\State',
+    'class' => 'teal\web\State',
 ];
 $config['components']['session'] = [
     'class' => 'yii\redis\Session',

@@ -1,17 +1,17 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\form;
 
 use cascade\components\db\fields\Model as ModelField;
 use cascade\components\db\fields\Relation as RelationField;
-use infinite\helpers\Html;
-use infinite\web\grid\Grid;
+use teal\helpers\Html;
+use teal\web\grid\Grid;
 use Yii;
 
 /**

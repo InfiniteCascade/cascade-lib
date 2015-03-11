@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\db\behaviors;
@@ -15,7 +15,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
+class RelatedObjects extends \teal\db\behaviors\ActiveRecord
 {
     /**
      * @var [[@doctodo var_type:companionObject]] [[@doctodo var_description:companionObject]]
@@ -52,11 +52,11 @@ class RelatedObjects extends \infinite\db\behaviors\ActiveRecord
     public function events()
     {
         return [
-            \infinite\db\ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
-            \infinite\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
-            \infinite\db\ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
-            \infinite\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
-            \infinite\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
+            \teal\db\ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
+            \teal\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
+            \teal\db\ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
+            \teal\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
+            \teal\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
         ];
     }
     /**

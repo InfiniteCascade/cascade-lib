@@ -1,8 +1,8 @@
 <?php
-use infinite\helpers\ArrayHelper;
-use infinite\helpers\Html;
-use infinite\web\grid\Cell;
-use infinite\web\grid\Grid;
+use teal\helpers\ArrayHelper;
+use teal\helpers\Html;
+use teal\web\grid\Cell;
+use teal\web\grid\Grid;
 use yii\helpers\Url;
 
 $js = [];
@@ -26,7 +26,7 @@ $topGrid->currentRow->addCell($watchingCell);
 $itemsCell = $topGrid->currentRow->addCell(new Cell(['columns' => 6]));
 $widgetGrid = new Grid();
 Html::addCssClass($widgetGrid->htmlOptions, 'ic-front-side');
-$js[] = '$("#' . $widgetGrid->id . '").infiniteAffix();';
+$js[] = '$("#' . $widgetGrid->id . '").tealAffix();';
 
 $widgetGrid->baseRow = ['trueWidth' => 6];
 $cells = [];

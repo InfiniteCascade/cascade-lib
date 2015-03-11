@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\setup\tasks;
@@ -15,7 +15,7 @@ use cascade\modules\core\TypeAccount\models\ObjectAccount;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task_000005_account extends \infinite\setup\Task
+class Task_000005_account extends \teal\setup\Task
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class Task_000005_account extends \infinite\setup\Task
 
         if ($account->save()) {
             $configResult = false;
-            $paramsFilePath = INFINITE_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'params.php';
+            $paramsFilePath = TEAL_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'params.php';
             $moreError = 'File does not exist! (' . $paramsFilePath . ')';
             if (file_exists($paramsFilePath)) {
                 $currentContents = $originalContents = file_get_contents($paramsFilePath);

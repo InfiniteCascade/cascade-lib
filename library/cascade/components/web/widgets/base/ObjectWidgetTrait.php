@@ -1,17 +1,17 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\widgets\base;
 
 use cascade\components\types\Relationship;
-use infinite\base\exceptions\Exception;
-use infinite\helpers\ArrayHelper;
-use infinite\helpers\Html;
+use teal\base\exceptions\Exception;
+use teal\helpers\ArrayHelper;
+use teal\helpers\Html;
 use Yii;
 
 trait ObjectWidgetTrait
@@ -68,7 +68,7 @@ trait ObjectWidgetTrait
         if (is_null($this->_dataProvider)) {
             $dataProvider = $this->dataProviderSettings;
             if (!isset($dataProvider['class'])) {
-                $dataProvider['class'] = 'infinite\data\ActiveDataProvider';
+                $dataProvider['class'] = 'teal\data\ActiveDataProvider';
             }
             $method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
             if (in_array($method, ['parents', 'children']) && empty(Yii::$app->request->object)) {
@@ -398,7 +398,7 @@ trait ObjectWidgetTrait
     public function getPaginationSettings()
     {
         return [
-            'class' => 'infinite\data\Pagination',
+            'class' => 'teal\data\Pagination',
             'pageSize' => $this->pageSize,
             'validatePage' => false,
             'page' => $this->getState('_page', 0),
@@ -408,7 +408,7 @@ trait ObjectWidgetTrait
     public function getSortSettings()
     {
         return [
-            'class' => 'infinite\data\Sort',
+            'class' => 'teal\data\Sort',
             'sortOrders' => [
                 $this->currentSortBy => $this->currentSortByDirection === 'asc' ? SORT_ASC : SORT_DESC,
             ],
@@ -420,7 +420,7 @@ trait ObjectWidgetTrait
     public function getPagerSettings()
     {
         return [
-            'class' => 'infinite\widgets\LinkPager',
+            'class' => 'teal\widgets\LinkPager',
             'pageStateKey' => $this->stateKeyName('_page'),
         ];
     }
@@ -428,7 +428,7 @@ trait ObjectWidgetTrait
     public function getDataProviderSettings()
     {
         return [
-            'class' => 'infinite\data\ActiveDataProvider',
+            'class' => 'teal\data\ActiveDataProvider',
         ];
     }
 }

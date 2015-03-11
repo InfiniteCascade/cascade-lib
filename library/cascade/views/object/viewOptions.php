@@ -1,5 +1,5 @@
 <?php
-use infinite\helpers\Html;
+use teal\helpers\Html;
 use yii\helpers\Url;
 
 echo Html::beginTag('div', ['class' => 'panel panel-default']);

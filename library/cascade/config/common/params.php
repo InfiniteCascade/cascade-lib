@@ -2,7 +2,7 @@
 /**
  * ./app/config/environments/common/params.php.
  *
- * @author Jacob Morrison <jacob@infinitecascade.com>
+ * @author Jacob Morrison <jacob@tealcascade.com>
  */
 
 return [
@@ -22,7 +22,7 @@ return [
     ],
     'defaultStorageEngine' => 'local',
     'maxRoleLevels' => [
-        'public' => INFINITE_ROLE_LEVEL_VIEWER, // viewer
-        'primaryAccount' => INFINITE_ROLE_LEVEL_MANAGER, // manager
+        'public' => TEAL_ROLE_LEVEL_VIEWER, // viewer
+        'primaryAccount' => TEAL_ROLE_LEVEL_MANAGER, // manager
     ],
 ];

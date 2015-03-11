@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\security;
@@ -15,7 +15,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class ObjectAccess extends \infinite\security\ObjectAccess
+class ObjectAccess extends \teal\security\ObjectAccess
 {
     /**
      * @var [[@doctodo var_type:specialAuthorities]] [[@doctodo var_description:specialAuthorities]]

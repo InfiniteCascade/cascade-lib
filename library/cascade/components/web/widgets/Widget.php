@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\widgets;
 
-use infinite\base\collector\CollectedObjectTrait;
+use teal\base\collector\CollectedObjectTrait;
 use Yii;
 
 /**
@@ -16,7 +16,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterface, \infinite\base\collector\CollectedObjectInterface
+abstract class Widget extends BaseWidget implements \teal\base\WidgetInterface, \teal\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;
 
@@ -35,11 +35,11 @@ abstract class Widget extends BaseWidget implements \infinite\base\WidgetInterfa
     /**
      * @var [[@doctodo var_type:gridCellClass]] [[@doctodo var_description:gridCellClass]]
      */
-    public $gridCellClass = 'infinite\web\grid\Cell';
+    public $gridCellClass = 'teal\web\grid\Cell';
     /**
      * @var [[@doctodo var_type:gridClass]] [[@doctodo var_description:gridClass]]
      */
-    public $gridClass = 'infinite\web\grid\Grid';
+    public $gridClass = 'teal\web\grid\Grid';
 
     /**
      * @inheritdoc

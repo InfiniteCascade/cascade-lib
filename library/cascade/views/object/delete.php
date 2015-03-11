@@ -1,5 +1,5 @@
 <?php
-use infinite\helpers\Html;
+use teal\helpers\Html;
 
 echo Html::beginForm('', 'post', ['class' => 'ajax']);
 echo Html::beginTag('div', ['class' => 'form']);

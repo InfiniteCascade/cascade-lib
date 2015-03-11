@@ -1,7 +1,7 @@
 <?php
 namespace cascade\components\helpers;
 
-use infinite\caching\Cacher;
+use teal\caching\Cacher;
 
 /**
  * Gravatar [[@doctodo class_description:cascade\components\helpers\Gravatar]].

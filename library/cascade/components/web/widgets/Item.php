@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\widgets;
 
-use infinite\base\collector\CollectedObjectTrait;
+use teal\base\collector\CollectedObjectTrait;
 use Yii;
 
 /**
@@ -16,7 +16,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Item extends \infinite\base\collector\Item implements \infinite\base\collector\CollectedObjectInterface
+class Item extends \teal\base\collector\Item implements \teal\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;
 

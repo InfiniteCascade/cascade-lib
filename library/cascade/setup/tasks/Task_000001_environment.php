@@ -1,21 +1,21 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\setup\tasks;
 
-use infinite\setup\Exception;
+use teal\setup\Exception;
 use yii\helpers\Inflector;
 
 /**
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task_000001_environment extends \infinite\setup\Task
+class Task_000001_environment extends \teal\setup\Task
 {
     /**
      * @inheritdoc
@@ -33,7 +33,7 @@ class Task_000001_environment extends \infinite\setup\Task
         if ($this->setup->isEnvironmented) {
             try {
                 $oe = ini_set('display_errors', 0);
-                $dbh = new \PDO('mysql:host=' . INFINITE_APP_DATABASE_HOST . ';port=' . INFINITE_APP_DATABASE_PORT . ';dbname=' . INFINITE_APP_DATABASE_DBNAME, INFINITE_APP_DATABASE_USERNAME, INFINITE_APP_DATABASE_PASSWORD);
+                $dbh = new \PDO('mysql:host=' . TEAL_APP_DATABASE_HOST . ';port=' . TEAL_APP_DATABASE_PORT . ';dbname=' . TEAL_APP_DATABASE_DBNAME, TEAL_APP_DATABASE_USERNAME, TEAL_APP_DATABASE_PASSWORD);
                 ini_set('display_errors', $oe);
             } catch (\Exception $e) {
                 throw new Exception("Unable to connect to database! Please verify your settings in <code>env.php</code>.");
@@ -70,15 +70,15 @@ class Task_000001_environment extends \infinite\setup\Task
         } else {
             $input = [];
             $input['general'] = [];
-            $input['general']['template'] = INFINITE_APP_ENVIRONMENT;
+            $input['general']['template'] = TEAL_APP_ENVIRONMENT;
             $input['general']['application_name'] = $this->setup->app()->name;
 
             $input['database'] = [];
-            $input['database']['host'] = INFINITE_APP_DATABASE_HOST;
-            $input['database']['port'] = INFINITE_APP_DATABASE_PORT;
-            $input['database']['username'] = INFINITE_APP_DATABASE_USERNAME;
-            $input['database']['password'] = INFINITE_APP_DATABASE_PASSWORD;
-            $input['database']['dbname'] = INFINITE_APP_DATABASE_DBNAME;
+            $input['database']['host'] = TEAL_APP_DATABASE_HOST;
+            $input['database']['port'] = TEAL_APP_DATABASE_PORT;
+            $input['database']['username'] = TEAL_APP_DATABASE_USERNAME;
+            $input['database']['password'] = TEAL_APP_DATABASE_PASSWORD;
+            $input['database']['dbname'] = TEAL_APP_DATABASE_DBNAME;
             $upgrade = true;
         }
         $input['_'] = [];
@@ -218,15 +218,15 @@ class Task_000001_environment extends \infinite\setup\Task
 
         $fields = [];
         $fields['general'] = ['label' => 'General', 'fields' => []];
-        $fields['general']['fields']['template'] = ['type' => 'select', 'options' => $this->envListOptions, 'label' => 'Environment', 'required' => true, 'value' => function () { return defined('INFINITE_APP_ENVIRONMENT') ? INFINITE_APP_ENVIRONMENT : 'development'; }];
+        $fields['general']['fields']['template'] = ['type' => 'select', 'options' => $this->envListOptions, 'label' => 'Environment', 'required' => true, 'value' => function () { return defined('TEAL_APP_ENVIRONMENT') ? TEAL_APP_ENVIRONMENT : 'development'; }];
         $fields['general']['fields']['application_name'] = ['type' => 'text', 'label' => 'Application Name', 'required' => true, 'value' => function () { return $this->setup->name; }];
 
         $fields['database'] = ['label' => 'Database', 'fields' => []];
-        $fields['database']['fields']['host'] = ['type' => 'text', 'label' => 'Host', 'required' => true, 'value' => function () { return defined('INFINITE_APP_DATABASE_HOST') ? INFINITE_APP_DATABASE_HOST : '127.0.0.1'; }];
-        $fields['database']['fields']['port'] = ['type' => 'text', 'label' => 'Port', 'required' => true, 'value' => function () { return defined('INFINITE_APP_DATABASE_PORT') ? INFINITE_APP_DATABASE_PORT : '3306'; }];
-        $fields['database']['fields']['username'] = ['type' => 'text', 'label' => 'Username', 'required' => true, 'value' => function () { return defined('INFINITE_APP_DATABASE_USERNAME') ? INFINITE_APP_DATABASE_USERNAME : ''; }];
-        $fields['database']['fields']['password'] = ['type' => 'text', 'label' => 'Password', 'required' => true, 'value' => function () { return defined('INFINITE_APP_DATABASE_PASSWORD') ? '' : ''; }];
-        $fields['database']['fields']['dbname'] = ['type' => 'text', 'label' => 'Database Name', 'required' => true, 'value' => function () { return defined('INFINITE_APP_DATABASE_DBNAME') ? INFINITE_APP_DATABASE_DBNAME : ''; }];
+        $fields['database']['fields']['host'] = ['type' => 'text', 'label' => 'Host', 'required' => true, 'value' => function () { return defined('TEAL_APP_DATABASE_HOST') ? TEAL_APP_DATABASE_HOST : '127.0.0.1'; }];
+        $fields['database']['fields']['port'] = ['type' => 'text', 'label' => 'Port', 'required' => true, 'value' => function () { return defined('TEAL_APP_DATABASE_PORT') ? TEAL_APP_DATABASE_PORT : '3306'; }];
+        $fields['database']['fields']['username'] = ['type' => 'text', 'label' => 'Username', 'required' => true, 'value' => function () { return defined('TEAL_APP_DATABASE_USERNAME') ? TEAL_APP_DATABASE_USERNAME : ''; }];
+        $fields['database']['fields']['password'] = ['type' => 'text', 'label' => 'Password', 'required' => true, 'value' => function () { return defined('TEAL_APP_DATABASE_PASSWORD') ? '' : ''; }];
+        $fields['database']['fields']['dbname'] = ['type' => 'text', 'label' => 'Database Name', 'required' => true, 'value' => function () { return defined('TEAL_APP_DATABASE_DBNAME') ? TEAL_APP_DATABASE_DBNAME : ''; }];
 
         return $fields;
     }

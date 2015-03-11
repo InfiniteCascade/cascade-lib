@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\commands;
 
 use cascade\components\dataInterface\ConsoleAction;
-use infinite\helpers\ArrayHelper;
-use infinite\helpers\Console;
+use teal\helpers\ArrayHelper;
+use teal\helpers\Console;
 use Yii;
 use yii\console\Exception;
 
@@ -21,7 +21,7 @@ ini_set('memory_limit', -1);
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class InterfaceController extends \infinite\console\Controller
+class InterfaceController extends \teal\console\Controller
 {
     /**
      * @var Item the currently running interface

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\types;
@@ -12,9 +12,9 @@ use cascade\components\db\behaviors\SearchTerm;
 use cascade\components\db\fields\Base as BaseField;
 use cascade\components\web\form\Segment as FormSegment;
 use cascade\models\Relation;
-use infinite\caching\Cacher;
-use infinite\helpers\ArrayHelper;
-use infinite\helpers\Html;
+use teal\caching\Cacher;
+use teal\helpers\ArrayHelper;
+use teal\helpers\Html;
 use Yii;
 use yii\helpers\Inflector;
 
@@ -49,7 +49,7 @@ trait ActiveRecordTrait
     {
         return [
             'Registry' => [
-                'class' => 'infinite\db\behaviors\Registry',
+                'class' => 'teal\db\behaviors\Registry',
             ],
             'Relatable' => [
                 'class' => 'cascade\components\db\behaviors\Relatable',

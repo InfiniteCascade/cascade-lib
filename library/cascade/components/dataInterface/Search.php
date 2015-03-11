@@ -1,23 +1,23 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\dataInterface;
 
 use cascade\components\helpers\StringHelper;
-use infinite\helpers\ArrayHelper;
-use infinite\helpers\Console;
+use teal\helpers\ArrayHelper;
+use teal\helpers\Console;
 
 /**
  * Search [[@doctodo class_description:cascade\components\dataInterface\Search]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Search extends \infinite\base\Component
+class Search extends \teal\base\Component
 {
     /**
      * @var [[@doctodo var_type:interactive]] [[@doctodo var_description:interactive]]

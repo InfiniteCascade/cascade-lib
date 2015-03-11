@@ -1,10 +1,10 @@
 <?php
 return [
-    'class' => 'infinite\security\identity\providers\Collector',
+    'class' => 'teal\security\identity\providers\Collector',
     'initialItems' => [],
     'handlers' => [
         'Ldap' => [
-            'class' => 'infinite\security\identity\providers\Ldap',
+            'class' => 'teal\security\identity\providers\Ldap',
         ],
     ],
 ];

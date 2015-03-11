@@ -1,8 +1,8 @@
 function ObjectBrowser (parent, options) {
-   InfiniteBrowser.call(this, parent, options);
+   TealBrowser.call(this, parent, options);
 }
 
-ObjectBrowser.prototype = Object.create(InfiniteBrowser.prototype);
+ObjectBrowser.prototype = Object.create(TealBrowser.prototype);
 
 (function ($) { 
    $.fn.objectBrowse = function (options) {

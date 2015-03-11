@@ -1,5 +1,5 @@
 <?php
-use infinite\helpers\Html;
+use teal\helpers\Html;
 
 cascade\components\web\assetBundles\ObjectViewAsset::register($this);
 

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\widgets\decorator;
@@ -18,7 +18,7 @@ class BlankDecorator extends Decorator
     /**
      * @var [[@doctodo var_type:gridCellClass]] [[@doctodo var_description:gridCellClass]]
      */
-    public $gridCellClass = 'infinite\web\grid\Cell';
+    public $gridCellClass = 'teal\web\grid\Cell';
 
     /**
      * [[@doctodo method_description:generateHeader]].

@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\base;
 
-use infinite\base\collector\CollectedObjectTrait;
-use infinite\base\exceptions\Exception;
+use teal\base\collector\CollectedObjectTrait;
+use teal\base\exceptions\Exception;
 use Yii;
 
 /**
@@ -17,7 +17,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class CollectorModule extends \infinite\base\Module implements \infinite\base\collector\CollectedObjectInterface
+abstract class CollectorModule extends \teal\base\Module implements \teal\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;
 

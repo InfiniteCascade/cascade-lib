@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\db;
@@ -13,7 +13,7 @@ namespace cascade\components\db;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class ActiveRecord extends \infinite\db\ActiveRecord
+class ActiveRecord extends \teal\db\ActiveRecord
 {
     use ActiveRecordTrait;
     /**

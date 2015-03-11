@@ -1,19 +1,19 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\types;
 
 use cascade\components\web\ObjectViewEvent;
 use cascade\models\Group;
-use infinite\base\exceptions\Exception;
-use infinite\base\exceptions\HttpException;
-use infinite\base\language\Noun;
-use infinite\security\Access;
+use teal\base\exceptions\Exception;
+use teal\base\exceptions\HttpException;
+use teal\base\language\Noun;
+use teal\security\Access;
 use Yii;
 use yii\base\Controller;
 

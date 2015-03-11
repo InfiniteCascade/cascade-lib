@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\db\fields;
 
-use infinite\helpers\Match;
+use teal\helpers\Match;
 use yii\db\ColumnSchema;
 
 /**
@@ -16,7 +16,7 @@ use yii\db\ColumnSchema;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class MultilineDetector extends \infinite\base\Object
+class MultilineDetector extends \teal\base\Object
 {
     /**
      * @var [[@doctodo var_type:_machineTests]] [[@doctodo var_description:_machineTests]]

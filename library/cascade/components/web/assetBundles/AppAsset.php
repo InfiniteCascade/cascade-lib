@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\assetBundles;
@@ -43,7 +43,7 @@ class AppAsset extends AssetBundle
         'js/cascade.objectSearch.js',
         'js/cascade.objectBrowse.js',
         'js/cascade.objectSelector.js',
-        'js/cascade.infiniteFilter.js',
+        'js/cascade.tealFilter.js',
         'js/cascade.editInPlace.js', // maybe move this to object? not sure if it will be used outside object view,
         'js/cascade.activityFeed.js',
         'js/cascade.types.js',
@@ -52,12 +52,12 @@ class AppAsset extends AssetBundle
      * @inheritdoc
      */
     public $depends = [
-        'infinite\web\assetBundles\InfiniteAsset',
-        'infinite\web\assetBundles\InfiniteBrowserAsset',
-        'infinite\web\assetBundles\BootstrapSelectAsset',
-        'infinite\web\assetBundles\BootstrapDatepickerAsset',
-        'infinite\web\assetBundles\TimeAgoAsset',
-        'infinite\web\assetBundles\BootstrapTypeaheadAsset',
+        'teal\web\assetBundles\TealAsset',
+        'teal\web\assetBundles\TealBrowserAsset',
+        'teal\web\assetBundles\BootstrapSelectAsset',
+        'teal\web\assetBundles\BootstrapDatepickerAsset',
+        'teal\web\assetBundles\TimeAgoAsset',
+        'teal\web\assetBundles\BootstrapTypeaheadAsset',
         'cascade\components\web\assetBundles\PurlAsset',
         'cascade\components\web\assetBundles\VibeAsset',
     ];

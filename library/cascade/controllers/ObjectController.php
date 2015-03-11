@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\controllers;
@@ -16,9 +16,9 @@ use cascade\models\DeleteForm;
 use cascade\models\ObjectFamiliarity;
 use cascade\models\Registry;
 use cascade\models\Relation;
-use infinite\base\exceptions\HttpException;
-use infinite\helpers\ArrayHelper;
-use infinite\web\Controller;
+use teal\base\exceptions\HttpException;
+use teal\helpers\ArrayHelper;
+use teal\web\Controller;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

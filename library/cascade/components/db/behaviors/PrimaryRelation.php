@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\db\behaviors;
@@ -16,7 +16,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class PrimaryRelation extends \infinite\db\behaviors\PrimaryRelation
+class PrimaryRelation extends \teal\db\behaviors\PrimaryRelation
 {
     /**
      * @var [[@doctodo var_type:_relationship]] [[@doctodo var_description:_relationship]]

@@ -1,21 +1,21 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\setup\tasks;
 
-use infinite\setup\Exception;
+use teal\setup\Exception;
 
 /**
  * AclTask [[@doctodo class_description:cascade\setup\tasks\AclTask]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class AclTask extends \infinite\setup\Task
+abstract class AclTask extends \teal\setup\Task
 {
     /**
      * @inheritdoc

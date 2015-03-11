@@ -1,21 +1,21 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\dataInterface\connectors\db;
 
-use infinite\base\exceptions\Exception;
+use teal\base\exceptions\Exception;
 
 /**
  * Meta meta for the database data interface connector.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Meta extends \infinite\base\Object
+class Meta extends \teal\base\Object
 {
     /**
      * @var array has many relationships for model meta

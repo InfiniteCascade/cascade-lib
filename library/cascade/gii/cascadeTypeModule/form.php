@@ -4,10 +4,10 @@
  * @var yii\widgets\ActiveForm
  * @var yii\gii\generators\module\Generator
  */
-use infinite\helpers\Html;
+use teal\helpers\Html;
 
-infinite\web\assetBundles\FontAwesomeAsset::register($this);
-infinite\web\assetBundles\UnderscoreAsset::register($this);
+teal\web\assetBundles\FontAwesomeAsset::register($this);
+teal\web\assetBundles\UnderscoreAsset::register($this);
 
 $js = <<< END
 

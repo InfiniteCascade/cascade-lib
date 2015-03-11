@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\form\fields;
@@ -15,7 +15,7 @@ use cascade\components\db\fields\Base as DbBaseField;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class FieldTypeDetector extends \infinite\base\object
+class FieldTypeDetector extends \teal\base\object
 {
     /**
      * [[@doctodo method_description:detect]].

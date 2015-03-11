@@ -1,8 +1,8 @@
 <?php
 namespace cascade\components\base;
 
-use infinite\base\Cron;
-use infinite\base\Daemon;
+use teal\base\Cron;
+use teal\base\Daemon;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Event;

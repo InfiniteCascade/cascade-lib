@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\db\fields\formats;
@@ -13,7 +13,7 @@ namespace cascade\components\db\fields\formats;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class Base extends \infinite\base\Object
+abstract class Base extends \teal\base\Object
 {
     /**
      * @var [[@doctodo var_type:field]] [[@doctodo var_description:field]]

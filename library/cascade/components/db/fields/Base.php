@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\db\fields;
@@ -12,7 +12,7 @@ use cascade\components\db\fields\formats\Base as BaseFormat;
 use cascade\components\db\fields\formats\Binary as BinaryType;
 use cascade\components\db\fields\formats\Date as DateType;
 use cascade\components\db\fields\formats\Text as TextType;
-use infinite\base\exceptions\Exception;
+use teal\base\exceptions\Exception;
 use Yii;
 
 /**
@@ -20,7 +20,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class Base extends \infinite\base\Object
+abstract class Base extends \teal\base\Object
 {
     /**
      * @var [[@doctodo var_type:formFieldClass]] [[@doctodo var_description:formFieldClass]]

@@ -1,21 +1,21 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\taxonomy;
 
-use infinite\helpers\ArrayHelper;
+use teal\helpers\ArrayHelper;
 
 /**
  * Item [[@doctodo class_description:cascade\components\taxonomy\Item]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Item extends \infinite\base\collector\Item
+class Item extends \teal\base\collector\Item
 {
     /**
      * @var [[@doctodo var_type:name]] [[@doctodo var_description:name]]

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\models;
@@ -15,7 +15,7 @@ use cascade\components\types\ActiveRecordTrait;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Identity extends \infinite\db\models\Identity
+class Identity extends \teal\db\models\Identity
 {
     use ActiveRecordTrait {
         behaviors as baseBehaviors;

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\gii\cascadeTypeModule;
@@ -38,7 +38,7 @@ use yii\helpers\Inflector;
  * @property boolean $modulePath The directory that contains the module class. This property is read-only.
  * @property string $widgetNamespace The widget namespace of the module. This property is read-only.
  *
- * @author Jacob Morrison <jacob@infinitecascade.com>
+ * @author Jacob Morrison <jacob@tealcascade.com>
  *
  * @since 1.0
  */
@@ -919,7 +919,7 @@ EOD;
 
             $field = "'{$column->name}' => '";
 
-            // \infinite\base\Debug::d($column);exit;
+            // \teal\base\Debug::d($column);exit;
             $fieldType = $column->dbType;
             preg_match('/^(\w+)(\((.+?)\))?\s*(.+)$/', $fieldType, $fieldTypeParts);
             if (!isset($fieldTypeParts[1])) {

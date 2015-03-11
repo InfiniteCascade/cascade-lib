@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\storageHandlers;
@@ -13,7 +13,7 @@ namespace cascade\components\storageHandlers;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Collector extends \infinite\base\collector\Module
+class Collector extends \teal\base\collector\Module
 {
     /**
      * @var [[@doctodo var_type:_initialItems]] [[@doctodo var_description:_initialItems]]

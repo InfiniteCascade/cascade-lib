@@ -1,8 +1,8 @@
 function ObjectSearch (parent, options) {
-   InfiniteSearch.call(this, parent, options);
+   TealSearch.call(this, parent, options);
 }
 
-ObjectSearch.prototype = Object.create(InfiniteSearch.prototype);
+ObjectSearch.prototype = Object.create(TealSearch.prototype);
 
 (function ($) { 
    $.fn.objectSearch = function (options) {

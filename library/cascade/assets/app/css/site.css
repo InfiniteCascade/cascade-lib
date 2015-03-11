@@ -294,10 +294,10 @@ footer {
   background-position: 100% 0;
   transition: background-position 1s;
 
-  -webkit-animation: widget-lazy-placeholder-animation 3s infinite; /* Safari 4+ */
-  -moz-animation:    widget-lazy-placeholder-animation 3s infinite; /* Fx 5+ */
-  -o-animation:      widget-lazy-placeholder-animation 3s infinite; /* Opera 12+ */
-  animation:         widget-lazy-placeholder-animation 3s infinite; /* IE 10+ */
+  -webkit-animation: widget-lazy-placeholder-animation 3s teal; /* Safari 4+ */
+  -moz-animation:    widget-lazy-placeholder-animation 3s teal; /* Fx 5+ */
+  -o-animation:      widget-lazy-placeholder-animation 3s teal; /* Opera 12+ */
+  animation:         widget-lazy-placeholder-animation 3s teal; /* IE 10+ */
 }
 
 

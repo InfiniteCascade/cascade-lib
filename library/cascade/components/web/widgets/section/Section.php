@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\web\widgets\section;
 
-use infinite\helpers\ArrayHelper;
-use infinite\helpers\Html;
+use teal\helpers\ArrayHelper;
+use teal\helpers\Html;
 use Yii;
 
 /**
@@ -22,7 +22,7 @@ class Section extends \cascade\components\web\widgets\Widget
     /**
      * @inheritdoc
      */
-    public $gridClass = 'infinite\web\grid\Grid';
+    public $gridClass = 'teal\web\grid\Grid';
     /**
      * @var [[@doctodo var_type:defaultWidgetDecoratorClass]] [[@doctodo var_description:defaultWidgetDecoratorClass]]
      */

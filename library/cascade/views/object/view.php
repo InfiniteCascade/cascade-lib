@@ -1,5 +1,5 @@
 <?php
-use infinite\helpers\Html;
+use teal\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\helpers\Url;
 
@@ -33,7 +33,7 @@ foreach ($sections as $section) {
 $this->tinyMenu = $sectionsMenu;
 echo Html::beginTag('div', ['class' => 'dashboard']);
 
-$grid = Yii::createObject(['class' => 'infinite\web\grid\Grid']);
+$grid = Yii::createObject(['class' => 'teal\web\grid\Grid']);
 $cells = [];
 $mainColumnSize = 12;
 
@@ -47,7 +47,7 @@ if (isset($sections['_side'])) {
         $mainColumnSize -= 4;
         $js[] = '$("#' . $cellInner->id . '").cascadeAffix();';
         $js[] = "\$('body').scrollspy({ target: '.ic-sidenav', 'offset': 10 });";
-        $cells[] = $sideCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $sideContent]);
+        $cells[] = $sideCell = Yii::createObject(['class' => 'teal\web\grid\Cell', 'content' => $sideContent]);
         Yii::configure($sideCell, ['mediumDesktopColumns' => 4, 'maxMediumDesktopColumns' => 4, 'largeDesktopSize' => false, 'tabletColumns' => 5]);
     }
 }
@@ -63,9 +63,9 @@ foreach ($sections as $section) {
     }
     $mainCell[] = $section->object->cell;
 }
-$mainCellGrid = Yii::createObject(['class' => 'infinite\web\grid\Grid']);
+$mainCellGrid = Yii::createObject(['class' => 'teal\web\grid\Grid']);
 $mainCellGrid->cells = $mainCell;
-$cells[] = $mainCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $mainCellGrid->generate()]);
+$cells[] = $mainCell = Yii::createObject(['class' => 'teal\web\grid\Cell', 'content' => $mainCellGrid->generate()]);
 Yii::configure($mainCell, ['mediumDesktopColumns' => 4, 'maxMediumDesktopColumns' => $mainColumnSize, 'largeDesktopSize' => false, 'tabletColumns' => $mainColumnSize + 1]);
 Html::addCssClass($mainCell->htmlOptions, 'ic-main-cell');
 
@@ -78,7 +78,7 @@ if (count($sectionsMenu) > 2) {
             'items' => $sectionsMenu,
         ]);
     $menuContent .= Html::endTag('div');
-    $cells[] = $menuCell = Yii::createObject(['class' => 'infinite\web\grid\Cell', 'content' => $menuContent]);
+    $cells[] = $menuCell = Yii::createObject(['class' => 'teal\web\grid\Cell', 'content' => $menuContent]);
     Yii::configure($menuCell, ['mediumDesktopColumns' => 2, 'maxMediumDesktopColumns' => 2, 'largeDesktopSize' => false, 'tabletSize' => false]);
     Html::addCssClass($menuCell->htmlOptions, 'hidden-xs hidden-sm');
 }

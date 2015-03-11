@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\dataInterface;
@@ -17,7 +17,7 @@ use yii\helpers\Inflector;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class DataSource extends \infinite\base\Component
+abstract class DataSource extends \teal\base\Component
 {
     const EVENT_LOAD_FOREIGN_DATA_ITEMS = 0x01;
     const EVENT_LOAD_LOCAL_DATA_ITEMS = 0x02;

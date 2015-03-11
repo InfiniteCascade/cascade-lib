@@ -1,18 +1,18 @@
 <?php
 /**
- * @link http://www.infinitecascade.com/
+ * @link http://www.tealcascade.com/
  *
- * @copyright Copyright (c) 2014 Infinite Cascade
- * @license http://www.infinitecascade.com/license/
+ * @copyright Copyright (c) 2014 Teal Software
+ * @license http://www.tealcascade.com/license/
  */
 
 namespace cascade\components\storageHandlers\core;
 
 use cascade\models\Storage;
 use cascade\models\StorageEngine;
-use infinite\base\exceptions\Exception;
-use infinite\base\FileInterface;
-use infinite\helpers\Date;
+use teal\base\exceptions\Exception;
+use teal\base\FileInterface;
+use teal\helpers\Date;
 use Yii;
 use yii\helpers\FileHelper;
 
@@ -27,7 +27,7 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
     /**
      * @var [[@doctodo var_type:localFileClass]] [[@doctodo var_description:localFileClass]]
      */
-    public $localFileClass = 'infinite\base\File';
+    public $localFileClass = 'teal\base\File';
     /**
      * @var [[@doctodo var_type:bucketFormat]] [[@doctodo var_description:bucketFormat]]
      */
