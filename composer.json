@@ -28,8 +28,8 @@
 		"fabpot/php-cs-fixer": "@stable"
 	},
     "autoload": {
-		"classmap": ["library/cascade/Cascade.php"],
-		"psr-0": { "cascade\\": "library" }
+		"classmap": ["lib/Cascade.php"],
+		"psr-4": { "cascade\\": "lib" }
     },
     "extra": {
     	"bootstrap": "cascade\\Cascade"
