@@ -54,6 +54,7 @@ class Task_000002_db extends \teal\setup\Task
         ob_start();
         $this->migrator->run();
         $result = ob_get_clean();
+        //var_dump($result);exit;
         preg_match('/Found ([0-9]+) new migration/', $result, $matches);
         if (empty($matches[1])) {
             return true;

@@ -14,10 +14,10 @@
 		"teal/yii2-notification-engine": "*",
 		"phpoffice/phpexcel": "*",
 		"emberlabs/gravatarlib": "*",
-		"mistic100/jquery-querybuilder": "*",
 		"bower-asset/smart-time-ago": "*",
 		"bower-asset/vibe": "*",
 		"bower-asset/purl": "*",
+		"bower-asset/jQuery-QueryBuilder": "*",
 		"yiisoft/yii2-jui": "*"
 	},
 	"require-dev": {

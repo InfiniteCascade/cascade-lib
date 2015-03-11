@@ -127,7 +127,6 @@ abstract class Module extends \cascade\components\base\CollectorModule
      */
     public function init()
     {
-        $this->always();
         $this->on(self::EVENT_VIEW_OBJECT, [$this, 'subactionHandle']);
         parent::init();
     }
