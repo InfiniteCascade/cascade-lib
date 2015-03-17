@@ -20,7 +20,7 @@ class QueryBuilderAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/mistic100/jquery-querybuilder/src';
+    public $sourcePath = '@vendor/bower/jQuery-QueryBuilder/dist';
     /**
      * @inheritdoc
      */
