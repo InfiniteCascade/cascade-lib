@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface\connectors\db;
 
 use cascade\components\dataInterface\connectors\generic\Module as BaseModule;
-use teal\base\exceptions\Exception;
+use canis\base\exceptions\Exception;
 use Yii;
 use yii\helpers\Inflector;
 

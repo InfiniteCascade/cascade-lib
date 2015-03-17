@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\section;
 
 interface SectionInterface
 {
-    // extends \teal\web\RenderInterface
+    // extends \canis\web\RenderInterface
     public static function generateSectionId($name);
     public function setTitle($title);
     public function getSectionTitle();

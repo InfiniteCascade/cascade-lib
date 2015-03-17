@@ -1,22 +1,22 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\setup\tasks;
 
 use cascade\models\Group;
 use cascade\models\User;
-use teal\base\exceptions\Exception;
+use canis\base\exceptions\Exception;
 
 /**
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task_000007_admin_user extends \teal\setup\Task
+class Task_000007_admin_user extends \canis\setup\Task
 {
     /**
      * @inheritdoc

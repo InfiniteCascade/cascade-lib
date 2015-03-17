@@ -1,5 +1,5 @@
 <?php
-use teal\helpers\Html;
+use canis\helpers\Html;
 
 if (empty($role)) {
     $role = 'none';

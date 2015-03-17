@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\db\behaviors\auditable;
@@ -15,7 +15,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class DeleteEvent extends \teal\db\behaviors\auditable\DeleteEvent
+class DeleteEvent extends \canis\db\behaviors\auditable\DeleteEvent
 {
     /**
      * @var [[@doctodo var_type:objectType]] [[@doctodo var_description:objectType]]

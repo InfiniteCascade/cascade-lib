@@ -1,17 +1,17 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\form;
 
 use cascade\components\db\fields\Model as ModelField;
 use cascade\components\db\fields\Relation as RelationField;
-use teal\helpers\Html;
-use teal\web\grid\Grid;
+use canis\helpers\Html;
+use canis\web\grid\Grid;
 use Yii;
 
 /**

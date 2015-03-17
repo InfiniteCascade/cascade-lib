@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface;
@@ -17,7 +17,7 @@ use yii\helpers\Inflector;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class DataSource extends \teal\base\Component
+abstract class DataSource extends \canis\base\Component
 {
     const EVENT_LOAD_FOREIGN_DATA_ITEMS = 0x01;
     const EVENT_LOAD_LOCAL_DATA_ITEMS = 0x02;

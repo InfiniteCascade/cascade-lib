@@ -2,7 +2,7 @@
 /**
  * ./app/config/environments/common/main.php.
  *
- * @author Jacob Morrison <jacob@tealcascade.com>
+ * @author Jacob Morrison <jacob@canis.io>
  */
 $config = include __DIR__ . DIRECTORY_SEPARATOR . 'base.php';
 $config['controllerNamespace'] = 'cascade\controllers';
@@ -16,13 +16,13 @@ $config['components']['request'] = [
     'enableCookieValidation' => true,
 ];
 $config['components']['user'] = [
-    'class' => 'teal\web\User',
+    'class' => 'canis\web\User',
     'enableAutoLogin' => false,
     'identityClass' => 'cascade\models\User',
     'loginUrl' => ['/app/login'],
 ];
 $config['components']['webState'] = [
-    'class' => 'teal\web\State',
+    'class' => 'canis\web\State',
 ];
 $config['components']['session'] = [
     'class' => 'yii\redis\Session',

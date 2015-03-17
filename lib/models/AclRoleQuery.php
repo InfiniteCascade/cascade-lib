@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\models;
 
-use teal\db\ActiveQuery;
-use teal\db\Query;
+use canis\db\ActiveQuery;
+use canis\db\Query;
 
 /**
  * AclRoleQuery [[@doctodo class_description:cascade\models\AclRoleQuery]].

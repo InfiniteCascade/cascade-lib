@@ -9,7 +9,7 @@ echo "<?php\n";
 ?>
 namespace <?= $migrationsNamespace; ?>;
 
-class <?=$migrationClassName; ?> extends \teal\db\Migration
+class <?=$migrationClassName; ?> extends \canis\db\Migration
 {
     public function up()
     {

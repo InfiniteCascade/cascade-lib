@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface;
@@ -15,7 +15,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class DataItem extends \teal\base\Component
+abstract class DataItem extends \canis\base\Component
 {
     /**
      * @var [[@doctodo var_type:dataSource]] [[@doctodo var_description:dataSource]]

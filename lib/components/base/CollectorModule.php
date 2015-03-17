@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\base;
 
-use teal\base\collector\CollectedObjectTrait;
-use teal\base\exceptions\Exception;
+use canis\base\collector\CollectedObjectTrait;
+use canis\base\exceptions\Exception;
 use Yii;
 
 /**
@@ -17,7 +17,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class CollectorModule extends \teal\base\Module implements \teal\base\collector\CollectedObjectInterface
+abstract class CollectorModule extends \canis\base\Module implements \canis\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;
 

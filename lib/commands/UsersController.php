@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\commands;
@@ -17,7 +17,7 @@ use yii\helpers\Console;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class UsersController extends \teal\console\Controller
+class UsersController extends \canis\console\Controller
 {
     /**
      * TBD.

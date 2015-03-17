@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\db\behaviors\auditable;
@@ -13,7 +13,7 @@ namespace cascade\components\db\behaviors\auditable;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class DataInterfaceEventBehavior extends \teal\db\behaviors\ActiveRecord
+class DataInterfaceEventBehavior extends \canis\db\behaviors\ActiveRecord
 {
     /**
      * @var [[@doctodo var_type:_dataInterface]] [[@doctodo var_description:_dataInterface]]
@@ -26,7 +26,7 @@ class DataInterfaceEventBehavior extends \teal\db\behaviors\ActiveRecord
     public function events()
     {
         return [
-            \teal\db\behaviors\auditable\Event::EVENT_BEFORE_MODEL_SAVE => 'beforeModelSave',
+            \canis\db\behaviors\auditable\Event::EVENT_BEFORE_MODEL_SAVE => 'beforeModelSave',
         ];
     }
 

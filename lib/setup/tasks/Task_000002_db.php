@@ -1,20 +1,20 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\setup\tasks;
 
-use teal\setup\Exception;
+use canis\setup\Exception;
 
 /**
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task_000002_db extends \teal\setup\Task
+class Task_000002_db extends \canis\setup\Task
 {
     /**
      */
@@ -102,7 +102,7 @@ class Task_000002_db extends \teal\setup\Task
             }
             $config = require $configFile;
             //var_dump($config);exit;
-            $this->_migrator = new \teal\console\Application($config);
+            $this->_migrator = new \canis\console\Application($config);
         }
 
         return $this->_migrator;

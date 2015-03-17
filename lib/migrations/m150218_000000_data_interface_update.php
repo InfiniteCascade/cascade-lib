@@ -1,7 +1,7 @@
 <?php
 namespace cascade\migrations;
 
-class m150218_000000_data_interface_update extends \teal\db\Migration
+class m150218_000000_data_interface_update extends \canis\db\Migration
 {
     public function up()
     {

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\db\behaviors;
@@ -15,7 +15,7 @@ use cascade\components\types\Relationship;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Relatable extends \teal\db\behaviors\Relatable
+class Relatable extends \canis\db\behaviors\Relatable
 {
     /**
      * @inheritdoc

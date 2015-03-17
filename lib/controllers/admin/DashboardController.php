@@ -2,7 +2,7 @@
 
 namespace cascade\controllers\admin;
 
-use teal\web\Controller;
+use canis\web\Controller;
 use Yii;
 use yii\filters\AccessControl;
 

@@ -6,7 +6,7 @@ namespace cascade\components\db;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class ActiveQuery extends \teal\db\ActiveQuery
+class ActiveQuery extends \canis\db\ActiveQuery
 {
     /**
      * [[@doctodo method_description:andWhereFromQuery]].

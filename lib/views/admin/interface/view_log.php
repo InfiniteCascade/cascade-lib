@@ -1,7 +1,7 @@
 <?php
-use teal\helpers\Html;
+use canis\helpers\Html;
 
-\teal\web\assetBundles\LogAsset::register($this);
+\canis\web\assetBundles\LogAsset::register($this);
 $interfaceModel = $dataInterfaceLog->dataInterface;
 $this->title = "View Data Interface Log";
 $this->params['breadcrumbs'][] = ['label' => 'Administration', 'url' => ['/admin/dashboard/index']];

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\types;
@@ -12,9 +12,9 @@ use cascade\components\db\behaviors\SearchTerm;
 use cascade\components\db\fields\Base as BaseField;
 use cascade\components\web\form\Segment as FormSegment;
 use cascade\models\Relation;
-use teal\caching\Cacher;
-use teal\helpers\ArrayHelper;
-use teal\helpers\Html;
+use canis\caching\Cacher;
+use canis\helpers\ArrayHelper;
+use canis\helpers\Html;
 use Yii;
 use yii\helpers\Inflector;
 
@@ -49,7 +49,7 @@ trait ActiveRecordTrait
     {
         return [
             'Registry' => [
-                'class' => 'teal\db\behaviors\Registry',
+                'class' => 'canis\db\behaviors\Registry',
             ],
             'Relatable' => [
                 'class' => 'cascade\components\db\behaviors\Relatable',

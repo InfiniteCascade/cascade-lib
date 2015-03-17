@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\base;
@@ -13,7 +13,7 @@ namespace cascade\components\base;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class ClassManager extends \teal\base\ClassManager
+class ClassManager extends \canis\base\ClassManager
 {
     /**
      * @inheritdoc

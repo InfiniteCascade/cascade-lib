@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\section;
 
 use cascade\components\helpers\StringHelper;
-use teal\base\collector\CollectorTrait;
-use teal\web\RenderTrait;
+use canis\base\collector\CollectorTrait;
+use canis\web\RenderTrait;
 use yii\helpers\Inflector;
 
 trait SectionTrait
@@ -20,7 +20,7 @@ trait SectionTrait
 
     public $sectionWidgetClass = 'cascade\components\web\widgets\section\Section';
     public $sectionSingleWidgetClass = 'cascade\components\web\widgets\section\SingleSection';
-    public $gridCellClass = 'teal\web\grid\Cell';
+    public $gridCellClass = 'canis\web\grid\Cell';
 
     protected $_title;
     protected $_parsedTitle;

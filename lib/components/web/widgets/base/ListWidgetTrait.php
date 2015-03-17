@@ -1,18 +1,18 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\widgets\base;
 
-use teal\helpers\ArrayHelper;
-use teal\helpers\Html;
-use teal\web\bootstrap\ButtonDropdown;
-use teal\web\grid\Cell;
-use teal\web\grid\Row;
+use canis\helpers\ArrayHelper;
+use canis\helpers\Html;
+use canis\web\bootstrap\ButtonDropdown;
+use canis\web\grid\Cell;
+use canis\web\grid\Row;
 
 trait ListWidgetTrait
 {
@@ -271,7 +271,7 @@ trait ListWidgetTrait
         }
         /* @var LinkPager $class */
         $pager = $this->pagerSettings;
-        $class = ArrayHelper::remove($pager, 'class', 'teal\widgets\LinkPager');
+        $class = ArrayHelper::remove($pager, 'class', 'canis\widgets\LinkPager');
         $pager['pagination'] = $pagination;
         if (!isset($pager['options'])) {
             $pager['options'] = [];

@@ -2,7 +2,7 @@
 use cascade\components\web\bootstrap\Nav;
 use cascade\components\web\bootstrap\TopNavBar;
 use cascade\models\SearchForm;
-use teal\deferred\widgets\NavItem as DeferredNavItem;
+use canis\deferred\widgets\NavItem as DeferredNavItem;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;

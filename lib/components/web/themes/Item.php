@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\themes;
@@ -13,6 +13,6 @@ namespace cascade\components\web\themes;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Item extends \teal\base\collector\Item
+class Item extends \canis\base\collector\Item
 {
 }

@@ -1,5 +1,5 @@
 <?php
-use teal\helpers\Html;
+use canis\helpers\Html;
 
 $this->params['breadcrumbs'][] = ['label' => 'Administration', 'url' => ['/admin/dashboard/index']];
 $this->params['breadcrumbs'][] = ['label' => $this->title];

@@ -1,17 +1,17 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\models;
 
 use cascade\components\dataInterface\Status;
-use teal\caching\Cacher;
-use teal\helpers\Date;
-use teal\helpers\StringHelper;
+use canis\caching\Cacher;
+use canis\helpers\Date;
+use canis\helpers\StringHelper;
 use yii\helpers\Url;
 
 /**

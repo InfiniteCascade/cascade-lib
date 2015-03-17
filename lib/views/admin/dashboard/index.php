@@ -2,7 +2,7 @@
 /**
  * @var yii\base\View
  */
-use teal\helpers\Html;
+use canis\helpers\Html;
 
 $this->title = 'Administration';
 $this->params['breadcrumbs'][] = ['label' => $this->title];

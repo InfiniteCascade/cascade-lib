@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2015 Teal Software
- * @license http://www.tealcascade.com/license
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license
  */
 
 namespace cascade\commands;
 
-use teal\caching\Cacher;
+use canis\caching\Cacher;
 use Yii;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;
@@ -18,7 +18,7 @@ use yii\helpers\FileHelper;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class ToolsController extends \teal\console\Controller
+class ToolsController extends \canis\console\Controller
 {
     /**
      * Flush the cache.
@@ -46,11 +46,11 @@ class ToolsController extends \teal\console\Controller
     {
         $dirs = [
             Yii::getAlias('@cascade'),
-            Yii::getAlias('@teal'),
+            Yii::getAlias('@canis'),
             Yii::getAlias('@cascade/modules/core'),
             Yii::getAlias('@psesd/cascade'),
-            Yii::getAlias('@teal/deferred'),
-            Yii::getAlias('@teal/notification'),
+            Yii::getAlias('@canis/deferred'),
+            Yii::getAlias('@canis/notification'),
         ];
         $customStart = microtime(true);
         Console::stdout("Running custom fixes..." . PHP_EOL);
@@ -170,7 +170,7 @@ class ToolsController extends \teal\console\Controller
     {
         $changed = false;
         foreach ($contents as $lineNumber => $line) {
-            if (preg_match('/(psesd|teal|cascade)\\\\\\\/', $line) === 1) {
+            if (preg_match('/(psesd|canis|cascade)\\\\\\\/', $line) === 1) {
                 $fixedLine = preg_replace('/\\\\\\\/', '\\', $line);
                 if ($fixedLine !== $line) {
                     $contents[$lineNumber] = $fixedLine;

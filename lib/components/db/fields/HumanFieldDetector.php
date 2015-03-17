@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\db\fields;
 
-use teal\helpers\Match;
+use canis\helpers\Match;
 use yii\db\ColumnSchema;
 
 /**
@@ -16,7 +16,7 @@ use yii\db\ColumnSchema;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class HumanFieldDetector extends \teal\base\Object
+class HumanFieldDetector extends \canis\base\Object
 {
     /**
      * @var [[@doctodo var_type:_machineTests]] [[@doctodo var_description:_machineTests]]

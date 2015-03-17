@@ -1,5 +1,5 @@
 <?php
-use teal\helpers\Html;
+use canis\helpers\Html;
 
 $this->registerMetaTag(['http-equiv' => 'refresh', 'content' => '5']);
 

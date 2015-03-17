@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface\connectors\generic;
@@ -13,7 +13,7 @@ namespace cascade\components\dataInterface\connectors\generic;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class Model extends \teal\base\Object
+abstract class Model extends \canis\base\Object
 {
     /**
      * @var [[@doctodo var_type:modelName]] [[@doctodo var_description:modelName]]

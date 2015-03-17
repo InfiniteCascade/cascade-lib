@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\form\fields;
@@ -15,7 +15,7 @@ use cascade\components\db\fields\Base as DbBaseField;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class FieldTypeDetector extends \teal\base\object
+class FieldTypeDetector extends \canis\base\object
 {
     /**
      * [[@doctodo method_description:detect]].

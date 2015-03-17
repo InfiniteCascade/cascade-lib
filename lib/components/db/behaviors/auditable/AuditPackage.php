@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\db\behaviors\auditable;
@@ -15,7 +15,7 @@ use ArrayIterator;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class AuditPackage extends \teal\base\Object implements \IteratorAggregate, \ArrayAccess, \Countable
+class AuditPackage extends \canis\base\Object implements \IteratorAggregate, \ArrayAccess, \Countable
 {
     /**
      * @var [[@doctodo var_type:similarThreshold]] [[@doctodo var_description:similarThreshold]]

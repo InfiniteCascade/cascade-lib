@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\controllers;
@@ -16,9 +16,9 @@ use cascade\models\DeleteForm;
 use cascade\models\ObjectFamiliarity;
 use cascade\models\Registry;
 use cascade\models\Relation;
-use teal\base\exceptions\HttpException;
-use teal\helpers\ArrayHelper;
-use teal\web\Controller;
+use canis\base\exceptions\HttpException;
+use canis\helpers\ArrayHelper;
+use canis\web\Controller;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

@@ -6,7 +6,7 @@ namespace cascade\components\dataInterface;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class ConsoleAction extends \teal\action\ConsoleAction
+class ConsoleAction extends \canis\action\ConsoleAction
 {
     use ActionTrait;
 }

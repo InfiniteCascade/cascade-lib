@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\models;
 
 use cascade\components\db\ActiveRecordTrait as BaseActiveRecordTrait;
 use cascade\components\types\ActiveRecordTrait as TypesActiveRecordTrait;
-use teal\base\exceptions\Exception;
+use canis\base\exceptions\Exception;
 use Yii;
 
 /**
@@ -18,7 +18,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class User extends \teal\db\models\User
+class User extends \canis\db\models\User
 {
     /**
      * @var [[@doctodo var_type:_icon]] [[@doctodo var_description:_icon]]

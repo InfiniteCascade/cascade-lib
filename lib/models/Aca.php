@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\models;
@@ -15,7 +15,7 @@ use cascade\components\db\ActiveRecordTrait;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Aca extends \teal\db\models\Aca
+class Aca extends \canis\db\models\Aca
 {
     use ActiveRecordTrait {
         behaviors as baseBehaviors;

@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\form;
 
-use teal\helpers\Html;
+use canis\helpers\Html;
 use Yii;
 
 /**
@@ -16,7 +16,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Generator extends \teal\base\Object implements \teal\web\RenderInterface
+class Generator extends \canis\base\Object implements \canis\web\RenderInterface
 {
     /**
      * @var [[@doctodo var_type:_items]] [[@doctodo var_description:_items]]
