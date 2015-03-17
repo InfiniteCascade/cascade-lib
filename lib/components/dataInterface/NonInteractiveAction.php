@@ -6,7 +6,7 @@ namespace cascade\components\dataInterface;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class NonInteractiveAction extends \teal\action\NonInteractiveAction
+class NonInteractiveAction extends \canis\action\NonInteractiveAction
 {
     use ActionTrait;
 }

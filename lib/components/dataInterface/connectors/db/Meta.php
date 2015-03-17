@@ -1,21 +1,21 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface\connectors\db;
 
-use teal\base\exceptions\Exception;
+use canis\base\exceptions\Exception;
 
 /**
  * Meta meta for the database data interface connector.
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Meta extends \teal\base\Object
+class Meta extends \canis\base\Object
 {
     /**
      * @var array has many relationships for model meta

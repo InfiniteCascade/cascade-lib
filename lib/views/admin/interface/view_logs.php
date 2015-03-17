@@ -1,5 +1,5 @@
 <?php
-use teal\helpers\Html;
+use canis\helpers\Html;
 
 $this->title = "<em>{$dataInterface->name}</em> Interface Logs";
 $this->params['breadcrumbs'][] = ['label' => 'Administration', 'url' => ['/admin/dashboard/index']];

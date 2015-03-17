@@ -1,23 +1,23 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\form\fields;
 
 use cascade\components\web\form\FormObjectTrait;
-use teal\helpers\Html;
-use teal\web\grid\CellContentTrait;
+use canis\helpers\Html;
+use canis\web\grid\CellContentTrait;
 
 /**
  * Base [[@doctodo class_description:cascade\components\web\form\fields\Base]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class Base extends \teal\base\Object implements \teal\web\grid\CellContentInterface
+abstract class Base extends \canis\base\Object implements \canis\web\grid\CellContentInterface
 {
     use FormObjectTrait;
     use CellContentTrait;

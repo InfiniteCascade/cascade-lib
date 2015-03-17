@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\setup\tasks;
@@ -12,7 +12,7 @@ namespace cascade\setup\tasks;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task_000008_collectors extends \teal\setup\Task
+class Task_000008_collectors extends \canis\setup\Task
 {
     /**
      * @inheritdoc

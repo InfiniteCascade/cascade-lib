@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\db\behaviors\auditable;
 
 use cascade\models\ObjectFamiliarity;
-use teal\helpers\ArrayHelper;
+use canis\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -17,7 +17,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class AuditDataProvider extends \teal\data\ActiveDataProvider
+class AuditDataProvider extends \canis\data\ActiveDataProvider
 {
     /**
      * @var [[@doctodo var_type:scope]] [[@doctodo var_description:scope]]

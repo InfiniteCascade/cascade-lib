@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\storageHandlers;
 
 use cascade\models\Storage;
 use cascade\models\StorageEngine;
-use teal\base\exceptions\Exception;
+use canis\base\exceptions\Exception;
 use Yii;
 
 /**
@@ -18,7 +18,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Item extends \teal\base\collector\Item
+class Item extends \canis\base\collector\Item
 {
     /**
      * @var [[@doctodo var_type:publicEngine]] [[@doctodo var_description:publicEngine]]

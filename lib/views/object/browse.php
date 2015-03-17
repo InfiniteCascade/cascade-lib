@@ -1,11 +1,11 @@
 <?php
 use cascade\models\SearchForm;
-use teal\helpers\Html;
+use canis\helpers\Html;
 use yii\widgets\ActiveForm;
 
 cascade\components\web\assetBundles\QueryBuilderAsset::register($this);
 cascade\components\web\assetBundles\BrowseFilterAsset::register($this);
-teal\web\assetBundles\TealRestDrawAsset::register($this);
+canis\web\assetBundles\CanisRestDrawAsset::register($this);
 
 $this->title = 'Browse ' . $type->title->upperPlural;
 $js = [];

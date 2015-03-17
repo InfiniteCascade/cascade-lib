@@ -1,23 +1,23 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface;
 
 use cascade\components\helpers\StringHelper;
-use teal\helpers\ArrayHelper;
-use teal\helpers\Console;
+use canis\helpers\ArrayHelper;
+use canis\helpers\Console;
 
 /**
  * Search [[@doctodo class_description:cascade\components\dataInterface\Search]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Search extends \teal\base\Component
+class Search extends \canis\base\Component
 {
     /**
      * @var [[@doctodo var_type:interactive]] [[@doctodo var_description:interactive]]

@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface;
 
-use teal\action\Action as BaseAction;
+use canis\action\Action as BaseAction;
 
 /**
  * Module [[@doctodo class_description:cascade\components\dataInterface\Module]].
@@ -45,7 +45,7 @@ abstract class Module extends \cascade\components\base\CollectorModule
     /**
      * [[@doctodo method_description:run]].
      *
-     * @param teal\action\Action $action [[@doctodo param_description:action]]
+     * @param canis\action\Action $action [[@doctodo param_description:action]]
      */
     abstract public function run(BaseAction $action);
 }

@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\storageHandlers;
 
 use cascade\models\Storage;
 use cascade\models\StorageEngine;
-use teal\base\collector\CollectedObjectTrait;
+use canis\base\collector\CollectedObjectTrait;
 use Yii;
 
 /**
@@ -18,7 +18,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class Handler extends \teal\base\Component implements \teal\base\collector\CollectedObjectInterface
+abstract class Handler extends \canis\base\Component implements \canis\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;
 

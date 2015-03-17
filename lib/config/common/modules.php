@@ -2,7 +2,7 @@
 /**
  * ./app/config/environments/common/modules.php.
  *
- * @author Jacob Morrison <jacob@tealcascade.com>
+ * @author Jacob Morrison <jacob@canis.io>
  */
 
 return [

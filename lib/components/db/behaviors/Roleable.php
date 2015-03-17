@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\db\behaviors;
@@ -13,7 +13,7 @@ namespace cascade\components\db\behaviors;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Roleable extends \teal\db\behaviors\Roleable
+class Roleable extends \canis\db\behaviors\Roleable
 {
     /**
      * @inheritdoc

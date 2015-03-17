@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\storageHandlers;
 
-use teal\base\exceptions\Exception;
-use teal\base\FileInterface;
-use teal\web\UploadedFile;
+use canis\base\exceptions\Exception;
+use canis\base\FileInterface;
+use canis\web\UploadedFile;
 use Yii;
 use yii\base\Event;
 
@@ -19,7 +19,7 @@ use yii\base\Event;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class StorageBehavior extends \teal\db\behaviors\ActiveRecord
+class StorageBehavior extends \canis\db\behaviors\ActiveRecord
 {
     /**
      * @var [[@doctodo var_type:storageAttribute]] [[@doctodo var_description:storageAttribute]]
@@ -56,12 +56,12 @@ class StorageBehavior extends \teal\db\behaviors\ActiveRecord
     public function events()
     {
         return [
-            \teal\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
-            \teal\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
-            \teal\db\ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
-            \teal\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
-            \teal\db\ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
-            \teal\db\ActiveRecord::EVENT_AFTER_DELETE => 'afterDelete',
+            \canis\db\ActiveRecord::EVENT_BEFORE_INSERT => 'beforeSave',
+            \canis\db\ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeSave',
+            \canis\db\ActiveRecord::EVENT_AFTER_INSERT => 'afterSave',
+            \canis\db\ActiveRecord::EVENT_AFTER_UPDATE => 'afterSave',
+            \canis\db\ActiveRecord::EVENT_BEFORE_VALIDATE => 'beforeValidate',
+            \canis\db\ActiveRecord::EVENT_AFTER_DELETE => 'afterDelete',
         ];
     }
 

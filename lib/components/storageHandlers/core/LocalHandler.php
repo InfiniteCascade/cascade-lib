@@ -1,18 +1,18 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\storageHandlers\core;
 
 use cascade\models\Storage;
 use cascade\models\StorageEngine;
-use teal\base\exceptions\Exception;
-use teal\base\FileInterface;
-use teal\helpers\Date;
+use canis\base\exceptions\Exception;
+use canis\base\FileInterface;
+use canis\helpers\Date;
 use Yii;
 use yii\helpers\FileHelper;
 
@@ -27,7 +27,7 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
     /**
      * @var [[@doctodo var_type:localFileClass]] [[@doctodo var_description:localFileClass]]
      */
-    public $localFileClass = 'teal\base\File';
+    public $localFileClass = 'canis\base\File';
     /**
      * @var [[@doctodo var_type:bucketFormat]] [[@doctodo var_description:bucketFormat]]
      */

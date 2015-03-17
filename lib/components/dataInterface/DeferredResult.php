@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface;
@@ -15,7 +15,7 @@ use yii\helpers\Url;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class DeferredResult extends \teal\deferred\components\Result
+class DeferredResult extends \canis\deferred\components\Result
 {
     //public $logModel;
 

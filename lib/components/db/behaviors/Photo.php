@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\db\behaviors;
 
 use cascade\components\helpers\Gravatar;
-use teal\base\FileInterface;
-use teal\base\RawFile;
+use canis\base\FileInterface;
+use canis\base\RawFile;
 use Yii;
 use yii\helpers\Url;
 use yii\imagine\Image;

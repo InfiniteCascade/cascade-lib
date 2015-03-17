@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface\connectors\generic;
 
 use cascade\components\dataInterface\Action;
 use cascade\components\dataInterface\Module as BaseModule;
-use teal\action\Action as BaseAction;
+use canis\action\Action as BaseAction;
 use Yii;
 
 /**

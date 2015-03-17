@@ -1,17 +1,17 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\widgets\base;
 
 use cascade\components\types\Relationship;
-use teal\base\exceptions\Exception;
-use teal\helpers\ArrayHelper;
-use teal\helpers\Html;
+use canis\base\exceptions\Exception;
+use canis\helpers\ArrayHelper;
+use canis\helpers\Html;
 use Yii;
 
 trait ObjectWidgetTrait
@@ -68,7 +68,7 @@ trait ObjectWidgetTrait
         if (is_null($this->_dataProvider)) {
             $dataProvider = $this->dataProviderSettings;
             if (!isset($dataProvider['class'])) {
-                $dataProvider['class'] = 'teal\data\ActiveDataProvider';
+                $dataProvider['class'] = 'canis\data\ActiveDataProvider';
             }
             $method = ArrayHelper::getValue($this->settings, 'queryRole', 'all');
             if (in_array($method, ['parents', 'children']) && empty(Yii::$app->request->object)) {
@@ -398,7 +398,7 @@ trait ObjectWidgetTrait
     public function getPaginationSettings()
     {
         return [
-            'class' => 'teal\data\Pagination',
+            'class' => 'canis\data\Pagination',
             'pageSize' => $this->pageSize,
             'validatePage' => false,
             'page' => $this->getState('_page', 0),
@@ -408,7 +408,7 @@ trait ObjectWidgetTrait
     public function getSortSettings()
     {
         return [
-            'class' => 'teal\data\Sort',
+            'class' => 'canis\data\Sort',
             'sortOrders' => [
                 $this->currentSortBy => $this->currentSortByDirection === 'asc' ? SORT_ASC : SORT_DESC,
             ],
@@ -420,7 +420,7 @@ trait ObjectWidgetTrait
     public function getPagerSettings()
     {
         return [
-            'class' => 'teal\widgets\LinkPager',
+            'class' => 'canis\widgets\LinkPager',
             'pageStateKey' => $this->stateKeyName('_page'),
         ];
     }
@@ -428,7 +428,7 @@ trait ObjectWidgetTrait
     public function getDataProviderSettings()
     {
         return [
-            'class' => 'teal\data\ActiveDataProvider',
+            'class' => 'canis\data\ActiveDataProvider',
         ];
     }
 }

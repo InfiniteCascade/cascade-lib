@@ -2,7 +2,7 @@
 /**
  * ./app/config/environments/templates/development/params.php.
  *
- * @author Jacob Morrison <jacob@tealcascade.com>
+ * @author Jacob Morrison <jacob@canis.io>
  */
 if (!defined('YII_ENV')) {
     define('YII_ENV', 'dev');

@@ -1,23 +1,23 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\security;
 
 use cascade\components\types\Module as TypeModule;
 use cascade\components\types\RelationshipEvent;
-use teal\caching\Cacher;
+use canis\caching\Cacher;
 
 /**
  * AuthorityBehavior [[@doctodo class_description:cascade\components\security\AuthorityBehavior]].
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class AuthorityBehavior extends \teal\security\AuthorityBehavior
+class AuthorityBehavior extends \canis\security\AuthorityBehavior
 {
     /**
      * @inheritdoc

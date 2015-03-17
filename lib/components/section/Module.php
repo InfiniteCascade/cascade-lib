@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\section;
 
-use teal\base\collector\Item as BaseItem;
+use canis\base\collector\Item as BaseItem;
 
 /**
  * Module [[@doctodo class_description:cascade\components\section\Module]].

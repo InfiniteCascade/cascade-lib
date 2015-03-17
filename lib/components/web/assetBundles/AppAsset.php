@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\assetBundles;
@@ -43,7 +43,7 @@ class AppAsset extends AssetBundle
         'js/cascade.objectSearch.js',
         'js/cascade.objectBrowse.js',
         'js/cascade.objectSelector.js',
-        'js/cascade.tealFilter.js',
+        'js/cascade.canisFilter.js',
         'js/cascade.editInPlace.js', // maybe move this to object? not sure if it will be used outside object view,
         'js/cascade.activityFeed.js',
         'js/cascade.types.js',
@@ -52,12 +52,12 @@ class AppAsset extends AssetBundle
      * @inheritdoc
      */
     public $depends = [
-        'teal\web\assetBundles\TealAsset',
-        'teal\web\assetBundles\TealBrowserAsset',
-        'teal\web\assetBundles\BootstrapSelectAsset',
-        'teal\web\assetBundles\BootstrapDatepickerAsset',
-        'teal\web\assetBundles\TimeAgoAsset',
-        'teal\web\assetBundles\BootstrapTypeaheadAsset',
+        'canis\web\assetBundles\CanisAsset',
+        'canis\web\assetBundles\CanisBrowserAsset',
+        'canis\web\assetBundles\BootstrapSelectAsset',
+        'canis\web\assetBundles\BootstrapDatepickerAsset',
+        'canis\web\assetBundles\TimeAgoAsset',
+        'canis\web\assetBundles\BootstrapTypeaheadAsset',
         'cascade\components\web\assetBundles\PurlAsset',
         'cascade\components\web\assetBundles\VibeAsset',
     ];

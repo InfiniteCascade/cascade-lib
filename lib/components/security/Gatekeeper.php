@@ -1,16 +1,16 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\security;
 
 use cascade\modules\core\TypeAccount\models\ObjectAccount;
-use teal\base\exceptions\Exception;
-use teal\db\Query;
+use canis\base\exceptions\Exception;
+use canis\db\Query;
 use Yii;
 
 /**
@@ -18,7 +18,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Gatekeeper extends \teal\security\Gatekeeper
+class Gatekeeper extends \canis\security\Gatekeeper
 {
     /**
      * @inheritdoc
@@ -121,7 +121,7 @@ class Gatekeeper extends \teal\security\Gatekeeper
      */
     public function buildInnerRoleCheckConditions(&$innerOnConditions, $innerAlias, $query)
     {
-        if ($query instanceof \teal\db\ActiveQuery
+        if ($query instanceof \canis\db\ActiveQuery
             && $query->model->getBehavior('Relatable') !== null
             && isset($query->model->objectType)
             && is_object($query->model->objectType)

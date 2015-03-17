@@ -1,14 +1,14 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\widgets;
 
-use teal\base\collector\CollectedObjectTrait;
+use canis\base\collector\CollectedObjectTrait;
 use Yii;
 
 /**
@@ -16,7 +16,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class Widget extends BaseWidget implements \teal\base\WidgetInterface, \teal\base\collector\CollectedObjectInterface
+abstract class Widget extends BaseWidget implements \canis\base\WidgetInterface, \canis\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;
 
@@ -35,11 +35,11 @@ abstract class Widget extends BaseWidget implements \teal\base\WidgetInterface, 
     /**
      * @var [[@doctodo var_type:gridCellClass]] [[@doctodo var_description:gridCellClass]]
      */
-    public $gridCellClass = 'teal\web\grid\Cell';
+    public $gridCellClass = 'canis\web\grid\Cell';
     /**
      * @var [[@doctodo var_type:gridClass]] [[@doctodo var_description:gridClass]]
      */
-    public $gridClass = 'teal\web\grid\Grid';
+    public $gridClass = 'canis\web\grid\Grid';
 
     /**
      * @inheritdoc

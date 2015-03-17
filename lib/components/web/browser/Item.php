@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\browser;
@@ -13,7 +13,7 @@ namespace cascade\components\web\browser;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Item extends \teal\web\browser\Item
+class Item extends \canis\web\browser\Item
 {
     /**
      * @var [[@doctodo var_type:objectType]] [[@doctodo var_description:objectType]]

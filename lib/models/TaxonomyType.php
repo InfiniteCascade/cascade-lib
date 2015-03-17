@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\models;
 
 use cascade\components\types\ActiveRecordTrait;
-use teal\base\collector\CollectedObjectTrait;
+use canis\base\collector\CollectedObjectTrait;
 
 /**
  * TaxonomyType is the model class for table "taxonomy_type".
@@ -25,7 +25,7 @@ use teal\base\collector\CollectedObjectTrait;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class TaxonomyType extends \cascade\components\db\ActiveRecord implements \teal\base\collector\CollectedObjectInterface
+class TaxonomyType extends \cascade\components\db\ActiveRecord implements \canis\base\collector\CollectedObjectInterface
 {
     use CollectedObjectTrait;
     use ActiveRecordTrait {

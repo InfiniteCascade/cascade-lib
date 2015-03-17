@@ -1,6 +1,6 @@
 <?php
 use cascade\components\web\browser\Response as BrowserResponse;
-use teal\helpers\Html;
+use canis\helpers\Html;
 use yii\widgets\ActiveForm;
 
 $specialRequestors = $access->specialRequestors;

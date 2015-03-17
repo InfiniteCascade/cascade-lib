@@ -1,18 +1,18 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\widgets;
 
 use cascade\components\helpers\StringHelper;
-use teal\base\ComponentTrait;
-use teal\base\ObjectTrait;
-use teal\web\grid\CellContentTrait;
-use teal\web\RenderTrait;
+use canis\base\ComponentTrait;
+use canis\base\ObjectTrait;
+use canis\web\grid\CellContentTrait;
+use canis\web\RenderTrait;
 use Yii;
 
 /**

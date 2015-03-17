@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\models;
@@ -50,7 +50,7 @@ class DataInterface extends \cascade\components\db\ActiveRecord
     {
         return array_merge(parent::behaviors(), [
             'Registry' => [
-                'class' => 'teal\db\behaviors\Registry',
+                'class' => 'canis\db\behaviors\Registry',
             ],
         ]);
     }

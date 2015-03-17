@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\widgets\decorator;
@@ -18,7 +18,7 @@ class BlankDecorator extends Decorator
     /**
      * @var [[@doctodo var_type:gridCellClass]] [[@doctodo var_description:gridCellClass]]
      */
-    public $gridCellClass = 'teal\web\grid\Cell';
+    public $gridCellClass = 'canis\web\grid\Cell';
 
     /**
      * [[@doctodo method_description:generateHeader]].

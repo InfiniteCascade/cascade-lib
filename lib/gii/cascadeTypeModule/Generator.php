@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\gii\cascadeTypeModule;
@@ -38,7 +38,7 @@ use yii\helpers\Inflector;
  * @property boolean $modulePath The directory that contains the module class. This property is read-only.
  * @property string $widgetNamespace The widget namespace of the module. This property is read-only.
  *
- * @author Jacob Morrison <jacob@tealcascade.com>
+ * @author Jacob Morrison <jacob@canis.io>
  *
  * @since 1.0
  */
@@ -919,7 +919,7 @@ EOD;
 
             $field = "'{$column->name}' => '";
 
-            // \teal\base\Debug::d($column);exit;
+            // \canis\base\Debug::d($column);exit;
             $fieldType = $column->dbType;
             preg_match('/^(\w+)(\((.+?)\))?\s*(.+)$/', $fieldType, $fieldTypeParts);
             if (!isset($fieldTypeParts[1])) {

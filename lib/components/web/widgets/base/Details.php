@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\web\widgets\base;
 
 use cascade\components\web\widgets\Widget;
-use teal\helpers\Html;
+use canis\helpers\Html;
 use Yii;
 
 /**
@@ -46,11 +46,11 @@ class Details extends Widget implements ListWidgetInterface
     /**
      * @inheritdoc
      */
-    public $gridClass = 'teal\web\grid\Grid';
+    public $gridClass = 'canis\web\grid\Grid';
     /**
      * @inheritdoc
      */
-    public $gridCellClass = 'teal\web\grid\Cell';
+    public $gridCellClass = 'canis\web\grid\Cell';
     /**
      * @inheritdoc
      */

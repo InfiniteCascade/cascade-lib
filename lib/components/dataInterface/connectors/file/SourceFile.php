@@ -1,15 +1,15 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface\connectors\file;
 
-use teal\base\exceptions\Exception;
-use teal\helpers\Match;
+use canis\base\exceptions\Exception;
+use canis\helpers\Match;
 use Yii;
 
 /**
@@ -17,7 +17,7 @@ use Yii;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class SourceFile extends \teal\base\Object
+class SourceFile extends \canis\base\Object
 {
     /**
      * @var [[@doctodo var_type:id]] [[@doctodo var_description:id]]

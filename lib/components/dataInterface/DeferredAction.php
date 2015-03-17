@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface;
@@ -16,7 +16,7 @@ use cascade\models\DataInterfaceLog;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class DeferredAction extends \teal\deferred\components\Action
+class DeferredAction extends \canis\deferred\components\Action
 {
     use ActionTrait;
 

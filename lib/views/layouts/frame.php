@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 
 /**
- * @var \teal\base\View
+ * @var \canis\base\View
  * @var string
  */
 cascade\components\web\assetBundles\AppAsset::register($this);

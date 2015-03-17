@@ -1,6 +1,6 @@
 <?php
 return [
-    'class' => 'teal\security\role\Collector',
+    'class' => 'canis\security\role\Collector',
     'initialItems' => [
         'owner' => [
             'name' => 'Owner',

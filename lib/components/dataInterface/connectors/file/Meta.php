@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://www.tealcascade.com/
+ * @link http://canis.io/
  *
- * @copyright Copyright (c) 2014 Teal Software
- * @license http://www.tealcascade.com/license/
+ * @copyright Copyright (c) 2015 Canis
+ * @license http://canis.io/license/
  */
 
 namespace cascade\components\dataInterface\connectors\file;
@@ -13,7 +13,7 @@ namespace cascade\components\dataInterface\connectors\file;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Meta extends \teal\base\Object
+class Meta extends \canis\base\Object
 {
     /**
      * @var SourceFile the source file referenced in this meta

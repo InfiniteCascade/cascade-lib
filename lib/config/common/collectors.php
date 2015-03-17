@@ -2,7 +2,7 @@
 $lazyLoad = !(defined('IS_CONSOLE') && IS_CONSOLE);
 
 return [
-    'class' => 'teal\base\collector\Component',
+    'class' => 'canis\base\collector\Component',
     'cacheTime' => 120,
     'collectors' => [
         'roles' => include(TEAL_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'roles.php'),
