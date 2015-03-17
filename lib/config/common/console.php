@@ -12,6 +12,5 @@ $config['controllerMap'] = [
     'phpDoc' => 'teal\console\controllers\PhpDocController',
 ];
 unset($config['modules']['debug']);
-$config['controllerNamespace'] = 'cascade\commands';
 
 return $config;
