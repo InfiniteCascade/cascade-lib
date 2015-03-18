@@ -249,7 +249,7 @@ class SourceFile extends \canis\base\Object
     private function _loadExcel()
     {
         spl_autoload_unregister(['BaseYii', 'autoload']);
-        $path = TEAL_APP_VENDOR_PATH . DIRECTORY_SEPARATOR . 'phpoffice' . DIRECTORY_SEPARATOR . 'phpexcel' . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'PHPExcel.php';
+        $path = CANIS_APP_VENDOR_PATH . DIRECTORY_SEPARATOR . 'phpoffice' . DIRECTORY_SEPARATOR . 'phpexcel' . DIRECTORY_SEPARATOR . 'Classes' . DIRECTORY_SEPARATOR . 'PHPExcel.php';
         require_once $path;
     }
 

@@ -7,10 +7,10 @@
 
 return [
     'class' => 'canis\db\Connection',
-    'dsn' => 'mysql:host=' . TEAL_APP_DATABASE_HOST . ';port=' . TEAL_APP_DATABASE_PORT . ';dbname=' . TEAL_APP_DATABASE_DBNAME . '',
+    'dsn' => 'mysql:host=' . CANIS_APP_DATABASE_HOST . ';port=' . CANIS_APP_DATABASE_PORT . ';dbname=' . CANIS_APP_DATABASE_DBNAME . '',
     'emulatePrepare' => true,
-    'username' => TEAL_APP_DATABASE_USERNAME,
-    'password' => TEAL_APP_DATABASE_PASSWORD,
+    'username' => CANIS_APP_DATABASE_USERNAME,
+    'password' => CANIS_APP_DATABASE_PASSWORD,
     'charset' => 'utf8',
     'enableSchemaCache' => true,
 

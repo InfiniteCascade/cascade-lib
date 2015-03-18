@@ -22,7 +22,7 @@ return [
     ],
     'defaultStorageEngine' => 'local',
     'maxRoleLevels' => [
-        'public' => TEAL_ROLE_LEVEL_VIEWER, // viewer
-        'primaryAccount' => TEAL_ROLE_LEVEL_MANAGER, // manager
+        'public' => CANIS_ROLE_LEVEL_VIEWER, // viewer
+        'primaryAccount' => CANIS_ROLE_LEVEL_MANAGER, // manager
     ],
 ];

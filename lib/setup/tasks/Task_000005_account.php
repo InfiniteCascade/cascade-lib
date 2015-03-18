@@ -41,7 +41,7 @@ class Task_000005_account extends \canis\setup\Task
 
         if ($account->save()) {
             $configResult = false;
-            $paramsFilePath = TEAL_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'params.php';
+            $paramsFilePath = CANIS_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'params.php';
             $moreError = 'File does not exist! (' . $paramsFilePath . ')';
             if (file_exists($paramsFilePath)) {
                 $currentContents = $originalContents = file_get_contents($paramsFilePath);
