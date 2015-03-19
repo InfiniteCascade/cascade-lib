@@ -11,7 +11,7 @@ return [
     'defaultCountry' => 'US',
     'currency' => 'usd',
     'defaultSubnationalDivision' => null,
-    'migrationAliases' => ['@cascade/migrations'],
+    'migrationAliases' => ['@canis/db/migrations', '@cascade/migrations'],
     // site look
     'logoLogin' => "/themes/ic/img/cascade-logo-450.png",
     'logoSmall' => "/themes/ic/img/cascade-logo-75.png",

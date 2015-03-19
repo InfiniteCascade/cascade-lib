@@ -174,6 +174,16 @@ class Task_000001_environment extends \canis\setup\Task
         return true;
     }
 
+    protected static function generateRandomString()
+    {
+        if (!extension_loaded('openssl')) {
+            throw new \Exception('The OpenSSL PHP extension is required by Yii2.');
+        }
+        $length = 120;
+        $bytes = openssl_random_pseudo_bytes($length);
+        return strtr(substr(base64_encode($bytes), 0, $length), '+/=', '_-.');
+    }
+
     /**
      * Get env options.
      */
