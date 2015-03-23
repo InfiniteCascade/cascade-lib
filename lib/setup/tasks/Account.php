@@ -15,7 +15,7 @@ use cascade\modules\core\TypeAccount\models\ObjectAccount;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task_000005_account extends \canis\setup\Task
+class Account extends \canis\setup\tasks\BaseTask
 {
     /**
      * @inheritdoc

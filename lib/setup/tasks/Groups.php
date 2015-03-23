@@ -15,7 +15,7 @@ use cascade\models\Relation;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task_000003_groups extends \canis\setup\Task
+class Groups extends \canis\setup\tasks\BaseTask
 {
     /**
      * @inheritdoc

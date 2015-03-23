@@ -15,7 +15,7 @@ use canis\setup\Exception;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-abstract class AclTask extends \canis\setup\Task
+abstract class AclTask extends \canis\setup\tasks\BaseTask
 {
     /**
      * @inheritdoc

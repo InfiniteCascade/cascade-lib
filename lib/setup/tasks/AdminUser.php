@@ -16,7 +16,7 @@ use canis\base\exceptions\Exception;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task_000007_admin_user extends \canis\setup\Task
+class AdminUser extends \canis\setup\tasks\BaseTask
 {
     /**
      * @inheritdoc

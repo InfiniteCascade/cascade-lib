@@ -14,7 +14,7 @@ use cascade\models\User;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task_000004_acl extends AclTask
+class Acl extends AclTask
 {
     /**
      * @inheritdoc

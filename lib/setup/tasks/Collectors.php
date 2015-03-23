@@ -12,7 +12,7 @@ namespace cascade\setup\tasks;
  *
  * @author Jacob Morrison <email@ofjacob.com>
  */
-class Task_000008_collectors extends \canis\setup\Task
+class Collectors extends \canis\setup\tasks\BaseTask
 {
     /**
      * @inheritdoc
