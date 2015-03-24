@@ -35,7 +35,7 @@ class Item extends \canis\base\collector\Item
     public function init()
     {
         parent::init();
-        if ($this->publicEngine !== false && Yii::$app->isDbAvailable) {
+        if ($this->publicEngine !== false && Yii::$app->isDbAvailable && !defined('CANIS_SETUP')) {
             Yii::$app->collectors->onAfterInit([$this, 'ensurePublicEngine']);
         }
     }

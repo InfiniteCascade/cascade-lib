@@ -47,6 +47,16 @@ if (!isset($base['params'])) {
     $base['params'] = include $paramConfigPath;
 }
 
+if (!isset($base['modules'])) {
+    $base['modules'] = [];
+}
+
+$modulesConfigPath = CANIS_APP_CONFIG_PATH . DIRECTORY_SEPARATOR . 'modules.php';
+if (!file_exists($modulesConfigPath)) {
+    $modulesConfigPath = __DIR__ . DIRECTORY_SEPARATOR . 'modules.php';
+}
+$base['modules'] = array_merge($base['modules'], include $modulesConfigPath);
+
 if (!isset($base['components'])) {
     $base['components'] = [];
 }
@@ -79,7 +89,10 @@ if (!isset($base['components']['fileCache'])) {
 }
 if (!isset($base['components']['gk'])) {
     $base['components']['gk'] = [
-        'class' => Gatekeeper::className()
+        'class' => Gatekeeper::className(),
+        'authority' => [
+            'type' => 'Individual',
+        ],
     ];
 }
 if (class_exists('cascade\models\User')) {

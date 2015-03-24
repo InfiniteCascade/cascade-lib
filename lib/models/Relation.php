@@ -68,11 +68,12 @@ class Relation extends \canis\db\models\Relation
             Cacher::invalidateGroup(['Object', 'relations', $this->child_object_id]);
             $parentObject = $this->getParentObject(false);
             $childObject =  $this->getChildObject(false);
-            $relationshipEvent = new RelationshipEvent(['parentEvent' => $event, 'parentObject' => $parentObject, 'childObject' => $childObject, 'relationship' => $this->relationship]);
-            if ($parentObject) {
+            $relationship = $this->relationship;
+            $relationshipEvent = new RelationshipEvent(['parentEvent' => $event, 'parentObject' => $parentObject, 'childObject' => $childObject, 'relationship' => $relationship]);
+            if (!empty($parentObject) && !empty($parentObject->objectType)) {
                 $parentObject->objectType->trigger(TypeModule::EVENT_RELATION_CHANGE, $relationshipEvent);
             }
-            if ($childObject) {
+            if (!empty($childObject) && !empty($childObject->objectType)) {
                 $childObject->objectType->trigger(TypeModule::EVENT_RELATION_CHANGE, $relationshipEvent);
             }
         }
@@ -130,10 +131,10 @@ class Relation extends \canis\db\models\Relation
      */
     public function getRelationship()
     {
-        if (!isset($this->parentObject) || !isset($this->parentObject->objectTypeItem)) {
+        if (!isset($this->parentObject) || empty($this->parentObject->objectTypeItem)) {
             return false;
         }
-        if (!isset($this->childObject) || !isset($this->childObject->objectTypeItem)) {
+        if (!isset($this->childObject) || empty($this->childObject->objectTypeItem)) {
             return false;
         }
 

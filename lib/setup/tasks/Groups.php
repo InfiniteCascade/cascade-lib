@@ -35,9 +35,26 @@ class Groups extends \canis\setup\tasks\BaseTask
     /**
      * @inheritdoc
      */
-    public function test()
+    public function test($groups = null)
     {
-        return Group::find()->disableAccessCheck()->where(['system' => 'top'])->count() > 0;
+        if ($groups === null) {
+            $groups = $this->baseGroups;
+        }
+        foreach ($groups as $group => $subGroups) {
+            if (!is_numeric($group)) {
+                if (!Group::find()->disableAccessCheck()->where(['name' => $group])->one()) {
+                    return false;
+                }
+                if (!$this->test($subGroups)) {
+                    return false;
+                }
+            } else {
+                if (!Group::find()->disableAccessCheck()->where(['name' => $subGroups])->one()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**

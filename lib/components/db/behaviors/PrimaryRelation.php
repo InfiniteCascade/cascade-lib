@@ -52,6 +52,9 @@ class PrimaryRelation extends \canis\db\behaviors\PrimaryRelation
             $parentObject = $this->owner->getParentObject(false);
             $childObject = $this->owner->getChildObject(false);
             if ($parentObject && $childObject) {
+                if (empty($parentObject->objectTypeItem) || empty($childObject->objectTypeItem)) {
+                    return false;
+                }
                 $this->_relationship = Relationship::getOne($parentObject->objectTypeItem, $childObject->objectTypeItem);
             }
         }

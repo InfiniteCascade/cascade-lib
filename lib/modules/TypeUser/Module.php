@@ -65,6 +65,18 @@ class Module extends \cascade\components\types\Module
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(), [
+            'Authority' => [
+                'class' => 'cascade\components\security\AuthorityBehavior',
+            ],
+        ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getPrimaryModel()
     {
         return User::className();

@@ -41,7 +41,7 @@ class Account extends \canis\setup\tasks\BaseTask
 
         if ($account->save()) {
             $configResult = false;
-            $paramsFilePath = CANIS_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'params.php';
+            $paramsFilePath = CANIS_APP_CONFIG_PATH . DIRECTORY_SEPARATOR . 'params.php';
             $moreError = 'File does not exist! (' . $paramsFilePath . ')';
             if (file_exists($paramsFilePath)) {
                 $currentContents = $originalContents = file_get_contents($paramsFilePath);
@@ -50,7 +50,7 @@ class Account extends \canis\setup\tasks\BaseTask
                 foreach ($currentContents as $line => $content) {
                     if (strpos($content, '$PRIMARY_ACCOUNT$') !== false) {
                         $found = true;
-                        $currentContents[$line] = "\t'primaryAccount' => '{$account->id}', // \$PRIMARY_ACCOUNT\$ : COULD BREAK THINGS IF CHANGED";
+                        $currentContents[$line] = "\$params['primaryAccount'] =  '{$account->id}'; // \$PRIMARY_ACCOUNT\$ : COULD BREAK THINGS IF CHANGED";
                     }
                 }
                 if ($found && file_put_contents($paramsFilePath, implode(PHP_EOL, $currentContents))) {

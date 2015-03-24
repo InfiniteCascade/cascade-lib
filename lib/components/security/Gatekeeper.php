@@ -43,7 +43,7 @@ class Gatekeeper extends \canis\security\Gatekeeper
         if (!isset($authority['type'])
             || !($authorityTypeItem = Yii::$app->collectors['types']->getOne($authority['type']))
             || !($authorityType = $authorityTypeItem->object)) {
-            throw new Exception("Access Control Authority is not set up correctly!" . print_r($authority, true));
+            throw new Exception("Access Control Authority is not set up correctly!");
         }
         unset($authority['type']);
         $authority['handler'] = $authorityType;

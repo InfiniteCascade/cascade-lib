@@ -41,6 +41,7 @@ class Acl extends AclTask
 
         return $run && parent::test();
     }
+    
     /**
      * @inheritdoc
      */
