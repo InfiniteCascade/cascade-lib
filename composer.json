@@ -4,7 +4,7 @@
 	"keywords": ["yii", "crm"],
 	"homepage": "http://canis.io",
 	"type": "yii2-extension",
-	"license": "GPL -2.0",
+	"license": "BSD-3-Clause",
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.4.0",
