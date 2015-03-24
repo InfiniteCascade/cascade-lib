@@ -7,7 +7,7 @@
 
 return [
     'class' => 'yii\redis\Connection',
-    'hostname' => '127.0.0.1',
-    'port' => 6379,
-    'database' => 0,
+    'hostname' => CANIS_APP_REDIS_HOST,
+    'port' => CANIS_APP_REDIS_PORT,
+    'database' => CANIS_APP_REDIS_DATABASE
 ];

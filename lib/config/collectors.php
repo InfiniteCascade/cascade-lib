@@ -5,8 +5,8 @@ return [
     'class' => 'canis\base\collector\Component',
     'cacheTime' => 120,
     'collectors' => [
-        'roles' => include(CANIS_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'roles.php'),
-        'identityProviders' => include(CANIS_APP_ENVIRONMENT_PATH . DIRECTORY_SEPARATOR . 'identityProviders.php'),
+        'roles' => include(CANIS_APP_CONFIG_PATH . DIRECTORY_SEPARATOR . 'roles.php'),
+        'identityProviders' => include(CANIS_APP_CONFIG_PATH . DIRECTORY_SEPARATOR . 'identityProviders.php'),
         'types' => [
             'class' => 'cascade\components\types\Collector',
         ],
