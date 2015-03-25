@@ -6,7 +6,7 @@ $config['components']['request']['cookieValidationKey'] = '{{ cookieValidationSt
 if (YII_DEBUG) {
 	$config['components']['assetManager']['linkAssets'] = true;
 	
-	if (isset($config['components']['debug'])) {
+	if (isset($config['modules']['debug'])) {
 		$config['bootstrap'][] = 'debug';
 	}
 }
