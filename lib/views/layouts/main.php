@@ -3,6 +3,7 @@ use cascade\components\web\bootstrap\Nav;
 use cascade\components\web\bootstrap\TopNavBar;
 use cascade\models\SearchForm;
 use canis\deferred\widgets\NavItem as DeferredNavItem;
+use canis\notification\widgets\NavItem as NotificationNavItem;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\Breadcrumbs;
@@ -86,6 +87,7 @@ if (!Yii::$app->user->isGuest) {
 
 $identityLink = isset(Yii::$app->user->identity) ? Yii::$app->user->identity->url : false;
 $userMenu = [];
+$userMenu[] = NotificationNavItem::widget([]);
 $userMenu[] = DeferredNavItem::widget([]);
 if (Yii::$app->user->isGuest) {
     $userMenu[] = ['label' => 'Sign In', 'url' => ['/app/login'],

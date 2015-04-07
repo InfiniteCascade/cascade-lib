@@ -218,7 +218,11 @@ class AppController extends Controller
 
         Yii::$app->response->task = false;
         $refreshed = [];
-        $source = $_GET;
+        $source = $_POST;
+        $stream = false;
+        if (!empty($source['__TODO_FIGURE_OUT_VIBE_STREAM_HINT__'])) { // @todo figure out this vibe hint thing
+            $stream = true;
+        }
         if (isset($source['when']) && $source['when'] === 'handshake') {
             echo json_encode(['id' => md5(microtime(true)), 'transports' => ['stream']]);
 
@@ -226,9 +230,9 @@ class AppController extends Controller
         }
         if (empty($source['requests'])) {
             echo json_encode([]);
-
             return;
         }
+        $nonStreamResult = [];
         $baseInstrictions = (isset($source['baseInstructions']) ? $source['baseInstructions'] : []);
         foreach ($source['requests'] as $requestId => $request) {
             $refreshed[$requestId] = false;
@@ -283,10 +287,17 @@ class AppController extends Controller
                 break;
             }
             if ($refreshed[$requestId]) {
-                echo "data: " . json_encode(['type' => 'handleRequests', 'data' => [$requestId => $refreshed[$requestId]], 'id' => round(microtime(true) * 100)]);
-                echo "\n\n";
+                if ($stream) {
+                    echo "data: " . json_encode(['type' => 'handleRequests', 'data' => [$requestId => $refreshed[$requestId]], 'id' => round(microtime(true) * 100)]);
+                    echo "\n\n";
+                } else {
+                    $nonStreamResult[$requestId] = $refreshed[$requestId];
+                }
                 //echo str_repeat("\n\n",1024*4);
             }
+        }
+        if (!$stream) {
+            echo json_encode(['requests' => $nonStreamResult]);
         }
         ob_implicit_flush(0);
         ob_start();
