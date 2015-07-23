@@ -93,7 +93,7 @@ trait SectionTrait
      *
      * @return unknown
      */
-    protected function defaultItems($parent = null)
+    public function defaultItems($parent = null)
     {
         return [];
     }

@@ -172,6 +172,9 @@ abstract class DataItem extends \canis\base\Component
             return $object;
         }
         if ($fromRelative || !$this->dataSource->childOnly) {
+            if (isset($baseAttributes['relationModels'][0]['parent_object_id'])) {
+                $baseAttributes['indirectObject'] = $baseAttributes['relationModels'][0]['parent_object_id'];
+            }
             if ($this->isForeign) {
                 // handle local to foreign
                 $result = $this->handler->handleForeign($baseAttributes);

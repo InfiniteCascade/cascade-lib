@@ -78,6 +78,14 @@ trait ActiveRecordTrait
         ];
     }
 
+    public function doHandleRelationAuditEvents()
+    {
+        if ($this->objectType->hasDashboard) {
+            return false;
+        }
+        return true;
+    }
+
     public static function queryBehaviors()
     {
         return array_merge(parent::queryBehaviors(),
