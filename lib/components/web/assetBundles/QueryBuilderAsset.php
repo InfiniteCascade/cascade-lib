@@ -25,13 +25,13 @@ class QueryBuilderAsset extends AssetBundle
      * @inheritdoc
      */
     public $css = [
-        'query-builder.css',
+        'css/query-builder.default.min.css',
     ];
     /**
      * @inheritdoc
      */
     public $js = [
-        'query-builder.js',
+        'js/query-builder.standalone.min.js',
     ];
     /**
      * @inheritdoc

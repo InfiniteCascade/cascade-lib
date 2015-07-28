@@ -92,6 +92,9 @@ class HandlerTypes extends \canis\web\browser\Handler
         } elseif (!is_array($instructions['typeFilters'])) {
             $instructions['typeFilters'] = [$instructions['typeFilters']];
         }
+        if (!isset($instructions['modules'])) {
+            $instructions['modules'] = false;
+        }
         if (isset($instructions['relationshipRole'])) {
             if (!isset($instructions['relationship'])) {
                 throw new InvalidConfigException("Relationship type tasks require a relationship ID");

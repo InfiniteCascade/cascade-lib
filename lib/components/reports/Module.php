@@ -44,4 +44,22 @@ abstract class Module extends \cascade\components\base\CollectorModule
     {
         return 'Report';
     }
+
+    /**
+     * Returns a short description for the report
+     */
+    abstract public function getDescription();
+
+    /**
+     * Returns a the object types associated with this object
+     */
+    public function getObjectTypes()
+    {
+        return [];
+    }
+
+    public function getVariations()
+    {
+        return false;
+    }
 }

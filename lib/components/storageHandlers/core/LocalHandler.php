@@ -104,7 +104,7 @@ class LocalHandler extends \cascade\components\storageHandlers\Handler
         if (!file_exists($path)) {
             return false;
         }
-        Yii::$app->response->sendFile($path, trim($storage->file_name), $storage->type);
+        Yii::$app->response->sendFile($path, trim($storage->file_name), ['mimeType' => $storage->type]);
 
         return true;
     }

@@ -231,7 +231,7 @@ class ObjectController extends Controller
      */
     public function actionPhoto()
     {
-        if (empty($_GET['id']) or !($object = $this->params['object'] = Registry::getObject($_GET['id'], false)) or !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
+        if (empty($_GET['id']) || !($object = $this->params['object'] = Registry::getObject($_GET['id'], false)) || !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
             throw new HttpException(404, "Unknown object.");
         }
         if (!$object->can('read')) {
@@ -270,7 +270,7 @@ class ObjectController extends Controller
      */
     public function actionView()
     {
-        if (empty($_GET['id']) or !($object = $this->params['object'] = Registry::getObject($_GET['id'], false)) or !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
+        if (empty($_GET['id']) || !($object = $this->params['object'] = Registry::getObject($_GET['id'], false)) || !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
             throw new HttpException(404, "Unknown object.");
         }
         if (!$object->can('read')) {
@@ -354,7 +354,7 @@ class ObjectController extends Controller
      */
     public function actionActivity()
     {
-        if (empty($_GET['id']) or !($object = $this->params['object'] = Registry::getObject($_GET['id'], false)) or !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
+        if (empty($_GET['id']) || !($object = $this->params['object'] = Registry::getObject($_GET['id'], false)) || !($typeItem = $this->params['typeItem'] = $object->objectTypeItem)) {
             throw new HttpException(404, "Unknown object.");
         }
         if (!$object->can('read')) {
