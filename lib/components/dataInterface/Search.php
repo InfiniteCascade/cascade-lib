@@ -9,6 +9,7 @@
 namespace cascade\components\dataInterface;
 
 use cascade\components\helpers\StringHelper;
+use cascade\models\Registry;
 use canis\helpers\ArrayHelper;
 use canis\helpers\Console;
 
@@ -26,11 +27,13 @@ class Search extends \canis\base\Component
     /**
      * @var [[@doctodo var_type:threshold]] [[@doctodo var_description:threshold]]
      */
-    public $threshold = 50;
+    public $threshold = 70;
+
+    public $defaultOptionThreshold = 90;
     /**
-     * @var [[@doctodo var_type:autoadjust]] [[@doctodo var_description:autoadjust]]
+     * @var [[@doctodo var_type:superSafeAdjust]] [[@doctodo var_description:superSafeAdjust]]
      */
-    public $autoadjust = 1.5;
+    public $superSafeAdjust = 1.3;
     /**
      * @var [[@doctodo var_type:dataSource]] [[@doctodo var_description:dataSource]]
      */
@@ -86,10 +89,11 @@ class Search extends \canis\base\Component
 
         $localClass = $this->dataSource->localModel;
         $searchResults = $localClass::searchTerm(implode(' ', $query), $searchParams);
+        $resultsLeft = $totalResults = count($searchResults);
         foreach ($searchResults as $k => $r) {
             // if ($r->descriptor === $query[0]) { continue; }
             $score = (
-                (($r->score * 100) * .2)
+                ((($resultsLeft/$totalResults) * 100) * .2)
                 + (StringHelper::compareStrings($r->descriptor, implode(' ', $query)) * .8)
             );
             $r->score = $score;
@@ -101,46 +105,45 @@ class Search extends \canis\base\Component
                     unset($searchResults[$k]);
                 }
             }
+            $resultsLeft--;
         }
         ArrayHelper::multisort($searchResults, 'scoreSort', SORT_DESC);
         $searchResults = array_values($searchResults);
         if (empty($searchResults)) {
             return;
-        } elseif (
-            count($searchResults) === 1
-            || !self::$interactive
-            ||  (
-                    $searchResults[0]->score > ($this->threshold * $this->autoadjust)
-                    && (!isset($searchResults[1]) || $searchResults[0]->score !== $searchResults[1]->score)
-                )
-            || (
-                    $searchResults[0]->descriptor === implode(' ', $query)
-                    && (!isset($searchResults[1]) || $searchResults[1]->descriptor !== implode(' ', $query))
-                )
-        ) {
-            // if (!$item->ignoreForeignObject) {
-            //     \d(count($searchResults), $searchResults[1]->descriptor);exit;
-            // }
-            return $searchResults[0]->object;
+        } elseif (($safeResult = $this->getSafeResult($searchResults))) {
+            $this->dataSource->task->addInfo('Auto-matched "'. implode(' ', $query) .'" to "'. $safeResult->descriptor .'" (Score: '.round($safeResult->score, 2).')', [
+                    'query' => $query,
+                    'foreignObject' => $item->foreignObject->attributes,
+                    'localObject' => ['id' => $safeResult->id, 'descriptor' => $safeResult->descriptor]
+            ]);
+            return $safeResult->object;
         } else {
             $options = [];
             $resultsNice = [];
             $optionNumber = 1;
+
+            $defaultOption = 'new';
+            if ($searchResults[0]->score > $this->defaultOptionThreshold) {
+                $defaultOption = '1';
+            }
             foreach ($searchResults as $result) {
-                $resultsNice['_o' . $optionNumber] = $result;
-                $options['_o' . $optionNumber] = $result->descriptor . ' (' . $result->score . '%)';
+                $resultsNice['' . $optionNumber] = $result;
+                $options['' . $optionNumber] = $result->descriptor . ' (' . round($result->score) . '%)';
                 $optionNumber++;
             }
             $options['new'] = 'Create New Object';
+            $options['selectObject'] = 'Select Object';
             $select = false;
             $interactionOptions = ['inputType' => 'select', 'options' => $options];
             $interactionOptions['details'] = $item->foreignObject->attributes;
+            $interactionOptions['default'] = $defaultOption;
             $callback = [
                 'callback' => function ($response) use (&$select, $options) {
                     if (empty($response)) {
                         return false;
                     }
-                    if (!isset($options[$response])) {
+                    if (substr($response, 0, 2) !== '*-' && !isset($options[$response])) {
                         return false;
                     }
                     $select = $response;
@@ -148,18 +151,39 @@ class Search extends \canis\base\Component
                     return true;
                 },
             ];
-            Console::output("Waiting for interaction...");
             if (!$this->dataSource->action->createInteraction('Match Object (' . implode(' ', $query) . ')', $interactionOptions, $callback)) {
                 return false;
             }
 
             if ($select === 'new') {
-                Console::output("Selected CREATE NEW");
-
+                $this->dataSource->task->addInfo('For "'. implode(' ', $query) .'" user chose to to create new object', [
+                        'query' => $query,
+                        'foreignObject' => $item->foreignObject->attributes
+                ]);
                 return;
+            } elseif (substr($select, 0, 2) === '*-') {
+                $matchedObjectId = substr($select, 2);
+                $matchedObject = Registry::getObject($matchedObjectId, false);
+                if (!$matchedObject) {
+                    $this->dataSource->task->addWarning('For "'. implode(' ', $query) .'" user tried to match it to a different object, but object wasn\'t found! Created new object.', [
+                            'query' => $query,
+                            'foreignObject' => $item->foreignObject->attributes,
+                            'matchedObject' => $matchedObjectId
+                    ]);
+                    return;
+                }
+                $this->dataSource->task->addInfo('For "'. implode(' ', $query) .'" matched to an existing object "'. $matchedObject->descriptor .'"', [
+                        'query' => $query,
+                        'foreignObject' => $item->foreignObject->attributes,
+                        'matchedObject' => $matchedObject->attributes
+                ]);
+                return $matchedObject;
             } else {
-                Console::output("Selected " . $resultsNice[$select]->descriptor);
-
+                $this->dataSource->task->addInfo('User matched "'. implode(' ', $query) .'" to "'. $resultsNice[$select]->descriptor . '"', [
+                        'query' => $query,
+                        'foreignObject' => $item->foreignObject->attributes,
+                        'localObject' => $resultsNice[$select]->id
+                ]);
                 return $resultsNice[$select]->object;
             }
         }
@@ -225,5 +249,32 @@ class Search extends \canis\base\Component
     public function getModule()
     {
         return $this->dataSource->module;
+    }
+
+    protected function getSafeResult($results)
+    {
+        // does it have a result?
+        if (!isset($results[0])) {
+            return false;
+        }
+        $firstResult = $results[0];
+
+        // does it have a second option?
+        $secondResult = false;
+        if (isset($results[1])) {
+            $secondResult = $results[1];
+        }
+
+        // is it super safe?
+        if ($firstResult->score < ($this->threshold * $this->superSafeAdjust)) {
+            return false;
+        }
+
+        // is its score the same as the next best result?
+        if ($secondResult && $secondResult->score === $firstResult->score) {
+            return false;
+        }
+
+        return $firstResult;
     }
 }

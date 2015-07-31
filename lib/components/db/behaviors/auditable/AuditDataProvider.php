@@ -73,9 +73,8 @@ class AuditDataProvider extends \canis\data\ActiveDataProvider
         $object = $this->context = ArrayHelper::getValue($params, 'object', false);
         if ($direction === '_newer') {
             $mostRecentItem = ArrayHelper::getValue($params, 'mostRecentItem', false);
-            $this->query->params[':mostRecentItem'] = (int) $mostRecentItem;
-            $this->query->andWhere($this->query->primaryAlias . '.id > :mostRecentItem');
-            $this->query->orderBy([$this->query->primaryAlias . '.id' => SORT_DESC]);
+            $this->query->andWhere($this->query->primaryAlias . '.[[created]] > FROM_UNIXTIME(' . (float) $mostRecentItem .')');
+            $this->query->orderBy([$this->query->primaryAlias . '.[[created]]' => SORT_DESC]);
             $this->pagination->pageSize = false;
             //\d(["newer", $this->query->createCommand()->rawSql]);exit;
         } else { // _older
@@ -83,10 +82,9 @@ class AuditDataProvider extends \canis\data\ActiveDataProvider
             $lastTime = ArrayHelper::getValue($params, 'lastItemTimestamp', false);
             $lastItem = ArrayHelper::getValue($params, 'lastItem', false);
             if ($lastItem) {
-                $this->query->params[':lastItem'] = (int) $lastItem;
-                $this->query->andWhere($this->query->primaryAlias . '.id < :lastItem');
+                $this->query->andWhere($this->query->primaryAlias . '.[[created]] < FROM_UNIXTIME(' . (float) $lastItem .')');
             }
-            $this->query->orderBy([$this->query->primaryAlias . '.id' => SORT_DESC]); //SORT_ASC
+            $this->query->orderBy([$this->query->primaryAlias . '.[[created]]' => SORT_DESC]); //SORT_ASC
             //\d($lastTime);
             //echo $this->query->createCommand()->rawSql;exit;
         }

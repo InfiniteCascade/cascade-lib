@@ -110,7 +110,6 @@ abstract class DataItem extends \cascade\components\dataInterface\DataItem
         if ($isNewRecord || !empty($dirtyAttributes)) {
             $infoData = [];
             if (!$isNewRecord) {
-                // @todo use auditable to ignore certain fields
                 $infoData = ['newValues' => $dirtyAttributes, 'oldValues' => []];
 
                 foreach ($dirtyAttributes as $key => $newValue) {

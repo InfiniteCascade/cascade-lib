@@ -174,7 +174,6 @@ class ObjectController extends Controller
 
         if (empty($searchParams['term'])) {
             Yii::$app->response->data = $package;
-
             return;
         }
 
@@ -203,7 +202,7 @@ class ObjectController extends Controller
             if (!$moduleItem || !($moduleObject = $moduleItem->object)) {
                 continue;
             }
-            if (empty($moduleItem->object->searchWeight)) {
+            if (!(isset($searchParams['modules']) && in_array($moduleItem->systemId, $searchParams['modules'])) && empty($moduleItem->object->searchWeight)) {
                 continue;
             }
             if (in_array('authority', $searchParams['typeFilters']) && $moduleItem->object->getBehavior('Authority') === null) {

@@ -48,6 +48,11 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
         return $this->_id;
     }
 
+    public function getMeta()
+    {
+       return $this->_meta;
+    }
+
     /**
      * Set id.
      *
@@ -121,6 +126,9 @@ class Model extends \cascade\components\dataInterface\connectors\generic\Model
      */
     public function getAttributes()
     {
+        if (!isset($this->meta)) {
+            return $this->_attributes;
+        }
         $a = [];
         foreach ($this->meta->attributeKeys as $k) {
             $a[$k] = null;
