@@ -1,8 +1,8 @@
 {
-	"name": "canis/cascade-lib",
+	"name": "psesd/cascade-lib",
 	"description": "Cascade CRM libraries",
 	"keywords": ["yii", "crm"],
-	"homepage": "http://canis.io",
+	"homepage": "http://psesd.org",
 	"type": "yii2-extension",
 	"license": "BSD-3-Clause",
 	"minimum-stability": "dev",
