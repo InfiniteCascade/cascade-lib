@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://canis.io/
+ * @link http://psesd.org/
  *
- * @copyright Copyright (c) 2015 Canis
- * @license http://canis.io/license/
+ * @copyright Copyright (c) 2015 Puget Sound ESD
+ * @license http://psesd.org/license/
  */
 
 namespace cascade\modules\TypeGroup\widgets;

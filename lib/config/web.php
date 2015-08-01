@@ -2,7 +2,7 @@
 /**
  * ./app/config/environments/common/main.php.
  *
- * @author Jacob Morrison <jacob@canis.io>
+ * @author Jacob Morrison <jmorrison@psesd.org>
  */
 $config = include __DIR__ . DIRECTORY_SEPARATOR . 'base.php';
 $config['controllerNamespace'] = 'cascade\controllers';

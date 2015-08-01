@@ -2,7 +2,7 @@
 /**
  * ./app/config/environments/common/console.php.
  *
- * @author Jacob Morrison <jacob@canis.io>
+ * @author Jacob Morrison <jmorrison@psesd.org>
  */
 defined('IS_CONSOLE') || define('IS_CONSOLE', true);
 $config = include __DIR__ . DIRECTORY_SEPARATOR . 'base.php';

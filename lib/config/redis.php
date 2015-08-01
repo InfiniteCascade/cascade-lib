@@ -2,7 +2,7 @@
 /**
  * ./app/config/environments/common/cache.php.
  *
- * @author Jacob Morrison <jacob@canis.io>
+ * @author Jacob Morrison <jmorrison@psesd.org>
  */
 
 return [

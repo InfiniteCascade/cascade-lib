@@ -1,9 +1,9 @@
 <?php
 /**
- * @link http://canis.io/
+ * @link http://psesd.org/
  *
- * @copyright Copyright (c) 2015 Canis
- * @license http://canis.io/license/
+ * @copyright Copyright (c) 2015 Puget Sound ESD
+ * @license http://psesd.org/license/
  */
 
 namespace cascade\gii\cascadeTypeModule;
@@ -38,7 +38,7 @@ use yii\helpers\Inflector;
  * @property boolean $modulePath The directory that contains the module class. This property is read-only.
  * @property string $widgetNamespace The widget namespace of the module. This property is read-only.
  *
- * @author Jacob Morrison <jacob@canis.io>
+ * @author Jacob Morrison <jmorrison@psesd.org>
  *
  * @since 1.0
  */

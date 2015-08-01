@@ -2,7 +2,7 @@
 /**
  * ./app/views/app/create.php.
  *
- * @author Jacob Morrison <jacob@canis.io>
+ * @author Jacob Morrison <jmorrison@psesd.org>
  */
 use canis\helpers\Html;
 cascade\components\web\assetBundles\ObjectViewAsset::register($this);
