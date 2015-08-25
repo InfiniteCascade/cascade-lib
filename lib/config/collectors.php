@@ -18,7 +18,7 @@ return [
         ],
         'widgets' => [
             'class' => 'cascade\components\web\widgets\Collector',
-            'lazyLoad' => false,
+            'lazy' => false,
         ],
         'storageHandlers' => [
             'class' => 'cascade\components\storageHandlers\Collector',

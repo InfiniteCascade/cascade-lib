@@ -131,7 +131,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
     public function getStatusLog($checkRecent = false)
     {
         if (!isset($this->_statusLog)) {
-            $this->_statusLog = Cacher::get([get_called_class(), $this->primaryKey]);
+            $this->_statusLog = Cacher::get([get_called_class(), $this->primaryKey, $this->created]);
             if (empty($this->_statusLog)) {
                 if (is_null($this->message)) {
                     $this->_statusLog = $this->_startStatus();
@@ -159,7 +159,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
     public function saveCache()
     {
         $this->statusLog->lastUpdate = microtime(true);
-        Cacher::set([get_called_class(), $this->primaryKey], $this->statusLog, 3600);
+        Cacher::set([get_called_class(), $this->primaryKey, $this->created], $this->statusLog, 3600);
     }
 
     /**
@@ -204,7 +204,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
      */
     public function start()
     {
-        Cacher::set([get_called_class(), $this->primaryKey], false);
+        Cacher::set([get_called_class(), $this->primaryKey, $this->created], false);
 
         return $this->save();
     }
@@ -233,7 +233,7 @@ class DataInterfaceLog extends \cascade\components\db\ActiveRecord
      */
     public function clearStatusLogCache()
     {
-        Cacher::set([get_called_class(), $this->primaryKey], false, 3600);
+        Cacher::set([get_called_class(), $this->primaryKey, $this->created], false, 3600);
     }
 
     /**

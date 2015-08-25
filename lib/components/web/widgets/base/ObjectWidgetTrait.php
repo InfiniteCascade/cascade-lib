@@ -121,13 +121,13 @@ trait ObjectWidgetTrait
         $defaultOrder = $dummyModel->getDefaultOrder($alias);
         $sortBy['familiarity'] = [
             'label' => 'Familiarity',
-            'asc' => array_merge(['ft.familiarity' => SORT_ASC], $defaultOrder),
-            'desc' => array_merge(['ft.familiarity' => SORT_DESC], $defaultOrder),
+            'asc' => array_merge(['ft.[[familiarity]]' => SORT_ASC], $defaultOrder),
+            'desc' => array_merge(['ft.[[familiarity]]' => SORT_DESC], $defaultOrder),
         ];
         $sortBy['last_accessed'] = [
             'label' => 'Last Accessed',
-            'asc' => array_merge(['ft.last_accessed' => SORT_ASC], $defaultOrder),
-            'desc' => array_merge(['ft.last_accessed' => SORT_DESC], $defaultOrder),
+            'asc' => array_merge(['ft.[[last_accessed]]' => SORT_ASC], $defaultOrder),
+            'desc' => array_merge(['ft.[[last_accessed]]' => SORT_DESC], $defaultOrder),
         ];
         $sortBy['descriptor'] = [
             'label' => $descriptorLabel,

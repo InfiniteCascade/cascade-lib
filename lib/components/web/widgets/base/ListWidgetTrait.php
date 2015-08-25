@@ -108,11 +108,10 @@ trait ListWidgetTrait
         $parts = [];
         if (isset($model->relationModel) && isset($model->relationModel['id'])) {
             // $parts[] = $model->relationModel['id'];
-            $template = array_merge([
-                    'relationTaxonomies' => ['class' => 'list-group-item-pre', 'tag' => 'div'],
-                ], $template);
+            $template = array_merge($template, [
+                    'relationTaxonomies' => ['class' => 'list-group-item-post', 'tag' => 'div'],
+                ]);
         }
-
         foreach ($template as $fieldName => $settings) {
             if (is_numeric($fieldName)) {
                 $fieldName = $settings;

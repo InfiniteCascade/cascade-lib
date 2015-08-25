@@ -51,7 +51,6 @@ trait ActionTrait
             ) {
             $this->_interface = Yii::$app->collectors['dataInterfaces']->getOne($this->_interface);
         }
-
         return $this->_interface;
     }
 
