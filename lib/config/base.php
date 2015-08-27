@@ -69,7 +69,12 @@ if (!isset($base['components']['db'])) {
     $base['components']['db'] = include 'database.php';
 }
 if (!isset($base['components']['collectors'])) {
-    $base['components']['collectors'] = include 'collectors.php';
+	$collectorsConfigPath = CANIS_APP_CONFIG_PATH . DIRECTORY_SEPARATOR . 'modules.php';
+	if (file_exists($collectorsConfigPath)) {
+		$base['components']['collectors'] = include $collectorsConfigPath;
+	} else {
+    	$base['components']['collectors'] = include 'collectors.php';
+	}
 }
 if (!isset($base['components']['cache'])) {
     if (isset($base['components']['redis'])) {
@@ -132,7 +137,7 @@ if (!isset($base['components']['log']['targets'])) {
         'levels' => ['error', 'warning'],
     ];
 }
-    
+
 if (!isset($base['components']['formatter'] )) {
     $base['components']['formatter'] = [
         'class' => I18nFormatter::className(),

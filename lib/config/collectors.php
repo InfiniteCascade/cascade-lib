@@ -21,11 +21,11 @@ return [
             'lazy' => false,
         ],
         'storageHandlers' => [
-            'class' => 'cascade\components\storageHandlers\Collector',
+            'class' => 'canis\storageHandlers\Collector',
             'initialItems' => [
                 'local' => [
                     'object' => [
-                        'class' => 'cascade\components\storageHandlers\core\LocalHandler',
+                        'class' => 'canis\storageHandlers\core\LocalHandler',
                         'bucketFormat' => '{year}.{month}',
                         'baseDir' => CANIS_APP_INSTALL_PATH . DIRECTORY_SEPARATOR . 'storage',
                     ],

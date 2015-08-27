@@ -152,8 +152,11 @@ TopNavBar::end();
 
 <footer class="footer">
 <div class="container-fluid">
-<!--            <p class="pull-left">&copy; <?=Yii::$app->name?> <?=date('Y'); ?></p>
-    <p class="pull-right"><?=Yii::powered(); ?></p> -->
+<?php
+if (defined('CANIS_APP_DATABASE_HOST')) {
+    echo '<!-- DB: '. gethostbyname(CANIS_APP_DATABASE_HOST) .'-->';
+}
+?>
 </div>
 </footer>
 
